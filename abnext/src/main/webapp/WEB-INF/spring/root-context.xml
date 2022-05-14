@@ -27,7 +27,7 @@
 	<!-- sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:kr/or/mask/util/MyBatisConfig.xml" />
+		<property name="configLocation" value="classpath:kr/or/abnext/util/MyBatisConfig.xml" />
 		<!-- db의 컬럼과 dto의 프로퍼티명을 자동으로 매핑 -->
 		<property name="mapperLocations">
 			<list>
