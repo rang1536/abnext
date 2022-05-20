@@ -1,13 +1,10 @@
-package kr.or.abnext.controller;
+package kr.or.abnext.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.abnext.service.AbService;
-
 @RestController
-public class AbRestController {
-	
+public class LoginRestController {
 	@Autowired
-	AbService abServ;
+	LoginService loginServ;
 }
