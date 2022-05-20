@@ -187,12 +187,45 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="requestInspect.do" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
               <p>진단검사
-                <!-- <span class="right badge badge-danger">New</span> -->
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">5</span>
               </p>
             </a>
+			<ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="requestInspect.do" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>신청접수</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>진단설정</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/layout/boxed.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>결과입력</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>최종진단</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>전체목록</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
