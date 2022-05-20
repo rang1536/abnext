@@ -1,14 +1,11 @@
-package kr.or.abnext.service;
+package kr.or.abnext.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.abnext.dao.AbDao;
 
 @Service
-public class AbService {
+public class LoginService {
 	@Autowired
-	private AbDao abDao;
-	
-	
+	private LoginDao loginDao;
 }
