@@ -56,6 +56,8 @@
     <section class="content">
       <div class="container-fluid">
         <!-- general form elements disabled -->
+        <div class="row">
+        <div class="col-md-4">
         <div class="card card-primary">
           <div class="card-header">
             <h3 class="card-title">신청정보</h3>
@@ -66,28 +68,20 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>*의뢰번호</label>
-                      <input type="text" class="form-control" placeholder="의뢰번호" readonly>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label>*신청일</label>
-                      <input type="text" class="form-control" placeholder="신청일" readonly>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
                       <label>*신청자(기관)</label>
-                      <input type="text" class="form-control" placeholder="ㅇㅇ병원" readonly>
+                      <select class="form-control select2" style="width: 100%;">
+                        <option selected="selected">강아지병원</option>
+                        <option>고양이병원</option>
+                      </select>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>*담당수의사</label>
-                      <input type="text" class="form-control" placeholder="나수의" readonly>
+                      <select class="form-control select2" style="width: 100%;">
+                        <option selected="selected">김의사</option>
+                        <option>이의사</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -97,7 +91,7 @@
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <select class="form-control" readonly>
+                      <select class="form-control">
                         <option>앵무</option>
                         <option>option 2</option>
                         <option>option 3</option>
@@ -108,7 +102,7 @@
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <select class="form-control" readonly>
+                      <select class="form-control">
                         <option>앵무</option>
                         <option>option 2</option>
                         <option>option 3</option>
@@ -119,7 +113,7 @@
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <select class="form-control" readonly>
+                      <select class="form-control">
                         <option>앵무</option>
                         <option>option 2</option>
                         <option>option 3</option>
@@ -134,17 +128,15 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>*동물명</label>
-                      <input type="text" class="form-control" placeholder="동물명" readonly>
+                      <input type="text" class="form-control" placeholder="동물명">
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>*생년월일</label>
                       <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <!-- <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" data-toggle="datetimepicker" placeholder="생년월일"> -->
-                        <!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker"> -->
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="생년월일">
-                        <div class="input-group-append" data-target="#reservationdate">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" data-toggle="datetimepicker" placeholder="생년월일">
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
                       </div>
@@ -156,7 +148,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>*성별</label>
-                        <select class="form-control" readonly>
+                        <select class="form-control">
                           <option>암컷</option>
                           <option>option 2</option>
                         </select>
@@ -165,7 +157,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label><font color="red">등록번호(인식번호)</font></label>
-                      <input type="text" class="form-control" placeholder="등록번호(인식번호)" readonly>
+                      <input type="text" class="form-control" placeholder="등록번호(인식번호)">
                     </div>
                   </div>
                 </div>
@@ -174,13 +166,13 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>*보호자명</label>
-                      <input type="text" class="form-control" placeholder="보호자명" readonly>
+                      <input type="text" class="form-control" placeholder="보호자명">
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label><font color="red">의뢰참고</font></label>
-                      <textarea class="form-control" rows="3" placeholder="특이사항... 참고할 만한 사항 작성"></textarea>
+                      <input type="text" class="form-control" placeholder="참고할 만한 사항 작성">
                     </div>
                   </div>
                 </div>
@@ -192,6 +184,7 @@
             <!-- general form elements disabled -->
           </div>
 
+          <div class="col-md-8">
           <div class="card card-success">
             <div class="card-header">
               <h3 class="card-title">검사정보</h3>
@@ -199,6 +192,67 @@
             <!-- /.card-header -->
             <div class="card-body">
               <form>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>*시료정보</label>
+                      <select class="form-control">
+                        <option>분변</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>시료번호</label>
+                      <input type="text" class="form-control" placeholder="시료번호">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label>*검사항목</label>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label>*납입방법</label>
+                  </div>
+                  <div class="col-sm-3">
+                      <select class="form-control">
+                        <option>바이러스</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <select class="form-control">
+                        <option>PDD</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-6">
+                    <select class="form-control">
+                      <option>즉시납입</option>
+                      <option>월간정산</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary" style="float:right;"> <font style="margin:0 10px 0 10px">추가</font></button>
+                  </div>
+                </div>
                 <div class="row">
                   <table id="example2" class="table table-bordered table-hover">
                   <thead>
@@ -238,11 +292,6 @@
 		              <th>70,000원</th>
 		              <th></th>
 		            </tr>
-		            <tr>
-		              <td colspan="7" align="center">
-		                <button type="button" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> 접수확인</button>
-		              </td>
-		            </tr>
                   </tfoot>
                 </table>
                 </div>
@@ -252,6 +301,7 @@
             </div>
             <!-- /.card -->
             <!-- general form elements disabled -->
+          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
