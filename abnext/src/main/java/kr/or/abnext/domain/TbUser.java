@@ -16,6 +16,7 @@ public class TbUser {
 	private String userFax;
 	private String userAdr;
 	private String userDtlAdr;
+	private String userZip;
 	private String userEmail;
 	private String userAccountNo; //계좌번호
 	private String userBankNm;
@@ -27,6 +28,8 @@ public class TbUser {
 	private int insId;
 	private String uptDt;
 	private int uptId;
+	
+	
 	public int getUserNo() {
 		return userNo;
 	}
