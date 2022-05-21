@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -279,13 +280,7 @@
 		</section> <!-- /.content -->
  	</div> 
  	
-	<!-- /.content-wrapper -->
-	<footer class="main-footer">
-		<div class="float-right d-none d-sm-block">
-			<b>Version</b> 3.1.0
-		</div>
-		<strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-	</footer>
+	<c:import url="../layer/layout_footer.jsp"></c:import>
 
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
