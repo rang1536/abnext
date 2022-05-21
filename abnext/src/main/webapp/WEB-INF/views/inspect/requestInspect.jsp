@@ -8,13 +8,13 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="/abnext/resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="/abnext/resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/abnext/resources/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
   
   <style>
     th,td {text-align:center;}
@@ -264,26 +264,26 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="/abnext/resources/plugins/jquery/jquery.min.js"></script>
+<script src="resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="/abnext/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables  & Plugins -->
-<script src="/abnext/resources/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/abnext/resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/abnext/resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/abnext/resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/abnext/resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="/abnext/resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="/abnext/resources/plugins/jszip/jszip.min.js"></script>
-<script src="/abnext/resources/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="/abnext/resources/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="/abnext/resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="/abnext/resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="/abnext/resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="resources/plugins/jszip/jszip.min.js"></script>
+<script src="resources/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="resources/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/abnext/resources/dist/js/adminlte.min.js"></script>
+<script src="resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/abnext/resources/dist/js/demo.js"></script>
+<script src="resources/dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {

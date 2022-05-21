@@ -9,26 +9,26 @@
     <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css">
   <!-- daterange picker -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="resources/plugins/daterangepicker/daterangepicker.css">
   <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <link rel="stylesheet" href="resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- Select2 -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="/abnext/resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Bootstrap4 Duallistbox -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+  <link rel="stylesheet" href="resources/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
   <!-- BS Stepper -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/bs-stepper/css/bs-stepper.min.css">
+  <link rel="stylesheet" href="resources/plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- dropzonejs -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/dropzone/min/dropzone.min.css">
+  <link rel="stylesheet" href="resources/plugins/dropzone/min/dropzone.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/abnext/resources/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -319,30 +319,30 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="/abnext/resources/plugins/jquery/jquery.min.js"></script>
+<script src="resources/plugins/jquery/jquery.min.js"></script>
 <!-- date-range-picker -->
-<script src="/abnext/resources/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Bootstrap 4 -->
-<script src="/abnext/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
-<script src="/abnext/resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/abnext/resources/dist/js/adminlte.min.js"></script>
+<script src="resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/abnext/resources/dist/js/demo.js"></script>
+<script src="resources/dist/js/demo.js"></script>
 <!-- Select2 -->
-<script src="/abnext/resources/plugins/select2/js/select2.full.min.js"></script>
+<script src="resources/plugins/select2/js/select2.full.min.js"></script>
 <!-- Bootstrap4 Duallistbox -->
-<script src="/abnext/resources/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<script src="resources/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 <!-- InputMask -->
-<script src="/abnext/resources/plugins/moment/moment.min.js"></script>
-<script src="/abnext/resources/plugins/inputmask/jquery.inputmask.min.js"></script>
+<script src="resources/plugins/moment/moment.min.js"></script>
+<script src="resources/plugins/inputmask/jquery.inputmask.min.js"></script>
 <!-- bootstrap color picker -->
-<script src="/abnext/resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="/abnext/resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Select2 -->
-<script src="/abnext/resources/plugins/select2/js/select2.full.min.js"></script>
+<script src="resources/plugins/select2/js/select2.full.min.js"></script>
 <!-- dropzonejs -->
 
 <!-- Page specific script -->
