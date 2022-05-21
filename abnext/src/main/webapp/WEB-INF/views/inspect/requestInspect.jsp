@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ABNext</title>
@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/abnext/resources/plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/abnext/resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="/abnext/resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="/abnext/resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/abnext/resources/dist/css/adminlte.min.css">
   
@@ -27,7 +31,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>진단검사</h1>
+            <h1> * 반려조류</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -39,82 +43,218 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="card-header">
-         <div class="card-tools">
-           <div class="input-group input-group-sm">
-             <input type="text" class="form-control" placeholder="검색어를 입력하세요.">
-             <div class="input-group-append">
-               <div class="btn btn-primary">
-                 <i class="fas fa-search" style="margin-top:3px;"></i>
-               </div>
-             </div>
-           </div>
-         </div>
-      </div>
-
 	  <!-- Main content -->
       <div class="invoice p-3 mb-3">
         <!-- Table row -->
         <div class="row">
-          <div class="col-12 table-responsive">
-            <table class="table table-striped">
-              <thead>
-              <tr>
-                <th>의뢰번호</th>
-                <th>신청일</th>
-                <th>상태</th>
-                <th>동물명</th>
-                <th>신청자(기관)</th>
-                <th>담당수의사</th>
-                <th>비용</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>ABC2203010002</td>
-                <td>2022.02.22</td>
-                <td>신청</td>
-                <td>망고</td>
-                <td>ㅇㅇ병원</td>
-                <td>나수의</td>
-                <td>30,000</td>
-              </tr>              <tr>
-                <td>ABC2203010002</td>
-                <td>2022.02.22</td>
-                <td>신청</td>
-                <td>망고</td>
-                <td>ㅇㅇ병원</td>
-                <td>나수의</td>
-                <td>30,000</td>
-              </tr>              <tr>
-                <td>ABC2203010002</td>
-                <td>2022.02.22</td>
-                <td>신청</td>
-                <td>망고</td>
-                <td>ㅇㅇ병원</td>
-                <td>나수의</td>
-                <td>30,000</td>
-              </tr>
-              </tbody>
-            </table>
+          <div class="col-12">
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>의뢰번호</th>
+                    <th>신청일</th>
+                    <th>상태</th>
+                    <th>동물명</th>
+                    <th>신청자(기관)</th>
+                    <th>담당수의사</th>
+                    <th>비용</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+		              <td>ABd2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+		            <tr>
+		              <td>ABC2203010002</td>
+		              <td>2022.02.22</td>
+		              <td>신청</td>
+		              <td>망고</td>
+		              <td>ㅇㅇ병원</td>
+		              <td>나수의</td>
+		              <td>30,000</td>
+		            </tr>
+                  </tbody>
+                  <!-- 
+                  <tfoot>
+                  <tr>
+                    <th>Rendering engine</th>
+                    <th>Browser</th>
+                    <th>Platform(s)</th>
+                    <th>Engine version</th>
+                    <th>CSS grade</th>
+                  </tr>
+                  </tfoot>
+                   -->
+                </table>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button type="button" class="btn btn-primary" style="float:right;">직접접수</button>
+              </div>
+            </div>
+            <!-- /.card -->
           </div>
-          <!-- /.col -->
+          <!-- /.row -->
         </div>
-         <!-- /.row -->
+         <!-- /.col -->
       </div><!-- /.container-fluid -->
-    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.1.0
-    </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
-
+  <jsp:include page="../layer/layout_footer.jsp"></jsp:include>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -124,20 +264,42 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="/abnext/resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- bs-custom-file-input -->
-<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="/abnext/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="/abnext/resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/abnext/resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/abnext/resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/abnext/resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/abnext/resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/abnext/resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/abnext/resources/plugins/jszip/jszip.min.js"></script>
+<script src="/abnext/resources/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/abnext/resources/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/abnext/resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="/abnext/resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="/abnext/resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="/abnext/resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="/abnext/resources/dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
-$(function () {
-  bsCustomFileInput.init();
-});
+  $(function () {
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+  
+  $(".btn-primary").on("click",function(){
+	 location.href = "registerInspect.do";
+  });
 </script>
 </body>
 </html>

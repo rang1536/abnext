@@ -21,9 +21,9 @@ public class InspectController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(InspectController.class);
 	
-	@RequestMapping(value = "requestInspect" , method = RequestMethod.GET)
+	@RequestMapping(value = "requestInspect")
 	public String requestInspect(Locale locale, Model model) {
-		logger.info("MyFarm Method is start {}.", locale);
+		logger.info("requestInspect Method is start {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -33,6 +33,20 @@ public class InspectController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "inspect/requestInspect";
+	}
+	
+	@RequestMapping(value = "registerInspect")
+	public String registerInspect(Locale locale, Model model) {
+		logger.info("registerInspect Method is start {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "inspect/registerInspect";
 	}
 	
 }
