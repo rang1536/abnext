@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Dashboard</title>
   <!-- Mobiscroll JS and CSS Includes -->
-  <link rel="stylesheet" href="/abnext/resources/scheduler/css/mobiscroll.javascript.min.css">
-  <script src="/abnext/resources/scheduler/js/mobiscroll.javascript.min.js"></script>
+  <link rel="stylesheet" href="resources/scheduler/css/mobiscroll.javascript.min.css">
+  <script src="resources/scheduler/js/mobiscroll.javascript.min.js"></script>
 
   <style type="text/css">
 	  body {
@@ -30,7 +31,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="/abnext/resources/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="resources/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <jsp:include page="../layer/layout.jsp"></jsp:include>
@@ -101,38 +102,38 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="/abnext/resources/plugins/jquery/jquery.min.js"></script>
+<script src="resources/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="/abnext/resources/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="resources/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="/abnext/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
-<script src="/abnext/resources/plugins/chart.js/Chart.min.js"></script>
+<script src="resources/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
-<script src="/abnext/resources/plugins/sparklines/sparkline.js"></script>
+<script src="resources/plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
-<script src="/abnext/resources/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="/abnext/resources/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="resources/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="resources/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="/abnext/resources/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="resources/plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
-<script src="/abnext/resources/plugins/moment/moment.min.js"></script>
-<script src="/abnext/resources/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="resources/plugins/moment/moment.min.js"></script>
+<script src="resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="/abnext/resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="/abnext/resources/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="resources/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
-<script src="/abnext/resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/abnext/resources/dist/js/adminlte.js"></script>
+<script src="resources/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/abnext/resources/dist/js/demo.js"></script>
+<script src="resources/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/abnext/resources/dist/js/pages/dashboard.js"></script>
+<script src="resources/dist/js/pages/dashboard.js"></script>
 </body>
 </html>
