@@ -4,7 +4,6 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AdminLTE 3 | General Form Elements</title>
-	
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
@@ -28,6 +27,9 @@
 	<link rel="stylesheet" href="resources/plugins/dropzone/min/dropzone.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
+	<style>
+		.txtc {text-align:center;}
+	</style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -55,186 +57,154 @@
 		<section class="content">
 			<div class="container-fluid">
 				<!-- general form elements disabled -->
-				<div class="card card-primary">
-					<div class="card-header">
-						<h3 class="card-title">신청정보</h3>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">신청정보</h3>
+							</div>
+							<div class="card-body">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰번호</td>
+											<td style="width:30%;" class="txtc">AAA2202020001</td>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">상태</td>
+											<td style="width:30%;" class="txtc">접수</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">신청자(기관)</td>
+											<td style="width:30%;" class="txtc">ㅇㅇ병원</td>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">담당수의사</td>
+											<td style="width:30%;" class="txtc">홍길동</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">품종</td>
+											<td style="width:30%;" class="txtc">앵무/앵무/유황앵무</td>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">생년월일</td>
+											<td style="width:30%;" class="txtc">2019-02-28</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">성별</td>
+											<td style="width:30%;" class="txtc">암컷</td>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">신청일</td>
+											<td style="width:30%;" class="txtc">2022-03-15</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">참고사항</td>
+											<td colspan="3">AAA2202020001</td>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
 					</div>
-					<!-- /.card-header -->
-					<div class="card-body">
-						<form>
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>*의뢰번호</label>
-										<input type="text" class="form-control" placeholder="의뢰번호" readonly>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>*신청일</label>
-										<input type="text" class="form-control" placeholder="신청일" readonly>
-									</div>
-								</div>
+					<div class="col-md-6">
+						<div class="card card-success">
+							<div class="card-header">
+								<h3 class="card-title">시료정보</h3>
 							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>*신청자(기관)</label>
-										<input type="text" class="form-control" placeholder="ㅇㅇ병원" readonly>
-									</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<form>
+								<div class="row">
+									<table id="example2" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<td class="txtc" style="width:15%;background-color:#F2F2F2">No</td>
+												<td class="txtc" style="width:30%;background-color:#F2F2F2">시료정보</td>
+												<td class="txtc" style="width:30%;background-color:#F2F2F2">시료번호</td>
+												<td class="txtc" style="width:*;background-color:#F2F2F2">기타</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="txtc">1</td>
+												<td class="txtc">분변</td>
+												<td class="txtc">00123</td>
+												<td class="txtc">바이러스</td>
+											</tr>
+											<tr>
+												<td class="txtc">2</td>
+												<td class="txtc">분변</td>
+												<td class="txtc">0001</td>
+												<td class="txtc">세균</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>*담당수의사</label>
-										<input type="text" class="form-control" placeholder="나수의" readonly>
-									</div>
-								</div>
+								</form>
 							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<label>*종</label>
-								</div>
-								<div class="col-sm-4">
-									<div class="form-group">
-										<select class="form-control" readonly>
-											<option>앵무</option>
-											<option>option 2</option>
-											<option>option 3</option>
-											<option>option 4</option>
-											<option>option 5</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="form-group">
-										<select class="form-control" readonly>
-											<option>앵무</option>
-											<option>option 2</option>
-											<option>option 3</option>
-											<option>option 4</option>
-											<option>option 5</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="form-group">
-										<select class="form-control" readonly>
-											<option>앵무</option>
-											<option>option 2</option>
-											<option>option 3</option>
-											<option>option 4</option>
-											<option>option 5</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>*동물명</label>
-										<input type="text" class="form-control" placeholder="동물명" readonly>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>*생년월일</label>
-										<div class="input-group date" id="reservationdate" data-target-input="nearest">
-											<!-- <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" data-toggle="datetimepicker" placeholder="생년월일"> -->
-											<!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker"> -->
-											<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="생년월일">
-											<div class="input-group-append" data-target="#reservationdate">
-												<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>*성별</label>
-											<select class="form-control" readonly>
-												<option>암컷</option>
-												<option>option 2</option>
-											</select>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label><font color="red">등록번호(인식번호)</font></label>
-										<input type="text" class="form-control" placeholder="등록번호(인식번호)" readonly>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>*보호자명</label>
-										<input type="text" class="form-control" placeholder="보호자명" readonly>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label><font color="red">의뢰참고</font></label>
-										<textarea class="form-control" rows="3" placeholder="특이사항... 참고할 만한 사항 작성"></textarea>
-									</div>
-								</div>
-							</div>
-						</form>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
 					</div>
-					<!-- /.card-body -->
 				</div>
-				<!-- /.card -->
-
-				<div class="card card-success">
+				<div class="card card-info">
 					<div class="card-header">
-						<h3 class="card-title">검사정보</h3>
+						<h3 class="card-title">검사정보 설정</h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
 						<form>
+							<div class="row">
+								<div class="col-sm-5">
+									<div class="form-group">
+										<label>질병구분</label>
+										<select class="form-control">
+											<option>바이러스</option>
+											<option>option 2</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<div class="form-group">
+										<label>검사방법</label>
+										<select class="form-control">
+											<option>PCR</option>
+											<option>option 2</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+										<button type="submit" class="btn btn-info btn-flat" style="margin-top:33px; float:right;"><span style="margin:0 20px 0 20px;">추가</span></button>
+									</div>
+								</div>
+							</div>
 							<div class="row">
 								<table id="example2" class="table table-bordered table-hover">
 									<thead>
 										<tr>
-											<th>번호</th>
-											<th>시료정보</th>
-											<th>시료번호</th>
-											<th>검사항목구분</th>
-											<th>검사항복세부</th>
-											<th>검사비</th>
-											<th>삭제</th>
+											<td class="txtc" style="width:15%;background-color:#F2F2F2">No</td>
+											<td class="txtc" style="width:30%;background-color:#F2F2F2">질병구분</td>
+											<td class="txtc" style="width:30%;background-color:#F2F2F2">검사방법</td>
+											<td class="txtc" style="width:*;background-color:#F2F2F2">비용</td>
+											<td class="txtc" style="width:*;background-color:#F2F2F2">삭제</td>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>1</td>
-											<td>분변</td>
-											<td>0001</td>
-											<td>바이러스</td>
-											<td>PDD</td>
-											<td>30,000원</td>
-											<td>삭제</td>
+											<td class="txtc">1</td>
+											<td class="txtc">분변</td>
+											<td class="txtc">00123</td>
+											<td class="txtc">30,000</td>
+											<td class="txtc">삭제</td>
 										</tr>
 										<tr>
-											<td>2</td>
-											<td>분변</td>
-											<td>0001</td>
-											<td>세균</td>
-											<td>살모넬라</td>
-											<td>40,000원</td>
-											<td>삭제</td>
+											<td class="txtc">2</td>
+											<td class="txtc">분변</td>
+											<td class="txtc">0001</td>
+											<td class="txtc">70,000</td>
+											<td class="txtc">삭제</td>
 										</tr>
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="5" align="center">검시비용 계</td>
-											<th>70,000원</th>
-											<th></th>
-										</tr>
-										<tr>
-											<td colspan="7" align="center">
-												<button type="button" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 접수확인</button>
+											<td colspan="5" class="txtc">
+												<button type="button" class="btn btn-primary btn-flat"><span style="margin:0 25px 0 20px;"><i class="fas fa-pencil-alt"></i> 설정확인</span></button>
 											</td>
 										</tr>
 									</tfoot>
@@ -245,10 +215,13 @@
 					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
-			</div><!-- /.container-fluid -->
+			</div>
+			<!-- /.container-fluid -->
 		</section>
 		<!-- /.content -->
 	</div>
+	
+
 	<jsp:include page="../layer/layout_footer.jsp"></jsp:include>
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">

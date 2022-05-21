@@ -49,4 +49,73 @@ public class InspectController {
 		return "inspect/registerInspect";
 	}
 	
+	@RequestMapping(value = "registerInspectByAdmin")
+	public String registerInspectByAdmin(Locale locale, Model model) {
+		logger.info("registerInspect Method is start {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "inspect/registerInspect2";
+	}
+	
+	@RequestMapping(value = "settingInspectList")
+	public String settingInspectList(Locale locale, Model model) {
+		logger.info("settingInspectList Method is start {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "inspect/settingInspectList";
+	}
+	
+	@RequestMapping(value = "settingInspectModify")
+	public String settingInspectModify(Locale locale, Model model) {
+		logger.info("settingInspectModify Method is start {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "inspect/settingInspectModify";
+	}
+
+	@RequestMapping(value = "resultInspectList")
+	public String resultInspectList(Locale locale, Model model) {
+		logger.info("resultInspectList Method is start {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "inspect/resultInspectList";
+	}
+	
+	@RequestMapping(value = "resultInspectModify")
+	public String resultInspectModify(Locale locale, Model model) {
+		logger.info("resultInspectModify Method is start {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "inspect/resultInspectModify";
+	}
 }
