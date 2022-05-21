@@ -3,16 +3,16 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ABNEXT</title>
+  <title>abnext | (주)아비넥스트</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/abnext/resources/dist/css/adminlte.min.css"> 
+  <link rel="stylesheet" href="resources/dist/css/adminlte.min.css"> 
 </head>
 
 <body class="hold-transition login-page">
@@ -74,7 +74,7 @@
 	      <a href="forgot-password.html">비밀번호찾기</a>
 	    </p>
 	    <p class="mb-0">
-	      <a href="register.html" class="text-center">회원가입하기</a>
+	      <a href="addUserPage" class="text-center">회원가입하기</a>
 	    </p>
 	  </div>
 	  <!-- /.card-body -->
@@ -85,11 +85,11 @@
 </div>
 
 <!-- jQuery -->
-<script src="/abnext/resources/plugins/jquery/jquery.min.js"></script>
+<script src="resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="/abnext/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/abnext/resources/dist/js/adminlte.min.js"></script>
+<script src="resources/dist/js/adminlte.min.js"></script>
 </body>
 </html>
 

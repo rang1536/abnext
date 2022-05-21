@@ -33,7 +33,7 @@
 			<list>
 				<value>classpath:kr/or/abnext/sqlMap/LoginMap.xml</value>	
 				<value>classpath:kr/or/abnext/sqlMap/Board.xml</value>	
-				<value>classpath:kr/or/abnext/sqlMap/AdminMap.xml</value>					
+								
 			</list>  
 		</property>
 	</bean>
