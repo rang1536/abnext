@@ -8,30 +8,30 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <link rel="stylesheet" href="resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/jqvmap/jqvmap.min.css">
+  <link rel="stylesheet" href="resources/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/abnext/resources/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="resources/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="/abnext/resources/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="resources/plugins/summernote/summernote-bs4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="/abnext/resources/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="resources/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <jsp:include page="layer/layout.jsp"></jsp:include>
@@ -189,7 +189,7 @@
                       <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
                     </div>
                     <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="/abnext/resources/dist/img/user1-128x128.jpg" alt="message user image">
+                    <img class="direct-chat-img" src="resources/dist/img/user1-128x128.jpg" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
                       Is this template really for free? That's unbelievable!
@@ -205,7 +205,7 @@
                       <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
                     </div>
                     <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="/abnext/resources/dist/img/user3-128x128.jpg" alt="message user image">
+                    <img class="direct-chat-img" src="resources/dist/img/user3-128x128.jpg" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
                       You better believe it!
@@ -221,7 +221,7 @@
                       <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
                     </div>
                     <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="/abnext/resources/dist/img/user1-128x128.jpg" alt="message user image">
+                    <img class="direct-chat-img" src="resources/dist/img/user1-128x128.jpg" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
                       Working with AdminLTE on a great new app! Wanna join?
@@ -237,7 +237,7 @@
                       <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
                     </div>
                     <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="/abnext/resources/dist/img/user3-128x128.jpg" alt="message user image">
+                    <img class="direct-chat-img" src="resources/dist/img/user3-128x128.jpg" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
                       I would love to.
@@ -254,7 +254,7 @@
                   <ul class="contacts-list">
                     <li>
                       <a href="#">
-                        <img class="contacts-list-img" src="/abnext/resources/dist/img/user1-128x128.jpg" alt="User Avatar">
+                        <img class="contacts-list-img" src="resources/dist/img/user1-128x128.jpg" alt="User Avatar">
 
                         <div class="contacts-list-info">
                           <span class="contacts-list-name">
@@ -269,7 +269,7 @@
                     <!-- End Contact Item -->
                     <li>
                       <a href="#">
-                        <img class="contacts-list-img" src="/abnext/resources/dist/img/user7-128x128.jpg" alt="User Avatar">
+                        <img class="contacts-list-img" src="resources/dist/img/user7-128x128.jpg" alt="User Avatar">
 
                         <div class="contacts-list-info">
                           <span class="contacts-list-name">
@@ -284,7 +284,7 @@
                     <!-- End Contact Item -->
                     <li>
                       <a href="#">
-                        <img class="contacts-list-img" src="/abnext/resources/dist/img/user3-128x128.jpg" alt="User Avatar">
+                        <img class="contacts-list-img" src="resources/dist/img/user3-128x128.jpg" alt="User Avatar">
 
                         <div class="contacts-list-info">
                           <span class="contacts-list-name">
@@ -299,7 +299,7 @@
                     <!-- End Contact Item -->
                     <li>
                       <a href="#">
-                        <img class="contacts-list-img" src="/abnext/resources/dist/img/user5-128x128.jpg" alt="User Avatar">
+                        <img class="contacts-list-img" src="resources/dist/img/user5-128x128.jpg" alt="User Avatar">
 
                         <div class="contacts-list-info">
                           <span class="contacts-list-name">
@@ -314,7 +314,7 @@
                     <!-- End Contact Item -->
                     <li>
                       <a href="#">
-                        <img class="contacts-list-img" src="/abnext/resources/dist/img/user6-128x128.jpg" alt="User Avatar">
+                        <img class="contacts-list-img" src="resources/dist/img/user6-128x128.jpg" alt="User Avatar">
 
                         <div class="contacts-list-info">
                           <span class="contacts-list-name">
@@ -329,7 +329,7 @@
                     <!-- End Contact Item -->
                     <li>
                       <a href="#">
-                        <img class="contacts-list-img" src="/abnext/resources/dist/img/user8-128x128.jpg" alt="User Avatar">
+                        <img class="contacts-list-img" src="resources/dist/img/user8-128x128.jpg" alt="User Avatar">
 
                         <div class="contacts-list-info">
                           <span class="contacts-list-name">
@@ -658,38 +658,38 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="/abnext/resources/plugins/jquery/jquery.min.js"></script>
+<script src="resources/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="/abnext/resources/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="resources/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="/abnext/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
-<script src="/abnext/resources/plugins/chart.js/Chart.min.js"></script>
+<script src="resources/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
-<script src="/abnext/resources/plugins/sparklines/sparkline.js"></script>
+<script src="resources/plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
-<script src="/abnext/resources/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="/abnext/resources/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="resources/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="resources/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
-<script src="/abnext/resources/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="resources/plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
-<script src="/abnext/resources/plugins/moment/moment.min.js"></script>
-<script src="/abnext/resources/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="resources/plugins/moment/moment.min.js"></script>
+<script src="resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="/abnext/resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
-<script src="/abnext/resources/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="resources/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
-<script src="/abnext/resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="resources/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="/abnext/resources/dist/js/adminlte.js"></script>
+<script src="resources/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/abnext/resources/dist/js/demo.js"></script>
+<script src="resources/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/abnext/resources/dist/js/pages/dashboard.js"></script>
+<script src="resources/dist/js/pages/dashboard.js"></script>
 </body>
 </html>
