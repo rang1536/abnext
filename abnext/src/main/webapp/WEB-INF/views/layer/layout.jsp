@@ -237,36 +237,136 @@
 					</li>
 					<li class="nav-item">
 			            <a href="#" class="nav-link">
-			              <i class="nav-icon fas fa-th"></i>
-			              <p>설정및관리<i class="right fas fa-angle-left"></i></p>
+			              <i class="nav-icon fas fa-book"></i>
+			              <p>
+			              	게시판
+			              	<i class="right fas fa-angle-left"></i>
+			              	<span class="badge badge-info right">2</span>
+			              </p>
+			            </a>
+			            <ul class="nav nav-treeview">
+			              <li class="nav-item">
+			                <a href="boardList" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>공지사항</p>
+			                </a>
+			              </li>
+			              <li class="nav-item">
+			                <a href="qnaList" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>QnA</p>
+			                </a>
+			              </li>
+			              
+			            </ul>
+			        </li>
+			        <!-- 상품 -->
+			        <li class="nav-item">
+			            <a href="#" class="nav-link">
+			              <i class="nav-icon fas fa-box"></i>
+			              <p>
+			              	상품구매
+			              	<i class="right fas fa-angle-left"></i>
+			              	<span class="badge badge-info right">2</span>
+			              </p>
+			            </a>
+			            <ul class="nav nav-treeview">
+			              <li class="nav-item">
+			                <a href="productList" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>상품판매</p>
+			                </a>
+			              </li>
+			              <li class="nav-item">
+			                <a href="productAdmin" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>판매관리</p>
+			                </a>
+			              </li>
+			              
+			            </ul>
+			        </li>
+			        
+			        <!-- 통계 -->
+			        <li class="nav-item">
+			            <a href="#" class="nav-link">
+			              <i class="nav-icon fas fa-box"></i>
+			              <p>
+			              	통계
+			              	<i class="right fas fa-angle-left"></i>
+			              	<span class="badge badge-info right">3</span>
+			              </p>
 			            </a>
 			            <ul class="nav nav-treeview">
 			              <li class="nav-item">
 			                <a href="#" class="nav-link">
 			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>MYPAGE</p>
+			                  <p>지역별통계</p>
 			                </a>
 			              </li>
 			              <li class="nav-item">
 			                <a href="#" class="nav-link">
 			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>병원목록</p>
+			                  <p>종류별통계</p>
 			                </a>
 			              </li>
 			              <li class="nav-item">
 			                <a href="#" class="nav-link">
 			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>Inline</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>uPlot</p>
+			                  <p>통합통계</p>
 			                </a>
 			              </li>
 			            </ul>
-			          </li>
+			        </li>
+			        
+					<li class="nav-item">
+			            <a href="#" class="nav-link">
+			              <i class="nav-icon fas fa-th"></i>
+			              <p>
+			              	설정및관리
+			              	<i class="right fas fa-angle-left"></i>
+			              	<span class="badge badge-info right">6</span>
+			              </p>
+			            </a>
+			            <ul class="nav nav-treeview">
+			              <li class="nav-item">
+			                <a href="userList" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>회원관리</p>
+			                </a>
+			              </li>
+			              <li class="nav-item">
+			                <a href="hospList" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>병원관리</p>
+			                </a>
+			              </li>
+			              <li class="nav-item">
+			                <a href="farmList" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>농장관리</p>
+			                </a>
+			              </li>
+			              <li class="nav-item">
+			                <a href="codeList" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>코드관리</p>
+			                </a>
+			              </li>
+			              <li class="nav-item">
+			                <a href="levList" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>권한관리</p>
+			                </a>
+			              </li>
+			              <li class="nav-item">
+			                <a href="#" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>관리</p>
+			                </a>
+			              </li>
+			            </ul>
+			        </li>
 					<!-- 
 					<li class="nav-item">
 						<a href="#" class="nav-link">

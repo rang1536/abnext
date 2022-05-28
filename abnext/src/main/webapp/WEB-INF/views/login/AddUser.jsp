@@ -11,7 +11,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="resources/dist/css/adminlte.css">
   <!-- BS Stepper -->
   <link rel="stylesheet" href="resources/plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- Select2 -->
@@ -233,29 +233,32 @@
 							                </div>
 							                
 							                <label for="userNm">주소 <code>&nbsp;주소검색을 이용해주세요.</code></label>
-							                <div class="input-group mb-3">
+							                <div class="row">
 							                	<div class="input-group col-sm-4">
 								                  <input type="text" class="form-control" id="userZip" name="userZip">
 								                  <span class="input-group-append">
-								                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr()" >주소검색</button>
+								                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('user')" >주소검색</button>
 								                  </span>
 								                </div>
-								                
+								             </div><br/>
+								             <div class="row">  
 							                	<div class="input-group col-sm-9">
 								                  <span class="input-group-prepend">
-								                    <button type="button" class="btn btn-secondary btn-flat" >기본주소</button>
+								                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
 								                  </span>
 								                  <input type="text" class="form-control" id="userAdr" name="userAdr">
 								                </div>
-								            
+								            </div><br/>
+								            <div class="row">
 								            	<div class="input-group col-sm-9">
 								            	  <div class="input-group-prepend">
-								                    <button type="button" class="btn btn-secondary">상세주소</button>
+								                    <button type="button" class="btn btn-default">상세주소</button>
 								                  </div>
-								                  <input type="text" class="form-control">
+								                  <input type="text" class="form-control" id="userDtlAdr" name="userDtlAdr">
 								            	</div>
 							                </div> <!-- END input-group mb-3 -->	
 							                
+							                	
 							                <br/>
 							                <!-- 기관(병원정보) -->
 							                <div class="row">
@@ -382,20 +385,50 @@
 									                </div>
 								                </div>
 								                
+								                <div class="row"> 
+									            	<div class="col-sm-6">
+										                <div class="form-group">
+										                  <label>사업자등록번호</label>
+										
+										                  <div class="input-group">
+										                    <div class="input-group-prepend">
+										                      <span class="input-group-text"><i class="fas fa-file"></i></span>
+										                    </div>
+										                    <input type="text" class="form-control" id="hospRn" name="hospRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+										                  </div>
+										                  <!-- /.input group -->
+										                </div>
+										                <!-- /.form group -->
+									                </div>  
+									                <div class="col-sm-6">
+										                <div class="form-group">
+										                  <label>사업자등록증파일</label>
+										
+										                  <div class="input-group">
+										                    <div class="custom-file">
+										                      <input type="file" class="custom-file-input" id="hospRnFile">
+										                      <label class="custom-file-label" for="hospRnFile">사업자등록증 파일을 등록해주세요</label>
+										                    </div>
+										                  </div>
+										                </div>
+										                <!-- /.form group -->
+									                </div>
+									            </div>
+								                
 								                <label for="hospAdr">주소 <code>&nbsp;주소검색을 이용해주세요.</code></label>
 								                <!-- <div class="input-group mb-3"> -->
 								                <div class="row">
 								                	<div class="input-group col-sm-4">
-									                  <input type="text" class="form-control" id="userZip" name="userZip">
+									                  <input type="text" class="form-control" id="hospZip" name="hospZip">
 									                  <span class="input-group-append">
-									                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr()" >주소검색</button>
+									                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('hospital')" >주소검색</button>
 									                  </span>
 									                </div>
 									            </div><br/>
 									            <div class="row">   
 								                	<div class="input-group col-sm-9">
 									                  <span class="input-group-prepend">
-									                    <button type="button" class="btn btn-secondary btn-flat" >기본주소</button>
+									                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
 									                  </span>
 									                  <input type="text" class="form-control" id="hospAdr" name="hospAdr">
 									                </div>
@@ -403,7 +436,7 @@
 									            <div class="row">
 									            	<div class="input-group col-sm-9">
 									            	  <div class="input-group-prepend">
-									                    <button type="button" class="btn btn-secondary">상세주소</button>
+									                    <button type="button" class="btn btn-default">상세주소</button>
 									                  </div>
 									                  <input type="text" class="form-control" name="hospDtlAdr" id="hospDtlAdr">
 									            	</div>
@@ -461,9 +494,7 @@
 										                </div>
 										                <!-- /.form group -->
 									                </div>
-									                
-									                
-								                </div>
+									            </div>
 								                
 								                <div class="row"> 
 									            	<div class="col-sm-6">
@@ -495,6 +526,36 @@
 									                </div>
 								                </div>
 								                
+								                <div class="row"> 
+									            	<div class="col-sm-6">
+										                <div class="form-group">
+										                  <label>사업자등록번호</label>
+										
+										                  <div class="input-group">
+										                    <div class="input-group-prepend">
+										                      <span class="input-group-text"><i class="fas fa-file"></i></span>
+										                    </div>
+										                    <input type="text" class="form-control" id="farmRn" name="farmRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+										                  </div>
+										                  <!-- /.input group -->
+										                </div>
+										                <!-- /.form group -->
+									                </div>  
+									                <div class="col-sm-6">
+										                <div class="form-group">
+										                  <label>사업자등록증파일</label>
+										
+										                  <div class="input-group">
+										                    <div class="custom-file">
+										                      <input type="file" class="custom-file-input" id="farmRnFile">
+										                      <label class="custom-file-label" for="farmRnFile">사업자등록증 파일을 등록해주세요</label>
+										                    </div>
+										                  </div>
+										                </div>
+										                <!-- /.form group -->
+									                </div>
+									            </div>
+									            
 								                <label for="farmAdr">주소 <code>&nbsp;주소검색을 이용해주세요.</code></label>
 								                <!-- <div class="input-group mb-3"> -->
 								                <div class="row">
@@ -509,7 +570,7 @@
 									            <div class="row"> 
 								                	<div class="input-group col-sm-9">
 									                  <span class="input-group-prepend">
-									                    <button type="button" class="btn btn-secondary btn-flat" >기본주소</button>
+									                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
 									                  </span>
 									                  <input type="text" class="form-control" id="farmAdr" name="farmAdr">
 									                </div>
@@ -517,7 +578,7 @@
 									            <div class="row">
 									            	<div class="input-group col-sm-9">
 									            	  <div class="input-group-prepend">
-									                    <button type="button" class="btn btn-secondary">상세주소</button>
+									                    <button type="button" class="btn btn-default">상세주소</button>
 									                  </div>
 									                  <input type="text" class="form-control" id="farmDtlAdr" name="farmDtlAdr">
 									            	</div>
@@ -534,7 +595,7 @@
 											<div>
 												
 											</div>
-											<div id="completeDiv" style="display:none;">
+											<div id="completeDiv">
 												<br/><br/><br/>
 												<div style="text-align:center;">
 													<h2><b>회원가입이 완료되었습니다</b></h2>
@@ -618,14 +679,31 @@
 	})
 	
 	$(function () {
-      $('.select2').select2()
+      $('.select2').select2();
+      bsCustomFileInput.init();
     });
 	
-	function fn_searchAdr(){
+	function fn_searchAdr(type){
 		new daum.Postcode({
 			oncomplete: function(data){
-				$("#userAdr").val(data.jibunAddress);
-				$("#userZip").val(data.zonecode);
+				if(type == 'user'){
+					$("#userAdr").val(data.jibunAddress);
+					$("#userZip").val(data.zonecode);	
+					
+					$('#userDtlAdr').focus();
+				}else if(type == 'hospital'){
+					$("#hospAdr").val(data.jibunAddress);
+					$("#hospZip").val(data.zonecode);
+					
+					$('#hospDtlAdr').focus();
+				}else if(type == 'farm'){
+					$("#farmAdr").val(data.jibunAddress);
+					$("#farmZip").val(data.zonecode);
+					
+					$('#farmDtlAdr').focus();
+				}
+					
+				
 			}
 		}).open();
 	}
