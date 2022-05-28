@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbRcept;
 
@@ -45,7 +46,7 @@ public class InspectController {
 		//신청정보
 		TbHospital hospital = insServ.getHospital(rcept.getHospNo());
 		//동물정보
-		
+		TbAnimal animal = insServ.getAnimal(rcept.getAnimNo());
 		
 		model.addAttribute("rceptInfo", rcept);
 		model.addAttribute("hospitalInfo", hospital);

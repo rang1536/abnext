@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbRcept;
 
@@ -23,6 +24,10 @@ public class InspectService {
 	
 	public TbHospital getHospital(int hospNo) {
 		return inspectDao.getHospital(hospNo);
+	}
+	
+	public TbAnimal getAnimal(int animNo) {
+		return inspectDao.getAnimal(animNo);
 	}
 	
 }
