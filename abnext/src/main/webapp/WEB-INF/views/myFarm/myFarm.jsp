@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>abnext | (주)아비넥스트</title>
   <!-- Mobiscroll JS and CSS Includes -->
   <link rel="stylesheet" href="resources/scheduler/css/mobiscroll.javascript.min.css">
   <script src="resources/scheduler/js/mobiscroll.javascript.min.js"></script>

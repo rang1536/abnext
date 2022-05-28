@@ -21,6 +21,11 @@
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	
   
   <style>
     th,td {text-align:center;}
@@ -52,9 +57,51 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
- 			<div class="container-fluid">
- 			
+		 <section class="content">
+ 			<div class="container-fluid"> 
+ 				<div class="invoice p-3 mb-3">
+					<!-- Table row -->
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<!-- /.card-header -->
+								<div class="card-body">
+									<table id="example2" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>-</th>
+												<th>구분</th>
+												<th>ID</th>
+												<th>이름</th>
+												<th>전화</th>
+												<th>휴대폰</th>
+												<th>이메일</th>
+												<th>소속</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="item" items="${rceptList }" varStatus="status">
+												<tr>
+													<td>${item.rqstNo }</td>
+													<td>${item.rqstDt }</td>
+													<td>${item.procStatNm }</td>
+													<td>${item.animNm }</td>
+													<td>${item.hospNm }</td>
+													<td>${item.docNm }</td>
+													<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div> <!-- /.card-body -->
+								<div class="card-footer">
+									<button type="button" class="btn btn-sm btn-danger">삭제</button>
+									<button type="button" class="btn btn-sm btn-success btn-flat" style="float:right;">회원등록</button>
+								</div>
+							</div> <!-- /.card -->
+						</div> <!-- /.col-12 -->
+					</div>  <!-- /.row -->
+				</div> <!-- invoice -->
  			
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
@@ -93,6 +140,19 @@
 <script src="resources/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
+<!-- DataTables	& Plugins -->
+<script src="resources/plugins/datatables/jquery.dataTables.js"></script>
+<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="resources/plugins/jszip/jszip.min.js"></script>
+<script src="resources/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="resources/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <script>
 
@@ -102,8 +162,17 @@
 	})
 	
 	$(function () {
-      $('.select2').select2();
-      bsCustomFileInput.init();
+		$('.select2').select2();
+		bsCustomFileInput.init();
+		
+		$('#example2').DataTable({
+			"paging": true,
+			"lengthChange": false,
+			"ordering": true,
+			"info": true,
+			"autoWidth": false,
+			"responsive": true,
+		});
     });
 	
 	
