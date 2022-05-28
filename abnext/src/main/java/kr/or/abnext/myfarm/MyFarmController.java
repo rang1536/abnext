@@ -22,16 +22,8 @@ public class MyFarmController {
 	private static final Logger logger = LoggerFactory.getLogger(MyFarmController.class);
 	
 	@RequestMapping(value = "myFarm" , method = RequestMethod.GET)
-	public String myFarm(Locale locale, Model model) {
-		logger.info("MyFarm Method is start {}.", locale);
+	public String myFarm(Model model) {
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "myFarm/myFarm";
+		return "index";
 	}
 }
