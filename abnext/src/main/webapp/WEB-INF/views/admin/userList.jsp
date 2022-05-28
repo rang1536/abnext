@@ -54,6 +54,8 @@
 		<!-- Main content -->
 		<section class="content">
  			<div class="container-fluid">
+ 			
+ 			
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
 	</div> <!-- End content-wrapper -->
