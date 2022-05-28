@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbRcept;
 
 @Controller
@@ -35,16 +36,19 @@ public class InspectController {
 	}
 	
 	@RequestMapping(value = "modifyInspect")
-	public String modifyInspect(Locale locale, Model model) {
+	public String modifyInspect(Locale locale, Model model, TbRcept searchRcept) {
 		logger.info("modifyInspect Method is start {}.", locale);
+		logger.info("rqstNo : "+searchRcept.getRqstNo());
+		//접수정보
+		TbRcept rcept = insServ.getRcept(searchRcept);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		//신청정보
+		TbHospital hospital = insServ.getHospital(rcept.getHospNo());
+		//동물정보
 		
-		String formattedDate = dateFormat.format(date);
 		
-		model.addAttribute("serverTime", formattedDate );
-		
+		model.addAttribute("rceptInfo", rcept);
+		model.addAttribute("hospitalInfo", hospital);
 		return "inspect/modifyInspect";
 	}
 	

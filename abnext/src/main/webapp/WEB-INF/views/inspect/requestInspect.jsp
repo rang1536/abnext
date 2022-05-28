@@ -65,7 +65,7 @@
 											<th>비용</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="listBody">
 										<c:forEach var="item" items="${rceptList }" varStatus="status">
 											<tr>
 												<td>${item.rqstNo }</td>
@@ -109,7 +109,7 @@
 <script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables	& Plugins -->
 <script src="resources/plugins/datatables/jquery.dataTables.js"></script>
-<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
@@ -138,8 +138,16 @@
 	});
 	
 	$(".btn-primary").on("click",function(){
-	 location.href = "registerInspect.do";
+		location.href = "registerInspect.do";
 	});
+	
+	$("#listBody").find("tr").on("click", function(){
+		var rqstNo = $(this).find("td:eq(0)").text();
+		$.ajax({
+			url : "modifyInspect.do",
+			data : {rqstNo : rqstNo}
+		})
+	})
 </script>
 </body>
 </html>

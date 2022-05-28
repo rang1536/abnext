@@ -11540,7 +11540,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "CURRENT [_START_ - _END_] TOTAL _TOTAL_ ",
 	
 	
 			/**

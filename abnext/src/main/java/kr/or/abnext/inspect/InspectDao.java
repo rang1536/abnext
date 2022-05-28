@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.abnext.domain.TbAnimal;
+import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbRcept;
 
 @Repository
@@ -42,4 +44,15 @@ public class InspectDao {
 		
 	}
 	
+	public TbRcept getRcept(TbRcept rcept) {
+		return sql.selectOne("getTbRcept", rcept);
+	}
+	
+	public TbHospital getHospital(int hospNo) {
+		return sql.selectOne("getTbHospital", hospNo);
+	}
+	
+	public TbAnimal getAnimal(int animNo) {
+		return sql.selectOne("getAnimal", animNo);
+	}
 }
