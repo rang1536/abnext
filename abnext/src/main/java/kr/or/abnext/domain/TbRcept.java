@@ -9,13 +9,20 @@ package kr.or.abnext.domain;
 public class TbRcept {
 	private int rqstNo;
 	private int hospNo;
+	private String hospNm;
 	private int userNo;
+	private String userNm;
 	private int animNo;
+	private String animNm;
 	private int farmNo;
+	private String farmNm;
+	private int docNo;
+	private String docNm;
 	private String inspCd;
 	private String inspSickCd;
 	private String rqstDt;
 	private String procStat;
+	private String procStatNm;
 	private String rqstMemo;
 	private String payGb;
 	private int price;
@@ -24,6 +31,7 @@ public class TbRcept {
 	private int insId;
 	private String uptDt;
 	private int uptId;
+	
 	public int getRqstNo() {
 		return rqstNo;
 	}
@@ -36,11 +44,23 @@ public class TbRcept {
 	public void setHospNo(int hospNo) {
 		this.hospNo = hospNo;
 	}
+	public String getHospNm() {
+		return hospNm;
+	}
+	public void setHospNm(String hospNm) {
+		this.hospNm = hospNm;
+	}
 	public int getUserNo() {
 		return userNo;
 	}
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
+	}
+	public String getUserNm() {
+		return userNm;
+	}
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
 	}
 	public int getAnimNo() {
 		return animNo;
@@ -48,11 +68,35 @@ public class TbRcept {
 	public void setAnimNo(int animNo) {
 		this.animNo = animNo;
 	}
+	public String getAnimNm() {
+		return animNm;
+	}
+	public void setAnimNm(String animNm) {
+		this.animNm = animNm;
+	}
 	public int getFarmNo() {
 		return farmNo;
 	}
 	public void setFarmNo(int farmNo) {
 		this.farmNo = farmNo;
+	}
+	public String getFarmNm() {
+		return farmNm;
+	}
+	public void setFarmNm(String farmNm) {
+		this.farmNm = farmNm;
+	}
+	public int getDocNo() {
+		return docNo;
+	}
+	public void setDocNo(int docNo) {
+		this.docNo = docNo;
+	}
+	public String getDocNm() {
+		return docNm;
+	}
+	public void setDocNm(String docNm) {
+		this.docNm = docNm;
 	}
 	public String getInspCd() {
 		return inspCd;
@@ -77,6 +121,12 @@ public class TbRcept {
 	}
 	public void setProcStat(String procStat) {
 		this.procStat = procStat;
+	}
+	public String getProcStatNm() {
+		return procStatNm;
+	}
+	public void setProcStatNm(String procStatNm) {
+		this.procStatNm = procStatNm;
 	}
 	public String getRqstMemo() {
 		return rqstMemo;
@@ -126,14 +176,15 @@ public class TbRcept {
 	public void setUptId(int uptId) {
 		this.uptId = uptId;
 	}
+	
 	@Override
 	public String toString() {
-		return "TbRcept [rqstNo=" + rqstNo + ", hospNo=" + hospNo + ", userNo=" + userNo + ", animNo=" + animNo
-				+ ", farmNo=" + farmNo + ", inspCd=" + inspCd + ", inspSickCd=" + inspSickCd + ", rqstDt=" + rqstDt
-				+ ", procStat=" + procStat + ", rqstMemo=" + rqstMemo + ", payGb=" + payGb + ", price=" + price
-				+ ", payStat=" + payStat + ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId="
-				+ uptId + "]";
+		return "TbRcept [rqstNo=" + rqstNo + ", hospNo=" + hospNo + ", hospNm=" + hospNm + ", userNo=" + userNo
+				+ ", userNm=" + userNm + ", animNo=" + animNo + ", animNm=" + animNm + ", farmNo=" + farmNo
+				+ ", farmNm=" + farmNm + ", docNo=" + docNo + ", docNm=" + docNm + ", inspCd=" + inspCd
+				+ ", inspSickCd=" + inspSickCd + ", rqstDt=" + rqstDt + ", procStat=" + procStat + ", procStatNm="
+				+ procStatNm + ", rqstMemo=" + rqstMemo + ", payGb=" + payGb + ", price=" + price + ", payStat="
+				+ payStat + ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
-	
 	
 }

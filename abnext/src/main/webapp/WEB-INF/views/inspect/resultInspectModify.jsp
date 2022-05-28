@@ -154,10 +154,10 @@
 									<thead>
 										<tr>
 											<td class="txtc" style="width:5%;background-color:#F2F2F2">No</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">질병구분</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">검사방법</td>
+											<td class="txtc" style="width:15%;background-color:#F2F2F2">질병구분</td>
+											<td class="txtc" style="width:15%;background-color:#F2F2F2">검사방법</td>
 											<td class="txtc" style="width:*;background-color:#F2F2F2">실험결과</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">사진</td>
+											<td class="txtc" style="width:35%;background-color:#F2F2F2">사진</td>
 										</tr>
 									</thead>
 									<tbody>
@@ -167,16 +167,40 @@
 											<td class="txtc">PCR</td>
 											<td class="txtc"><textarea rows="3" class="form-control" placeholder="실험결과입력"></textarea></td>
 											<td class="txtc">
-												<div class="custom-file">
-													<input type="file" class="custom-file-input" id="customFile">
-													<label class="custom-file-label" for="customFile" name="u_file">사진</label>
+												<div class="btn-group w-100">
+													<span class="btn btn-success col fileinput-button">
+														<i class="fas fa-plus"></i>
+														<span>Add files</span>
+													</span>
 												</div>
-																							<div id="imgViewArea" style="margin-top:10px; display:none;">
-												<img id="imgArea" style="width:200px; height:100px;" onerror="imgAreaError()"/>
-											</div>
+												<div class="table table-striped files" id="previews">
+													<div id="template" class="row mt-2">
+														<div class="col-auto">
+															<span class="preview"><img src="data:," alt="" data-dz-thumbnail /></span>
+														</div>
+														<div class="col d-flex align-items-center">
+															<p class="mb-0">
+																<span class="lead" data-dz-name></span>
+																(<span data-dz-size></span>)
+															</p>
+															<strong class="error text-danger" data-dz-errormessage></strong>
+														</div><!-- 
+														<div class="col-4 d-flex align-items-center">
+															<div class="progress progress-striped active w-100" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+																<div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+															</div>
+														</div> -->
+														<div class="col-auto d-flex align-items-center">
+															<div class="btn-group">
+																<button data-dz-remove class="btn btn-danger delete">
+																	<i class="fas fa-trash"></i>
+																	<span>Delete</span>
+																</button>
+															</div>
+														</div>
+													</div>
+												</div>
 											</td>
-											
-
 										</tr>
 										<tr>
 											<td class="txtc">2</td>
@@ -240,6 +264,7 @@
 <!-- Select2 -->
 <script src="resources/plugins/select2/js/select2.full.min.js"></script>
 <!-- dropzonejs -->
+<script src="resources/plugins/dropzone/min/dropzone.min.js"></script>
 
 <!-- Page specific script -->
 <script>
@@ -258,30 +283,38 @@ $(function () {
 	$('#reservationdate').datetimepicker({
 			format: 'YYYY.MM.DD'
 	});
+
 });
 
-function readURL(input) {
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			$('#imgArea').attr('src', e.target.result); 
-		}
-		reader.readAsDataURL(input.files[0]);
-	}
-}
+// DropzoneJS Demo Code Start
+Dropzone.autoDiscover = false
 
-$(":input[name='u_file']").change(function() {
-	if( $(":input[name='u_file']").val() == '' ) {
-		$('#imgArea').attr('src' , '');  
-	}
-	$('#imgViewArea').css({ 'display' : '' });
-	readURL(this);
-});
+// Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+var previewNode = document.querySelector("#template")
+previewNode.id = ""
+var previewTemplate = previewNode.parentNode.innerHTML
+previewNode.parentNode.removeChild(previewNode)
 
-// 이미지 에러 시 미리보기영역 미노출
-function imgAreaError(){
-	$('#imgViewArea').css({ 'display' : 'none' });
-} 
+var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+	url: "/target-url", // Set the url
+	thumbnailWidth: 80,
+	thumbnailHeight: 80,
+	parallelUploads: 20,
+	previewTemplate: previewTemplate,
+	autoQueue: false, // Make sure the files aren't queued until manually added
+	previewsContainer: "#previews", // Define the container to display the previews
+	clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+})
+
+// Hide the total progress bar when nothing's uploading anymore
+myDropzone.on("queuecomplete", function(progress) {
+	document.querySelector("#total-progress").style.opacity = "0"
+})
+
+// Setup the buttons for all transfers
+// The "add files" button doesn't need to be setup because the config
+// `clickable` has already been specified.
+
 </script>
 </body>
 </html>

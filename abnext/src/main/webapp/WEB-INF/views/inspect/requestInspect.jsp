@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,8 +56,8 @@
 								<table id="example2" class="table table-bordered table-hover">
 									<thead>
 										<tr>
-											<th>의뢰번호</th>
-											<th>신청일</th>
+											<th>접수번호</th>
+											<th>접수일자</th>
 											<th>상태</th>
 											<th>동물명</th>
 											<th>신청자(기관)</th>
@@ -64,168 +66,17 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>ABd2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
-										<tr>
-											<td>ABC2203010002</td>
-											<td>2022.02.22</td>
-											<td>신청</td>
-											<td>망고</td>
-											<td>ㅇㅇ병원</td>
-											<td>나수의</td>
-											<td>30,000</td>
-										</tr>
+										<c:forEach var="item" items="${rceptList }" varStatus="status">
+											<tr>
+												<td>${item.rqstNo }</td>
+												<td>${item.rqstDt }</td>
+												<td>${item.procStatNm }</td>
+												<td>${item.animNm }</td>
+												<td>${item.hospNm }</td>
+												<td>${item.docNm }</td>
+												<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -257,7 +108,7 @@
 <!-- Bootstrap 4 -->
 <script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables	& Plugins -->
-<script src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="resources/plugins/datatables/jquery.dataTables.js"></script>
 <script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
