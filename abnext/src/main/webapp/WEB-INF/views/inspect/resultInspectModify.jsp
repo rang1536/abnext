@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -166,7 +166,17 @@
 											<td class="txtc">바이러스</td>
 											<td class="txtc">PCR</td>
 											<td class="txtc"><textarea rows="3" class="form-control" placeholder="실험결과입력"></textarea></td>
-											<td class="txtc"></td>
+											<td class="txtc">
+												<div class="custom-file">
+													<input type="file" class="custom-file-input" id="customFile">
+													<label class="custom-file-label" for="customFile" name="u_file">사진</label>
+												</div>
+																							<div id="imgViewArea" style="margin-top:10px; display:none;">
+												<img id="imgArea" style="width:200px; height:100px;" onerror="imgAreaError()"/>
+											</div>
+											</td>
+											
+
 										</tr>
 										<tr>
 											<td class="txtc">2</td>
@@ -249,6 +259,29 @@ $(function () {
 			format: 'YYYY.MM.DD'
 	});
 });
+
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#imgArea').attr('src', e.target.result); 
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+$(":input[name='u_file']").change(function() {
+	if( $(":input[name='u_file']").val() == '' ) {
+		$('#imgArea').attr('src' , '');  
+	}
+	$('#imgViewArea').css({ 'display' : '' });
+	readURL(this);
+});
+
+// 이미지 에러 시 미리보기영역 미노출
+function imgAreaError(){
+	$('#imgViewArea').css({ 'display' : 'none' });
+} 
 </script>
 </body>
 </html>

@@ -35,6 +35,20 @@ public class InspectController {
 		return "inspect/requestInspect";
 	}
 	
+	@RequestMapping(value = "modifyInspect")
+	public String modifyInspect(Locale locale, Model model) {
+		logger.info("modifyInspect Method is start {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "inspect/modifyInspect";
+	}
+	
 	@RequestMapping(value = "registerInspect")
 	public String registerInspect(Locale locale, Model model) {
 		logger.info("registerInspect Method is start {}.", locale);
