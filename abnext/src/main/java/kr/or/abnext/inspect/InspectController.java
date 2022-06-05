@@ -26,8 +26,15 @@ public class InspectController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(InspectController.class);
 	
+	@RequestMapping(value = "introInspect")
+	public String introInspect(Locale locale, Model model) {
+		logger.info("requestInspect Method is start {}.", locale);
+		
+		return "inspect/introInspect";
+	}
+	
 	@RequestMapping(value = "requestInspect")
-	public String requestInspect(Locale locale, Model model) {
+	public String requestInspect(Locale locale, Model model, String page) {
 		logger.info("requestInspect Method is start {}.", locale);
 		
 		List<TbRcept> list = insServ.recptList();

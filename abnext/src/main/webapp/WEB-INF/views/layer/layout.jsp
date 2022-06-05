@@ -204,7 +204,7 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a href="requestInspect.do" class="nav-link leftMenuSub">
+								<a href="introInspect.do" class="nav-link leftMenuSub">
 									<i class="far fa-circle nav-icon"></i>
 									<p>신청접수</p>
 								</a>
