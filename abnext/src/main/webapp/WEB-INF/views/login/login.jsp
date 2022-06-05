@@ -12,7 +12,7 @@
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="resources/dist/css/adminlte.min.css"> 
+  <link rel="stylesheet" href="resources/dist/css/adminlte.css"> 
 </head>
 
 <body class="hold-transition login-page">
@@ -28,7 +28,7 @@
 	
 	    <form id="loginForm" method="post">
 	      <div class="input-group mb-3">
-	        <input type="email" class="form-control" placeholder="아이디">
+	        <input type="email" class="form-control" placeholder="아이디" id="userId" name="userId">
 	        <div class="input-group-append">
 	          <div class="input-group-text">
 	            <span class="fas fa-envelope"></span>
@@ -36,7 +36,7 @@
 	        </div>
 	      </div>
 	      <div class="input-group mb-3">
-	        <input type="password" class="form-control" placeholder="비밀번호">
+	        <input type="password" class="form-control" placeholder="비밀번호" id="userPass" name="userPass">
 	        <div class="input-group-append">
 	          <div class="input-group-text">
 	            <span class="fas fa-lock"></span>
@@ -46,7 +46,7 @@
 	      <div class="row">
 	        <div class="col-8">
 	          <div class="icheck-primary">
-	            <input type="checkbox" id="idSave">
+	            <input type="checkbox" id="idSave" checked>
 	            <label for="idSave">
 	              	아이디 저장
 	            </label>
@@ -54,28 +54,25 @@
 	        </div>
 	        <!-- /.col -->
 	        <div class="col-4">
-	          <button class="btn btn-primary btn-block" id="loginBtn">로그인</button>
+	          
 	        </div>
 	        <!-- /.col -->
 	      </div>
 	    </form>
 	
 	    <div class="social-auth-links text-center mt-2 mb-3">
-	      <a href="#" class="btn btn-block btn-primary">
-	        <i class="fab fa-facebook mr-2"></i> Facebook 계정으로 로그인
-	      </a>
-	      <a href="#" class="btn btn-block btn-danger">
-	        <i class="fab fa-google-plus mr-2"></i> Google계정으로 로그인
+	      
+	      <a href="#" class="btn btn-block btn-primary" onclick="fn_login();">
+	        <i class="fab fa-google-plus mr-2"></i> 로그인
 	      </a>
 	    </div>
 	    <!-- /.social-auth-links -->
-	
+		<br/>
 	    <p class="mb-1">
-	      <a href="forgot-password.html">비밀번호찾기</a>
+	      <a href="#" class="btn btn-sm btn-info">비밀번호찾기</a>
+	      <a href="addUserPage" class="btn btn-sm btn-warning" style="float:right;">회원가입하기</a>
 	    </p>
-	    <p class="mb-0">
-	      <a href="addUserPage" class="text-center">회원가입하기</a>
-	    </p>
+	   
 	  </div>
 	  <!-- /.card-body -->
 	</div>
@@ -91,5 +88,71 @@
 <!-- AdminLTE App -->
 <script src="resources/dist/js/adminlte.min.js"></script>
 </body>
+
+<script>
+	/*기본 세팅*/
+	$(document).ready(function(){
+		//저장된 아이디가 있다면 미리 세팅함.
+		var userId = localStorage.getItem('userId');
+		var userPass = locaStorage.getItem('userPass');
+		
+		if(userId != null && userId != ''){
+			$('#userId').val(userId);
+		}
+		
+		if(userPass != null && userPass != ''){
+			$('#userPass').val(userPass);
+		}
+	})
+	
+	/*로그인*/
+	function fn_login(){
+		var idSave = $('#idSave').is(':checked');
+		var userId = $('#userId').val();
+		var userPass = $('#userPass').val();
+		
+		if(userId == null || userId == ''){
+			alert('아이디를 입력하세요');
+			$('#userId').focus();
+			return;
+		}
+		
+		if(userPass == null || userPass == ''){
+			alert('비밀번호를 입력하세요');
+			$('#userPass').focus();
+			return;
+		}
+		
+		$.ajax({
+			url : 'userLogin',
+			data : {'userId'	:userId, 
+					'userPass'	:userPass},
+			dataType : 'json',
+			type : 'post',
+			success:function(data){
+				var result = data.result;
+				
+				if(result == 'noUser'){
+					alert('회원정보가 없습니다 \r\n 아이디와 비밀번호를 다시 입력해주세요.');
+					$('#userId').val('');
+					$('#userPass').val('');
+					
+					$('#userId').focus();
+					return;
+				}else if(result == 'succ'){
+					var userInfo = data.userInfo;
+					if(idSave){
+						localStorage.setItem('userId', userId);
+						localStorage.setItem('userPass', userPass);
+					}
+					
+					localStorage.setItem('userInfo', userInfo);
+					alert(userInfo.userNm+' 님 반갑습니다!!');
+					location.href = 'index';
+				}
+			}
+		})
+	}
+</script>
 </html>
 

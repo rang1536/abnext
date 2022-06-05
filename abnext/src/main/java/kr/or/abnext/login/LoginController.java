@@ -19,7 +19,7 @@ public class LoginController {
 	/*
 	 * 로그인페이지 연결.
 	 * */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "loginPage", method = RequestMethod.GET)
 	public String loginPage(Model model) {
 		
 		return "login/login";
@@ -28,7 +28,7 @@ public class LoginController {
 	/*
 	 * 회원가입페이지연결.
 	 * */
-	@RequestMapping(value = "/addUserPage", method = RequestMethod.GET)
+	@RequestMapping(value = "addUserPage", method = {RequestMethod.GET, RequestMethod.POST})
 	public String addUserPage(Model model) {
 		
 		return "login/AddUser";

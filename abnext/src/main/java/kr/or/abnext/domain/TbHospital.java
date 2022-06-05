@@ -23,7 +23,23 @@ public class TbHospital {
 	private String uptDt;
 	private int uptId;
 	
+	//추가
+	private String hospSidoNm;
+	private String hospSigunguNm;
 	
+	
+	public String getHospSidoNm() {
+		return hospSidoNm;
+	}
+	public void setHospSidoNm(String hospSidoNm) {
+		this.hospSidoNm = hospSidoNm;
+	}
+	public String getHospSigunguNm() {
+		return hospSigunguNm;
+	}
+	public void setHospSigunguNm(String hospSigunguNm) {
+		this.hospSigunguNm = hospSigunguNm;
+	}
 	public String getHospZip() {
 		return hospZip;
 	}
@@ -119,8 +135,8 @@ public class TbHospital {
 		return "TbHospital [hospNo=" + hospNo + ", hospNm=" + hospNm + ", hospTel=" + hospTel + ", hospHp=" + hospHp
 				+ ", hospEmail=" + hospEmail + ", hospFax=" + hospFax + ", hospAdr=" + hospAdr + ", hospDtlAdr="
 				+ hospDtlAdr + ", hospZip=" + hospZip + ", hospCeo=" + hospCeo + ", hospRn=" + hospRn + ", insDt="
-				+ insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", hospSidoNm=" + hospSidoNm
+				+ ", hospSigunguNm=" + hospSigunguNm + "]";
 	}
-	
 	
 }

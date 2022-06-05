@@ -87,180 +87,211 @@
 										</div>
 									</div>
                   
-									<div class="bs-stepper-content">  <!-- your steps content here -->
-                   
-										<div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
-											<div class="row">
-												<div class="col-sm-6">
-													<p>아이디 <code>&nbsp;입력후 중복체크를 해주세요</code></p>
-													<div class="input-group">
-														<input type="text" class="form-control" id="userNm" name="userNm">
-														<span class="input-group-append">
-															<button type="button" class="btn btn-warning btn-flat" onclick="fn_idchk()">중복확인</button>
-														</span>
+                  					
+                  					<div class="bs-stepper-content">  <!-- your steps content here -->
+										<!-- 유저정보입력 FORM -->
+                   						<form onsubmit="return false" id="userInfoForm" method="post" encType="multipart/form-data">  
+											<div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+												<div class="row">
+													<div class="col-sm-6">
+														<p>아이디 <code>&nbsp;입력후 중복체크를 해주세요</code></p>
+														<div class="input-group">
+															<input type="text" class="form-control" id="userId" name="userId">
+															<span class="input-group-append">
+																<button type="button" class="btn btn-warning btn-flat" onclick="fn_idchk()">중복확인</button>
+															</span>
+														</div>
+														<p><code id="idChkResult"></code></p>
 													</div>
 												</div>
-											</div>
-											<br/>
-											<div class="row">
-												<div class="col-sm-6">
-													<p>비밀번호 <code>&nbsp;비밀번호를 입력하세요</code></p>
-													<div class="input-group">
-														<input type="password" class="form-control" id="userPass" name="userPass">
-														<!-- <span class="input-group-append">
-															<button type="button" class="btn btn-warning btn-flat" onclick="fn_idchk()">비번확인</button>
-														</span> -->
+												<br/>
+												<div class="row">
+													<div class="col-sm-6">
+														<p>비밀번호 <code>&nbsp;비밀번호를 입력하세요</code></p>
+														<div class="input-group">
+															<input type="password" class="form-control" id="userPass" name="userPass">
+															<!-- <span class="input-group-append">
+																<button type="button" class="btn btn-warning btn-flat" onclick="fn_idchk()">비번확인</button>
+															</span> -->
+														</div>
+													</div>
+												<!-- </div>
+												<br/>
+												<div class="row"> -->
+													<div class="col-sm-6">
+														<p>비밀번호 확인<code>&nbsp;비밀번호를 다시 입력해주세요</code></p>
+														<div class="input-group">
+															<input type="password" class="form-control" id="userRePass">
+															<!-- <span class="input-group-append">
+																<button type="button" class="btn btn-warning btn-flat" onclick="fn_idchk()">비번확인</button>
+															</span> -->
+														</div>
 													</div>
 												</div>
-											<!-- </div>
-											<br/>
-											<div class="row"> -->
-												<div class="col-sm-6">
-													<p>비밀번호 확인<code>&nbsp;비밀번호를 다시 입력해주세요</code></p>
-													<div class="input-group">
-														<input type="password" class="form-control" id="userPassRe" name="userPassRe">
-														<!-- <span class="input-group-append">
-															<button type="button" class="btn btn-warning btn-flat" onclick="fn_idchk()">비번확인</button>
-														</span> -->
-													</div>
+												<br/><br/>
+												<div class="row">
+													<button class="btn btn-primary" onclick="nextPage('1')">다음</button>
+													<!-- <button class="btn btn-primary" onclick="stepper.next()">다음</button> -->
 												</div>
 											</div>
-											<br/><br/>
-											<div class="row">
-												<button class="btn btn-primary" onclick="stepper.next()">다음</button>
-											</div>
-										</div>
-                    
-										<div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
-											<div class="row">
-												<div class="line" style="background-color:#C90000;"></div>
-												<div>&nbsp;&nbsp;<b>User Information</b>&nbsp;&nbsp;</div>	
-												<div class="line" style="background-color:#C90000;"></div>
-											</div>
-											
-											<div class="row">
-							                  <div class="col-sm-6">
-							                    <!-- select -->
-							                    <div class="form-group">
-							                      <label>회원등급</label>
-							                      <select class="custom-select" name="userLev" id="userLev">
-							                        <option>option 1</option>
-							                        <option>option 2</option>
-							                        <option>option 3</option>
-							                        <option>option 4</option>
-							                        <option>option 5</option>
-							                      </select>
-							                    </div>
-							                  </div>
-							                  <div class="col-sm-6">
-							                    <!-- <div class="form-group">
-							                      <label>Custom Select Disabled</label>
-							                      <select class="custom-select" disabled>
-							                        <option>option 1</option>
-							                        <option>option 2</option>
-							                        <option>option 3</option>
-							                        <option>option 4</option>
-							                        <option>option 5</option>
-							                      </select>
-							                    </div> -->
-							                  </div>
-							                </div>
-								            
-								            <!-- phone mask -->
-								            <div class="row">   
-								                <div class="col-sm-6">
-									                <div class="form-group">
-									                  <label>전화번호</label>
-									
-									                  <div class="input-group">
-									                    <div class="input-group-prepend">
-									                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
-									                    </div>
-									                    <input type="text" class="form-control" id="userTel" name="userTel" data-inputmask='"mask": "(999) 999-9999"' data-mask>
-									                  </div>
-									                  <!-- /.input group -->
-									                </div>
-									                <!-- /.form group -->
-								                </div>
-								                
-								                <div class="col-sm-6">
-									                <div class="form-group">
-									                  <label>휴대폰번호</label>
-									
-									                  <div class="input-group">
-									                    <div class="input-group-prepend">
-									                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
-									                    </div>
-									                    <input type="text" class="form-control" id="userHp" name="userHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
-									                  </div>
-									                  <!-- /.input group -->
-									                </div>
-									                <!-- /.form group -->
-								                </div>
-							                </div>
-							                
-							                <!-- phone mask -->
-								            <div class="row">   
-								                <div class="col-sm-6">
-									                <div class="form-group">
-									                  <label>팩스</label>
-									
-									                  <div class="input-group">
-									                    <div class="input-group-prepend">
-									                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
-									                    </div>
-									                    <input type="text" class="form-control" id="userFax" name="userFax" data-inputmask='"mask": "(999) 999-9999"' data-mask>
-									                  </div>
-									                  <!-- /.input group -->
-									                </div>
-									                <!-- /.form group -->
-								                </div>
-								                
-								                <div class="col-sm-6">
-									                <div class="form-group">
-									                  <label>이메일</label>
-									
-									                  <div class="input-group">
-									                    <div class="input-group-prepend">
-									                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-									                    </div>
-									                    <input type="text" class="form-control" id="userEmail" name="userEmail" />
-									                  </div>
-									                  <!-- /.input group -->
-									                </div>
-									                <!-- /.form group -->
-								                </div>
-							                </div>
-							                
-							                <label for="userNm">주소 <code>&nbsp;주소검색을 이용해주세요.</code></label>
-							                <div class="row">
-							                	<div class="input-group col-sm-4">
-								                  <input type="text" class="form-control" id="userZip" name="userZip">
-								                  <span class="input-group-append">
-								                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('user')" >주소검색</button>
-								                  </span>
-								                </div>
-								             </div><br/>
-								             <div class="row">  
-							                	<div class="input-group col-sm-9">
-								                  <span class="input-group-prepend">
-								                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
-								                  </span>
-								                  <input type="text" class="form-control" id="userAdr" name="userAdr">
-								                </div>
-								            </div><br/>
-								            <div class="row">
-								            	<div class="input-group col-sm-9">
-								            	  <div class="input-group-prepend">
-								                    <button type="button" class="btn btn-default">상세주소</button>
+	                    
+											<div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+												<div class="row">
+													<div class="line" style="background-color:#C90000;"></div>
+													<div>&nbsp;&nbsp;<b>User Information</b>&nbsp;&nbsp;</div>	
+													<div class="line" style="background-color:#C90000;"></div>
+												</div>
+												
+												<div class="row">
+								                  <div class="col-sm-6">
+								                    <!-- select -->
+								                    <div class="form-group">
+								                      <label>회원구분</label>
+								                      <select class="custom-select" name="userLev" id="userLev">
+								                        <option value="1">일반회원</option>
+								                        <option value="2">수의사</option>
+								                        <option value="3">기관(병원)</option>
+								                        <option value="4">농장</option>
+								                        <option value="5">관리자</option>
+								                      </select>
+								                    </div>
 								                  </div>
-								                  <input type="text" class="form-control" id="userDtlAdr" name="userDtlAdr">
-								            	</div>
-							                </div> <!-- END input-group mb-3 -->	
-							                
+								                  <div class="col-sm-6">
+								                    <!-- <div class="form-group">
+								                      <label>Custom Select Disabled</label>
+								                      <select class="custom-select" disabled>
+								                        <option>option 1</option>
+								                        <option>option 2</option>
+								                        <option>option 3</option>
+								                        <option>option 4</option>
+								                        <option>option 5</option>
+								                      </select>
+								                    </div> -->
+								                  </div>
+								                </div>
+									            
+									            <div class="row">   
+									                <div class="col-sm-6">
+										                <div class="form-group">
+										                  <label>이름 *</label>
+										
+										                  <div class="input-group">
+										                    <div class="input-group-prepend">
+										                      <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+										                    </div>
+										                    <input type="text" class="form-control" id="userNm" name="userNm" >
+										                  </div>
+										                  <!-- /.input group -->
+										                </div>
+										                <!-- /.form group -->
+									                </div>
+									                
+									                <div class="col-sm-6">
+										                <div class="form-group">
+										                  <label>전화번호</label>
+										
+										                  <div class="input-group">
+										                    <div class="input-group-prepend">
+										                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+										                    </div>
+										                    <input type="text" class="form-control" id="userTel" name="userTel" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+										                  </div>
+										                  <!-- /.input group -->
+										                </div>
+										                <!-- /.form group -->
+									                </div>
+								                </div>
+								                
+									            <!-- phone mask -->
+									            <div class="row">   
+									                <div class="col-sm-6">
+										                <div class="form-group">
+										                  <label>휴대폰번호 *</label>
+										
+										                  <div class="input-group">
+										                    <div class="input-group-prepend">
+										                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
+										                    </div>
+										                    <input type="text" class="form-control" id="userHp" name="userHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+										                  </div>
+										                  <!-- /.input group -->
+										                </div>
+										                <!-- /.form group -->
+									                </div>
+									                
+									                <div class="col-sm-6">
+										                <div class="form-group">
+										                  <label>팩스</label>
+										
+										                  <div class="input-group">
+										                    <div class="input-group-prepend">
+										                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+										                    </div>
+										                    <input type="text" class="form-control" id="userFax" name="userFax" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+										                  </div>
+										                  <!-- /.input group -->
+										                </div>
+										                <!-- /.form group -->
+									                </div>
+								                </div>
+								                
+								                <!-- phone mask -->
+									            <div class="row">   
+									                <div class="col-sm-12">
+										                <div class="form-group">
+										                  <label>이메일</label>
+										
+										                  <div class="input-group">
+										                    <div class="input-group-prepend">
+										                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+										                    </div>
+										                    <input type="text" class="form-control" id="userEmail" name="userEmail" />
+										                  </div>
+										                  <!-- /.input group -->
+										                </div>
+										                <!-- /.form group -->
+									                </div>
+									                <div class="col-sm-6">
+										                
+									                </div>
+								                </div>
+								                
+								                <label for="userNm">주소  *<code>&nbsp;주소검색을 이용해주세요.</code></label>
+								                <div class="row">
+								                	<div class="input-group col-sm-4">
+									                  <input type="text" class="form-control" id="userZip" name="userZip">
+									                  <span class="input-group-append">
+									                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('user')" >주소검색</button>
+									                  </span>
+									                </div>
+									                <input type="hidden" id="sidoNm" name="sidoNm"/>
+									                <input type="hidden" id="sigunguNm" name="sigunguNm"/>
+									             </div><br/>
+									             <div class="row">  
+								                	<div class="input-group col-sm-9">
+									                  <span class="input-group-prepend">
+									                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
+									                  </span>
+									                  <input type="text" class="form-control" id="userAdr" name="userAdr">
+									                </div>
+									            </div><br/>
+									            <div class="row">
+									            	<div class="input-group col-sm-9">
+									            	  <div class="input-group-prepend">
+									                    <button type="button" class="btn btn-default">상세주소</button>
+									                  </div>
+									                  <input type="text" class="form-control" id="userDtlAdr" name="userDtlAdr">
+									            	</div>
+								                </div> <!-- END input-group mb-3 -->
+								                
+								                <!-- 기관, 농장등 소속 입력 혹은 검색선택시 적용 히든값 -->
+								                <input type="hidden" id="hospNo" name="hospNo"/>	
+								                <input type="hidden" id="farmNo" name="farmNo"/>
+							                </form><!-- userInfoForm END  -->
 							                	
 							                <br/>
 							                <!-- 기관(병원정보) -->
+							                
 							                <div class="row">
 												<div class="line" style="background-color:#C90000;"></div>
 												<div>&nbsp;&nbsp;<b>Company Information</b>&nbsp;&nbsp;</div>	
@@ -268,10 +299,10 @@
 											</div>
 							                
 							                <div class="row">
-							                	<div class="col-3">
+							                	<div class="col-5">
 					                                <div class="form-group clearfix">
 								                      <div class="icheck-danger d-inline">
-								                        <input type="radio" name="searchKey" checked id="searchKey1" value="hospital" onclick="fn_searchKeyChg('hospital')">
+								                        <input type="radio" name="searchKey" id="searchKey1" value="hospital" onclick="fn_searchKeyChg('hospital')">
 								                        <label for="searchKey1">
 								                        	기관(병원)
 								                        </label>
@@ -285,14 +316,14 @@
 								                      </div>
 								                    </div>
 					                            </div>
-					                            <div class="col-8">
+					                            <div class="col-6">
 								                	<div class="form-group">
 								                		<div class="input-group">
-							                                <input type="search" class="form-control" placeholder="검색할 내용을 입력하세요" value="">
+							                                <input type="search" class="form-control" placeholder="기관, 농장명검색" value="">
 							                                <div class="input-group-append">
 							                                    <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popCompany"> -->
-							                                    <button type="button" class="btn btn-default" id="fn_searchCompany">
-							                                        <i class="fa fa-search"></i>
+							                                    <button type="button" class="btn btn-success" id="fn_searchCompany">
+							                                    	검색&nbsp;<i class="fa fa-search"></i> 
 							                                    </button>
 							                                </div>
 							                            </div>
@@ -300,295 +331,305 @@
 						                        </div>
 							                </div>
 							                
-							                <div class="hospitalDiv">
-							                	<div class="row">   
-									                <div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>기관(병원)명</label>								
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-building"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="hospNm" name="hospNm">
-										                  </div>
-										                  <!-- /.input group -->
+							                <!-- 병원입력폼  -->
+							                <form onsubmit="return false" id="hospInfoForm" encType="multipart/form-data"> 
+								                <div class="hospitalDiv">
+								                	<div class="row">   
+										                <div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>기관(병원)명</label>								
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="hospNm" name="hospNm">
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
 										                </div>
-										                <!-- /.form group -->
+										                
+										                <div class="col-sm-6">
+											                
+										                </div>
 									                </div>
 									                
-									                <div class="col-sm-6">
+									                <!-- phone mask -->
+										            <div class="row"> 
+										            	<div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>휴대폰번호</label>
+											
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="hospHp" name="hospHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
+										                </div>  
+										                <div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>전화번호</label>
+											
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="hospTel" name=""hospTel"" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
+										                </div>
+										                
 										                
 									                </div>
-								                </div>
-								                
-								                <!-- phone mask -->
-									            <div class="row"> 
-									            	<div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>휴대폰번호</label>
-										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="hospHp" name="hospHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
-										                  </div>
-										                  <!-- /.input group -->
+									                
+									                <div class="row"> 
+										            	<div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>팩스</label>										
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="hospFax" name="hospFax" />
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
 										                </div>
-										                <!-- /.form group -->
-									                </div>  
-									                <div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>전화번호</label>
-										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="hospTel" name=""hospTel"" data-inputmask='"mask": "(999) 999-9999"' data-mask>
-										                  </div>
-										                  <!-- /.input group -->
+										                <div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>이메일(세금계산서용)</label>
+											
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="hospEmail" name="hospEmail" />
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
 										                </div>
-										                <!-- /.form group -->
 									                </div>
 									                
+									                <div class="row"> 
+										            	<div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>사업자등록번호</label>
+											
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-file"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="hospRn" name="hospRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
+										                </div>  
+										                <div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>사업자등록증파일</label>
+											
+											                  <div class="input-group">
+											                    <div class="custom-file">
+											                      <input type="file" class="custom-file-input" id="hospRnFile">
+											                      <label class="custom-file-label" for="hospRnFile">사업자등록증 파일을 등록해주세요</label>
+											                    </div>
+											                  </div>
+											                </div>
+											                <!-- /.form group -->
+										                </div>
+										            </div>
 									                
+									                <label for="hospAdr">주소 <code>&nbsp;주소검색을 이용해주세요.</code></label>
+									                <!-- <div class="input-group mb-3"> -->
+									                <div class="row">
+									                	<div class="input-group col-sm-4">
+										                  <input type="text" class="form-control" id="hospZip" name="hospZip">
+										                  <span class="input-group-append">
+										                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('hospital')" >주소검색</button>
+										                  </span>
+										                  <input type="hidden" id="hospSidoNm" name="hospSidoNm"/>
+										                  <input type="hidden" id="hospSigunguNm" name="hospSigunguNm"/>
+										                </div>
+										            </div><br/>
+										            <div class="row">   
+									                	<div class="input-group col-sm-9">
+										                  <span class="input-group-prepend">
+										                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
+										                  </span>
+										                  <input type="text" class="form-control" id="hospAdr" name="hospAdr">
+										                </div>
+										            </div><br/>
+										            <div class="row">
+										            	<div class="input-group col-sm-9">
+										            	  <div class="input-group-prepend">
+										                    <button type="button" class="btn btn-default">상세주소</button>
+										                  </div>
+										                  <input type="text" class="form-control" name="hospDtlAdr" id="hospDtlAdr">
+										            	</div>
+									                </div> <!-- END input-group mb-3 -->		
 								                </div>
-								                
-								                <div class="row"> 
-									            	<div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>팩스</label>										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="hospFax" name="hospFax" />
-										                  </div>
-										                  <!-- /.input group -->
+								            </form> <!-- 병원입력폼 END -->
+								            
+								            <!-- 농장입력폼 ST -->
+								            <form onsubmit="return false" id="farmInfoForm" encType="multipart/form-data"> 
+								                <div class="farmDiv" style="display:none;">
+								                	<div class="row">   
+										                <div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>농장명</label>
+											
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="farmNm" name="farmNm">
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
 										                </div>
-										                <!-- /.form group -->
-									                </div>
-									                <div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>이메일(세금계산서용)</label>
-										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="hospEmail" name="hospEmail" />
-										                  </div>
-										                  <!-- /.input group -->
-										                </div>
-										                <!-- /.form group -->
-									                </div>
-								                </div>
-								                
-								                <div class="row"> 
-									            	<div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>사업자등록번호</label>
-										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-file"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="hospRn" name="hospRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
-										                  </div>
-										                  <!-- /.input group -->
-										                </div>
-										                <!-- /.form group -->
-									                </div>  
-									                <div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>사업자등록증파일</label>
-										
-										                  <div class="input-group">
-										                    <div class="custom-file">
-										                      <input type="file" class="custom-file-input" id="hospRnFile">
-										                      <label class="custom-file-label" for="hospRnFile">사업자등록증 파일을 등록해주세요</label>
-										                    </div>
-										                  </div>
-										                </div>
-										                <!-- /.form group -->
-									                </div>
-									            </div>
-								                
-								                <label for="hospAdr">주소 <code>&nbsp;주소검색을 이용해주세요.</code></label>
-								                <!-- <div class="input-group mb-3"> -->
-								                <div class="row">
-								                	<div class="input-group col-sm-4">
-									                  <input type="text" class="form-control" id="hospZip" name="hospZip">
-									                  <span class="input-group-append">
-									                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('hospital')" >주소검색</button>
-									                  </span>
-									                </div>
-									            </div><br/>
-									            <div class="row">   
-								                	<div class="input-group col-sm-9">
-									                  <span class="input-group-prepend">
-									                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
-									                  </span>
-									                  <input type="text" class="form-control" id="hospAdr" name="hospAdr">
-									                </div>
-									            </div><br/>
-									            <div class="row">
-									            	<div class="input-group col-sm-9">
-									            	  <div class="input-group-prepend">
-									                    <button type="button" class="btn btn-default">상세주소</button>
-									                  </div>
-									                  <input type="text" class="form-control" name="hospDtlAdr" id="hospDtlAdr">
-									            	</div>
-								                </div> <!-- END input-group mb-3 -->		
-							                </div>
-							                <div class="farmDiv" style="display:none;">
-							                	<div class="row">   
-									                <div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>농장명</label>
-										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-building"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="farmNm" name="farmNm">
-										                  </div>
-										                  <!-- /.input group -->
-										                </div>
-										                <!-- /.form group -->
-									                </div>
-									                
-									                <div class="col-sm-6">
 										                
-									                </div>
-								                </div>
-								                
-								                <!-- phone mask -->
-									            <div class="row"> 
-									            	<div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>휴대폰번호</label>
-										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="farmHp" name="farmHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
-										                  </div>
-										                  <!-- /.input group -->
+										                <div class="col-sm-6">
+											                
 										                </div>
-										                <!-- /.form group -->
-									                </div>  
-									                <div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>전화번호</label>
-										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="farmTel" name="farmTel" data-inputmask='"mask": "(999) 999-9999"' data-mask>
-										                  </div>
-										                  <!-- /.input group -->
-										                </div>
-										                <!-- /.form group -->
 									                </div>
+									                
+									                <!-- phone mask -->
+										            <div class="row"> 
+										            	<div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>휴대폰번호</label>
+											
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="farmHp" name="farmHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
+										                </div>  
+										                <div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>전화번호</label>
+											
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="farmTel" name="farmTel" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
+										                </div>
+										            </div>
+									                
+									                <div class="row"> 
+										            	<div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>팩스</label>										
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="farmFax" name="farmFax" />
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
+										                </div>
+										                <div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>이메일(세금계산서용)</label>
+											
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="farmEmail" name="farmEmail" />
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
+										                </div>
+									                </div>
+									                
+									                <div class="row"> 
+										            	<div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>사업자등록번호</label>
+											
+											                  <div class="input-group">
+											                    <div class="input-group-prepend">
+											                      <span class="input-group-text"><i class="fas fa-file"></i></span>
+											                    </div>
+											                    <input type="text" class="form-control" id="farmRn" name="farmRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+											                  </div>
+											                  <!-- /.input group -->
+											                </div>
+											                <!-- /.form group -->
+										                </div>  
+										                <div class="col-sm-6">
+											                <div class="form-group">
+											                  <label>사업자등록증파일</label>
+											
+											                  <div class="input-group">
+											                    <div class="custom-file">
+											                      <input type="file" class="custom-file-input" id="farmRnFile">
+											                      <label class="custom-file-label" for="farmRnFile">사업자등록증 파일을 등록해주세요</label>
+											                    </div>
+											                  </div>
+											                </div>
+											                <!-- /.form group -->
+										                </div>
+										            </div>
+										            
+									                <label for="farmAdr">주소 <code>&nbsp;주소검색을 이용해주세요.</code></label>
+									                <!-- <div class="input-group mb-3"> -->
+									                <div class="row">
+									                	<div class="input-group col-sm-4">
+										                  <input type="text" class="form-control" id="farmZip" name="farmZip">
+										                  <span class="input-group-append">
+										                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('farm')" >주소검색</button>
+										                  </span>
+										                </div>
+										                <input type="hidden" id="farmSidoNm" name="farmSidoNm"/>
+										                <input type="hidden" id="farmSigunguNm" name="farmSigunguNm"/>
+										            </div> 
+										            <br/>  
+										            <div class="row"> 
+									                	<div class="input-group col-sm-9">
+										                  <span class="input-group-prepend">
+										                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
+										                  </span>
+										                  <input type="text" class="form-control" id="farmAdr" name="farmAdr">
+										                </div>
+										            </div><br/> 
+										            <div class="row">
+										            	<div class="input-group col-sm-9">
+										            	  <div class="input-group-prepend">
+										                    <button type="button" class="btn btn-default">상세주소</button>
+										                  </div>
+										                  <input type="text" class="form-control" id="farmDtlAdr" name="farmDtlAdr">
+										            	</div>
+									                </div> <br/> <!-- END input-group mb-3 -->	
 									            </div>
-								                
-								                <div class="row"> 
-									            	<div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>팩스</label>										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="farmFax" name="farmFax" />
-										                  </div>
-										                  <!-- /.input group -->
-										                </div>
-										                <!-- /.form group -->
-									                </div>
-									                <div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>이메일(세금계산서용)</label>
-										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="hospEmail" name="hospEmail" />
-										                  </div>
-										                  <!-- /.input group -->
-										                </div>
-										                <!-- /.form group -->
-									                </div>
-								                </div>
-								                
-								                <div class="row"> 
-									            	<div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>사업자등록번호</label>
-										
-										                  <div class="input-group">
-										                    <div class="input-group-prepend">
-										                      <span class="input-group-text"><i class="fas fa-file"></i></span>
-										                    </div>
-										                    <input type="text" class="form-control" id="farmRn" name="farmRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
-										                  </div>
-										                  <!-- /.input group -->
-										                </div>
-										                <!-- /.form group -->
-									                </div>  
-									                <div class="col-sm-6">
-										                <div class="form-group">
-										                  <label>사업자등록증파일</label>
-										
-										                  <div class="input-group">
-										                    <div class="custom-file">
-										                      <input type="file" class="custom-file-input" id="farmRnFile">
-										                      <label class="custom-file-label" for="farmRnFile">사업자등록증 파일을 등록해주세요</label>
-										                    </div>
-										                  </div>
-										                </div>
-										                <!-- /.form group -->
-									                </div>
-									            </div>
-									            
-								                <label for="farmAdr">주소 <code>&nbsp;주소검색을 이용해주세요.</code></label>
-								                <!-- <div class="input-group mb-3"> -->
-								                <div class="row">
-								                	<div class="input-group col-sm-4">
-									                  <input type="text" class="form-control" id="farmZip" name="farmZip">
-									                  <span class="input-group-append">
-									                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('farm')" >주소검색</button>
-									                  </span>
-									                </div>
-									            </div> 
-									            <br/>  
-									            <div class="row"> 
-								                	<div class="input-group col-sm-9">
-									                  <span class="input-group-prepend">
-									                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
-									                  </span>
-									                  <input type="text" class="form-control" id="farmAdr" name="farmAdr">
-									                </div>
-									            </div><br/> 
-									            <div class="row">
-									            	<div class="input-group col-sm-9">
-									            	  <div class="input-group-prepend">
-									                    <button type="button" class="btn btn-default">상세주소</button>
-									                  </div>
-									                  <input type="text" class="form-control" id="farmDtlAdr" name="farmDtlAdr">
-									            	</div>
-								                </div> <br/> <!-- END input-group mb-3 -->	
-								            </div>
-							                
+							                </form>   <!-- farmInfoForm END  -->
 							                
 							                <br/><br/>
 							              	<button class="btn btn-warning" onclick="stepper.previous()">이전</button>
-							              	<button class="btn btn-primary" onclick="stepper.next()">다음</button>
+							              	<button class="btn btn-primary" onclick="nextPage('2')">다음</button>
 										</div> <!-- END information-part -->
 										
 										<div id="ending-part" class="content" role="tabpanel" aria-labelledby="ending-part-trigger">
@@ -610,29 +651,13 @@
 										</div>
 										
                     				</div> <!-- bs-stepper-content -->
+                    				
 								</div> <!-- bs-stepper -->
  							</div> <!-- card-body p-0 -->
+ 							
 						</div>  <!-- card primary -->
           			</div> <!-- right md-8 End -->
-          			
-          			<!--/.col (left) -->
-					<!-- right column -->
-					<!-- <div class="col-md-4">
-						Form Element sizes
-						<div class="card card-success">
-							<div class="card-header">
-								<h3 class="card-title">병원검색</h3>
-							</div>
-							<div class="card-body">
-								<input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
-								<br>
-								<input class="form-control" type="text" placeholder="Default input">
-								<br>
-								<input class="form-control form-control-sm" type="text" placeholder=".form-control-sm">
-							</div> /.card-body
-						</div>/.card         
-					</div> -->
-				</div> <!-- /.row -->
+          		</div> <!-- /.row -->
 			</div><!-- /.container-fluid -->
 		</section> <!-- /.content -->
  	</div> 
@@ -682,24 +707,36 @@
 	$(function () {
       $('.select2').select2();
       bsCustomFileInput.init();
+      
+      localStorage.setItem('idChkResult', 'fail'); //새로 열때마다 id중복체크 초기화.
     });
 	
+	
+	/*======================
+	* 주소찾기
+	======================*/
 	function fn_searchAdr(type){
 		new daum.Postcode({
 			oncomplete: function(data){
 				if(type == 'user'){
 					$("#userAdr").val(data.jibunAddress);
 					$("#userZip").val(data.zonecode);	
+					$('#sidoNm').val(data.sido);
+					$('#sigunguNm').val(data.sigungu);
 					
 					$('#userDtlAdr').focus();
 				}else if(type == 'hospital'){
 					$("#hospAdr").val(data.jibunAddress);
 					$("#hospZip").val(data.zonecode);
+					$('#hospSidoNm').val(data.sido);
+					$('#hospSigunguNm').val(data.sigungu);
 					
 					$('#hospDtlAdr').focus();
 				}else if(type == 'farm'){
 					$("#farmAdr").val(data.jibunAddress);
 					$("#farmZip").val(data.zonecode);
+					$('#farmSidoNm').val(data.sido);
+					$('#farmSigunguNm').val(data.sigungu);
 					
 					$('#farmDtlAdr').focus();
 				}
@@ -709,11 +746,19 @@
 		}).open();
 	}
 	
+	
+	/*======================
+	* 기관 병원찾기 팝업
+	======================*/
 	$(document).on('click', '#fn_searchCompany', function(){
 		//팝업 오픈전에 미리 검색키로 검색되는 내용을 확인해서 있으면 세팅 없으면 모달
 		$('#popCompany').modal();
 	})
 	
+	
+	/*======================
+	* 기관,병원 소속선택 폼 이벤트
+	======================*/
 	function fn_searchKeyChg(searchKey){
 		console.log('기관병원 클릭');
 		if(searchKey == 'hospital'){
@@ -725,9 +770,123 @@
 		}
 	}
 	
+	
+	/*======================
+	* 회원관리 페이지이동
+	======================*/
 	function fn_userListPage(){
 		location.href = 'userList';
 	}
+	
+	
+	/*======================
+	* 아이디 중복체크 
+	======================*/
+	function fn_idchk(){
+		var userId = $('#userId').val();
+		
+		if(userId == null || userId == ''){
+			alert('아이디를 입력하고 중복체크를 해주세요');
+			$('#userId').focus();
+			return;
+		}
+		
+		$.ajax({
+			url : 'idChk',
+			data : {'userId':userId},
+			dataType : 'json',
+			type : 'post',
+			success : function(data){
+				if(data.result == 'succ'){
+					$('#idChkResult').text('사용가능한 아이디 입니다.');
+					localStorage.setItem('idChkResult', 'succ');					
+				}else{
+					$('#idChkResult').text('이미 존재하는 아이디입니다. 다른 아이디를 입력해주세요.');
+					localStorage.setItem('idChkResult', 'fail');
+				}
+			}
+		})
+	}
+	
+	
+	/*======================
+	* 비밀번호 확인
+	======================*/
+	function fn_passChk(){
+		var userPass = $('#userPass').val();
+		var userRePass = $('#userRePass').val();
+		
+		if(userPass == userRePass){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	/*======================
+	* 다음버튼 유효성검사 이벤트
+	======================*/
+	function nextPage(nowPage){
+		if(nowPage == '1'){ //계정정보
+			var idChk = localStorage.getItem('idChkResult');
+			var passChk = fn_passChk();
+			
+			if(idChk == 'succ'){
+				if(passChk){
+					stepper.next();
+				}else{
+					alert('비밀번호가 다릅니다. 다시 확인해주세요');
+					$('#userPass').val('');
+					$('#userRePass').val('');
+					
+					$('#userPass').focus();
+					return;
+				}
+			}else{
+				alert('아이디를 입력 후 중복체크 후 사용가능합니다.');
+				$('#userId').val('');
+				$('#userId').focus();
+				
+				return;
+			}
+		}else if(nowPage == '2'){ //회원정보
+			var userNm = $('#userNm').val();
+			var userHp = $('#userHp').val();		
+			var userAdr = $('#userAdr').val();
+			
+			if(userNm == null || userNm == ''){
+				alert('이름은 필수입력입니다.');
+				return;
+			}
+			
+			if(userHp == null || userHp == ''){
+				alert('핸드폰번호는 필수입력입니다.');
+				return;
+			}
+			
+			if(userAdr == null || userAdr == ''){
+				alert('주소는 필수입력입니다.');
+				return;
+			}
+			
+			var formData = $('#userInfoForm').serialize();
+			//고객정보저장
+			$.ajax({
+				url : 'addUser',
+				data : formData,
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					
+				}
+			})
+			
+			
+			//stepper.next();
+			
+		}
+	}
+	
 	
 	
 </script>

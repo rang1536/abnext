@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ABNext</title>
+<title>Abnext | (주)아비넥스트</title>
 </head>
 <body>
 	<!-- Navbar -->
@@ -165,8 +165,8 @@
 				<br/>
 				
 			</div>
-			<div>
-				<button class="btn btn-warning">로그인</button>
+			<div style="text-align:right;">
+				<button class="btn btn-warning" onclick="fn_loginPage();">로그인</button>
 				<button class="btn btn-success">회원가입</button>
 			</div>
 			<br/>
@@ -204,7 +204,7 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a href="requestInspect.do" class="nav-link leftMenuSub">
+								<a href="introInspect.do" class="nav-link leftMenuSub">
 									<i class="far fa-circle nav-icon"></i>
 									<p>신청접수</p>
 								</a>
@@ -928,6 +928,11 @@
 				}
 			}
 		});
+		
+		/*로그인*/
+		function fn_loginPage(){
+			location.href = 'loginPage';
+		}
 	</script>
 
 </body>

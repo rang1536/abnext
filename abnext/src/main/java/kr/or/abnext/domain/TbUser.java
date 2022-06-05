@@ -28,8 +28,38 @@ public class TbUser {
 	private int insId;
 	private String uptDt;
 	private int uptId;
+	private String userNm;
+	
+	//추가, 시도명, 시군구명
+	private String sidoNm;
+	private String sigunguNm;
 	
 	
+	
+	public String getUserNm() {
+		return userNm;
+	}
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
+	public String getUserZip() {
+		return userZip;
+	}
+	public void setUserZip(String userZip) {
+		this.userZip = userZip;
+	}
+	public String getSidoNm() {
+		return sidoNm;
+	}
+	public void setSidoNm(String sidoNm) {
+		this.sidoNm = sidoNm;
+	}
+	public String getSigunguNm() {
+		return sigunguNm;
+	}
+	public void setSigunguNm(String sigunguNm) {
+		this.sigunguNm = sigunguNm;
+	}
 	public int getUserNo() {
 		return userNo;
 	}
@@ -154,11 +184,11 @@ public class TbUser {
 	public String toString() {
 		return "TbUser [userNo=" + userNo + ", userId=" + userId + ", userPass=" + userPass + ", userLev=" + userLev
 				+ ", userTel=" + userTel + ", userHp=" + userHp + ", userFax=" + userFax + ", userAdr=" + userAdr
-				+ ", userDtlAdr=" + userDtlAdr + ", userEmail=" + userEmail + ", userAccountNo=" + userAccountNo
-				+ ", userBankNm=" + userBankNm + ", userMemo=" + userMemo + ", userRn=" + userRn + ", hospNo=" + hospNo
-				+ ", farmNo=" + farmNo + ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId="
-				+ uptId + "]";
+				+ ", userDtlAdr=" + userDtlAdr + ", userZip=" + userZip + ", userEmail=" + userEmail
+				+ ", userAccountNo=" + userAccountNo + ", userBankNm=" + userBankNm + ", userMemo=" + userMemo
+				+ ", userRn=" + userRn + ", hospNo=" + hospNo + ", farmNo=" + farmNo + ", insDt=" + insDt + ", insId="
+				+ insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", userNm=" + userNm + ", sidoNm=" + sidoNm
+				+ ", sigunguNm=" + sigunguNm + "]";
 	}
-	
 	
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	
+	<!-- 회원등록 -->
+	<insert id="addUser" parameterType="kr.or.abnext.domain.TbUser">
+		INSERT INTO TB_USER(
+			USER_ZIP
+			,USER_TEL
+			,USER_RN
+			,USER_PASS
+			,USER_NM
+			,USER_MEMO
+			,USER_LEV
+			,USER_ID
+			,USER_HP
+			,USER_FAX
+			,USER_EMAIL
+			,USER_DTL_ADR
+			,USER_BANK_NM
+			,USER_ADR
+			,USER_ACCOUNT_NO
+			,UPT_ID
+			,UPT_DT
+			,SIGUNGU_NM
+			,SIDO_NM
+			,INS_ID
+			,INS_DT
+			,HOSP_NO
+			,FARM_NO
+		) VALUES(
+			#{USER_ZIP}
+			,#{USER_TEL}
+			,#{USER_RN}
+			,#{USER_PASS}
+			,#{USER_NM}
+			,#{USER_MEMO}
+			,#{USER_LEV}
+			,#{USER_ID}
+			,#{USER_HP}
+			,#{USER_FAX}
+			,#{USER_EMAIL}
+			,#{USER_DTL_ADR}
+			,#{USER_BANK_NM}
+			,#{USER_ADR}
+			,#{USER_ACCOUNT_NO}
+			,#{UPT_ID}
+			,#{UPT_DT}
+			,#{SIGUNGU_NM}
+			,#{SIDO_NM}
+			,#{INS_ID}
+			,#{INS_DT}
+			,#{HOSP_NO}
+			,#{FARM_NO}
+		)
+		
+	</insert>
+	
+
+</mapper>
