@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="code">
+	<select id="codeList" resultType="kr.or.abnext.domain.TbCode">
+		SELECT CODE_ID
+		     , CONCAT(CONCAT(CONCAT(CODE_ID,'['),CODE_NM),']') AS CODE_NM
+		     , UPP_CODE_ID
+		     , CODE_GB
+		     , CODE_DTL_MEMO
+		     , SORT_IDX
+		     , (SELECT COUNT(*) FROM TB_CODE B WHERE A.CODE_ID = B.UPP_CODE_ID) AS CHILD_CNT
+		  FROM TB_CODE A
+		 ORDER BY CODE_ID,SORT_IDX,UPP_CODE_ID
+	</select>
+</mapper>

@@ -16,7 +16,7 @@ public class TbCode {
 	private int sortIdx;
 	private String insDt;
 	private int insId;
-	
+	private int childCnt;
 	
 	public int getCodeNo() {
 		return codeNo;
@@ -72,14 +72,18 @@ public class TbCode {
 	public void setInsId(int insId) {
 		this.insId = insId;
 	}
+	
+	public int getChildCnt() {
+		return childCnt;
+	}
+	public void setChildCnt(int childCnt) {
+		this.childCnt = childCnt;
+	}
 	@Override
 	public String toString() {
 		return "TbCode [codeNo=" + codeNo + ", codeId=" + codeId + ", codeNm=" + codeNm + ", uppCodeId=" + uppCodeId
 				+ ", codeGb=" + codeGb + ", codeDtlMemo=" + codeDtlMemo + ", sortIdx=" + sortIdx + ", insDt=" + insDt
-				+ ", insId=" + insId + "]";
+				+ ", insId=" + insId + ", childCnt=" + childCnt + "]";
 	}
-	
-	
-	
 	
 }

@@ -1,10 +1,14 @@
 package kr.or.abnext.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import kr.or.abnext.domain.TbCode;
 
 @Controller
 public class AdminController {
@@ -36,6 +40,8 @@ public class AdminController {
 	public String codeListCtrl(Model model) {
 		System.out.println("코드관리~!!");
 		
+		List<TbCode> list = adminServ.codeList();
+		model.addAttribute("codeList", list);
 		return "admin/codeList";
 	}
 	

@@ -3,30 +3,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>abnext | (주)아비넥스트</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>abnext | (주)아비넥스트</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="resources/dist/css/adminlte.css">
-  <!-- BS Stepper -->
-  <link rel="stylesheet" href="resources/plugins/bs-stepper/css/bs-stepper.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
-  
-  <!-- SweetAlert2 -->
-  <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
-  
-  <style>
-    th,td {text-align:center;}
-  </style>
-  
-  
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
+	<style>
+		.txtc{text-align:center;}
+		.expandable-body{text-align:left;}
+	</style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -53,10 +42,98 @@
 
 		<!-- Main content -->
 		<section class="content">
- 			<div class="container-fluid">
- 			</div> <!-- End container-fluid -->
-		</section> <!-- End content -->
-	</div> <!-- End content-wrapper -->
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-4">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">코드</h3>
+							</div>
+							<!-- ./card-header -->
+							<div class="card-body p-0">
+								<table class="table table-hover">
+									<tbody>
+										<c:forEach var="item" items="${codeList }">
+											<c:choose>
+												<c:when test="${item.uppCodeId == null }">
+													<c:if test="${item.childCnt != '0'}">
+														<tr data-widget="expandable-table" aria-expanded="true">
+															<td>${item.codeNm }<i class="expandable-table-caret fas fa-caret-right fa-fw"></i></td>
+														</tr>
+
+														<tr class="expandable-body">
+															<td>
+																<div class="p-0">
+																	<table class="table table-hover">
+																		<tbody>
+																			<c:forEach var="item2" items="${codeList }" varStatus="k">
+																				<c:if test="${item2.childCnt != '0' && item.codeId==item2.uppCodeId}">
+																					<tr data-widget="expandable-table" aria-expanded="true">
+																						<td>${item2.codeNm }<i class="expandable-table-caret fas fa-caret-right fa-fw"></i></td>
+																					</tr>
+																					
+																					<tr class="expandable-body">
+																						<td>
+																							<div class="p-0">
+																								<table class="table table-hover">
+																									<tbody>
+																										<c:forEach var="item3" items="${codeList }" varStatus="n">
+																											<c:if test="${item3.childCnt != '0' && item2.codeId==item3.uppCodeId}">
+																												<tr data-widget="expandable-table" aria-expanded="true">
+																													<td>${item3.codeNm }<i class="expandable-table-caret fas fa-caret-right fa-fw"></i></td>
+																												</tr>
+																											</c:if>
+																											<c:if test="${item3.childCnt == '0' && item2.codeId==item3.uppCodeId}">
+																												<tr>
+																													<td>${item3.codeNm }</td>
+																												</tr>
+																											</c:if>
+																										</c:forEach>
+																									</tbody>
+																								</table>
+																							</div>
+																						</td>
+																					</tr>
+																				</c:if>
+	
+																				<c:if test="${item2.childCnt == '0' && item.codeId==item2.uppCodeId}">
+																					<tr>
+																						<td>${item2.codeNm }</td>
+																					</tr>
+																				</c:if>
+																			</c:forEach>
+																		</tbody>
+																	</table>
+																</div>
+															</td>
+														</tr>
+
+													</c:if>
+													<c:if test="${item.childCnt == '0'}">
+														<tr>
+															<td>${item.codeNm }</td>
+														</tr>
+													</c:if>
+												</c:when>
+												<c:otherwise>
+													
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+				</div>
+				<!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
 	
 	<c:import url="../layer/layout_footer.jsp"></c:import>
 	
@@ -64,7 +141,7 @@
 	<aside class="control-sidebar control-sidebar-dark">
 	<!-- Control sidebar content goes here -->
 	</aside> <!-- /.control-sidebar -->
-</div> <!-- End wrapper  -->
+</div> <!-- End wrapper	-->
 </body>
 
 <!-- jQuery -->
@@ -92,18 +169,4 @@
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
 
-<script>
-
-	//BS-Stepper Init
-	document.addEventListener('DOMContentLoaded', function () {
-	  window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-	})
-	
-	$(function () {
-      $('.select2').select2();
-      bsCustomFileInput.init();
-    });
-	
-	
-</script>
 </html>
