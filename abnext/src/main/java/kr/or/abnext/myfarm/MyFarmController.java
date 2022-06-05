@@ -24,6 +24,6 @@ public class MyFarmController {
 	@RequestMapping(value = "myFarm" , method = RequestMethod.GET)
 	public String myFarm(Model model) {
 		
-		return "index";
+		return "myFarm/myFarm";
 	}
 }
