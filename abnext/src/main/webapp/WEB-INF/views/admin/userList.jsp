@@ -95,8 +95,8 @@
 									</table>
 								</div> <!-- /.card-body -->
 								<div class="card-footer">
-									<button type="button" class="btn btn-sm btn-danger">삭제</button>
-									<button type="button" class="btn btn-sm btn-success btn-flat" style="float:right;">회원등록</button>
+									<button type="button" id="delUserBtn" class="btn btn-sm btn-danger">삭제</button>
+									<button type="button" id="addUserBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">회원등록</button>
 								</div>
 							</div> <!-- /.card -->
 						</div> <!-- /.col-12 -->
@@ -174,6 +174,19 @@
 			"responsive": true,
 		});
     });
+	
+	
+	/*
+	* 회원등록 페이지 연결
+	*/
+	$('#addUserBtn').on('click', function(){
+		location.href = 'addUserPage';
+	})
+	
+	
+	/*
+	* 회원삭제
+	*/
 	
 	
 </script>

@@ -17,10 +17,19 @@ public class TbFarm {
 	private String farmDtlAdr;
 	private String farmEmail;
 	private String farmRn;
+	private String farmZip;
 	private String insDt;
 	private int insId;
 	private String uptDt;
 	private int uptId;
+	
+	
+	public String getFarmZip() {
+		return farmZip;
+	}
+	public void setFarmZip(String farmZip) {
+		this.farmZip = farmZip;
+	}
 	public int getFarmNo() {
 		return farmNo;
 	}
@@ -110,9 +119,8 @@ public class TbFarm {
 	public String toString() {
 		return "TbFarm [farmNo=" + farmNo + ", farmNm=" + farmNm + ", farmCeo=" + farmCeo + ", farmTel=" + farmTel
 				+ ", farmHp=" + farmHp + ", farmFax=" + farmFax + ", farmAdr=" + farmAdr + ", farmDtlAdr=" + farmDtlAdr
-				+ ", farmEmail=" + farmEmail + ", farmRn=" + farmRn + ", insDt=" + insDt + ", insId=" + insId
-				+ ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ ", farmEmail=" + farmEmail + ", farmRn=" + farmRn + ", farmZip=" + farmZip + ", insDt=" + insDt
+				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
-	
 	
 }

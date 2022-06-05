@@ -602,9 +602,10 @@
 												</div>
 												<br/><br/><br/>
 											</div>
-											<div class="row">
-												<button class="btn btn-primary" onclick="stepper.previous()">이전</button>
-											</div>
+											
+											<button type="button" class="btn btn-primary" onclick="stepper.previous()">이전</button>
+											<button type="button" onclick="fn_userListPage();" class="btn btn-success btn-flat" style="float:right;">회원목록 바로가기</button>
+											
 											
 										</div>
 										
@@ -723,6 +724,11 @@
 			$('.farmDiv').css('display', '');
 		}
 	}
+	
+	function fn_userListPage(){
+		location.href = 'userList';
+	}
+	
 	
 </script>
 </body>

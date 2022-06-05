@@ -15,12 +15,21 @@ public class TbHospital {
 	private String hospFax;
 	private String hospAdr;
 	private String hospDtlAdr;
+	private String hospZip;
 	private String hospCeo;
 	private String hospRn;
 	private String insDt;
 	private int insId;
 	private String uptDt;
 	private int uptId;
+	
+	
+	public String getHospZip() {
+		return hospZip;
+	}
+	public void setHospZip(String hospZip) {
+		this.hospZip = hospZip;
+	}
 	public int getHospNo() {
 		return hospNo;
 	}
@@ -109,8 +118,8 @@ public class TbHospital {
 	public String toString() {
 		return "TbHospital [hospNo=" + hospNo + ", hospNm=" + hospNm + ", hospTel=" + hospTel + ", hospHp=" + hospHp
 				+ ", hospEmail=" + hospEmail + ", hospFax=" + hospFax + ", hospAdr=" + hospAdr + ", hospDtlAdr="
-				+ hospDtlAdr + ", hospCeo=" + hospCeo + ", hospRn=" + hospRn + ", insDt=" + insDt + ", insId=" + insId
-				+ ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ hospDtlAdr + ", hospZip=" + hospZip + ", hospCeo=" + hospCeo + ", hospRn=" + hospRn + ", insDt="
+				+ insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
 	
 	

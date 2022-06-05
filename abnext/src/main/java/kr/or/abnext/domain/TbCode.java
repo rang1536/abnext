@@ -7,6 +7,7 @@ package kr.or.abnext.domain;
  * */
 
 public class TbCode {
+	private int codeNo;
 	private String codeId;
 	private String codeNm;
 	private String uppCodeId;
@@ -15,6 +16,14 @@ public class TbCode {
 	private int sortIdx;
 	private String insDt;
 	private int insId;
+	
+	
+	public int getCodeNo() {
+		return codeNo;
+	}
+	public void setCodeNo(int codeNo) {
+		this.codeNo = codeNo;
+	}
 	public String getCodeId() {
 		return codeId;
 	}
@@ -65,10 +74,12 @@ public class TbCode {
 	}
 	@Override
 	public String toString() {
-		return "TbCode [codeId=" + codeId + ", codeNm=" + codeNm + ", uppCodeId=" + uppCodeId + ", codeGb=" + codeGb
-				+ ", codeDtlMemo=" + codeDtlMemo + ", sortIdx=" + sortIdx + ", insDt=" + insDt + ", insId=" + insId
-				+ "]";
+		return "TbCode [codeNo=" + codeNo + ", codeId=" + codeId + ", codeNm=" + codeNm + ", uppCodeId=" + uppCodeId
+				+ ", codeGb=" + codeGb + ", codeDtlMemo=" + codeDtlMemo + ", sortIdx=" + sortIdx + ", insDt=" + insDt
+				+ ", insId=" + insId + "]";
 	}
+	
+	
 	
 	
 }
