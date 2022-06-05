@@ -23,7 +23,23 @@ public class TbFarm {
 	private String uptDt;
 	private int uptId;
 	
+	//추가
+	private String farmSidoNm;
+	private String farmSigunguNm;
 	
+	
+	public String getFarmSidoNm() {
+		return farmSidoNm;
+	}
+	public void setFarmSidoNm(String farmSidoNm) {
+		this.farmSidoNm = farmSidoNm;
+	}
+	public String getFarmSigunguNm() {
+		return farmSigunguNm;
+	}
+	public void setFarmSigunguNm(String farmSigunguNm) {
+		this.farmSigunguNm = farmSigunguNm;
+	}
 	public String getFarmZip() {
 		return farmZip;
 	}
@@ -120,7 +136,9 @@ public class TbFarm {
 		return "TbFarm [farmNo=" + farmNo + ", farmNm=" + farmNm + ", farmCeo=" + farmCeo + ", farmTel=" + farmTel
 				+ ", farmHp=" + farmHp + ", farmFax=" + farmFax + ", farmAdr=" + farmAdr + ", farmDtlAdr=" + farmDtlAdr
 				+ ", farmEmail=" + farmEmail + ", farmRn=" + farmRn + ", farmZip=" + farmZip + ", insDt=" + insDt
-				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", farmSidoNm=" + farmSidoNm
+				+ ", farmSigunguNm=" + farmSigunguNm + "]";
 	}
+	
 	
 }

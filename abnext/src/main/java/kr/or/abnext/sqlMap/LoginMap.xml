@@ -3,6 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="login">
-
+	
+	<!-- 로그인 -->
+	<select id="userLogin" parameterType="kr.or.abnext.domain.TbUser" resultType="kr.or.abnext.domain.TbUser">
+		SELECT *
+		  FROM TB_USER
+		 WHERE USER_ID = #{userId}
+		   AND USER_PASS = #{userPass}
+	</select>
+	
+	<!-- id중복체크 -->
+	<select id="idChk" parameterType="kr.or.abnext.domain.TbUser" resultType="int">
+		SELECT COUNT(*)
+		  FROM TB_USER
+		 WHERE USER_ID = #{userId}
+	</select>
+	
 
 </mapper>
