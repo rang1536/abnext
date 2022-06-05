@@ -31,9 +31,7 @@
 		<!-- db의 컬럼과 dto의 프로퍼티명을 자동으로 매핑 -->
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:kr/or/abnext/sqlMap/LoginMap.xml</value>	
-				<value>classpath:kr/or/abnext/sqlMap/Board.xml</value>	
-				<value>classpath:kr/or/abnext/sqlMap/AdminMap.xml</value>					
+				<value>classpath:kr/or/abnext/sqlMap/*.xml</value>	
 			</list>  
 		</property>
 	</bean>
