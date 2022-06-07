@@ -44,88 +44,81 @@
 		<section class="content">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-4">
+					<div class="col-md-5">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">코드</h3>
+								<h3 class="card-title" style="float:right;">
+									<div class="input-group mb-2">
+										<input type="text" class="form-control rounded-0" id="searchCode">
+										<span class="input-group-append">
+											<button type="button" class="btn btn-info btn-flat" onclick="searchCode()">검색</button>
+										</span>
+									</div>
+								</h3>
 							</div>
 							<!-- ./card-header -->
 							<div class="card-body p-0">
-								<table class="table table-hover">
-									<tbody>
-										<c:forEach var="item" items="${codeList }">
-											<c:choose>
-												<c:when test="${item.uppCodeId == null }">
-													<c:if test="${item.childCnt != '0'}">
-														<tr data-widget="expandable-table" aria-expanded="true">
-															<td>${item.codeNm }<i class="expandable-table-caret fas fa-caret-right fa-fw"></i></td>
-														</tr>
-
-														<tr class="expandable-body">
-															<td>
-																<div class="p-0">
-																	<table class="table table-hover">
-																		<tbody>
-																			<c:forEach var="item2" items="${codeList }" varStatus="k">
-																				<c:if test="${item2.childCnt != '0' && item.codeId==item2.uppCodeId}">
-																					<tr data-widget="expandable-table" aria-expanded="true">
-																						<td>${item2.codeNm }<i class="expandable-table-caret fas fa-caret-right fa-fw"></i></td>
-																					</tr>
-																					
-																					<tr class="expandable-body">
-																						<td>
-																							<div class="p-0">
-																								<table class="table table-hover">
-																									<tbody>
-																										<c:forEach var="item3" items="${codeList }" varStatus="n">
-																											<c:if test="${item3.childCnt != '0' && item2.codeId==item3.uppCodeId}">
-																												<tr data-widget="expandable-table" aria-expanded="true">
-																													<td>${item3.codeNm }<i class="expandable-table-caret fas fa-caret-right fa-fw"></i></td>
-																												</tr>
-																											</c:if>
-																											<c:if test="${item3.childCnt == '0' && item2.codeId==item3.uppCodeId}">
-																												<tr>
-																													<td>${item3.codeNm }</td>
-																												</tr>
-																											</c:if>
-																										</c:forEach>
-																									</tbody>
-																								</table>
-																							</div>
-																						</td>
-																					</tr>
-																				</c:if>
-	
-																				<c:if test="${item2.childCnt == '0' && item.codeId==item2.uppCodeId}">
-																					<tr>
-																						<td>${item2.codeNm }</td>
-																					</tr>
-																				</c:if>
-																			</c:forEach>
-																		</tbody>
-																	</table>
-																</div>
-															</td>
-														</tr>
-
-													</c:if>
-													<c:if test="${item.childCnt == '0'}">
-														<tr>
-															<td>${item.codeNm }</td>
-														</tr>
-													</c:if>
-												</c:when>
-												<c:otherwise>
-													
-												</c:otherwise>
-											</c:choose>
-										</c:forEach>
-									</tbody>
-								</table>
+								<table class="table table-hover" id="codeListTable"></table>
 							</div>
 							<!-- /.card-body -->
 						</div>
 						<!-- /.card -->
+					</div>
+					<div class="col-md-7">
+						<div class="card">
+							<div class="card-header">
+								<div class="row">
+									<div class="col-sm-6">&nbsp;</div>
+									<div class="col-sm-3">
+										<button type="button" class="btn btn-block btn-danger btn-flat" onclick="inputClear()">초기화</button>
+									</div>
+									<div class="col-sm-3">
+										<button type="button" class="btn btn-block btn-primary btn-flat" onclick="saveCode()">저장</button>
+									</div>
+								</div>
+							</div>
+							<!-- ./card-header -->
+							<div class="card-body">
+								<form id="codeFrm">
+									<div class="form-group">
+										<label for="exampleInputEmail1">상위코드</label>
+										<input type="text" class="form-control" id="uppCodeId" name="uppCodeId" placeholder="상위코드">
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="exampleInputEmail1">코드아이디</label>
+												<input type="text" class="form-control" id="codeId" name="codeId" placeholder="코드아이디">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="exampleInputEmail1">코드명</label>
+												<input type="text" class="form-control" id="codeNm" name="codeNm" placeholder="코드명">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="exampleInputEmail1">코드구분</label>
+												<input type="text" class="form-control" id="codeGb" name="codeGb" placeholder="코드구분">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="exampleInputEmail1">정렬순서</label>
+												<input type="number" class="form-control" id="sortIdx" name="sortIdx" placeholder="정렬순서">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputEmail1">상세내용</label>
+										<textarea class="form-control" id="codeDtlMemo" name="codeDtlMemo" placeholder="상세내용" rows="7"></textarea>
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 				<!-- /.row -->
@@ -169,4 +162,227 @@
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
 
+<script>
+	$(document).ready(function(){
+		searchCode();
+	});
+	
+	function searchCode(){
+		$.ajax({
+			url : "searchCodeList",
+			data : {searchValue : $("#searchCode").val()},
+			type : "POST",
+			dataType : "JSON",
+			success : function(data){
+				var codeListHtml = '';
+				var viewedCodeArr = new Array();
+				codeListHtml += '<tbody>';
+				for(var i=0; i<data.length; i++){
+					var item = data[i];
+					if(item.codeLevel == 1){
+						codeListHtml += '<tr><td onclick="modifyCode(this)">■ '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
+						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
+						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
+						codeListHtml += '<input type="hidden" id="codeGb" value="'+item.codeGb+'"/>';
+						codeListHtml += '<input type="hidden" id="sortIdx" value="'+item.sortIdx+'"/>';
+						codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item.codeDtlMemo+'"/>';
+						codeListHtml += '</td>';
+						codeListHtml += '	<td class="project-actions text-right">';
+						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '	</td>';
+						codeListHtml += '</tr>';
+						if(item.childCnt != 0){
+							for(var k=0; k<data.length; k++){
+								var item2 = data[k];
+								viewedCodeArr.push(item2.codeId);
+								if(item.codeId == item2.uppCodeId && item2.codeLevel == 2){
+									codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:30px;">● '+item2.codeIdNm;
+									codeListHtml += '<input type="hidden" id="codeId" value="'+item2.codeId+'"/>';
+									codeListHtml += '<input type="hidden" id="codeNm" value="'+item2.codeNm+'"/>';
+									codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item2.uppCodeId+'"/>';
+									codeListHtml += '<input type="hidden" id="codeGb" value="'+item2.codeGb+'"/>';
+									codeListHtml += '<input type="hidden" id="sortIdx" value="'+item2.sortIdx+'"/>';
+									codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item2.codeDtlMemo+'"/>';
+									codeListHtml += '</td>';
+									codeListHtml += '	<td class="project-actions text-right">';
+									codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item2.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
+									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+									codeListHtml += '	</td>';
+									codeListHtml += '</tr>';
+									if(item2.childCnt != 0){
+										for(var n=0; n<data.length; n++){
+											var item3 = data[n];
+											viewedCodeArr.push(item3.codeId);
+											if(item2.codeId == item3.uppCodeId && item3.codeLevel == 3){
+												codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item3.codeIdNm;
+												codeListHtml += '<input type="hidden" id="codeId" value="'+item3.codeId+'"/>';
+												codeListHtml += '<input type="hidden" id="codeNm" value="'+item3.codeNm+'"/>';
+												codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item3.uppCodeId+'"/>';
+												codeListHtml += '<input type="hidden" id="codeGb" value="'+item3.codeGb+'"/>';
+												codeListHtml += '<input type="hidden" id="sortIdx" value="'+item3.sortIdx+'"/>';
+												codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item3.codeDtlMemo+'"/>';
+												codeListHtml += '</td>';
+												codeListHtml += '	<td class="project-actions text-right">';
+												codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item3.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+												codeListHtml += '	</td>';
+												codeListHtml += '</tr>';
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				item = null; item2 = null;
+				for(var i=0; i<data.length; i++){
+					item = data[i];
+					if(item.codeLevel == 2 && viewedCodeArr.indexOf(item.codeId) == -1){
+						viewedCodeArr.push(item.codeId);
+						codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:30px;">● '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
+						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
+						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
+						codeListHtml += '<input type="hidden" id="codeGb" value="'+item.codeGb+'"/>';
+						codeListHtml += '<input type="hidden" id="sortIdx" value="'+item.sortIdx+'"/>';
+						codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item.codeDtlMemo+'"/>';
+						codeListHtml += '</td>';
+						codeListHtml += '	<td class="project-actions text-right">';
+						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '	</td>';
+						codeListHtml += '</tr>';
+						if(item.childCnt != 0){
+							for(var n=0; n<data.length; n++){
+								item2 = data[n];
+								if(item.codeId == item2.uppCodeId && item2.codeLevel == 3){
+									viewedCodeArr.push(item2.codeId);
+									codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item2.codeIdNm;
+									codeListHtml += '<input type="hidden" id="codeId" value="'+item2.codeId+'"/>';
+									codeListHtml += '<input type="hidden" id="codeNm" value="'+item2.codeNm+'"/>';
+									codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item2.uppCodeId+'"/>';
+									codeListHtml += '<input type="hidden" id="codeGb" value="'+item2.codeGb+'"/>';
+									codeListHtml += '<input type="hidden" id="sortIdx" value="'+item2.sortIdx+'"/>';
+									codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item2.codeDtlMemo+'"/>';
+									codeListHtml += '</td>';
+									codeListHtml += '	<td class="project-actions text-right">';
+									codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item2.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
+									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+									codeListHtml += '	</td>';
+									codeListHtml += '</tr>';
+								}
+							}
+						}
+					}
+				}
+				
+				item = null;
+				for(var i=0; i<data.length; i++){
+					item = data[i];
+					if(item.codeLevel == 3 && viewedCodeArr.indexOf(item.codeId) == -1){
+						codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
+						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
+						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
+						codeListHtml += '<input type="hidden" id="codeGb" value="'+item.codeGb+'"/>';
+						codeListHtml += '<input type="hidden" id="sortIdx" value="'+item.sortIdx+'"/>';
+						codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item.codeDtlMemo+'"/>';
+						codeListHtml += '</td>';
+						codeListHtml += '	<td class="project-actions text-right">';
+						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '	</td>';
+						codeListHtml += '</tr>';
+					}
+				}
+
+				codeListHtml += '</tbody>';
+				$("#codeListTable").empty();
+				$("#codeListTable").html(codeListHtml);
+			},
+			error : function(error){
+				console.log(error);
+			}
+		})
+	}
+	
+	function addCode(codeId){
+		$("#uppCodeId").val(codeId);
+	}
+	
+	function delCode(codeId){
+		var msg = "삭제하시겠습니까?";
+		if(confirm(msg)){
+			$.ajax({
+				url : "deleteCode",
+				data : {codeId : codeId},
+				type : "POST",
+				dataType : "JSON",
+				success : function(data){
+					alert("정상적으로 삭제하였습니다.");
+					pageReload();
+				},
+				error : function(err){
+					console.log(err);
+					alert("알 수 없는 이유로 삭제에 실패하였습니다.");
+				}
+			});
+		}
+	}
+	
+	function inputClear(){
+		var clearArr = ['uppCodeId','codeId','codeNm','codeGb','sortIdx','codeDtlMemo'];
+		for(var i=0; i<clearArr.length; i++){
+			$("#"+clearArr[i]).val("");
+		}
+	}
+	
+	function saveCode(){
+		if($("#sortIdx").val() == ''){
+			$("#sortIdx").val("1");
+		}
+		
+		var data = $("#codeFrm").serialize();
+		var msg = "등록하시겠습니까?";
+		if(confirm(msg)){
+			$.ajax({
+				url : "insertCode",
+				data : data,
+				type : "POST",
+				dataType : "JSON",
+				success : function(data){
+					alert("정상적으로 등록하였습니다.");
+					pageReload();
+				},
+				error : function(err){
+					console.log(err);
+					alert("알 수 없는 이유로 등록에 실패하였습니다.");
+				}
+			});
+		}
+	}
+	
+	function pageReload(){
+		searchCode();
+		inputClear();
+	}
+	
+	function modifyCode(target){
+		$("[name=codeId]").val(nullToBlank($(target).find("[id^=codeId]").val()));
+		$("[name=codeNm]").val(nullToBlank($(target).find("[id^=codeNm]").val()));
+		$("[name=uppCodeId]").val(nullToBlank($(target).find("[id^=uppCodeId]").val()));
+		$("[name=codeDtlMemo]").val(nullToBlank($(target).find("[id^=codeDtlMemo]").val()));
+		$("[name=sortIdx]").val(nullToBlank($(target).find("[id^=sortIdx]").val()));
+		$("[name=codeGb]").val(nullToBlank($(target).find("[id^=codeGb]").val()));
+	}
+	
+	function nullToBlank(str){
+		if(str == null || str == 'null'){
+			str = '';
+		}
+		return str;
+	}
+</script>
 </html>
