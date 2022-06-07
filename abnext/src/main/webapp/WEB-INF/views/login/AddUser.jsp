@@ -89,6 +89,8 @@
                   
                   					
                   					<div class="bs-stepper-content">  <!-- your steps content here -->
+                  						
+                  					
 										<!-- 유저정보입력 FORM -->
                    						<form onsubmit="return false" id="userInfoForm" method="post" encType="multipart/form-data">  
 											<div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
@@ -173,7 +175,7 @@
 									            <div class="row">   
 									                <div class="col-sm-6">
 										                <div class="form-group">
-										                  <label>이름 *</label>
+										                  <label>이름 *<code>&nbsp;(필수입력)</code></label>
 										
 										                  <div class="input-group">
 										                    <div class="input-group-prepend">
@@ -206,7 +208,7 @@
 									            <div class="row">   
 									                <div class="col-sm-6">
 										                <div class="form-group">
-										                  <label>휴대폰번호 *</label>
+										                  <label>휴대폰번호 *<code>&nbsp;(필수입력)</code></label>
 										
 										                  <div class="input-group">
 										                    <div class="input-group-prepend">
@@ -256,7 +258,61 @@
 									                </div>
 								                </div>
 								                
-								                <label for="userNm">주소  *<code>&nbsp;주소검색을 이용해주세요.</code></label>
+								                <div class="row">   
+									                <div class="col-md-4">
+										                <div class="form-group">
+										                  <label>입금은행명 </label>
+														  
+														  <div class="input-group">
+											                  <select class="form-control select2" name="userBankNm" id="userBankNm" style="width:100%;">
+										                    	<option selected="selected" value="0">::입금은행선택::</option>
+										                    	<option value="">KB국민은행</option>
+										                    	<option value="">기업은행</option>
+										                    	<option value="">농협은행</option>
+										                    	<option value="">산업은행</option>
+										                    	<option value="">수협은행</option>
+										                    	<option value="">신한은행</option>
+										                    	<option value="">우리은행</option>
+										                    	<option value="">우체국</option>
+										                    	<option value="">하나은행</option>
+										                    	<option value="">한국시티은행</option>
+										                    	<option value="">SC제일은행</option>
+										                    	<option value="">카카오뱅크</option>
+										                    	<option value="">케이뱅크</option>
+										                    	<option value="">토스뱅크</option>
+										                    	<option value="">경남은행</option>
+										                    	<option value="">광주은행</option>
+										                    	<option value="">대구은행</option>
+										                    	<option value="">부산은행</option>
+										                    	<option value="">전북은행</option>
+										                    	<option value="">제주은행</option>
+										                    	<option value="">저축은행</option>
+										                    	<option value="">산림조합</option>
+										                    	<option value="">새마을금고</option>
+										                    	<option value="">신협은행</option>
+										                      </select>
+										                  </div> 
+										                </div>
+										                <!-- /.form group -->
+									                </div>
+									                
+									                <div class="col-sm-8">
+										                <div class="form-group">
+										                  <label>입금계좌번호</label>
+										
+										                  <div class="input-group">
+										                    <div class="input-group-prepend">
+										                      <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+										                    </div>
+										                    <input type="text" class="form-control" id="userAccountNo" name="userAccountNo" >
+										                  </div>
+										                  <!-- /.input group -->
+										                </div>
+										                <!-- /.form group -->
+									                </div>
+								                </div>
+								                
+								                <label for="userNm">주소  *<code>&nbsp;주소검색을 이용해주세요. (필수입력)</code></label>
 								                <div class="row">
 								                	<div class="input-group col-sm-4">
 									                  <input type="text" class="form-control" id="userZip" name="userZip">
@@ -282,11 +338,23 @@
 									                  </div>
 									                  <input type="text" class="form-control" id="userDtlAdr" name="userDtlAdr">
 									            	</div>
-								                </div> <!-- END input-group mb-3 -->
+								                </div> <br/><!-- END input-group mb-3 -->
+								                
+								                
+								                <div class="row">
+								                	<div class="col-sm-12">
+														<!-- textarea -->
+														<div class="form-group">
+															<label>고객메모</label>
+															<textarea class="form-control" rows="3" name="userMemo" id="userMemo"></textarea>
+														</div>
+													</div>
+								                </div>
 								                
 								                <!-- 기관, 농장등 소속 입력 혹은 검색선택시 적용 히든값 -->
 								                <input type="hidden" id="hospNo" name="hospNo"/>	
 								                <input type="hidden" id="farmNo" name="farmNo"/>
+								                
 							                </form><!-- userInfoForm END  -->
 							                	
 							                <br/>
@@ -319,7 +387,7 @@
 					                            <div class="col-6">
 								                	<div class="form-group">
 								                		<div class="input-group">
-							                                <input type="search" class="form-control" placeholder="기관, 농장명검색" value="">
+							                                <input type="search" class="form-control" id="companyNm" placeholder="기관, 농장명검색" value="">
 							                                <div class="input-group-append">
 							                                    <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popCompany"> -->
 							                                    <button type="button" class="btn btn-success" id="fn_searchCompany">
@@ -628,7 +696,7 @@
 							                </form>   <!-- farmInfoForm END  -->
 							                
 							                <br/><br/>
-							              	<button class="btn btn-warning" onclick="stepper.previous()">이전</button>
+							              	<!-- <button class="btn btn-warning" onclick="stepper.previous()">이전</button> -->
 							              	<button class="btn btn-primary" onclick="nextPage('2')">다음</button>
 										</div> <!-- END information-part -->
 										
@@ -698,6 +766,7 @@
 <script src="resources/plugins/toastr/toastr.min.js"></script>
 
 <script>
+	var Toast = '';
 
 	//BS-Stepper Init
 	document.addEventListener('DOMContentLoaded', function () {
@@ -705,11 +774,19 @@
 	})
 	
 	$(function () {
-      $('.select2').select2();
-      bsCustomFileInput.init();
-      
-      localStorage.setItem('idChkResult', 'fail'); //새로 열때마다 id중복체크 초기화.
+		$('.select2').select2();
+		bsCustomFileInput.init();
+		
+		localStorage.setItem('idChkResult', 'fail'); //새로 열때마다 id중복체크 초기화.
+		
+		Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000
+		});
     });
+	
 	
 	
 	/*======================
@@ -751,8 +828,64 @@
 	* 기관 병원찾기 팝업
 	======================*/
 	$(document).on('click', '#fn_searchCompany', function(){
-		//팝업 오픈전에 미리 검색키로 검색되는 내용을 확인해서 있으면 세팅 없으면 모달
-		$('#popCompany').modal();
+		var companyGb = $('input[name=searchKey]:checked').val(); 
+		var companyNm = $('#companyNm').val();
+		
+		console.log(companyGb, companyNm);
+		
+		if(companyGb == null || companyGb == ''){
+			alert('기관(병원)인지 농장인지 좌측에 카테고리를 선택한 후 검색해주세요.');
+			return;
+		}
+		
+		if(companyNm != null && companyNm != ''){ //검색값이 있을경우 조회먼저 시행.
+			$.ajax({
+				url : 'searchCompany',
+				data : {'companyGb':companyGb, 'companyNm': companyNm},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					if(companyGb == 'hospital'){
+						var hospList = data.hospList;
+						
+						console.log(hospList.length);
+						if(hospList.length == 1){
+							$('#hospNm').val('hospList[0].hospNm');
+						}else if(hospList.length == 0){
+							alert('등록된 기관(병원)이 없습니다. 아래 기관(병원)정보를 입력해주세요');
+							return;
+						}else{
+							var html = '';
+							$.each(hospList, function(list, i){
+								html += '<tr>';
+								html += '	<td>'+기관(병원)+'</td>';
+								html += '	<td>'+list.hospNm+'</td>';
+							})
+							
+							
+							$('#popCompany').modal();
+						}
+					}else if(companyGb == 'farm'){
+						var farmList = data.farmList;
+						
+						console.log(farmList.length);
+						if(farmList.length == 1){
+							$('#farmNm').val('farmList[0].farmNm');
+						}else if(farmList.length == 0){
+							alert('등록된 농장이 없습니다. 아래 농장정보를 입력해주세요');
+							return;
+						}else{
+							$('#popCompany').modal();
+						}
+					}
+				}
+			})
+		}else{
+			console.log('검색값 없음~!!');
+			$('#popCompany').modal();
+		}
+		
+		//$('#popCompany').modal();
 	})
 	
 	
@@ -764,9 +897,12 @@
 		if(searchKey == 'hospital'){
 			$('.hospitalDiv').css('display', '');
 			$('.farmDiv').css('display', 'none');
-		}else{
+		}else if(searchKey == 'farm'){
 			$('.hospitalDiv').css('display', 'none');
 			$('.farmDiv').css('display', '');
+		}else{
+			$('.hospitalDiv').css('display', '');
+			$('.farmDiv').css('display', 'none');
 		}
 	}
 	
@@ -823,6 +959,34 @@
 		}
 	}
 	
+	
+	/*======================
+	* 다음버튼 유효성검사 이벤트
+	======================*/
+	$('#userLev').on('change', function(){
+		console.log($(this).val());
+		var userLev = $(this).val();
+		var searchKey = 'hospital';
+		
+		//라디오 name="searchKey" id 기관 searchKey1 농장 searchKey2 // 값 hospital, farm 변화시 폼 이벤트 fn_searchKeyChg(searchKey)
+		if(userLev == '2' || userLev == '3'){ //수의사, 병원
+			$('#searchKey1').prop('checked', true);
+			toastr.info('수의사 혹은 기관소속인 경우 아래 기관(병원)정보 입력이 필수입니다.');
+		
+		}else if(userLev == '4'){ //농장
+			$('#searchKey2').prop('checked', true);
+			searchKey = 'farm';
+			
+			toastr.info('농장소속인 경우 농장정보 입력이 필수입니다.');
+		}else{ //1번 일반회원, 5번 관리자
+			$('#searchKey1').prop('checked', false);
+			$('#searchKey2').prop('checked', false);
+		}
+		
+		fn_searchKeyChg(searchKey);
+	})
+	
+	
 	/*======================
 	* 다음버튼 유효성검사 이벤트
 	======================*/
@@ -869,15 +1033,34 @@
 				return;
 			}
 			
-			var formData = $('#userInfoForm').serialize();
+			//회원구분에 따라 회사정보입력이 필수
+			var userLev = $('#userLev option:selected').val();
+			console.log('userLev : '+userLev);
+			
+			if(userLev == '2'){ //수의사
+				
+			}else if(userLev == '3'){ //기관(병원)
+				
+			}else if(userLev == '4'){ //농장
+				
+			}
+			
+			
+			var params = $('#userInfoForm').serialize();
+			//console.log('params : '+params);
 			//고객정보저장
 			$.ajax({
-				url : 'addUser',
-				data : formData,
+				url : 'addUserCtrl',
+				data : params,
 				dataType : 'json',
 				type : 'post',
 				success : function(data){
-					
+					if(data.result == 'succ'){
+						toastr.success('회원등록이 완료되었습니다.');
+						stepper.next();
+					}else{
+						toastr.error('회원등록에 실패하였습니다.');
+					}
 				}
 			})
 			

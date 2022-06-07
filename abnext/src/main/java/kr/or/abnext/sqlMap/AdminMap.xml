@@ -8,55 +8,93 @@
 	<insert id="addUser" parameterType="kr.or.abnext.domain.TbUser">
 		INSERT INTO TB_USER(
 			USER_ZIP
-			,USER_TEL
-			,USER_RN
-			,USER_PASS
-			,USER_NM
-			,USER_MEMO
-			,USER_LEV
-			,USER_ID
-			,USER_HP
-			,USER_FAX
-			,USER_EMAIL
-			,USER_DTL_ADR
-			,USER_BANK_NM
-			,USER_ADR
-			,USER_ACCOUNT_NO
-			,UPT_ID
-			,UPT_DT
-			,SIGUNGU_NM
-			,SIDO_NM
-			,INS_ID
-			,INS_DT
-			,HOSP_NO
-			,FARM_NO
+			, USER_TEL
+			, USER_RN
+			, USER_PASS
+			, USER_NM
+			, USER_MEMO
+			, USER_LEV
+			, USER_ID
+			, USER_HP
+			, USER_FAX
+			, USER_EMAIL
+			, USER_DTL_ADR
+			, USER_BANK_NM
+			, USER_ADR
+			, USER_ACCOUNT_NO
+			, UPT_ID
+			, UPT_DT
+			, SIGUNGU_NM
+			, SIDO_NM
+			, INS_ID
+			, INS_DT
+			, HOSP_NO
+			, FARM_NO
 		) VALUES(
-			#{USER_ZIP}
-			,#{USER_TEL}
-			,#{USER_RN}
-			,#{USER_PASS}
-			,#{USER_NM}
-			,#{USER_MEMO}
-			,#{USER_LEV}
-			,#{USER_ID}
-			,#{USER_HP}
-			,#{USER_FAX}
-			,#{USER_EMAIL}
-			,#{USER_DTL_ADR}
-			,#{USER_BANK_NM}
-			,#{USER_ADR}
-			,#{USER_ACCOUNT_NO}
-			,#{UPT_ID}
-			,#{UPT_DT}
-			,#{SIGUNGU_NM}
-			,#{SIDO_NM}
-			,#{INS_ID}
-			,#{INS_DT}
-			,#{HOSP_NO}
-			,#{FARM_NO}
+			#{userZip}
+			, #{userTel}
+			, #{userRn}
+			, #{userPass}
+			, #{userNm}
+			, #{userMemo}
+			, #{userLev}
+			, #{userId}
+			, #{userHp}
+			, #{userFax}
+			, #{userEmail}
+			, #{userDtlAdr}
+			, #{userBankNm}
+			, #{userAdr}
+			, #{userAccountNo}
+			, #{userId}
+			, now()
+			, #{sigunguNm}
+			, #{sidoNm}
+			, #{userId}
+			, now()
+			, #{hospNo}
+			, #{farmNo}
 		)
-		
 	</insert>
 	
+	<!-- 회원정보 수정 -->
+	<update id="modifyUser" parameterType="kr.or.abnext.domain.TbUser">
+		UPDATE TB_USER
+		   SET USER_ZIP
+			   , USER_TEL	= #{userTel}
+			   , USER_RN	= #{userRn}
+			   , USER_PASS	= #{userPass}
+			   , USER_NM	= #{userNm}
+			   , USER_MEMO	= #{userMemo}
+			   , USER_LEV	= #{userLev}
+			   , USER_ID	= #{userId}
+			   , USER_HP	= #{userHp}
+			   , USER_FAX	= #{userFax}
+			   , USER_EMAIL	= #{userEmail}
+			   , USER_DTL_ADR	= #{userDtlAdr}
+			   , USER_BANK_NM	= #{userBankNm}
+			   , USER_ADR		= #{userAdr}
+			   , USER_ACCOUNT_NO= #{userAccountNo}
+			   , UPT_ID		= #{uptId}
+			   , UPT_DT		= now()
+			   , SIGUNGU_NM	= #{sigunguNm}
+			   , SIDO_NM	= #{sidoNm}
+			   , HOSP_NO	= #{hospNo}
+			   , FARM_NO	= #{farmNo}
+	     WHERE USER_NO = #{userNo} 
+	</update>
 
+	<!-- 병원검색 -->
+	<select id="searchHospital" parameterType="kr.or.abnext.domain.TbHospital" resultType="kr.or.abnext.domain.TbHospital">
+		SELECT *
+		  FROM TB_HOSPITAL
+		 WHERE HOSP_NM LIKE CONCAT('%', #{hospNm}, '%') 
+	</select>
+	
+	<!-- 농장검색 -->
+	<select id="searchFarm" parameterType="kr.or.abnext.domain.TbFarm" resultType="kr.or.abnext.domain.TbFarm">
+		SELECT *
+		  FROM TB_FARM
+		 WHERE FARM_NM LIKE CONCAT('%', #{farmNm}, '%') 
+	</select>
 </mapper>

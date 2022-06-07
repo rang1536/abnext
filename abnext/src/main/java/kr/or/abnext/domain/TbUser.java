@@ -22,44 +22,17 @@ public class TbUser {
 	private String userBankNm;
 	private String userMemo;
 	private String userRn;
-	private int hospNo;
-	private int farmNo;
+	private String hospNo;
+	private String farmNo;
 	private String insDt;
-	private int insId;
+	private String insId;
 	private String uptDt;
-	private int uptId;
+	private String uptId;
 	private String userNm;
 	
 	//추가, 시도명, 시군구명
 	private String sidoNm;
 	private String sigunguNm;
-	
-	
-	
-	public String getUserNm() {
-		return userNm;
-	}
-	public void setUserNm(String userNm) {
-		this.userNm = userNm;
-	}
-	public String getUserZip() {
-		return userZip;
-	}
-	public void setUserZip(String userZip) {
-		this.userZip = userZip;
-	}
-	public String getSidoNm() {
-		return sidoNm;
-	}
-	public void setSidoNm(String sidoNm) {
-		this.sidoNm = sidoNm;
-	}
-	public String getSigunguNm() {
-		return sigunguNm;
-	}
-	public void setSigunguNm(String sigunguNm) {
-		this.sigunguNm = sigunguNm;
-	}
 	public int getUserNo() {
 		return userNo;
 	}
@@ -114,6 +87,12 @@ public class TbUser {
 	public void setUserDtlAdr(String userDtlAdr) {
 		this.userDtlAdr = userDtlAdr;
 	}
+	public String getUserZip() {
+		return userZip;
+	}
+	public void setUserZip(String userZip) {
+		this.userZip = userZip;
+	}
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -144,16 +123,16 @@ public class TbUser {
 	public void setUserRn(String userRn) {
 		this.userRn = userRn;
 	}
-	public int getHospNo() {
+	public String getHospNo() {
 		return hospNo;
 	}
-	public void setHospNo(int hospNo) {
+	public void setHospNo(String hospNo) {
 		this.hospNo = hospNo;
 	}
-	public int getFarmNo() {
+	public String getFarmNo() {
 		return farmNo;
 	}
-	public void setFarmNo(int farmNo) {
+	public void setFarmNo(String farmNo) {
 		this.farmNo = farmNo;
 	}
 	public String getInsDt() {
@@ -162,10 +141,10 @@ public class TbUser {
 	public void setInsDt(String insDt) {
 		this.insDt = insDt;
 	}
-	public int getInsId() {
+	public String getInsId() {
 		return insId;
 	}
-	public void setInsId(int insId) {
+	public void setInsId(String insId) {
 		this.insId = insId;
 	}
 	public String getUptDt() {
@@ -174,11 +153,29 @@ public class TbUser {
 	public void setUptDt(String uptDt) {
 		this.uptDt = uptDt;
 	}
-	public int getUptId() {
+	public String getUptId() {
 		return uptId;
 	}
-	public void setUptId(int uptId) {
+	public void setUptId(String uptId) {
 		this.uptId = uptId;
+	}
+	public String getUserNm() {
+		return userNm;
+	}
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
+	public String getSidoNm() {
+		return sidoNm;
+	}
+	public void setSidoNm(String sidoNm) {
+		this.sidoNm = sidoNm;
+	}
+	public String getSigunguNm() {
+		return sigunguNm;
+	}
+	public void setSigunguNm(String sigunguNm) {
+		this.sigunguNm = sigunguNm;
 	}
 	@Override
 	public String toString() {
@@ -190,5 +187,7 @@ public class TbUser {
 				+ insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", userNm=" + userNm + ", sidoNm=" + sidoNm
 				+ ", sigunguNm=" + sigunguNm + "]";
 	}
+	
+	
 	
 }

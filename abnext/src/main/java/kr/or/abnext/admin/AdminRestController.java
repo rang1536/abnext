@@ -17,10 +17,21 @@ public class AdminRestController {
 	/*
 	 * 회원가입
 	 **/
-	@RequestMapping(value = "addUser", method = RequestMethod.POST)
+	@RequestMapping(value = "addUserCtrl", method = {RequestMethod.GET, RequestMethod.POST})
 	public Map<String, Object> addUserCtrl(TbUser tbUser) {
 		System.out.println("회원가입 시작~!!");
+		//System.out.println(">>> tbUser : "+tbUser);
 		
-		return null;
+		return adminServ.addUserServ(tbUser);
+	}
+	
+	/**
+	 * 기관, 병원, 농장검색 
+	 **/
+	@RequestMapping(value = "searchCompany", method = {RequestMethod.GET, RequestMethod.POST})
+	public Map<String, Object> searchCompanyCtrl(String companyGb, String companyNm) {
+		System.out.println("기관농장검색 시작~!!");
+		
+		return adminServ.searchCompanyServ(companyGb, companyNm);
 	}
 }
