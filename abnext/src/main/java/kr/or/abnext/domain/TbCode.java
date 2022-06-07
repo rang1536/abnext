@@ -10,13 +10,17 @@ public class TbCode {
 	private int codeNo;
 	private String codeId;
 	private String codeNm;
+	private String codeIdNm;
 	private String uppCodeId;
 	private String codeGb;
 	private String codeDtlMemo;
+	private int codeLevel;
 	private int sortIdx;
 	private String insDt;
 	private int insId;
 	private int childCnt;
+	private String searchKey;
+	private String searchValue;
 	
 	public int getCodeNo() {
 		return codeNo;
@@ -36,6 +40,13 @@ public class TbCode {
 	public void setCodeNm(String codeNm) {
 		this.codeNm = codeNm;
 	}
+	
+	public String getCodeIdNm() {
+		return codeIdNm;
+	}
+	public void setCodeIdNm(String codeIdNm) {
+		this.codeIdNm = codeIdNm;
+	}
 	public String getUppCodeId() {
 		return uppCodeId;
 	}
@@ -53,6 +64,13 @@ public class TbCode {
 	}
 	public void setCodeDtlMemo(String codeDtlMemo) {
 		this.codeDtlMemo = codeDtlMemo;
+	}
+	
+	public int getCodeLevel() {
+		return codeLevel;
+	}
+	public void setCodeLevel(int codeLevel) {
+		this.codeLevel = codeLevel;
 	}
 	public int getSortIdx() {
 		return sortIdx;
@@ -79,11 +97,25 @@ public class TbCode {
 	public void setChildCnt(int childCnt) {
 		this.childCnt = childCnt;
 	}
+	
+	public String getSearchKey() {
+		return searchKey;
+	}
+	public void setSearchKey(String searchKey) {
+		this.searchKey = searchKey;
+	}
+	public String getSearchValue() {
+		return searchValue;
+	}
+	public void setSearchValue(String searchValue) {
+		this.searchValue = searchValue;
+	}
 	@Override
 	public String toString() {
-		return "TbCode [codeNo=" + codeNo + ", codeId=" + codeId + ", codeNm=" + codeNm + ", uppCodeId=" + uppCodeId
-				+ ", codeGb=" + codeGb + ", codeDtlMemo=" + codeDtlMemo + ", sortIdx=" + sortIdx + ", insDt=" + insDt
-				+ ", insId=" + insId + ", childCnt=" + childCnt + "]";
+		return "TbCode [codeNo=" + codeNo + ", codeId=" + codeId + ", codeNm=" + codeNm + ", codeIdNm=" + codeIdNm
+				+ ", uppCodeId=" + uppCodeId + ", codeGb=" + codeGb + ", codeDtlMemo=" + codeDtlMemo + ", codeLevel="
+				+ codeLevel + ", sortIdx=" + sortIdx + ", insDt=" + insDt + ", insId=" + insId + ", childCnt="
+				+ childCnt + ", searchKey=" + searchKey + ", searchValue=" + searchValue + "]";
 	}
 	
 }

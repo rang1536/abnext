@@ -40,7 +40,7 @@ public class AdminController {
 	public String codeListCtrl(Model model) {
 		System.out.println("코드관리~!!");
 		
-		List<TbCode> list = adminServ.codeList();
+		List<TbCode> list = adminServ.codeList(null);
 		model.addAttribute("codeList", list);
 		return "admin/codeList";
 	}
