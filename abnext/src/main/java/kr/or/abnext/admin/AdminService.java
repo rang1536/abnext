@@ -37,6 +37,10 @@ public class AdminService {
 		return adminDao.dupChk(tbCode);
 	}
 	
+	public int modChk(TbCode tbCode){
+		return adminDao.modChk(tbCode);
+	}
+	
 	public int getCodeLevel(TbCode tbCode){
 		return adminDao.getCodeLevel(tbCode);
 	}

@@ -46,6 +46,11 @@ public class AdminDao {
 		return a;
 	}
 	
+	public int modChk(TbCode tbCode){
+		int a = sql.selectOne("code.modChk", tbCode);
+		return a;
+	}
+	
 	public int deleteCode(TbCode tbCode){
 		return sql.delete("code.deleteCode", tbCode);
 	}

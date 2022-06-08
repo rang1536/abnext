@@ -55,10 +55,16 @@ public class AdminRestController {
 	public Map<String, Object> insertCode(TbCode tbCode) {
 		System.out.println("코드조회 시작~!!");
 		
-		int dupCnt = adminServ.dupChk(tbCode);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		if(dupCnt > 0 && tbCode.getCodeNo() != 999999999) {
+		int dupCnt = adminServ.dupChk(tbCode);
+		if(dupCnt > 0 && tbCode.getCodeNo() == 999999999) {
+			map.put("result", "dup");
+			return map;
+		}
+		
+		int modChk = adminServ.modChk(tbCode);
+		if(modChk > 0 && tbCode.getCodeNo() != 999999999) {
 			int i = adminServ.updateCode(tbCode);
 			if(i > 0) {
 				map.put("result", "success");

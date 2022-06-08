@@ -33,8 +33,13 @@
 	<select id="dupChk" resultType="int">
 		SELECT COUNT(*) AS CNT
 		  FROM TB_CODE
+		 WHERE CODE_ID = #{codeId}
+	</select>
+	
+	<select id="modChk" resultType="int">
+		SELECT COUNT(*) AS CNT
+		  FROM TB_CODE
 		 WHERE CODE_NO = #{codeNo}
-		   AND CODE_NO != 999999999
 	</select>
 	
 	<insert id="insertCode" parameterType="kr.or.abnext.domain.TbCode">
