@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>AdminLTE 3 | General Form Elements</title>
+	<title>avinext | (주)아비넥스트</title>
 	
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -219,7 +219,7 @@
 							<div class="col-sm-5">
 								<div class="form-group">
 									<label>*시료정보</label>
-									<input type="text" class="form-control" placeholder="시료정보">
+									<select class="form-control" id="sample"></select>
 								</div>
 							</div>
 							<div class="col-sm-5">
@@ -351,8 +351,8 @@
 <script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Select2 -->
 <script src="resources/plugins/select2/js/select2.full.min.js"></script>
-<!-- dropzonejs -->
-
+<!-- Customizing Js -->
+<script src="resources/js/common.js"></script>
 <!-- Page specific script -->
 <script>
 $(function () {
@@ -371,6 +371,27 @@ $(function () {
 			format: 'YYYY.MM.DD'
 	});
 });
+
+$(document).ready(function(){
+	var uppCodeId = 'SAMPLE';
+	gfn_getCode(uppCodeId,callBackFn);
+	uppCodeId = 'INSPECT_STATUS';
+	gfn_getCode(uppCodeId,callBackFn);
+});
+
+function callBackFn(data){
+	var optHtml = '';
+	if(data[0].uppCodeId == 'SAMPLE'){
+		for(var i=0; i<data.length; i++){
+			optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>'; 
+		}
+		$("#sample").html(optHtml);
+	}else if(data[0].uppCodeId == 'SAMPLE'){
+		
+	}
+	
+}
+
 </script>
 </body>
 </html>

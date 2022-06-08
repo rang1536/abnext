@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ABNext</title>
+	<title>avinext | (주)아비넥스트</title>
 
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -56,13 +56,15 @@
 								<table id="example2" class="table table-bordered table-hover">
 									<thead>
 										<tr>
-											<th>접수번호</th>
-											<th>접수일자</th>
+											<th>의뢰번호</th>
+											<th>신청일</th>
 											<th>상태</th>
 											<th>동물명</th>
 											<th>신청자(기관)</th>
 											<th>담당수의사</th>
-											<th>비용</th>
+											<th>검사구분</th>
+											<th>진단명</th>
+											<th>검사결과</th>
 										</tr>
 									</thead>
 									<tbody id="listBody">
@@ -74,7 +76,9 @@
 												<td>${item.animNm }</td>
 												<td>${item.hospNm }</td>
 												<td>${item.docNm }</td>
-												<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
+												<td></td>
+												<td></td>
+												<td></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -82,7 +86,7 @@
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
-								<button type="button" class="btn btn-primary btn-flat" style="float:right;">직접접수</button>
+								<button type="button" class="btn btn-primary btn-flat" style="float:right;">신규신청</button>
 							</div>
 						</div>
 						<!-- /.card -->
@@ -124,6 +128,8 @@
 <script src="resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="resources/dist/js/demo.js"></script>
+<!-- Customizing Js -->
+<script src="resources/js/common.js"></script>
 <!-- Page specific script -->
 <script>
 	$(function () {
@@ -148,6 +154,7 @@
 			data : {rqstNo : rqstNo}
 		})
 	})
+	
 </script>
 </body>
 </html>

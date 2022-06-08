@@ -181,6 +181,7 @@
 					var item = data[i];
 					if(item.codeLevel == 1){
 						codeListHtml += '<tr><td onclick="modifyCode(this)">■ '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeNo" value="'+item.codeNo+'"/>';
 						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
 						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
 						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
@@ -199,6 +200,7 @@
 								viewedCodeArr.push(item2.codeId);
 								if(item.codeId == item2.uppCodeId && item2.codeLevel == 2){
 									codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:30px;">● '+item2.codeIdNm;
+									codeListHtml += '<input type="hidden" id="codeNo" value="'+item2.codeNo+'"/>';
 									codeListHtml += '<input type="hidden" id="codeId" value="'+item2.codeId+'"/>';
 									codeListHtml += '<input type="hidden" id="codeNm" value="'+item2.codeNm+'"/>';
 									codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item2.uppCodeId+'"/>';
@@ -217,6 +219,7 @@
 											viewedCodeArr.push(item3.codeId);
 											if(item2.codeId == item3.uppCodeId && item3.codeLevel == 3){
 												codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item3.codeIdNm;
+												codeListHtml += '<input type="hidden" id="codeNo" value="'+item3.codeNo+'"/>';
 												codeListHtml += '<input type="hidden" id="codeId" value="'+item3.codeId+'"/>';
 												codeListHtml += '<input type="hidden" id="codeNm" value="'+item3.codeNm+'"/>';
 												codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item3.uppCodeId+'"/>';
@@ -242,6 +245,7 @@
 					if(item.codeLevel == 2 && viewedCodeArr.indexOf(item.codeId) == -1){
 						viewedCodeArr.push(item.codeId);
 						codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:30px;">● '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeNo" value="'+item.codeNo+'"/>';
 						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
 						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
 						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
@@ -251,7 +255,7 @@
 						codeListHtml += '</td>';
 						codeListHtml += '	<td class="project-actions text-right">';
 						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 						codeListHtml += '	</td>';
 						codeListHtml += '</tr>';
 						if(item.childCnt != 0){
@@ -260,6 +264,7 @@
 								if(item.codeId == item2.uppCodeId && item2.codeLevel == 3){
 									viewedCodeArr.push(item2.codeId);
 									codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item2.codeIdNm;
+									codeListHtml += '<input type="hidden" id="codeNo" value="'+item2.codeNo+'"/>';
 									codeListHtml += '<input type="hidden" id="codeId" value="'+item2.codeId+'"/>';
 									codeListHtml += '<input type="hidden" id="codeNm" value="'+item2.codeNm+'"/>';
 									codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item2.uppCodeId+'"/>';
@@ -269,7 +274,7 @@
 									codeListHtml += '</td>';
 									codeListHtml += '	<td class="project-actions text-right">';
 									codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item2.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 									codeListHtml += '	</td>';
 									codeListHtml += '</tr>';
 								}
@@ -283,6 +288,7 @@
 					item = data[i];
 					if(item.codeLevel == 3 && viewedCodeArr.indexOf(item.codeId) == -1){
 						codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeNo" value="'+item.codeNo+'"/>';
 						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
 						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
 						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
@@ -292,7 +298,7 @@
 						codeListHtml += '</td>';
 						codeListHtml += '	<td class="project-actions text-right">';
 						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 						codeListHtml += '	</td>';
 						codeListHtml += '</tr>';
 					}
@@ -309,15 +315,15 @@
 	}
 	
 	function addCode(codeId){
-		$("#uppCodeId").val(codeId);
+		$("[name=uppCodeId]").val(codeId);
 	}
 	
-	function delCode(codeId){
+	function delCode(codeNo){
 		var msg = "삭제하시겠습니까?";
 		if(confirm(msg)){
 			$.ajax({
 				url : "deleteCode",
-				data : {codeId : codeId},
+				data : {codeNo : codeNo},
 				type : "POST",
 				dataType : "JSON",
 				success : function(data){
@@ -335,13 +341,13 @@
 	function inputClear(){
 		var clearArr = ['uppCodeId','codeId','codeNm','codeGb','sortIdx','codeDtlMemo'];
 		for(var i=0; i<clearArr.length; i++){
-			$("#"+clearArr[i]).val("");
+			$("[name="+clearArr[i]+"]").val("");
 		}
 	}
 	
 	function saveCode(){
-		if($("#sortIdx").val() == ''){
-			$("#sortIdx").val("1");
+		if($("[name=sortIdx]").val() == ''){
+			$("[name=sortIdx]").val("1");
 		}
 		
 		var data = $("#codeFrm").serialize();

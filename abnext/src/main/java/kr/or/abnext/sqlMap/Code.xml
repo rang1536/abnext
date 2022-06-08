@@ -5,7 +5,8 @@
 <mapper namespace="code">
 
 	<select id="codeList" resultType="kr.or.abnext.domain.TbCode">
-		SELECT CODE_ID
+		SELECT CODE_NO
+		     , CODE_ID
 		     , CONCAT(CONCAT(CONCAT(CODE_ID,'['),CODE_NM),']') AS CODE_ID_NM
 		     , CODE_NM
 		     , UPP_CODE_ID
@@ -54,12 +55,13 @@
 	
 	<update id="updateCode" parameterType="kr.or.abnext.domain.TbCode">
 		UPDATE TB_CODE
-		   SET CODE_NM = #{codeNm}
+		   SET CODE_ID = #{codeId}
+		     , CODE_NM = #{codeNm}
 		     , UPP_CODE_ID = #{uppCodeId}
 		     , CODE_GB = #{codeGb}
 		     , SORT_IDX = #{sortIdx}
 		     , CODE_DTL_MEMO = #{codeDtlMemo}
-		 WHERE CODE_ID = #{codeId}
+		 WHERE CODE_NO = #{codeNo}
 	</update>
 	
 	<delete id="deleteCode" parameterType="kr.or.abnext.domain.TbCode">
@@ -67,4 +69,10 @@
 		  FROM TB_CODE
 		 WHERE CODE_ID =  #{codeId}
 	</delete>
+	
+	<select id="selectCodeList" resultType="kr.or.abnext.domain.TbCode">
+		SELECT *
+		  FROM TB_CODE
+		 WHERE UPP_CODE_ID = #{uppCodeId}
+	</select>
 </mapper>
