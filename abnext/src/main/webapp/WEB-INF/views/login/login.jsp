@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>abnext | (주)아비넥스트</title>
+  <title>avinext | (주)아비넥스트</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -21,7 +21,7 @@
 	<!-- /.login-logo -->
 	<div class="card card-outline card-primary">
 	  <div class="card-header text-center">
-	    <a href="index" class="h1"><b>Abnext</b><!-- &nbsp;LOGIN --></a>
+	    <a href="index" class="h1"><b>Avinext</b><!-- &nbsp;LOGIN --></a>
 	  </div>
 	  <div class="card-body">
 	    <p class="login-box-msg">LOGIN</p> 

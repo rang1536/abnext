@@ -19,6 +19,7 @@ public class AdminController {
 	public String userListCtrl(Model model) {
 		System.out.println("회원관리~!!");
 		
+		model.addAttribute("userList", adminServ.getUserListServ());
 		return "admin/userList";
 	}
 	

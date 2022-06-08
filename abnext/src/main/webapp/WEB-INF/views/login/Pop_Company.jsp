@@ -38,7 +38,7 @@
                       <th>대표자</th>
                       <th>전화번호</th>
                       <th>휴대폰</th>
-                      <th>주소</th>
+                      <th>지역</th>
                     </tr>
                   </thead>
                   <tbody id="comTbody">

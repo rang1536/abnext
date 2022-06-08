@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>abnext | (주)아비넥스트</title>
+  <title>avinext | (주)아비넥스트</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -69,26 +69,45 @@
 									<table id="example2" class="table table-bordered table-hover">
 										<thead>
 											<tr>
-												<th>-</th>
+												<th><input type="checkbox" id="allCheck"/></th>
 												<th>구분</th>
 												<th>ID</th>
 												<th>이름</th>
 												<th>전화</th>
 												<th>휴대폰</th>
-												<th>이메일</th>
+												<th>지역</th>
 												<th>소속</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="item" items="${rceptList }" varStatus="status">
+											<c:forEach var="item" items="${userList }" varStatus="status">
 												<tr>
-													<td>${item.rqstNo }</td>
-													<td>${item.rqstDt }</td>
-													<td>${item.procStatNm }</td>
-													<td>${item.animNm }</td>
-													<td>${item.hospNm }</td>
-													<td>${item.docNm }</td>
-													<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
+													<td>
+														<input type="checkbox" />
+													</td>
+													<td>
+														<c:if test="${item.userLev eq '1'}">
+															일반회원
+														</c:if>
+														<c:if test="${item.userLev eq '2'}">
+															수의사
+														</c:if>
+														<c:if test="${item.userLev eq '3'}">
+															기관(병원)
+														</c:if>
+														<c:if test="${item.userLev eq '4'}">
+															농장
+														</c:if>
+														<c:if test="${item.userLev eq '5'}">
+															관리자
+														</c:if>
+													</td>
+													<td>${item.userId }</td>
+													<td>${item.userNm }</td>
+													<td>${item.userTel }</td>
+													<td>${item.userHp}</td>
+													<td>${item.sidoNm}</td>
+													<td>${item.hospNm }${item.farmNm }</td>
 												</tr>
 											</c:forEach>
 										</tbody>
