@@ -83,6 +83,7 @@
 									<div class="form-group">
 										<label for="exampleInputEmail1">상위코드</label>
 										<input type="text" class="form-control" id="uppCodeId" name="uppCodeId" placeholder="상위코드">
+										<input type="hidden" name="codeNo">
 									</div>
 									<div class="row">
 										<div class="col-sm-6">
@@ -191,7 +192,7 @@
 						codeListHtml += '</td>';
 						codeListHtml += '	<td class="project-actions text-right">';
 						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 						codeListHtml += '	</td>';
 						codeListHtml += '</tr>';
 						if(item.childCnt != 0){
@@ -210,7 +211,7 @@
 									codeListHtml += '</td>';
 									codeListHtml += '	<td class="project-actions text-right">';
 									codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item2.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 									codeListHtml += '	</td>';
 									codeListHtml += '</tr>';
 									if(item2.childCnt != 0){
@@ -228,7 +229,7 @@
 												codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item3.codeDtlMemo+'"/>';
 												codeListHtml += '</td>';
 												codeListHtml += '	<td class="project-actions text-right">';
-												codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item3.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+												codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item3.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 												codeListHtml += '	</td>';
 												codeListHtml += '</tr>';
 											}
@@ -320,6 +321,7 @@
 	
 	function delCode(codeNo){
 		var msg = "삭제하시겠습니까?";
+		console.log(codeNo);
 		if(confirm(msg)){
 			$.ajax({
 				url : "deleteCode",
@@ -339,7 +341,7 @@
 	}
 	
 	function inputClear(){
-		var clearArr = ['uppCodeId','codeId','codeNm','codeGb','sortIdx','codeDtlMemo'];
+		var clearArr = ['codeNo','uppCodeId','codeId','codeNm','codeGb','sortIdx','codeDtlMemo'];
 		for(var i=0; i<clearArr.length; i++){
 			$("[name="+clearArr[i]+"]").val("");
 		}
@@ -348,6 +350,10 @@
 	function saveCode(){
 		if($("[name=sortIdx]").val() == ''){
 			$("[name=sortIdx]").val("1");
+		}
+		
+		if($("[name=codeNo]").val() == ''){
+			$("[name=codeNo]").val("999999999");
 		}
 		
 		var data = $("#codeFrm").serialize();
@@ -376,6 +382,7 @@
 	}
 	
 	function modifyCode(target){
+		$("[name=codeNo]").val(nullToBlank($(target).find("[id^=codeNo]").val()));
 		$("[name=codeId]").val(nullToBlank($(target).find("[id^=codeId]").val()));
 		$("[name=codeNm]").val(nullToBlank($(target).find("[id^=codeNm]").val()));
 		$("[name=uppCodeId]").val(nullToBlank($(target).find("[id^=uppCodeId]").val()));

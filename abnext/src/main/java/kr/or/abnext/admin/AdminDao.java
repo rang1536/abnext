@@ -20,6 +20,10 @@ public class AdminDao {
 		return sql.selectList("code.codeList", tbCode);
 	}
 	
+	public List<TbCode> selectCodeList(TbCode tbCode){
+		return sql.selectList("code.selectCodeList", tbCode);
+	}
+	
 	public int insertCode(TbCode tbCode){
 		return sql.insert("code.insertCode", tbCode);
 	}

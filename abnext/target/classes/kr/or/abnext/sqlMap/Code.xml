@@ -33,23 +33,22 @@
 	<select id="dupChk" resultType="int">
 		SELECT COUNT(*) AS CNT
 		  FROM TB_CODE
-		 WHERE CODE_ID = #{codeId}
+		 WHERE CODE_NO = #{codeNo}
+		   AND CODE_NO != 999999999
 	</select>
 	
 	<insert id="insertCode" parameterType="kr.or.abnext.domain.TbCode">
 		INSERT INTO TB_CODE
 		(
-		       CODE_NO     , CODE_ID   , CODE_NM
-		     , UPP_CODE_ID , CODE_GB   , CODE_DTL_MEMO
-		     , CODE_LEVEL  , SORT_IDX
-		     , INS_DT      , INS_ID
+		       CODE_ID   , CODE_NM       , UPP_CODE_ID
+		     , CODE_GB   , CODE_DTL_MEMO , CODE_LEVEL
+		     , SORT_IDX  , INS_DT        , INS_ID
 		)
 		VALUES
 		(
-		       #{codeNo}     , #{codeId}   , #{codeNm}
-		     , #{uppCodeId}  , #{codeGb}   , #{codeDtlMemo}
-		     , #{codeLevel}  , IFNULL(#{sortIdx},1)
-		     , NOW()         , #{insId}
+		       #{codeId}   , #{codeNm}      , #{uppCodeId}
+		     , #{codeGb}   , #{codeDtlMemo} , #{codeLevel}
+		     , #{sortIdx}  , NOW()          , #{insId}
 		)
 	</insert>
 	
@@ -67,7 +66,7 @@
 	<delete id="deleteCode" parameterType="kr.or.abnext.domain.TbCode">
 		DELETE
 		  FROM TB_CODE
-		 WHERE CODE_ID =  #{codeId}
+		 WHERE CODE_NO =  #{codeNo}
 	</delete>
 	
 	<select id="selectCodeList" resultType="kr.or.abnext.domain.TbCode">

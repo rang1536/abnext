@@ -58,7 +58,7 @@ public class AdminRestController {
 		int dupCnt = adminServ.dupChk(tbCode);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		if(dupCnt > 0) {
+		if(dupCnt > 0 && tbCode.getCodeNo() != 999999999) {
 			int i = adminServ.updateCode(tbCode);
 			if(i > 0) {
 				map.put("result", "success");
@@ -95,4 +95,15 @@ public class AdminRestController {
 		
 		return map;
 	}
+	
+	/*
+	 * 코드조회
+	 **/
+	@RequestMapping(value = "selectCodeList", method = RequestMethod.POST)
+	public List<TbCode> selectCodeList(TbCode tbCode) {
+		System.out.println("코드조회 시작~!!");
+		List<TbCode> list = adminServ.selectCodeList(tbCode);
+		return list;
+	}
+	
 }
