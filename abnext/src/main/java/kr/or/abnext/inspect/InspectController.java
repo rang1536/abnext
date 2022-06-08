@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbRcept;
@@ -23,6 +24,9 @@ public class InspectController {
 	
 	@Autowired
 	InspectService insServ;
+	
+	@Autowired
+	AdminService admServ;
 	
 	private static final Logger logger = LoggerFactory.getLogger(InspectController.class);
 	
@@ -64,12 +68,7 @@ public class InspectController {
 	public String registerInspect(Locale locale, Model model) {
 		logger.info("registerInspect Method is start {}.", locale);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+		//model.addAttribute("serverTime", formattedDate );
 		
 		return "inspect/registerInspect";
 	}

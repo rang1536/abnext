@@ -27,6 +27,8 @@ public class TbRcept {
 	private String payGb;
 	private int price;
 	private String payStat;
+	private String sidoNm;
+	private String sigunguNm;
 	private String insDt;
 	private int insId;
 	private String uptDt;
@@ -152,6 +154,19 @@ public class TbRcept {
 	public void setPayStat(String payStat) {
 		this.payStat = payStat;
 	}
+	
+	public String getSidoNm() {
+		return sidoNm;
+	}
+	public void setSidoNm(String sidoNm) {
+		this.sidoNm = sidoNm;
+	}
+	public String getSigunguNm() {
+		return sigunguNm;
+	}
+	public void setSigunguNm(String sigunguNm) {
+		this.sigunguNm = sigunguNm;
+	}
 	public String getInsDt() {
 		return insDt;
 	}
@@ -184,7 +199,8 @@ public class TbRcept {
 				+ ", farmNm=" + farmNm + ", docNo=" + docNo + ", docNm=" + docNm + ", inspCd=" + inspCd
 				+ ", inspSickCd=" + inspSickCd + ", rqstDt=" + rqstDt + ", procStat=" + procStat + ", procStatNm="
 				+ procStatNm + ", rqstMemo=" + rqstMemo + ", payGb=" + payGb + ", price=" + price + ", payStat="
-				+ payStat + ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ payStat + ", sidoNm=" + sidoNm + ", sigunguNm=" + sigunguNm + ", insDt=" + insDt + ", insId=" + insId
+				+ ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
 	
 }

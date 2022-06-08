@@ -83,6 +83,7 @@
 									<div class="form-group">
 										<label for="exampleInputEmail1">상위코드</label>
 										<input type="text" class="form-control" id="uppCodeId" name="uppCodeId" placeholder="상위코드">
+										<input type="hidden" name="codeNo">
 									</div>
 									<div class="row">
 										<div class="col-sm-6">
@@ -177,10 +178,13 @@
 				var codeListHtml = '';
 				var viewedCodeArr = new Array();
 				codeListHtml += '<tbody>';
+				console.log(data);
 				for(var i=0; i<data.length; i++){
 					var item = data[i];
 					if(item.codeLevel == 1){
+						viewedCodeArr.push(item.codeNo);
 						codeListHtml += '<tr><td onclick="modifyCode(this)">■ '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeNo" value="'+item.codeNo+'"/>';
 						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
 						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
 						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
@@ -190,15 +194,16 @@
 						codeListHtml += '</td>';
 						codeListHtml += '	<td class="project-actions text-right">';
 						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 						codeListHtml += '	</td>';
 						codeListHtml += '</tr>';
 						if(item.childCnt != 0){
 							for(var k=0; k<data.length; k++){
 								var item2 = data[k];
-								viewedCodeArr.push(item2.codeId);
 								if(item.codeId == item2.uppCodeId && item2.codeLevel == 2){
-									codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:30px;">● '+item2.codeIdNm;
+									viewedCodeArr.push(item2.codeNo);
+									codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:40px;">● '+item2.codeIdNm;
+									codeListHtml += '<input type="hidden" id="codeNo" value="'+item2.codeNo+'"/>';
 									codeListHtml += '<input type="hidden" id="codeId" value="'+item2.codeId+'"/>';
 									codeListHtml += '<input type="hidden" id="codeNm" value="'+item2.codeNm+'"/>';
 									codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item2.uppCodeId+'"/>';
@@ -208,15 +213,19 @@
 									codeListHtml += '</td>';
 									codeListHtml += '	<td class="project-actions text-right">';
 									codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item2.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 									codeListHtml += '	</td>';
 									codeListHtml += '</tr>';
 									if(item2.childCnt != 0){
 										for(var n=0; n<data.length; n++){
 											var item3 = data[n];
-											viewedCodeArr.push(item3.codeId);
+											if(item3.codeId == 'PDD'){
+												console.log(item2.codeId,item3.uppCodeId);
+											}
 											if(item2.codeId == item3.uppCodeId && item3.codeLevel == 3){
+												viewedCodeArr.push(item3.codeNo);
 												codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item3.codeIdNm;
+												codeListHtml += '<input type="hidden" id="codeNo" value="'+item3.codeNo+'"/>';
 												codeListHtml += '<input type="hidden" id="codeId" value="'+item3.codeId+'"/>';
 												codeListHtml += '<input type="hidden" id="codeNm" value="'+item3.codeNm+'"/>';
 												codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item3.uppCodeId+'"/>';
@@ -225,7 +234,93 @@
 												codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item3.codeDtlMemo+'"/>';
 												codeListHtml += '</td>';
 												codeListHtml += '	<td class="project-actions text-right">';
-												codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item3.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+												codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item3.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
+												codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item3.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
+												codeListHtml += '	</td>';
+												codeListHtml += '</tr>';
+												if(item3.childCnt != 0){
+													for(var u=0; u<data.length; u++){
+														var item4 = data[u];
+														if(item3.codeId == item4.uppCodeId && item4.codeLevel == 4){
+															viewedCodeArr.push(item4.codeNo);
+															codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:90px;">▷ '+item4.codeIdNm;
+															codeListHtml += '<input type="hidden" id="codeNo" value="'+item4.codeNo+'"/>';
+															codeListHtml += '<input type="hidden" id="codeId" value="'+item4.codeId+'"/>';
+															codeListHtml += '<input type="hidden" id="codeNm" value="'+item4.codeNm+'"/>';
+															codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item4.uppCodeId+'"/>';
+															codeListHtml += '<input type="hidden" id="codeGb" value="'+item4.codeGb+'"/>';
+															codeListHtml += '<input type="hidden" id="sortIdx" value="'+item4.sortIdx+'"/>';
+															codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item4.codeDtlMemo+'"/>';
+															codeListHtml += '</td>';
+															codeListHtml += '	<td class="project-actions text-right">';
+															codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item4.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
+															codeListHtml += '	</td>';
+															codeListHtml += '</tr>';
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				for(var i=0; i<data.length; i++){
+					var item = data[i];
+					if(item.codeLevel == 2 && viewedCodeArr.indexOf(item.codeNo) == -1){
+						viewedCodeArr.push(item.codeNo);
+						codeListHtml += '<tr><td onclick="modifyCode(this)">■ '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeNo" value="'+item.codeNo+'"/>';
+						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
+						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
+						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
+						codeListHtml += '<input type="hidden" id="codeGb" value="'+item.codeGb+'"/>';
+						codeListHtml += '<input type="hidden" id="sortIdx" value="'+item.sortIdx+'"/>';
+						codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item.codeDtlMemo+'"/>';
+						codeListHtml += '</td>';
+						codeListHtml += '	<td class="project-actions text-right">';
+						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '	</td>';
+						codeListHtml += '</tr>';
+						if(item.childCnt != 0){
+							for(var k=0; k<data.length; k++){
+								var item2 = data[k];
+								if(item.codeId == item2.uppCodeId && item2.codeLevel == 3){
+									viewedCodeArr.push(item2.codeNo);
+									codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:40px;">● '+item2.codeIdNm;
+									codeListHtml += '<input type="hidden" id="codeNo" value="'+item2.codeNo+'"/>';
+									codeListHtml += '<input type="hidden" id="codeId" value="'+item2.codeId+'"/>';
+									codeListHtml += '<input type="hidden" id="codeNm" value="'+item2.codeNm+'"/>';
+									codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item2.uppCodeId+'"/>';
+									codeListHtml += '<input type="hidden" id="codeGb" value="'+item2.codeGb+'"/>';
+									codeListHtml += '<input type="hidden" id="sortIdx" value="'+item2.sortIdx+'"/>';
+									codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item2.codeDtlMemo+'"/>';
+									codeListHtml += '</td>';
+									codeListHtml += '	<td class="project-actions text-right">';
+									codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item2.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
+									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
+									codeListHtml += '	</td>';
+									codeListHtml += '</tr>';
+									if(item2.childCnt != 0){
+										for(var n=0; n<data.length; n++){
+											var item3 = data[n];
+											if(item2.codeId == item3.uppCodeId && item3.codeLevel == 4){
+												viewedCodeArr.push(item3.codeNo);
+												codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item3.codeIdNm;
+												codeListHtml += '<input type="hidden" id="codeNo" value="'+item3.codeNo+'"/>';
+												codeListHtml += '<input type="hidden" id="codeId" value="'+item3.codeId+'"/>';
+												codeListHtml += '<input type="hidden" id="codeNm" value="'+item3.codeNm+'"/>';
+												codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item3.uppCodeId+'"/>';
+												codeListHtml += '<input type="hidden" id="codeGb" value="'+item3.codeGb+'"/>';
+												codeListHtml += '<input type="hidden" id="sortIdx" value="'+item3.sortIdx+'"/>';
+												codeListHtml += '<input type="hidden" id="codeDtlMemo" value="'+item3.codeDtlMemo+'"/>';
+												codeListHtml += '</td>';
+												codeListHtml += '	<td class="project-actions text-right">';
+												codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item3.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 												codeListHtml += '	</td>';
 												codeListHtml += '</tr>';
 											}
@@ -239,9 +334,10 @@
 				item = null; item2 = null;
 				for(var i=0; i<data.length; i++){
 					item = data[i];
-					if(item.codeLevel == 2 && viewedCodeArr.indexOf(item.codeId) == -1){
-						viewedCodeArr.push(item.codeId);
-						codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:30px;">● '+item.codeIdNm;
+					if(item.codeLevel == 3 && viewedCodeArr.indexOf(item.codeNo) == -1){
+						viewedCodeArr.push(item.codeNo);
+						codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:40px;">● '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeNo" value="'+item.codeNo+'"/>';
 						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
 						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
 						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
@@ -251,15 +347,16 @@
 						codeListHtml += '</td>';
 						codeListHtml += '	<td class="project-actions text-right">';
 						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 						codeListHtml += '	</td>';
 						codeListHtml += '</tr>';
 						if(item.childCnt != 0){
 							for(var n=0; n<data.length; n++){
 								item2 = data[n];
-								if(item.codeId == item2.uppCodeId && item2.codeLevel == 3){
-									viewedCodeArr.push(item2.codeId);
+								if(item.codeId == item2.uppCodeId && item2.codeLevel == 4){
+									viewedCodeArr.push(item2.codeNo);
 									codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item2.codeIdNm;
+									codeListHtml += '<input type="hidden" id="codeNo" value="'+item2.codeNo+'"/>';
 									codeListHtml += '<input type="hidden" id="codeId" value="'+item2.codeId+'"/>';
 									codeListHtml += '<input type="hidden" id="codeNm" value="'+item2.codeNm+'"/>';
 									codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item2.uppCodeId+'"/>';
@@ -269,7 +366,7 @@
 									codeListHtml += '</td>';
 									codeListHtml += '	<td class="project-actions text-right">';
 									codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item2.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+									codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item2.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 									codeListHtml += '	</td>';
 									codeListHtml += '</tr>';
 								}
@@ -281,8 +378,9 @@
 				item = null;
 				for(var i=0; i<data.length; i++){
 					item = data[i];
-					if(item.codeLevel == 3 && viewedCodeArr.indexOf(item.codeId) == -1){
+					if(item.codeLevel == 4 && viewedCodeArr.indexOf(item.codeNo) == -1){
 						codeListHtml += '<tr><td onclick="modifyCode(this)" style="padding-left:60px;">→ '+item.codeIdNm;
+						codeListHtml += '<input type="hidden" id="codeNo" value="'+item.codeNo+'"/>';
 						codeListHtml += '<input type="hidden" id="codeId" value="'+item.codeId+'"/>';
 						codeListHtml += '<input type="hidden" id="codeNm" value="'+item.codeNm+'"/>';
 						codeListHtml += '<input type="hidden" id="uppCodeId" value="'+item.uppCodeId+'"/>';
@@ -292,7 +390,7 @@
 						codeListHtml += '</td>';
 						codeListHtml += '	<td class="project-actions text-right">';
 						codeListHtml += '		<a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="addCode(\''+item.codeId+'\')"><i class="fas fa-folder"></i>추가</a>';
-						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeId+'\')"><i class="fas fa-trash"></i>삭제</a>';
+						codeListHtml += '		<a class="btn btn-danger btn-sm" href="javascript:void(0)" onclick="delCode(\''+item.codeNo+'\')"><i class="fas fa-trash"></i>삭제</a>';
 						codeListHtml += '	</td>';
 						codeListHtml += '</tr>';
 					}
@@ -309,15 +407,16 @@
 	}
 	
 	function addCode(codeId){
-		$("#uppCodeId").val(codeId);
+		$("[name=uppCodeId]").val(codeId);
 	}
 	
-	function delCode(codeId){
+	function delCode(codeNo){
 		var msg = "삭제하시겠습니까?";
+		console.log(codeNo);
 		if(confirm(msg)){
 			$.ajax({
 				url : "deleteCode",
-				data : {codeId : codeId},
+				data : {codeNo : codeNo},
 				type : "POST",
 				dataType : "JSON",
 				success : function(data){
@@ -333,15 +432,19 @@
 	}
 	
 	function inputClear(){
-		var clearArr = ['uppCodeId','codeId','codeNm','codeGb','sortIdx','codeDtlMemo'];
+		var clearArr = ['codeNo','uppCodeId','codeId','codeNm','codeGb','sortIdx','codeDtlMemo'];
 		for(var i=0; i<clearArr.length; i++){
-			$("#"+clearArr[i]).val("");
+			$("[name="+clearArr[i]+"]").val("");
 		}
 	}
 	
 	function saveCode(){
-		if($("#sortIdx").val() == ''){
-			$("#sortIdx").val("1");
+		if($("[name=sortIdx]").val() == ''){
+			$("[name=sortIdx]").val("1");
+		}
+		
+		if($("[name=codeNo]").val() == ''){
+			$("[name=codeNo]").val("999999999");
 		}
 		
 		var data = $("#codeFrm").serialize();
@@ -353,8 +456,12 @@
 				type : "POST",
 				dataType : "JSON",
 				success : function(data){
-					alert("정상적으로 등록하였습니다.");
-					pageReload();
+					if(data.result == 'dup'){
+						alert("중복된 코드가 존재합니다.");
+					}else {
+						alert("정상적으로 등록하였습니다.");
+						pageReload();	
+					}
 				},
 				error : function(err){
 					console.log(err);
@@ -370,6 +477,7 @@
 	}
 	
 	function modifyCode(target){
+		$("[name=codeNo]").val(nullToBlank($(target).find("[id^=codeNo]").val()));
 		$("[name=codeId]").val(nullToBlank($(target).find("[id^=codeId]").val()));
 		$("[name=codeNm]").val(nullToBlank($(target).find("[id^=codeNm]").val()));
 		$("[name=uppCodeId]").val(nullToBlank($(target).find("[id^=uppCodeId]").val()));

@@ -20,6 +20,10 @@ public class AdminDao {
 		return sql.selectList("code.codeList", tbCode);
 	}
 	
+	public List<TbCode> selectCodeList(TbCode tbCode){
+		return sql.selectList("code.selectCodeList", tbCode);
+	}
+	
 	public int insertCode(TbCode tbCode){
 		return sql.insert("code.insertCode", tbCode);
 	}
@@ -39,6 +43,11 @@ public class AdminDao {
 	
 	public int dupChk(TbCode tbCode){
 		int a = sql.selectOne("code.dupChk", tbCode);
+		return a;
+	}
+	
+	public int modChk(TbCode tbCode){
+		int a = sql.selectOne("code.modChk", tbCode);
 		return a;
 	}
 	

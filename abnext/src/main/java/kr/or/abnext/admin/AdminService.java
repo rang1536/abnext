@@ -21,6 +21,10 @@ public class AdminService {
 		return adminDao.codeList(tbCode);
 	}
 	
+	public List<TbCode> selectCodeList(TbCode tbCode){
+		return adminDao.selectCodeList(tbCode);
+	}
+	
 	public int insertCode(TbCode tbCode){
 		return adminDao.insertCode(tbCode);
 	}
@@ -31,6 +35,10 @@ public class AdminService {
 	
 	public int dupChk(TbCode tbCode){
 		return adminDao.dupChk(tbCode);
+	}
+	
+	public int modChk(TbCode tbCode){
+		return adminDao.modChk(tbCode);
 	}
 	
 	public int getCodeLevel(TbCode tbCode){
