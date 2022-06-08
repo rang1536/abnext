@@ -410,7 +410,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-building"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="hospNm" name="hospNm">
+											                    <input type="text" class="form-control hospInput" id="hospNm" name="hospNm">
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -432,7 +432,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="hospHp" name="hospHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+											                    <input type="text" class="form-control hospInput" id="hospHp" name="hospHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -446,7 +446,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="hospTel" name=""hospTel"" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+											                    <input type="text" class="form-control hospInput" id="hospTel" name=""hospTel"" data-inputmask='"mask": "(999) 999-9999"' data-mask>
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -464,7 +464,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="hospFax" name="hospFax" />
+											                    <input type="text" class="form-control hospInput" id="hospFax" name="hospFax" />
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -478,7 +478,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="hospEmail" name="hospEmail" />
+											                    <input type="text" class="form-control hospInput" id="hospEmail" name="hospEmail" />
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -495,7 +495,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-file"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="hospRn" name="hospRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+											                    <input type="text" class="form-control hospInput" id="hospRn" name="hospRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -507,7 +507,7 @@
 											
 											                  <div class="input-group">
 											                    <div class="custom-file">
-											                      <input type="file" class="custom-file-input" id="hospRnFile">
+											                      <input type="file" class="custom-file-input hospInput" id="hospRnFile"> 
 											                      <label class="custom-file-label" for="hospRnFile">사업자등록증 파일을 등록해주세요</label>
 											                    </div>
 											                  </div>
@@ -520,9 +520,9 @@
 									                <!-- <div class="input-group mb-3"> -->
 									                <div class="row">
 									                	<div class="input-group col-sm-4">
-										                  <input type="text" class="form-control" id="hospZip" name="hospZip">
+										                  <input type="text" class="form-control hospInput" id="hospZip" name="hospZip" >
 										                  <span class="input-group-append">
-										                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('hospital')" >주소검색</button>
+										                    <button type="button" class="btn btn-success btn-flat" >주소검색</button><!-- onclick="fn_searchAdr('hospital')" -->
 										                  </span>
 										                  <input type="hidden" id="hospSidoNm" name="hospSidoNm"/>
 										                  <input type="hidden" id="hospSigunguNm" name="hospSigunguNm"/>
@@ -533,7 +533,7 @@
 										                  <span class="input-group-prepend">
 										                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
 										                  </span>
-										                  <input type="text" class="form-control" id="hospAdr" name="hospAdr">
+										                  <input type="text" class="form-control hospInput" id="hospAdr" name="hospAdr">
 										                </div>
 										            </div><br/>
 										            <div class="row">
@@ -541,7 +541,7 @@
 										            	  <div class="input-group-prepend">
 										                    <button type="button" class="btn btn-default">상세주소</button>
 										                  </div>
-										                  <input type="text" class="form-control" name="hospDtlAdr" id="hospDtlAdr">
+										                  <input type="text" class="form-control hospInput" name="hospDtlAdr" id="hospDtlAdr">
 										            	</div>
 									                </div> <!-- END input-group mb-3 -->		
 								                </div>
@@ -559,7 +559,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-building"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="farmNm" name="farmNm">
+											                    <input type="text" class="form-control farmInput" id="farmNm" name="farmNm">
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -581,7 +581,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="farmHp" name="farmHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+											                    <input type="text" class="form-control farmInput" id="farmHp" name="farmHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -595,7 +595,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="farmTel" name="farmTel" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+											                    <input type="text" class="form-control farmInput" id="farmTel" name="farmTel" data-inputmask='"mask": "(999) 999-9999"' data-mask>
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -611,7 +611,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="farmFax" name="farmFax" />
+											                    <input type="text" class="form-control farmInput" id="farmFax" name="farmFax" />
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -625,7 +625,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="farmEmail" name="farmEmail" />
+											                    <input type="text" class="form-control farmInput" id="farmEmail" name="farmEmail" />
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -642,7 +642,7 @@
 											                    <div class="input-group-prepend">
 											                      <span class="input-group-text"><i class="fas fa-file"></i></span>
 											                    </div>
-											                    <input type="text" class="form-control" id="farmRn" name="farmRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+											                    <input type="text" class="form-control farmInput" id="farmRn" name="farmRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
 											                  </div>
 											                  <!-- /.input group -->
 											                </div>
@@ -654,7 +654,7 @@
 											
 											                  <div class="input-group">
 											                    <div class="custom-file">
-											                      <input type="file" class="custom-file-input" id="farmRnFile">
+											                      <input type="file" class="custom-file-input farmInput" id="farmRnFile">
 											                      <label class="custom-file-label" for="farmRnFile">사업자등록증 파일을 등록해주세요</label>
 											                    </div>
 											                  </div>
@@ -667,9 +667,9 @@
 									                <!-- <div class="input-group mb-3"> -->
 									                <div class="row">
 									                	<div class="input-group col-sm-4">
-										                  <input type="text" class="form-control" id="farmZip" name="farmZip">
+										                  <input type="text" class="form-control farmInput" id="farmZip" name="farmZip">
 										                  <span class="input-group-append">
-										                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('farm')" >주소검색</button>
+										                    <button type="button" class="btn btn-success btn-flat">주소검색</button> <!-- onclick="fn_searchAdr('farm')" -->
 										                  </span>
 										                </div>
 										                <input type="hidden" id="farmSidoNm" name="farmSidoNm"/>
@@ -681,7 +681,7 @@
 										                  <span class="input-group-prepend">
 										                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
 										                  </span>
-										                  <input type="text" class="form-control" id="farmAdr" name="farmAdr">
+										                  <input type="text" class="form-control farmInput" id="farmAdr" name="farmAdr">
 										                </div>
 										            </div><br/> 
 										            <div class="row">
@@ -689,7 +689,7 @@
 										            	  <div class="input-group-prepend">
 										                    <button type="button" class="btn btn-default">상세주소</button>
 										                  </div>
-										                  <input type="text" class="form-control" id="farmDtlAdr" name="farmDtlAdr">
+										                  <input type="text" class="form-control farmInput" id="farmDtlAdr" name="farmDtlAdr">
 										            	</div>
 									                </div> <br/> <!-- END input-group mb-3 -->	
 									            </div>
@@ -737,7 +737,7 @@
 	<!-- Control sidebar content goes here -->
 	</aside> <!-- /.control-sidebar -->
 
-	<c:import url="./Pop_Company.jsp"></c:import>
+	<c:import url="../popup/pop_searchCompany.jsp"></c:import>
 </div> <!-- ./wrapper -->
 
 <!-- jQuery -->
@@ -756,8 +756,6 @@
 <script src="resources/plugins/inputmask/jquery.inputmask.min.js"></script>
 <!-- BS-Stepper -->
 <script src="resources/plugins/bs-stepper/js/bs-stepper.min.js"></script>
-<!-- 주소찾기 -->
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- Select2 -->
 <script src="resources/plugins/select2/js/select2.full.min.js"></script>
 <!-- SweetAlert2 -->
@@ -785,43 +783,25 @@
 			showConfirmButton: false,
 			timer: 3000
 		});
+		
+		$('.hospInput').prop('readonly', true);
+		$('.farmInput').prop('readonly', true);
+				
     });
 	
 	
+	/*=====================================
+	* 기관, 농장은 검색으로만 입력가능하도록 함
+	=====================================*/
+	$('.hospInput').on('click', function(){
+		toastr.error('상단의 기관(병원)을 선택하시고 검색하여 등록된 기관(병원)을 선택해주세요.');
+		$('#companyNm').focus();
+	})
 	
-	/*======================
-	* 주소찾기
-	======================*/
-	function fn_searchAdr(type){
-		new daum.Postcode({
-			oncomplete: function(data){
-				if(type == 'user'){
-					$("#userAdr").val(data.jibunAddress);
-					$("#userZip").val(data.zonecode);	
-					$('#sidoNm').val(data.sido);
-					$('#sigunguNm').val(data.sigungu);
-					
-					$('#userDtlAdr').focus();
-				}else if(type == 'hospital'){
-					$("#hospAdr").val(data.jibunAddress);
-					$("#hospZip").val(data.zonecode);
-					$('#hospSidoNm').val(data.sido);
-					$('#hospSigunguNm').val(data.sigungu);
-					
-					$('#hospDtlAdr').focus();
-				}else if(type == 'farm'){
-					$("#farmAdr").val(data.jibunAddress);
-					$("#farmZip").val(data.zonecode);
-					$('#farmSidoNm').val(data.sido);
-					$('#farmSigunguNm').val(data.sigungu);
-					
-					$('#farmDtlAdr').focus();
-				}
-					
-				
-			}
-		}).open();
-	}
+	$('.farmInput').on('click', function(){
+		toastr.error('상단의 기관, 농장 구분을 선택하시고 검색하여 등록된 기관을 선택해주세요.');
+		$('#companyNm').focus();
+	})
 	
 	
 	/*======================
@@ -1033,9 +1013,9 @@
 				return;
 			}
 			
-			//회원구분에 따라 회사정보입력이 필수
+			//회원구분에 따라 회사정보입력이 필수. 추가작업해야함. 팝업에서 선택해서 PK 히든태그에 넣어줘야함.
 			var userLev = $('#userLev option:selected').val();
-			console.log('userLev : '+userLev);
+			//console.log('userLev : '+userLev);
 			
 			if(userLev == '2'){ //수의사
 				

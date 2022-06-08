@@ -122,9 +122,107 @@
 			   , INS_ID
 			   , INS_DT
 			   , (SELECT HOSP_NM FROM TB_HOSPITAL WHERE HOSP_NO = A.HOSP_NO) AS HOSP_NM
-			   , (SELECT FARM_NM FROM TB_HOSPITAL WHERE FARM_NO = A.FARM_NO) AS FARM_NM
+			   , (SELECT FARM_NM FROM TB_FARM WHERE FARM_NO = A.FARM_NO) AS FARM_NM
 		  FROM TB_USER A
 		 ORDER BY USER_NO
 	</select>
 	
+	<!-- 기관(병원)조회 -->
+	<select id="getHospList" resultType="kr.or.abnext.domain.TbHospital">
+		SELECT *
+		  FROM TB_HOSPITAL
+	</select>
+	
+	<!-- 농장조회 -->
+	<select id="getFarmList" resultType="kr.or.abnext.domain.TbFarm">
+		SELECT *
+		  FROM TB_FARM
+	</select>
+	
+	
+	<!-- 병원등록 -->
+	<insert id="addHosp" parameterType="kr.or.abnext.domain.TbHospital">
+		INSERT INTO TB_HOSPITAL(
+			HOSP_NM
+			,HOSP_TEL
+			,HOSP_HP
+			,HOSP_EMAIL
+			,HOSP_FAX
+			,HOSP_ADR
+			,HOSP_DTL_ADR
+			,HOSP_ZIP
+			,HOSP_CEO
+			,HOSP_RN
+			,HOSP_SIDO_NM
+			,HOSP_SIGUNGU_NM
+			,HOSP_ACCOUNT_NO
+			,HOSP_BANK_NM
+			,INS_DT
+			,INS_ID
+			,UPT_DT
+			,UPT_ID			
+		) VALUES(
+			#{hospNm}
+			,#{hospTel}
+			,#{hospHp}
+			,#{hospEmail}
+			,#{hospFax}
+			,#{hospAdr}
+			,#{hospDtlAdr}
+			,#{hospZip}
+			,#{hospCeo}
+			,#{hospRn}
+			,#{hospSidoNm}
+			,#{hospSigunguNm}
+			,#{hospAccountNo}
+			,#{hospBankNm}
+			,NOW()
+			,#{userId}
+			,NOW()
+			,#{userId}
+		)
+	</insert>
+	
+	<!-- 농장등록 -->
+	<insert id="addFarm" parameterType="kr.or.abnext.domain.TbFarm">
+		INSERT INTO TB_FARM(
+			FARM_NM
+			,FARM_CEO
+			,FARM_TEL
+			,FARM_HP
+			,FARM_FAX
+			,FARM_ADR
+			,FARM_DTL_ADR
+			,FARM_ZIP
+			,FARM_EMAIL
+			,FARM_RN
+			,FARM_SIDO_NM
+			,FARM_SIGUNGU_NM
+			,FARM_BANK_NM
+			,FARM_ACCOUNT_NO
+			,INS_DT
+			,INS_ID
+			,UPT_DT
+			,UPT_ID
+		) VALUES(
+			#{farmNm}
+			,#{farmTel}
+			,#{farmHp}
+			,#{farmEmail}
+			,#{farmFax}
+			,#{farmAdr}
+			,#{farmDtlAdr}
+			,#{farmZip}
+			,#{farmCeo}
+			,#{farmRn}
+			,#{farmSidoNm}
+			,#{farmSigunguNm}
+			,#{farmAccountNo}
+			,#{farmBankNm}
+			,NOW()
+			,#{userId}
+			,NOW()
+			,#{userId}
+		)
+	</insert>
 </mapper>

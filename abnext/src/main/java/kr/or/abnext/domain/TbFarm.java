@@ -19,33 +19,15 @@ public class TbFarm {
 	private String farmRn;
 	private String farmZip;
 	private String insDt;
-	private int insId;
+	private String insId;
 	private String uptDt;
-	private int uptId;
+	private String uptId;
 	
 	//추가
 	private String farmSidoNm;
 	private String farmSigunguNm;
-	
-	
-	public String getFarmSidoNm() {
-		return farmSidoNm;
-	}
-	public void setFarmSidoNm(String farmSidoNm) {
-		this.farmSidoNm = farmSidoNm;
-	}
-	public String getFarmSigunguNm() {
-		return farmSigunguNm;
-	}
-	public void setFarmSigunguNm(String farmSigunguNm) {
-		this.farmSigunguNm = farmSigunguNm;
-	}
-	public String getFarmZip() {
-		return farmZip;
-	}
-	public void setFarmZip(String farmZip) {
-		this.farmZip = farmZip;
-	}
+	private String farmBankNm;
+	private String farmAccountNo;
 	public int getFarmNo() {
 		return farmNo;
 	}
@@ -82,7 +64,6 @@ public class TbFarm {
 	public void setFarmFax(String farmFax) {
 		this.farmFax = farmFax;
 	}
-	
 	public String getFarmAdr() {
 		return farmAdr;
 	}
@@ -107,16 +88,22 @@ public class TbFarm {
 	public void setFarmRn(String farmRn) {
 		this.farmRn = farmRn;
 	}
+	public String getFarmZip() {
+		return farmZip;
+	}
+	public void setFarmZip(String farmZip) {
+		this.farmZip = farmZip;
+	}
 	public String getInsDt() {
 		return insDt;
 	}
 	public void setInsDt(String insDt) {
 		this.insDt = insDt;
 	}
-	public int getInsId() {
+	public String getInsId() {
 		return insId;
 	}
-	public void setInsId(int insId) {
+	public void setInsId(String insId) {
 		this.insId = insId;
 	}
 	public String getUptDt() {
@@ -125,11 +112,35 @@ public class TbFarm {
 	public void setUptDt(String uptDt) {
 		this.uptDt = uptDt;
 	}
-	public int getUptId() {
+	public String getUptId() {
 		return uptId;
 	}
-	public void setUptId(int uptId) {
+	public void setUptId(String uptId) {
 		this.uptId = uptId;
+	}
+	public String getFarmSidoNm() {
+		return farmSidoNm;
+	}
+	public void setFarmSidoNm(String farmSidoNm) {
+		this.farmSidoNm = farmSidoNm;
+	}
+	public String getFarmSigunguNm() {
+		return farmSigunguNm;
+	}
+	public void setFarmSigunguNm(String farmSigunguNm) {
+		this.farmSigunguNm = farmSigunguNm;
+	}
+	public String getFarmBankNm() {
+		return farmBankNm;
+	}
+	public void setFarmBankNm(String farmBankNm) {
+		this.farmBankNm = farmBankNm;
+	}
+	public String getFarmAccountNo() {
+		return farmAccountNo;
+	}
+	public void setFarmAccountNo(String farmAccountNo) {
+		this.farmAccountNo = farmAccountNo;
 	}
 	@Override
 	public String toString() {
@@ -137,7 +148,8 @@ public class TbFarm {
 				+ ", farmHp=" + farmHp + ", farmFax=" + farmFax + ", farmAdr=" + farmAdr + ", farmDtlAdr=" + farmDtlAdr
 				+ ", farmEmail=" + farmEmail + ", farmRn=" + farmRn + ", farmZip=" + farmZip + ", insDt=" + insDt
 				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", farmSidoNm=" + farmSidoNm
-				+ ", farmSigunguNm=" + farmSigunguNm + "]";
+				+ ", farmSigunguNm=" + farmSigunguNm + ", farmBankNm=" + farmBankNm + ", farmAccountNo=" + farmAccountNo
+				+ "]";
 	}
 	
 	

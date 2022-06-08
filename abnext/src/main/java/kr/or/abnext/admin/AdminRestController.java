@@ -95,4 +95,15 @@ public class AdminRestController {
 		
 		return map;
 	}
+	
+	
+	/**
+	 * 병원등록
+	 * */
+	
+	
+	
+	/**
+	 * 농장등록
+	 * */
 }

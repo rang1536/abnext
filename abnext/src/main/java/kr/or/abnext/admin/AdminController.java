@@ -27,6 +27,7 @@ public class AdminController {
 	public String hospListCtrl(Model model) {
 		System.out.println("병원관리~!!");
 		
+		model.addAttribute("hospList", adminServ.getHospListServ());
 		return "admin/hospList";
 	}
 	
@@ -34,6 +35,7 @@ public class AdminController {
 	public String farmListCtrl(Model model) {
 		System.out.println("농장관리~!!");
 		
+		model.addAttribute("farmList", adminServ.getFarmListServ());
 		return "admin/farmList";
 	}
 	

@@ -110,4 +110,44 @@ public class AdminService {
 	}
 	
 	
+	/**
+	 * @function : getHospListServ
+	 * @Description : 기관병원조회
+	 * @param : 
+	 * @return: List<TbHospital>
+	 **/
+	public List<TbHospital> getHospListServ() {
+		return adminDao.getHospList();
+	}
+	
+	
+	/**
+	 * @function : getFarmListServ
+	 * @Description : 농장조회
+	 * @param : 
+	 * @return: List<TbFarm>
+	 **/
+	public List<TbFarm> getFarmListServ() {
+		return adminDao.getFarmList();
+	}
+	
+	
+	/**
+	 * @function : addHosp
+	 * @Description : 병원등록
+	 * @param : TbHospital
+	 **/
+	public Map<String, Object> addHospServ(TbHospital tbHospital) {
+		return getResultMap(adminDao.addHosp(tbHospital));
+	}
+	
+	
+	/**
+	 * @function : addFarm
+	 * @Description : 농장등록
+	 * @param : TbFarm
+	 **/
+	public Map<String, Object> addFarmServ(TbFarm tbFarm) {
+		return getResultMap(adminDao.addFarm(tbFarm));
+	}
 }

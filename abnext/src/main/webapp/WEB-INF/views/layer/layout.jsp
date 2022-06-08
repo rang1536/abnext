@@ -3,6 +3,8 @@
 <html>
 <head>
 <title>avinext | (주)아비넥스트</title>
+<!-- 주소찾기 -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 	<!-- Navbar -->
@@ -933,6 +935,84 @@
 		function fn_loginPage(){
 			location.href = 'loginPage';
 		}
+		
+		/*======================
+		* 주소찾기
+		======================*/
+		function fn_searchAdr(type){
+			new daum.Postcode({
+				oncomplete: function(data){
+					if(type == 'user'){
+						$("#userAdr").val(data.jibunAddress);
+						$("#userZip").val(data.zonecode);	
+						$('#sidoNm').val(data.sido);
+						$('#sigunguNm').val(data.sigungu);
+						
+						$('#userDtlAdr').focus();
+					}else if(type == 'hospital'){
+						$("#hospAdr").val(data.jibunAddress);
+						$("#hospZip").val(data.zonecode);
+						$('#hospSidoNm').val(data.sido);
+						$('#hospSigunguNm').val(data.sigungu);
+						
+						$('#hospDtlAdr').focus();
+					}else if(type == 'farm'){
+						$("#farmAdr").val(data.jibunAddress);
+						$("#farmZip").val(data.zonecode);
+						$('#farmSidoNm').val(data.sido);
+						$('#farmSigunguNm').val(data.sigungu);
+						
+						$('#farmDtlAdr').focus();
+					}
+				}
+			}).open();
+		}
+		
+		
+		/*====================================
+		* 기관병원등 (팝업)
+		* 팝업 : pop_addHospital
+		* 팝업오픈 : $('#popAddHosp').modal();
+		====================================*/
+		function fn_addHospital(){
+			var hospNm = $('#hospNm').val();	
+			var hospHp = $('#hospHp').val();
+			var hospAdr = $('#hospAdr').val();
+			
+			if(hospNm == null || hospNm == ''){
+				alert('기관(병원)명은 필수입력입니다.');
+				return;
+			}
+			
+			if(hospHp == null || hospHp == ''){
+				alert('핸드폰번호는 필수입력입니다.');
+				return;
+			}
+			
+			if(hospAdr == null || hospAdr == ''){
+				alert('주소는 필수입력입니다.');
+				return;
+			}
+			
+			$('#hospInfoForm').serialize();
+			
+			$.ajax({
+				url : 'addHospCtrl',
+				data : params,
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					if(data.result == 'succ'){
+						toastr.success('기관(병원)등록이 완료되었습니다.');
+						stepper.next();
+					}else{
+						toastr.error('기관(병원)등록에 실패하였습니다.');
+					}
+				}
+			})
+		}
+		
+		
 	</script>
 
 </body>

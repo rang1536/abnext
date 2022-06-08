@@ -56,6 +56,27 @@ public class AdminDao {
 		return sql.insert("admin.addUser", tbUser);
 	}
 	
+	
+	/**
+	 * @function : addHosp
+	 * @Description : 병원등록
+	 * @param : TbHospital
+	 **/
+	public int addHosp(TbHospital tbHospital) {
+		return sql.insert("admin.addHosp", tbHospital);
+	}
+	
+	
+	/**
+	 * @function : addFarm
+	 * @Description : 농장등록
+	 * @param : TbFarm
+	 **/
+	public int addFarm(TbFarm tbFarm) {
+		return sql.insert("admin.addFarm", tbFarm);
+	}
+	
+	
 	/**
 	 * @function : searchHospital
 	 * @Description : 병원검색
@@ -64,6 +85,7 @@ public class AdminDao {
 	public List<TbHospital> searchHospital(TbHospital tbHospital) {
 		return sql.selectList("admin.searchHospital", tbHospital);
 	}
+	
 	
 	/**
 	 * @function : searchFarm
@@ -78,11 +100,33 @@ public class AdminDao {
 	/**
 	 * @function : getUserList
 	 * @Description : 회원조회
-	 * @param : TbUser
+	 * @param : 
+	 * @return:TbUser
 	 **/
 	public List<TbUser> getUserList() {
 		return sql.selectList("admin.getUserList");
 	}
 	
+	
+	/**
+	 * @function : getHospList
+	 * @Description : 기관병원조회
+	 * @param : 
+	 * @return: List<TbHospital>
+	 **/
+	public List<TbHospital> getHospList() {
+		return sql.selectList("admin.getHospList");
+	}
+	
+	
+	/**
+	 * @function : getFarmList
+	 * @Description : 농장조회
+	 * @param : 
+	 * @return: List<TbFarm>
+	 **/
+	public List<TbFarm> getFarmList() {
+		return sql.selectList("admin.getFarmList");
+	}
 	
 }

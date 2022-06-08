@@ -21,6 +21,11 @@
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	
   
   <style>
     th,td {text-align:center;}
@@ -39,12 +44,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>병원관리</b></h1>
+						<h1><b>기관(병원)관리</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active"><b>병원관리</b></li>
+							<li class="breadcrumb-item"><a href="index">Home</a></li>
+							<li class="breadcrumb-item active"><b>기관(병원)관리</b></li>
 						</ol>
 					</div>
 				</div>
@@ -52,8 +57,53 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
- 			<div class="container-fluid">
+		 <section class="content">
+ 			<div class="container-fluid"> 
+ 				<div class="invoice p-3 mb-3">
+					<!-- Table row -->
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<!-- /.card-header -->
+								<div class="card-body">
+									<table id="example2" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" id="allCheck"/></th>
+												<th>병원명</th>
+												<th>전화번호</th>
+												<th>휴대폰</th>
+												<th>이메일</th>
+												<th>지역</th>
+												<th>입금계좌</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="item" items="${hospList }" varStatus="status">
+												<tr>
+													<td>
+														<input type="checkbox" name="hospNo" value="${item.hospNo }"/>
+													</td>
+													<td>${item.hospNm }</td>
+													<td>${item.hospTel }</td>
+													<td>${item.hospHp }</td>
+													<td>${item.hospEmail }</td>
+													<td>${item.hospSidoNm}</td>
+													<td>${item.hospAccountNo }</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div> <!-- /.card-body -->
+								<div class="card-footer">
+									<button type="button" id="delHospBtn" class="btn btn-sm btn-danger">삭제</button>
+									<button type="button" id="addHospBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">기관병원등록</button>
+								</div>
+							</div> <!-- /.card -->
+						</div> <!-- /.col-12 -->
+					</div>  <!-- /.row -->
+				</div> <!-- invoice -->
+ 			
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
 	</div> <!-- End content-wrapper -->
@@ -65,6 +115,8 @@
 	<!-- Control sidebar content goes here -->
 	</aside> <!-- /.control-sidebar -->
 </div> <!-- End wrapper  -->
+
+<c:import url="../popup/pop_addHospital.jsp"></c:import>
 </body>
 
 <!-- jQuery -->
@@ -91,6 +143,19 @@
 <script src="resources/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
+<!-- DataTables	& Plugins -->
+<script src="resources/plugins/datatables/jquery.dataTables.js"></script>
+<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="resources/plugins/jszip/jszip.min.js"></script>
+<script src="resources/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="resources/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <script>
 
@@ -100,9 +165,31 @@
 	})
 	
 	$(function () {
-      $('.select2').select2();
-      bsCustomFileInput.init();
+		$('.select2').select2();
+		bsCustomFileInput.init();
+		
+		$('#example2').DataTable({
+			"paging": true,
+			"lengthChange": false,
+			"ordering": true,
+			"info": true,
+			"autoWidth": false,
+			"responsive": true,
+		});
     });
+	
+	
+	/*
+	* 회원등록 페이지 연결
+	*/
+	$('#addHospBtn').on('click', function(){
+		$('#popAddHosp').modal();
+	})
+	
+	
+	/*
+	* 회원삭제
+	*/
 	
 	
 </script>
