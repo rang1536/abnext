@@ -74,4 +74,15 @@ public class AdminDao {
 		return sql.selectList("admin.searchFarm", tbFarm);
 	}
 	
+	
+	/**
+	 * @function : getUserList
+	 * @Description : 회원조회
+	 * @param : TbUser
+	 **/
+	public List<TbUser> getUserList() {
+		return sql.selectList("admin.getUserList");
+	}
+	
+	
 }

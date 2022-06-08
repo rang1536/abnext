@@ -20,14 +20,14 @@ public class HomeController {
 	public String home() {
 		System.out.println("시작~!!");
 		
-		return "index";
+		return "myFarm/myFarm";
 	}
 	
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index() {
 		System.out.println("시작~!!");
 		
-		return "index";
+		return "myFarm/myFarm";
 	}
 	
 }

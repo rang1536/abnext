@@ -99,6 +99,15 @@ public class AdminService {
 		return map;
 	}
 	
+	/**
+	 * @function : getUserListServ
+	 * @Description : 전체회원조회
+	 * @param : 
+	 * @return : List<TbUser>
+	 **/
+	public List<TbUser> getUserListServ(){
+		return adminDao.getUserList();
+	}
 	
 	
 }
