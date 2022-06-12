@@ -169,7 +169,7 @@
 			</div>
 			<div style="text-align:right;">
 				<button class="btn btn-warning" onclick="fn_loginPage();">로그인</button>
-				<button class="btn btn-success">회원가입</button>
+				<button class="btn btn-success" onclick="fn_addUserPage();">회원가입</button>
 			</div>
 			<br/>
 			<!-- SidebarSearch Form -->
@@ -206,7 +206,7 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a href="introInspect" class="nav-link leftMenuSub">
+								<a href="introInspect.do" class="nav-link leftMenuSub">
 									<i class="far fa-circle nav-icon"></i>
 									<p>신청접수</p>
 								</a>
@@ -340,7 +340,7 @@
 			              <li class="nav-item">
 			                <a href="hospList" class="nav-link">
 			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>병원관리</p>
+			                  <p>기관(병원)관리</p>
 			                </a>
 			              </li>
 			              <li class="nav-item">
@@ -359,12 +359,6 @@
 			                <a href="levList" class="nav-link">
 			                  <i class="far fa-circle nav-icon"></i>
 			                  <p>권한관리</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>관리</p>
 			                </a>
 			              </li>
 			            </ul>
@@ -936,6 +930,12 @@
 			location.href = 'loginPage';
 		}
 		
+		/*회원가입*/
+		function fn_addUserPage(){
+			location.href = 'addUserPage';
+		}
+		
+		
 		/*======================
 		* 주소찾기
 		======================*/
@@ -997,24 +997,83 @@
 				return;
 			}
 			
-			$('#hospInfoForm').serialize();
+			//$('#hospInfoForm').serialize();
+			var params = new FormData($('#hospInfoForm')[0]);
+			
+			toastr.info('등록중입니다');
 			
 			$.ajax({
 				url : 'addHospCtrl',
 				data : params,
 				dataType : 'json',
 				type : 'post',
+				processData : false,
+				contentType : false,
 				success : function(data){
 					if(data.result == 'succ'){
 						toastr.success('기관(병원)등록이 완료되었습니다.');
-						stepper.next();
+						$('#modalCloseBtn').click();
+						
+						window.location.reload(true);
 					}else{
 						toastr.error('기관(병원)등록에 실패하였습니다.');
 					}
 				}
 			})
+			
 		}
 		
+		
+		/*====================================
+		* 농장등록 (팝업)
+		* 팝업 : pop_addFarm
+		* 팝업오픈 : $('#popAddFarm').modal();
+		====================================*/
+		function fn_addFarm(){
+			var farmNm = $('#farmNm').val();	
+			var farmHp = $('#farmHp').val();
+			var farmAdr = $('#farmAdr').val();
+			
+			if(farmNm == null || farmNm == ''){
+				alert('농장명은 필수입력입니다.');
+				return;
+			}
+			
+			if(farmHp == null || farmHp == ''){
+				alert('핸드폰번호는 필수입력입니다.');
+				return;
+			}
+			
+			if(farmAdr == null || farmAdr == ''){
+				alert('주소는 필수입력입니다.');
+				return;
+			}
+			
+			//$('#farmInfoForm').serialize();
+			var params = new FormData($('#farmInfoForm')[0]);
+			
+			toastr.info('등록중입니다');
+			
+			$.ajax({
+				url : 'addFarmCtrl',
+				data : params,
+				dataType : 'json',
+				type : 'post',
+				processData : false,
+				contentType : false,
+				success : function(data){
+					if(data.result == 'succ'){
+						toastr.success('농장등록이 완료되었습니다.');
+						$('#modalCloseBtn').click();
+						
+						window.location.reload(true);
+					}else{
+						toastr.error('농장등록에 실패하였습니다.');
+					}
+				}
+			})
+			
+		}
 		
 	</script>
 
