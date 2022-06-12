@@ -1089,10 +1089,10 @@
 		}
 		
 		
-		/*======================
+		/*==================================
 		* 앤터키 Event
 		* onkeyup = "fn_enterKey(pgmId)"
-		======================*/
+		==================================*/
 		function fn_enterKey(pgmId){
 			if(window.event.keyCode == 13){
 				if(pgmId == 'addUser'){
@@ -1101,6 +1101,29 @@
 			}
 		}
 
+		
+		/*==================================
+		* 기관, 농장검색 팝업
+		* onclick="popSearch();"
+		==================================*/
+		function popSearch(){
+			var popSearchNm = $('#popSearchNm').val();
+			
+			if(popSearchNm == null || popSearchNm == ''){
+				toastr.info('상호입력을 하지 않은 경우 전체 등록된 데이터를 조회합니다.');
+			}
+			
+			$.ajax({
+				url : 'allCompanySearch',
+				data : {'popSearchNm', popSearchNm},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					
+				}
+			})
+		}	
+			
 	</script>
 
 </body>

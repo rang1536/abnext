@@ -713,7 +713,7 @@
 												<br/><br/><br/>
 											</div>
 											
-											<button type="button" class="btn btn-primary" onclick="stepper.previous()">이전</button>
+											<!-- <button type="button" class="btn btn-primary" onclick="stepper.previous()">이전</button> -->
 											<button type="button" onclick="fn_userListPage();" class="btn btn-success btn-flat" style="float:right;">회원목록 바로가기</button>
 											
 											
@@ -952,6 +952,8 @@
 				toastr.success(hospInfo.hospNm+' 이 선택되었습니다');
 				
 				$('#hospNo').val(hospInfo.hospNo);
+				
+				$('#modalCloseBtn').click();
 			}
 		})
 	}
@@ -983,6 +985,8 @@
 				toastr.success(farmInfo.farmNm+' 이 선택되었습니다');
 				
 				$('#farmNo').val(farmInfo.farmNo);
+				
+				$('#modalCloseBtn').click();
 			}
 		})
 	}
@@ -1131,16 +1135,30 @@
 				return;
 			}
 			
-			//회원구분에 따라 회사정보입력이 필수. 추가작업해야함. 팝업에서 선택해서 PK 히든태그에 넣어줘야함.
+			//회원구분에 따라 회사정보입력이 필수. 
 			var userLev = $('#userLev option:selected').val();
 			//console.log('userLev : '+userLev);
 			
 			if(userLev == '2'){ //수의사
-				
+				if($('#hospNo').val() == null || $('#hospNo').val() == ''){
+					alert('수의사인 경우 소속병원을 선택하세요');
+					$('#companyNm').focus();
+					return;
+				}
+			
 			}else if(userLev == '3'){ //기관(병원)
-				
+				if($('#hospNo').val() == null || $('#hospNo').val() == ''){
+					alert('기관(병원)인 경우 소속기관(병원)을 선택하세요');
+					$('#companyNm').focus();
+					return;
+				}
+			
 			}else if(userLev == '4'){ //농장
-				
+				if($('#farmNo').val() == null || $('#farmNo').val() == ''){
+					alert('농장인 경우 소속농장을 선택하세요');
+					$('#companyNm').focus();
+					return;
+				}
 			}
 			
 			

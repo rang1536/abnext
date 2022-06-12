@@ -284,5 +284,10 @@
 		)
 	</select>
 	
+	<!-- 전체회사조회
+	<select id="allCompanySearch" parameterType="Map" resultType="kr.or.abnext.domain.TbHospital">
+	
+	</select> -->
+	
 	
 </mapper>

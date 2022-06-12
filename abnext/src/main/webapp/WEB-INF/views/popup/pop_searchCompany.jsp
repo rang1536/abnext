@@ -18,10 +18,10 @@
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 300px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="상호를 입력하세요">
+                    <input type="text" id="popSearchNm" name="popSearchNm" class="form-control float-right" placeholder="상호를 입력하세요">
 
                     <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
+                      <button type="button" class="btn btn-default" onclick="popSearch();">
                         <i class="fas fa-search"></i>
                       </button>
                     </div>
@@ -54,7 +54,7 @@
         <!-- /.row -->
        </div>
        <div class="modal-footer justify-content-between">
-         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+         <button type="button" class="btn btn-default" data-dismiss="modal" id="modalCloseBtn">닫기</button>
          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
        </div>
      </div>

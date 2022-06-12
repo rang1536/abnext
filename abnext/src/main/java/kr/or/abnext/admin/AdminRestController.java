@@ -199,5 +199,18 @@ public class AdminRestController {
 		map.put("farmInfo", adminServ.getFarmListServ(tbFarm));
 		return map;
 	}
+	
+	
+	/**
+	 * 기관, 병원, 농장 전체조회
+	 * */
+	@RequestMapping(value = "allCompanySearch", method = RequestMethod.POST)
+	public Map<String, Object> allCompanySearchCtrl(
+			@RequestParam(value="popSearchNm", defaultValue = "noNm") String popSearchNm) {
+		System.out.println("회사 조회 시작~!!");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		return map;
+	}
 }
 	
