@@ -963,9 +963,6 @@
 						$('#farmSigunguNm').val(data.sigungu);
 						
 						$('#farmDtlAdr').focus();
-					}else if(type == 'butler'){
-						$('#butlerSidoNm').val(data.sido);
-						$('#butlerSigunguNm').val(data.sigungu);
 					}
 				}
 			}).open();
