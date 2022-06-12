@@ -1,5 +1,8 @@
 package kr.or.abnext.domain;
 
+import java.util.List;
+import java.util.Map;
+
 /*
  * 생성일 2022.05.20.
  * 테이블명 TB_RCEPT
@@ -8,42 +11,46 @@ package kr.or.abnext.domain;
 
 public class TbRcept {
 	private int rqstNo;
-	private int hospNo;
+	private String hospNo;
 	private String hospNm;
-	private int userNo;
+	private String userNo;
 	private String userNm;
-	private int animNo;
+	private String animNo;
 	private String animNm;
-	private int farmNo;
+	private String farmNo;
 	private String farmNm;
-	private int docNo;
+	private String docNo;
 	private String docNm;
-	private String inspCd;
-	private String inspSickCd;
+	private String animButler;
+	private String butlerSido;
+	private String butlerSigungu;
+	private String animBirth;
+	private String animFirstCd;
+	private String animSecondCd;
+	private String AnimThirdCd;
+	private String animSex;
 	private String rqstDt;
 	private String procStat;
 	private String procStatNm;
 	private String rqstMemo;
 	private String payGb;
-	private int price;
+	private String price;
 	private String payStat;
-	private String sidoNm;
-	private String sigunguNm;
+	private List<Map<String , Object>> inspList;
 	private String insDt;
-	private int insId;
+	private String insId;
 	private String uptDt;
-	private int uptId;
-	
+	private String uptId;
 	public int getRqstNo() {
 		return rqstNo;
 	}
 	public void setRqstNo(int rqstNo) {
 		this.rqstNo = rqstNo;
 	}
-	public int getHospNo() {
+	public String getHospNo() {
 		return hospNo;
 	}
-	public void setHospNo(int hospNo) {
+	public void setHospNo(String hospNo) {
 		this.hospNo = hospNo;
 	}
 	public String getHospNm() {
@@ -52,10 +59,10 @@ public class TbRcept {
 	public void setHospNm(String hospNm) {
 		this.hospNm = hospNm;
 	}
-	public int getUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 	public String getUserNm() {
@@ -64,10 +71,10 @@ public class TbRcept {
 	public void setUserNm(String userNm) {
 		this.userNm = userNm;
 	}
-	public int getAnimNo() {
+	public String getAnimNo() {
 		return animNo;
 	}
-	public void setAnimNo(int animNo) {
+	public void setAnimNo(String animNo) {
 		this.animNo = animNo;
 	}
 	public String getAnimNm() {
@@ -76,10 +83,10 @@ public class TbRcept {
 	public void setAnimNm(String animNm) {
 		this.animNm = animNm;
 	}
-	public int getFarmNo() {
+	public String getFarmNo() {
 		return farmNo;
 	}
-	public void setFarmNo(int farmNo) {
+	public void setFarmNo(String farmNo) {
 		this.farmNo = farmNo;
 	}
 	public String getFarmNm() {
@@ -88,10 +95,10 @@ public class TbRcept {
 	public void setFarmNm(String farmNm) {
 		this.farmNm = farmNm;
 	}
-	public int getDocNo() {
+	public String getDocNo() {
 		return docNo;
 	}
-	public void setDocNo(int docNo) {
+	public void setDocNo(String docNo) {
 		this.docNo = docNo;
 	}
 	public String getDocNm() {
@@ -100,17 +107,53 @@ public class TbRcept {
 	public void setDocNm(String docNm) {
 		this.docNm = docNm;
 	}
-	public String getInspCd() {
-		return inspCd;
+	public String getAnimButler() {
+		return animButler;
 	}
-	public void setInspCd(String inspCd) {
-		this.inspCd = inspCd;
+	public void setAnimButler(String animButler) {
+		this.animButler = animButler;
 	}
-	public String getInspSickCd() {
-		return inspSickCd;
+	public String getButlerSido() {
+		return butlerSido;
 	}
-	public void setInspSickCd(String inspSickCd) {
-		this.inspSickCd = inspSickCd;
+	public void setButlerSido(String butlerSido) {
+		this.butlerSido = butlerSido;
+	}
+	public String getButlerSigungu() {
+		return butlerSigungu;
+	}
+	public void setButlerSigungu(String butlerSigungu) {
+		this.butlerSigungu = butlerSigungu;
+	}
+	public String getAnimBirth() {
+		return animBirth;
+	}
+	public void setAnimBirth(String animBirth) {
+		this.animBirth = animBirth;
+	}
+	public String getAnimFirstCd() {
+		return animFirstCd;
+	}
+	public void setAnimFirstCd(String animFirstCd) {
+		this.animFirstCd = animFirstCd;
+	}
+	public String getAnimSecondCd() {
+		return animSecondCd;
+	}
+	public void setAnimSecondCd(String animSecondCd) {
+		this.animSecondCd = animSecondCd;
+	}
+	public String getAnimThirdCd() {
+		return AnimThirdCd;
+	}
+	public void setAnimThirdCd(String animThirdCd) {
+		AnimThirdCd = animThirdCd;
+	}
+	public String getAnimSex() {
+		return animSex;
+	}
+	public void setAnimSex(String animSex) {
+		this.animSex = animSex;
 	}
 	public String getRqstDt() {
 		return rqstDt;
@@ -142,10 +185,10 @@ public class TbRcept {
 	public void setPayGb(String payGb) {
 		this.payGb = payGb;
 	}
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public String getPayStat() {
@@ -154,18 +197,12 @@ public class TbRcept {
 	public void setPayStat(String payStat) {
 		this.payStat = payStat;
 	}
-	
-	public String getSidoNm() {
-		return sidoNm;
+
+	public List<Map<String, Object>> getInspList() {
+		return inspList;
 	}
-	public void setSidoNm(String sidoNm) {
-		this.sidoNm = sidoNm;
-	}
-	public String getSigunguNm() {
-		return sigunguNm;
-	}
-	public void setSigunguNm(String sigunguNm) {
-		this.sigunguNm = sigunguNm;
+	public void setInspList(List<Map<String, Object>> inspList) {
+		this.inspList = inspList;
 	}
 	public String getInsDt() {
 		return insDt;
@@ -173,10 +210,10 @@ public class TbRcept {
 	public void setInsDt(String insDt) {
 		this.insDt = insDt;
 	}
-	public int getInsId() {
+	public String getInsId() {
 		return insId;
 	}
-	public void setInsId(int insId) {
+	public void setInsId(String insId) {
 		this.insId = insId;
 	}
 	public String getUptDt() {
@@ -185,22 +222,24 @@ public class TbRcept {
 	public void setUptDt(String uptDt) {
 		this.uptDt = uptDt;
 	}
-	public int getUptId() {
+	public String getUptId() {
 		return uptId;
 	}
-	public void setUptId(int uptId) {
+	public void setUptId(String uptId) {
 		this.uptId = uptId;
 	}
-	
 	@Override
 	public String toString() {
 		return "TbRcept [rqstNo=" + rqstNo + ", hospNo=" + hospNo + ", hospNm=" + hospNm + ", userNo=" + userNo
 				+ ", userNm=" + userNm + ", animNo=" + animNo + ", animNm=" + animNm + ", farmNo=" + farmNo
-				+ ", farmNm=" + farmNm + ", docNo=" + docNo + ", docNm=" + docNm + ", inspCd=" + inspCd
-				+ ", inspSickCd=" + inspSickCd + ", rqstDt=" + rqstDt + ", procStat=" + procStat + ", procStatNm="
+				+ ", farmNm=" + farmNm + ", docNo=" + docNo + ", docNm=" + docNm + ", animButler=" + animButler
+				+ ", butlerSido=" + butlerSido + ", butlerSigungu=" + butlerSigungu + ", animBirth=" + animBirth
+				+ ", animFirstCd=" + animFirstCd + ", animSecondCd=" + animSecondCd + ", AnimThirdCd=" + AnimThirdCd
+				+ ", animSex=" + animSex + ", rqstDt=" + rqstDt + ", procStat=" + procStat + ", procStatNm="
 				+ procStatNm + ", rqstMemo=" + rqstMemo + ", payGb=" + payGb + ", price=" + price + ", payStat="
-				+ payStat + ", sidoNm=" + sidoNm + ", sigunguNm=" + sigunguNm + ", insDt=" + insDt + ", insId=" + insId
-				+ ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ payStat + ", inspList=" + inspList + ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt
+				+ ", uptId=" + uptId + "]";
 	}
-	
+
+
 }

@@ -2,13 +2,15 @@
 /*****************************************************
  *                   코 드 정 보                        *  
  *****************************************************/
-$.gfn_getCode = function(uppCodeId,callBackFn){
+$.gfn_getCode = function(uppCodeId,callBackFn,obj){
 	$.ajax({
 		url : "selectCodeList",
 		data : {uppCodeId : uppCodeId},
 		type : "POST",
 		dataType : "JSON",
-		success : callBackFn
+		success : function(data){
+			callBackFn(data,obj);
+		}
 	});
 }
 

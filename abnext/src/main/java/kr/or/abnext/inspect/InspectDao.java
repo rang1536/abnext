@@ -8,14 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.abnext.domain.TbAnimal;
+import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
+import kr.or.abnext.domain.TbUser;
 
 @Repository
 public class InspectDao {
 	@Autowired
 	private SqlSessionTemplate sql;
-	
+
 	public List<TbRcept> rceptList(){
 		//return sql.selectList("inspect.rceptList");
 		List<TbRcept> list = new ArrayList<TbRcept>();
@@ -27,12 +30,12 @@ public class InspectDao {
 				r.setHospNm("달마병원");
 				r.setAnimNm("망고");
 				r.setDocNm("나수의");
-				r.setPrice(30000);
+				r.setPrice("30000");
 			}else {
 				r.setHospNm("예수병원");
 				r.setAnimNm("검둥이");
 				r.setDocNm("최수의");
-				r.setPrice(70000);
+				r.setPrice("70000");
 			}
 			if(i<5) r.setRqstDt("2022.02.22");
 			if(i>4 && i<10) r.setRqstDt("2022.03.03");
@@ -41,18 +44,34 @@ public class InspectDao {
 			list.add(r);
 		}
 		return list;
-		
+
 	}
-	
+
 	public TbRcept getRcept(TbRcept rcept) {
 		return sql.selectOne("getTbRcept", rcept);
 	}
-	
+
 	public TbHospital getHospital(int hospNo) {
 		return sql.selectOne("getTbHospital", hospNo);
 	}
-	
+
 	public TbAnimal getAnimal(int animNo) {
 		return sql.selectOne("getAnimal", animNo);
+	}
+
+	public String getNextKey() {
+		return sql.selectOne("inspection.getNextKey");
+	}
+
+	public int insertRcept(TbRcept rcept) {
+		return sql.selectOne("inspection.insertRcept", rcept);
+	}
+
+	public int insertInspection(TbInspection insp) {
+		return sql.selectOne("inspection.insertInspection", insp);
+	}
+
+	public List<TbUser> selectDoctorList(TbUser tbUser){
+		return sql.selectList("code.selectDoctorList", tbUser);
 	}
 }

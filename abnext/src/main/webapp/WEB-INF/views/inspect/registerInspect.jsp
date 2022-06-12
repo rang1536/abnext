@@ -4,7 +4,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>avinext | (주)아비넥스트</title>
-	
+
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
@@ -28,7 +28,7 @@
 	<link rel="stylesheet" href="resources/plugins/dropzone/min/dropzone.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
-	
+
 	<style>
 		.th{text-align:center; font-weight:bold;}
 		.txtc{text-align:center;}
@@ -69,11 +69,15 @@
 							<!-- /.card-header -->
 							<div class="card-body">
 								<form>
+									<input type="hidden" id="userNo"/>
+									<input type="hidden" id="userNm"/>
+
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*신청자(기관)</label>
-												<input type="text" class="form-control" placeholder="ㅇㅇ동물병원" readonly>
+												<input type="text" class="form-control" placeholder="ㅇㅇ동물병원" readonly id="hospNm">
+												<input type="hidden" id="hospNo"/>
 											</div>
 										</div>
 										<div class="col-sm-6">
@@ -87,19 +91,15 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*담당수의사</label>
-												<select class="form-control">
-													<option>나수의</option>
-													<option>option 2</option>
-													<option>option 3</option>
-													<option>option 4</option>
-													<option>option 5</option>
+												<select class="form-control" id="docNo">
+													<option value="1234">나수의</option>
 												</select>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*연락처</label>
-												<input type="text" class="form-control" placeholder="01012345678" readonly>
+												<input type="text" class="form-control" placeholder="전화번호" readonly>
 											</div>
 										</div>
 									</div>
@@ -165,16 +165,34 @@
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label><font color="red">등록번호(인식번호)</font></label>
-												<input type="text" class="form-control" placeholder="등록번호(인식번호)">
+												<label>*보호자명</label>
+												<input type="text" class="form-control" placeholder="보호자명" id="animButler">
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label>*보호자명</label>
-												<input type="text" class="form-control" placeholder="보호자명" id="animButler">
+												<div class="row">
+													<div class="col-7">
+														<label>
+															*보호자주소
+														</label>
+													</div>
+													<div class="col-5">
+														<button type="button" class="btn btn-danger btn-block btn-sm" onclick="fn_searchAdr('butler')"><i class="fa fa-book"></i> 주소검색</button>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-6">
+														<input type="text" class="form-control" placeholder="시도" id="butlerSidoNm" readonly>
+														<input type="hidden" id="sidoNm">
+													</div>
+													<div class="col-6">
+														<input type="text" class="form-control" placeholder="시군구" id="butlerSigunguNm" readonly>
+														<input type="hidden" id="sigunguNm">
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="col-sm-6">
@@ -190,7 +208,7 @@
 						</div><!-- /.card-body -->
 					</div><!-- /.col-md-6 -->
 				</div><!-- /.row -->
-				
+
 
 				<div class="card card-success">
 					<div class="card-header">
@@ -202,7 +220,7 @@
 								<div class="form-group">
 									<label>*시료정보</label>
 									<select class="form-control" id="sampleCode"></select>
-									
+
 								</div>
 							</div>
 							<div class="col-sm-2">
@@ -211,7 +229,7 @@
 									<select class="form-control" id="sampleType"></select>
 								</div>
 							</div>
-							
+
 							<div class="col-sm-7">
 								<div class="form-group">
 									<label>시료메모</label>
@@ -276,7 +294,7 @@
 											<td class="th">삭제</td>
 										</tr>
 									</thead>
-									<tbody id="inspectTbody">
+									<tbody id="inspectTbody"><!--
 										<tr>
 											<td class="txtc">1</td>
 											<td class="txtc">분변</td>
@@ -299,6 +317,7 @@
 											<td class="txtr">40,000원</td>
 											<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delInspect(this)"><i class="fas fa-trash"></i> 삭제 </a></td>
 										</tr>
+										 -->
 									</tbody>
 									<tfoot>
 										<tr>
@@ -316,7 +335,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group">
-									<button type="button" class="btn btn-block btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 신청하기</button>
+									<button type="button" class="btn btn-block btn-primary btn-flat btn-save"><i class="fas fa-pencil-alt"></i> 신청하기</button>
 								</div>
 							</div>
 						</div>
@@ -325,7 +344,7 @@
 				<!-- /.card -->
 			</div><!-- /.container-fluid -->
 		</section>
-		
+
 	</div><!-- /.content wrapper-->
 	<jsp:include page="../layer/layout_footer.jsp"></jsp:include>
 	<!-- Control Sidebar -->
@@ -365,7 +384,7 @@
 <script>
 $(function () {
 	bsCustomFileInput.init();
-	
+
 	//Initialize Select2 Elements
 	$('.select2').select2()
 
@@ -381,59 +400,49 @@ $(function () {
 });
 
 $(document).ready(function(){
-	var uppCodeId = 'SAMPLE_CODE';
-	$.gfn_getCode(uppCodeId,callBackFn);
-	uppCodeId = 'SAMPLE_TYPE';
-	$.gfn_getCode(uppCodeId,callBackFn);
-	uppCodeId = 'INSPECTION_ITEM';
-	$.gfn_getCode(uppCodeId,callBackFn);
+	//시료정보
+	$.gfn_getCode('A002',callBackFn,'sampleCode');
+	//시료방법
+	$.gfn_getCode('A003',callBackFn,'sampleType');
+	//검사항목
+	$.gfn_getCode('B001',callBackFn,'inspFirstCd');
+	//동물 종
+	$.gfn_getCode('C001',callBackFn,'animFirstCd');
 });
 
-function callBackFn(data){
-	var optHtml = '';
-	
-	for(var i=0; i<data.length; i++){
-		optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>'; 
-	}
-	
-	if(data[0].uppCodeId == 'SAMPLE_CODE'){
-		$("#sampleCode").html(optHtml);
-	}else if(data[0].uppCodeId == 'SAMPLE_TYPE'){
-		$("#sampleType").html(optHtml);
-	}else if(data[0].uppCodeId == 'INSPECTION_ITEM'){
-		$("#inspFirstCd").html(optHtml);
-		chgCodeCd2(data[0].codeId);
-	}
-	
-	
-}
-
-function chgCodeCd2(code){
-	$.gfn_getCode(code,callBackFnCate2);
-}
-
-function callBackFnCate2(data){
-	var optHtml = '';
-	
-	for(var i=0; i<data.length; i++){
-		optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>'; 
-	}
-	$("#inspSecondCd").html(optHtml);
-	chgCodeCd3(data[0].codeId);
-	
-}
-
-function chgCodeCd3(code){
-	$.gfn_getCode(code,callBackFnCate3);
-}
-
-function callBackFnCate3(data){
+function callBackFn(data,col){
 	var optHtml = '';
 	for(var i=0; i<data.length; i++){
-		optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>'; 
+		optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>';
 	}
-	$("#inspThirdCd").html(optHtml);
+
+	$("#"+col).html(optHtml);
+	if(col == 'inspFirstCd'){
+		$.gfn_getCode(data[0].codeId,callBackFn,'inspSecondCd');
+	}else if(col == 'inspSecondCd'){
+		$.gfn_getCode(data[0].codeId,callBackFn,'inspThirdCd');
+	}else if(col == 'animFirstCd'){
+		$.gfn_getCode(data[0].codeId,callBackFn,'animSecondCd');
+	}else if(col == 'animSecondCd'){
+		$.gfn_getCode(data[0].codeId,callBackFn,'animThirdCd');
+	}
 }
+
+$("#animFirstCd").on('change',function(){
+	$.gfn_getCode($(this).val(),callBackFn,'animSecondCd');
+});
+
+$("#animSecondCd").on('change',function(){
+	$.gfn_getCode($(this).val(),callBackFn,'animThirdCd');
+});
+
+$("#inspFirstCd").on('change',function(){
+	$.gfn_getCode($(this).val(),callBackFn,'inspSecondCd');
+});
+
+$("#inspSecondCd").on('change',function(){
+	$.gfn_getCode($(this).val(),callBackFn,'inspThirdCd');
+});
 
 function delInspect(target){
 	$(target).parent().parent().remove();
@@ -449,7 +458,7 @@ $("#addBtn").click(function(){
 	var td6Text = $("#inspSecondCd option:selected").text();
 	var td7Text = $("#inspThirdCd option:selected").text();
 	var td8Text = "50,000원";
-	
+
 	var sampleCode = $("#sampleCode").val();
 	var sampleType = $("#sampleType").val();
 	var sampleMemo = $("#sampleMemo").val();
@@ -457,7 +466,7 @@ $("#addBtn").click(function(){
 	var inspSecondCd= $("#inspSecondCd").val();
 	var inspThirdCd= $("#inspThirdCd").val();
 	var inspPrice= $("#inspPrice").val();
-	
+
 	var addHtml = '<tr>';
 	addHtml += '	<td class="txtc">'+tblNo+'</td>';
 	addHtml += '	<td class="txtc">'+td2Text;
@@ -477,7 +486,7 @@ $("#addBtn").click(function(){
 	addHtml += '	<td class="txtr">'+td8Text+'</td>';
 	addHtml += '	<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delInspect(this)"><i class="fas fa-trash"></i> 삭제 </a></td>';
 	addHtml += '</tr>';
-	console.log(addHtml);
+
 	$("#inspectTbody").append(addHtml);
 	calcPrice();
 });
@@ -490,9 +499,90 @@ function calcPrice(){
 		totalPrice += price;
 		$(this).find("td:eq(0)").text(idx+1);
 	});
-	
+
 	$("#sumPrice").text($.gfn_setComma(totalPrice)+'원');
 }
+
+$(".btn-save").on('click',function(){
+	//필수값 체크
+	if(!validSave()){
+		//return;
+	}
+
+	var arrayInsp = [];
+	$("#inspectTbody").find("tr").each(function(){
+		var insp = {
+				sampleCode : $(this).find("[id^=sampleCode]").val(),
+				sampleType : $(this).find("[id^=sampleType]").val(),
+				sampleMemo : $(this).find("[id^=sampleMemo]").val(),
+				inspFirstCd : $(this).find("[id^=inspFirstCd]").val(),
+				inspSecondCd : $(this).find("[id^=inspSecondCd]").val(),
+				inspThirdCd : $(this).find("[id^=inspThirdCd]").val(),
+				inspPrice : $(this).find("[id^=inspPrice]").val()
+		}
+		arrayInsp.push(insp);
+	});
+
+	var data = {
+			hospNo : $("#hospNo").val(),
+			hospNm : $("#hospNm").val(),
+			userNo : $("#userNo").val(),
+			userNm : $("#userNm").val(),
+			animNm : $("#animNm").val(),
+			docNo : $("#docNo option:selected").val(),
+			docNm : $("#docNo option:selected").text(),
+			procStat : '1',
+			procStatNm : '신청',
+			rqstMemo : $("#rqstMemo").val(),
+			payGb : '',
+			price : '',
+			payStat : '',
+			sidoNm : $("#butlerSidoNm").val(),
+			sigunguNm : $("#butlerSigunguNm").val(),
+			listInsp : arrayInsp
+	}
+
+	$.ajax({
+		url : "insertInspect",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+
+		}
+	});
+});
+
+function validSave(){
+	var tBodyLen = 0;
+	$('#inspectTbody').find("tr").each(function(idx){
+		tBodyLen++;
+	});
+
+	if(tBodyLen == 0){
+		alert('하나이상의 검사정보를 입력해주세요.');
+		validFlag = false;
+	}else {
+		var validFlag = true;
+		var validItem = ['docNo', 'animFirstCd', 'animSecondCd', 'animThirdCd', 'animNm', 'animBirth'
+			            ,'animSex', 'animButler', 'butlerSidoNm', 'butlerSigunguNm', 'rqstMemo'
+			];
+		var validItemNm = ['담당수의사', '동물 종 첫번째', '동물 종 두번째', '동물 종 세번째', '동물이름', '동물생년월일'
+			            ,'동물성별', '보호자이름', '보호자주소(시도)', '보호자주소(시군구)', '의뢰참고사항'
+			];
+		for(var i=0; i<validItem.length; i++){
+			if($("#"+validItem[i]).val() == '' || $("#"+validItem[i]).val() == null){
+				validFlag = false;
+				$("#"+validItem[i]).focus();
+				alert('필수값['+validItemNm[i]+']을 입력해주세요 ');
+				break;
+			}
+		}
+	}
+
+	return validFlag;
+}
+
 </script>
 </body>
 </html>

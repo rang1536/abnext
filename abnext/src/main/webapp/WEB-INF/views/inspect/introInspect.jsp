@@ -191,9 +191,9 @@
 	
 	function movePage(idx){
 		//1:반려조류 2:가금류 3:돼지
-		if(idx == 1) location.href = "requestInspect.do?page=1";
-		//if(idx == 2) location.href = "requestInspect.do?page=2";
-		//if(idx == 3) location.href = "requestInspect.do?page=3";
+		if(idx == 1) location.href = "requestInspect";
+		//if(idx == 2) location.href = "requestInspect";
+		//if(idx == 3) location.href = "requestInspect";
 	}
 </script>
 </body>
