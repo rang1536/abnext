@@ -91,9 +91,7 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*담당수의사</label>
-												<select class="form-control" id="docNo">
-													<option value="1234">나수의</option>
-												</select>
+												<select class="form-control" id="docNo"></select>
 											</div>
 										</div>
 										<div class="col-sm-6">
@@ -185,11 +183,11 @@
 												</div>
 												<div class="row">
 													<div class="col-6">
-														<input type="text" class="form-control" placeholder="시도" id="butlerSidoNm" readonly>
+														<input type="text" class="form-control" placeholder="시도" id="butlerSido" readonly>
 														<input type="hidden" id="sidoNm">
 													</div>
 													<div class="col-6">
-														<input type="text" class="form-control" placeholder="시군구" id="butlerSigunguNm" readonly>
+														<input type="text" class="form-control" placeholder="시군구" id="butlerSigungu" readonly>
 														<input type="hidden" id="sigunguNm">
 													</div>
 												</div>
@@ -322,7 +320,7 @@
 									<tfoot>
 										<tr>
 											<td colspan="7" class="txtc">검사비용 계</td>
-											<th class="txtr" id="sumPrice">70,000원</th>
+											<th class="txtr" id="sumPrice">0원</th>
 											<th></th>
 										</tr>
 									</tfoot>
@@ -408,6 +406,19 @@ $(document).ready(function(){
 	$.gfn_getCode('B001',callBackFn,'inspFirstCd');
 	//동물 종
 	$.gfn_getCode('C001',callBackFn,'animFirstCd');
+
+	//의사목록
+	docList();
+
+	//로그인유저정보
+	var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+	//신청자(userId, userNm)
+	$("#userNo").val(userInfo.userNo);
+	$("#userNm").val(userInfo.userNm);
+	$("#hospNo").val(userInfo.hospNo);
+	$("#hospNm").val(userInfo.hospNm);
+
 });
 
 function callBackFn(data,col){
@@ -425,6 +436,8 @@ function callBackFn(data,col){
 		$.gfn_getCode(data[0].codeId,callBackFn,'animSecondCd');
 	}else if(col == 'animSecondCd'){
 		$.gfn_getCode(data[0].codeId,callBackFn,'animThirdCd');
+	}else if(col == 'inspThirdCd'){
+		$("#inspPrice").val(data[0].codeDtlMemo);
 	}
 }
 
@@ -444,6 +457,14 @@ $("#inspSecondCd").on('change',function(){
 	$.gfn_getCode($(this).val(),callBackFn,'inspThirdCd');
 });
 
+$("#inspThirdCd").on('change',function(){
+	$.gfn_getCodeDtl($(this).val(),callBackFnGetPrice);
+});
+
+function callBackFnGetPrice(data){
+	$("#inspPrice").val(data.codeDtlMemo);
+}
+
 function delInspect(target){
 	$(target).parent().parent().remove();
 	calcPrice();
@@ -457,15 +478,15 @@ $("#addBtn").click(function(){
 	var td5Text = $("#inspFirstCd option:selected").text();
 	var td6Text = $("#inspSecondCd option:selected").text();
 	var td7Text = $("#inspThirdCd option:selected").text();
-	var td8Text = "50,000원";
+	var td8Text = $.gfn_setComma($("#inspPrice").val())+"원";
 
 	var sampleCode = $("#sampleCode").val();
 	var sampleType = $("#sampleType").val();
 	var sampleMemo = $("#sampleMemo").val();
 	var inspFirstCd = $("#inspFirstCd").val();
-	var inspSecondCd= $("#inspSecondCd").val();
-	var inspThirdCd= $("#inspThirdCd").val();
-	var inspPrice= $("#inspPrice").val();
+	var inspSecondCd = $("#inspSecondCd").val();
+	var inspThirdCd = $("#inspThirdCd").val();
+	var inspPrice = $("#inspPrice").val();
 
 	var addHtml = '<tr>';
 	addHtml += '	<td class="txtc">'+tblNo+'</td>';
@@ -506,7 +527,7 @@ function calcPrice(){
 $(".btn-save").on('click',function(){
 	//필수값 체크
 	if(!validSave()){
-		//return;
+		return;
 	}
 
 	var arrayInsp = [];
@@ -518,7 +539,8 @@ $(".btn-save").on('click',function(){
 				inspFirstCd : $(this).find("[id^=inspFirstCd]").val(),
 				inspSecondCd : $(this).find("[id^=inspSecondCd]").val(),
 				inspThirdCd : $(this).find("[id^=inspThirdCd]").val(),
-				inspPrice : $(this).find("[id^=inspPrice]").val()
+				inspPrice : $(this).find("[id^=inspPrice]").val().replace(/,/gi,'').replace('원',''),
+				insId : localStorage.getItem("userId")
 		}
 		arrayInsp.push(insp);
 	});
@@ -528,18 +550,26 @@ $(".btn-save").on('click',function(){
 			hospNm : $("#hospNm").val(),
 			userNo : $("#userNo").val(),
 			userNm : $("#userNm").val(),
+			animNo : '0',
 			animNm : $("#animNm").val(),
 			docNo : $("#docNo option:selected").val(),
 			docNm : $("#docNo option:selected").text(),
+			animButler : $("#animButler").val(),
+			butlerSido : $("#butlerSido").val(),
+			butlerSigungu : $("#butlerSigungu").val(),
+			animBirth : $("#animBirth").val(),
+			animFirstCd : $("#animFirstCd").val(),
+			animSecondCd : $("#animSecondCd").val(),
+			animThirdCd : $("#animThirdCd").val(),
+			animSex : $("#animSex").val(),
 			procStat : '1',
 			procStatNm : '신청',
 			rqstMemo : $("#rqstMemo").val(),
 			payGb : '',
-			price : '',
+			price : '0',
 			payStat : '',
-			sidoNm : $("#butlerSidoNm").val(),
-			sigunguNm : $("#butlerSigunguNm").val(),
-			listInsp : arrayInsp
+			insId : localStorage.getItem("userId"),
+			inspList : arrayInsp
 	}
 
 	$.ajax({
@@ -565,10 +595,10 @@ function validSave(){
 	}else {
 		var validFlag = true;
 		var validItem = ['docNo', 'animFirstCd', 'animSecondCd', 'animThirdCd', 'animNm', 'animBirth'
-			            ,'animSex', 'animButler', 'butlerSidoNm', 'butlerSigunguNm', 'rqstMemo'
+			            ,'animSex', 'animButler', 'butlerSido', 'butlerSigungu'
 			];
 		var validItemNm = ['담당수의사', '동물 종 첫번째', '동물 종 두번째', '동물 종 세번째', '동물이름', '동물생년월일'
-			            ,'동물성별', '보호자이름', '보호자주소(시도)', '보호자주소(시군구)', '의뢰참고사항'
+			            ,'동물성별', '보호자이름', '보호자주소(시도)', '보호자주소(시군구)'
 			];
 		for(var i=0; i<validItem.length; i++){
 			if($("#"+validItem[i]).val() == '' || $("#"+validItem[i]).val() == null){
@@ -581,6 +611,22 @@ function validSave(){
 	}
 
 	return validFlag;
+}
+
+function docList(){
+	$.ajax({
+		url : "selectDoctorList",
+		data : {userId : localStorage.getItem("userId")},
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			var optHtml = '';
+			for(var i=0; i<data.length; i++){
+				optHtml += '<option value="'+data[i].userNo+'">'+data[i].userNm+'</option>';
+			}
+			$("#docNo").html(optHtml);
+		}
+	});
 }
 
 </script>
