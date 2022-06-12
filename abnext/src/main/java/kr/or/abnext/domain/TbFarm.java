@@ -1,5 +1,7 @@
 package kr.or.abnext.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /*
  * 생성일 2022.05.20.
  * 테이블명 TB_FARM
@@ -28,6 +30,16 @@ public class TbFarm {
 	private String farmSigunguNm;
 	private String farmBankNm;
 	private String farmAccountNo;
+	
+	private MultipartFile farmRnFile;
+	
+	
+	public MultipartFile getFarmRnFile() {
+		return farmRnFile;
+	}
+	public void setFarmRnFile(MultipartFile farmRnFile) {
+		this.farmRnFile = farmRnFile;
+	}
 	public int getFarmNo() {
 		return farmNo;
 	}
@@ -149,7 +161,7 @@ public class TbFarm {
 				+ ", farmEmail=" + farmEmail + ", farmRn=" + farmRn + ", farmZip=" + farmZip + ", insDt=" + insDt
 				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", farmSidoNm=" + farmSidoNm
 				+ ", farmSigunguNm=" + farmSigunguNm + ", farmBankNm=" + farmBankNm + ", farmAccountNo=" + farmAccountNo
-				+ "]";
+				+ ", farmRnFile=" + farmRnFile + "]";
 	}
 	
 	

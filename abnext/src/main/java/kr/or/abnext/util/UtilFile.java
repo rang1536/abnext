@@ -40,10 +40,10 @@ public class UtilFile {
 	public List<TbFile> multiUploadFile(MultipartHttpServletRequest request){
 		List<TbFile> uploadFileList = new ArrayList<TbFile>();
 		//호스팅
-		String rootPath = "/home/hosting_users/sh86/tomcat/webapps/files/";
+		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 		
 		//로컬
-		/*String rootPath = "C:\\Users\\FreeUser\\Documents\\workspace-sts-3.9.0.RELEASE\\sh86\\src\\main\\webapp\\resources\\files\\";*/
+		String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
 		
 		//회사 서버
 		/*String rootPath = "F:\\sh86\\resources\\files\\";*/
@@ -59,23 +59,19 @@ public class UtilFile {
 		return uploadFileList;	
 	}
 	//단일파일 업로드
-	public TbFile singleUploadFile(MultipartHttpServletRequest request, String classNum, String type){
+	public TbFile singleUploadFile(MultipartFile file){
 		//호스팅
 		/*String rootPath = "/home/hosting_users/kis0488/tomcat/webapps/resources/files/"+classNum+"/";*/
 		/*String rootPath = "http:///sh86.kr/resources/files/"+classNum+"/";*/
 		
-		//로컬
-		String rootPath = "C:\\Users\\206\\git\\SH86\\sh86\\src\\main\\webapp\\resources\\files\\"+classNum+"\\";
+		//호스팅
+		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 		
-		if(type.equals("myPage")) {
-			return uploadFile(request.getFile("userImgNew"), rootPath);
-		}else if(type.equals("album")) {
-			return uploadFile(request.getFile("albumImg"), rootPath);
-		}else if(type.equals("photo")){
-			return uploadFile(request.getFile("albumImg"), rootPath);
-		}else {
-			return uploadFile(request.getFile("userImgNew"), rootPath);
-		}
+		//로컬
+		String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
+		
+		return uploadFile(file, rootPath);
+		
 	}
 	
 	// 멀티파트 파일 > 파일 형식으로 변환 (안씀.)
@@ -94,13 +90,14 @@ public class UtilFile {
 		uploadFile.setFilePath(rootPath);
 		uploadFile.setFileOriNm(multipartFile.getOriginalFilename().replace("-", ""));
 		
+		/* 이미지 업로드용. 용량압축 및 jpg보정 로직 포함
 		byte[] imgBytes = null;
 		try {			
 			imgBytes = multipartFile.getBytes(); 
 			BufferedInputStream bufferedIS = new BufferedInputStream(new ByteArrayInputStream(imgBytes));
 			
-			/* Thumbnails 사용시 이미지 색상이 변하는 문제가 생김.
-			 * BufferedImage bi = Thumbnails.of(file).scale(1).asBufferedImage();*/
+			 Thumbnails 사용시 이미지 색상이 변하는 문제가 생김.
+			 * BufferedImage bi = Thumbnails.of(file).scale(1).asBufferedImage();
 			
 			int orientation = correctOrientation(bufferedIS);
 			
@@ -115,7 +112,7 @@ public class UtilFile {
 			biNew.setRGB(0, 0, w, h, rgb, 0, w);
 			
 			makeJPG(biNew, new File(rootPath+multipartFile.getOriginalFilename().replace("-", "")));
-			/*ByteArrayInputStream byteIS = new ByteArrayInputStream(imgBytes);*/
+			ByteArrayInputStream byteIS = new ByteArrayInputStream(imgBytes);
 			
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -126,10 +123,10 @@ public class UtilFile {
 		} catch (MetadataException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		
-		/*try {
+		try {
 			String originalName = multipartFile.getOriginalFilename(); //원래 파일명
 	    	int index = originalName.lastIndexOf("."); //확장자 구분을 위한 (.)인덱스 찾기
 			String extension = "."+originalName.substring(index+1); //. 뒤의 확장자를 저장.일단안씀
@@ -138,14 +135,14 @@ public class UtilFile {
 	        String savePath = rootPath + fileName;
 	        File destFile = new File(savePath); //최종파일을 업로드 패쓰에 업로드
 	        multipartFile.transferTo(destFile);
-	        uploadFile.setFileOriginalName(originalName);
+	        uploadFile.setFileOriNm(originalName);
 	        uploadFile.setFilePath(rootPath);
-	        uploadFile.setFileName(fileName);
+	        uploadFile.setFileNewNm(fileName);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
+		}
 		return uploadFile;
 	}
 	//파일 삭제

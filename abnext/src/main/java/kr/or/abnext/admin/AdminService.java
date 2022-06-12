@@ -1,5 +1,6 @@
 package kr.or.abnext.admin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFarm;
+import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbUser;
+import kr.or.abnext.util.UtilFile;
 
 @Service
 public class AdminService {
@@ -146,16 +149,98 @@ public class AdminService {
 	 * @param : TbHospital
 	 **/
 	public Map<String, Object> addHospServ(TbHospital tbHospital) {
-		return getResultMap(adminDao.addHosp(tbHospital));
+		Map<String, Object> map = getResultMap(adminDao.addHosp(tbHospital));
+		
+		if(map.get("result").equals("succ")) {
+			UtilFile utilFile = new UtilFile();
+			
+			if(tbHospital.getHospRnFile() != null) {
+				TbFile tbFile = utilFile.singleUploadFile(tbHospital.getHospRnFile());
+				
+				if(tbFile != null) {
+					tbFile.setHospNo(tbHospital.getHospNo());
+					tbFile.setFileGb("F001-01"); //사업자등록증
+					tbFile.setFileMemo("사업자등록증");
+					
+					map = getResultMap(adminDao.addFile(tbFile));
+				}
+			}
+			
+		}
+		
+		return map;
 	}
 	
 	
 	/**
-	 * @function : addFarm
+	 * @function : delHospServ
+	 * @Description : 병원삭제
+	 * @param : java.util.ArrayList
+	 **/
+	public Map<String, Object> delHospServ(ArrayList<String> hospList) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int result = adminDao.delHosp(hospList);
+		
+		//파일삭제도 넣어야 하려나..
+		
+		if(result > 0) {
+			map.put("result", "succ");
+		}else {
+			map.put("result", "fail");
+		}
+		
+		return map;
+	}
+	
+	
+	/**
+	 * @function : addFarmServ
 	 * @Description : 농장등록
 	 * @param : TbFarm
 	 **/
 	public Map<String, Object> addFarmServ(TbFarm tbFarm) {
-		return getResultMap(adminDao.addFarm(tbFarm));
+		Map<String, Object> map = getResultMap(adminDao.addFarm(tbFarm));
+		
+		if(map.get("result").equals("succ")) {
+			UtilFile utilFile = new UtilFile();
+			
+			if(tbFarm.getFarmRnFile() != null) {
+				TbFile tbFile = utilFile.singleUploadFile(tbFarm.getFarmRnFile());
+				
+				if(tbFile != null) {
+					tbFile.setHospNo(tbFarm.getFarmNo());
+					tbFile.setFileGb("F001-01"); //사업자등록증
+					tbFile.setFileMemo("사업자등록증");
+					
+					map = getResultMap(adminDao.addFile(tbFile));
+				}
+			}
+			
+		}
+		
+		return map;
+	}
+	
+	
+	/**
+	 * @function : delFarmServ
+	 * @Description : 농장삭제
+	 * @param : java.util.ArrayList
+	 **/
+	public Map<String, Object> delFarmServ(ArrayList<String> farmList) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int result = adminDao.delFarm(farmList);
+		
+		//파일삭제도 넣어야 하려나..
+		
+		if(result > 0) {
+			map.put("result", "succ");
+		}else {
+			map.put("result", "fail");
+		}
+		
+		return map;
 	}
 }

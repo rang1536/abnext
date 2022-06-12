@@ -89,14 +89,17 @@
 													<td>${item.hospHp }</td>
 													<td>${item.hospEmail }</td>
 													<td>${item.hospSidoNm}</td>
-													<td>${item.hospAccountNo }</td>
+													<td>
+														<c:if test="${item.hospBankNm ne null and item.hospBankNm ne ''}">(${item.hospBankNm})</c:if>
+														${item.hospAccountNo }
+													</td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
 								</div> <!-- /.card-body -->
 								<div class="card-footer">
-									<button type="button" id="delHospBtn" class="btn btn-sm btn-danger">삭제</button>
+									<button type="button" id="delHospBtn" class="btn btn-sm btn-danger" onclick="fn_delHospital();">삭제</button>
 									<button type="button" id="addHospBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">기관병원등록</button>
 								</div>
 							</div> <!-- /.card -->
@@ -133,8 +136,6 @@
 <!-- InputMask -->
 <script src="resources/plugins/moment/moment.min.js"></script>
 <script src="resources/plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- BS-Stepper -->
-<script src="resources/plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <!-- 주소찾기 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- Select2 -->
@@ -159,11 +160,6 @@
 
 <script>
 
-	//BS-Stepper Init
-	document.addEventListener('DOMContentLoaded', function () {
-	  window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-	})
-	
 	$(function () {
 		$('.select2').select2();
 		bsCustomFileInput.init();
@@ -188,8 +184,43 @@
 	
 	
 	/*
-	* 회원삭제
+	* 전체체크/헤제
 	*/
+	$('#allCheck').on('click', function(){
+		if($('#allCheck').is(':checked')){
+			$('input:checkbox').prop('checked', true);
+		}else{
+			$('input:checkbox').prop('checked', false);
+		}
+	})
+	
+	
+	/*
+	* 병원삭제
+	*/
+	function fn_delHospital(){
+		var arr = new Array();
+		
+		$('input:checkbox[name="hospNo"]').each(function(){
+			if($(this).is(':checked')){
+				arr.push($(this).val());
+			}
+		})
+		
+		$.ajax({
+			url : 'delHospCtrl',
+			dataType : 'json',
+			type : 'post',
+			data : {'hospList':arr},
+			success : function(data){
+				if(data.result == 'succ'){
+					alert('삭제되었습니다');
+					window.location.reload(true);
+				}
+			}
+		})
+	}
+	
 	
 	
 </script>

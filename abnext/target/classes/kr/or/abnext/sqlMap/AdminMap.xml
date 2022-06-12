@@ -141,7 +141,7 @@
 	
 	
 	<!-- 병원등록 -->
-	<insert id="addHosp" parameterType="kr.or.abnext.domain.TbHospital">
+	<insert id="addHosp" parameterType="kr.or.abnext.domain.TbHospital" useGeneratedKeys="true" keyProperty="hospNo">
 		INSERT INTO TB_HOSPITAL(
 			HOSP_NM
 			,HOSP_TEL
@@ -177,14 +177,25 @@
 			,#{hospAccountNo}
 			,#{hospBankNm}
 			,NOW()
-			,#{userId}
+			,#{insId}
 			,NOW()
-			,#{userId}
+			,#{insId}
 		)
 	</insert>
 	
+	<!-- 병원삭제 -->
+	<delete id="delHosp" parameterType="java.util.ArrayList">
+		DELETE FROM TB_HOSPITAL
+		WHERE HOSP_NO IN (
+			<foreach collection="list" item="item" index="i" separator=",">
+				${item}
+			</foreach>
+		)
+	</delete>
+	
+	
 	<!-- 농장등록 -->
-	<insert id="addFarm" parameterType="kr.or.abnext.domain.TbFarm">
+	<insert id="addFarm" parameterType="kr.or.abnext.domain.TbFarm" useGeneratedKeys="true" keyProperty="farmNo">
 		INSERT INTO TB_FARM(
 			FARM_NM
 			,FARM_CEO
@@ -206,23 +217,64 @@
 			,UPT_ID
 		) VALUES(
 			#{farmNm}
+			,#{farmCeo}
 			,#{farmTel}
 			,#{farmHp}
-			,#{farmEmail}
 			,#{farmFax}
 			,#{farmAdr}
 			,#{farmDtlAdr}
 			,#{farmZip}
-			,#{farmCeo}
+			,#{farmEmail}
 			,#{farmRn}
 			,#{farmSidoNm}
 			,#{farmSigunguNm}
-			,#{farmAccountNo}
 			,#{farmBankNm}
+			,#{farmAccountNo}
 			,NOW()
-			,#{userId}
+			,#{insId}
 			,NOW()
-			,#{userId}
+			,#{insId}
 		)
 	</insert>
+	
+	<!-- 병원삭제 -->
+	<delete id="delFarm" parameterType="java.util.ArrayList">
+		DELETE FROM TB_FARM
+		WHERE FARM_NO IN (
+			<foreach collection="list" item="item" index="i" separator=",">
+				${item}
+			</foreach>
+		)
+	</delete>
+	
+	<!-- 파일등록 -->
+	<select id="addFile" parameterType="kr.or.abnext.domain.TbFile">
+		INSERT INTO TB_FILE(
+			FILE_GB
+			, FILE_PATH
+			, FILE_ORI_NM
+			, FILE_NEW_NM
+			, FILE_MEMO
+			, RQST_NO
+			, HOSP_NO
+			, USER_NO
+			, ANIM_NO
+			, FARM_NO
+			, BOARD_NO						
+		) VALUES(
+			#{fileGb}
+			, #{filePath}
+			, #{fileOriNm}
+			, #{fileNewNm}
+			, #{fileMemo}
+			, #{rqstNo}
+			, #{hospNo}
+			, #{userNo}
+			, #{animNo}
+			, #{farmNo}
+			, #{boardNo}
+		)
+	</select>
+	
+	
 </mapper>

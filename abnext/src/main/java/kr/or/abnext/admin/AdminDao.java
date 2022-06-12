@@ -1,5 +1,6 @@
 package kr.or.abnext.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFarm;
+import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbUser;
 
@@ -77,12 +79,31 @@ public class AdminDao {
 	
 	
 	/**
+	 * @function : delHosp
+	 * @Description : 병원삭제
+	 * @param : java.util.ArrayList
+	 **/
+	public int delHosp(ArrayList<String> array) {
+		return sql.delete("admin.delHosp", array);
+	}
+	
+	
+	/**
 	 * @function : addFarm
 	 * @Description : 농장등록
 	 * @param : TbFarm
 	 **/
 	public int addFarm(TbFarm tbFarm) {
 		return sql.insert("admin.addFarm", tbFarm);
+	}
+	
+	/**
+	 * @function : delFarm
+	 * @Description : 농장삭제
+	 * @param : java.util.ArrayList
+	 **/
+	public int delFarm(ArrayList<String> array) {
+		return sql.delete("admin.delFarm", array);
 	}
 	
 	
@@ -138,4 +159,14 @@ public class AdminDao {
 		return sql.selectList("admin.getFarmList");
 	}
 	
+	
+	/**
+	 * @function : addFile
+	 * @Description : 파일정보등록
+	 * @param : TbFile
+	 * @return: integer
+	 **/
+	public int addFile(TbFile tbFile) {
+		return sql.insert("admin.addFile", tbFile);
+	}
 }
