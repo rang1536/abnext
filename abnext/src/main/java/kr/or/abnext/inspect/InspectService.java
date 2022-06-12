@@ -6,28 +6,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.abnext.domain.TbAnimal;
+import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
+import kr.or.abnext.domain.TbUser;
 
 @Service
 public class InspectService {
 	@Autowired
 	private InspectDao inspectDao;
-	
+
 	public List<TbRcept> recptList(){
 		return inspectDao.rceptList();
 	}
-	
+
 	public TbRcept getRcept(TbRcept rcept) {
 		return inspectDao.getRcept(rcept);
 	}
-	
+
 	public TbHospital getHospital(int hospNo) {
 		return inspectDao.getHospital(hospNo);
 	}
-	
+
 	public TbAnimal getAnimal(int animNo) {
 		return inspectDao.getAnimal(animNo);
 	}
-	
+
+	public String getNextKey() {
+		return inspectDao.getNextKey();
+	}
+
+	public int insertRcept(TbRcept rcept) {
+		return inspectDao.insertRcept(rcept);
+	}
+
+	public int insertInspection(TbInspection insp) {
+		return inspectDao.insertInspection(insp);
+	}
+
+	public List<TbUser> selectDoctorList(TbUser tbUser){
+		return inspectDao.selectDoctorList(tbUser);
+	}
 }

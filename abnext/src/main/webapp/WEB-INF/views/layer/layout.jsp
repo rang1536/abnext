@@ -206,7 +206,7 @@
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
-								<a href="introInspect.do" class="nav-link leftMenuSub">
+								<a href="introInspect" class="nav-link leftMenuSub">
 									<i class="far fa-circle nav-icon"></i>
 									<p>신청접수</p>
 								</a>
@@ -963,6 +963,9 @@
 						$('#farmSigunguNm').val(data.sigungu);
 						
 						$('#farmDtlAdr').focus();
+					}else if(type == 'butler'){
+						$('#butlerSidoNm').val(data.sido);
+						$('#butlerSigunguNm').val(data.sigungu);
 					}
 				}
 			}).open();

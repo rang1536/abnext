@@ -23,25 +23,25 @@
 		</where>
 		 ORDER BY CODE_LEVEL,UPP_CODE_ID
 	</select>
-	
+
 	<select id="getCodeLevel" resultType="kr.or.abnext.domain.TbCode">
 		SELECT CODE_LEVEL
 		  FROM TB_CODE
 		 WHERE CODE_ID = #{uppCodeId}
 	</select>
-	
+
 	<select id="dupChk" resultType="int">
 		SELECT COUNT(*) AS CNT
 		  FROM TB_CODE
 		 WHERE CODE_ID = #{codeId}
 	</select>
-	
+
 	<select id="modChk" resultType="int">
 		SELECT COUNT(*) AS CNT
 		  FROM TB_CODE
 		 WHERE CODE_NO = #{codeNo}
 	</select>
-	
+
 	<insert id="insertCode" parameterType="kr.or.abnext.domain.TbCode">
 		INSERT INTO TB_CODE
 		(
@@ -56,7 +56,7 @@
 		     , #{sortIdx}  , NOW()          , #{insId}
 		)
 	</insert>
-	
+
 	<update id="updateCode" parameterType="kr.or.abnext.domain.TbCode">
 		UPDATE TB_CODE
 		   SET CODE_ID = #{codeId}
@@ -67,16 +67,23 @@
 		     , CODE_DTL_MEMO = #{codeDtlMemo}
 		 WHERE CODE_NO = #{codeNo}
 	</update>
-	
+
 	<delete id="deleteCode" parameterType="kr.or.abnext.domain.TbCode">
 		DELETE
 		  FROM TB_CODE
 		 WHERE CODE_NO =  #{codeNo}
 	</delete>
-	
+
 	<select id="selectCodeList" resultType="kr.or.abnext.domain.TbCode">
 		SELECT *
 		  FROM TB_CODE
 		 WHERE UPP_CODE_ID = #{uppCodeId}
+	</select>
+
+	<select id="getNextKey" resultType="java.lang.String">
+		SELECT AUTO_INCREMENT
+		  FROM INFORMATION_SCHEMA.TABLES
+		 WHERE TABLE_SCHEMA = 'avinext'
+		   AND TABLE_NAME = 'TB_RCEPT'
 	</select>
 </mapper>

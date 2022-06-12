@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inspection">
+	<select id="getNextKey" resultType="java.lang.String">
+		SELECT AUTO_INCREMENT
+		  FROM INFORMATION_SCHEMA.TABLES
+		 WHERE TABLE_SCHEMA = 'avinext'
+		   AND TABLE_NAME = 'TB_RCEPT'
+	</select>
+
+	<select id="doctorList" resultType="kr.or.abnext.domain.TbUser">
+		SELECT *
+		  FROM TB_USER
+		 WHERE HOSP_NO = #{hospNo}
+		   AND USER_LEV = '2'
+	</select>
+
+	<insert id="insertRcept" parameterType="kr.or.abnext.domain.TbRcept">
+		INSERT
+		  INTO TB_RCEPT
+		     (
+		       RQST_NO       , HOSP_NO        , HOSP_NM
+		     , USER_NO       , USER_NM        , ANIM_NO        , ANIM_NM
+		     , DOC_NO        , DOC_NM
+		     , ANIM_BUTLER   , BUTLER_SIDO    , BUTLER_SIGUNGU
+		     , ANIM_FIRST_CD , ANIM_SECOND_CD , ANIM_THIRD_CD
+		     , ANIM_BIRTH    , ANIM_SEX       , RQST_DT        , RQST_MEMO
+		     , PROC_STAT     , PROC_STAT_NM
+		     , PAY_GB        , PRICE          , PAY_STAT
+		     , INS_DT        , INS_ID
+		     )
+		VALUES
+		     (
+		       #{rqstNo}       , #{hospNo}        , #{hospNm}
+		     , #{userNo}       , #{userNm}        , #{animNo}        , #{animNm}
+		     , #{docNo}        , #{docNm}
+		     , #{animButler}   , #{butlerSido}    , #{butlerSigungu}
+		     , #{animFirstCd}  , #{animSecondCd}  , #{animThirdCd}
+		     , #{animBirth}    , #{animSex}       , NOW()            , #{rqstMemo}
+		     , #{procStat}     , #{procStatNm}
+		     , #{payGb}        , #{price}         , #{payStat}
+		     , NOW()           , #{insId}
+		     )
+	</insert>
+
+	<insert id="insertInspection" parameterType="kr.or.abnext.domain.TbInspection">
+
+	</insert>
+</mapper>
