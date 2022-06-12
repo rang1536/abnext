@@ -28,6 +28,10 @@ public class AdminService {
 		return adminDao.selectCodeList(tbCode);
 	}
 
+	public TbCode getCode(TbCode tbCode){
+		return adminDao.getCode(tbCode);
+	}
+
 	public int insertCode(TbCode tbCode){
 		return adminDao.insertCode(tbCode);
 	}

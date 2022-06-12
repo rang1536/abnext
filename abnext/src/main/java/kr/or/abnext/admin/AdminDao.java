@@ -27,6 +27,10 @@ public class AdminDao {
 		return sql.selectList("code.selectCodeList", tbCode);
 	}
 
+	public TbCode getCode(TbCode tbCode){
+		return sql.selectOne("code.getCode", tbCode);
+	}
+
 	public int insertCode(TbCode tbCode){
 		return sql.insert("code.insertCode", tbCode);
 	}

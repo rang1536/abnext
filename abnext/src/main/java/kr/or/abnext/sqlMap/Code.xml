@@ -30,6 +30,12 @@
 		 WHERE CODE_ID = #{uppCodeId}
 	</select>
 
+	<select id="getCode" resultType="kr.or.abnext.domain.TbCode">
+		SELECT *
+		  FROM TB_CODE
+		 WHERE CODE_ID = #{codeId}
+	</select>
+
 	<select id="dupChk" resultType="int">
 		SELECT COUNT(*) AS CNT
 		  FROM TB_CODE

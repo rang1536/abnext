@@ -120,6 +120,14 @@ public class AdminRestController {
 		return list;
 	}
 
+	/*
+	 * 코드조회
+	 **/
+	@RequestMapping(value = "getCode", method = RequestMethod.POST)
+	public TbCode getCode(TbCode tbCode) {
+		System.out.println("코드상세조회 시작~!!");
+		return adminServ.getCode(tbCode);
+	}
 
 	/**
 	 * 기관등록
