@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>avinext | (주)아비넥스트트</title>
+  <title>avinext | (주)아비넥스트</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -21,6 +21,11 @@
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+	
   
   <style>
     th,td {text-align:center;}
@@ -43,7 +48,7 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item"><a href="index">Home</a></li>
 							<li class="breadcrumb-item active"><b>농장관리</b></li>
 						</ol>
 					</div>
@@ -52,8 +57,56 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
- 			<div class="container-fluid">
+		 <section class="content">
+ 			<div class="container-fluid"> 
+ 				<div class="invoice p-3 mb-3">
+					<!-- Table row -->
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<!-- /.card-header -->
+								<div class="card-body">
+									<table id="example2" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th><input type="checkbox" id="allCheck"/></th>
+												<th>농장명</th>
+												<th>전화번호</th>
+												<th>휴대폰</th>
+												<th>이메일</th>
+												<th>지역</th>
+												<th>입금계좌</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="item" items="${farmList }" varStatus="status">
+												<tr>
+													<td>
+														<input type="checkbox" name="farmNo" value="${item.farmNo }"/>
+													</td>
+													<td>${item.farmNm }</td>
+													<td>${item.farmTel }</td>
+													<td>${item.farmHp }</td>
+													<td>${item.farmEmail }</td>
+													<td>${item.farmSidoNm}</td>
+													<td>
+														<c:if test="${item.farmBankNm ne null and item.farmBankNm ne ''}">(${item.farmBankNm})</c:if>
+														${item.farmAccountNo }
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div> <!-- /.card-body -->
+								<div class="card-footer">
+									<button type="button" id="delFarmBtn" class="btn btn-sm btn-danger" onclick="fn_delFarm();">삭제</button>
+									<button type="button" id="addFarmBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">농장등록</button>
+								</div>
+							</div> <!-- /.card -->
+						</div> <!-- /.col-12 -->
+					</div>  <!-- /.row -->
+				</div> <!-- invoice -->
+ 			
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
 	</div> <!-- End content-wrapper -->
@@ -65,6 +118,8 @@
 	<!-- Control sidebar content goes here -->
 	</aside> <!-- /.control-sidebar -->
 </div> <!-- End wrapper  -->
+
+<c:import url="../popup/pop_addFarm.jsp"></c:import>
 </body>
 
 <!-- jQuery -->
@@ -81,8 +136,6 @@
 <!-- InputMask -->
 <script src="resources/plugins/moment/moment.min.js"></script>
 <script src="resources/plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- BS-Stepper -->
-<script src="resources/plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <!-- 주소찾기 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- Select2 -->
@@ -91,18 +144,85 @@
 <script src="resources/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
+<!-- DataTables	& Plugins -->
+<script src="resources/plugins/datatables/jquery.dataTables.js"></script>
+<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="resources/plugins/jszip/jszip.min.js"></script>
+<script src="resources/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="resources/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <script>
 
-	//BS-Stepper Init
-	document.addEventListener('DOMContentLoaded', function () {
-	  window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+	$(function () {
+		$('.select2').select2();
+		bsCustomFileInput.init();
+		
+		$('#example2').DataTable({
+			"paging": true,
+			"lengthChange": false,
+			"ordering": true,
+			"info": true,
+			"autoWidth": false,
+			"responsive": true,
+		});
+    });
+	
+	
+	/*
+	* 회원등록 페이지 연결
+	*/
+	$('#addFarmBtn').on('click', function(){
+		$('#popAddFarm').modal();
 	})
 	
-	$(function () {
-      $('.select2').select2();
-      bsCustomFileInput.init();
-    });
+	
+	/*
+	* 전체체크/헤제
+	*/
+	$('#allCheck').on('click', function(){
+		if($('#allCheck').is(':checked')){
+			$('input:checkbox').prop('checked', true);
+		}else{
+			$('input:checkbox').prop('checked', false);
+		}
+	})
+	
+	
+	/*
+	* 병원삭제
+	*/
+	function fn_delFarm(){
+		var arr = new Array();
+		
+		$('input:checkbox[name="farmNo"]').each(function(){
+			if($(this).is(':checked')){
+				arr.push($(this).val());
+			}
+		})
+		
+		console.log(arr);
+		
+		$.ajax({
+			url : 'delFarmCtrl',
+			dataType : 'json',
+			type : 'post',
+			data : {'farmList':arr},
+			success : function(data){
+				if(data.result == 'succ'){
+					alert('삭제되었습니다');
+					window.location.reload(true);
+				}
+			}
+		})
+	}
+	
 	
 	
 </script>

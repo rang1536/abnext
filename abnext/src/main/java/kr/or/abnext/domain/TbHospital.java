@@ -1,5 +1,7 @@
 package kr.or.abnext.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /*
  * 생성일 2022.05.20.
  * 테이블명 TB_HOSPITAL
@@ -29,8 +31,21 @@ public class TbHospital {
 	private String hospBankNm;
 	private String hospAccountNo;
 	
+	private MultipartFile hospRnFile;
 	
 	
+	public MultipartFile getHospRnFile() {
+		return hospRnFile;
+	}
+
+
+
+	public void setHospRnFile(MultipartFile hospRnFile) {
+		this.hospRnFile = hospRnFile;
+	}
+
+
+
 	public int getHospNo() {
 		return hospNo;
 	}

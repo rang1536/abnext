@@ -828,7 +828,7 @@
 					if(companyGb == 'hospital'){
 						var hospList = data.hospList;
 						
-						console.log(hospList.length);
+						console.log(hospList);
 						if(hospList.length == 1){
 							$('#hospNm').val('hospList[0].hospNm');
 						}else if(hospList.length == 0){
@@ -836,13 +836,19 @@
 							return;
 						}else{
 							var html = '';
-							$.each(hospList, function(list, i){
-								html += '<tr>';
-								html += '	<td>'+기관(병원)+'</td>';
+							$.each(hospList, function(i, list){
+								html += '<tr ondblclick="setHospDataToForm('+list.hospNo+');">';
+								html += '	<td>기관(병원)</td>';
 								html += '	<td>'+list.hospNm+'</td>';
+								html += '	<td>'+list.hospCeo+'</td>';
+								html += '	<td>'+list.hospTel+'</td>';
+								html += '	<td>'+list.hospHp+'</td>';
+								html += '	<td>'+list.hospSigunguNm+'</td>';
+								html += '</tr>';
 							})
 							
-							
+							$('#comTbody').empty();
+							$('#comTbody').html(html);
 							$('#popCompany').modal();
 						}
 					}else if(companyGb == 'farm'){
