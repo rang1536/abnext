@@ -1,5 +1,6 @@
 package kr.or.abnext.inspect;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbUser;
@@ -35,7 +35,8 @@ public class InspectRestController {
 		tbRcept.setRqstNo(Integer.parseInt(rqstNo));
 
 		//접수 테이블 등록
-		inspectServ.insertRcept(tbRcept);
+		int k = inspectServ.insertRcept(tbRcept);
+		int l = tbRcept.getInspList().size();
 
 		for(int i=0; i<tbRcept.getInspList().size(); i++) {
 			TbInspection ti = new TbInspection();
@@ -50,7 +51,14 @@ public class InspectRestController {
 			//검사 테이블 등록
 			inspectServ.insertInspection(ti);
 		}
-		return null;
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(k > 0 && l > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
 	}
 
 	/*

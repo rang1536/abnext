@@ -10,10 +10,10 @@
 		   AND TABLE_NAME = 'TB_RCEPT'
 	</select>
 
-	<select id="doctorList" resultType="kr.or.abnext.domain.TbUser">
+	<select id="selectDoctorList" parameterType="kr.or.abnext.domain.TbUser" resultType="kr.or.abnext.domain.TbUser">
 		SELECT *
 		  FROM TB_USER
-		 WHERE HOSP_NO = #{hospNo}
+		 WHERE HOSP_NO = (SELECT HOSP_NO FROM TB_USER WHERE USER_ID = #{userId})
 		   AND USER_LEV = '2'
 	</select>
 
@@ -46,6 +46,23 @@
 	</insert>
 
 	<insert id="insertInspection" parameterType="kr.or.abnext.domain.TbInspection">
-
+		INSERT
+		  INTO TB_INSPECTION
+		     (
+		       RQST_NO       , SAMPLE_CODE    , SAMPLE_TYPE   , SAMPLE_MEMO
+		     , INSP_FIRST_CD , INSP_SECOND_CD , INSP_THIRD_CD , INSP_PRICE
+		     , INS_DT        , INS_ID
+		     )
+		VALUES
+		     (
+		       #{rqstNo}      , #{sampleCode}   , #{sampleType}  , #{sampleMemo}
+		     , #{inspFirstCd} , #{inspSecondCd} , #{inspThirdCd} , #{inspPrice}
+		     , NOW()          , #{insId}
+		     )
 	</insert>
+
+	<select id="selectRceptList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
+		SELECT *
+		  FROM TB_RCEPT
+	</select>
 </mapper>

@@ -3,21 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="login">
-	
+
 	<!-- 로그인 -->
 	<select id="userLogin" parameterType="kr.or.abnext.domain.TbUser" resultType="kr.or.abnext.domain.TbUser">
-		SELECT *
-		  FROM TB_USER
-		 WHERE USER_ID = #{userId}
-		   AND USER_PASS = #{userPass}
+		SELECT A.*
+		     , (SELECT HOSP_NM FROM TB_HOSPITAL WHERE HOSP_NO = A.HOSP_NO) AS HOSP_NM
+		     , (SELECT FARM_NM FROM TB_FARM WHERE FARM_NO = A.FARM_NO) AS FARM_NM
+		  FROM TB_USER A
+		 WHERE A.USER_ID = #{userId}
+		   AND A.USER_PASS = #{userPass}
 	</select>
-	
+
 	<!-- id중복체크 -->
 	<select id="idChk" parameterType="kr.or.abnext.domain.TbUser" resultType="int">
 		SELECT COUNT(*)
 		  FROM TB_USER
 		 WHERE USER_ID = #{userId}
 	</select>
-	
+
 
 </mapper>

@@ -1074,9 +1074,15 @@
 			})
 
 		}
+<<<<<<< HEAD
 
 
 
+=======
+
+		
+		
+>>>>>>> branch 'master' of https://github.com/rang1536/abnext.git
 		/*======================
 		* 조회값 null체크
 		======================*/
@@ -1140,7 +1146,9 @@
 					$('#comTbody').html(html);
 				}
 			})
-		}
+
+		}	
+			
 
 	</script>
 
