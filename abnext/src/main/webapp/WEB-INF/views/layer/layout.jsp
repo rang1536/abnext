@@ -1115,7 +1115,7 @@
 			
 			$.ajax({
 				url : 'allCompanySearch',
-				data : {'popSearchNm', popSearchNm},
+				data : {'popSearchNm':popSearchNm},
 				dataType : 'json',
 				type : 'post',
 				success : function(data){
