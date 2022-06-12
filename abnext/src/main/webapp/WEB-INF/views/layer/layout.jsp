@@ -144,7 +144,7 @@
 		</ul>
 	</nav>
 	<!-- /.navbar -->
-	
+
 	<!-- Main Sidebar Container -->
 	<aside class="main-sidebar sidebar-dark-primary elevation-4">
 		<!-- Brand Logo -->
@@ -159,13 +159,13 @@
 			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 
 				<div class="image">
-					<img src="resources/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> 
+					<img src="resources/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 				</div>
 				<div class="info">
 					<a href="#" class="d-block">홍길동 님</a>
 				</div>
 				<br/>
-				
+
 			</div>
 			<div style="text-align:right;">
 				<button class="btn btn-warning" onclick="fn_loginPage();">로그인</button>
@@ -184,7 +184,7 @@
 					</div>
 				</div>
 			</div>
-			 
+
 			<!-- Sidebar Menu -->
 			<nav class="mt-2">
 				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -259,7 +259,7 @@
 			                  <p>QnA</p>
 			                </a>
 			              </li>
-			              
+
 			            </ul>
 			        </li>
 			        <!-- 상품 -->
@@ -285,10 +285,10 @@
 			                  <p>판매관리</p>
 			                </a>
 			              </li>
-			              
+
 			            </ul>
 			        </li>
-			        
+
 			        <!-- 통계 -->
 			        <li class="nav-item">
 			            <a href="#" class="nav-link">
@@ -320,7 +320,7 @@
 			              </li>
 			            </ul>
 			        </li>
-			        
+
 					<li class="nav-item">
 			            <a href="#" class="nav-link">
 			              <i class="nav-icon fas fa-th"></i>
@@ -363,7 +363,7 @@
 			              </li>
 			            </ul>
 			        </li>
-					<!-- 
+					<!--
 					<li class="nav-item">
 						<a href="#" class="nav-link">
 							<i class="nav-icon fas fa-chart-pie"></i>
@@ -924,18 +924,18 @@
 				}
 			}
 		});
-		
+
 		/*로그인*/
 		function fn_loginPage(){
 			location.href = 'loginPage';
 		}
-		
+
 		/*회원가입*/
 		function fn_addUserPage(){
 			location.href = 'addUserPage';
 		}
-		
-		
+
+
 		/*======================
 		* 주소찾기
 		======================*/
@@ -944,61 +944,64 @@
 				oncomplete: function(data){
 					if(type == 'user'){
 						$("#userAdr").val(data.jibunAddress);
-						$("#userZip").val(data.zonecode);	
+						$("#userZip").val(data.zonecode);
 						$('#sidoNm').val(data.sido);
 						$('#sigunguNm').val(data.sigungu);
-						
+
 						$('#userDtlAdr').focus();
 					}else if(type == 'hospital'){
 						$("#hospAdr").val(data.jibunAddress);
 						$("#hospZip").val(data.zonecode);
 						$('#hospSidoNm').val(data.sido);
 						$('#hospSigunguNm').val(data.sigungu);
-						
+
 						$('#hospDtlAdr').focus();
 					}else if(type == 'farm'){
 						$("#farmAdr").val(data.jibunAddress);
 						$("#farmZip").val(data.zonecode);
 						$('#farmSidoNm').val(data.sido);
 						$('#farmSigunguNm').val(data.sigungu);
-						
+
 						$('#farmDtlAdr').focus();
+					}else if(type == 'butler'){
+						$('#butlerSidoNm').val(data.sido);
+						$('#butlerSigunguNm').val(data.sigungu);
 					}
 				}
 			}).open();
 		}
-		
-		
+
+
 		/*====================================
 		* 기관병원등 (팝업)
 		* 팝업 : pop_addHospital
 		* 팝업오픈 : $('#popAddHosp').modal();
 		====================================*/
 		function fn_addHospital(){
-			var hospNm = $('#hospNm').val();	
+			var hospNm = $('#hospNm').val();
 			var hospHp = $('#hospHp').val();
 			var hospAdr = $('#hospAdr').val();
-			
+
 			if(hospNm == null || hospNm == ''){
 				alert('기관(병원)명은 필수입력입니다.');
 				return;
 			}
-			
+
 			if(hospHp == null || hospHp == ''){
 				alert('핸드폰번호는 필수입력입니다.');
 				return;
 			}
-			
+
 			if(hospAdr == null || hospAdr == ''){
 				alert('주소는 필수입력입니다.');
 				return;
 			}
-			
+
 			//$('#hospInfoForm').serialize();
 			var params = new FormData($('#hospInfoForm')[0]);
-			
+
 			toastr.info('등록중입니다');
-			
+
 			$.ajax({
 				url : 'addHospCtrl',
 				data : params,
@@ -1010,47 +1013,47 @@
 					if(data.result == 'succ'){
 						toastr.success('기관(병원)등록이 완료되었습니다.');
 						$('#modalCloseBtn').click();
-						
+
 						window.location.reload(true);
 					}else{
 						toastr.error('기관(병원)등록에 실패하였습니다.');
 					}
 				}
 			})
-			
+
 		}
-		
-		
+
+
 		/*====================================
 		* 농장등록 (팝업)
 		* 팝업 : pop_addFarm
 		* 팝업오픈 : $('#popAddFarm').modal();
 		====================================*/
 		function fn_addFarm(){
-			var farmNm = $('#farmNm').val();	
+			var farmNm = $('#farmNm').val();
 			var farmHp = $('#farmHp').val();
 			var farmAdr = $('#farmAdr').val();
-			
+
 			if(farmNm == null || farmNm == ''){
 				alert('농장명은 필수입력입니다.');
 				return;
 			}
-			
+
 			if(farmHp == null || farmHp == ''){
 				alert('핸드폰번호는 필수입력입니다.');
 				return;
 			}
-			
+
 			if(farmAdr == null || farmAdr == ''){
 				alert('주소는 필수입력입니다.');
 				return;
 			}
-			
+
 			//$('#farmInfoForm').serialize();
 			var params = new FormData($('#farmInfoForm')[0]);
-			
+
 			toastr.info('등록중입니다');
-			
+
 			$.ajax({
 				url : 'addFarmCtrl',
 				data : params,
@@ -1062,16 +1065,16 @@
 					if(data.result == 'succ'){
 						toastr.success('농장등록이 완료되었습니다.');
 						$('#modalCloseBtn').click();
-						
+
 						window.location.reload(true);
 					}else{
 						toastr.error('농장등록에 실패하였습니다.');
 					}
 				}
 			})
-			
+
 		}
-		
+
 	</script>
 
 </body>
