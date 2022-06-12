@@ -12,7 +12,7 @@
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="resources/dist/css/adminlte.css"> 
+  <link rel="stylesheet" href="resources/dist/css/adminlte.css">
 </head>
 
 <body class="hold-transition login-page">
@@ -24,8 +24,8 @@
 	    <a href="index" class="h1"><b>Avinext</b><!-- &nbsp;LOGIN --></a>
 	  </div>
 	  <div class="card-body">
-	    <p class="login-box-msg">LOGIN</p> 
-	
+	    <p class="login-box-msg">LOGIN</p>
+
 	    <form id="loginForm" method="post">
 	      <div class="input-group mb-3">
 	        <input type="email" class="form-control" placeholder="아이디" id="userId" name="userId">
@@ -54,14 +54,14 @@
 	        </div>
 	        <!-- /.col -->
 	        <div class="col-4">
-	          
+
 	        </div>
 	        <!-- /.col -->
 	      </div>
 	    </form>
-	
+
 	    <div class="social-auth-links text-center mt-2 mb-3">
-	      
+
 	      <a href="#" class="btn btn-block btn-primary" onclick="fn_login();">
 	        <i class="fab fa-google-plus mr-2"></i> 로그인
 	      </a>
@@ -72,7 +72,7 @@
 	      <a href="#" class="btn btn-sm btn-info">비밀번호찾기</a>
 	      <a href="addUserPage" class="btn btn-sm btn-warning" style="float:right;">회원가입하기</a>
 	    </p>
-	   
+
 	  </div>
 	  <!-- /.card-body -->
 	</div>
@@ -95,48 +95,48 @@
 		//저장된 아이디가 있다면 미리 세팅함.
 		var userId = localStorage.getItem('userId');
 		var userPass = locaStorage.getItem('userPass');
-		
+
 		if(userId != null && userId != ''){
 			$('#userId').val(userId);
 		}
-		
+
 		if(userPass != null && userPass != ''){
 			$('#userPass').val(userPass);
 		}
 	})
-	
+
 	/*로그인*/
 	function fn_login(){
 		var idSave = $('#idSave').is(':checked');
 		var userId = $('#userId').val();
 		var userPass = $('#userPass').val();
-		
+
 		if(userId == null || userId == ''){
 			alert('아이디를 입력하세요');
 			$('#userId').focus();
 			return;
 		}
-		
+
 		if(userPass == null || userPass == ''){
 			alert('비밀번호를 입력하세요');
 			$('#userPass').focus();
 			return;
 		}
-		
+
 		$.ajax({
 			url : 'userLogin',
-			data : {'userId'	:userId, 
+			data : {'userId'	:userId,
 					'userPass'	:userPass},
 			dataType : 'json',
 			type : 'post',
 			success:function(data){
 				var result = data.result;
-				
+
 				if(result == 'noUser'){
 					alert('회원정보가 없습니다 \r\n 아이디와 비밀번호를 다시 입력해주세요.');
 					$('#userId').val('');
 					$('#userPass').val('');
-					
+
 					$('#userId').focus();
 					return;
 				}else if(result == 'succ'){
@@ -145,8 +145,8 @@
 						localStorage.setItem('userId', userId);
 						localStorage.setItem('userPass', userPass);
 					}
-					
-					localStorage.setItem('userInfo', userInfo);
+
+					localStorage.setItem('userInfo', JSON.stringify(userInfo));
 					alert(userInfo.userNm+' 님 반갑습니다!!');
 					location.href = 'index';
 				}

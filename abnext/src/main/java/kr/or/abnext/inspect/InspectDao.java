@@ -20,7 +20,8 @@ public class InspectDao {
 	private SqlSessionTemplate sql;
 
 	public List<TbRcept> rceptList(){
-		//return sql.selectList("inspect.rceptList");
+		return sql.selectList("inspection.selectRceptList");
+/*
 		List<TbRcept> list = new ArrayList<TbRcept>();
 		for(int i=0; i<20; i++) {
 			TbRcept r = new TbRcept();
@@ -44,19 +45,19 @@ public class InspectDao {
 			list.add(r);
 		}
 		return list;
-
+*/
 	}
 
 	public TbRcept getRcept(TbRcept rcept) {
-		return sql.selectOne("getTbRcept", rcept);
+		return sql.selectOne("inspection.getTbRcept", rcept);
 	}
 
 	public TbHospital getHospital(int hospNo) {
-		return sql.selectOne("getTbHospital", hospNo);
+		return sql.selectOne("inspection.getTbHospital", hospNo);
 	}
 
 	public TbAnimal getAnimal(int animNo) {
-		return sql.selectOne("getAnimal", animNo);
+		return sql.selectOne("inspection.getAnimal", animNo);
 	}
 
 	public String getNextKey() {
@@ -64,14 +65,14 @@ public class InspectDao {
 	}
 
 	public int insertRcept(TbRcept rcept) {
-		return sql.selectOne("inspection.insertRcept", rcept);
+		return sql.insert("inspection.insertRcept", rcept);
 	}
 
 	public int insertInspection(TbInspection insp) {
-		return sql.selectOne("inspection.insertInspection", insp);
+		return sql.insert("inspection.insertInspection", insp);
 	}
 
 	public List<TbUser> selectDoctorList(TbUser tbUser){
-		return sql.selectList("code.selectDoctorList", tbUser);
+		return sql.selectList("inspection.selectDoctorList", tbUser);
 	}
 }
