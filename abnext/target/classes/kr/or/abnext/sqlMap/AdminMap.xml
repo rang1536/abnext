@@ -131,12 +131,20 @@
 	<select id="getHospList" resultType="kr.or.abnext.domain.TbHospital">
 		SELECT *
 		  FROM TB_HOSPITAL
+		 WHERE 1=1
+		   <if test="hospNo != null and hospNo != 0">
+				AND HOSP_NO = #{hospNo}
+		   </if>
 	</select>
 	
 	<!-- 농장조회 -->
 	<select id="getFarmList" resultType="kr.or.abnext.domain.TbFarm">
 		SELECT *
 		  FROM TB_FARM
+		 WHERE 1=1
+		   <if test="farmNo != null and farmNo != 0">
+				AND FARM_NO = #{farmNo}
+		   </if>
 	</select>
 	
 	

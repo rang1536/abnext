@@ -13,11 +13,11 @@
          <div class="row">
           <div class="col-12">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header" style="background-color:red;">
                 <h3 class="card-title"></h3>
 
                 <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
+                  <div class="input-group input-group-sm" style="width: 300px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="상호를 입력하세요">
 
                     <div class="input-group-append">

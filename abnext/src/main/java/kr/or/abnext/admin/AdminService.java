@@ -133,6 +133,17 @@ public class AdminService {
 	
 	
 	/**
+	 * @function : getHospListServ
+	 * @Description : 기관병원조회
+	 * @param : 
+	 * @return: TbHospital
+	 **/
+	public TbHospital getHospListServ(TbHospital tbHospital) {
+		return adminDao.getHospList(tbHospital);
+	}
+	
+	
+	/**
 	 * @function : getFarmListServ
 	 * @Description : 농장조회
 	 * @param : 
@@ -140,6 +151,17 @@ public class AdminService {
 	 **/
 	public List<TbFarm> getFarmListServ() {
 		return adminDao.getFarmList();
+	}
+	
+	
+	/**
+	 * @function : getFarmListServ
+	 * @Description : 농장조회
+	 * @param : 
+	 * @return: TbFarm
+	 **/
+	public TbFarm getFarmListServ(TbFarm tbFarm) {
+		return adminDao.getFarmList(tbFarm);
 	}
 	
 	

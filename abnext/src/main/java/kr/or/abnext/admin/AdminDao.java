@@ -150,6 +150,17 @@ public class AdminDao {
 	
 	
 	/**
+	 * @function : getHospList
+	 * @Description : 기관병원조회
+	 * @param : 
+	 * @return: TbHospital
+	 **/
+	public TbHospital getHospList(TbHospital tbHospital) {
+		return sql.selectOne("admin.getHospList", tbHospital);
+	}
+	
+	
+	/**
 	 * @function : getFarmList
 	 * @Description : 농장조회
 	 * @param : 
@@ -157,6 +168,17 @@ public class AdminDao {
 	 **/
 	public List<TbFarm> getFarmList() {
 		return sql.selectList("admin.getFarmList");
+	}
+	
+	
+	/**
+	 * @function : getFarmList
+	 * @Description : 농장조회
+	 * @param : 
+	 * @return: TbFarm
+	 **/
+	public TbFarm getFarmList(TbFarm tbFarm) {
+		return sql.selectOne("admin.getFarmList", tbFarm);
 	}
 	
 	

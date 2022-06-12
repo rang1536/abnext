@@ -1072,6 +1072,30 @@
 			
 		}
 		
+		
+		/*======================
+		* 조회값 null체크
+		======================*/
+		function fn_ifNull(str){
+			if(str == null || str == 'null' || str == ''){
+				str = '';
+			}
+			
+			return str;
+		}
+		
+		
+		/*======================
+		* 앤터키 Event
+		* onkeyup = "fn_enterKey(pgmId)"
+		======================*/
+		function fn_enterKey(pgmId){
+			if(window.event.keyCode == 13){
+				if(pgmId == 'addUser'){
+					$('#fn_searchCompany').click();
+				}
+			}
+		}
 	</script>
 
 </body>

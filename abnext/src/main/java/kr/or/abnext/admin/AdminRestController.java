@@ -173,5 +173,31 @@ public class AdminRestController {
 		Map<String, Object> map = adminServ.delFarmServ(farmList);
 		return map;
 	}
+	
+	
+	/**
+	 * 병원조회 단건
+	 * */
+	@RequestMapping(value = "getHospInfo", method = RequestMethod.POST)
+	public Map<String, Object> getHospInfoCtrl(TbHospital tbHospital) {
+		System.out.println("병원정보 조회 시작~!!");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("hospInfo", adminServ.getHospListServ(tbHospital));
+		return map;
+	}
+	
+	
+	/**
+	 * 농장조회 단건
+	 * */
+	@RequestMapping(value = "getFarmInfo", method = RequestMethod.POST)
+	public Map<String, Object> getFarmInfoCtrl(TbFarm tbFarm) {
+		System.out.println("농장정보 조회 시작~!!");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("farmInfo", adminServ.getFarmListServ(tbFarm));
+		return map;
+	}
 }
 	

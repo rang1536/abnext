@@ -366,39 +366,40 @@
 												<div class="line" style="background-color:#C90000;"></div>
 											</div>
 							                
-							                <div class="row">
-							                	<div class="col-5">
-					                                <div class="form-group clearfix">
-								                      <div class="icheck-danger d-inline">
-								                        <input type="radio" name="searchKey" id="searchKey1" value="hospital" onclick="fn_searchKeyChg('hospital')">
-								                        <label for="searchKey1">
-								                        	기관(병원)
-								                        </label>
-								                      </div>
-								                      &nbsp;&nbsp;
-								                      <div class="icheck-danger d-inline">
-								                        <input type="radio" name="searchKey" id="searchKey2" value="farm" onclick="fn_searchKeyChg('farm')">
-								                        <label for="searchKey2">
-								                        	농장
-								                        </label>
-								                      </div>
-								                    </div>
-					                            </div>
-					                            <div class="col-6">
-								                	<div class="form-group">
-								                		<div class="input-group">
-							                                <input type="search" class="form-control" id="companyNm" placeholder="기관, 농장명검색" value="">
-							                                <div class="input-group-append">
-							                                    <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popCompany"> -->
-							                                    <button type="button" class="btn btn-success" id="fn_searchCompany">
-							                                    	검색&nbsp;<i class="fa fa-search"></i> 
-							                                    </button>
-							                                </div>
-							                            </div>
+							                <form onsubmit="return false;">
+								                <div class="row">
+								                	<div class="col-5">
+						                                <div class="form-group clearfix">
+									                      <div class="icheck-danger d-inline">
+									                        <input type="radio" name="searchKey" id="searchKey1" value="hospital" onclick="fn_searchKeyChg('hospital')">
+									                        <label for="searchKey1">
+									                        	기관(병원)
+									                        </label>
+									                      </div>
+									                      &nbsp;&nbsp;
+									                      <div class="icheck-danger d-inline">
+									                        <input type="radio" name="searchKey" id="searchKey2" value="farm" onclick="fn_searchKeyChg('farm')">
+									                        <label for="searchKey2">
+									                        	농장
+									                        </label>
+									                      </div>
+									                    </div>
+						                            </div>
+						                            <div class="col-6">
+									                	<div class="form-group">
+									                		<div class="input-group">
+								                                <input type="search" class="form-control" id="companyNm" placeholder="기관, 농장명검색" value="" onkeyup="fn_enterKey('addUser');">
+								                                <div class="input-group-append">
+								                                    <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popCompany"> -->
+								                                    <button type="button" class="btn btn-success" id="fn_searchCompany">
+								                                    	검색&nbsp;<i class="fa fa-search"></i> 
+								                                    </button>
+								                                </div>
+								                            </div>
+								                        </div>
 							                        </div>
-						                        </div>
-							                </div>
-							                
+								                </div>
+							                </form>
 							                <!-- 병원입력폼  -->
 							                <form onsubmit="return false" id="hospInfoForm" encType="multipart/form-data"> 
 								                <div class="hospitalDiv">
@@ -818,6 +819,14 @@
 			return;
 		}
 		
+		if(companyGb == 'hospital'){
+			$('#popComNm').empty();
+			$('#popComNm').html('기관(병원)');	
+		}else if(companyGb == 'farm'){
+			$('#popComNm').empty();
+			$('#popComNm').html('농장');	
+		}
+		
 		if(companyNm != null && companyNm != ''){ //검색값이 있을경우 조회먼저 시행.
 			$.ajax({
 				url : 'searchCompany',
@@ -828,22 +837,37 @@
 					if(companyGb == 'hospital'){
 						var hospList = data.hospList;
 						
-						console.log(hospList);
 						if(hospList.length == 1){
-							$('#hospNm').val('hospList[0].hospNm');
+							var list = hospList[0];
+							$('#hospNm').val(fn_ifNull(list.hospNm));
+							$('#hospHp').val(fn_ifNull(list.hospHp));
+							$('#hospTel').val(fn_ifNull(list.hospTel));
+							$('#hospFax').val(fn_ifNull(list.hospFax));
+							$('#hospEmail').val(fn_ifNull(list.hospEmail));
+							$('#hospRn').val(fn_ifNull(list.hospRn));
+							$('#hospRnFile').val(fn_ifNull(list.hospRnFile));
+							$('#hospZip').val(fn_ifNull(list.hospZip));
+							$('#hospAdr').val(fn_ifNull(list.hospAdr));
+							$('#hospDtlAdr').val(fn_ifNull(list.hospDtlAdr));
+							
+							toastr.success(list.hospNm+' 이 검색되었습니다');
+							
+							$('#hospNo').val(list.hospNo);
+							
 						}else if(hospList.length == 0){
-							alert('등록된 기관(병원)이 없습니다. 아래 기관(병원)정보를 입력해주세요');
-							return;
+							toastr.error('등록된 기관(병원)이 없습니다.');
+							$('#popCompany').modal();
+							
 						}else{
 							var html = '';
 							$.each(hospList, function(i, list){
-								html += '<tr ondblclick="setHospDataToForm('+list.hospNo+');">';
+								html += '<tr ondblclick="fn_setHospDataToForm('+list.hospNo+');">';
 								html += '	<td>기관(병원)</td>';
-								html += '	<td>'+list.hospNm+'</td>';
-								html += '	<td>'+list.hospCeo+'</td>';
-								html += '	<td>'+list.hospTel+'</td>';
-								html += '	<td>'+list.hospHp+'</td>';
-								html += '	<td>'+list.hospSigunguNm+'</td>';
+								html += '	<td>'+fn_ifNull(list.hospNm)+'</td>';
+								html += '	<td>'+fn_ifNull(list.hospCeo)+'</td>';
+								html += '	<td>'+fn_ifNull(list.hospTel)+'</td>';
+								html += '	<td>'+fn_ifNull(list.hospHp)+'</td>';
+								html += '	<td>'+fn_ifNull(list.hospSigunguNm)+'</td>';
 								html += '</tr>';
 							})
 							
@@ -854,26 +878,114 @@
 					}else if(companyGb == 'farm'){
 						var farmList = data.farmList;
 						
-						console.log(farmList.length);
 						if(farmList.length == 1){
-							$('#farmNm').val('farmList[0].farmNm');
+							var list = farmList[0];
+							$('#farmNm').val(fn_ifNull(list.farmNm));
+							$('#farmHp').val(fn_ifNull(list.farmHp));
+							$('#farmTel').val(fn_ifNull(list.farmTel));
+							$('#farmFax').val(fn_ifNull(list.farmFax));
+							$('#farmEmail').val(fn_ifNull(list.farmEmail));
+							$('#farmRn').val(fn_ifNull(list.farmRn));
+							$('#farmRnFile').val(fn_ifNull(list.farmRnFile));
+							$('#farmZip').val(fn_ifNull(list.farmZip));
+							$('#farmAdr').val(fn_ifNull(list.farmAdr));
+							$('#farmDtlAdr').val(fn_ifNull(list.farmDtlAdr));
+							
+							toastr.success(list.farmNm+' 이 검색되었습니다');
+							$('#farmNo').val(list.farmNo);
+							
 						}else if(farmList.length == 0){
-							alert('등록된 농장이 없습니다. 아래 농장정보를 입력해주세요');
-							return;
+							toastr.error('등록된 농장이 없습니다.');
+							$('#popCompany').modal();
+							
 						}else{
+							var html = '';
+							$.each(farmList, function(i, list){
+								html += '<tr ondblclick="fn_setfarmDataToForm('+list.farmNo+');">';
+								html += '	<td>농장</td>';
+								html += '	<td>'+fn_ifNull(list.farmNm)+'</td>';
+								html += '	<td>'+fn_ifNull(list.farmCeo)+'</td>';
+								html += '	<td>'+fn_ifNull(list.farmTel)+'</td>';
+								html += '	<td>'+fn_ifNull(list.farmHp)+'</td>';
+								html += '	<td>'+fn_ifNull(list.farmSigunguNm)+'</td>';
+								html += '</tr>';
+							})
+							
+							$('#comTbody').empty();
+							$('#comTbody').html(html);
 							$('#popCompany').modal();
 						}
 					}
 				}
 			})
 		}else{
-			console.log('검색값 없음~!!');
+			toastr.error('검색된 정보가 없습니다');
 			$('#popCompany').modal();
 		}
 		
-		//$('#popCompany').modal();
 	})
 	
+	
+	/*======================
+	* 기관,병원 세팅
+	======================*/
+	function fn_setHospDataToForm(hospNo){
+		$.ajax({
+			url : 'getHospInfo',
+			dataType : 'json',
+			type : 'post',
+			data : {'hospNo':hospNo},
+			success : function(data){
+				var hospInfo = data.hospInfo;
+				
+				$('#hospNm').val(fn_ifNull(hospInfo.hospNm));
+				$('#hospHp').val(fn_ifNull(hospInfo.hospHp));
+				$('#hospTel').val(fn_ifNull(hospInfo.hospTel));
+				$('#hospFax').val(fn_ifNull(hospInfo.hospFax));
+				$('#hospEmail').val(fn_ifNull(hospInfo.hospEmail));
+				$('#hospRn').val(fn_ifNull(hospInfo.hospRn));
+				$('#hospRnFile').val(fn_ifNull(hospInfo.hospRnFile));
+				$('#hospZip').val(fn_ifNull(hospInfo.hospZip));
+				$('#hospAdr').val(fn_ifNull(hospInfo.hospAdr));
+				$('#hospDtlAdr').val(fn_ifNull(hospInfo.hospDtlAdr));
+				
+				toastr.success(hospInfo.hospNm+' 이 선택되었습니다');
+				
+				$('#hospNo').val(hospInfo.hospNo);
+			}
+		})
+	}
+	
+	
+	/*======================
+	* 농장 세팅
+	======================*/
+	function fn_setfarmDataToForm(farmNo){
+		$.ajax({
+			url : 'getFarmInfo',
+			dataType : 'json',
+			type : 'post',
+			data : {'farmNo':farmNo},
+			success : function(data){
+				var farmInfo = data.farmInfo;
+				
+				$('#farmNm').val(fn_ifNull(farmInfo.farmNm));
+				$('#farmHp').val(fn_ifNull(farmInfo.farmHp));
+				$('#farmTel').val(fn_ifNull(farmInfo.farmTel));
+				$('#farmFax').val(fn_ifNull(farmInfo.farmFax));
+				$('#farmEmail').val(fn_ifNull(farmInfo.farmEmail));
+				$('#farmRn').val(fn_ifNull(farmInfo.farmRn));
+				$('#farmRnFile').val(fn_ifNull(farmInfo.farmRnFile));
+				$('#farmZip').val(fn_ifNull(farmInfo.farmZip));
+				$('#farmAdr').val(fn_ifNull(farmInfo.farmAdr));
+				$('#farmDtlAdr').val(fn_ifNull(farmInfo.farmDtlAdr));
+				
+				toastr.success(farmInfo.farmNm+' 이 선택되었습니다');
+				
+				$('#farmNo').val(farmInfo.farmNo);
+			}
+		})
+	}
 	
 	/*======================
 	* 기관,병원 소속선택 폼 이벤트
