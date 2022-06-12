@@ -24,16 +24,29 @@ public class TbHospital {
 	private String insId;
 	private String uptDt;
 	private String uptId;
-	
+
 	//추가
 	private String hospSidoNm;
 	private String hospSigunguNm;
 	private String hospBankNm;
 	private String hospAccountNo;
-	
+
 	private MultipartFile hospRnFile;
-	
-	
+	private String gubun;
+
+
+	public String getGubun() {
+		return gubun;
+	}
+
+
+
+	public void setGubun(String gubun) {
+		this.gubun = gubun;
+	}
+
+
+
 	public MultipartFile getHospRnFile() {
 		return hospRnFile;
 	}
@@ -281,11 +294,9 @@ public class TbHospital {
 				+ hospDtlAdr + ", hospZip=" + hospZip + ", hospCeo=" + hospCeo + ", hospRn=" + hospRn + ", insDt="
 				+ insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", hospSidoNm=" + hospSidoNm
 				+ ", hospSigunguNm=" + hospSigunguNm + ", hospBankNm=" + hospBankNm + ", hospAccountNo=" + hospAccountNo
-				+ "]";
+				+ ", hospRnFile=" + hospRnFile + ", gubun=" + gubun + "]";
 	}
 
 
 
-	
-	
 }

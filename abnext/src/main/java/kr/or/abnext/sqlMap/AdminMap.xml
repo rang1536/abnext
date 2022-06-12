@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
-	
+
 	<!-- 회원등록 -->
 	<insert id="addUser" parameterType="kr.or.abnext.domain.TbUser">
 		INSERT INTO TB_USER(
@@ -56,7 +56,7 @@
 			, #{farmNo}
 		)
 	</insert>
-	
+
 	<!-- 회원정보 수정 -->
 	<update id="modifyUser" parameterType="kr.or.abnext.domain.TbUser">
 		UPDATE TB_USER
@@ -81,23 +81,23 @@
 			   , SIDO_NM	= #{sidoNm}
 			   , HOSP_NO	= #{hospNo}
 			   , FARM_NO	= #{farmNo}
-	     WHERE USER_NO = #{userNo} 
+	     WHERE USER_NO = #{userNo}
 	</update>
 
 	<!-- 병원검색 -->
 	<select id="searchHospital" parameterType="kr.or.abnext.domain.TbHospital" resultType="kr.or.abnext.domain.TbHospital">
 		SELECT *
 		  FROM TB_HOSPITAL
-		 WHERE HOSP_NM LIKE CONCAT('%', #{hospNm}, '%') 
+		 WHERE HOSP_NM LIKE CONCAT('%', #{hospNm}, '%')
 	</select>
-	
+
 	<!-- 농장검색 -->
 	<select id="searchFarm" parameterType="kr.or.abnext.domain.TbFarm" resultType="kr.or.abnext.domain.TbFarm">
 		SELECT *
 		  FROM TB_FARM
-		 WHERE FARM_NM LIKE CONCAT('%', #{farmNm}, '%') 
+		 WHERE FARM_NM LIKE CONCAT('%', #{farmNm}, '%')
 	</select>
-	
+
 	<!-- 회원조회 -->
 	<select id="getUserList" resultType="kr.or.abnext.domain.TbUser">
 		SELECT USER_ZIP
@@ -126,7 +126,7 @@
 		  FROM TB_USER A
 		 ORDER BY USER_NO
 	</select>
-	
+
 	<!-- 기관(병원)조회 -->
 	<select id="getHospList" resultType="kr.or.abnext.domain.TbHospital">
 		SELECT *
@@ -136,7 +136,7 @@
 				AND HOSP_NO = #{hospNo}
 		   </if>
 	</select>
-	
+
 	<!-- 농장조회 -->
 	<select id="getFarmList" resultType="kr.or.abnext.domain.TbFarm">
 		SELECT *
@@ -146,8 +146,8 @@
 				AND FARM_NO = #{farmNo}
 		   </if>
 	</select>
-	
-	
+
+
 	<!-- 병원등록 -->
 	<insert id="addHosp" parameterType="kr.or.abnext.domain.TbHospital" useGeneratedKeys="true" keyProperty="hospNo">
 		INSERT INTO TB_HOSPITAL(
@@ -168,7 +168,7 @@
 			,INS_DT
 			,INS_ID
 			,UPT_DT
-			,UPT_ID			
+			,UPT_ID
 		) VALUES(
 			#{hospNm}
 			,#{hospTel}
@@ -190,7 +190,7 @@
 			,#{insId}
 		)
 	</insert>
-	
+
 	<!-- 병원삭제 -->
 	<delete id="delHosp" parameterType="java.util.ArrayList">
 		DELETE FROM TB_HOSPITAL
@@ -200,8 +200,8 @@
 			</foreach>
 		)
 	</delete>
-	
-	
+
+
 	<!-- 농장등록 -->
 	<insert id="addFarm" parameterType="kr.or.abnext.domain.TbFarm" useGeneratedKeys="true" keyProperty="farmNo">
 		INSERT INTO TB_FARM(
@@ -244,7 +244,7 @@
 			,#{insId}
 		)
 	</insert>
-	
+
 	<!-- 병원삭제 -->
 	<delete id="delFarm" parameterType="java.util.ArrayList">
 		DELETE FROM TB_FARM
@@ -254,7 +254,7 @@
 			</foreach>
 		)
 	</delete>
-	
+
 	<!-- 파일등록 -->
 	<select id="addFile" parameterType="kr.or.abnext.domain.TbFile">
 		INSERT INTO TB_FILE(
@@ -268,7 +268,7 @@
 			, USER_NO
 			, ANIM_NO
 			, FARM_NO
-			, BOARD_NO						
+			, BOARD_NO
 		) VALUES(
 			#{fileGb}
 			, #{filePath}
@@ -283,11 +283,33 @@
 			, #{boardNo}
 		)
 	</select>
-	
-	<!-- 전체회사조회
+
+	<!-- 전체회사조회-->
 	<select id="allCompanySearch" parameterType="Map" resultType="kr.or.abnext.domain.TbHospital">
-	
-	</select> -->
-	
-	
+		SELECT 'hospital' AS GUBUN
+			   , HOSP_NM		, HOSP_TEL			, HOSP_HP
+			   , HOSP_EMAIL		, HOSP_FAX			, HOSP_ADR
+			   , HOSP_ZIP		, HOSP_CEO			, HOSP_RN
+			   , HOSP_SIDO_NM	, HOSP_SIGUNGU_NM	, HOSP_ACCOUNT_NO
+			   , HOSP_BANK_NM
+		  FROM TB_HOSPITAL
+		 WHERE 1=1
+		   <if test="popSearchNm != 'noNm'">
+		   		AND HOSP_NM LIKE CONCAT('%', #{popSearchNm}, '%')
+		   </if>
+		 UNION ALL
+		SELECT 'farm' AS GUBUN
+			   , FARM_NM		, FARM_TEL			, FARM_HP
+			   , FARM_EMAIL		, FARM_FAX			, FARM_ADR
+			   , FARM_ZIP		, FARM_CEO			, FARM_RN
+			   , FARM_SIDO_NM	, FARM_SIGUNGU_NM	, FARM_ACCOUNT_NO
+			   , FARM_BANK_NM
+		  FROM TB_FARM
+		 WHERE 1=1
+		   <if test="popSearchNm != 'noNm'">
+		   		AND FARM_NM LIKE CONCAT('%', #{popSearchNm}, '%')
+		   </if>
+	</select>
+
+
 </mapper>
