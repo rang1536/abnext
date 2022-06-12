@@ -964,8 +964,8 @@
 
 						$('#farmDtlAdr').focus();
 					}else if(type == 'butler'){
-						$('#butlerSido').val(data.sido);
-						$('#butlerSigungu').val(data.sigungu);
+						$('#butlerSidoNm').val(data.sido);
+						$('#butlerSigunguNm').val(data.sigungu);
 					}
 				}
 			}).open();
@@ -1075,8 +1075,8 @@
 
 		}
 
-
-
+		
+		
 		/*======================
 		* 조회값 null체크
 		======================*/
@@ -1084,11 +1084,11 @@
 			if(str == null || str == 'null' || str == ''){
 				str = '';
 			}
-
+			
 			return str;
 		}
-
-
+		
+		
 		/*==================================
 		* 앤터키 Event
 		* onkeyup = "fn_enterKey(pgmId)"
@@ -1101,29 +1101,29 @@
 			}
 		}
 
-
+		
 		/*==================================
 		* 기관, 농장검색 팝업
 		* onclick="popSearch();"
 		==================================*/
 		function popSearch(){
 			var popSearchNm = $('#popSearchNm').val();
-
+			
 			if(popSearchNm == null || popSearchNm == ''){
 				toastr.info('상호입력을 하지 않은 경우 전체 등록된 데이터를 조회합니다.');
 			}
-
+			
 			$.ajax({
 				url : 'allCompanySearch',
-				data : {'popSearchNm': popSearchNm},
+				data : {'popSearchNm':popSearchNm},
 				dataType : 'json',
 				type : 'post',
 				success : function(data){
-
+					
 				}
 			})
-		}
-
+		}	
+			
 	</script>
 
 </body>
