@@ -16,22 +16,22 @@
   <link rel="stylesheet" href="resources/plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
-  
+
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-	
-  
+
+
   <style>
     th,td {text-align:center;}
   </style>
-  
-  
+
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -58,7 +58,7 @@
 
 		<!-- Main content -->
 		 <section class="content">
- 			<div class="container-fluid"> 
+ 			<div class="container-fluid">
  				<div class="invoice p-3 mb-3">
 					<!-- Table row -->
 					<div class="row">
@@ -106,13 +106,13 @@
 						</div> <!-- /.col-12 -->
 					</div>  <!-- /.row -->
 				</div> <!-- invoice -->
- 			
+
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
 	</div> <!-- End content-wrapper -->
-	
+
 	<c:import url="../layer/layout_footer.jsp"></c:import>
-	
+
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
 	<!-- Control sidebar content goes here -->
@@ -163,7 +163,7 @@
 	$(function () {
 		$('.select2').select2();
 		bsCustomFileInput.init();
-		
+
 		$('#example2').DataTable({
 			"paging": true,
 			"lengthChange": false,
@@ -173,16 +173,16 @@
 			"responsive": true,
 		});
     });
-	
-	
+
+
 	/*
 	* 회원등록 페이지 연결
 	*/
 	$('#addFarmBtn').on('click', function(){
 		$('#popAddFarm').modal();
 	})
-	
-	
+
+
 	/*
 	* 전체체크/헤제
 	*/
@@ -193,22 +193,22 @@
 			$('input:checkbox').prop('checked', false);
 		}
 	})
-	
-	
+
+
 	/*
 	* 병원삭제
 	*/
 	function fn_delFarm(){
 		var arr = new Array();
-		
+
 		$('input:checkbox[name="farmNo"]').each(function(){
 			if($(this).is(':checked')){
 				arr.push($(this).val());
 			}
 		})
-		
+
 		console.log(arr);
-		
+
 		$.ajax({
 			url : 'delFarmCtrl',
 			dataType : 'json',
@@ -222,8 +222,8 @@
 			}
 		})
 	}
-	
-	
-	
+
+
+
 </script>
 </html>
