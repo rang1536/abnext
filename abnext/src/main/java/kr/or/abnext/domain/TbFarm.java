@@ -24,16 +24,61 @@ public class TbFarm {
 	private String insId;
 	private String uptDt;
 	private String uptId;
-	
+
 	//추가
 	private String farmSidoNm;
 	private String farmSigunguNm;
 	private String farmBankNm;
 	private String farmAccountNo;
-	
+
 	private MultipartFile farmRnFile;
-	
-	
+
+	//추가. 2022.06.18.
+	private String farmMemo;
+	private String payGb;
+	private String payDate;
+	private String payManagerNm;
+	private String payManagerHp;
+	private String payMemo;
+
+
+
+	public String getFarmMemo() {
+		return farmMemo;
+	}
+	public void setFarmMemo(String farmMemo) {
+		this.farmMemo = farmMemo;
+	}
+	public String getPayGb() {
+		return payGb;
+	}
+	public void setPayGb(String payGb) {
+		this.payGb = payGb;
+	}
+	public String getPayDate() {
+		return payDate;
+	}
+	public void setPayDate(String payDate) {
+		this.payDate = payDate;
+	}
+	public String getPayManagerNm() {
+		return payManagerNm;
+	}
+	public void setPayManagerNm(String payManagerNm) {
+		this.payManagerNm = payManagerNm;
+	}
+	public String getPayManagerHp() {
+		return payManagerHp;
+	}
+	public void setPayManagerHp(String payManagerHp) {
+		this.payManagerHp = payManagerHp;
+	}
+	public String getPayMemo() {
+		return payMemo;
+	}
+	public void setPayMemo(String payMemo) {
+		this.payMemo = payMemo;
+	}
 	public MultipartFile getFarmRnFile() {
 		return farmRnFile;
 	}
@@ -161,8 +206,8 @@ public class TbFarm {
 				+ ", farmEmail=" + farmEmail + ", farmRn=" + farmRn + ", farmZip=" + farmZip + ", insDt=" + insDt
 				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", farmSidoNm=" + farmSidoNm
 				+ ", farmSigunguNm=" + farmSigunguNm + ", farmBankNm=" + farmBankNm + ", farmAccountNo=" + farmAccountNo
-				+ ", farmRnFile=" + farmRnFile + "]";
+				+ ", farmRnFile=" + farmRnFile + ", farmMemo=" + farmMemo + ", payGb=" + payGb + ", payDate=" + payDate
+				+ ", payManagerNm=" + payManagerNm + ", payManagerHp=" + payManagerHp + ", payMemo=" + payMemo + "]";
 	}
-	
-	
+
 }

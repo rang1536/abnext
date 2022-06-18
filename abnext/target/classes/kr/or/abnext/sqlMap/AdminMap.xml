@@ -129,11 +129,12 @@
 
 	<!-- 기관(병원)조회 -->
 	<select id="getHospList" resultType="kr.or.abnext.domain.TbHospital">
-		SELECT *
-		  FROM TB_HOSPITAL
+		SELECT A.*
+			   , (SELECT USER_NM FROM TB_USER WHERE USER_NO = A.HOSP_FIRST_DOCTOR) AS hospFirstDoctorNm
+		  FROM TB_HOSPITAL A
 		 WHERE 1=1
 		   <if test="hospNo != null and hospNo != 0">
-				AND HOSP_NO = #{hospNo}
+				AND A.HOSP_NO = #{hospNo}
 		   </if>
 	</select>
 
@@ -165,6 +166,12 @@
 			,HOSP_SIGUNGU_NM
 			,HOSP_ACCOUNT_NO
 			,HOSP_BANK_NM
+			,HOSP_MEMO
+			,PAY_GB
+			,PAY_DATE
+			,PAY_MANAGER_NM
+			,PAY_MANAGER_HP
+			,PAY_MEMO
 			,INS_DT
 			,INS_ID
 			,UPT_DT
@@ -184,12 +191,53 @@
 			,#{hospSigunguNm}
 			,#{hospAccountNo}
 			,#{hospBankNm}
+			,#{hospMemo}
+			,#{payGb}
+			,#{payDate}
+			,#{payManagerNm}
+			,#{payManagerHp}
+			,#{payMemo}
 			,NOW()
 			,#{insId}
 			,NOW()
 			,#{insId}
 		)
 	</insert>
+
+	<!-- 병원수정 -->
+	<update id="modifyHospital" parameterType="kr.or.abnext.domain.TbHospital">
+		UPDATE TB_HOSPITAL
+		   SET HOSP_NM				= #{hospNm}
+			   ,HOSP_TEL			= #{hospTel}
+			   ,HOSP_HP				= #{hospHp}
+			   ,HOSP_EMAIL			= #{hospEmail}
+			   ,HOSP_FAX			= #{hospFax}
+			   ,HOSP_ADR			= #{hospAdr}
+			   ,HOSP_DTL_ADR		= #{hospDtlAdr}
+			   ,HOSP_ZIP			= #{hospZip}
+			   ,HOSP_CEO			= #{hospCeo}
+			   ,HOSP_RN				= #{hospRn}
+			   ,HOSP_SIDO_NM		= #{hospSidoNm}
+			   ,HOSP_SIGUNGU_NM		= #{hospSigunguNm}
+			   ,HOSP_ACCOUNT_NO		= #{hospAccountNo}
+			   ,HOSP_BANK_NM		= #{hospBankNm}
+			   ,HOSP_MEMO			= #{hospMemo}
+			   ,PAY_GB				= #{payGb}
+			   ,PAY_DATE			= #{payDate}
+			   ,PAY_MANAGER_NM		= #{payManagerNm}
+			   ,PAY_MANAGER_HP		= #{payManagerHp}
+			   ,PAY_MEMO			= #{payMemo}
+			   ,HOSP_FIRST_DOCTOR	= #{hospFirstDoctor}
+			   <if test="hospFirstDoctorNm == null and hospFirstDoctor != null ">
+			   		,HOSP_FIRST_DOCTOR_NM	= (SELECT USER_NM FROM TB_USER WHERE USER_NO = #{hospFirstDoctor})
+			   </if>
+			   <if test="hospFirstDoctorNm != null and hospFirstDoctorNm != '' ">
+			   		,HOSP_FIRST_DOCTOR_NM	= #{hospFirstDoctorNm}
+			   </if>
+			   ,UPT_DT				= NOW()
+			   ,UPT_ID				= #{insId}
+		WHERE HOSP_NO = #{hospNo}
+	</update>
 
 	<!-- 병원삭제 -->
 	<delete id="delHosp" parameterType="java.util.ArrayList">
@@ -219,6 +267,12 @@
 			,FARM_SIGUNGU_NM
 			,FARM_BANK_NM
 			,FARM_ACCOUNT_NO
+			,FARM_MEMO
+			,PAY_GB
+			,PAY_DATE
+			,PAY_MANAGER_NM
+			,PAY_MANAGER_HP
+			,PAY_MEMO
 			,INS_DT
 			,INS_ID
 			,UPT_DT
@@ -238,6 +292,12 @@
 			,#{farmSigunguNm}
 			,#{farmBankNm}
 			,#{farmAccountNo}
+			,#{farmMemo}
+			,#{payGb}
+			,#{payDate}
+			,#{payManagerNm}
+			,#{payManagerHp}
+			,#{payMemo}
 			,NOW()
 			,#{insId}
 			,NOW()
@@ -309,6 +369,17 @@
 		   <if test="popSearchNm != 'noNm'">
 		   		AND FARM_NM LIKE CONCAT('%', #{popSearchNm}, '%')
 		   </if>
+	</select>
+
+
+	<!-- 소속수의사조회 -->
+	<select id="getDoctorList" parameterType="kr.or.abnext.domain.TbHospital" resultType="kr.or.abnext.domain.TbUser">
+		SELECT USER_NO
+			   , USER_NM
+	      FROM TB_USER
+	     WHERE 1=1
+	       AND HOSP_NO = #{hospNo}
+	       AND USER_LEV IN ('1', '2', '3', '5')
 	</select>
 
 

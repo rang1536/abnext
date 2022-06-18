@@ -221,5 +221,16 @@ public class AdminRestController {
 		Map<String, Object> map = adminServ.allCompanySearchServ(popSearchNm);
 		return map;
 	}
+
+
+	/**
+	 * 기관수정
+	 * */
+	@RequestMapping(value = "modifyHospCtrl", method = RequestMethod.POST)
+	public Map<String, Object> modifyHospCtrl(TbHospital tbHospital) {
+		System.out.println("기관수정 시작~!!");
+
+		return adminServ.modifyHospitalServ(tbHospital);
+	}
 }
 

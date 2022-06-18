@@ -981,6 +981,8 @@
 			var hospNm = $('#hospNm').val();
 			var hospHp = $('#hospHp').val();
 			var hospAdr = $('#hospAdr').val();
+			var payManagerNm = $('#payManagerNm').val();
+			var payManagerHp = $('#payManagerHp').val();
 
 			if(hospNm == null || hospNm == ''){
 				alert('기관(병원)명은 필수입력입니다.');
@@ -994,6 +996,16 @@
 
 			if(hospAdr == null || hospAdr == ''){
 				alert('주소는 필수입력입니다.');
+				return;
+			}
+
+			if(payManagerNm == null || payManagerNm == ''){
+				alert('정산담당자를 입력하세요');
+				return;
+			}
+
+			if(payManagerHp == null || payManagerHp == ''){
+				alert('정산담당자 연락처를 입력하세요');
 				return;
 			}
 
@@ -1023,6 +1035,13 @@
 
 		}
 
+		$(document).on('change', '#payGb', function(){
+			if($(this).val() == '월간정산'){
+				$('#payDate').prop('disabled', false);
+			}else{
+				$('#payDate').prop('disabled', true);
+			}
+		})
 
 		/*====================================
 		* 농장등록 (팝업)

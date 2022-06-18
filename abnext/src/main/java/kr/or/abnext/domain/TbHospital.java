@@ -34,6 +34,112 @@ public class TbHospital {
 	private MultipartFile hospRnFile;
 	private String gubun;
 
+	//추가. 2022.06.18.
+	private String hospMemo;
+	private String payGb;
+	private String payDate;
+	private String payManagerNm;
+	private String payManagerHp;
+	private String payMemo;
+	private String hospFirstDoctor;
+	private String hospFirstDoctorNm;
+
+
+	public String getHospFirstDoctorNm() {
+		return hospFirstDoctorNm;
+	}
+
+
+
+	public void setHospFirstDoctorNm(String hospFirstDoctorNm) {
+		this.hospFirstDoctorNm = hospFirstDoctorNm;
+	}
+
+
+
+	public String getHospFirstDoctor() {
+		return hospFirstDoctor;
+	}
+
+
+
+	public void setHospFirstDoctor(String hospFirstDoctor) {
+		this.hospFirstDoctor = hospFirstDoctor;
+	}
+
+
+
+	public String getHospMemo() {
+		return hospMemo;
+	}
+
+
+
+	public void setHospMemo(String hospMemo) {
+		this.hospMemo = hospMemo;
+	}
+
+
+
+	public String getPayGb() {
+		return payGb;
+	}
+
+
+
+	public void setPayGb(String payGb) {
+		this.payGb = payGb;
+	}
+
+
+
+	public String getPayDate() {
+		return payDate;
+	}
+
+
+
+	public void setPayDate(String payDate) {
+		this.payDate = payDate;
+	}
+
+
+
+	public String getPayManagerNm() {
+		return payManagerNm;
+	}
+
+
+
+	public void setPayManagerNm(String payManagerNm) {
+		this.payManagerNm = payManagerNm;
+	}
+
+
+
+	public String getPayManagerHp() {
+		return payManagerHp;
+	}
+
+
+
+	public void setPayManagerHp(String payManagerHp) {
+		this.payManagerHp = payManagerHp;
+	}
+
+
+
+	public String getPayMemo() {
+		return payMemo;
+	}
+
+
+
+	public void setPayMemo(String payMemo) {
+		this.payMemo = payMemo;
+	}
+
+
 
 	public String getGubun() {
 		return gubun;
@@ -294,8 +400,12 @@ public class TbHospital {
 				+ hospDtlAdr + ", hospZip=" + hospZip + ", hospCeo=" + hospCeo + ", hospRn=" + hospRn + ", insDt="
 				+ insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", hospSidoNm=" + hospSidoNm
 				+ ", hospSigunguNm=" + hospSigunguNm + ", hospBankNm=" + hospBankNm + ", hospAccountNo=" + hospAccountNo
-				+ ", hospRnFile=" + hospRnFile + ", gubun=" + gubun + "]";
+				+ ", hospRnFile=" + hospRnFile + ", gubun=" + gubun + ", hospMemo=" + hospMemo + ", payGb=" + payGb
+				+ ", payDate=" + payDate + ", payManagerNm=" + payManagerNm + ", payManagerHp=" + payManagerHp
+				+ ", payMemo=" + payMemo + ", hospFirstDoctor=" + hospFirstDoctor + ", hospFirstDoctorNm="
+				+ hospFirstDoctorNm + "]";
 	}
+
 
 
 

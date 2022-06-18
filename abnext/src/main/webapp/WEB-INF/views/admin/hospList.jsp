@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="resources/plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
-  
+
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
@@ -25,13 +25,13 @@
   <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-	
-  
+
+
   <style>
     th,td {text-align:center;}
   </style>
-  
-  
+
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -58,7 +58,7 @@
 
 		<!-- Main content -->
 		 <section class="content">
- 			<div class="container-fluid"> 
+ 			<div class="container-fluid">
  				<div class="invoice p-3 mb-3">
 					<!-- Table row -->
 					<div class="row">
@@ -70,12 +70,12 @@
 										<thead>
 											<tr>
 												<th><input type="checkbox" id="allCheck"/></th>
-												<th>병원명</th>
-												<th>전화번호</th>
-												<th>휴대폰</th>
-												<th>이메일</th>
+												<th>기관명</th>
+												<th>대표자</th>
+												<th>책임수의사</th>
 												<th>지역</th>
-												<th>입금계좌</th>
+												<th>지역2</th>
+												<th>정산타입</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -84,20 +84,23 @@
 													<td>
 														<input type="checkbox" name="hospNo" value="${item.hospNo }"/>
 													</td>
-													<td>${item.hospNm }</td>
-													<td>${item.hospTel }</td>
-													<td>${item.hospHp }</td>
-													<td>${item.hospEmail }</td>
+													<td ondblclick="fn_modifyHosp('${item.hospNo }')">${item.hospNm }</td>
+													<td>${item.hospCeo }</td>
+													<td>${item.hospFirstDoctorNm }</td>
 													<td>${item.hospSidoNm}</td>
-													<td>
-														<c:if test="${item.hospBankNm ne null and item.hospBankNm ne ''}">(${item.hospBankNm})</c:if>
-														${item.hospAccountNo }
-													</td>
+													<td>${item.hospSigunguNm }</td>
+													<td>${item.payGb }</td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
 								</div> <!-- /.card-body -->
+
+								<!-- 수정페이지 키값 세팅 폼-->
+								<form id="modifyHospForm">
+									<input type="hidden" id="modifyHospNo" name="modifyHospNo" />
+								</form>
+
 								<div class="card-footer">
 									<button type="button" id="delHospBtn" class="btn btn-sm btn-danger" onclick="fn_delHospital();">삭제</button>
 									<button type="button" id="addHospBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">기관병원등록</button>
@@ -106,13 +109,13 @@
 						</div> <!-- /.col-12 -->
 					</div>  <!-- /.row -->
 				</div> <!-- invoice -->
- 			
+
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
 	</div> <!-- End content-wrapper -->
-	
+
 	<c:import url="../layer/layout_footer.jsp"></c:import>
-	
+
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
 	<!-- Control sidebar content goes here -->
@@ -163,7 +166,7 @@
 	$(function () {
 		$('.select2').select2();
 		bsCustomFileInput.init();
-		
+
 		$('#example2').DataTable({
 			"paging": true,
 			"lengthChange": false,
@@ -173,16 +176,16 @@
 			"responsive": true,
 		});
     });
-	
-	
+
+
 	/*
 	* 회원등록 페이지 연결
 	*/
 	$('#addHospBtn').on('click', function(){
 		$('#popAddHosp').modal();
 	})
-	
-	
+
+
 	/*
 	* 전체체크/헤제
 	*/
@@ -193,20 +196,20 @@
 			$('input:checkbox').prop('checked', false);
 		}
 	})
-	
-	
+
+
 	/*
 	* 병원삭제
 	*/
 	function fn_delHospital(){
 		var arr = new Array();
-		
+
 		$('input:checkbox[name="hospNo"]').each(function(){
 			if($(this).is(':checked')){
 				arr.push($(this).val());
 			}
 		})
-		
+
 		$.ajax({
 			url : 'delHospCtrl',
 			dataType : 'json',
@@ -220,8 +223,15 @@
 			}
 		})
 	}
-	
-	
-	
+
+	//기관정보수정
+	function fn_modifyHosp(hospNo){
+		$('#modifyHospNo').val(hospNo);
+
+		$('#modifyHospForm').prop('action', 'modifyHospital');
+		$('#modifyHospForm').submit();
+	}
+
+
 </script>
 </html>

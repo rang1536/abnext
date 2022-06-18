@@ -207,4 +207,28 @@ public class AdminDao {
 	public List<TbHospital> allCompanySearch(Map<String, Object> params){
 		return sql.selectList("admin.allCompanySearch", params);
 	}
+
+
+	/**
+	 * @function : getDoctorList
+	 * @Description : 소속 수의사 조회
+	 * @param : Map<String, Object>
+	 * @return: List TbUser
+	 **/
+	public List<TbUser> getDoctorList(TbHospital tbHospital){
+		return sql.selectList("admin.getDoctorList", tbHospital);
+	}
+
+
+	/**
+	 * @function : modifyHospital
+	 * @Description : 기관수정
+	 * @param : TbHospital
+	 **/
+	public int modifyHospital(TbHospital tbHospital) {
+		return sql.update("admin.modifyHospital", tbHospital);
+	}
+
+
+
 }

@@ -288,4 +288,26 @@ public class AdminService {
 	}
 
 
+
+	/**
+	 * @function : getDoctorListServ
+	 * @Description : 소속 수의사 조회
+	 * @param : Map<String, Object>
+	 * @return: List TbUser
+	 **/
+	public List<TbUser> getDoctorListServ(TbHospital tbHospital){
+		return adminDao.getDoctorList(tbHospital);
+	}
+
+
+	/**
+	 * @function : modifyHospitalServ
+	 * @Description : 기관수정
+	 * @param : TbHospital
+	 **/
+	public Map<String, Object> modifyHospitalServ(TbHospital tbHospital) {
+		return getResultMap(adminDao.modifyHospital(tbHospital));
+	}
+
+
 }
