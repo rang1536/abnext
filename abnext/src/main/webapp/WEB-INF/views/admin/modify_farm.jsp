@@ -49,7 +49,7 @@
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>농장관리</b></li>
+							<li class="breadcrumb-item active"><a href="farmList"><b>농장관리</b></a></li>
 						</ol>
 					</div>
 				</div>
@@ -207,6 +207,7 @@
 					                  </span>
 					                  <input type="hidden" id="farmSidoNm" name="farmSidoNm" value="${farm.farmSidoNm }"/>
 					                  <input type="hidden" id="farmSigunguNm" name="farmSigunguNm" value="${farm.farmSigunguNm }"/>
+					                  <input type="hidden" id="farmSigunguCd" name="farmSigunguCd" value="${farm.farmSigunguCd }"/>
 					                </div>
 					            </div><br/>
 					            <div class="row">

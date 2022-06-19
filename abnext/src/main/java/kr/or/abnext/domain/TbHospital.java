@@ -45,6 +45,19 @@ public class TbHospital {
 	private String hospFirstDoctorNm;
 
 	private String hospRnFilePathName;
+	private String hospSigunguCd;
+
+
+	public String getHospSigunguCd() {
+		return hospSigunguCd;
+	}
+
+
+
+	public void setHospSigunguCd(String hospSigunguCd) {
+		this.hospSigunguCd = hospSigunguCd;
+	}
+
 
 
 	public String getHospRnFilePathName() {
@@ -417,8 +430,10 @@ public class TbHospital {
 				+ ", hospRnFile=" + hospRnFile + ", gubun=" + gubun + ", hospMemo=" + hospMemo + ", payGb=" + payGb
 				+ ", payDate=" + payDate + ", payManagerNm=" + payManagerNm + ", payManagerHp=" + payManagerHp
 				+ ", payMemo=" + payMemo + ", hospFirstDoctor=" + hospFirstDoctor + ", hospFirstDoctorNm="
-				+ hospFirstDoctorNm + ", hospRnFilePathName=" + hospRnFilePathName + "]";
+				+ hospFirstDoctorNm + ", hospRnFilePathName=" + hospRnFilePathName + ", hospSigunguCd=" + hospSigunguCd
+				+ "]";
 	}
+
 
 
 

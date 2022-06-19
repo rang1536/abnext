@@ -22,7 +22,7 @@
   <!-- Toastr -->
   <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
@@ -44,12 +44,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>회원관리</b></h1>
+						<h1><b>회원관리</b><code>&nbsp;(정보수정)</code></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>회원관리</b></li>
+							<li class="breadcrumb-item active"><a href="userList"><b>회원관리</b></a></li>
 						</ol>
 					</div>
 				</div>
@@ -59,74 +59,58 @@
 		<!-- Main content -->
 		 <section class="content">
  			<div class="container-fluid">
- 				<div class="invoice p-3 mb-3">
-					<!-- Table row -->
-					<div class="row">
-						<div class="col-12">
-							<div class="card">
-								<!-- /.card-header -->
-								<div class="card-body">
-									<table id="example2" class="table table-bordered table-hover">
-										<thead>
-											<tr>
-												<th><input type="checkbox" id="allCheck"/></th>
-												<th>구분</th>
-												<th>ID</th>
-												<th>이름</th>
-												<th>전화</th>
-												<th>휴대폰</th>
-												<th>지역</th>
-												<th>소속</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="item" items="${userList }" varStatus="status">
-												<tr>
-													<td>
-														<input type="checkbox" />
-													</td>
-													<td  onclick="fn_modifyUser('${item.userNo}');">
-														<c:if test="${item.userLev eq '1'}">
-															일반회원
-														</c:if>
-														<c:if test="${item.userLev eq '2'}">
-															수의사
-														</c:if>
-														<c:if test="${item.userLev eq '3'}">
-															기관(병원)
-														</c:if>
-														<c:if test="${item.userLev eq '4'}">
-															농장
-														</c:if>
-														<c:if test="${item.userLev eq '5'}">
-															관리자
-														</c:if>
-													</td>
-													<td onclick="fn_modifyUser('${item.userNo}');">${item.userId }</td>
-													<td onclick="fn_modifyUser('${item.userNo}');">${item.userNm }</td>
-													<td>${item.userTel }</td>
-													<td>${item.userHp}</td>
-													<td>${item.sidoNm}</td>
-													<td>${item.hospNm }${item.farmNm }</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div> <!-- /.card-body -->
+ 				<div class="row">
+		          <div class="col-12">
+		            <div class="card">
+		              <div class="card-header" style="background-color:red;">
+		                <h3 class="card-title"></h3>
 
-								<!-- 수정페이지 키값 세팅 폼-->
-								<form id="modifyUserForm">
-									<input type="hidden" id="modifyUserNo" name="modifyUserNo" />
-								</form>
+		              </div>
+		              <!-- /.card-header 본문-->
+		              <div class="card-body">
+						<!-- 유저정보입력 FORM -->
+                   		<form onsubmit="return false" id="userInfoForm" method="post" encType="multipart/form-data">
+							<h5><b>소속정보</b></h5>
 
-								<div class="card-footer">
-									<button type="button" id="delUserBtn" class="btn btn-sm btn-danger">삭제</button>
-									<button type="button" id="addUserBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">회원등록</button>
-								</div>
-							</div> <!-- /.card -->
-						</div> <!-- /.col-12 -->
-					</div>  <!-- /.row -->
-				</div> <!-- invoice -->
+							<div class="row">
+			                  <div class="col-sm-6">
+			                    <!-- select -->
+			                    <div class="form-group">
+			                      <label>회원구분</label>
+			                      <select class="custom-select" name="userLev" id="userLev">
+			                        <option value="1">일반회원</option>
+			                        <option value="2">수의사</option>
+			                        <option value="3">기관(병원)</option>
+			                        <option value="4">농장</option>
+			                        <option value="5">관리자</option>
+			                      </select>
+			                    </div>
+			                  </div>
+			                  <div class="col-sm-6">
+			                    <!-- <div class="form-group">
+			                      <label>Custom Select Disabled</label>
+			                      <select class="custom-select" disabled>
+			                        <option>option 1</option>
+			                        <option>option 2</option>
+			                        <option>option 3</option>
+			                        <option>option 4</option>
+			                        <option>option 5</option>
+			                      </select>
+			                    </div> -->
+			                  </div>
+			                </div>
+
+						</form>
+					  </div> <!-- card-body END -->
+
+		              <div class="card-footer">
+					  	<button type="button" onclick="fn_modifyfarmital();" class="btn btn-sm btn-success btn-flat" style="float:right;">정보변경</button>
+					  </div>
+		            </div>
+		            <!-- /.card -->
+		          </div>
+		        </div>
+		        <!-- /.row -->
 
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
@@ -139,6 +123,7 @@
 	<!-- Control sidebar content goes here -->
 	</aside> <!-- /.control-sidebar -->
 </div> <!-- End wrapper  -->
+
 </body>
 
 <!-- jQuery -->
@@ -155,8 +140,6 @@
 <!-- InputMask -->
 <script src="resources/plugins/moment/moment.min.js"></script>
 <script src="resources/plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- BS-Stepper -->
-<script src="resources/plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <!-- 주소찾기 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- Select2 -->
@@ -181,11 +164,6 @@
 
 <script>
 
-	//BS-Stepper Init
-	document.addEventListener('DOMContentLoaded', function () {
-	  window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-	})
-
 	$(function () {
 		$('.select2').select2();
 		bsCustomFileInput.init();
@@ -201,28 +179,71 @@
     });
 
 
-	/*
-	* 회원등록 페이지 연결
-	*/
-	$('#addUserBtn').on('click', function(){
-		location.href = 'addUserPage';
-	})
+	/*====================================
+	* 농장병원등 수정
+	* 팝업 : fn_modifyfarmital()
+	====================================*/
+	function fn_modifyfarmital(){
+		var farmNm = $('#farmNm').val();
+		var farmHp = $('#farmHp').val();
+		var farmAdr = $('#farmAdr').val();
+		var payGb = $('#payGb').val();
+		var payManagerNm = $('#payManagerNm').val();
+		var payManagerHp = $('#payManagerHp').val();
+
+		if(farmNm == null || farmNm == ''){
+			alert('농장명은 필수입력입니다.');
+			return;
+		}
+
+		if(farmHp == null || farmHp == ''){
+			alert('핸드폰번호는 필수입력입니다.');
+			return;
+		}
+
+		if(farmAdr == null || farmAdr == ''){
+			alert('주소는 필수입력입니다.');
+			return;
+		}
+
+		if(payGb == '월간정산'){
+			if(payManagerNm == null || payManagerNm == ''){
+				alert('정산담당자를 입력하세요');
+				return;
+			}
+
+			if(payManagerHp == null || payManagerHp == ''){
+				alert('정산담당자 연락처를 입력하세요');
+				return;
+			}
+		}
 
 
-	/*
-	* 회원삭제
-	*/
+		//$('#farmInfoForm').serialize();
+		var params = new FormData($('#farmInfoForm')[0]);
 
+		toastr.info('등록중입니다');
 
-	/*
-	* 회원정보수정페이지 연결
-	*/
-	function fn_modifyUser(userNo){
-		$('#modifyUserNo').val(userNo);
+		$.ajax({
+			url : 'modifyfarmCtrl',
+			data : params,
+			dataType : 'json',
+			type : 'post',
+			processData : false,
+			contentType : false,
+			success : function(data){
+				if(data.result == 'succ'){
+					alert('농장정보변경이 완료되었습니다.');
+					location.href = 'farmList';
+				}else{
+					toastr.error('농장 정보변경에 실패하였습니다.');
+				}
+			}
+		})
 
-		$('#modifyUserForm').prop('action', 'modifyUser');
-		$('#modifyUserForm').submit();
 	}
+
+
 
 </script>
 </html>

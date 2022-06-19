@@ -262,7 +262,28 @@
 
 			            </ul>
 			        </li>
-			        <!-- 상품 -->
+
+			        <!-- 수납관리 -->
+			        <li class="nav-item">
+			            <a href="#" class="nav-link">
+			              <i class="nav-icon fas fa-box"></i>
+			              <p>
+			              	수납관리
+			              	<i class="right fas fa-angle-left"></i>
+			              	<span class="badge badge-info right">2</span>
+			              </p>
+			            </a>
+			            <ul class="nav nav-treeview">
+			              <li class="nav-item">
+			                <a href="payList" class="nav-link">
+			                  <i class="far fa-circle nav-icon"></i>
+			                  <p>목록조회</p>
+			                </a>
+			              </li>
+			            </ul>
+			        </li>
+
+			        <!-- 상품
 			        <li class="nav-item">
 			            <a href="#" class="nav-link">
 			              <i class="nav-icon fas fa-box"></i>
@@ -287,7 +308,7 @@
 			              </li>
 
 			            </ul>
-			        </li>
+			        </li> -->
 
 			        <!-- 통계 -->
 			        <li class="nav-item">
@@ -969,6 +990,7 @@
 					}else if(type == 'butler'){
 						$('#butlerSido').val(data.sido);
 						$('#butlerSigungu').val(data.sigungu);
+						$('#butlerSigunguCd').val(data.sigunguCode);
 
 					}
 				}

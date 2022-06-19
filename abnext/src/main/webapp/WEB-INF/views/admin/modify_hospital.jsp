@@ -218,6 +218,7 @@
 					                  </span>
 					                  <input type="hidden" id="hospSidoNm" name="hospSidoNm" value="${hosp.hospSidoNm }"/>
 					                  <input type="hidden" id="hospSigunguNm" name="hospSigunguNm" value="${hosp.hospSigunguNm }"/>
+					                  <input type="hidden" id="hospSigunguCd" name="hospSigunguCd" value="${hosp.hospSigunguCd }"/>
 					                </div>
 					            </div><br/>
 					            <div class="row">

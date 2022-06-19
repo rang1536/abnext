@@ -42,8 +42,16 @@ public class TbFarm {
 	private String payMemo;
 
 	private String farmRnFilePathName;
+	private String farmSigunguCd;
 
 
+
+	public String getFarmSigunguCd() {
+		return farmSigunguCd;
+	}
+	public void setFarmSigunguCd(String farmSigunguCd) {
+		this.farmSigunguCd = farmSigunguCd;
+	}
 	public String getFarmRnFilePathName() {
 		return farmRnFilePathName;
 	}
@@ -215,7 +223,7 @@ public class TbFarm {
 				+ ", farmSigunguNm=" + farmSigunguNm + ", farmBankNm=" + farmBankNm + ", farmAccountNo=" + farmAccountNo
 				+ ", farmRnFile=" + farmRnFile + ", farmMemo=" + farmMemo + ", payGb=" + payGb + ", payDate=" + payDate
 				+ ", payManagerNm=" + payManagerNm + ", payManagerHp=" + payManagerHp + ", payMemo=" + payMemo
-				+ ", farmRnFilePathName=" + farmRnFilePathName + "]";
+				+ ", farmRnFilePathName=" + farmRnFilePathName + ", farmSigunguCd=" + farmSigunguCd + "]";
 	}
 
 }

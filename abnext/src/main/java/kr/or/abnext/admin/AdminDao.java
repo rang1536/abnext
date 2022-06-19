@@ -249,4 +249,14 @@ public class AdminDao {
 		return sql.delete("admin.removeRnFile", param);
 	}
 
+
+	/**
+	 * @function : getUserInfo
+	 * @Description : 회원정보조회
+	 * @param : TbUser
+	 * @return : TbUser
+	 **/
+	public TbUser getUserInfo(TbUser tbUser) {
+		return sql.selectOne("admin.getUserInfo", tbUser);
+	}
 }

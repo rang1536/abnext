@@ -146,6 +146,7 @@
 			                  </span>
 			                  <input type="hidden" id="hospSidoNm" name="hospSidoNm"/>
 			                  <input type="hidden" id="hospSigunguNm" name="hospSigunguNm"/>
+			                  <input type="hidden" id="hospSigunguCd" name="hospSigunguCd"/>
 			                </div>
 			            </div><br/>
 			            <div class="row">

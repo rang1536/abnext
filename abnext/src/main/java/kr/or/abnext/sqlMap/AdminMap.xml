@@ -142,10 +142,11 @@
 	<!-- 농장조회 -->
 	<select id="getFarmList" resultType="kr.or.abnext.domain.TbFarm">
 		SELECT *
-		  FROM TB_FARM
+			   , (SELECT FILE_NEW_NM FROM TB_FILE WHERE FARM_NO = A.FARM_NO AND FILE_GB = 'F001-01') AS farmRnFilePathName
+		  FROM TB_FARM A
 		 WHERE 1=1
 		   <if test="farmNo != null and farmNo != 0">
-				AND FARM_NO = #{farmNo}
+				AND A.FARM_NO = #{farmNo}
 		   </if>
 	</select>
 
@@ -306,7 +307,37 @@
 		)
 	</insert>
 
-	<!-- 병원삭제 -->
+	<!-- 농장수정 -->
+	<update id="modifyFarm" parameterType="kr.or.abnext.domain.TbFarm">
+		UPDATE TB_FARM
+		   SET FARM_NM				= #{farmNm}
+			   ,FARM_TEL			= #{farmTel}
+			   ,FARM_HP				= #{farmHp}
+			   ,FARM_EMAIL			= #{farmEmail}
+			   ,FARM_FAX			= #{farmFax}
+			   ,FARM_ADR			= #{farmAdr}
+			   ,FARM_DTL_ADR		= #{farmDtlAdr}
+			   ,FARM_ZIP			= #{farmZip}
+			   ,FARM_CEO			= #{farmCeo}
+			   ,FARM_RN				= #{farmRn}
+			   ,FARM_SIDO_NM		= #{farmSidoNm}
+			   ,FARM_SIGUNGU_NM		= #{farmSigunguNm}
+			   ,FARM_SIGUNGU_CD		= #{farmSigunguCd}
+			   ,FARM_ACCOUNT_NO		= #{farmAccountNo}
+			   ,FARM_BANK_NM		= #{farmBankNm}
+			   ,FARM_MEMO			= #{farmMemo}
+			   ,PAY_GB				= #{payGb}
+			   ,PAY_DATE			= #{payDate}
+			   ,PAY_MANAGER_NM		= #{payManagerNm}
+			   ,PAY_MANAGER_HP		= #{payManagerHp}
+			   ,PAY_MEMO			= #{payMemo}
+			   ,UPT_DT				= NOW()
+			   ,UPT_ID				= #{insId}
+		WHERE FARM_NO = #{farmNo}
+	</update>
+
+
+	<!-- 농장삭제 -->
 	<delete id="delFarm" parameterType="java.util.ArrayList">
 		DELETE FROM TB_FARM
 		WHERE FARM_NO IN (
@@ -380,7 +411,7 @@
 	      FROM TB_USER
 	     WHERE 1=1
 	       AND HOSP_NO = #{hospNo}
-	       AND USER_LEV IN ('1', '2', '3', '5')
+	       AND USER_LEV IN ('2', '3', '5')
 	</select>
 
 	<!-- 사업자등록증 삭제 -->
@@ -396,5 +427,15 @@
 			AND FARM_NO = #{farmNo}
 		</if>
 	</delete>
+
+
+	<!-- 회원조회 -->
+	<select id="getUserInfo" parameterType="kr.or.abnext.domain.TbUser" resultType="kr.or.abnext.domain.TbUser">
+		SELECT *
+		  FROM TB_USER
+		 WHERE USER_NO = #{userNo}
+	</select>
+
+
 
 </mapper>

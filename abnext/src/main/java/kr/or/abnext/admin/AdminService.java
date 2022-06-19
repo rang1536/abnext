@@ -346,7 +346,7 @@ public class AdminService {
 			TbFile tbFile = utilFile.singleUploadFile(tbFarm.getFarmRnFile());
 
 			if(tbFile != null) {
-				tbFile.setHospNo(tbFarm.getFarmNo());
+				tbFile.setFarmNo(tbFarm.getFarmNo());
 				tbFile.setFileGb("F001-01"); //사업자등록증
 				tbFile.setFileMemo("사업자등록증");
 
@@ -356,4 +356,15 @@ public class AdminService {
 
 		return getResultMap(adminDao.modifyFarm(tbFarm));
 	}
+
+	/**
+	 * @function : getUserInfo
+	 * @Description : 회원정보조회
+	 * @param : TbUser
+	 * @return : TbUser
+	 **/
+	public TbUser getUserInfoServ(TbUser tbUser) {
+		return adminDao.getUserInfo(tbUser);
+	}
+
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbUser;
 
 @Controller
 public class AdminController {
@@ -91,5 +92,24 @@ public class AdminController {
 		model.addAttribute("farm", adminServ.getFarmListServ(tbFarm));
 
 		return "admin/modify_farm";
+	}
+
+
+	/*
+	 * 회원수정
+	 * */
+	@RequestMapping(value = "modifyUser", method = RequestMethod.GET)
+	public String modifyUser(@RequestParam(value="modifyUserNo")String userNo
+			, Model model) {
+		System.out.println("농장정보 수정페이지 연결~!!");
+		TbUser tbUser = new TbUser();
+		tbUser.setUserNo(Integer.parseInt(userNo));
+
+		tbUser = adminServ.getUserInfoServ(tbUser);
+
+		//if(tbUser)
+		//model.addAttribute("user", adminServ.getUserListServ(tbUser));
+
+		return "admin/modify_user";
 	}
 }

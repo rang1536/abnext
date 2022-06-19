@@ -146,6 +146,7 @@
 			                  </span>
 			                  <input type="hidden" id="farmSidoNm" name="farmSidoNm"/>
 			                  <input type="hidden" id="farmSigunguNm" name="farmSigunguNm"/>
+			                  <input type="hidden" id="farmSigunguCd" name="farmSigunguCd"/>
 			                </div>
 			            </div><br/>
 			            <div class="row">
