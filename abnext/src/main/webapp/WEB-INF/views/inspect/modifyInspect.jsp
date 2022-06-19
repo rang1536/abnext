@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>avinext | (주)아비넥스트</title>
-	
+
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
@@ -66,13 +68,13 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>*의뢰번호</label>
-										<input type="text" class="form-control" placeholder="의뢰번호" readonly>
+										<input type="text" class="form-control" placeholder="의뢰번호" readonly value="${rceptInfo.rqstNo }">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>*신청일</label>
-										<input type="text" class="form-control" placeholder="신청일" readonly>
+										<input type="text" class="form-control" placeholder="신청일" readonly value="${rceptInfo.rqstDt }">
 									</div>
 								</div>
 							</div>
@@ -80,13 +82,13 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>*신청자(기관)</label>
-										<input type="text" class="form-control" placeholder="ㅇㅇ병원" readonly>
+										<input type="text" class="form-control" placeholder="ㅇㅇ병원" readonly value="${rceptInfo.hospNm }">
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>*담당수의사</label>
-										<input type="text" class="form-control" placeholder="나수의" readonly>
+										<input type="text" class="form-control" placeholder="나수의" readonly value="${rceptInfo.docNm }">
 									</div>
 								</div>
 							</div>
@@ -96,35 +98,17 @@
 								</div>
 								<div class="col-sm-4">
 									<div class="form-group">
-										<select class="form-control" readonly>
-											<option>앵무</option>
-											<option>option 2</option>
-											<option>option 3</option>
-											<option>option 4</option>
-											<option>option 5</option>
-										</select>
+										<select class="form-control" disabled id="animFirstCd"></select>
 									</div>
 								</div>
 								<div class="col-sm-4">
 									<div class="form-group">
-										<select class="form-control" readonly>
-											<option>앵무</option>
-											<option>option 2</option>
-											<option>option 3</option>
-											<option>option 4</option>
-											<option>option 5</option>
-										</select>
+										<select class="form-control" disabled id="animSecondCd"></select>
 									</div>
 								</div>
 								<div class="col-sm-4">
 									<div class="form-group">
-										<select class="form-control" readonly>
-											<option>앵무</option>
-											<option>option 2</option>
-											<option>option 3</option>
-											<option>option 4</option>
-											<option>option 5</option>
-										</select>
+										<select class="form-control" disabled id="animThirdCd"></select>
 									</div>
 								</div>
 							</div>
@@ -132,7 +116,7 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>*동물명</label>
-										<input type="text" class="form-control" placeholder="동물명" readonly>
+										<input type="text" id="animNm" class="form-control" placeholder="동물명" readonly value="${rceptInfo.animNm}">
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -141,7 +125,7 @@
 										<div class="input-group date" id="reservationdate" data-target-input="nearest">
 											<!-- <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" data-toggle="datetimepicker" placeholder="생년월일"> -->
 											<!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker"> -->
-											<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="생년월일">
+											<input type="text" id="animBirth" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="생년월일" value="${rceptInfo.animBirth}">
 											<div class="input-group-append" data-target="#reservationdate">
 												<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 											</div>
@@ -153,30 +137,33 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>*성별</label>
-											<select class="form-control" readonly>
-												<option>암컷</option>
-												<option>option 2</option>
+											<select class="form-control" disabled id="animSex">
+												<option value="수컷">수컷</option>
+												<option value="암컷">암컷</option>
 											</select>
 									</div>
 								</div>
+								<%--
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label><font color="red">등록번호(인식번호)</font></label>
-										<input type="text" class="form-control" placeholder="등록번호(인식번호)" readonly>
+										<input type="text" class="form-control" placeholder="등록번호(인식번호)" readonly value="${rceptInfo.animNm}">
+									</div>
+								</div>
+								 --%>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>*보호자명</label>
+										<input type="text" id="animButler" class="form-control" placeholder="보호자명" readonly value="${rceptInfo.animButler}">
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>*보호자명</label>
-										<input type="text" class="form-control" placeholder="보호자명" readonly>
-									</div>
-								</div>
-								<div class="col-sm-6">
+
+								<div class="col-sm-12">
 									<div class="form-group">
 										<label><font color="red">의뢰참고</font></label>
-										<textarea class="form-control" rows="3" placeholder="특이사항... 참고할 만한 사항 작성"></textarea>
+										<textarea class="form-control" rows="3" placeholder="특이사항... 참고할 만한 사항 작성">${rceptInfo.rqstMemo }</textarea>
 									</div>
 								</div>
 							</div>
@@ -188,6 +175,38 @@
 
 				<div class="card card-success">
 					<div class="card-header">
+						<h3 class="card-title">시료정보</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<form>
+							<div class="row">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>시료</th>
+											<th>메모</th>
+										</tr>
+									</thead>
+									<tbody id="sampleTbody">
+										<c:forEach var="item" items="${smplList }" varStatus="status">
+											<tr>
+												<td>${status.index+1 }</td>
+												<td>${item.sampleName }</td>
+												<td>${item.sampleMemo }</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</form>
+					</div>
+					<!-- /.card-body -->
+				</div>
+
+				<div class="card card-warning">
+					<div class="card-header">
 						<h3 class="card-title">검사정보</h3>
 					</div>
 					<!-- /.card-header -->
@@ -198,43 +217,34 @@
 									<thead>
 										<tr>
 											<th>번호</th>
-											<th>시료정보</th>
-											<th>시료번호</th>
 											<th>검사항목구분</th>
+											<th>검사항목</th>
 											<th>검사항복세부</th>
 											<th>검사비</th>
-											<th>삭제</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>분변</td>
-											<td>0001</td>
-											<td>바이러스</td>
-											<td>PDD</td>
-											<td>30,000원</td>
-											<td>삭제</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>분변</td>
-											<td>0001</td>
-											<td>세균</td>
-											<td>살모넬라</td>
-											<td>40,000원</td>
-											<td>삭제</td>
-										</tr>
+									<tbody id="inspTbody">
+										<c:set var="totPrice" value="0"/>
+										<c:forEach var="item" items="${inspList }" varStatus="status">
+											<tr>
+												<td>${status.index+1 }</td>
+												<td>${item.inspFirstNm }</td>
+												<td>${item.inspSecondNm }</td>
+												<td>${item.inspThirdNm }</td>
+												<td><fmt:formatNumber value="${item.inspPrice }" pattern="#,###"/></td>
+											</tr>
+											<c:set var="totPrice" value="${totPrice+ item.inspPrice}"/>
+										</c:forEach>
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="5" align="center">검시비용 계</td>
-											<th>70,000원</th>
-											<th></th>
+											<td colspan="4" align="center">검시비용 계</td>
+											<th id="totPrice"><fmt:formatNumber value="${totPrice }" pattern="#,###"/></th>
 										</tr>
 										<tr>
 											<td colspan="7" align="center">
-												<button type="button" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 접수확인</button>
+												<button type="button" id="list" style="width:109.2px" class="btn btn-success btn-flat"><i class="fas fa-credit-card"></i> 목록</button>
+												<button type="button" id="acpt" style="width:109.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 접수확인</button>
 											</td>
 										</tr>
 									</tfoot>
@@ -281,13 +291,13 @@
 <script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Select2 -->
 <script src="resources/plugins/select2/js/select2.full.min.js"></script>
-<!-- dropzonejs -->
-
+<!-- Customizing Js -->
+<script src="resources/js/common.js"></script>
 <!-- Page specific script -->
 <script>
 $(function () {
 	bsCustomFileInput.init();
-	
+
 	//Initialize Select2 Elements
 	$('.select2').select2()
 
@@ -300,7 +310,57 @@ $(function () {
 	$('#reservationdate').datetimepicker({
 			format: 'YYYY.MM.DD'
 	});
+
+	//동물 종
+	$.gfn_getCode('C001',callBackFn,'animFirstCd');
+	//성별
+	$("#animSex").val("${rceptInfo.animSex}");
+
+	$("#list").on("click",function(){
+		location.href = "requestInspect";
+	});
+
+	$("#acpt").on("click",function(){
+
+		var data = {
+			animNm : $("#animNm").val(),
+			animButler : $("#animButler").val(),
+			animBirth : $("#animBirth").val().replace(/\./gi,''),
+			userNo : "${rceptInfo.userNo}"
+		};
+
+		$.ajax({
+			url : "createAnimal",
+			data : data,
+			type : "POST",
+			dataType : "JSON",
+			success : function(data){
+
+			}
+		});
+
+	});
+
 });
+
+function callBackFn(data,col){
+	var optHtml = '';
+	for(var i=0; i<data.length; i++){
+		optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>';
+	}
+
+	$("#"+col).html(optHtml);
+
+	if(col == 'animFirstCd'){
+		$.gfn_getCode("${rceptInfo.animFirstCd}",callBackFn,'animSecondCd');
+		$("#animFirstCd").val("${rceptInfo.animFirstCd}");
+	}else if(col == 'animSecondCd'){
+		$.gfn_getCode("${rceptInfo.animSecondCd}",callBackFn,'animThirdCd');
+		$("#animSecondCd").val("${rceptInfo.animSecondCd}");
+	}else if(col == 'animThirdCd'){
+		$("#animThirdCd").val("${rceptInfo.animThirdCd}");
+	}
+}
 </script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
+import kr.or.abnext.domain.TbSample;
 import kr.or.abnext.domain.TbUser;
 
 @Service
@@ -45,7 +46,19 @@ public class InspectService {
 		return inspectDao.insertInspection(insp);
 	}
 
+	public int insertSample(TbSample smpl) {
+		return inspectDao.insertSample(smpl);
+	}
+
 	public List<TbUser> selectDoctorList(TbUser tbUser){
 		return inspectDao.selectDoctorList(tbUser);
+	}
+
+	public List<TbInspection> selectInspList(TbInspection tbInspection){
+		return inspectDao.selectInspList(tbInspection);
+	}
+
+	public List<TbSample> selectSampleList(TbSample tbSample){
+		return inspectDao.selectSampleList(tbSample);
 	}
 }

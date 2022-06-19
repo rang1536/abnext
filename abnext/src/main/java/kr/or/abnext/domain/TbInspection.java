@@ -10,12 +10,15 @@ public class TbInspection {
 	private String inspNo;
 	private String rqstNo;
 	private String sampleCode;
-	private String sampleType;
-	private String sampleMemo;
+	private String manager;
 	private String inspFirstCd;
+	private String inspFirstNm;
 	private String inspSecondCd;
+	private String inspSecondNm;
 	private String inspThirdCd;
+	private String inspThirdNm;
 	private String inspPrice;
+	private String inspResult;
 	private String insDt;
 	private String insId;
 	private String uptDt;
@@ -38,17 +41,11 @@ public class TbInspection {
 	public void setSampleCode(String sampleCode) {
 		this.sampleCode = sampleCode;
 	}
-	public String getSampleType() {
-		return sampleType;
+	public String getManager() {
+		return manager;
 	}
-	public void setSampleType(String sampleType) {
-		this.sampleType = sampleType;
-	}
-	public String getSampleMemo() {
-		return sampleMemo;
-	}
-	public void setSampleMemo(String sampleMemo) {
-		this.sampleMemo = sampleMemo;
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 	public String getInspFirstCd() {
 		return inspFirstCd;
@@ -56,11 +53,23 @@ public class TbInspection {
 	public void setInspFirstCd(String inspFirstCd) {
 		this.inspFirstCd = inspFirstCd;
 	}
+	public String getInspFirstNm() {
+		return inspFirstNm;
+	}
+	public void setInspFirstNm(String inspFirstNm) {
+		this.inspFirstNm = inspFirstNm;
+	}
 	public String getInspSecondCd() {
 		return inspSecondCd;
 	}
 	public void setInspSecondCd(String inspSecondCd) {
 		this.inspSecondCd = inspSecondCd;
+	}
+	public String getInspSecondNm() {
+		return inspSecondNm;
+	}
+	public void setInspSecondNm(String inspSecondNm) {
+		this.inspSecondNm = inspSecondNm;
 	}
 	public String getInspThirdCd() {
 		return inspThirdCd;
@@ -68,11 +77,23 @@ public class TbInspection {
 	public void setInspThirdCd(String inspThirdCd) {
 		this.inspThirdCd = inspThirdCd;
 	}
+	public String getInspThirdNm() {
+		return inspThirdNm;
+	}
+	public void setInspThirdNm(String inspThirdNm) {
+		this.inspThirdNm = inspThirdNm;
+	}
 	public String getInspPrice() {
 		return inspPrice;
 	}
 	public void setInspPrice(String inspPrice) {
 		this.inspPrice = inspPrice;
+	}
+	public String getInspResult() {
+		return inspResult;
+	}
+	public void setInspResult(String inspResult) {
+		this.inspResult = inspResult;
 	}
 	public String getInsDt() {
 		return insDt;
@@ -100,10 +121,12 @@ public class TbInspection {
 	}
 	@Override
 	public String toString() {
-		return "TbInspection [inspNo=" + inspNo + ", rqstNo=" + rqstNo + ", sampleCode=" + sampleCode + ", sampleType="
-				+ sampleType + ", sampleMemo=" + sampleMemo + ", inspFirstCd=" + inspFirstCd + ", inspSecondCd="
-				+ inspSecondCd + ", inspThirdCd=" + inspThirdCd + ", inspPrice=" + inspPrice + ", insDt=" + insDt
+		return "TbInspection [inspNo=" + inspNo + ", rqstNo=" + rqstNo + ", sampleCode=" + sampleCode + ", manager="
+				+ manager + ", inspFirstCd=" + inspFirstCd + ", inspFirstNm=" + inspFirstNm + ", inspSecondCd="
+				+ inspSecondCd + ", inspSecondNm=" + inspSecondNm + ", inspThirdCd=" + inspThirdCd + ", inspThirdNm="
+				+ inspThirdNm + ", inspPrice=" + inspPrice + ", inspResult=" + inspResult + ", insDt=" + insDt
 				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
+
 
 }

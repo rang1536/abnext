@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
-	
+
 	<style>
 		th,td {text-align:center;}
 	</style>
@@ -97,6 +97,9 @@
 			</div><!-- /.container-fluid -->
 		<!-- /.content -->
 	</div>
+	<form id="viewFrm" method="POST">
+		<input type="hidden" name="rqstNo"/>
+	</form>
 	<!-- /.content-wrapper -->
 	<jsp:include page="../layer/layout_footer.jsp"></jsp:include>
 	<!-- Control Sidebar -->
@@ -142,19 +145,18 @@
 			"responsive": true,
 		});
 	});
-	
+
 	$(".btn-primary").on("click",function(){
-		location.href = "registerInspect.do";
+		location.href = "registerInspect";
 	});
-	
+
 	$("#listBody").find("tr").on("click", function(){
 		var rqstNo = $(this).find("td:eq(0)").text();
-		$.ajax({
-			url : "modifyInspect.do",
-			data : {rqstNo : rqstNo}
-		})
+		$("[name=rqstNo]").val(rqstNo);
+		$("#viewFrm").attr("action","modifyInspect");
+		$("#viewFrm").submit();
 	})
-	
+
 </script>
 </body>
 </html>

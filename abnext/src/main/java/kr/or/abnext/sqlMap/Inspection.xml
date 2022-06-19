@@ -49,14 +49,28 @@
 		INSERT
 		  INTO TB_INSPECTION
 		     (
-		       RQST_NO       , SAMPLE_CODE    , SAMPLE_TYPE   , SAMPLE_MEMO
+		       RQST_NO       , SAMPLE_CODE
 		     , INSP_FIRST_CD , INSP_SECOND_CD , INSP_THIRD_CD , INSP_PRICE
 		     , INS_DT        , INS_ID
 		     )
 		VALUES
 		     (
-		       #{rqstNo}      , #{sampleCode}   , #{sampleType}  , #{sampleMemo}
+		       #{rqstNo}      , #{sampleCode}
 		     , #{inspFirstCd} , #{inspSecondCd} , #{inspThirdCd} , #{inspPrice}
+		     , NOW()          , #{insId}
+		     )
+	</insert>
+
+	<insert id="insertSample" parameterType="kr.or.abnext.domain.TbSample">
+		INSERT
+		  INTO TB_SAMPLE
+		     (
+		       RQST_NO       , SAMPLE_CODE    , SAMPLE_MEMO
+		     , INS_DT        , INS_ID
+		     )
+		VALUES
+		     (
+		       #{rqstNo}      , #{sampleCode} , #{sampleMemo}
 		     , NOW()          , #{insId}
 		     )
 	</insert>
@@ -64,5 +78,27 @@
 	<select id="selectRceptList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
 		SELECT *
 		  FROM TB_RCEPT
+	</select>
+
+	<select id="selectInspList" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbInspection">
+		SELECT A.*
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_FIRST_CD) AS INSP_FIRST_NM
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_SECOND_CD) AS INSP_SECOND_NM
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_THIRD_CD) AS INSP_THIRD_NM
+		  FROM TB_INSPECTION A
+		 WHERE RQST_NO = #{rqstNo}
+	</select>
+
+	<select id="selectSampleList" parameterType="kr.or.abnext.domain.TbSample" resultType="kr.or.abnext.domain.TbSample">
+		SELECT A.*
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.SAMPLE_CODE) AS SAMPLE_NAME
+		  FROM TB_SAMPLE A
+		 WHERE RQST_NO = #{rqstNo}
+	</select>
+
+	<select id="getTbRcept" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
+		SELECT *
+		  FROM TB_RCEPT
+		 WHERE RQST_NO = #{rqstNo}
 	</select>
 </mapper>

@@ -210,81 +210,111 @@
 
 				<div class="card card-success">
 					<div class="card-header">
-						<h3 class="card-title">검사정보</h3>
+						<h3 class="card-title">시료정보</h3>
 					</div>
 					<div class="card-body">
 						<div class="row">
-							<div class="col-sm-3">
-								<div class="form-group">
-									<label>*시료정보</label>
-									<select class="form-control" id="sampleCode"></select>
+							<div class="col-md-11">
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="form-group">
+											<label>*시료정보</label>
+											<select class="form-control" id="sampleCode"></select>
 
-								</div>
-							</div>
-							<div class="col-sm-2">
-								<div class="form-group">
-									<label>&nbsp;</label>
-									<select class="form-control" id="sampleType"></select>
-								</div>
-							</div>
-
-							<div class="col-sm-7">
-								<div class="form-group">
-									<label>시료메모</label>
-									<input type="text" class="form-control" placeholder="시료메모" id="sampleMemo">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<label>*검사항목</label>
-							</div>
-							<div class="col-sm-3">
-								<div class="form-group">
-									<select class="form-control" id="inspFirstCd"></select>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="form-group">
-									<select class="form-control" id="inspSecondCd"></select>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="form-group">
-									<select class="form-control" id="inspThirdCd"></select>
-									<input type="hidden" id="inspPrice"/>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="form-group">
-									<div class="row">
-										<div class="col-6">
-											<button type="button" class="btn btn-block btn-success btn-flat" id="addBtn">추가</button>
 										</div>
-										<div class="col-6">
-											<button type="button" class="btn btn-block btn-danger btn-flat" id="clearBtn">초기화</button>
+									</div>
+									<div class="col-sm-2">
+										<div class="form-group">
+											<label>&nbsp;</label>
+											<select class="form-control" id="sampleType"></select>
+										</div>
+									</div>
+
+									<div class="col-sm-7">
+										<div class="form-group">
+											<label>시료메모</label>
+											<input type="text" class="form-control" placeholder="시료메모" id="sampleMemo">
 										</div>
 									</div>
 								</div>
 							</div>
-<!-- 							<div class="col-sm-2">
+							<div class="col-md-1">
 								<div class="form-group">
-									<button type="button" class="btn btn-block btn-danger btn-flat" id="clearBtn">초기화</button>
+									<label>&nbsp;</label>
+									<button type="button" class="btn btn-block btn-success btn-flat" id="addSampleBtn">추가</button>
 								</div>
-							</div> -->
+							</div>
+						</div>
+					</div>
+					<div class="card-body table-responsive">
+						<form>
+							<div class="row">
+								<table id="example2" class="table table-bordered text-nowrap">
+									<thead>
+										<tr>
+											<td class="th" style="width:10%">번호</td>
+											<td class="th" style="width:20%">시료</td>
+											<td class="th" style="width:*">시료메모</td>
+											<td class="th" style="width:10%">삭제</td>
+										</tr>
+									</thead>
+									<tbody id="sampleTbody">
+									</tbody>
+								</table>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="card card-warning">
+					<div class="card-header">
+						<h3 class="card-title">검사정보</h3>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-11">
+								<div class="row">
+									<div class="col-sm-12">
+										<label>*검사항목</label>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<select class="form-control" id="inspFirstCd"></select>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<select class="form-control" id="inspSecondCd"></select>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<select class="form-control" id="inspThirdCd"></select>
+											<input type="hidden" id="inspPrice"/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label>&nbsp;</label>
+											<button type="button" class="btn btn-block btn-success btn-flat" id="addInspBtn">추가</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<!-- /.card-header -->
-					<div class="card-body table-responsive p-0">
+					<div class="card-body table-responsive">
 						<form>
 							<div class="row">
 								<table id="example2" class="table table-bordered text-nowrap">
 									<thead>
 										<tr>
 											<td class="th">번호</td>
-											<td class="th">시료</td>
-											<td class="th">혼합구분</td>
-											<td class="th">시료번호</td>
 											<td class="th">검사항목구분</td>
 											<td class="th">검사항목</td>
 											<td class="th">검사항복세부</td>
@@ -319,7 +349,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="7" class="txtc">검사비용 계</td>
+											<td colspan="4" class="txtc">검사비용 계</td>
 											<th class="txtr" id="sumPrice">0원</th>
 											<th></th>
 										</tr>
@@ -470,19 +500,13 @@ function delInspect(target){
 	calcPrice();
 }
 
-$("#addBtn").click(function(){
+$("#addInspBtn").click(function(){
 	var tblNo = Number($("#inspectTbody").find("tr:last").find("td:eq(0)").text())+1;
-	var td2Text = $("#sampleCode option:selected").text();
-	var td3Text = $("#sampleType option:selected").text();
-	var td4Text = $("#sampleCode option:selected").val();
-	var td5Text = $("#inspFirstCd option:selected").text();
-	var td6Text = $("#inspSecondCd option:selected").text();
-	var td7Text = $("#inspThirdCd option:selected").text();
+	var td2Text = $("#inspFirstCd option:selected").text();
+	var td3Text = $("#inspSecondCd option:selected").text();
+	var td4Text = $("#inspThirdCd option:selected").text();
 	var td8Text = $.gfn_setComma($("#inspPrice").val())+"원";
 
-	var sampleCode = $("#sampleCode").val();
-	var sampleType = $("#sampleType").val();
-	var sampleMemo = $("#sampleMemo").val();
 	var inspFirstCd = $("#inspFirstCd").val();
 	var inspSecondCd = $("#inspSecondCd").val();
 	var inspThirdCd = $("#inspThirdCd").val();
@@ -491,9 +515,6 @@ $("#addBtn").click(function(){
 	var addHtml = '<tr>';
 	addHtml += '	<td class="txtc">'+tblNo+'</td>';
 	addHtml += '	<td class="txtc">'+td2Text;
-	addHtml += '		<input type="hidden" id="sampleCode_'+tblNo+'" value="'+sampleCode+'"/>';
-	addHtml += '		<input type="hidden" id="sampleType_'+tblNo+'" value="'+sampleType+'"/>';
-	addHtml += '		<input type="hidden" id="sampleMemo_'+tblNo+'" value="'+sampleMemo+'"/>';
 	addHtml += '		<input type="hidden" id="inspFirstCd_'+tblNo+'" value="'+inspFirstCd+'"/>';
 	addHtml += '		<input type="hidden" id="inspSecondCd_'+tblNo+'" value="'+inspSecondCd+'"/>';
 	addHtml += '		<input type="hidden" id="inspThirdCd_'+tblNo+'" value="'+inspThirdCd+'"/>';
@@ -501,9 +522,6 @@ $("#addBtn").click(function(){
 	addHtml += '	</td>';
 	addHtml += '	<td class="txtc">'+td3Text+'</td>';
 	addHtml += '	<td class="txtc">'+td4Text+'</td>';
-	addHtml += '	<td class="txtc">'+td5Text+'</td>';
-	addHtml += '	<td class="txtc">'+td6Text+'</td>';
-	addHtml += '	<td class="txtc">'+td7Text+'</td>';
 	addHtml += '	<td class="txtr">'+td8Text+'</td>';
 	addHtml += '	<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delInspect(this)"><i class="fas fa-trash"></i> 삭제 </a></td>';
 	addHtml += '</tr>';
@@ -512,10 +530,37 @@ $("#addBtn").click(function(){
 	calcPrice();
 });
 
+$("#addSampleBtn").click(function(){
+	var tblNo = Number($("#sampleTbody").find("tr:last").find("td:eq(0)").text())+1;
+	var td2Text = $("#sampleCode option:selected").text();
+
+	var sampleCode = $("#sampleCode").val();
+	var sampleMemo = $("#sampleMemo").val();
+
+	var addHtml = '<tr>';
+	addHtml += '	<td class="txtc">'+tblNo+'</td>';
+	addHtml += '	<td class="txtc">'+td2Text;
+	addHtml += '		<input type="hidden" id="sampleCode_'+tblNo+'" value="'+sampleCode+'"/>';
+	addHtml += '		<input type="hidden" id="sampleMemo_'+tblNo+'" value="'+sampleMemo+'"/>';
+	addHtml += '	</td>';
+	addHtml += '	<td class="txtc">'+sampleMemo+'</td>';
+	addHtml += '	<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delSample(this)"><i class="fas fa-trash"></i> 삭제 </a></td>';
+	addHtml += '</tr>';
+
+	$("#sampleTbody").append(addHtml);
+});
+
+function delSample(target){
+	$(target).parent().parent().remove();
+	$("#sampleTbody").find("tr").each(function(idx){
+		$(this).find("td:eq(0)").text(idx+1);
+	});
+}
+
 function calcPrice(){
 	var totalPrice = 0;
 	$("#inspectTbody").find("tr").each(function(idx){
-		var txtPrice = $(this).find("td:eq(7)").text().replace(/,/gi,'');
+		var txtPrice = $(this).find("td:eq(4)").text().replace(/,/gi,'');
 		var price = Number(txtPrice.replace(/원/gi,''));
 		totalPrice += price;
 		$(this).find("td:eq(0)").text(idx+1);
@@ -533,9 +578,6 @@ $(".btn-save").on('click',function(){
 	var arrayInsp = [];
 	$("#inspectTbody").find("tr").each(function(){
 		var insp = {
-				sampleCode : $(this).find("[id^=sampleCode]").val(),
-				sampleType : $(this).find("[id^=sampleType]").val(),
-				sampleMemo : $(this).find("[id^=sampleMemo]").val(),
 				inspFirstCd : $(this).find("[id^=inspFirstCd]").val(),
 				inspSecondCd : $(this).find("[id^=inspSecondCd]").val(),
 				inspThirdCd : $(this).find("[id^=inspThirdCd]").val(),
@@ -543,6 +585,16 @@ $(".btn-save").on('click',function(){
 				insId : localStorage.getItem("userId")
 		}
 		arrayInsp.push(insp);
+	});
+
+	var arraySmpl = [];
+	$("#sampleTbody").find("tr").each(function(){
+		var smpl = {
+				sampleCode : $(this).find("[id^=sampleCode]").val(),
+				sampleMemo : $(this).find("[id^=sampleMemo]").val(),
+				insId : localStorage.getItem("userId")
+		}
+		arraySmpl.push(smpl);
 	});
 
 	var data = {
@@ -569,7 +621,8 @@ $(".btn-save").on('click',function(){
 			price : '0',
 			payStat : '',
 			insId : localStorage.getItem("userId"),
-			inspList : arrayInsp
+			inspList : arrayInsp,
+			smplList : arraySmpl
 	}
 
 	$.ajax({
@@ -578,19 +631,28 @@ $(".btn-save").on('click',function(){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-
+			alert("등록되었습니다.");
+			location.href = "requestInspect";
 		}
 	});
 });
 
 function validSave(){
-	var tBodyLen = 0;
+	var inspLen = 0;
 	$('#inspectTbody').find("tr").each(function(idx){
-		tBodyLen++;
+		inspLen++;
 	});
 
-	if(tBodyLen == 0){
+	var smplLen = 0;
+	$('#sampleTbody').find("tr").each(function(idx){
+		smplLen++;
+	});
+
+	if(inspLen == 0){
 		alert('하나이상의 검사정보를 입력해주세요.');
+		validFlag = false;
+	}else if(smplLen == 0){
+		alert('하나이상의 시료정보를 입력해주세요.');
 		validFlag = false;
 	}else {
 		var validFlag = true;

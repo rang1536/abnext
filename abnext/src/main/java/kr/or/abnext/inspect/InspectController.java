@@ -12,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.abnext.admin.AdminService;
+import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
+import kr.or.abnext.domain.TbSample;
 
 @Controller
 public class InspectController {
@@ -47,17 +50,22 @@ public class InspectController {
 	@RequestMapping(value = "modifyInspect")
 	public String modifyInspect(Locale locale, Model model, TbRcept searchRcept) {
 		logger.info("modifyInspect Method is start {}.", locale);
-		logger.info("rqstNo : "+searchRcept.getRqstNo());
 		//접수정보
 		TbRcept rcept = insServ.getRcept(searchRcept);
 
-		//신청정보
-		//TbHospital hospital = insServ.getHospital(rcept.getHospNo());
-		//동물정보
-		//TbAnimal animal = insServ.getAnimal(rcept.getAnimNo());
+		//시료정보
+		TbSample tbSample = new TbSample();
+		tbSample.setRqstNo(""+searchRcept.getRqstNo());
+		List<TbSample> smplList = insServ.selectSampleList(tbSample);
+
+		//검사정보
+		TbInspection tbInspection = new TbInspection();
+		tbInspection.setRqstNo(""+searchRcept.getRqstNo());
+		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
 
 		model.addAttribute("rceptInfo", rcept);
-		//model.addAttribute("hospitalInfo", hospital);
+		model.addAttribute("smplList", smplList);
+		model.addAttribute("inspList", inspList);
 		return "inspect/modifyInspect";
 	}
 

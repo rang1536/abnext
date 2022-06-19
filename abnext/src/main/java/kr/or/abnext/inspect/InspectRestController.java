@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
+import kr.or.abnext.domain.TbSample;
 import kr.or.abnext.domain.TbUser;
 
 @RestController
@@ -41,15 +42,23 @@ public class InspectRestController {
 		for(int i=0; i<tbRcept.getInspList().size(); i++) {
 			TbInspection ti = new TbInspection();
 			ti.setRqstNo(rqstNo);
-			ti.setSampleCode(tbRcept.getInspList().get(i).get("sampleCode").toString());
-			ti.setSampleType(tbRcept.getInspList().get(i).get("sampleType").toString());
-			ti.setSampleMemo(tbRcept.getInspList().get(i).get("sampleMemo").toString());
 			ti.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
 			ti.setInspSecondCd(tbRcept.getInspList().get(i).get("inspSecondCd").toString());
 			ti.setInspThirdCd(tbRcept.getInspList().get(i).get("inspThirdCd").toString());
 			ti.setInspPrice(tbRcept.getInspList().get(i).get("inspPrice").toString());
+			ti.setInsId(tbRcept.getInsId());
 			//검사 테이블 등록
 			inspectServ.insertInspection(ti);
+		}
+
+		for(int i=0; i<tbRcept.getSmplList().size(); i++) {
+			TbSample ts = new TbSample();
+			ts.setRqstNo(rqstNo);
+			ts.setSampleCode(tbRcept.getSmplList().get(i).get("sampleCode").toString());
+			ts.setSampleMemo(tbRcept.getSmplList().get(i).get("sampleMemo").toString());
+			ts.setInsId(tbRcept.getInsId());
+			//시료 테이블 등록
+			inspectServ.insertSample(ts);
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -69,6 +78,15 @@ public class InspectRestController {
 		System.out.println("의사조회 시작~!!");
 		List<TbUser> list = inspectServ.selectDoctorList(tbUser);
 		return list;
+	}
+
+	/*
+	 * 동물코드생성
+	 **/
+	@RequestMapping(value = "selectDoctorList", method = RequestMethod.POST)
+	public Map<String, Object> createAnimal(TbRcept tbRcept) {
+
+		return null;
 	}
 
 }

@@ -37,6 +37,7 @@ public class TbRcept {
 	private String price;
 	private String payStat;
 	private List<Map<String , Object>> inspList;
+	private List<Map<String , Object>> smplList;
 	private String insDt;
 	private String insId;
 	private String uptDt;
@@ -197,9 +198,14 @@ public class TbRcept {
 	public void setPayStat(String payStat) {
 		this.payStat = payStat;
 	}
-
 	public List<Map<String, Object>> getInspList() {
 		return inspList;
+	}
+	public List<Map<String, Object>> getSmplList() {
+		return smplList;
+	}
+	public void setSmplList(List<Map<String, Object>> smplList) {
+		this.smplList = smplList;
 	}
 	public void setInspList(List<Map<String, Object>> inspList) {
 		this.inspList = inspList;
@@ -237,8 +243,8 @@ public class TbRcept {
 				+ ", animFirstCd=" + animFirstCd + ", animSecondCd=" + animSecondCd + ", AnimThirdCd=" + AnimThirdCd
 				+ ", animSex=" + animSex + ", rqstDt=" + rqstDt + ", procStat=" + procStat + ", procStatNm="
 				+ procStatNm + ", rqstMemo=" + rqstMemo + ", payGb=" + payGb + ", price=" + price + ", payStat="
-				+ payStat + ", inspList=" + inspList + ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt
-				+ ", uptId=" + uptId + "]";
+				+ payStat + ", inspList=" + inspList + ", smplList=" + smplList + ", insDt=" + insDt + ", insId="
+				+ insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
 
 
