@@ -139,6 +139,10 @@
 
 					$('#userId').focus();
 					return;
+				}else if(result == 'noAllowed'){
+					alert('승인되지 않은 계정입니다. 관리자에게 문의바랍니다.');
+					return;
+
 				}else if(result == 'succ'){
 					var userInfo = data.userInfo;
 					if(idSave){
@@ -149,6 +153,9 @@
 					localStorage.setItem('userInfo', JSON.stringify(userInfo));
 					alert(userInfo.userNm+' 님 반갑습니다!!');
 					location.href = 'index';
+				}else if(result == 'stopId'){
+					alert('사용정지된 계정입니다. 관리자에게 문의바랍니다');
+					return;
 				}
 			}
 		})

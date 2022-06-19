@@ -59,6 +59,15 @@ public class AdminController {
 		return "admin/levList";
 	}
 
+	//
+	@RequestMapping(value = "payList", method = RequestMethod.GET)
+	public String payListCtrl(Model model) {
+		System.out.println("권한관리~!!");
+
+		return "pay/payList";
+	}
+
+
 
 	/*======================================== 수정페이지 ======================================== */
 
@@ -107,8 +116,31 @@ public class AdminController {
 
 		tbUser = adminServ.getUserInfoServ(tbUser);
 
-		//if(tbUser)
-		//model.addAttribute("user", adminServ.getUserListServ(tbUser));
+		System.out.println(">>>> tbUser : "+tbUser);
+		TbHospital tbHospital = new TbHospital();
+		TbFarm tbFarm = new TbFarm();
+
+		if(tbUser.getUserLev() != null) {
+			if(tbUser.getUserLev().equals("2") || tbUser.getUserLev().equals("3") || tbUser.getUserLev().equals("5")) { //병원정보
+				if(tbUser.getHospNo() != null) {
+					tbHospital.setHospNo(Integer.parseInt(tbUser.getHospNo()));
+
+					tbHospital = adminServ.getHospListServ(tbHospital);
+
+					model.addAttribute("hosp", tbHospital); //기관병원 정보
+				}
+			}else if(tbUser.getUserLev().equals("4") || tbUser.getUserLev().equals("5")) {
+				if(tbUser.getFarmNo() != null) {
+					tbFarm.setFarmNo(Integer.parseInt(tbUser.getFarmNo()));
+
+					tbFarm = adminServ.getFarmListServ(tbFarm);
+
+					model.addAttribute("farm", tbFarm);
+				}
+			}
+		}
+
+		model.addAttribute("user", tbUser); //회원정보
 
 		return "admin/modify_user";
 	}

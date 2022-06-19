@@ -12,6 +12,7 @@
 		  FROM TB_USER A
 		 WHERE A.USER_ID = #{userId}
 		   AND A.USER_PASS = #{userPass}
+
 	</select>
 
 	<!-- id중복체크 -->

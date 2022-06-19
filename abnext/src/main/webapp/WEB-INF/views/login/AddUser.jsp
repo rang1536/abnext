@@ -1130,6 +1130,15 @@
 			if(userHp == null || userHp == ''){
 				alert('핸드폰번호는 필수입력입니다.');
 				return;
+			}else{
+				userHp = userHp.replace('-','').replace('-','');
+
+				if(userHp.length == 11){
+					$('#userHp').val(userHp);
+				}else{
+					alert('정확한 휴대폰번로를 입력하세요.');
+					return;
+				}
 			}
 
 			if(userAdr == null || userAdr == ''){

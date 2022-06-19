@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,54 +63,253 @@
  			<div class="container-fluid">
  				<div class="row">
 		          <div class="col-12">
+
+		          	<!-- 소속정보 -->
 		            <div class="card">
-		              <div class="card-header" style="background-color:red;">
-		                <h3 class="card-title"></h3>
+		              <div class="card-header" style="background-color:#002266;">
+		                <h5 class="card-title"><b style="color:#FFFFFF;">소속정보</b></h5>
 
 		              </div>
 		              <!-- /.card-header 본문-->
-		              <div class="card-body">
-						<!-- 유저정보입력 FORM -->
-                   		<form onsubmit="return false" id="userInfoForm" method="post" encType="multipart/form-data">
-							<h5><b>소속정보</b></h5>
-
+		              <div class="card-body" style="font-size:13px;">
+						<div id="hospInfoDiv" <c:if test="${user.hospNo eq null or user.hospNo eq ''}"> style="display:none;" </c:if>>
 							<div class="row">
-			                  <div class="col-sm-6">
-			                    <!-- select -->
-			                    <div class="form-group">
-			                      <label>회원구분</label>
-			                      <select class="custom-select" name="userLev" id="userLev">
-			                        <option value="1">일반회원</option>
-			                        <option value="2">수의사</option>
-			                        <option value="3">기관(병원)</option>
-			                        <option value="4">농장</option>
-			                        <option value="5">관리자</option>
-			                      </select>
-			                    </div>
-			                  </div>
-			                  <div class="col-sm-6">
-			                    <!-- <div class="form-group">
-			                      <label>Custom Select Disabled</label>
-			                      <select class="custom-select" disabled>
-			                        <option>option 1</option>
-			                        <option>option 2</option>
-			                        <option>option 3</option>
-			                        <option>option 4</option>
-			                        <option>option 5</option>
-			                      </select>
-			                    </div> -->
-			                  </div>
+								<div class="col-sm-6">
+									<!-- select -->
+									<div class="form-group">
+										<label>소속구분</label>
+										<select class="custom-select hospInput" name="gubun" id="gubun" disabled>
+											<option value="hospital" selected>기관(병원)</option>
+										</select>
+									</div>
+								</div>
+			                  	<div class="col-sm-6">
+					                <div class="form-group">
+					                  <label>기관(병원)명</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control hospInput" id="hospNm" name="hospNm" value="${hosp.hospNm }" readonly>
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+				                </div>
 			                </div>
 
-						</form>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+					                  <label>대표자</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control hospInput" id="hospCeo" name="hospCeo" value="${hosp.hospCeo }" readonly>
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+								</div>
+			                  	<div class="col-sm-6">
+					                <div class="form-group">
+					                  <label>책임수의사</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control hospInput" id="hospFirstDoctorNm" name="hospFirstDoctorNm" value="${hosp.hospFirstDoctorNm }" readonly>
+					                  	<input type="hidden" class="form-control hospInput" id="hospFirstDoctor" name="hospFirstDoctor" value="${hosp.hospFirstDoctor }" readonly>
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+				                </div>
+			                </div>
+
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+					                  <label>주소</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control hospInput" id="hospAdr" name="hospAdr" value="${hosp.hospAdr} ${hosp.hospDtlAdr }" readonly>
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+								</div>
+			                  	<div class="col-sm-6">
+					                <div class="form-group">
+					                  <label>전화번호</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control hospInput" id="hospHp" name="hospHp" value="${fn:substring(hosp.hospHp, 0, 3) }-${fn:substring(hosp.hospHp, 3, 7) }-${fn:substring(hosp.hospHp, 7, 11) }" readonly>
+
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+				                </div>
+			                </div>
+						</div> <!-- 병원폼 -->
 					  </div> <!-- card-body END -->
 
 		              <div class="card-footer">
-					  	<button type="button" onclick="fn_modifyfarmital();" class="btn btn-sm btn-success btn-flat" style="float:right;">정보변경</button>
+					  	<button type="button" onclick="fn_openCompanyPop();" class="btn btn-sm btn-primary btn-flat" style="float:right;">소속변경</button>
 					  </div>
 		            </div>
 		            <!-- /.card -->
-		          </div>
+
+					<br/>
+		            <div class="card">
+		              <div class="card-header" style="background-color:#002266;">
+		                <h5 class="card-title"><b style="color:#FFFFFF;">사용자정보</b></h5>
+
+		              </div>
+		              <!-- /.card-header 본문-->
+		              <div class="card-body" style="font-size:13px;">
+					  	<!-- 유저정보입력 FORM -->
+                   		<form onsubmit="return false" id="userInfoForm" method="post" encType="multipart/form-data">
+							<div class="row">
+								<div class="col-sm-6">
+									<!-- select -->
+									<div class="form-group">
+										<label>사용자구분</label>
+										<select class="custom-select" name="userLev" id="userLev" >
+											<option <c:if test="${user.userLev eq '1' }">seleted</c:if> value="1">일반회원</option>
+					                        <option <c:if test="${user.userLev eq '2' }">seleted</c:if> value="2">수의사</option>
+					                        <option <c:if test="${user.userLev eq '3' }">seleted</c:if> value="3">기관(병원)</option>
+					                        <option <c:if test="${user.userLev eq '4' }">seleted</c:if> value="4">농장</option>
+					                        <option <c:if test="${user.userLev eq '5' }">seleted</c:if> value="5">관리자</option>
+										</select>
+									</div>
+								</div>
+			                  	<div class="col-sm-6">
+					                <div class="form-group">
+					                  <label>이름</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control" id="userNm" name="userNm" value="${user.userNm }" />
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+				                </div>
+			                </div>
+
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+					                  <label>전화번호</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control" id="userHp" name="userHp" value="${fn:substring(user.userHp, 0, 3) }-${fn:substring(user.userHp, 3, 7) }-${fn:substring(user.userHp, 7, 11) }" />
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+								</div>
+			                  	<div class="col-sm-6">
+					                <div class="form-group">
+					                  <label>이메일</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control" id="userEmail" name="userEmail" value="${user.userEmail }">
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+				                </div>
+			                </div>
+
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+					                  <label>아이디</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control" id="userId" name="userId" value="${user.userId }" readonly>
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+								</div>
+			                  	<div class="col-sm-6">
+					                <div class="form-group">
+					                  <label>비밀번호</label>
+					                  <div class="input-group">
+					                    <input type="password" class="form-control" id="userPass" name="userPass" value="${user.userPass}" readonly>
+										<div class="input-group-append">
+					                      <button type="button" class="btn btn-danger btn-flat" onclick="fn_passReset('${fn:substring(user.userHp, 7, 11)}')" >초기화</button>
+					                    </div>
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+				                </div>
+
+			                </div>
+						</form>
+					  </div> <!-- card-body END -->
+					</div>
+
+
+					<br/>
+		            <div class="card">
+		              <div class="card-header" style="background-color:#002266;">
+		                <h5 class="card-title"><b style="color:#FFFFFF;">사용자상태 및 권한</b></h5>
+
+		              </div>
+		              <!-- /.card-header 본문-->
+		              <div class="card-body" style="font-size:13px;">
+					  	<div class="row">
+							<div class="col-sm-6">
+								<!-- select -->
+								<div class="form-group">
+									<label>승인상태</label>
+									<select class="custom-select" name="userStat" id="userStat" >
+										<c:forEach var="item" items="${user.userStatList }" varStatus="status">
+											<option <c:if test="${item.codeId eq user.userStat }">selected</c:if> value="${item.codeId }">${item.codeNm }</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+		                  	<div class="col-sm-6">
+				                <div class="form-group">
+				                  <label>권한</label>
+				                  <select class="custom-select" name="userStat" id="userStat" >
+							     	  <option <c:if test="${user.adminYn eq 'N' }">selected</c:if> value="N">일반사용자</option>
+									  <option <c:if test="${user.adminYn eq 'Y' }">selected</c:if> value="Y">관리자</option>
+								  </select>
+				                  <!-- /.input group -->
+				                </div>
+				                <!-- /.form group -->
+			                </div>
+		                </div>
+					  </div> <!-- card-body END -->
+
+
+		              <div class="card-footer">
+					  	<button type="button" onclick="fn_modifyUserCtrl();" class="btn btn-sm btn-primary btn-flat" style="float:right;">회원정보변경</button>
+					  </div>
+
+
+
+		          </div><!-- /.card -->
 		        </div>
 		        <!-- /.row -->
 
@@ -124,6 +325,9 @@
 	</aside> <!-- /.control-sidebar -->
 </div> <!-- End wrapper  -->
 
+
+
+<c:import url="../popup/pop_searchCompany.jsp"></c:import>
 </body>
 
 <!-- jQuery -->
@@ -179,68 +383,50 @@
     });
 
 
-	/*====================================
-	* 농장병원등 수정
-	* 팝업 : fn_modifyfarmital()
-	====================================*/
-	function fn_modifyfarmital(){
-		var farmNm = $('#farmNm').val();
-		var farmHp = $('#farmHp').val();
-		var farmAdr = $('#farmAdr').val();
-		var payGb = $('#payGb').val();
-		var payManagerNm = $('#payManagerNm').val();
-		var payManagerHp = $('#payManagerHp').val();
-
-		if(farmNm == null || farmNm == ''){
-			alert('농장명은 필수입력입니다.');
-			return;
-		}
-
-		if(farmHp == null || farmHp == ''){
-			alert('핸드폰번호는 필수입력입니다.');
-			return;
-		}
-
-		if(farmAdr == null || farmAdr == ''){
-			alert('주소는 필수입력입니다.');
-			return;
-		}
-
-		if(payGb == '월간정산'){
-			if(payManagerNm == null || payManagerNm == ''){
-				alert('정산담당자를 입력하세요');
-				return;
-			}
-
-			if(payManagerHp == null || payManagerHp == ''){
-				alert('정산담당자 연락처를 입력하세요');
-				return;
-			}
-		}
+	function fn_openCompanyPop(){
+		$('#popCompany').modal();
+		popSearch();
+	}
 
 
-		//$('#farmInfoForm').serialize();
-		var params = new FormData($('#farmInfoForm')[0]);
-
-		toastr.info('등록중입니다');
-
+	/*======================
+	* 기관,병원 세팅
+	======================*/
+	function fn_setHospDataToForm(hospNo){
+		alert(hospNo)
 		$.ajax({
-			url : 'modifyfarmCtrl',
-			data : params,
+			url : 'getHospInfo',
 			dataType : 'json',
 			type : 'post',
-			processData : false,
-			contentType : false,
+			data : {'hospNo':hospNo},
 			success : function(data){
-				if(data.result == 'succ'){
-					alert('농장정보변경이 완료되었습니다.');
-					location.href = 'farmList';
-				}else{
-					toastr.error('농장 정보변경에 실패하였습니다.');
-				}
+				var hospInfo = data.hospInfo;
+
+				$('#hospNm').val(fn_ifNull(hospInfo.hospNm));
+				$('#hospHp').val(fn_ifNull(hospInfo.hospHp.substring(0, 3)+'-'+hospInfo.hospHp.substring(3, 7)+'-'+hospInfo.hospHp.substring(7)));
+				$('#hospAdr').val(fn_ifNull(hospInfo.hospAdr)+' '+fn_ifNull(hospInfo.hospDtlAdr));
+
+				toastr.success(hospInfo.hospNm+' 이 선택되었습니다');
+
+				$('#hospNo').val(hospInfo.hospNo);
+
+				$('#modalCloseBtn').click();
 			}
 		})
+	}
 
+
+	/*====================================
+	* 비밀번호 초기화(세팅만 하고 저장할때 저장함.)
+	====================================*/
+	function fn_passReset(newPass){
+		//console.log(newPass.length, newPass);
+		if(confirm('비밀번호를 초기화 하시겠습니까?')){
+			$('#userPass').val('');
+			$('#userPass').val(newPass);
+
+			toastr.info('변경된 비밀번호의 적용을 위해서는 하단의 저장버튼으로 저장하셔야 합니다.');
+		}
 	}
 
 

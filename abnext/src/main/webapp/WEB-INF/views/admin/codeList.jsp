@@ -57,8 +57,8 @@
 								</h3>
 							</div>
 							<!-- ./card-header -->
-							<div class="card-body p-0">
-								<table class="table table-hover" id="codeListTable"></table>
+							<div class="card-body p-0" style="display:block;width:100%;height:500px;overflow:auto;font-size:14px;">
+								<table class="table table-hover" id="codeListTable" ></table>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -128,9 +128,9 @@
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
-	
+
 	<c:import url="../layer/layout_footer.jsp"></c:import>
-	
+
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
 	<!-- Control sidebar content goes here -->
@@ -167,7 +167,7 @@
 	$(document).ready(function(){
 		searchCode();
 	});
-	
+
 	function searchCode(){
 		$.ajax({
 			url : "searchCodeList",
@@ -267,7 +267,7 @@
 						}
 					}
 				}
-				
+
 				for(var i=0; i<data.length; i++){
 					var item = data[i];
 					if(item.codeLevel == 2 && viewedCodeArr.indexOf(item.codeNo) == -1){
@@ -374,7 +374,7 @@
 						}
 					}
 				}
-				
+
 				item = null;
 				for(var i=0; i<data.length; i++){
 					item = data[i];
@@ -405,11 +405,11 @@
 			}
 		})
 	}
-	
+
 	function addCode(codeId){
 		$("[name=uppCodeId]").val(codeId);
 	}
-	
+
 	function delCode(codeNo){
 		var msg = "삭제하시겠습니까?";
 		console.log(codeNo);
@@ -430,23 +430,23 @@
 			});
 		}
 	}
-	
+
 	function inputClear(){
 		var clearArr = ['codeNo','uppCodeId','codeId','codeNm','codeGb','sortIdx','codeDtlMemo'];
 		for(var i=0; i<clearArr.length; i++){
 			$("[name="+clearArr[i]+"]").val("");
 		}
 	}
-	
+
 	function saveCode(){
 		if($("[name=sortIdx]").val() == ''){
 			$("[name=sortIdx]").val("1");
 		}
-		
+
 		if($("[name=codeNo]").val() == ''){
 			$("[name=codeNo]").val("999999999");
 		}
-		
+
 		var data = $("#codeFrm").serialize();
 		var msg = "등록하시겠습니까?";
 		if(confirm(msg)){
@@ -460,7 +460,7 @@
 						alert("중복된 코드가 존재합니다.");
 					}else {
 						alert("정상적으로 등록하였습니다.");
-						pageReload();	
+						pageReload();
 					}
 				},
 				error : function(err){
@@ -470,12 +470,12 @@
 			});
 		}
 	}
-	
+
 	function pageReload(){
 		searchCode();
 		inputClear();
 	}
-	
+
 	function modifyCode(target){
 		$("[name=codeNo]").val(nullToBlank($(target).find("[id^=codeNo]").val()));
 		$("[name=codeId]").val(nullToBlank($(target).find("[id^=codeId]").val()));
@@ -485,7 +485,7 @@
 		$("[name=sortIdx]").val(nullToBlank($(target).find("[id^=sortIdx]").val()));
 		$("[name=codeGb]").val(nullToBlank($(target).find("[id^=codeGb]").val()));
 	}
-	
+
 	function nullToBlank(str){
 		if(str == null || str == 'null'){
 			str = '';

@@ -1188,6 +1188,75 @@
 		}
 
 
+		/*===================================
+		* 회원검색 팝업
+		* onclick="popOpenUser(objId);"
+		=====================================*/
+		function popOpenUser(objId){
+			$('#popUser').modal();
+
+			if(objId != null && objId != ''){
+				$('#objId').val(objId);
+			}
+
+			popSearchUser();
+		}
+
+		/*===================================
+		* 회원목록검색 (팝업)
+		* onclick="popSearchUser();"
+		=====================================*/
+		function popSearchUser(){
+			var popSearchUserNm = $('#popSearchUserNm').val();
+
+			if(popSearchUserNm == null || popSearchUserNm == ''){
+				toastr.info('전체 회원을 데이터를 조회합니다.');
+			}
+
+			$.ajax({
+				url : 'searchUserCtrl',
+				data : {'userNm':popSearchUserNm},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					var list = data.list;
+
+					var html = '';
+					$.each(list, function(i, list){
+						html += '<tr ondblclick="fn_setUserDataToForm('+list.userNo+', '+list.userNm+');">';
+						html += '	<td>'
+						if(list.userLev == '1') html += '일반회원';
+						else if(list.userLev == '2') html += '수의사';
+						else if(list.userLev == '3') html += '기관(병원)';
+						else if(list.userLev == '4') html += '농장';
+						else if(list.userLev == '5') html += '관리자';
+						html += '	</td>';
+
+						html += '	<td>'+fn_ifNull(list.userWorkGbNm)+'</td>';
+						html += '	<td>'+fn_ifNull(list.userNm)+'</td>';
+						html += '	<td>'+fn_ifNull(list.userHp)+'</td>';
+						html += '	<td>'+fn_ifNull(list.sigunguNm)+'</td>';
+						html += '	<td>'+fn_ifNull(list.hospNm)+fn_ifNull(list.farmNm)+'</td>';
+						html += '</tr>';
+					})
+
+					$('#userTbody').empty();
+					$('#userTbody').html(html);
+				}
+			})
+		}
+
+		function fn_setUserDataToForm(userNo, userNm){
+			var objId = $('#objId').val();
+
+			if(objId != null && objId != ''){
+				$('#'+objId+'Id').val(userNo);
+				$('#'+objId+'Nm').val(userNm);
+			}else{
+				console.log('h2 ^^');
+			}
+		}
+
 	</script>
 
 </body>

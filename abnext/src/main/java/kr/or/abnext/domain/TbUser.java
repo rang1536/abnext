@@ -1,5 +1,7 @@
 package kr.or.abnext.domain;
 
+import java.util.List;
+
 /*
  * 생성일 2022.05.20.
  * 테이블명 TB_USER
@@ -38,7 +40,44 @@ public class TbUser {
 	private String sidoCd;
 	private String sigunguCd;
 
+	private String userStat;
+	private String adminYn;
+	private List<TbCode> userStatList;
+	private String userWorkGb;
+	private String userWorkGbNm;
 
+
+	public String getUserWorkGbNm() {
+		return userWorkGbNm;
+	}
+	public void setUserWorkGbNm(String userWorkGbNm) {
+		this.userWorkGbNm = userWorkGbNm;
+	}
+	public String getUserWorkGb() {
+		return userWorkGb;
+	}
+	public void setUserWorkGb(String userWorkGb) {
+		this.userWorkGb = userWorkGb;
+	}
+	public String getUserStat() {
+		return userStat;
+	}
+	public void setUserStat(String userStat) {
+		this.userStat = userStat;
+	}
+	public String getAdminYn() {
+		return adminYn;
+	}
+	public void setAdminYn(String adminYn) {
+		this.adminYn = adminYn;
+	}
+
+	public List<TbCode> getUserStatList() {
+		return userStatList;
+	}
+	public void setUserStatList(List<TbCode> userStatList) {
+		this.userStatList = userStatList;
+	}
 	public String getSidoCd() {
 		return sidoCd;
 	}
@@ -216,7 +255,8 @@ public class TbUser {
 				+ ", userRn=" + userRn + ", hospNo=" + hospNo + ", farmNo=" + farmNo + ", insDt=" + insDt + ", insId="
 				+ insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", userNm=" + userNm + ", hospNm=" + hospNm
 				+ ", farmNm=" + farmNm + ", sidoNm=" + sidoNm + ", sigunguNm=" + sigunguNm + ", sidoCd=" + sidoCd
-				+ ", sigunguCd=" + sigunguCd + "]";
+				+ ", sigunguCd=" + sigunguCd + ", userStat=" + userStat + ", adminYn=" + adminYn + ", userStatList="
+				+ userStatList + ", userWorkGb=" + userWorkGb + ", userWorkGbNm=" + userWorkGbNm + "]";
 	}
 
 

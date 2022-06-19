@@ -243,5 +243,18 @@ public class AdminRestController {
 
 		return adminServ.modifyFarmServ(tbFarm);
 	}
+
+	//searchUserCtrl
+	/**
+	 * 농장수정
+	 * */
+	@RequestMapping(value = "searchUserCtrl", method = RequestMethod.POST)
+	public Map<String, Object> searchUserCtrl(TbUser tbUser) {
+		System.out.println("회원검색 시작~!!");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", adminServ.getUserListServ(tbUser));
+		return map;
+	}
 }
 

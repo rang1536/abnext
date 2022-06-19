@@ -100,30 +100,24 @@
 
 	<!-- 회원조회 -->
 	<select id="getUserList" resultType="kr.or.abnext.domain.TbUser">
-		SELECT USER_ZIP
-			   , USER_TEL
-			   , USER_RN
-			   , USER_PASS
-			   , USER_NM
-			   , USER_MEMO
-			   , USER_LEV
-			   , USER_ID
-			   , USER_HP
-			   , USER_FAX
-			   , USER_EMAIL
-			   , USER_DTL_ADR
-			   , USER_BANK_NM
-			   , USER_ADR
-			   , USER_ACCOUNT_NO
-			   , UPT_ID
-			   , UPT_DT
-			   , SIGUNGU_NM
-			   , SIDO_NM
-			   , INS_ID
-			   , INS_DT
-			   , (SELECT HOSP_NM FROM TB_HOSPITAL WHERE HOSP_NO = A.HOSP_NO) AS HOSP_NM
-			   , (SELECT FARM_NM FROM TB_FARM WHERE FARM_NO = A.FARM_NO) AS FARM_NM
+		SELECT A.*
+			   , (SELECT HOSP_NM
+			   		FROM TB_HOSPITAL
+			   	   WHERE HOSP_NO = A.HOSP_NO) AS HOSP_NM
+			   , (SELECT FARM_NM
+			   		FROM TB_FARM
+			   	   WHERE FARM_NO = A.FARM_NO) AS FARM_NM
+			   , (SELECT CODE_NM
+			        FROM TB_CODE
+			       WHERE CODE_ID = A.USER_WORK_GB) AS USER_WORK_GB_NM
 		  FROM TB_USER A
+		 WHERE 1=1
+		 <if test="userNo != null and userNo != ''">
+		 	AND USER_NO = #{userNo}
+		 </if>
+		 <if test="userNm != null and userNm != ''">
+		 	AND USER_NM LIKE CONCAT('%', #{userNm}, '%')
+		 </if>
 		 ORDER BY USER_NO
 	</select>
 
@@ -383,7 +377,7 @@
 			   , HOSP_EMAIL		, HOSP_FAX			, HOSP_ADR
 			   , HOSP_ZIP		, HOSP_CEO			, HOSP_RN
 			   , HOSP_SIDO_NM	, HOSP_SIGUNGU_NM	, HOSP_ACCOUNT_NO
-			   , HOSP_BANK_NM
+			   , HOSP_BANK_NM	, HOSP_NO
 		  FROM TB_HOSPITAL
 		 WHERE 1=1
 		   <if test="popSearchNm != 'noNm'">
@@ -395,7 +389,7 @@
 			   , FARM_EMAIL		, FARM_FAX			, FARM_ADR
 			   , FARM_ZIP		, FARM_CEO			, FARM_RN
 			   , FARM_SIDO_NM	, FARM_SIGUNGU_NM	, FARM_ACCOUNT_NO
-			   , FARM_BANK_NM
+			   , FARM_BANK_NM	, FARM_NO
 		  FROM TB_FARM
 		 WHERE 1=1
 		   <if test="popSearchNm != 'noNm'">
@@ -436,6 +430,17 @@
 		 WHERE USER_NO = #{userNo}
 	</select>
 
-
+	<!-- 코드조회 -->
+	<select id="getCodeList" parameterType="Map" resultType="kr.or.abnext.domain.TbCode">
+		SELECT *
+		  FROM TB_CODE
+		 WHERE 1=1
+		<if test="codeId != null and codeId != ''">
+			AND CODE_ID LIKE CONCAT('%',#{codeId},'%')
+		</if>
+		<if test="codeNm != null and codeNm != ''">
+			AND CODE_NM LIKE CONCAT('%',#{codeNm},'%')
+		</if>
+	</select>
 
 </mapper>

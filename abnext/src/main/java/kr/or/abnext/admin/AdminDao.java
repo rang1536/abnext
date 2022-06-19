@@ -136,10 +136,21 @@ public class AdminDao {
 	 * @function : getUserList
 	 * @Description : 회원조회
 	 * @param :
-	 * @return:TbUser
+	 * @return:List<TbUser>
 	 **/
 	public List<TbUser> getUserList() {
 		return sql.selectList("admin.getUserList");
+	}
+
+
+	/**
+	 * @function : getUserList
+	 * @Description : 회원조회2
+	 * @param :
+	 * @return:List<TbUser>
+	 **/
+	public List<TbUser> getUserList(TbUser tbUser) {
+		return sql.selectList("admin.getUserList", tbUser);
 	}
 
 
@@ -258,5 +269,16 @@ public class AdminDao {
 	 **/
 	public TbUser getUserInfo(TbUser tbUser) {
 		return sql.selectOne("admin.getUserInfo", tbUser);
+	}
+
+
+	/**
+	 * @function : getCodeList
+	 * @Description : 공통코드조회
+	 * @param : Map<String, Object>
+	 * @return : TbCode
+	 **/
+	public List<TbCode> getCodeList(Map<String, Object> param){
+		return sql.selectList("admin.getCodeList", param);
 	}
 }

@@ -124,6 +124,15 @@ public class AdminService {
 		return adminDao.getUserList();
 	}
 
+	/**
+	 * @function : getUserListServ
+	 * @Description : 회원조회
+	 * @param :
+	 * @return : List<TbUser>
+	 **/
+	public List<TbUser> getUserListServ(TbUser tbUser){
+		return adminDao.getUserList(tbUser);
+	}
 
 	/**
 	 * @function : getHospListServ
@@ -364,7 +373,18 @@ public class AdminService {
 	 * @return : TbUser
 	 **/
 	public TbUser getUserInfoServ(TbUser tbUser) {
-		return adminDao.getUserInfo(tbUser);
+		tbUser = adminDao.getUserInfo(tbUser);
+
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("codeId", "F002");
+
+		List<TbCode> codeList = adminDao.getCodeList(param);
+
+		if(codeList != null) {
+			tbUser.setUserStatList(codeList);
+		}
+
+		return tbUser;
 	}
 
 }
