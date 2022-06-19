@@ -44,6 +44,20 @@ public class TbHospital {
 	private String hospFirstDoctor;
 	private String hospFirstDoctorNm;
 
+	private String hospRnFilePathName;
+
+
+	public String getHospRnFilePathName() {
+		return hospRnFilePathName;
+	}
+
+
+
+	public void setHospRnFilePathName(String hospRnFilePathName) {
+		this.hospRnFilePathName = hospRnFilePathName;
+	}
+
+
 
 	public String getHospFirstDoctorNm() {
 		return hospFirstDoctorNm;
@@ -403,8 +417,10 @@ public class TbHospital {
 				+ ", hospRnFile=" + hospRnFile + ", gubun=" + gubun + ", hospMemo=" + hospMemo + ", payGb=" + payGb
 				+ ", payDate=" + payDate + ", payManagerNm=" + payManagerNm + ", payManagerHp=" + payManagerHp
 				+ ", payMemo=" + payMemo + ", hospFirstDoctor=" + hospFirstDoctor + ", hospFirstDoctorNm="
-				+ hospFirstDoctorNm + "]";
+				+ hospFirstDoctorNm + ", hospRnFilePathName=" + hospRnFilePathName + "]";
 	}
+
+
 
 
 

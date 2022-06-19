@@ -232,5 +232,16 @@ public class AdminRestController {
 
 		return adminServ.modifyHospitalServ(tbHospital);
 	}
+
+
+	/**
+	 * 농장수정
+	 * */
+	@RequestMapping(value = "modifyfarmCtrl", method = RequestMethod.POST)
+	public Map<String, Object> modifyfarmCtrl(TbFarm tbFarm) {
+		System.out.println("농장수정 시작~!!");
+
+		return adminServ.modifyFarmServ(tbFarm);
+	}
 }
 

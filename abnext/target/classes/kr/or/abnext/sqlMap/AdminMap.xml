@@ -130,6 +130,7 @@
 	<!-- 기관(병원)조회 -->
 	<select id="getHospList" resultType="kr.or.abnext.domain.TbHospital">
 		SELECT A.*
+			   , (SELECT FILE_NEW_NM FROM TB_FILE WHERE HOSP_NO = A.HOSP_NO AND FILE_GB = 'F001-01') AS hospRnFilePathName
 			   , (SELECT USER_NM FROM TB_USER WHERE USER_NO = A.HOSP_FIRST_DOCTOR) AS hospFirstDoctorNm
 		  FROM TB_HOSPITAL A
 		 WHERE 1=1
@@ -382,5 +383,18 @@
 	       AND USER_LEV IN ('1', '2', '3', '5')
 	</select>
 
+	<!-- 사업자등록증 삭제 -->
+	<delete id="removeRnFile" parameterType="Map">
+		DELETE
+		  FROM TB_FILE
+		 WHERE 1=1
+		   AND FILE_GB = 'F001-01'
+		<if test="hospNo != null and hospNo != ''">
+			AND HOSP_NO = #{hospNo}
+		</if>
+		<if test="farmNo != null and farmNo != ''">
+			AND FARM_NO = #{farmNo}
+		</if>
+	</delete>
 
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.abnext.domain.TbCode;
+import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbHospital;
 
 @Controller
@@ -59,6 +60,10 @@ public class AdminController {
 
 
 	/*======================================== 수정페이지 ======================================== */
+
+	/*
+	 * 기관수정
+	 * */
 	@RequestMapping(value = "modifyHospital", method = RequestMethod.GET)
 	public String modifyHospitalCtrl(@RequestParam(value="modifyHospNo")String hospNo
 			, Model model) {
@@ -70,5 +75,21 @@ public class AdminController {
 		model.addAttribute("doctor", adminServ.getDoctorListServ(tbHospital));
 
 		return "admin/modify_hospital";
+	}
+
+
+	/*
+	 * 농장수정
+	 * */
+	@RequestMapping(value = "modifyFarm", method = RequestMethod.GET)
+	public String modifyFarm(@RequestParam(value="modifyFarmNo")String farmNo
+			, Model model) {
+		System.out.println("농장정보 수정페이지 연결~!!");
+		TbFarm tbFarm = new TbFarm();
+		tbFarm.setFarmNo(Integer.parseInt(farmNo));
+
+		model.addAttribute("farm", adminServ.getFarmListServ(tbFarm));
+
+		return "admin/modify_farm";
 	}
 }

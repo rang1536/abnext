@@ -230,5 +230,23 @@ public class AdminDao {
 	}
 
 
+	/**
+	 * @function : modifyFarm
+	 * @Description : 농장수정
+	 * @param : TbFarm
+	 **/
+	public int modifyFarm(TbFarm tbFarm) {
+		return sql.update("admin.modifyFarm", tbFarm);
+	}
+
+
+	/**
+	 * @function : removeRnFile
+	 * @Description : 사업자등록증삭제
+	 * @param : Map<Sting, Object>
+	 **/
+	public int removeRnFile(Map<String, Object> param) {
+		return sql.delete("admin.removeRnFile", param);
+	}
 
 }

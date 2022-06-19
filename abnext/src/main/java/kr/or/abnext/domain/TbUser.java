@@ -31,12 +31,26 @@ public class TbUser {
 	private String userNm;
 	private String hospNm;
 	private String farmNm;
-	
+
 	//추가, 시도명, 시군구명
 	private String sidoNm;
 	private String sigunguNm;
-	
-	
+	private String sidoCd;
+	private String sigunguCd;
+
+
+	public String getSidoCd() {
+		return sidoCd;
+	}
+	public void setSidoCd(String sidoCd) {
+		this.sidoCd = sidoCd;
+	}
+	public String getSigunguCd() {
+		return sigunguCd;
+	}
+	public void setSigunguCd(String sigunguCd) {
+		this.sigunguCd = sigunguCd;
+	}
 	public String getHospNm() {
 		return hospNm;
 	}
@@ -201,8 +215,9 @@ public class TbUser {
 				+ ", userAccountNo=" + userAccountNo + ", userBankNm=" + userBankNm + ", userMemo=" + userMemo
 				+ ", userRn=" + userRn + ", hospNo=" + hospNo + ", farmNo=" + farmNo + ", insDt=" + insDt + ", insId="
 				+ insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", userNm=" + userNm + ", hospNm=" + hospNm
-				+ ", farmNm=" + farmNm + ", sidoNm=" + sidoNm + ", sigunguNm=" + sigunguNm + "]";
+				+ ", farmNm=" + farmNm + ", sidoNm=" + sidoNm + ", sigunguNm=" + sigunguNm + ", sidoCd=" + sidoCd
+				+ ", sigunguCd=" + sigunguCd + "]";
 	}
-	
-	
+
+
 }

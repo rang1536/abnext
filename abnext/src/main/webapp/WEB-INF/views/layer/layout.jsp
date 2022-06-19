@@ -947,6 +947,7 @@
 						$("#userZip").val(data.zonecode);
 						$('#sidoNm').val(data.sido);
 						$('#sigunguNm').val(data.sigungu);
+						$('#sigunguCd').val(data.sigunguCode);
 
 						$('#userDtlAdr').focus();
 					}else if(type == 'hospital'){
@@ -954,6 +955,7 @@
 						$("#hospZip").val(data.zonecode);
 						$('#hospSidoNm').val(data.sido);
 						$('#hospSigunguNm').val(data.sigungu);
+						$('#hospSigunguCd').val(data.sigunguCode);
 
 						$('#hospDtlAdr').focus();
 					}else if(type == 'farm'){
@@ -961,11 +963,13 @@
 						$("#farmZip").val(data.zonecode);
 						$('#farmSidoNm').val(data.sido);
 						$('#farmSigunguNm').val(data.sigungu);
+						$('#farmSigunguCd').val(data.sigunguCode);
 
 						$('#farmDtlAdr').focus();
 					}else if(type == 'butler'){
 						$('#butlerSido').val(data.sido);
 						$('#butlerSigungu').val(data.sigungu);
+
 					}
 				}
 			}).open();

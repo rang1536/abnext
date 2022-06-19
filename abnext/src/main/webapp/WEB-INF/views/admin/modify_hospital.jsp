@@ -197,11 +197,13 @@
 
 						                  <div class="input-group">
 						                    <div class="custom-file">
-						                      <input type="file" class="custom-file-input" name="hospRnFile" id="hospRnFile" value="${hosp.hospRnFile }">
+						                      <input type="file" class="custom-file-input" name="hospRnFile" id="hospRnFile" value="">
 						                      <label class="custom-file-label" for="hospRnFile">사업자등록증 파일을 등록해주세요</label>
 						                    </div>
 						                  </div>
 						                </div>
+
+						                <a href="resources/files/${hosp.hospRnFilePathName }" download>${hosp.hospRnFilePathName }</a>
 						                <!-- /.form group -->
 					                </div>
 					            </div>

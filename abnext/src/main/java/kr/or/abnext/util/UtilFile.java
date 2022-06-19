@@ -41,13 +41,13 @@ public class UtilFile {
 		List<TbFile> uploadFileList = new ArrayList<TbFile>();
 		//호스팅
 		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
-		
+
 		//로컬
 		String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
-		
+
 		//회사 서버
 		/*String rootPath = "F:\\sh86\\resources\\files\\";*/
-		
+
 		List<MultipartFile> multipartFile = request.getFiles("uploadFile");
         if (multipartFile.size() == 1 && multipartFile.get(0).getOriginalFilename().equals("")) {
         } else {
@@ -56,26 +56,26 @@ public class UtilFile {
                 uploadFileList.add(uploadFile);
             }
         }
-		return uploadFileList;	
+		return uploadFileList;
 	}
 	//단일파일 업로드
 	public TbFile singleUploadFile(MultipartFile file){
 		//호스팅
-		/*String rootPath = "/home/hosting_users/kis0488/tomcat/webapps/resources/files/"+classNum+"/";*/
+		/*String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 		/*String rootPath = "http:///sh86.kr/resources/files/"+classNum+"/";*/
-		
+
 		//호스팅
 		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
-		
+
 		//로컬
 		String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
-		
+
 		return uploadFile(file, rootPath);
-		
+
 	}
-	
+
 	// 멀티파트 파일 > 파일 형식으로 변환 (안씀.)
-	public File convert(MultipartFile multipartFile) throws IOException {   
+	public File convert(MultipartFile multipartFile) throws IOException {
 	    File file= new File(multipartFile.getOriginalFilename());
 	    file.createNewFile();
 	    FileOutputStream fos = new FileOutputStream(file);
@@ -89,31 +89,31 @@ public class UtilFile {
 		TbFile uploadFile = new TbFile();
 		uploadFile.setFilePath(rootPath);
 		uploadFile.setFileOriNm(multipartFile.getOriginalFilename().replace("-", ""));
-		
+
 		/* 이미지 업로드용. 용량압축 및 jpg보정 로직 포함
 		byte[] imgBytes = null;
-		try {			
-			imgBytes = multipartFile.getBytes(); 
+		try {
+			imgBytes = multipartFile.getBytes();
 			BufferedInputStream bufferedIS = new BufferedInputStream(new ByteArrayInputStream(imgBytes));
-			
+
 			 Thumbnails 사용시 이미지 색상이 변하는 문제가 생김.
 			 * BufferedImage bi = Thumbnails.of(file).scale(1).asBufferedImage();
-			
+
 			int orientation = correctOrientation(bufferedIS);
-			
+
 			BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(imgBytes)); //새로 생성해줘야 bufferedImage가 널이 아니다.
 			BufferedImage bi = rotateImageForMobile(bis, orientation);
-			
+
 			//분홍배경 색상 원색상으로 보정
 			int w = bi.getWidth();
 			int h = bi.getHeight();
 			BufferedImage biNew = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 			int[] rgb = bi.getRGB(0, 0, w, h, null, 0, w);
 			biNew.setRGB(0, 0, w, h, rgb, 0, w);
-			
+
 			makeJPG(biNew, new File(rootPath+multipartFile.getOriginalFilename().replace("-", "")));
 			ByteArrayInputStream byteIS = new ByteArrayInputStream(imgBytes);
-			
+
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -124,8 +124,8 @@ public class UtilFile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
-		
+
+
 		try {
 			String originalName = multipartFile.getOriginalFilename(); //원래 파일명
 	    	int index = originalName.lastIndexOf("."); //확장자 구분을 위한 (.)인덱스 찾기
@@ -151,8 +151,8 @@ public class UtilFile {
 		boolean result = destFile.delete();
 		return result;
 	}
-	
-	
+
+
 	public static int correctOrientation(BufferedInputStream inputStream) throws ImageProcessingException, IOException, MetadataException {
 	    Metadata metadata = ImageMetadataReader.readMetadata(inputStream);
 	    int orientation = 1;
@@ -169,7 +169,7 @@ public class UtilFile {
         }
 	    return orientation;
 	}
-	
+
 	public BufferedImage rotateImageForMobile(InputStream is,int orientation) throws IOException {
         BufferedImage bi = ImageIO. read(is);
          if(orientation == 6){ //정위치
@@ -179,10 +179,10 @@ public class UtilFile {
         } else if (orientation == 3){//오른쪽으로 눞였을때
                 return rotateImage(bi, 180);
         } else if (orientation == 8){//180도
-                return rotateImage(bi, 270);      
+                return rotateImage(bi, 270);
         } else{
                 return bi;
-        }       
+        }
 	}
 
 	public BufferedImage rotateImage(BufferedImage orgImage,int radians) {
@@ -198,16 +198,16 @@ public class UtilFile {
         graphics.rotate(Math. toRadians(radians), newImage.getWidth() / 2, newImage.getHeight() / 2);
         graphics.translate((newImage.getWidth() - orgImage.getWidth()) / 2, (newImage.getHeight() - orgImage.getHeight()) / 2);
         graphics.drawImage(orgImage, 0, 0, orgImage.getWidth(), orgImage.getHeight(), null );
-        
+
          return newImage;
 	}
-	
+
 	public void makeJPG(BufferedImage orgImage, File destFile) throws IOException {
 		/*MultiStepRescaleOp rescale = new MultiStepRescaleOp(orgImage.getWidth(),orgImage.getWidth());
 		rescale.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.Soft);
-		  
+
 		BufferedImage resizedImage = rescale.filter(orgImage, null);*/
-		
+
 		ImageIO.write(orgImage, "jpg", destFile);
 	}
 }

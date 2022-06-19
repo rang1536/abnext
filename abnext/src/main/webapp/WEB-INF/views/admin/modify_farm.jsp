@@ -79,7 +79,8 @@
 						                    <div class="input-group-prepend">
 						                      <span class="input-group-text"><i class="fas fa-building"></i></span>
 						                    </div>
-						                    <input type="text" class="form-control farmInput" id="farmNm" name="farmNm">
+						                    <input type="hidden" id="farmNo" name="farmNo" value="${farm.farmNo }"/>
+						                    <input type="text" class="form-control farmInput" id="farmNm" name="farmNm" value="${farm.farmNm }"/>
 						                  </div>
 						                  <!-- /.input group -->
 						                </div>
@@ -87,7 +88,16 @@
 					                </div>
 
 					                <div class="col-sm-6">
+										<div class="form-group">
+						                  <label>농장주</label>
 
+						                  <div class="input-group">
+						                  	  <div class="input-group-prepend">
+							                      <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+							                  </div>
+							                  <input type="text" class="form-control farmInput" id="farmCeo" name="farmCeo" value="${farm.farmCeo }"/>
+							              </div>
+						                </div>
 					                </div>
 				                </div>
 
@@ -101,7 +111,7 @@
 						                    <div class="input-group-prepend">
 						                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
 						                    </div>
-						                    <input type="text" class="form-control farmInput" id="farmHp" name="farmHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+						                    <input type="text" class="form-control farmInput" id="farmHp" name="farmHp" value="${farm.farmHp }">
 						                  </div>
 						                  <!-- /.input group -->
 						                </div>
@@ -115,7 +125,7 @@
 						                    <div class="input-group-prepend">
 						                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 						                    </div>
-						                    <input type="text" class="form-control farmInput" id="farmTel" name=""farmTel"" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+						                    <input type="text" class="form-control farmInput" id="farmTel" name="farmTel" value="${farm.farmTel }">
 						                  </div>
 						                  <!-- /.input group -->
 						                </div>
@@ -133,7 +143,7 @@
 						                    <div class="input-group-prepend">
 						                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 						                    </div>
-						                    <input type="text" class="form-control farmInput" id="farmFax" name="farmFax" />
+						                    <input type="text" class="form-control farmInput" id="farmFax" name="farmFax" value="${farm.farmFax }" />
 						                  </div>
 						                  <!-- /.input group -->
 						                </div>
@@ -147,7 +157,7 @@
 						                    <div class="input-group-prepend">
 						                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
 						                    </div>
-						                    <input type="text" class="form-control farmInput" id="farmEmail" name="farmEmail" />
+						                    <input type="text" class="form-control farmInput" id="farmEmail" name="farmEmail" value="${farm.farmEmail }" />
 						                  </div>
 						                  <!-- /.input group -->
 						                </div>
@@ -164,7 +174,7 @@
 						                    <div class="input-group-prepend">
 						                      <span class="input-group-text"><i class="fas fa-file"></i></span>
 						                    </div>
-						                    <input type="text" class="form-control farmInput" id="farmRn" name="farmRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+						                    <input type="text" class="form-control farmInput" id="farmRn" name="farmRn" value="${farm.farmRn }">
 						                  </div>
 						                  <!-- /.input group -->
 						                </div>
@@ -176,11 +186,13 @@
 
 						                  <div class="input-group">
 						                    <div class="custom-file">
-						                      <input type="file" class="custom-file-input" name="farmRnFile" id="farmRnFile">
+						                      <input type="file" class="custom-file-input" name="farmRnFile" id="farmRnFile" value="">
 						                      <label class="custom-file-label" for="farmRnFile">사업자등록증 파일을 등록해주세요</label>
 						                    </div>
 						                  </div>
 						                </div>
+
+						                <a href="resources/files/${farm.farmRnFilePathName }" download>${farm.farmRnFilePathName }</a>
 						                <!-- /.form group -->
 					                </div>
 					            </div>
@@ -189,12 +201,12 @@
 				                <!-- <div class="input-group mb-3"> -->
 				                <div class="row">
 				                	<div class="input-group col-sm-4">
-					                  <input type="text" class="form-control farmInput" id="farmZip" name="farmZip" >
+					                  <input type="text" class="form-control farmInput" id="farmZip" name="farmZip"  value="${farm.farmZip }">
 					                  <span class="input-group-append">
-					                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('farm')">주소검색</button><!--  -->
+					                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('farmital')">주소검색</button><!--  -->
 					                  </span>
-					                  <input type="hidden" id="farmSidoNm" name="farmSidoNm"/>
-					                  <input type="hidden" id="farmSigunguNm" name="farmSigunguNm"/>
+					                  <input type="hidden" id="farmSidoNm" name="farmSidoNm" value="${farm.farmSidoNm }"/>
+					                  <input type="hidden" id="farmSigunguNm" name="farmSigunguNm" value="${farm.farmSigunguNm }"/>
 					                </div>
 					            </div><br/>
 					            <div class="row">
@@ -202,7 +214,7 @@
 					                  <span class="input-group-prepend">
 					                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
 					                  </span>
-					                  <input type="text" class="form-control farmInput" id="farmAdr" name="farmAdr">
+					                  <input type="text" class="form-control farmInput" id="farmAdr" name="farmAdr" value="${farm.farmAdr }">
 					                </div>
 					            </div><br/>
 					            <div class="row">
@@ -210,7 +222,7 @@
 					            	  <div class="input-group-prepend">
 					                    <button type="button" class="btn btn-default">상세주소</button>
 					                  </div>
-					                  <input type="text" class="form-control farmInput" name="farmDtlAdr" id="farmDtlAdr">
+					                  <input type="text" class="form-control farmInput" name="farmDtlAdr" id="farmDtlAdr" value="${farm.farmDtlAdr }">
 					            	</div>
 				                </div> <!-- END input-group mb-3 -->
 
@@ -222,9 +234,9 @@
 
 						                  <div class="input-group">
 						                    <div class="input-group-prepend">
-						                      <span class="input-group-text"><i class="fas fa-memo"></i></span>
+						                      <span class="input-group-text"><i class="fas fa-plus"></i></span>
 						                    </div>
-						                    <input type="text" class="form-control hospInput" id="farmMemo" name="farmMemo" >
+						                    <input type="text" class="form-control farmInput" id="farmMemo" name="farmMemo"  placeholder="참고사항 자유롭게 기재.." value="${farm.farmMemo }">
 						                  </div>
 						                  <!-- /.input group -->
 						                </div>
@@ -232,7 +244,7 @@
 					                </div>
 					            </div>
 
-				                <br/><br/>
+								<br/><br/>
 
 								<div class="row">
 					                <div class="col-sm-2">
@@ -241,8 +253,8 @@
 
 										  <div class="input-group">
 							                  <select class="form-control" name="payGb" id="payGb" style="width:100%;">
-						                    	<option selected="selected" value="월간정산">월간정산</option>
-						                    	<option value="건별정산">건별정산</option>
+						                    	<option <c:if test="${farm.payGb eq '즉시납부' }">selected="selected"</c:if> value="즉시납부">즉시납부</option>
+						                    	<option <c:if test="${farm.payGb eq '월간정산' }">selected="selected"</c:if> value="월간정산">월간정산</option>
 						                      </select>
 						                  </div>
 						                </div>
@@ -254,12 +266,12 @@
 
 						                  <div class="input-group">
 						                    <div class="input-group">
-												<select class="form-control" name="payDate" id="payDate" style="width:100%;">
-													<option selected="selected" value="1">1</option>
-													<option value="5">5</option>
-													<option value="15">15</option>
-													<option value="25">25</option>
-													<option value="30">30</option>
+												<select class="form-control" name="payDate" id="payDate" style="width:100%;" <c:if test="${farm.payGb eq '즉시납부' }">disabled="disabled"</c:if> />
+													<option <c:if test="${farm.payDate eq '1' }">selected="selected"</c:if> value="1">1</option>
+													<option <c:if test="${farm.payDate eq '5' }">selected="selected"</c:if> value="5">5</option>
+													<option <c:if test="${farm.payDate eq '15' }">selected="selected"</c:if> value="15">15</option>
+													<option <c:if test="${farm.payDate eq '25' }">selected="selected"</c:if> value="25">25</option>
+													<option <c:if test="${farm.payDate eq '30' }">selected="selected"</c:if> value="30">30</option>
 												</select>
 											</div>
 						                  </div>
@@ -275,7 +287,7 @@
 						                    <div class="input-group-prepend">
 						                      <span class="input-group-text"><i class="fas fa-address-card"></i></span>
 						                    </div>
-						                    <input type="text" class="form-control hospInput" id="payManagerNm" name="payManagerNm" >
+						                    <input type="text" class="form-control farmInput" id="payManagerNm" name="payManagerNm" value="${farm.payManagerNm }"/>
 						                  </div>
 						                </div>
 						                <!-- /.form group -->
@@ -288,18 +300,38 @@
 						                    <div class="input-group-prepend">
 						                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 						                    </div>
-						                    <input type="text" class="form-control hospInput" id="payManagerHp" name="payManagerHp" >
+						                    <input type="text" class="form-control farmInput" id="payManagerHp" name="payManagerHp" value="${farm.payManagerHp }" />
 						                  </div>
 						                  <!-- /.input group -->
 						                </div>
 						                <!-- /.form group -->
 					                </div>
-
 				                </div>
+
+				                <div class="row">
+					            	<div class="col-sm-12">
+						                <div class="form-group">
+						                  <label>메모</label>
+
+						                  <div class="input-group">
+						                    <div class="input-group-prepend">
+						                      <span class="input-group-text"><i class="fas fa-plus"></i></span>
+						                    </div>
+						                    <input type="text" class="form-control farmInput" id="payMemo" name="payMemo"  value="${farm.payMemo }" placeholder="정산관련 참고사항..">
+						                  </div>
+						                  <!-- /.input group -->
+						                </div>
+						                <!-- /.form group -->
+					                </div>
+					            </div>
 			                </div>
 			            </form> <!-- 병원입력폼 END -->
 		              </div>
 		              <!-- /.card-body -->
+
+		              <div class="card-footer">
+					  	<button type="button" onclick="fn_modifyfarmital();" class="btn btn-sm btn-success btn-flat" style="float:right;">정보변경</button>
+					  </div>
 		            </div>
 		            <!-- /.card -->
 		          </div>
@@ -374,28 +406,28 @@
 
 
 	/*====================================
-	* 기관병원등 수정
-	* 팝업 : fn_modifyHospital()
+	* 농장병원등 수정
+	* 팝업 : fn_modifyfarmital()
 	====================================*/
-	function fn_modifyHospital(){
-		var hospNm = $('#hospNm').val();
-		var hospHp = $('#hospHp').val();
-		var hospAdr = $('#hospAdr').val();
+	function fn_modifyfarmital(){
+		var farmNm = $('#farmNm').val();
+		var farmHp = $('#farmHp').val();
+		var farmAdr = $('#farmAdr').val();
 		var payGb = $('#payGb').val();
 		var payManagerNm = $('#payManagerNm').val();
 		var payManagerHp = $('#payManagerHp').val();
 
-		if(hospNm == null || hospNm == ''){
-			alert('기관(병원)명은 필수입력입니다.');
+		if(farmNm == null || farmNm == ''){
+			alert('농장명은 필수입력입니다.');
 			return;
 		}
 
-		if(hospHp == null || hospHp == ''){
+		if(farmHp == null || farmHp == ''){
 			alert('핸드폰번호는 필수입력입니다.');
 			return;
 		}
 
-		if(hospAdr == null || hospAdr == ''){
+		if(farmAdr == null || farmAdr == ''){
 			alert('주소는 필수입력입니다.');
 			return;
 		}
@@ -413,13 +445,13 @@
 		}
 
 
-		//$('#hospInfoForm').serialize();
-		var params = new FormData($('#hospInfoForm')[0]);
+		//$('#farmInfoForm').serialize();
+		var params = new FormData($('#farmInfoForm')[0]);
 
 		toastr.info('등록중입니다');
 
 		$.ajax({
-			url : 'modifyHospCtrl',
+			url : 'modifyfarmCtrl',
 			data : params,
 			dataType : 'json',
 			type : 'post',
@@ -427,10 +459,10 @@
 			contentType : false,
 			success : function(data){
 				if(data.result == 'succ'){
-					alert('기관정보변경이 완료되었습니다.');
-					location.href = 'hospList';
+					alert('농장정보변경이 완료되었습니다.');
+					location.href = 'farmList';
 				}else{
-					toastr.error('기관(병원) 정보변경에 실패하였습니다.');
+					toastr.error('농장 정보변경에 실패하였습니다.');
 				}
 			}
 		})

@@ -306,8 +306,54 @@ public class AdminService {
 	 * @param : TbHospital
 	 **/
 	public Map<String, Object> modifyHospitalServ(TbHospital tbHospital) {
+		//기존파일 삭제 및 신규등록
+		if(tbHospital.getHospRnFile() != null) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("hospNo", tbHospital.getHospNo());
+
+			int result = adminDao.removeRnFile(param);
+
+			UtilFile utilFile = new UtilFile();
+			TbFile tbFile = utilFile.singleUploadFile(tbHospital.getHospRnFile());
+
+			if(tbFile != null) {
+				tbFile.setHospNo(tbHospital.getHospNo());
+				tbFile.setFileGb("F001-01"); //사업자등록증
+				tbFile.setFileMemo("사업자등록증");
+
+				adminDao.addFile(tbFile);
+			}
+		}
+
 		return getResultMap(adminDao.modifyHospital(tbHospital));
 	}
 
 
+	/**
+	 * @function : modifyFarmServ
+	 * @Description : 농장수정
+	 * @param : TbHospital
+	 **/
+	public Map<String, Object> modifyFarmServ(TbFarm tbFarm) {
+		//기존파일 삭제 및 신규등록
+		if(tbFarm.getFarmRnFile() != null) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("farmNo", tbFarm.getFarmNo());
+
+			int result = adminDao.removeRnFile(param);
+
+			UtilFile utilFile = new UtilFile();
+			TbFile tbFile = utilFile.singleUploadFile(tbFarm.getFarmRnFile());
+
+			if(tbFile != null) {
+				tbFile.setHospNo(tbFarm.getFarmNo());
+				tbFile.setFileGb("F001-01"); //사업자등록증
+				tbFile.setFileMemo("사업자등록증");
+
+				adminDao.addFile(tbFile);
+			}
+		}
+
+		return getResultMap(adminDao.modifyFarm(tbFarm));
+	}
 }

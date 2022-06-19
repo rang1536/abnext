@@ -71,11 +71,11 @@
 											<tr>
 												<th><input type="checkbox" id="allCheck"/></th>
 												<th>농장명</th>
-												<th>전화번호</th>
+												<th>대표자</th>
 												<th>휴대폰</th>
-												<th>이메일</th>
 												<th>지역</th>
-												<th>입금계좌</th>
+												<th>지역2</th>
+												<th>정산타입</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -84,20 +84,23 @@
 													<td>
 														<input type="checkbox" name="farmNo" value="${item.farmNo }"/>
 													</td>
-													<td>${item.farmNm }</td>
-													<td>${item.farmTel }</td>
+													<td onclick="fn_modifyFarm('${item.farmNo }')">${item.farmNm }</td>
+													<td>${item.farmCeo }</td>
 													<td>${item.farmHp }</td>
-													<td>${item.farmEmail }</td>
 													<td>${item.farmSidoNm}</td>
-													<td>
-														<c:if test="${item.farmBankNm ne null and item.farmBankNm ne ''}">(${item.farmBankNm})</c:if>
-														${item.farmAccountNo }
-													</td>
+													<td>${item.farmSigunguNm }</td>
+													<td>${item.payGb }</td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
 								</div> <!-- /.card-body -->
+
+								<!-- 수정페이지 키값 세팅 폼-->
+								<form id="modifyFarmForm">
+									<input type="hidden" id="modifyFarmNo" name="modifyFarmNo" />
+								</form>
+
 								<div class="card-footer">
 									<button type="button" id="delFarmBtn" class="btn btn-sm btn-danger" onclick="fn_delFarm();">삭제</button>
 									<button type="button" id="addFarmBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">농장등록</button>
@@ -221,6 +224,15 @@
 				}
 			}
 		})
+	}
+
+
+	//농장정보수정 페이지이동.
+	function fn_modifyFarm(farmNo){
+		$('#modifyFarmNo').val(farmNo);
+
+		$('#modifyFarmForm').prop('action', 'modifyFarm');
+		$('#modifyFarmForm').submit();
 	}
 
 

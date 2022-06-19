@@ -41,8 +41,15 @@ public class TbFarm {
 	private String payManagerHp;
 	private String payMemo;
 
+	private String farmRnFilePathName;
 
 
+	public String getFarmRnFilePathName() {
+		return farmRnFilePathName;
+	}
+	public void setFarmRnFilePathName(String farmRnFilePathName) {
+		this.farmRnFilePathName = farmRnFilePathName;
+	}
 	public String getFarmMemo() {
 		return farmMemo;
 	}
@@ -207,7 +214,8 @@ public class TbFarm {
 				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", farmSidoNm=" + farmSidoNm
 				+ ", farmSigunguNm=" + farmSigunguNm + ", farmBankNm=" + farmBankNm + ", farmAccountNo=" + farmAccountNo
 				+ ", farmRnFile=" + farmRnFile + ", farmMemo=" + farmMemo + ", payGb=" + payGb + ", payDate=" + payDate
-				+ ", payManagerNm=" + payManagerNm + ", payManagerHp=" + payManagerHp + ", payMemo=" + payMemo + "]";
+				+ ", payManagerNm=" + payManagerNm + ", payManagerHp=" + payManagerHp + ", payMemo=" + payMemo
+				+ ", farmRnFilePathName=" + farmRnFilePathName + "]";
 	}
 
 }
