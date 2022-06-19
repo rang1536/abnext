@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
@@ -83,9 +84,10 @@ public class InspectRestController {
 	/*
 	 * 동물코드생성
 	 **/
-	@RequestMapping(value = "selectDoctorList", method = RequestMethod.POST)
+	@RequestMapping(value = "createAnimal", method = RequestMethod.POST)
 	public Map<String, Object> createAnimal(TbRcept tbRcept) {
-
+		logger.info(tbRcept.toString());
+		TbAnimal tbAnimal = new TbAnimal();
 		return null;
 	}
 
