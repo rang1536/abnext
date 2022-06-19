@@ -74,6 +74,8 @@ table.dataTable > thead > tr > td:active {
 table.dataTable > thead > tr > th:not(.sorting_disabled),
 table.dataTable > thead > tr > td:not(.sorting_disabled) {
   padding-right: 30px;
+  background-color:#A81919;
+  color:white;
 }
 table.dataTable > thead .sorting,
 table.dataTable > thead .sorting_asc,

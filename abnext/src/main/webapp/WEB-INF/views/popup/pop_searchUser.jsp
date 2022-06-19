@@ -18,6 +18,7 @@
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 300px;">
+                  	<input type="text" id="popSearchUserNm" name="popSearchUserWorkGb" class="form-control float-right" placeholder="검사방법">
                     <input type="text" id="popSearchUserNm" name="popSearchUserNm" class="form-control float-right" placeholder="이름을 입력하세요">
 
                     <div class="input-group-append">

@@ -41,6 +41,12 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+@font-face {
+    font-family: 'GangwonEduPowerExtraBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 *,
 *::before,
 *::after {
@@ -11173,6 +11179,12 @@ body,
 
 .wrapper .content-wrapper {
   min-height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px));
+  background-image : url(../../files/bird3.jpg)
+}
+
+.wapper .content-wrapper .yun {
+  min-height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px));
+
 }
 
 .layout-boxed .wrapper {
