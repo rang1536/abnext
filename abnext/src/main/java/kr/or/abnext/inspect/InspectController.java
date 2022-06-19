@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.abnext.admin.AdminService;
+import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
@@ -41,7 +42,8 @@ public class InspectController {
 	public String requestInspect(Locale locale, Model model, String page) {
 		logger.info("requestInspect Method is start {}.", locale);
 
-		List<TbRcept> list = insServ.recptList();
+		String [] arr = {"1" , "2"};
+		List<TbRcept> list = insServ.recptList(arr);
 		model.addAttribute("rceptList", list);
 
 		return "inspect/requestInspect";
@@ -96,27 +98,39 @@ public class InspectController {
 	public String settingInspectList(Locale locale, Model model) {
 		logger.info("settingInspectList Method is start {}.", locale);
 
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate );
+		String [] arr = {"2"};
+		List<TbRcept> list = insServ.recptList(arr);
+		model.addAttribute("rceptList", list);
 
 		return "inspect/settingInspectList";
 	}
 
 	@RequestMapping(value = "settingInspectModify")
-	public String settingInspectModify(Locale locale, Model model) {
+	public String settingInspectModify(Locale locale, Model model, TbRcept searchRcept) {
 		logger.info("settingInspectModify Method is start {}.", locale);
 
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		//접수정보
+		TbRcept rcept = insServ.getRcept(searchRcept);
 
-		String formattedDate = dateFormat.format(date);
+		//시료정보
+		TbSample tbSample = new TbSample();
+		tbSample.setRqstNo(""+searchRcept.getRqstNo());
+		List<TbSample> smplList = insServ.selectSampleList(tbSample);
 
-		model.addAttribute("serverTime", formattedDate );
+		//검사정보
+		TbInspection tbInspection = new TbInspection();
+		tbInspection.setRqstNo(""+searchRcept.getRqstNo());
+		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
 
+		//시료상태
+		TbCode code = new TbCode();
+		code.setUppCodeId("S001");
+		List<TbCode> codeList = admServ.selectCodeList(code);
+
+		model.addAttribute("rceptInfo", rcept);
+		model.addAttribute("codeList", codeList);
+		model.addAttribute("smplList", smplList);
+		model.addAttribute("inspList", inspList);
 		return "inspect/settingInspectModify";
 	}
 

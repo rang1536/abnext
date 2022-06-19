@@ -20,37 +20,24 @@ public class InspectDao {
 	@Autowired
 	private SqlSessionTemplate sql;
 
-	public List<TbRcept> rceptList(){
-		return sql.selectList("inspection.selectRceptList");
-/*
-		List<TbRcept> list = new ArrayList<TbRcept>();
-		for(int i=0; i<20; i++) {
-			TbRcept r = new TbRcept();
-			r.setRqstNo(i);
-			r.setProcStatNm("신청");
-			if(i%2 == 0) {
-				r.setHospNm("달마병원");
-				r.setAnimNm("망고");
-				r.setDocNm("나수의");
-				r.setPrice("30000");
-			}else {
-				r.setHospNm("예수병원");
-				r.setAnimNm("검둥이");
-				r.setDocNm("최수의");
-				r.setPrice("70000");
-			}
-			if(i<5) r.setRqstDt("2022.02.22");
-			if(i>4 && i<10) r.setRqstDt("2022.03.03");
-			if(i>9 && i<15) r.setRqstDt("2022.03.20");
-			if(i>14) r.setRqstDt("2022.04.05");
-			list.add(r);
-		}
-		return list;
-*/
+	public List<TbRcept> rceptList(String[] arr){
+		return sql.selectList("inspection.selectRceptList", arr);
 	}
 
 	public TbRcept getRcept(TbRcept rcept) {
 		return sql.selectOne("inspection.getTbRcept", rcept);
+	}
+
+	public TbAnimal getAnimal(TbAnimal anim) {
+		return sql.selectOne("inspection.getAnimal", anim);
+	}
+
+	public TbUser getUser(TbUser user) {
+		return sql.selectOne("inspection.getUser", user);
+	}
+
+	public int duplAnimChk(TbAnimal anim) {
+		return sql.selectOne("inspection.duplAnimChk", anim);
 	}
 
 	public TbHospital getHospital(int hospNo) {
@@ -77,6 +64,10 @@ public class InspectDao {
 		return sql.insert("inspection.insertSample", smpl);
 	}
 
+	public int insertAnimal(TbAnimal anim) {
+		return sql.insert("inspection.insertAnimal", anim);
+	}
+
 	public List<TbUser> selectDoctorList(TbUser tbUser){
 		return sql.selectList("inspection.selectDoctorList", tbUser);
 	}
@@ -87,5 +78,17 @@ public class InspectDao {
 
 	public List<TbSample> selectSampleList(TbSample tbSample){
 		return sql.selectList("inspection.selectSampleList", tbSample);
+	}
+
+	public int updateInspectStatus(TbRcept rcpt) {
+		return sql.insert("inspection.updateInspectStatus", rcpt);
+	}
+
+	public int updateSampleStatus(TbSample smpl) {
+		return sql.insert("inspection.updateSampleStatus", smpl);
+	}
+
+	public int updateInspect(TbInspection insp) {
+		return sql.insert("inspection.updateInspect", insp);
 	}
 }

@@ -184,11 +184,10 @@
 												<div class="row">
 													<div class="col-6">
 														<input type="text" class="form-control" placeholder="시도" id="butlerSido" readonly>
-														<input type="hidden" id="sidoNm">
 													</div>
 													<div class="col-6">
 														<input type="text" class="form-control" placeholder="시군구" id="butlerSigungu" readonly>
-														<input type="hidden" id="sigunguNm">
+														<input type="hidden" id="butlerSigunguCd">
 													</div>
 												</div>
 											</div>
@@ -197,7 +196,6 @@
 											<div class="form-group">
 												<label><font color="red">의뢰참고</font></label>
 												<input type="text" class="form-control" placeholder="의뢰참고" id="rqstMemo">
-												<!-- <textarea class="form-control" rows="3" placeholder="특이사항(참고할 만한 사항)"></textarea> -->
 											</div>
 										</div>
 									</div>
@@ -609,6 +607,7 @@ $(".btn-save").on('click',function(){
 			animButler : $("#animButler").val(),
 			butlerSido : $("#butlerSido").val(),
 			butlerSigungu : $("#butlerSigungu").val(),
+			butlerSigunguCd : $("#butlerSigunguCd").val(),
 			animBirth : $("#animBirth").val(),
 			animFirstCd : $("#animFirstCd").val(),
 			animSecondCd : $("#animSecondCd").val(),

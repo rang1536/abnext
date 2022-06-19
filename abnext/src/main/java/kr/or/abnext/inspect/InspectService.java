@@ -18,12 +18,24 @@ public class InspectService {
 	@Autowired
 	private InspectDao inspectDao;
 
-	public List<TbRcept> recptList(){
-		return inspectDao.rceptList();
+	public List<TbRcept> recptList(String[] arr){
+		return inspectDao.rceptList(arr);
+	}
+
+	public TbUser getUser(TbUser user) {
+		return inspectDao.getUser(user);
+	}
+
+	public int duplAnimChk(TbAnimal anim) {
+		return inspectDao.duplAnimChk(anim);
 	}
 
 	public TbRcept getRcept(TbRcept rcept) {
 		return inspectDao.getRcept(rcept);
+	}
+
+	public TbAnimal getAnimal(TbAnimal anim) {
+		return inspectDao.getAnimal(anim);
 	}
 
 	public TbHospital getHospital(int hospNo) {
@@ -50,6 +62,10 @@ public class InspectService {
 		return inspectDao.insertSample(smpl);
 	}
 
+	public int insertAnimal(TbAnimal anim) {
+		return inspectDao.insertAnimal(anim);
+	}
+
 	public List<TbUser> selectDoctorList(TbUser tbUser){
 		return inspectDao.selectDoctorList(tbUser);
 	}
@@ -61,4 +77,17 @@ public class InspectService {
 	public List<TbSample> selectSampleList(TbSample tbSample){
 		return inspectDao.selectSampleList(tbSample);
 	}
+
+	public int updateInspectStatus(TbRcept rcpt) {
+		return inspectDao.updateInspectStatus(rcpt);
+	}
+
+	public int updateSampleStatus(TbSample smpl) {
+		return inspectDao.updateSampleStatus(smpl);
+	}
+
+	public int updateInspect(TbInspection insp) {
+		return inspectDao.updateInspect(insp);
+	}
+
 }

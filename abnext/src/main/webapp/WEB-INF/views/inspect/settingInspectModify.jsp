@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -57,91 +59,96 @@
 		<section class="content">
 			<div class="container-fluid">
 				<!-- general form elements disabled -->
-				<div class="row">
-					<div class="col-md-6">
-						<div class="card card-primary">
-							<div class="card-header">
-								<h3 class="card-title">신청정보</h3>
-							</div>
-							<div class="card-body">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰번호</td>
-											<td style="width:30%;" class="txtc">AAA2202020001</td>
-											<td style="width:20%;background-color:#F2F2F2" class="txtc">상태</td>
-											<td style="width:30%;" class="txtc">접수</td>
-										</tr>
-										<tr>
-											<td style="width:20%;background-color:#F2F2F2" class="txtc">신청자(기관)</td>
-											<td style="width:30%;" class="txtc">ㅇㅇ병원</td>
-											<td style="width:20%;background-color:#F2F2F2" class="txtc">담당수의사</td>
-											<td style="width:30%;" class="txtc">홍길동</td>
-										</tr>
-										<tr>
-											<td style="width:20%;background-color:#F2F2F2" class="txtc">품종</td>
-											<td style="width:30%;" class="txtc">앵무/앵무/유황앵무</td>
-											<td style="width:20%;background-color:#F2F2F2" class="txtc">생년월일</td>
-											<td style="width:30%;" class="txtc">2019-02-28</td>
-										</tr>
-										<tr>
-											<td style="width:20%;background-color:#F2F2F2" class="txtc">성별</td>
-											<td style="width:30%;" class="txtc">암컷</td>
-											<td style="width:20%;background-color:#F2F2F2" class="txtc">신청일</td>
-											<td style="width:30%;" class="txtc">2022-03-15</td>
-										</tr>
-										<tr>
-											<td style="width:20%;background-color:#F2F2F2" class="txtc">참고사항</td>
-											<td colspan="3">AAA2202020001</td>
-										</tr>
-									</thead>
-								</table>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title">신청정보</h3>
 					</div>
-					<div class="col-md-6">
-						<div class="card card-success">
-							<div class="card-header">
-								<h3 class="card-title">시료정보</h3>
-							</div>
-							<!-- /.card-header -->
-							<div class="card-body">
-								<form>
-								<div class="row">
-									<table id="example2" class="table table-bordered table-hover">
-										<thead>
-											<tr>
-												<td class="txtc" style="width:15%;background-color:#F2F2F2">No</td>
-												<td class="txtc" style="width:30%;background-color:#F2F2F2">시료정보</td>
-												<td class="txtc" style="width:30%;background-color:#F2F2F2">시료번호</td>
-												<td class="txtc" style="width:*;background-color:#F2F2F2">기타</td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="txtc">1</td>
-												<td class="txtc">분변</td>
-												<td class="txtc">00123</td>
-												<td class="txtc">바이러스</td>
-											</tr>
-											<tr>
-												<td class="txtc">2</td>
-												<td class="txtc">분변</td>
-												<td class="txtc">0001</td>
-												<td class="txtc">세균</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								</form>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
+					<div class="card-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰번호</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.rqstNo }</td>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">상태</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.procStatNm }</td>
+								</tr>
+								<tr>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">신청자(기관)</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.hospNm }</td>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">담당수의사</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.docNm }</td>
+								</tr>
+								<tr>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">품종</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.animFirstNm }/${rceptInfo.animSecondNm }/${rceptInfo.animThirdNm }</td>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">생년월일</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.animBirth }</td>
+								</tr>
+								<tr>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">성별</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.animSex}</td>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">신청일</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.rqstDt}</td>
+								</tr>
+								<tr>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">동물명(번호)</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.animNm }(${rceptInfo.animNo})</td>
+									<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰메모</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.rqstMemo }</td>
+								</tr>
+							</thead>
+						</table>
 					</div>
+					<!-- /.card-body -->
 				</div>
+				<!-- /.card -->
+
+				<div class="card card-success">
+					<div class="card-header">
+						<h3 class="card-title">시료정보</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<form>
+						<div class="row">
+							<table id="example2" class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<td class="txtc" style="width:15%;background-color:#F2F2F2">No</td>
+										<td class="txtc" style="width:30%;background-color:#F2F2F2">시료구분</td>
+										<td class="txtc" style="width:30%;background-color:#F2F2F2">시료메모</td>
+										<td class="txtc" style="width:*;background-color:#F2F2F2">상태</td>
+									</tr>
+								</thead>
+								<tbody id="smplList">
+									<c:forEach var="item" items="${smplList }" varStatus="status">
+										<tr>
+											<td class="txtc" style="vertical-align:middle;">${status.index+1 }</td>
+											<td class="txtc" style="vertical-align:middle;">${item.sampleName }</td>
+											<td class="txtc" style="vertical-align:middle;">${item.sampleMemo }</td>
+											<td class="txtc">
+												<div class="form-group">
+													<input type="hidden" id="sampleNo_${status.index+1}" value="${item.sampleNo }"/>
+													<select class="form-control" id="sampleStatus_${status.index+1 }">
+														<c:forEach var="item2" items="${codeList }" varStatus="status">
+															<option value="${item2.codeId }" <c:if test="${item2.codeId == item.sampleStatus}">selected</c:if>>
+																${item2.codeNm }
+															</option>
+														</c:forEach>
+													</select>
+												</div>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						</form>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+
 				<div class="card card-info">
 					<div class="card-header">
 						<h3 class="card-title">검사정보 설정</h3>
@@ -150,27 +157,48 @@
 					<div class="card-body">
 						<form>
 							<div class="row">
-								<div class="col-sm-5">
-									<div class="form-group">
-										<label>질병구분</label>
-										<select class="form-control">
-											<option>바이러스</option>
-											<option>option 2</option>
-										</select>
+								<div class="col-md-10">
+									<div class="row">
+										<div class="col-sm-4">
+											<div class="form-group">
+												<label>검사구분</label>
+												<select class="form-control" id="inspFirstCd"></select>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="form-group">
+												<label>검사방법</label>
+												<select class="form-control" id="inspSecondCd"></select>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<div class="form-group">
+												<label>시료선택</label>
+												<div class="form-group">
+													<select class="select2bs4" multiple="multiple" data-placeholder="시료선택" style="width: 100%;" id="sampleCode">
+														<c:forEach var="item" items="${smplList }" varStatus="status">
+															<option value="${item.sampleCode }">${item.sampleName }</option>
+														</c:forEach>
+													</select>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="col-sm-5">
-									<div class="form-group">
-										<label>검사방법</label>
-										<select class="form-control">
-											<option>PCR</option>
-											<option>option 2</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-sm-2">
-									<div class="form-group">
-										<button type="submit" class="btn btn-info btn-flat" style="margin-top:33px; float:right;"><span style="margin:0 20px 0 20px;">추가</span></button>
+								<div class="col-md-2">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<button type="button" class="btn btn-block btn-info btn-flat" id="modBtn">수정</button>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>&nbsp;</label>
+												<button type="button" class="btn btn-block btn-info btn-flat" >추가</button>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -178,33 +206,62 @@
 								<table id="example2" class="table table-bordered table-hover">
 									<thead>
 										<tr>
-											<td class="txtc" style="width:15%;background-color:#F2F2F2">No</td>
-											<td class="txtc" style="width:30%;background-color:#F2F2F2">질병구분</td>
-											<td class="txtc" style="width:30%;background-color:#F2F2F2">검사방법</td>
+											<td class="txtc" style="width:5%;background-color:#F2F2F2"></td>
+											<td class="txtc" style="width:5%;background-color:#F2F2F2">No</td>
+											<td class="txtc" style="width:20%;background-color:#F2F2F2">검사구분</td>
+											<td class="txtc" style="width:20%;background-color:#F2F2F2">검사방법</td>
+											<td class="txtc" style="width:20%;background-color:#F2F2F2">시료</td>
+											<td class="txtc" style="width:20%;background-color:#F2F2F2">담당자</td>
 											<td class="txtc" style="width:*;background-color:#F2F2F2">비용</td>
-											<td class="txtc" style="width:*;background-color:#F2F2F2">삭제</td>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td class="txtc">1</td>
-											<td class="txtc">분변</td>
-											<td class="txtc">00123</td>
-											<td class="txtc">30,000</td>
-											<td class="txtc">삭제</td>
-										</tr>
-										<tr>
-											<td class="txtc">2</td>
-											<td class="txtc">분변</td>
-											<td class="txtc">0001</td>
-											<td class="txtc">70,000</td>
-											<td class="txtc">삭제</td>
-										</tr>
+									<tbody id="inspList">
+										<c:forEach var="item" items="${inspList }" varStatus="status">
+											<tr>
+												<td>
+													<input type="hidden" id="inspFirstCd_${status.index+1 }" value="${item.inspFirstCd }"/>
+													<input type="hidden" id="inspSecondCd_${status.index+1 }"/>
+													<input type="hidden" id="sampleCode_${status.index+1 }"/>
+													<input type="hidden" id="sampleName_${status.index+1 }"/>
+													<div class="form-group clearfix">
+														<div class="icheck-primary d-inline">
+															<input type="checkbox" id="chk_${status.index+1 }">
+															<label for="chk_${status.index+1 }">&nbsp;</label>
+														</div>
+													</div>
+												</td>
+												<td class="txtc">
+													${status.index+1 }
+													<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
+												</td>
+												<td class="txtc">
+													${item.inspFirstNm }
+												</td>
+												<td class="txtc">${item.inspThirdNm }</td>
+												<td class="txtc" id="inspSmplCd">
+
+												</td>
+												<td class="txtc">
+													<input type="hidden" id="workerNo_${status.index+1 }">
+													<input type="hidden" id="workerNm_${status.index+1 }">
+													<a href="javascript:void(0)" onclick="">
+														<c:if test="${item.workerNo == null || item.workerNo == ''}">
+															담당자
+														</c:if>
+														<c:if test="${item.workerNo != null && item.workerNo != ''}">
+															${item.workerNm}
+														</c:if>
+													</a>
+												</td>
+												<td class="txtc"><fmt:formatNumber value="${item.inspPrice }" pattern="#,###"/></td>
+											</tr>
+										</c:forEach>
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="5" class="txtc">
-												<button type="button" class="btn btn-primary btn-flat"><span style="margin:0 25px 0 20px;"><i class="fas fa-pencil-alt"></i> 설정확인</span></button>
+											<td colspan="6" class="txtc">
+												<button type="button" id="list" style="width:121.2px" class="btn btn-success btn-flat"><i class="fas fa-credit-card"></i> 목록</button>
+												<button type="button" id="sett" style="width:121.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 설정확인</button>
 											</td>
 										</tr>
 									</tfoot>
@@ -220,7 +277,7 @@
 		</section>
 		<!-- /.content -->
 	</div>
-	
+
 
 	<jsp:include page="../layer/layout_footer.jsp"></jsp:include>
 	<!-- Control Sidebar -->
@@ -231,6 +288,8 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- jQuery -->
+<script src="resources/plugins/jquery/jquery.min.js"></script>
 <!-- date-range-picker -->
 <script src="resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Bootstrap 4 -->
@@ -252,15 +311,19 @@
 <script src="resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Select2 -->
-<script src="resources/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="resources/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="resources/plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <!-- dropzonejs -->
-
+<script src="resources/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- Customizing Js -->
+<script src="resources/js/common.js"></script>
 <!-- Page specific script -->
 <script>
 $(function () {
 	bsCustomFileInput.init();
-	
+
 	//Initialize Select2 Elements
 	$('.select2').select2()
 
@@ -273,7 +336,98 @@ $(function () {
 	$('#reservationdate').datetimepicker({
 			format: 'YYYY.MM.DD'
 	});
+
+	//검사항목
+	$.gfn_getCode('B001',callBackFn,'inspFirstCd');
+
 });
+
+$("#sett").on("click",function (){
+	var inspData = [];
+	$("#inspList").find("tr").each(function(){
+		var sData = {
+			inspNo : $(this).find("[id^=inspNo]").val(),
+			workerNo : $(this).find("[id^=workerNo]").val(),
+			workerNm : $(this).find("[id^=workerNm]").val(),
+			sampleCode : $(this).find("[id^=sampleCode]").val(),
+			sampleName : $(this).find("[id^=sampleName]").val()
+		}
+		inspData.push(sData);
+	});
+
+	var smplData = [];
+	$("#smplList").find("tr").each(function(){
+		var sData = {
+			sampleNo : $(this).find("[id^=sampleNo]").val(),
+			sampleStatus : $(this).find("[id^=sampleStatus]").val()
+		}
+		smplData.push(sData);
+	});
+
+	var data = {
+		uptId : localStorage.getItem("userId"),
+		inspList : inspData,
+		smplList : smplData
+	}
+
+	$.ajax({
+		url : "modifySetting",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			alert("저장하였습니다.");
+		}
+	});
+
+});
+
+function callBackFn(data,col){
+	var optHtml = '';
+	for(var i=0; i<data.length; i++){
+		optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>';
+	}
+
+	$("#"+col).html(optHtml);
+	if(col == 'inspFirstCd'){
+		$.gfn_getCode(data[0].codeId,callBackFn,'inspSecondCd');
+	}else if(col == 'inspSecondCd'){
+		//$.gfn_getCode(data[0].codeId,callBackFn,'inspThirdCd');
+		$("#inspPrice").val(data[0].codeDtlMemo);
+	}
+}
+
+$("#inspFirstCd").on('change',function(){
+	$.gfn_getCode($(this).val(),callBackFn,'inspSecondCd');
+});
+
+$("#inspSecondCd").on('change',function(){
+	$.gfn_getCodeDtl($(this).val(),callBackFnGetPrice);
+});
+
+function callBackFnGetPrice(data){
+	$("#inspPrice").val(data.codeDtlMemo);
+}
+
+$("#inspList").find("tr").click(function(){
+	$("#inspList").find("tr").find("[id^=chk]").prop("checked",false);
+	$(this).find("[id^=chk]").prop("checked",true);
+});
+
+$("#modBtn").on("click",function(){
+	$("#inspList").find("tr").each(function(){
+		if($(this).find("[id^=chk]").is(":checked")){
+			$(this).find("[id^=inspFirstCd]").val($("#inspFirstCd").val());
+			$(this).find("td:eq(2)").text($("#inspFirstCd option:selected").text());
+			$(this).find("[id^=inspSecondCd]").val($("#inspSecondCd").val());
+			$(this).find("td:eq(3)").text($("#inspSecondCd option:selected").text());
+			$(this).find("td:eq(4)").text($("#sampleCode option:selected").text());
+			var str = JSON.stringify($("#sampleCode").val());
+			str = str.replace('[','').replace(']','').replace(/\"/gi,'');
+			$(this).find("[id^=sampleCode]").val(str);
+		}
+	})
+})
 </script>
 </body>
 </html>

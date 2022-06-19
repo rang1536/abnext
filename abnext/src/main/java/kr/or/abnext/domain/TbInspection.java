@@ -10,7 +10,9 @@ public class TbInspection {
 	private String inspNo;
 	private String rqstNo;
 	private String sampleCode;
-	private String manager;
+	private String sampleName;
+	private String workerNo;
+	private String workerNm;
 	private String inspFirstCd;
 	private String inspFirstNm;
 	private String inspSecondCd;
@@ -41,11 +43,23 @@ public class TbInspection {
 	public void setSampleCode(String sampleCode) {
 		this.sampleCode = sampleCode;
 	}
-	public String getManager() {
-		return manager;
+	public String getSampleName() {
+		return sampleName;
 	}
-	public void setManager(String manager) {
-		this.manager = manager;
+	public void setSampleName(String sampleName) {
+		this.sampleName = sampleName;
+	}
+	public String getWorkerNo() {
+		return workerNo;
+	}
+	public void setWorkerNo(String workerNo) {
+		this.workerNo = workerNo;
+	}
+	public String getWorkerNm() {
+		return workerNm;
+	}
+	public void setWorkerNm(String workerNm) {
+		this.workerNm = workerNm;
 	}
 	public String getInspFirstCd() {
 		return inspFirstCd;
@@ -121,12 +135,12 @@ public class TbInspection {
 	}
 	@Override
 	public String toString() {
-		return "TbInspection [inspNo=" + inspNo + ", rqstNo=" + rqstNo + ", sampleCode=" + sampleCode + ", manager="
-				+ manager + ", inspFirstCd=" + inspFirstCd + ", inspFirstNm=" + inspFirstNm + ", inspSecondCd="
-				+ inspSecondCd + ", inspSecondNm=" + inspSecondNm + ", inspThirdCd=" + inspThirdCd + ", inspThirdNm="
-				+ inspThirdNm + ", inspPrice=" + inspPrice + ", inspResult=" + inspResult + ", insDt=" + insDt
-				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+		return "TbInspection [inspNo=" + inspNo + ", rqstNo=" + rqstNo + ", sampleCode=" + sampleCode + ", sampleName="
+				+ sampleName + ", workerNo=" + workerNo + ", workerNm=" + workerNm + ", inspFirstCd=" + inspFirstCd
+				+ ", inspFirstNm=" + inspFirstNm + ", inspSecondCd=" + inspSecondCd + ", inspSecondNm=" + inspSecondNm
+				+ ", inspThirdCd=" + inspThirdCd + ", inspThirdNm=" + inspThirdNm + ", inspPrice=" + inspPrice
+				+ ", inspResult=" + inspResult + ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt
+				+ ", uptId=" + uptId + "]";
 	}
-
 
 }

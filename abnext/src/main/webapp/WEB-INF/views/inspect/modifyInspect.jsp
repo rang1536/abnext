@@ -68,7 +68,7 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>*의뢰번호</label>
-										<input type="text" class="form-control" placeholder="의뢰번호" readonly value="${rceptInfo.rqstNo }">
+										<input type="text" class="form-control" placeholder="의뢰번호" readonly value="${rceptInfo.rqstNo }" id="rqstNo"/>
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -155,6 +155,7 @@
 									<div class="form-group">
 										<label>*보호자명</label>
 										<input type="text" id="animButler" class="form-control" placeholder="보호자명" readonly value="${rceptInfo.animButler}">
+										<input type="hidden" id="butlerSigunguCd" value="${rceptInfo.butlerSigunguCd}"/>
 									</div>
 								</div>
 							</div>
@@ -323,10 +324,16 @@ $(function () {
 	$("#acpt").on("click",function(){
 
 		var data = {
+			rqstNo : $("#rqstNo").val(),
 			animNm : $("#animNm").val(),
 			animButler : $("#animButler").val(),
 			animBirth : $("#animBirth").val().replace(/\./gi,''),
-			userNo : "${rceptInfo.userNo}"
+			animFirstCd : $("#animFirstCd").val(),
+			animSecondCd : $("#animSecondCd").val(),
+			animThirdCd : $("#animThirdCd").val(),
+			animSex : $("#animSex").val(),
+			butlerSigunguCd : $("#butlerSigunguCd").val(),
+			insId :localStorage.getItem("userId")
 		};
 
 		$.ajax({
@@ -335,7 +342,8 @@ $(function () {
 			type : "POST",
 			dataType : "JSON",
 			success : function(data){
-
+				alert("저장하였습니다.");
+				location.href="requestInspect";
 			}
 		});
 

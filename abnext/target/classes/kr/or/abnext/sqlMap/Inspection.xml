@@ -24,7 +24,7 @@
 		       RQST_NO       , HOSP_NO        , HOSP_NM
 		     , USER_NO       , USER_NM        , ANIM_NO        , ANIM_NM
 		     , DOC_NO        , DOC_NM
-		     , ANIM_BUTLER   , BUTLER_SIDO    , BUTLER_SIGUNGU
+		     , ANIM_BUTLER   , BUTLER_SIDO    , BUTLER_SIGUNGU , BUTLER_SIGUNGU_CD
 		     , ANIM_FIRST_CD , ANIM_SECOND_CD , ANIM_THIRD_CD
 		     , ANIM_BIRTH    , ANIM_SEX       , RQST_DT        , RQST_MEMO
 		     , PROC_STAT     , PROC_STAT_NM
@@ -36,7 +36,7 @@
 		       #{rqstNo}       , #{hospNo}        , #{hospNm}
 		     , #{userNo}       , #{userNm}        , #{animNo}        , #{animNm}
 		     , #{docNo}        , #{docNm}
-		     , #{animButler}   , #{butlerSido}    , #{butlerSigungu}
+		     , #{animButler}   , #{butlerSido}    , #{butlerSigungu} , #{butlerSigunguCd}
 		     , #{animFirstCd}  , #{animSecondCd}  , #{animThirdCd}
 		     , #{animBirth}    , #{animSex}       , NOW()            , #{rqstMemo}
 		     , #{procStat}     , #{procStatNm}
@@ -76,8 +76,12 @@
 	</insert>
 
 	<select id="selectRceptList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
-		SELECT *
-		  FROM TB_RCEPT
+		SELECT A.*
+		  FROM TB_RCEPT A
+		 WHERE PROC_STAT IN
+		<foreach item="arr" collection="array" open="(" separator="," close=")">
+        	#{arr}
+  		</foreach>
 	</select>
 
 	<select id="selectInspList" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbInspection">
@@ -97,8 +101,84 @@
 	</select>
 
 	<select id="getTbRcept" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
-		SELECT *
-		  FROM TB_RCEPT
+		SELECT A.*
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.ANIM_FIRST_CD) AS ANIM_FIRST_NM
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.ANIM_SECOND_CD) AS ANIM_SECOND_NM
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.ANIM_THIRD_CD) AS ANIM_THIRD_NM
+		  FROM TB_RCEPT A
 		 WHERE RQST_NO = #{rqstNo}
 	</select>
+
+	<select id="getUser" parameterType="kr.or.abnext.domain.TbUser" resultType="kr.or.abnext.domain.TbUser">
+		SELECT *
+		  FROM TB_USER
+		 WHERE USER_NO = #{userNo}
+	</select>
+
+	<select id="getAnimal" parameterType="kr.or.abnext.domain.TbAnimal" resultType="kr.or.abnext.domain.TbAnimal">
+		SELECT *
+		  FROM TB_ANIMAL
+		 WHERE ANIM_NM = #{animNm}
+		   AND ANIM_BIRTH = #{animBirth}
+		   AND USER_NM = #{userNm}
+		   AND SIGUNGU_CD = #{sigunguCd}
+	</select>
+
+	<select id="duplAnimChk" parameterType="kr.or.abnext.domain.TbAnimal" resultType="int">
+		SELECT COUNT(*)
+		  FROM TB_ANIMAL
+		 WHERE ANIM_NM = #{animNm}
+		   AND ANIM_BIRTH = #{animBirth}
+		   AND USER_NM = #{userNm}
+		   AND SIGUNGU_CD = #{sigunguCd}
+	</select>
+
+	<insert id="insertAnimal" parameterType="kr.or.abnext.domain.TbAnimal">
+		INSERT
+		  INTO TB_ANIMAL
+		     (
+		       ANIM_NO       , ANIM_NM
+		     , ANIM_FIRST_CD , ANIM_SECOND_CD , ANIM_THIRD_CD
+		     , ANIM_BIRTH    , ANIM_SEX       , MEMO
+		     , USER_NM       , SIGUNGU_CD
+		     , INS_DT        , INS_ID
+		     )
+		VALUES
+		     (
+		       #{animNo}      , #{animNm}
+		     , #{animFirstCd} , #{animSecondCd} , #{animThirdCd}
+		     , #{animBirth}   , #{animSex}      , #{memo}
+		     , #{userNm}      , #{sigunguCd}
+		     , NOW()          , #{insId}
+		     )
+	</insert>
+
+	<update id="updateInspectStatus" parameterType="kr.or.abnext.domain.TbRcept">
+		UPDATE TB_RCEPT
+		   SET PROC_STAT = #{procStat}
+		     , PROC_STAT_NM = #{procStatNm}
+		     , ANIM_NO = #{animNo}
+		     , UPT_ID = #{uptId}
+		     , UPT_DT = NOW()
+		 WHERE RQST_NO = #{rqstNo}
+	</update>
+
+	<update id="updateSampleStatus" parameterType="kr.or.abnext.domain.TbSample">
+		UPDATE TB_SAMPLE
+		   SET SAMPLE_STATUS = #{sampleStatus}
+		     , UPT_ID = #{uptId}
+		     , UPT_DT = NOW()
+		 WHERE SAMPLE_NO = #{sampleNo}
+	</update>
+
+	<update id="updateInspect" parameterType="kr.or.abnext.domain.TbInspection">
+		UPDATE TB_INSPECTION
+		   SET SAMPLE_CODE = #{sampleCode}
+		     , SAMPLE_NAME = #{sampleName}
+		     , WORKER_NO = #{workerNo}
+		     , WORKER_NM = #{workerNm}
+		     , UPT_ID = #{uptId}
+		     , UPT_DT = NOW()
+		 WHERE INSP_NO = #{inspNo}
+	</update>
 </mapper>

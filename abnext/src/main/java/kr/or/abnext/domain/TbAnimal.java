@@ -7,25 +7,25 @@ package kr.or.abnext.domain;
  * */
 
 public class TbAnimal {
-	private int animNo;
+	private String animNo;
 	private String animNm;
-	private String cate1;
-	private String cate2;
-	private String cate3;
-	private String birth;
-	private String gender;
-	private String registerNo;
+	private String animFirstCd;
+	private String animSecondCd;
+	private String animThirdCd;
+	private String animBirth;
+	private String animSex;
 	private String userNo;
 	private String userNm;
+	private String sigunguCd;
 	private String memo;
 	private String insDt;
-	private int insId;
+	private String insId;
 	private String uptDt;
-	private int uptId;
-	public int getAnimNo() {
+	private String uptId;
+	public String getAnimNo() {
 		return animNo;
 	}
-	public void setAnimNo(int animNo) {
+	public void setAnimNo(String animNo) {
 		this.animNo = animNo;
 	}
 	public String getAnimNm() {
@@ -34,41 +34,35 @@ public class TbAnimal {
 	public void setAnimNm(String animNm) {
 		this.animNm = animNm;
 	}
-	public String getCate1() {
-		return cate1;
+	public String getAnimFirstCd() {
+		return animFirstCd;
 	}
-	public void setCate1(String cate1) {
-		this.cate1 = cate1;
+	public void setAnimFirstCd(String animFirstCd) {
+		this.animFirstCd = animFirstCd;
 	}
-	public String getCate2() {
-		return cate2;
+	public String getAnimSecondCd() {
+		return animSecondCd;
 	}
-	public void setCate2(String cate2) {
-		this.cate2 = cate2;
+	public void setAnimSecondCd(String animSecondCd) {
+		this.animSecondCd = animSecondCd;
 	}
-	public String getCate3() {
-		return cate3;
+	public String getAnimThirdCd() {
+		return animThirdCd;
 	}
-	public void setCate3(String cate3) {
-		this.cate3 = cate3;
+	public void setAnimThirdCd(String animThirdCd) {
+		this.animThirdCd = animThirdCd;
 	}
-	public String getBirth() {
-		return birth;
+	public String getAnimBirth() {
+		return animBirth;
 	}
-	public void setBirth(String birth) {
-		this.birth = birth;
+	public void setAnimBirth(String animBirth) {
+		this.animBirth = animBirth;
 	}
-	public String getGender() {
-		return gender;
+	public String getAnimSex() {
+		return animSex;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-	public String getRegisterNo() {
-		return registerNo;
-	}
-	public void setRegisterNo(String registerNo) {
-		this.registerNo = registerNo;
+	public void setAnimSex(String animSex) {
+		this.animSex = animSex;
 	}
 	public String getUserNo() {
 		return userNo;
@@ -82,6 +76,12 @@ public class TbAnimal {
 	public void setUserNm(String userNm) {
 		this.userNm = userNm;
 	}
+	public String getSigunguCd() {
+		return sigunguCd;
+	}
+	public void setSigunguCd(String sigunguCd) {
+		this.sigunguCd = sigunguCd;
+	}
 	public String getMemo() {
 		return memo;
 	}
@@ -94,10 +94,10 @@ public class TbAnimal {
 	public void setInsDt(String insDt) {
 		this.insDt = insDt;
 	}
-	public int getInsId() {
+	public String getInsId() {
 		return insId;
 	}
-	public void setInsId(int insId) {
+	public void setInsId(String insId) {
 		this.insId = insId;
 	}
 	public String getUptDt() {
@@ -106,18 +106,18 @@ public class TbAnimal {
 	public void setUptDt(String uptDt) {
 		this.uptDt = uptDt;
 	}
-	public int getUptId() {
+	public String getUptId() {
 		return uptId;
 	}
-	public void setUptId(int uptId) {
+	public void setUptId(String uptId) {
 		this.uptId = uptId;
 	}
 	@Override
 	public String toString() {
-		return "TbAnimal [animNo=" + animNo + ", animNm=" + animNm + ", cate1=" + cate1 + ", cate2=" + cate2
-				+ ", cate3=" + cate3 + ", birth=" + birth + ", gender=" + gender + ", registerNo=" + registerNo
-				+ ", userNo=" + userNo + ", userNm=" + userNm + ", memo=" + memo + ", insDt=" + insDt + ", insId="
-				+ insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+		return "TbAnimal [animNo=" + animNo + ", animNm=" + animNm + ", animFirstCd=" + animFirstCd + ", animSecondCd="
+				+ animSecondCd + ", animThirdCd=" + animThirdCd + ", animBirth=" + animBirth + ", animSex=" + animSex
+				+ ", userNo=" + userNo + ", userNm=" + userNm + ", sigunguCd=" + sigunguCd + ", memo=" + memo
+				+ ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
-	
+
 }

@@ -1,5 +1,6 @@
 package kr.or.abnext.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +25,14 @@ public class TbRcept {
 	private String animButler;
 	private String butlerSido;
 	private String butlerSigungu;
+	private String butlerSigunguCd;
 	private String animBirth;
 	private String animFirstCd;
 	private String animSecondCd;
 	private String AnimThirdCd;
+	private String animFirstNm;
+	private String animSecondNm;
+	private String AnimThirdNm;
 	private String animSex;
 	private String rqstDt;
 	private String procStat;
@@ -38,6 +43,7 @@ public class TbRcept {
 	private String payStat;
 	private List<Map<String , Object>> inspList;
 	private List<Map<String , Object>> smplList;
+	private String [] sampleArr;
 	private String insDt;
 	private String insId;
 	private String uptDt;
@@ -126,6 +132,12 @@ public class TbRcept {
 	public void setButlerSigungu(String butlerSigungu) {
 		this.butlerSigungu = butlerSigungu;
 	}
+	public String getButlerSigunguCd() {
+		return butlerSigunguCd;
+	}
+	public void setButlerSigunguCd(String butlerSigunguCd) {
+		this.butlerSigunguCd = butlerSigunguCd;
+	}
 	public String getAnimBirth() {
 		return animBirth;
 	}
@@ -149,6 +161,24 @@ public class TbRcept {
 	}
 	public void setAnimThirdCd(String animThirdCd) {
 		AnimThirdCd = animThirdCd;
+	}
+	public String getAnimFirstNm() {
+		return animFirstNm;
+	}
+	public void setAnimFirstNm(String animFirstNm) {
+		this.animFirstNm = animFirstNm;
+	}
+	public String getAnimSecondNm() {
+		return animSecondNm;
+	}
+	public void setAnimSecondNm(String animSecondNm) {
+		this.animSecondNm = animSecondNm;
+	}
+	public String getAnimThirdNm() {
+		return AnimThirdNm;
+	}
+	public void setAnimThirdNm(String animThirdNm) {
+		AnimThirdNm = animThirdNm;
 	}
 	public String getAnimSex() {
 		return animSex;
@@ -201,14 +231,20 @@ public class TbRcept {
 	public List<Map<String, Object>> getInspList() {
 		return inspList;
 	}
+	public void setInspList(List<Map<String, Object>> inspList) {
+		this.inspList = inspList;
+	}
 	public List<Map<String, Object>> getSmplList() {
 		return smplList;
 	}
 	public void setSmplList(List<Map<String, Object>> smplList) {
 		this.smplList = smplList;
 	}
-	public void setInspList(List<Map<String, Object>> inspList) {
-		this.inspList = inspList;
+	public String[] getSampleArr() {
+		return sampleArr;
+	}
+	public void setSampleArr(String[] sampleArr) {
+		this.sampleArr = sampleArr;
 	}
 	public String getInsDt() {
 		return insDt;
@@ -239,13 +275,14 @@ public class TbRcept {
 		return "TbRcept [rqstNo=" + rqstNo + ", hospNo=" + hospNo + ", hospNm=" + hospNm + ", userNo=" + userNo
 				+ ", userNm=" + userNm + ", animNo=" + animNo + ", animNm=" + animNm + ", farmNo=" + farmNo
 				+ ", farmNm=" + farmNm + ", docNo=" + docNo + ", docNm=" + docNm + ", animButler=" + animButler
-				+ ", butlerSido=" + butlerSido + ", butlerSigungu=" + butlerSigungu + ", animBirth=" + animBirth
-				+ ", animFirstCd=" + animFirstCd + ", animSecondCd=" + animSecondCd + ", AnimThirdCd=" + AnimThirdCd
-				+ ", animSex=" + animSex + ", rqstDt=" + rqstDt + ", procStat=" + procStat + ", procStatNm="
-				+ procStatNm + ", rqstMemo=" + rqstMemo + ", payGb=" + payGb + ", price=" + price + ", payStat="
-				+ payStat + ", inspList=" + inspList + ", smplList=" + smplList + ", insDt=" + insDt + ", insId="
-				+ insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ ", butlerSido=" + butlerSido + ", butlerSigungu=" + butlerSigungu + ", butlerSigunguCd="
+				+ butlerSigunguCd + ", animBirth=" + animBirth + ", animFirstCd=" + animFirstCd + ", animSecondCd="
+				+ animSecondCd + ", AnimThirdCd=" + AnimThirdCd + ", animFirstNm=" + animFirstNm + ", animSecondNm="
+				+ animSecondNm + ", AnimThirdNm=" + AnimThirdNm + ", animSex=" + animSex + ", rqstDt=" + rqstDt
+				+ ", procStat=" + procStat + ", procStatNm=" + procStatNm + ", rqstMemo=" + rqstMemo + ", payGb="
+				+ payGb + ", price=" + price + ", payStat=" + payStat + ", inspList=" + inspList + ", smplList="
+				+ smplList + ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt + ", insId=" + insId
+				+ ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
-
 
 }

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -14,7 +16,7 @@
 	<link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
-	
+
 	<style>
 		th,td {text-align:center;}
 	</style>
@@ -57,156 +59,25 @@
 									<th>신청일</th>
 									<th>상태</th>
 									<th>동물명</th>
+									<th>동물번호</th>
 									<th>신청자(기관)</th>
 									<th>담당수의사</th>
 									<th>검사구분</th>
 								</tr>
 								</thead>
-								<tbody>
-									<tr>
-								<td>ABd2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>ㅇㅇ</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>ㅇㅇ</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>ㅇㅇ</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>ㅇㅇ</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>ㅇㅇ</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>ㅇㅇ</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>22</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>33</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>34</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>30</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>0</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>100</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>30</td>
-							</tr>
-							<tr>
-								<td>ABC2203010002</td>
-								<td>2022.02.22</td>
-								<td>신청</td>
-								<td>망고</td>
-								<td>ㅇㅇ병원</td>
-								<td>나수의</td>
-								<td>3000</td>
-							</tr>
+								<tbody id="listBody">
+									<c:forEach var="item" items="${rceptList }" varStatus="status">
+										<tr>
+											<td>${item.rqstNo }</td>
+											<td>${item.rqstDt }</td>
+											<td>${item.procStatNm }</td>
+											<td>${item.animNm }</td>
+											<td>${item.animNo }</td>
+											<td>${item.hospNm }</td>
+											<td>${item.docNm }</td>
+											<td></td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -227,6 +98,10 @@
 		<!-- Control sidebar content goes here -->
 	</aside>
 	<!-- /.control-sidebar -->
+	<form id="viewFrm" method="POST">
+		<input type="hidden" name="rqstNo"/>
+	</form>
+
 </div>
 <!-- ./wrapper -->
 
@@ -263,10 +138,18 @@
 			"responsive": true,
 		});
 	});
-	
+
 	$(".btn-primary").on("click",function(){
-	 location.href = "registerInspect.do";
+		location.href = "registerInspect.do";
 	});
+
+	$("#listBody").find("tr").on("click", function(){
+		var rqstNo = $(this).find("td:eq(0)").text();
+		$("[name=rqstNo]").val(rqstNo);
+		$("#viewFrm").attr("action","settingInspectModify");
+		$("#viewFrm").submit();
+	})
+
 </script>
 </body>
 </html>
