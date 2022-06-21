@@ -35,7 +35,9 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+
 	<jsp:include page="../layer/layout.jsp"></jsp:include>
+	<jsp:include page="../popup/pop_searchUser.jsp"></jsp:include>
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -168,7 +170,7 @@
 										<div class="col-sm-4">
 											<div class="form-group">
 												<label>검사방법</label>
-												<select class="form-control" id="inspSecondCd"></select>
+												<select class="form-control" id="inspType"></select>
 											</div>
 										</div>
 										<div class="col-sm-4">
@@ -220,9 +222,11 @@
 											<tr>
 												<td>
 													<input type="hidden" id="inspFirstCd_${status.index+1 }" value="${item.inspFirstCd }"/>
-													<input type="hidden" id="inspSecondCd_${status.index+1 }"/>
-													<input type="hidden" id="sampleCode_${status.index+1 }"/>
-													<input type="hidden" id="sampleName_${status.index+1 }"/>
+													<input type="hidden" id="inspType_${status.index+1 }" value="${item.inspType }"/>
+													<input type="hidden" id="sampleCode_${status.index+1 }" value="${item.sampleCode }"/>
+													<input type="hidden" id="sampleName_${status.index+1 }" value="${item.sampleName }"/>
+													<input type="hidden" id="workerNo_${status.index+1 }" value="${item.workerNo }"/>
+													<input type="hidden" id="workerNm_${status.index+1 }" value="${item.workerNm }"/>
 													<div class="form-group clearfix">
 														<div class="icheck-primary d-inline">
 															<input type="checkbox" id="chk_${status.index+1 }">
@@ -234,22 +238,18 @@
 													${status.index+1 }
 													<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
 												</td>
-												<td class="txtc">
-													${item.inspFirstNm }
-												</td>
-												<td class="txtc">${item.inspThirdNm }</td>
-												<td class="txtc" id="inspSmplCd">
-
-												</td>
+												<td class="txtc">${item.inspFirstNm }</td>
+												<td class="txtc">${item.inspTypeNm }</td>
+												<td class="txtc">${item.sampleName }</td>
 												<td class="txtc">
 													<input type="hidden" id="workerNo_${status.index+1 }">
 													<input type="hidden" id="workerNm_${status.index+1 }">
-													<a href="javascript:void(0)" onclick="">
+													<a href="javascript:void(0)" onclick="popOpenUser2('${item.inspType }','${status.index+1 }')">
 														<c:if test="${item.workerNo == null || item.workerNo == ''}">
-															담당자
+															<span id="workerView_${status.index+1 }">담당자</span>
 														</c:if>
 														<c:if test="${item.workerNo != null && item.workerNo != ''}">
-															${item.workerNm}
+															<span id="workerView_${status.index+1 }">${item.workerNm}</span>
 														</c:if>
 													</a>
 												</td>
@@ -339,6 +339,8 @@ $(function () {
 
 	//검사항목
 	$.gfn_getCode('B001',callBackFn,'inspFirstCd');
+	$.gfn_getCode('AE001',callBackFn,'inspType');
+
 
 });
 
@@ -350,7 +352,9 @@ $("#sett").on("click",function (){
 			workerNo : $(this).find("[id^=workerNo]").val(),
 			workerNm : $(this).find("[id^=workerNm]").val(),
 			sampleCode : $(this).find("[id^=sampleCode]").val(),
-			sampleName : $(this).find("[id^=sampleName]").val()
+			sampleName : $(this).find("[id^=sampleName]").val(),
+			inspType : $(this).find("[id^=inspType]").val(),
+			inspFirstCd : $(this).find("[id^=inspFirstCd]").val()
 		}
 		inspData.push(sData);
 	});
@@ -419,15 +423,70 @@ $("#modBtn").on("click",function(){
 		if($(this).find("[id^=chk]").is(":checked")){
 			$(this).find("[id^=inspFirstCd]").val($("#inspFirstCd").val());
 			$(this).find("td:eq(2)").text($("#inspFirstCd option:selected").text());
-			$(this).find("[id^=inspSecondCd]").val($("#inspSecondCd").val());
-			$(this).find("td:eq(3)").text($("#inspSecondCd option:selected").text());
-			$(this).find("td:eq(4)").text($("#sampleCode option:selected").text());
+			$(this).find("[id^=inspType]").val($("#inspType").val());
+			$(this).find("[id^=inspType]").val($("#inspType").val());
+			$(this).find("td:eq(3)").text($("#inspType option:selected").text());
 			var str = JSON.stringify($("#sampleCode").val());
 			str = str.replace('[','').replace(']','').replace(/\"/gi,'');
+			var strArr = str.split(',');
+			var sampleNm = "";
+			for(var i=0; i<strArr.length; i++){
+				if(i == 0) sampleNm = $.gfn_getCodeNm(strArr[i]);
+				else sampleNm += ","+$.gfn_getCodeNm(strArr[i]);
+			}
+			$(this).find("td:eq(4)").text(sampleNm);
 			$(this).find("[id^=sampleCode]").val(str);
+			$(this).find("[id^=sampleName]").val(sampleNm);
 		}
 	})
+
 })
+
+function popOpenUser2(workGb,objId){
+	$('#popUser').modal();
+	popSearchUser2(workGb,objId);
+}
+
+function popSearchUser2(workGb,objId){
+	$.ajax({
+		url : 'searchUserCtrl',
+		data : {'userWorkGb':workGb},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var list = data.list;
+
+			var html = '';
+			$.each(list, function(i, list){
+				html += '<tr ondblclick="fn_setUserDataToForm2(\''+list.userNo+'\', \''+list.userNm+'\', \''+objId+'\');">';
+				html += '	<td>'
+				if(list.userLev == '1') html += '일반회원';
+				else if(list.userLev == '2') html += '수의사';
+				else if(list.userLev == '3') html += '기관(병원)';
+				else if(list.userLev == '4') html += '농장';
+				else if(list.userLev == '5') html += '관리자';
+				html += '	</td>';
+
+				html += '	<td>'+fn_ifNull(list.userWorkGbNm)+'</td>';
+				html += '	<td>'+fn_ifNull(list.userNm)+'</td>';
+				html += '	<td>'+fn_ifNull(list.userHp)+'</td>';
+				html += '	<td>'+fn_ifNull(list.sigunguNm)+'</td>';
+				html += '	<td>'+fn_ifNull(list.hospNm)+fn_ifNull(list.farmNm)+'</td>';
+				html += '</tr>';
+			})
+
+			$('#userTbody').empty();
+			$('#userTbody').html(html);
+		}
+	})
+}
+
+function fn_setUserDataToForm2(userNo,userNm,objId){
+	$("#workerNo_"+objId).val(userNo);
+	$("#workerNm_"+objId).val(userNm);
+	$("#workerView_"+objId).text(userNm);
+	$('#popUser').modal('hide');
+}
 </script>
 </body>
 </html>

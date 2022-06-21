@@ -19,6 +19,8 @@ public class TbInspection {
 	private String inspSecondNm;
 	private String inspThirdCd;
 	private String inspThirdNm;
+	private String inspType;
+	private String inspTypeNm;
 	private String inspPrice;
 	private String inspResult;
 	private String insDt;
@@ -96,6 +98,18 @@ public class TbInspection {
 	}
 	public void setInspThirdNm(String inspThirdNm) {
 		this.inspThirdNm = inspThirdNm;
+	}
+	public String getInspType() {
+		return inspType;
+	}
+	public void setInspType(String inspType) {
+		this.inspType = inspType;
+	}
+	public String getInspTypeNm() {
+		return inspTypeNm;
+	}
+	public void setInspTypeNm(String inspTypeNm) {
+		this.inspTypeNm = inspTypeNm;
 	}
 	public String getInspPrice() {
 		return inspPrice;

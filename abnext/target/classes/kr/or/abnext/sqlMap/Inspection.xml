@@ -89,6 +89,7 @@
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_FIRST_CD) AS INSP_FIRST_NM
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_SECOND_CD) AS INSP_SECOND_NM
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_THIRD_CD) AS INSP_THIRD_NM
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_TYPE) AS INSP_TYPE_NM
 		  FROM TB_INSPECTION A
 		 WHERE RQST_NO = #{rqstNo}
 	</select>
@@ -173,12 +174,26 @@
 
 	<update id="updateInspect" parameterType="kr.or.abnext.domain.TbInspection">
 		UPDATE TB_INSPECTION
-		   SET SAMPLE_CODE = #{sampleCode}
-		     , SAMPLE_NAME = #{sampleName}
-		     , WORKER_NO = #{workerNo}
-		     , WORKER_NM = #{workerNm}
-		     , UPT_ID = #{uptId}
+		   SET UPT_ID = #{uptId}
 		     , UPT_DT = NOW()
+		<if test="inspType != null and inspType != ''">
+		     , INSP_TYPE = #{inspType}
+		</if>
+		<if test="inspFirstCd != null and inspFirstCd != ''">
+		     , INSP_FIRST_CD = #{inspFirstCd}
+		</if>
+		<if test="sampleCode != null and sampleCode != ''">
+		     , SAMPLE_CODE = #{sampleCode}
+		</if>
+		<if test="sampleName != null and sampleName != ''">
+		     , SAMPLE_NAME = #{sampleName}
+		</if>
+		<if test="workerNo != null and workerNo != ''">
+		     , WORKER_NO = #{workerNo}
+		</if>
+		<if test="workerNm != null and workerNm != ''">
+		     , WORKER_NM = #{workerNm}
+		</if>
 		 WHERE INSP_NO = #{inspNo}
 	</update>
 </mapper>

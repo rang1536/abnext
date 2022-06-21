@@ -155,22 +155,10 @@ public class InspectRestController {
 			bean.setWorkerNo(tbRcept.getInspList().get(i).get("workerNo").toString());
 			bean.setWorkerNm(tbRcept.getInspList().get(i).get("workerNm").toString());
 			bean.setSampleCode(tbRcept.getInspList().get(i).get("sampleCode").toString());
-			String smplCode = tbRcept.getInspList().get(i).get("sampleCode").toString();
-			String [] smplArr = smplCode.split(",");
-			String codeNm = "";
-			for(int k=0; k<smplArr.length; k++) {
-				TbCode code = new TbCode();
-				code.setCodeId(smplArr[i]);
-				TbCode newCode = adminServ.getCode(code);
-				if(k == 0) {
-					codeNm = newCode.getCodeNm();
-				}else {
-					codeNm += ","+newCode.getCodeNm();
-				}
-			}
-			bean.setSampleName(codeNm);
+			bean.setSampleName(tbRcept.getInspList().get(i).get("sampleName").toString());
+			bean.setInspType(tbRcept.getInspList().get(i).get("inspType").toString());
+			bean.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
 			bean.setUptId(tbRcept.getUptId());
-			logger.info(bean.toString());
 			//시료 테이블 수정
 			inspectServ.updateInspect(bean);
 		}

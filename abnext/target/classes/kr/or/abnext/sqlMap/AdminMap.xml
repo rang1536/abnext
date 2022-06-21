@@ -118,6 +118,9 @@
 		 <if test="userNm != null and userNm != ''">
 		 	AND USER_NM LIKE CONCAT('%', #{userNm}, '%')
 		 </if>
+		 <if test="userWorkGb != null and userWorkGb != ''">
+		    AND USER_WORK_GB = #{userWorkGb}
+		 </if>
 		 ORDER BY USER_NO
 	</select>
 

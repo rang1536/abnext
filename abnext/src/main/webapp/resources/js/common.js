@@ -30,6 +30,23 @@ $.gfn_getCodeDtl = function(codeId,callBackFn){
 	});
 }
 
+/*****************************************************
+ *                코 드 상 세 정 보                      *
+ *****************************************************/
+$.gfn_getCodeNm = function(codeId){
+	var codeNm;
+	$.ajax({
+		url : "getCode",
+		data : {codeId : codeId},
+		type : "POST",
+		async: false,
+		dataType : "JSON",
+		success : function(data){
+			codeNm = data.codeNm;
+		}
+	});
+	return codeNm;
+}
 
 /************************************************************
  *                   숫 자 콤 마 지 정                          *
