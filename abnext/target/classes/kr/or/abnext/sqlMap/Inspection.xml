@@ -49,14 +49,16 @@
 		INSERT
 		  INTO TB_INSPECTION
 		     (
-		       RQST_NO       , SAMPLE_CODE
+		       RQST_NO       , SAMPLE_CODE    , SAMPLE_NAME   , INSP_TYPE
 		     , INSP_FIRST_CD , INSP_SECOND_CD , INSP_THIRD_CD , INSP_PRICE
+		     , WORKER_NO     , WORKER_NM
 		     , INS_DT        , INS_ID
 		     )
 		VALUES
 		     (
-		       #{rqstNo}      , #{sampleCode}
+		       #{rqstNo}      , #{sampleCode}   , #{sampleName}  , #{inspType}
 		     , #{inspFirstCd} , #{inspSecondCd} , #{inspThirdCd} , #{inspPrice}
+		     , #{workerNo}    , #{workerNm}
 		     , NOW()          , #{insId}
 		     )
 	</insert>
@@ -158,7 +160,12 @@
 		UPDATE TB_RCEPT
 		   SET PROC_STAT = #{procStat}
 		     , PROC_STAT_NM = #{procStatNm}
+		<if test="animNo != null and animNo != ''">
 		     , ANIM_NO = #{animNo}
+		</if>
+		<if test="result != null and result != ''">
+		     , RESULT = #{result}
+		</if>
 		     , UPT_ID = #{uptId}
 		     , UPT_DT = NOW()
 		 WHERE RQST_NO = #{rqstNo}
@@ -193,6 +200,9 @@
 		</if>
 		<if test="workerNm != null and workerNm != ''">
 		     , WORKER_NM = #{workerNm}
+		</if>
+		<if test="inspResult != null and inspResult != ''">
+		     , INSP_RESULT = #{inspResult}
 		</if>
 		 WHERE INSP_NO = #{inspNo}
 	</update>

@@ -45,7 +45,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>* 진단검사 신청서</h1>
+						<h1>* 진단검사 설정</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -198,7 +198,7 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>&nbsp;</label>
-												<button type="button" class="btn btn-block btn-info btn-flat" >추가</button>
+												<button type="button" class="btn btn-block btn-info btn-flat" id="addBtn">추가</button>
 											</div>
 										</div>
 									</div>
@@ -369,6 +369,7 @@ $("#sett").on("click",function (){
 	});
 
 	var data = {
+		rqstNo : "${rceptInfo.rqstNo }",
 		uptId : localStorage.getItem("userId"),
 		inspList : inspData,
 		smplList : smplData
@@ -381,9 +382,14 @@ $("#sett").on("click",function (){
 		dataType : "JSON",
 		success : function(data){
 			alert("저장하였습니다.");
+			location.href = "settingInspectList";
 		}
 	});
 
+});
+
+$("#list").on("click",function (){
+	location.href = "settingInspectList";
 });
 
 function callBackFn(data,col){
@@ -441,6 +447,59 @@ $("#modBtn").on("click",function(){
 	})
 
 })
+
+$("#addBtn").on("click",function(){
+	var idx = 1;
+	$("#inspList").find("tr").each(function(){
+		idx++;
+	});
+
+	var inspFirstCd = $("#inspFirstCd").val();
+	var inspFirstCdNm = $("#inspFirstCd option:selected").text();
+	var inspType = $("#inspType").val();
+	var inspTypeNm = $("#inspType option:selected").text();
+	var sampleCode = $("#sampleCode").val();
+	var str = JSON.stringify(sampleCode);
+	str = str.replace('[','').replace(']','').replace(/\"/gi,'');
+	var strArr = str.split(',');
+	var sampleName = "";
+	for(var i=0; i<strArr.length; i++){
+		if(i == 0) sampleName = $.gfn_getCodeNm(strArr[i]);
+		else sampleName += ","+$.gfn_getCodeNm(strArr[i]);
+	}
+	var workerNo = '';
+	var workerNm = '';
+
+	var html = '';
+	html += '<tr>';
+	html += '	<td>';
+	html += '		<input type="hidden" id="inspNo_'+idx+'" value="${item.inspNo}"/>';
+	html += '		<input type="hidden" id="inspFirstCd_'+idx+'" value="'+inspFirstCd+'"/>';
+	html += '		<input type="hidden" id="inspType_'+idx+'" value="'+inspType+'"/>';
+	html += '		<input type="hidden" id="sampleCode_'+idx+'" value="'+sampleCode+'"/>';
+	html += '		<input type="hidden" id="sampleName_'+idx+'" value="'+sampleName+'"/>';
+	html += '		<input type="hidden" id="workerNo_'+idx+'" value="'+workerNo+'"/>';
+	html += '		<input type="hidden" id="workerNm_'+idx+'" value="'+workerNm+'"/>';
+	html += '		<div class="form-group clearfix">';
+	html += '			<div class="icheck-primary d-inline">';
+	html += '					<input type="checkbox" id="chk_'+idx+'">';
+	html += '					<label for="chk_'+idx+'">&nbsp;</label>';
+	html += '				</div>';
+	html += '			</div>';
+	html += '		</td>';
+	html += '		<td class="txtc">'+idx+'</td>';
+	html += '		<td class="txtc">'+inspFirstCdNm+'</td>';
+	html += '		<td class="txtc">'+inspTypeNm+'</td>';
+	html += '		<td class="txtc">'+sampleName+'</td>';
+	html += '		<td class="txtc">';
+	html += '			<a href="javascript:void(0)" onclick="popOpenUser2(\''+inspType+'\',\''+idx+'\')">';
+	html += '					<span id="workerView_'+idx+'">담당자</span>';
+	html += '			</a>';
+	html += '		</td>';
+	html += '		<td class="txtc">0</td>';
+	html += '	</tr>';
+	$("#inspList").append(html);
+});
 
 function popOpenUser2(workGb,objId){
 	$('#popUser').modal();

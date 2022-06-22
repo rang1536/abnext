@@ -196,17 +196,17 @@
 							<p>My-Farm</p>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a href="#" class="nav-link leftMenu">
+					<li class="nav-item menu-is-opening menu-open">
+						<a href="introInspect.do" class="nav-link leftMenu">
 							<i class="nav-icon fas fa-copy"></i>
 							<p>진단검사
 								<i class="fas fa-angle-left right"></i>
 								<span class="badge badge-info right">5</span>
 							</p>
 						</a>
-						<ul class="nav nav-treeview">
+						<ul class="nav nav-view">
 							<li class="nav-item">
-								<a href="introInspect.do" class="nav-link leftMenuSub">
+								<a href="requestInspect.do" class="nav-link leftMenuSub">
 									<i class="far fa-circle nav-icon"></i>
 									<p>신청접수</p>
 								</a>
@@ -935,7 +935,7 @@
 				$(".leftMenu").eq(0).addClass("active");
 			}else if(path.indexOf('Inspect') > -1){
 				$(".leftMenu").eq(1).addClass("active");
-				$(".leftMenu").eq(1).closest(".nav-item").addClass("menu-is-opening menu-open");
+				//$(".leftMenu").eq(1).closest(".nav-item").addClass("menu-is-opening menu-open");
 				if(path.indexOf('request') > -1 || path.indexOf('register') > -1){
 					$(".leftMenuSub").eq(0).addClass("active");
 				}else if(path.indexOf('setting') > -1){

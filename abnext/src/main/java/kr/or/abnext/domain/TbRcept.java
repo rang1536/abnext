@@ -41,6 +41,7 @@ public class TbRcept {
 	private String payGb;
 	private String price;
 	private String payStat;
+	private String result;
 	private List<Map<String , Object>> inspList;
 	private List<Map<String , Object>> smplList;
 	private String [] sampleArr;
@@ -270,6 +271,13 @@ public class TbRcept {
 	public void setUptId(String uptId) {
 		this.uptId = uptId;
 	}
+
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
 	@Override
 	public String toString() {
 		return "TbRcept [rqstNo=" + rqstNo + ", hospNo=" + hospNo + ", hospNm=" + hospNm + ", userNo=" + userNo
@@ -280,9 +288,9 @@ public class TbRcept {
 				+ animSecondCd + ", AnimThirdCd=" + AnimThirdCd + ", animFirstNm=" + animFirstNm + ", animSecondNm="
 				+ animSecondNm + ", AnimThirdNm=" + AnimThirdNm + ", animSex=" + animSex + ", rqstDt=" + rqstDt
 				+ ", procStat=" + procStat + ", procStatNm=" + procStatNm + ", rqstMemo=" + rqstMemo + ", payGb="
-				+ payGb + ", price=" + price + ", payStat=" + payStat + ", inspList=" + inspList + ", smplList="
-				+ smplList + ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt + ", insId=" + insId
-				+ ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ payGb + ", price=" + price + ", payStat=" + payStat + ", result=" + result + ", inspList=" + inspList
+				+ ", smplList=" + smplList + ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt
+				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
 
 }

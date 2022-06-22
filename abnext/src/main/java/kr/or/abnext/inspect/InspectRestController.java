@@ -151,7 +151,9 @@ public class InspectRestController {
 
 		for(int i=0; i<tbRcept.getInspList().size(); i++) {
 			TbInspection bean = new TbInspection();
-			bean.setInspNo(tbRcept.getInspList().get(i).get("inspNo").toString());
+			if(tbRcept.getInspList().get(i).get("inspNo") != null && !tbRcept.getInspList().get(i).get("inspNo").equals("")) {
+				bean.setInspNo(tbRcept.getInspList().get(i).get("inspNo").toString());
+			}
 			bean.setWorkerNo(tbRcept.getInspList().get(i).get("workerNo").toString());
 			bean.setWorkerNm(tbRcept.getInspList().get(i).get("workerNm").toString());
 			bean.setSampleCode(tbRcept.getInspList().get(i).get("sampleCode").toString());
@@ -160,9 +162,48 @@ public class InspectRestController {
 			bean.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
 			bean.setUptId(tbRcept.getUptId());
 			//시료 테이블 수정
+			if(tbRcept.getInspList().get(i).get("inspNo") != null && !tbRcept.getInspList().get(i).get("inspNo").equals("")) {
+				inspectServ.updateInspect(bean);
+			}else {
+				bean.setRqstNo(""+tbRcept.getRqstNo());
+				bean.setInsId(tbRcept.getUptId());
+				inspectServ.insertInspection(bean);
+			}
+		}
+
+		TbRcept rcpt = new TbRcept();
+		rcpt.setRqstNo(tbRcept.getRqstNo());
+		rcpt.setUptId(tbRcept.getUptId());
+		rcpt.setProcStat("3");
+		rcpt.setProcStatNm("진단설정");
+
+		inspectServ.updateInspectStatus(rcpt);
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("result", "ok");
+
+		return map;
+	}
+
+	@RequestMapping(value = "modifyResult", method = RequestMethod.POST)
+	public Map<String, Object> modifyResult(TbRcept tbRcept) {
+
+		for(int i=0; i<tbRcept.getInspList().size(); i++) {
+			TbInspection bean = new TbInspection();
+			bean.setInspNo(tbRcept.getInspList().get(i).get("inspNo").toString());
+			bean.setInspResult(tbRcept.getInspList().get(i).get("inspResult").toString());
+			bean.setUptId(tbRcept.getUptId());
+			//시료 테이블 수정
 			inspectServ.updateInspect(bean);
 		}
 
+		TbRcept rcpt = new TbRcept();
+		rcpt.setRqstNo(tbRcept.getRqstNo());
+		rcpt.setUptId(tbRcept.getUptId());
+		rcpt.setProcStat("4");
+		rcpt.setProcStatNm("결과입력");
+		rcpt.setResult(tbRcept.getResult());
+
+		inspectServ.updateInspectStatus(rcpt);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");
 

@@ -139,10 +139,6 @@
 		});
 	});
 
-	$(".btn-primary").on("click",function(){
-		location.href = "registerInspect.do";
-	});
-
 	$("#listBody").find("tr").on("click", function(){
 		var rqstNo = $(this).find("td:eq(0)").text();
 		$("[name=rqstNo]").val(rqstNo);
