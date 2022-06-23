@@ -79,6 +79,7 @@
 
 	<select id="selectRceptList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
 		SELECT A.*
+		     , (SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.RESULT_WRITER) AS RESULT_WRITER_NM
 		  FROM TB_RCEPT A
 		 WHERE PROC_STAT IN
 		<foreach item="arr" collection="array" open="(" separator="," close=")">
@@ -160,14 +161,24 @@
 		UPDATE TB_RCEPT
 		   SET PROC_STAT = #{procStat}
 		     , PROC_STAT_NM = #{procStatNm}
+		     , UPT_ID = #{uptId}
+		     , UPT_DT = NOW()
 		<if test="animNo != null and animNo != ''">
 		     , ANIM_NO = #{animNo}
 		</if>
 		<if test="result != null and result != ''">
 		     , RESULT = #{result}
+		     , RESULT_WRITER = #{uptId}
 		</if>
-		     , UPT_ID = #{uptId}
-		     , UPT_DT = NOW()
+		<if test="finalMemo != null and finalMemo != ''">
+		     , FINAL_MEMO = #{finalMemo}
+		</if>
+		<if test="diagUpCd != null and diagUpCd != ''">
+		     , DIAG_UP_CD = #{diagUpCd}
+		</if>
+		<if test="diagCd != null and diagCd != ''">
+		     , DIAG_CD = #{diagCd}
+		</if>
 		 WHERE RQST_NO = #{rqstNo}
 	</update>
 

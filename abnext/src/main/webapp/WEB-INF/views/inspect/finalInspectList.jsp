@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +32,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1> * 진단설정</h1>
+						<h1> * 최종판정 대상</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -54,16 +54,16 @@
 						<div class="card-body">
 							<table id="example2" class="table table-bordered table-hover">
 								<thead>
-								<tr>
-									<th>의뢰번호</th>
-									<th>신청일</th>
-									<th>상태</th>
-									<th>동물명</th>
-									<th>동물번호</th>
-									<th>신청자(기관)</th>
-									<th>담당수의사</th>
-									<th>검사구분</th>
-								</tr>
+									<tr>
+										<th>의뢰번호</th>
+										<th>신청일</th>
+										<th>상태</th>
+										<th>동물명</th>
+										<th>신청자(기관)</th>
+										<th>담당수의사</th>
+										<th>결과입력자</th>
+										<th>검사구분</th>
+									</tr>
 								</thead>
 								<tbody id="listBody">
 									<c:forEach var="item" items="${rceptList }" varStatus="status">
@@ -72,9 +72,9 @@
 											<td>${item.rqstDt }</td>
 											<td>${item.procStatNm }</td>
 											<td>${item.animNm }</td>
-											<td>${item.animNo }</td>
 											<td>${item.hospNm }</td>
 											<td>${item.docNm }</td>
+											<td>${item.resultWriterNm }</td>
 											<td></td>
 										</tr>
 									</c:forEach>
@@ -110,7 +110,7 @@
 <!-- Bootstrap 4 -->
 <script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables	& Plugins -->
-<script src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="resources/plugins/datatables/jquery.dataTables.js"></script>
 <script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
@@ -142,10 +142,9 @@
 	$("#listBody").find("tr").on("click", function(){
 		var rqstNo = $(this).find("td:eq(0)").text();
 		$("[name=rqstNo]").val(rqstNo);
-		$("#viewFrm").attr("action","settingInspectModify");
+		$("#viewFrm").attr("action","finalInspectModify");
 		$("#viewFrm").submit();
 	})
-
 </script>
 </body>
 </html>

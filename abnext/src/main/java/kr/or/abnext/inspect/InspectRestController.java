@@ -209,4 +209,16 @@ public class InspectRestController {
 
 		return map;
 	}
+
+	@RequestMapping(value = "modifyFinal", method = RequestMethod.POST)
+	public Map<String, Object> modifyFinal(TbRcept tbRcept) {
+		tbRcept.setProcStat("5");
+		tbRcept.setProcStatNm("최종판정");
+
+		inspectServ.updateInspectStatus(tbRcept);
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("result", "ok");
+
+		return map;
+	}
 }
