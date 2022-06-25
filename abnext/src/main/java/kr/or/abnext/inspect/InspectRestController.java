@@ -12,16 +12,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbCode;
+import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
 import kr.or.abnext.domain.TbUser;
+import kr.or.abnext.util.UtilFile;
 
 @RestController
 public class InspectRestController {
@@ -188,6 +192,11 @@ public class InspectRestController {
 	public Map<String, Object> modifyResult(TbRcept tbRcept) {
 
 		for(int i=0; i<tbRcept.getInspList().size(); i++) {
+			System.out.println("fileLsit : "+tbRcept.getInspList().get(i).get("fileList"));
+		}
+
+		for(int i=0; i<tbRcept.getInspList().size(); i++) {
+
 			TbInspection bean = new TbInspection();
 			bean.setInspNo(tbRcept.getInspList().get(i).get("inspNo").toString());
 			bean.setInspResult(tbRcept.getInspList().get(i).get("inspResult").toString());
@@ -207,6 +216,35 @@ public class InspectRestController {
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");
 
+		return map;
+	}
+
+	//결과사진업로드
+	@RequestMapping(value = "inspFileUpload", method = RequestMethod.POST)
+	public Map<String, Object> inspFileUpload(TbRcept tbRcept, String inspNo
+			, @RequestParam("fileList") List<MultipartFile> files) {
+		System.out.println("inspNo : "+inspNo);
+
+		Map<String, Object> map = new HashMap<String,Object>();
+		if(files.size() > 0) {
+			System.out.println("파일넘어옴");
+			map = inspectServ.inspFileUploadServ(tbRcept, inspNo, files);
+		}
+
+		return map;
+	}
+
+	//removeFileByFileNo
+	@RequestMapping(value = "removeFileByFileNo", method = RequestMethod.POST)
+	public Map<String, Object> removeFileByFileNo(TbFile tbFile) {
+		Map<String, Object> map = new HashMap<String,Object>();
+
+		int result = inspectServ.removeFile(tbFile);
+		if(result > 0) {
+			map.put("result", "succ");
+		}else {
+			map.put("result", "fail");
+		}
 		return map;
 	}
 

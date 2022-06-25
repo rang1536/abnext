@@ -97,6 +97,14 @@
 		 WHERE RQST_NO = #{rqstNo}
 	</select>
 
+	<select id="selectInspFileList" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbFile">
+		SELECT *
+		  FROM TB_FILE
+		 WHERE 1=1
+		   AND RQST_NO = #{rqstNo}
+		   AND INSP_NO = #{inspNo}
+	</select>
+
 	<select id="selectSampleList" parameterType="kr.or.abnext.domain.TbSample" resultType="kr.or.abnext.domain.TbSample">
 		SELECT A.*
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.SAMPLE_CODE) AS SAMPLE_NAME

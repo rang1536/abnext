@@ -19,6 +19,15 @@ public class TbFile {
 	private int animNo;
 	private int farmNo;
 	private int boardNo;
+	private int inspNo;
+
+
+	public int getInspNo() {
+		return inspNo;
+	}
+	public void setInspNo(int inspNo) {
+		this.inspNo = inspNo;
+	}
 	public int getFileNo() {
 		return fileNo;
 	}
@@ -95,8 +104,9 @@ public class TbFile {
 	public String toString() {
 		return "TbFile [fileNo=" + fileNo + ", fileGb=" + fileGb + ", filePath=" + filePath + ", fileOriNm=" + fileOriNm
 				+ ", fileNewNm=" + fileNewNm + ", fileMemo=" + fileMemo + ", rqstNo=" + rqstNo + ", hospNo=" + hospNo
-				+ ", userNo=" + userNo + ", animNo=" + animNo + ", farmNo=" + farmNo + ", boardNo=" + boardNo + "]";
+				+ ", userNo=" + userNo + ", animNo=" + animNo + ", farmNo=" + farmNo + ", boardNo=" + boardNo
+				+ ", inspNo=" + inspNo + "]";
 	}
-	
-	
+
+
 }

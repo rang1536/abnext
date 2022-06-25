@@ -28,9 +28,38 @@
 	<!-- dropzonejs -->
 	<link rel="stylesheet" href="resources/plugins/dropzone/min/dropzone.min.css">
 	<!-- Theme style -->
-	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
+	<link rel="stylesheet" href="resources/dist/css/adminlte.css">
+	<!-- Toastr -->
+    <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
+
+
 	<style>
 		.txtc {text-align:center;}
+		.fileBox label {
+		  display: inline-block;
+		  padding: .5em .75em;
+		  color: #000000;
+		  font-size: inherit;
+		  line-height: normal;
+		  vertical-align: middle;
+		  background-color: #fdfdfd;
+		  cursor: pointer;
+		  border: 1px solid #ebebeb;
+		  border-bottom-color: #e2e2e2;
+		  border-radius: .25em;
+		}
+
+		.fileBox input[type="file"] {  /* 파일 필드 숨기기 */
+		  position: absolute;
+		  width: 1px;
+		  height: 1px;
+		  padding: 0;
+		  margin: -1px;
+		  overflow: hidden;
+		  clip:rect(0,0,0,0);
+		  border: 0;
+		}
+
 	</style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -144,7 +173,7 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<form>
+
 							<div class="row">
 								<table id="example2" class="table table-bordered table-hover">
 									<thead>
@@ -158,23 +187,41 @@
 									</thead>
 									<tbody id="inspList">
 										<c:forEach var="item" items="${inspList }" varStatus="status">
-											<tr>
-												<td class="txtc">
-													${status.index+1 }
-													<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
-												</td>
-												<td class="txtc">${item.inspFirstNm }</td>
-												<td class="txtc">${item.inspTypeNm }</td>
-												<td class="txtc">
-													<input type="text" id="inspResult_${status.index+1 }" class="form-control" placeholder="실험결과" value="${item.inspResult}">
-												</td>
-												<td></td>
-											</tr>
+											<form id="inspResultForm_${status.index+1 }" method="post" enctype="multipart/form-data">
+												<tr>
+													<td class="txtc" rowspan="2">
+														${status.index+1 }
+														<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
+													</td>
+													<td class="txtc">${item.inspFirstNm }</td>
+													<td class="txtc">${item.inspTypeNm }</td>
+													<td class="txtc">
+														<input type="text" id="inspResult_${status.index+1 }" class="form-control" placeholder="실험결과" value="${item.inspResult}">
+													</td>
+													<td>
+														<div class="fileBox">
+															<label for="inspResultFile_${status.index+1 }">결과사진추가</label>
+															<input type="file" id="inspResultFile_${status.index+1 }" onchange="addFileSet(this, '${status.index+1 }');" multiple>
+														</div>
+													</td>
+												</tr>
+												<tr id="${status.index+1 }tr">
+													<td colspan="4">
+														<c:forEach var="file" items="${item.inspFileList }" varStatus="status">
+															<b id="bFile_${file.fileNo }">
+																<a href="#">${file.fileNewNm}</a>
+		        												<a class="delete" onclick="deleteServerFile('${file.fileNo}');"><i class="far fa-minus-square"></i></a>
+		       													&nbsp;&nbsp;
+	       													</b>
+														</c:forEach>
+													</td>
+												</tr>
+											</form>
 										</c:forEach>
 									</tbody>
 								</table>
 							</div>
-						</form>
+
 					</div>
 					<!-- /.card-body -->
 				</div>
@@ -250,6 +297,8 @@
 <!-- Customizing Js -->
 <script src="resources/js/common.js"></script>
 <!-- Page specific script -->
+<!-- Toastr -->
+<script src="resources/plugins/toastr/toastr.min.js"></script>
 <script>
 $(function () {
 	bsCustomFileInput.init();
@@ -264,14 +313,152 @@ $(function () {
 
 });
 
+var fileNo = 0;
+var filesArr = new Array();
+
+/* 첨부파일 추가 */
+function addFileSet(obj, rowNum){
+	for (var i=0; i<obj.files.length; i++) {
+		var file = obj.files[i];
+	    // 첨부파일 검증
+	    if (validation(file)) {
+	        // 파일 배열에 담기
+	        var reader = new FileReader();
+	        reader.onload = function () {
+	            filesArr.push(file);
+	        };
+	        reader.readAsDataURL(file);
+
+	        // 목록 추가
+	        let htmlData = '';
+	        htmlData += '   <span id="file' + fileNo + '">' + file.name;
+	        htmlData += '   	<a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
+	        htmlData += '	</span>';
+	        htmlData += '&nbsp;&nbsp;';
+
+	        $('#'+rowNum+'tr').find('td:eq(0)').append(htmlData);
+	        fileNo++;
+	    } else {
+	        continue;
+	    }
+	}
+    //}
+    // 초기화
+    document.querySelector("input[type=file]").value = "";
+}
+
+/* 첨부파일 검증 */
+function validation(obj){
+    const fileTypes = ['application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tif', 'application/haansofthwp', 'application/x-hwp'];
+    if (obj.name.length > 100) {
+        alert("파일명이 100자 이상인 파일은 제외되었습니다.");
+        return false;
+    } else if (obj.size > (100 * 1024 * 1024)) {
+        alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
+        return false;
+    } else if (obj.name.lastIndexOf('.') == -1) {
+        alert("확장자가 없는 파일은 제외되었습니다.");
+        return false;
+    } else if (!fileTypes.includes(obj.type)) {
+        alert("첨부가 불가능한 파일은 제외되었습니다.");
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/* 첨부파일 삭제 */
+function deleteFile(num) {
+    document.querySelector("#file" + num).remove();
+    filesArr[num].is_delete = true;
+}
+
+/*서버파일삭제
+ * 기존등록된 파일은 삭제할 경우 즉시 삭제
+ */
+function deleteServerFile(fileNo){
+	if(confirm('삭제한 파일은 복구하실수 없습니다. 삭제하시겠습니까?')){
+		$.ajax({
+			url : 'removeFileByFileNo',
+			data : {'fileNo':fileNo},
+			dataType : 'json',
+			type :'post',
+			success:function(data){
+				if(data.result == 'succ'){
+					$('#bFile_'+fileNo).remove();
+					toastr.info('선택하신 파일이 삭제되었습니다.');
+				}
+
+			}
+		})
+	}
+}
+
+function fileSave(){
+	$("#inspList").find("tr").each(function(){
+		if($(this).find("[id^=inspNo]").length != 0){
+			var fileList = new Array();
+			var rowNum = $(this).find("[id^=inspNo]").prop('id');
+			rowNum = rowNum.split('_')[1];
+			var formData = new FormData($('#inspResultForm_'+rowNum)[0]);
+
+			var fileCnt = $('#'+rowNum+'tr').find('td:eq(0)').find('span').length;
+			var fileNames = new Array();
+
+			if(fileCnt > 0){
+				$('#'+rowNum+'tr').find('td:eq(0)').find('span').each(function(){
+					fileNames.push($(this).text());
+				})
+
+				for (var i = 0; i < filesArr.length; i++) {
+			        // 삭제되지 않은 파일만 폼데이터에 담기
+			        if (!filesArr[i].is_delete) {
+			        	for (var j=0; j<fileNames.length; j++){
+			        		if(filesArr[i].name == fileNames[j].trim()){
+			        			formData.append('fileList',filesArr[i]);
+							}
+			        	}
+			        }
+			    }
+
+				formData.append('inspNo', $(this).find("[id^=inspNo]").val());
+				formData.append('rqstNo', '${rceptInfo.rqstNo }');
+				formData.append('uptId', localStorage.getItem("userId"));
+
+				$.ajax({
+					url : 'inspFileUpload',
+					data : formData,
+					dataType : 'json',
+					type : 'post',
+					processData : false,
+					contentType : false,
+					success : function(data){
+						if(data.result == 'succ'){
+							console.log("결과사진등록 성공~!!");
+						}else{
+							console.log("결과사진등록 실패~!!");
+						}
+					}
+				})
+
+			}
+		}
+	});
+}
+
 $("#save").on("click",function (){
 	var inspData = [];
+	fileSave();
+
 	$("#inspList").find("tr").each(function(){
-		var sData = {
-			inspNo : $(this).find("[id^=inspNo]").val(),
-			inspResult : $(this).find("[id^=inspResult]").val()
+		if($(this).find("[id^=inspNo]").length != 0){
+			var sData = {
+				inspNo : $(this).find("[id^=inspNo]").val(),
+				inspResult : $(this).find("[id^=inspResult]").val()
+			}
+
+			inspData.push(sData);
 		}
-		inspData.push(sData);
 	});
 
 	var data = {
@@ -287,8 +474,11 @@ $("#save").on("click",function (){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			alert("저장하였습니다.");
-			location.href = "resultInspectList";
+			setTimeout(function(){
+				alert("저장하였습니다.");
+				location.href = "resultInspectList";
+			}, 1500);
+
 		}
 	});
 

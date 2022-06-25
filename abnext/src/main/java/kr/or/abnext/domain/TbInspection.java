@@ -1,5 +1,7 @@
 package kr.or.abnext.domain;
 
+import java.util.List;
+
 /*
  * 생성일 2022.06.11.
  * 테이블명 TbInspection
@@ -27,6 +29,16 @@ public class TbInspection {
 	private String insId;
 	private String uptDt;
 	private String uptId;
+
+	private List<TbFile> inspFileList;
+
+
+	public List<TbFile> getInspFileList() {
+		return inspFileList;
+	}
+	public void setInspFileList(List<TbFile> inspFileList) {
+		this.inspFileList = inspFileList;
+	}
 	public String getInspNo() {
 		return inspNo;
 	}
@@ -152,9 +164,10 @@ public class TbInspection {
 		return "TbInspection [inspNo=" + inspNo + ", rqstNo=" + rqstNo + ", sampleCode=" + sampleCode + ", sampleName="
 				+ sampleName + ", workerNo=" + workerNo + ", workerNm=" + workerNm + ", inspFirstCd=" + inspFirstCd
 				+ ", inspFirstNm=" + inspFirstNm + ", inspSecondCd=" + inspSecondCd + ", inspSecondNm=" + inspSecondNm
-				+ ", inspThirdCd=" + inspThirdCd + ", inspThirdNm=" + inspThirdNm + ", inspPrice=" + inspPrice
-				+ ", inspResult=" + inspResult + ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt
-				+ ", uptId=" + uptId + "]";
+				+ ", inspThirdCd=" + inspThirdCd + ", inspThirdNm=" + inspThirdNm + ", inspType=" + inspType
+				+ ", inspTypeNm=" + inspTypeNm + ", inspPrice=" + inspPrice + ", inspResult=" + inspResult + ", insDt="
+				+ insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", inspFileList="
+				+ inspFileList + "]";
 	}
 
 }

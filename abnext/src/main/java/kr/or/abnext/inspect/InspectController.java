@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.TbCode;
+import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;

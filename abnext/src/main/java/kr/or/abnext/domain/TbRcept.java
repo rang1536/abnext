@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /*
  * 생성일 2022.05.20.
  * 테이블명 TB_RCEPT
@@ -56,6 +58,16 @@ public class TbRcept {
 	private String insId;
 	private String uptDt;
 	private String uptId;
+
+	private List<MultipartFile> fileList;
+
+
+	public List<MultipartFile> getFileList() {
+		return fileList;
+	}
+	public void setFileList(List<MultipartFile> fileList) {
+		this.fileList = fileList;
+	}
 	public int getRqstNo() {
 		return rqstNo;
 	}

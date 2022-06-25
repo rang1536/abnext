@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbCode;
+import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
@@ -90,5 +91,9 @@ public class InspectDao {
 
 	public int updateInspect(TbInspection insp) {
 		return sql.insert("inspection.updateInspect", insp);
+	}
+
+	public List<TbFile> selectInspFileList(TbInspection insp) {
+		return sql.selectList("inspection.selectInspFileList", insp);
 	}
 }

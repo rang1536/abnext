@@ -37,7 +37,7 @@ import net.coobird.thumbnailator.Thumbnails;
 
 public class UtilFile {
 	//다중파일업로드
-	public List<TbFile> multiUploadFile(MultipartHttpServletRequest request){
+	public List<TbFile> multiUploadFile(List<MultipartFile> fileList){
 		List<TbFile> uploadFileList = new ArrayList<TbFile>();
 		//호스팅
 		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
@@ -48,16 +48,15 @@ public class UtilFile {
 		//회사 서버
 		/*String rootPath = "F:\\sh86\\resources\\files\\";*/
 
-		List<MultipartFile> multipartFile = request.getFiles("uploadFile");
-        if (multipartFile.size() == 1 && multipartFile.get(0).getOriginalFilename().equals("")) {
-        } else {
-            for (int i = 0; i < multipartFile.size(); i++) {
-            	TbFile uploadFile = uploadFile(multipartFile.get(i), rootPath);
+		if (fileList.size() > 0){
+            for (int i = 0; i < fileList.size(); i++) {
+            	TbFile uploadFile = uploadFile(fileList.get(i), rootPath);
                 uploadFileList.add(uploadFile);
             }
         }
 		return uploadFileList;
 	}
+
 	//단일파일 업로드
 	public TbFile singleUploadFile(MultipartFile file){
 		//호스팅
@@ -145,6 +144,7 @@ public class UtilFile {
 		}
 		return uploadFile;
 	}
+
 	//파일 삭제
 	public boolean deleteImage(String path){
 		File destFile = new File(path);

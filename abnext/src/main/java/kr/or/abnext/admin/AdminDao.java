@@ -281,4 +281,15 @@ public class AdminDao {
 	public List<TbCode> getCodeList(Map<String, Object> param){
 		return sql.selectList("admin.getCodeList", param);
 	}
+
+
+	/**
+	 * @function : removeFile
+	 * @Description : 파일정보삭제
+	 * @param : TbFile
+	 * @return : int
+	 **/
+	public int removeFile(TbFile tbFile) {
+		return sql.delete("admin.removeFile", tbFile);
+	}
 }
