@@ -6,7 +6,6 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>avinext | (주)아비넥스트</title>
-
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
@@ -33,12 +32,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1> * 신청접수</h1>
+						<h1> * 의뢰목록</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">신청접수</li>
+							<li class="breadcrumb-item active">의뢰목록</li>
 						</ol>
 					</div>
 				</div>
@@ -46,60 +45,54 @@
 		</section>
 
 		<!-- Main content -->
-			<div class="invoice p-3 mb-3">
-				<!-- Table row -->
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<!-- /.card-header -->
-							<div class="card-body">
-								<table id="example2" class="table table-bordered table-hover">
-									<thead>
+		<div class="invoice p-3 mb-3">
+			<!-- Table row -->
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<!-- /.card-header -->
+						<div class="card-body">
+							<table id="example2" class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>의뢰번호</th>
+										<th>신청일</th>
+										<th>상태</th>
+										<th>동물명</th>
+										<th>신청자(기관)</th>
+										<th>담당수의사</th>
+										<th>결과입력자</th>
+										<th>진단명</th>
+										<th>검사완료일</th>
+									</tr>
+								</thead>
+								<tbody id="listBody">
+									<c:forEach var="item" items="${rceptList }" varStatus="status">
 										<tr>
-											<th>의뢰번호</th>
-											<th>신청일</th>
-											<th>상태</th>
-											<th>동물명</th>
-											<th>신청자(기관)</th>
-											<th>담당수의사</th>
-											<th>검사구분</th>
-											<th>진단명</th>
-											<th>검사결과</th>
+											<td>${item.rqstNo }</td>
+											<td>${item.rqstDt }</td>
+											<td>${item.procStatNm }</td>
+											<td>${item.animNm }</td>
+											<td>${item.hospNm }</td>
+											<td>${item.docNm }</td>
+											<td>${item.resultWriterNm }</td>
+											<td></td>
+											<td></td>
 										</tr>
-									</thead>
-									<tbody id="listBody">
-										<c:forEach var="item" items="${rceptList }" varStatus="status">
-											<tr>
-												<td>${item.rqstNo }</td>
-												<td>${item.rqstDt }</td>
-												<td <c:if test="${item.procStat == 1}">class='text-danger'</c:if>> ${item.procStatNm }</td>
-												<td>${item.animNm }</td>
-												<td>${item.hospNm }</td>
-												<td>${item.docNm }</td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-							<!-- /.card-body -->
-							<div class="card-footer">
-								<button type="button" class="btn btn-primary btn-flat" style="float:right;">신규신청</button>
-							</div>
+									</c:forEach>
+								</tbody>
+							</table>
 						</div>
-						<!-- /.card -->
+						<!-- /.card-body -->
 					</div>
-					<!-- /.col-12 -->
+					<!-- /.card -->
 				</div>
-				 <!-- /.row -->
-			</div><!-- /.container-fluid -->
-		<!-- /.content -->
+				<!-- /.row -->
+			</div>
+			 <!-- /.col -->
+		</div><!-- /.container-fluid -->
+	<!-- /.content -->
 	</div>
-	<form id="viewFrm" method="POST">
-		<input type="hidden" name="rqstNo"/>
-	</form>
 	<!-- /.content-wrapper -->
 	<jsp:include page="../layer/layout_footer.jsp"></jsp:include>
 	<!-- Control Sidebar -->
@@ -107,6 +100,10 @@
 		<!-- Control sidebar content goes here -->
 	</aside>
 	<!-- /.control-sidebar -->
+	<form id="viewFrm" method="POST">
+		<input type="hidden" name="rqstNo"/>
+	</form>
+
 </div>
 <!-- ./wrapper -->
 
@@ -116,7 +113,7 @@
 <script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables	& Plugins -->
 <script src="resources/plugins/datatables/jquery.dataTables.js"></script>
-<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
@@ -131,8 +128,6 @@
 <script src="resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="resources/dist/js/demo.js"></script>
-<!-- Customizing Js -->
-<script src="resources/js/common.js"></script>
 <!-- Page specific script -->
 <script>
 	$(function () {
@@ -146,17 +141,12 @@
 		});
 	});
 
-	$(".btn-primary").on("click",function(){
-		location.href = "registerInspect";
-	});
-
 	$("#listBody").find("tr").on("click", function(){
 		var rqstNo = $(this).find("td:eq(0)").text();
 		$("[name=rqstNo]").val(rqstNo);
-		$("#viewFrm").attr("action","modifyInspect");
+		$("#viewFrm").attr("action","viewInspect");
 		$("#viewFrm").submit();
 	})
-
 </script>
 </body>
 </html>

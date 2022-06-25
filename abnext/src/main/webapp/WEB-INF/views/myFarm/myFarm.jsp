@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +31,7 @@
 	<link rel="stylesheet" href="resources/plugins/dropzone/min/dropzone.min.css">
 	<!-- Tempusdominus Bootstrap 4 -->
 	<link rel="stylesheet" href="resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-	
+
 	<style>
 		.txtl{text-align:left;}
 		.txtc{text-align:center;}
@@ -39,9 +41,9 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-	
+
 	<jsp:include page="../layer/layout.jsp"></jsp:include>
-	
+
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -96,9 +98,9 @@
 							<div class="icon">
 								<i class="ion ion-bag"></i>
 							</div>
-							<a href="#" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="#" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="#" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 						</div>
 					</div>
 					<!-- ./col -->
@@ -112,9 +114,9 @@
 							<div class="icon">
 								<i class="ion ion-stats-bars"></i>
 							</div>
-							<a href="#" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="#" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="#" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 						</div>
 					</div>
 					<!-- ./col -->
@@ -128,9 +130,9 @@
 							<div class="icon">
 								<i class="ion ion-person-add"></i>
 							</div>
-							<a href="#" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="#" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="#" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 						</div>
 					</div>
 					<!-- ./col -->
@@ -144,103 +146,91 @@
 							<div class="icon">
 								<i class="ion ion-pie-graph"></i>
 							</div>
-							<a href="#" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="#" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="#" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 						</div>
 					</div>
 					<!-- ./col -->
 				</div>
-				
+
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">*진단비용</h3>
-								<!-- 
-								<div class="card-tools">
-									<div class="input-group input-group-sm" style="width: 150px;">
-										<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-										<div class="input-group-append">
-											<button type="submit" class="btn btn-default">
-												<i class="fas fa-search"></i>
-											</button>
-										</div>
-									</div>
-								</div> -->
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<ul class="pagination pagination-month justify-content-center">
+								<ul class="pagination pagination-month justify-content-center" style="overflow:scroll;">
 									<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="changeYear(1)">«</a></li>
-									<li class="page-item">
+									<li class="page-item Jan">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Jan</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item active">
+									<li class="page-item Feb">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Feb</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item Mar">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Mar</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item Apr">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Apr</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item May">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">May</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item Jun">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Jun</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item Jul">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Jul</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item Aug">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Aug</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item Sep">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Sep</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item Oct">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Oct</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item Nov">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Nov</p>
 											<p class="page-year">2022</p>
 										</a>
 									</li>
-									<li class="page-item">
+									<li class="page-item Dec">
 										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
 											<p class="page-month">Dec</p>
 											<p class="page-year">2022</p>
@@ -260,42 +250,47 @@
 											<td class="txtc txtb">납부예정</td>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td class="txtc">2022-02-12</td>
-											<td class="txtc">1</td>
-											<td class="txtr">30,000</td>
-											<td class="txtr">30,000</td>
-											<td class="txtr"></td>
-										</tr>
-										<tr>
-											<td class="txtc">2022-02-12</td>
-											<td class="txtc">2</td>
-											<td class="txtr">30,000</td>
-											<td class="txtr"></td>
-											<td class="txtr">30,000</td>
-										</tr>
-										<tr>
-											<td class="txtc">2022-02-16</td>
-											<td class="txtc">3</td>
-											<td class="txtr">70,000</td>
-											<td class="txtr">70,000</td>
-											<td class="txtr"></td>
-										</tr>
-										<tr>
-											<td class="txtc">2022-02-22</td>
-											<td class="txtc">4</td>
-											<td class="txtr">30,000</td>
-											<td class="txtr"></td>
-											<td class="txtr">30,000</td>
-										</tr>
+									<tbody id="tbodyList">
+										<c:set var="rqstTot" value="0"/>
+										<c:set var="payedTot" value="0"/>
+										<c:set var="payingTot" value="0"/>
+										<c:forEach var="item" items="${ak01Monthdata }" varStatus="status">
+											<tr>
+												<td class="txtc">${item.rqstDt }</td>
+												<td class="txtc">${item.rqstNo }</td>
+												<td class="txtr"><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
+												<td class="txtr">
+													<c:choose>
+														<c:when test="${item.payStat == '02' }">
+															<fmt:formatNumber value="${item.price }" pattern="#,###"/>
+															<c:set var="payedTot" value="${payedTot+ item.price}"/>
+														</c:when>
+														<c:otherwise>
+															0
+														</c:otherwise>
+													</c:choose>
+												</td>
+												<td class="txtr">
+													<c:choose>
+														<c:when test="${item.payStat == '01' }">
+															<fmt:formatNumber value="${item.price }" pattern="#,###"/>
+															<c:set var="payingTot" value="${payingTot+ item.price}"/>
+														</c:when>
+														<c:otherwise>
+															0
+														</c:otherwise>
+													</c:choose>
+												</td>
+											</tr>
+											<c:set var="rqstTot" value="${rqstTot+ item.price}"/>
+										</c:forEach>
 									</tbody>
-									<tfoot>
+									<tfoot id="tfootList">
 										<tr>
 											<td class="txtr" colspan="2">합계</td>
-											<td class="txtr">160,000</td>
-											<td class="txtr">10,000</td>
-											<td class="txtr">60,000</td>
+											<td class="txtr"><fmt:formatNumber value="${rqstTot }" pattern="#,###"/></td>
+											<td class="txtr"><fmt:formatNumber value="${payedTot }" pattern="#,###"/></td>
+											<td class="txtr"><fmt:formatNumber value="${payingTot }" pattern="#,###"/></td>
 										</tr>
 									</tfoot>
 								</table>
@@ -344,47 +339,175 @@
 <script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-
+<!-- Customizing Js -->
+<script src="resources/js/common.js"></script>
 <script>
 
 	$(function () {
 		bsCustomFileInput.init();
-		
+
 		//Initialize Select2 Elements
 		$('.select2').select2()
-	
+
 		//Initialize Select2 Elements
 		$('.select2bs4').select2({
 			theme: 'bootstrap4'
 		})
-	
+
 		//Date picker
 		$('#reservationdate').datetimepicker({
 			format: 'YYYY'
 		});
+
+		var now = new Date();
+		$("#searchYear").val(now.getFullYear());
+		var nowMonth = now.getMonth()+1;
+		var monthTxt = "";
+		switch(nowMonth) {
+		  case 1 : monthTxt = 'Jan'; break;
+		  case 2 : monthTxt = "Feb"; break;
+		  case 3 : monthTxt = "Mar"; break;
+		  case 4 : monthTxt = "Apr"; break;
+		  case 5 : monthTxt = "May"; break;
+		  case 6 : monthTxt = "Jun"; break;
+		  case 7 : monthTxt = "Jul"; break;
+		  case 8 : monthTxt = "Aug"; break;
+		  case 9 : monthTxt = "Sep"; break;
+		  case 10 : monthTxt = "Oct"; break;
+		  case 11 : monthTxt = "Nov"; break;
+		  case 12 : monthTxt = "Dec"; break;
+		}
+		$("."+monthTxt).addClass("active");
 	 });
-	
+
 	$('#reservationdate').on('change.datetimepicker', function (e) {
-		console.log($("#searchYear").val());
+		var searchStr = $("#searchYear").val();
+		var data = {
+				searchStr : searchStr
+		}
+		$.ajax({
+			url : "getDataYear",
+			data : data,
+			type : "POST",
+			dataType : "JSON",
+			success : function(data){
+				 $("#ak01ReqCnt").text(data.myFarm.reqCnt);
+				 $("#ak01RecCnt").text(data.myFarm.recCnt);
+				 $("#ak01ProcCnt").text(data.myFarm.procCnt);
+				 $("#ak01FinCnt").text(data.myFarm.finCnt);
+			}
+		});
 	});
-	
+
 	function selCal(target){
-		console.log($(target).find(".page-month").text());
-		console.log($(target).find(".page-year").text());
 		$(".page-item").removeClass("active");
 		$(target).parent().addClass("active");
+
+		var month = '';
+		switch($(target).find(".page-month").text()) {
+		  case 'Jan' : month = "01"; break;
+		  case 'Feb' : month = "02"; break;
+		  case 'Mar' : month = "03"; break;
+		  case 'Apr' : month = "04"; break;
+		  case 'May' : month = "05"; break;
+		  case 'Jun' : month = "06"; break;
+		  case 'Jul' : month = "07"; break;
+		  case 'Aug' : month = "08"; break;
+		  case 'Sep' : month = "09"; break;
+		  case 'Oct' : month = "10"; break;
+		  case 'Nov' : month = "11"; break;
+		  case 'Dec' : month = "12"; break;
+		  default : "01"; break;
+		}
+		var searchStr = $(target).find(".page-year").text()+month;
+		var data = {
+				searchStr : searchStr
+		}
+		$.ajax({
+			url : "getDataMonth",
+			data : data,
+			type : "POST",
+			dataType : "JSON",
+			success : function(data){
+				console.log(data);
+
+				var tbodyHtml = '';
+				var rqstTot = 0;
+				var payedTot = 0;
+				var payingTot = 0;
+
+				for(var i=0; i<data.list.length; i++){
+					var item = data.list[i];
+					var payedPrice = 0;
+					var payingPrice = 0;
+					if(item.payStat == '02') {
+						payedPrice = item.price;
+						payedTot += Number(item.price);
+					}else {
+						payingPrice = item.price;
+						payingTot += Number(item.price);
+					}
+					rqstTot += Number(item.price);
+
+					tbodyHtml += '<tr>';
+					tbodyHtml += '	<td class="txtc">'+item.rqstDt+'</td>';
+					tbodyHtml += '	<td class="txtc">'+item.rqstNo+'</td>';
+					tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(item.price)+'</td>';
+					tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(payedPrice)+'</td>';
+					tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(payingPrice)+'</td>';
+					tbodyHtml += '</tr>';
+				}
+
+				$("#tbodyList").empty();
+				$("#tbodyList").append(tbodyHtml);
+				$("#tfootList").empty();
+
+				if(data.list.length > 0){
+					var tfootHtml = '<tr>';
+					tfootHtml += '	<td class="txtr" colspan="2">합계</td>';
+					tfootHtml += '	<td class="txtr">'+$.gfn_setComma(rqstTot)+'</td>';
+					tfootHtml += '	<td class="txtr">'+$.gfn_setComma(payedTot)+'</td>';
+					tfootHtml += '	<td class="txtr">'+$.gfn_setComma(payingTot)+'</td>';
+					tfootHtml += '</tr>';
+					$("#tfootList").html(tfootHtml);
+				}else {
+					var noData = '<tr><td class="txtc" colspan="5">데이터가 없습니다.</td></tr>';
+					$("#tfootList").html(noData);
+				}
+			}
+		});
 	}
-	
+
 	function changeYear(type){
 		$(".page-item").removeClass("active");
 		if(type == 1){
 			$(".pagination-month").find(".page-year").each(function(){
 				$(this).text(parseInt($(this).text())-1);
-			});			
+			});
 		}else {
 			$(".pagination-month").find(".page-year").each(function(){
 				$(this).text(parseInt($(this).text())+1);
 			});
+		}
+	}
+
+	function getList(str){
+		if(str == 'a1'){
+			if($("#ak01ReqCnt").text().trim() != 0){
+				location.href = 'requestInspect';
+			}
+		}else if(str == 'a2'){
+			if($("#ak01RecCnt").text().trim() != 0){
+				location.href = 'requestInspect';
+			}
+		}else if(str == 'a3'){
+			if($("#ak01ProcCnt").text().trim() != 0){
+				location.href = 'settingInspectList';
+			}
+		}else if(str == 'a4'){
+			if($("#ak01FinCnt").text().trim() != 0){
+				location.href = 'resultInspectList';
+			}
 		}
 	}
 
