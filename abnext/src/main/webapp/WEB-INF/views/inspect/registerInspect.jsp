@@ -214,20 +214,13 @@
 						<div class="row">
 							<div class="col-md-11">
 								<div class="row">
-									<div class="col-sm-3">
+									<div class="col-sm-5">
 										<div class="form-group">
 											<label>*시료정보</label>
 											<select class="form-control" id="sampleCode"></select>
 
 										</div>
 									</div>
-									<div class="col-sm-2">
-										<div class="form-group">
-											<label>&nbsp;</label>
-											<select class="form-control" id="sampleType"></select>
-										</div>
-									</div>
-
 									<div class="col-sm-7">
 										<div class="form-group">
 											<label>시료메모</label>
@@ -320,30 +313,7 @@
 											<td class="th">삭제</td>
 										</tr>
 									</thead>
-									<tbody id="inspectTbody"><!--
-										<tr>
-											<td class="txtc">1</td>
-											<td class="txtc">분변</td>
-											<td class="txtc">단일</td>
-											<td class="txtc">0001</td>
-											<td class="txtc">바이러스</td>
-											<td class="txtc">PDD</td>
-											<td class="txtc">PDD</td>
-											<td class="txtr">30,000원</td>
-											<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delInspect(this)"><i class="fas fa-trash"></i> 삭제 </a></td>
-										</tr>
-										<tr>
-											<td class="txtc">2</td>
-											<td class="txtc">분변</td>
-											<td class="txtc">혼합</td>
-											<td class="txtc">0001</td>
-											<td class="txtc">세균</td>
-											<td class="txtc">살모넬라</td>
-											<td class="txtc">살모넬라</td>
-											<td class="txtr">40,000원</td>
-											<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delInspect(this)"><i class="fas fa-trash"></i> 삭제 </a></td>
-										</tr>
-										 -->
+									<tbody id="inspectTbody">
 									</tbody>
 									<tfoot>
 										<tr>
@@ -595,6 +565,8 @@ $(".btn-save").on('click',function(){
 		arraySmpl.push(smpl);
 	});
 
+	var price = $("#sumPrice").text().replace(/,/gi,'').replace('원','');
+
 	var data = {
 			hospNo : $("#hospNo").val(),
 			hospNm : $("#hospNm").val(),
@@ -617,8 +589,8 @@ $(".btn-save").on('click',function(){
 			procStatNm : '신청',
 			rqstMemo : $("#rqstMemo").val(),
 			payGb : '',
-			price : '0',
-			payStat : '',
+			price : price,
+			payStat : '01',
 			insId : localStorage.getItem("userId"),
 			inspList : arrayInsp,
 			smplList : arraySmpl

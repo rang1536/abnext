@@ -209,7 +209,7 @@
 													<td colspan="4">
 														<c:forEach var="file" items="${item.inspFileList }" varStatus="status">
 															<b id="bFile_${file.fileNo }">
-																<a href="#">${file.fileNewNm}</a>
+																[<a href="javascript:void(0)" onclick="imgView('${file.fileNewNm}')">${file.fileNewNm}</a>]
 		        												<a class="delete" onclick="deleteServerFile('${file.fileNo}');"><i class="far fa-minus-square"></i></a>
 		       													&nbsp;&nbsp;
 	       													</b>
@@ -488,6 +488,15 @@ $("#list").on("click",function (){
 	location.href = "resultInspectList";
 });
 
+function imgView(name){
+	//호스팅
+	//var path = '/home/hosting_users/avinext/tomcat/webapps/files/';
+	var path = '/abnext/resources/files/';
+	$(".image").attr("src",path+name);
+	$('#imgView').modal();
+}
+
 </script>
+<jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>
 </html>

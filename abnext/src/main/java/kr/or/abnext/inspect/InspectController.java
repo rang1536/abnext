@@ -213,4 +213,44 @@ public class InspectController {
 
 		return "inspect/finalInspectModify";
 	}
+
+	@RequestMapping(value = "allInspectList")
+	public String allInspectList(Locale locale, Model model) {
+		logger.info("allInspectList Method is start {}.", locale);
+		String [] arr = {"1","2","3","4","5"};
+		List<TbRcept> list = insServ.recptList(arr);
+		model.addAttribute("rceptList", list);
+		return "inspect/allInspectList";
+	}
+
+	@RequestMapping(value = "viewInspect")
+	public String viewInspect(Locale locale, Model model, TbRcept searchRcept) {
+		logger.info("viewInspect Method is start {}.", locale);
+
+		//접수정보
+		TbRcept rcept = insServ.getRcept(searchRcept);
+
+		//시료정보
+		TbSample tbSample = new TbSample();
+		tbSample.setRqstNo(""+searchRcept.getRqstNo());
+		List<TbSample> smplList = insServ.selectSampleList(tbSample);
+
+		//검사정보
+		TbInspection tbInspection = new TbInspection();
+		tbInspection.setRqstNo(""+searchRcept.getRqstNo());
+		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
+
+		//시료상태
+		TbCode code = new TbCode();
+		code.setUppCodeId("S001");
+		List<TbCode> codeList = admServ.selectCodeList(code);
+
+		model.addAttribute("rceptInfo", rcept);
+		model.addAttribute("codeList", codeList);
+		model.addAttribute("smplList", smplList);
+		model.addAttribute("inspList", inspList);
+
+		return "inspect/viewInspect";
+	}
+
 }
