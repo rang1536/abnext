@@ -158,6 +158,92 @@
 				                </div>
 			                </div>
 						</div> <!-- 병원폼 -->
+
+						<div id="farmInfoDiv" <c:if test="${user.farmNo eq null or user.farmNo eq ''}"> style="display:none;" </c:if>>
+							<div class="row">
+								<div class="col-sm-6">
+									<!-- select -->
+									<div class="form-group">
+										<label>소속구분</label>
+										<select class="custom-select farmInput" name="gubun" id="gubun" disabled>
+											<option value="farm" selected>기관(병원)</option>
+										</select>
+									</div>
+								</div>
+			                  	<div class="col-sm-6">
+					                <div class="form-group">
+					                  <label>기관(병원)명</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control farmInput" id="farmNm" name="farmNm" value="${farm.farmNm }" readonly>
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+				                </div>
+			                </div>
+
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+					                  <label>대표자</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control farmInput" id="farmCeo" name="farmCeo" value="${farm.farmCeo }" readonly>
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+								</div>
+			                  	<div class="col-sm-6">
+					                <!-- <div class="form-group">
+					                  <label>휴대폰번호</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control farmInput" id="farmHp" name="farmHp" value="${farm.farmHp }" readonly>
+
+					                  </div>
+
+					                </div>-->
+				                </div>
+			                </div>
+
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+					                  <label>주소</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control farmInput" id="farmAdr" name="farmAdr" value="${farm.farmAdr} ${farm.farmDtlAdr }" readonly>
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+								</div>
+			                  	<div class="col-sm-6">
+					                <div class="form-group">
+					                  <label>전화번호</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control farmInput" id="farmHp" name="farmHp" value="${fn:substring(farm.farmHp, 0, 3) }-${fn:substring(farm.farmHp, 3, 7) }-${fn:substring(farm.farmHp, 7, 11) }" readonly>
+
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+				                </div>
+			                </div>
+						</div> <!-- 농장폼 -->
 					  </div> <!-- card-body END -->
 
 		              <div class="card-footer">
@@ -182,11 +268,11 @@
 									<div class="form-group">
 										<label>사용자구분</label>
 										<select class="custom-select" name="userLev" id="userLev" >
-											<option <c:if test="${user.userLev eq '1' }">seleted</c:if> value="1">일반회원</option>
-					                        <option <c:if test="${user.userLev eq '2' }">seleted</c:if> value="2">수의사</option>
-					                        <option <c:if test="${user.userLev eq '3' }">seleted</c:if> value="3">기관(병원)</option>
-					                        <option <c:if test="${user.userLev eq '4' }">seleted</c:if> value="4">농장</option>
-					                        <option <c:if test="${user.userLev eq '5' }">seleted</c:if> value="5">관리자</option>
+											<option <c:if test="${user.userLev eq '1' }">selected</c:if> value="1">일반회원</option>
+					                        <option <c:if test="${user.userLev eq '2' }">selected</c:if> value="2">수의사</option>
+					                        <option <c:if test="${user.userLev eq '3' }">selected</c:if> value="3">기관(병원)</option>
+					                        <option <c:if test="${user.userLev eq '4' }">selected</c:if> value="4">농장</option>
+					                        <option <c:if test="${user.userLev eq '5' }">selected</c:if> value="5">관리자</option>
 										</select>
 									</div>
 								</div>
@@ -392,27 +478,56 @@
 	/*======================
 	* 기관,병원 세팅
 	======================*/
-	function fn_setHospDataToForm(hospNo){
-		alert(hospNo)
-		$.ajax({
-			url : 'getHospInfo',
-			dataType : 'json',
-			type : 'post',
-			data : {'hospNo':hospNo},
-			success : function(data){
-				var hospInfo = data.hospInfo;
+	function fn_setHospDataToForm(hospNo, gubun){
+		console.log('??')
+		if(gubun == 'farm'){
+			$.ajax({
+				url : 'getFarmInfo',
+				dataType : 'json',
+				type : 'post',
+				data : {'farmNo':hospNo},
+				success : function(data){
+					var farmInfo = data.farmInfo;
 
-				$('#hospNm').val(fn_ifNull(hospInfo.hospNm));
-				$('#hospHp').val(fn_ifNull(hospInfo.hospHp.substring(0, 3)+'-'+hospInfo.hospHp.substring(3, 7)+'-'+hospInfo.hospHp.substring(7)));
-				$('#hospAdr').val(fn_ifNull(hospInfo.hospAdr)+' '+fn_ifNull(hospInfo.hospDtlAdr));
+					$('#farmNm').val(fn_ifNull(farmInfo.farmNm));
+					$('#farmHp').val(fn_ifNull(farmInfo.farmHp.substring(0, 3)+'-'+farmInfo.farmHp.substring(3, 7)+'-'+farmInfo.farmHp.substring(7)));
+					$('#farmAdr').val(fn_ifNull(farmInfo.farmAdr)+' '+fn_ifNull(farmInfo.farmDtlAdr));
 
-				toastr.success(hospInfo.hospNm+' 이 선택되었습니다');
+					toastr.success(farmInfo.farmNm+' 이 선택되었습니다');
 
-				$('#hospNo').val(hospInfo.hospNo);
+					$('#farmNo').val(farmInfo.farmNo);
 
-				$('#modalCloseBtn').click();
-			}
-		})
+					$('#modalCloseBtn').click();
+
+					$('#hospInfoDiv').css('display', 'none');
+					$('#farmInfoDiv').css('display', '');
+				}
+			})
+		}else{
+			$.ajax({
+				url : 'getHospInfo',
+				dataType : 'json',
+				type : 'post',
+				data : {'hospNo':hospNo},
+				success : function(data){
+					var hospInfo = data.hospInfo;
+
+					$('#hospNm').val(fn_ifNull(hospInfo.hospNm));
+					$('#hospHp').val(fn_ifNull(hospInfo.hospHp.substring(0, 3)+'-'+hospInfo.hospHp.substring(3, 7)+'-'+hospInfo.hospHp.substring(7)));
+					$('#hospAdr').val(fn_ifNull(hospInfo.hospAdr)+' '+fn_ifNull(hospInfo.hospDtlAdr));
+
+					toastr.success(hospInfo.hospNm+' 이 선택되었습니다');
+
+					$('#hospNo').val(hospInfo.hospNo);
+
+					$('#modalCloseBtn').click();
+
+					$('#farmInfoDiv').css('display', 'none');
+					$('#hospInfoDiv').css('display', '');
+				}
+			})
+		}
+
 	}
 
 
@@ -429,6 +544,13 @@
 		}
 	}
 
+
+	/*====================================
+	* 회원정보수정
+	====================================*/
+	function fn_modifyUserCtrl(){
+
+	}
 
 
 </script>
