@@ -43,9 +43,11 @@ public class TbRcept {
 	private String payGb;
 	private String price;
 	private String payStat;
+	private String payedDt;
 	private String result;
 	private String resultWriter;
 	private String resultWriterNm;
+	private String finishDt;
 	private String diagUpCd;
 	private String diagUpCdNm;
 	private String diagCd;
@@ -248,6 +250,12 @@ public class TbRcept {
 	public void setPayStat(String payStat) {
 		this.payStat = payStat;
 	}
+	public String getPayedDt() {
+		return payedDt;
+	}
+	public void setPayedDt(String payedDt) {
+		this.payedDt = payedDt;
+	}
 	public String getResult() {
 		return result;
 	}
@@ -265,6 +273,12 @@ public class TbRcept {
 	}
 	public void setResultWriterNm(String resultWriterNm) {
 		this.resultWriterNm = resultWriterNm;
+	}
+	public String getFinishDt() {
+		return finishDt;
+	}
+	public void setFinishDt(String finishDt) {
+		this.finishDt = finishDt;
 	}
 	public String getDiagUpCd() {
 		return diagUpCd;
@@ -348,11 +362,12 @@ public class TbRcept {
 				+ animSecondCd + ", AnimThirdCd=" + AnimThirdCd + ", animFirstNm=" + animFirstNm + ", animSecondNm="
 				+ animSecondNm + ", AnimThirdNm=" + AnimThirdNm + ", animSex=" + animSex + ", rqstDt=" + rqstDt
 				+ ", procStat=" + procStat + ", procStatNm=" + procStatNm + ", rqstMemo=" + rqstMemo + ", payGb="
-				+ payGb + ", price=" + price + ", payStat=" + payStat + ", result=" + result + ", resultWriter="
-				+ resultWriter + ", resultWriterNm=" + resultWriterNm + ", diagUpCd=" + diagUpCd + ", diagUpCdNm="
-				+ diagUpCdNm + ", diagCd=" + diagCd + ", diagCdNm=" + diagCdNm + ", finalMemo=" + finalMemo
-				+ ", inspList=" + inspList + ", smplList=" + smplList + ", sampleArr=" + Arrays.toString(sampleArr)
-				+ ", insDt=" + insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ payGb + ", price=" + price + ", payStat=" + payStat + ", payedDt=" + payedDt + ", result=" + result
+				+ ", resultWriter=" + resultWriter + ", resultWriterNm=" + resultWriterNm + ", finishDt=" + finishDt
+				+ ", diagUpCd=" + diagUpCd + ", diagUpCdNm=" + diagUpCdNm + ", diagCd=" + diagCd + ", diagCdNm="
+				+ diagCdNm + ", finalMemo=" + finalMemo + ", inspList=" + inspList + ", smplList=" + smplList
+				+ ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt + ", insId=" + insId + ", uptDt="
+				+ uptDt + ", uptId=" + uptId + ", fileList=" + fileList + "]";
 	}
 
 }

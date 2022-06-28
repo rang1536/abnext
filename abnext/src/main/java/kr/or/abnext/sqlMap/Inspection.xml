@@ -38,7 +38,7 @@
 		     , #{docNo}        , #{docNm}
 		     , #{animButler}   , #{butlerSido}    , #{butlerSigungu} , #{butlerSigunguCd}
 		     , #{animFirstCd}  , #{animSecondCd}  , #{animThirdCd}
-		     , #{animBirth}    , #{animSex}       , NOW()            , #{rqstMemo}
+		     , #{animBirth}    , #{animSex}       , DATE_FORMAT(NOW(),'%Y.%m.%d') , #{rqstMemo}
 		     , #{procStat}     , #{procStatNm}
 		     , #{payGb}        , #{price}         , #{payStat}
 		     , NOW()           , #{insId}
@@ -80,6 +80,7 @@
 	<select id="selectRceptList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
 		SELECT A.*
 		     , (SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.RESULT_WRITER) AS RESULT_WRITER_NM
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.DIAG_CD) AS DIAG_CD_NM
 		  FROM TB_RCEPT A
 		 WHERE PROC_STAT IN
 		<foreach item="arr" collection="array" open="(" separator="," close=")">
@@ -177,6 +178,7 @@
 		<if test="result != null and result != ''">
 		     , RESULT = #{result}
 		     , RESULT_WRITER = #{uptId}
+		     , FINISH_DT = DATE_FORMAT(NOW(),'%Y.%m.%d')
 		</if>
 		<if test="finalMemo != null and finalMemo != ''">
 		     , FINAL_MEMO = #{finalMemo}

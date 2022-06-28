@@ -59,16 +59,6 @@ public class AdminController {
 		return "admin/levList";
 	}
 
-	//
-	@RequestMapping(value = "payList", method = RequestMethod.GET)
-	public String payListCtrl(Model model) {
-		System.out.println("권한관리~!!");
-
-		return "pay/payList";
-	}
-
-
-
 	/*======================================== 수정페이지 ======================================== */
 
 	/*
