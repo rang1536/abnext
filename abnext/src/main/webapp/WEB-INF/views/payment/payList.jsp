@@ -64,7 +64,7 @@
 									<div class="form-group">
 										<label>기간</label>
 										<div class="input-group date" id="searchStrtDt" data-target-input="nearest">
-											<input type="text" class="form-control datetimepicker-input" data-target="#searchStrtDt" data-toggle="datetimepicker" placeholder="시작일자" id="strtDt">
+											<input type="text" class="form-control datetimepicker-input" data-target="#searchStrtDt" data-toggle="datetimepicker" placeholder="시작일자" id="strtDt" value="${strt}">
 											<div class="input-group-append" data-target="#searchStrtDt" data-toggle="datetimepicker">
 												<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 											</div>
@@ -75,7 +75,7 @@
 									<div class="form-group">
 										<label>&nbsp;</label>
 										<div class="input-group date" id="searchFnshDt" data-target-input="nearest">
-											<input type="text" class="form-control datetimepicker-input" data-target="#searchFnshDt" data-toggle="datetimepicker" placeholder="종료일자" id="fnshDt">
+											<input type="text" class="form-control datetimepicker-input" data-target="#searchFnshDt" data-toggle="datetimepicker" placeholder="종료일자" id="fnshDt" value="${fnsh}">
 											<div class="input-group-append" data-target="#searchFnshDt" data-toggle="datetimepicker">
 												<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 											</div>
@@ -85,13 +85,13 @@
 								<div class="col-sm-5">
 									<div class="form-group">
 										<label>신청기관</label>
-										<input type="text" class="form-control" placeholder="신청기관" id="searchHospNm">
+										<input type="text" class="form-control" placeholder="신청기관" id="searchStr">
 									</div>
 								</div>
 								<div class="col-sm-1">
 									<div class="form-group">
 										<label>&nbsp;</label>
-										<button type="button" class="btn btn-default btn-flat btn-block" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
+										<button type="button" class="searchBtn btn btn-default btn-flat btn-block" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
 									</div>
 								</div>
 							</div>
@@ -203,6 +203,9 @@
 <script src="resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="resources/dist/js/demo.js"></script>
+<!-- Customizing Js -->
+<script src="resources/js/common.js"></script>
+
 <!-- Page specific script -->
 <script>
 	//Date picker
@@ -226,7 +229,54 @@
 //			"autoWidth": false,
 //			"responsive": true,
 		});
+
+		$('.searchBtn').on('click',function(){
+			var data = {
+					searchStrtDt : $('#strtDt').val(),
+					searchFnshDt : $('#fnshDt').val(),
+					searchStr : $('#searchStr').val()
+			}
+			console.log(data);
+			$.ajax({
+				url : "selectPaymentList",
+				data : data,
+				type : "POST",
+				dataType : "JSON",
+				success : function(data){
+					console.log(data);
+					var tbodyHtml = '';
+					for(var i=0; i<data.length; i++){
+						tbodyHtml += '<tr>';
+						tbodyHtml += '	<td>'+(i+1)+'</td>';
+						tbodyHtml += '	<td>'+$.gfn_nvl(data[i].hospNm)+'</td>';
+						tbodyHtml += '	<td>'+$.gfn_nvl(data[i].rqstDt)+'</td>';
+						tbodyHtml += '	<td>'+$.gfn_nvl(data[i].finishDt)+'</td>';
+						tbodyHtml += '	<td>'+$.gfn_nvl(data[i].diagCdNm)+'</td>';
+						tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(data[i].price)+'</td>';
+						if(data[i].payStat == '02'){
+							tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(data[i].price)+'</td>';
+							tbodyHtml += '	<td>납부완료</td>';
+						}else {
+							tbodyHtml += '	<td class="txtr">'+0+'</td>';
+							tbodyHtml += '	<td>';
+							tbodyHtml += '		<div class="clearfix">';
+							tbodyHtml += '			<div class="icheck-primary d-inline">';
+							tbodyHtml += '				<input type="checkbox" id="checkboxDanger_'+(i+1)+'">';
+							tbodyHtml += '				<label for="checkboxDanger_'+(i+1)+'"></label>';
+							tbodyHtml += '			</div>';
+							tbodyHtml += '		</div>';
+							tbodyHtml += '	</td>';
+							tbodyHtml += '</tr>';
+						}
+					}
+
+					$('#listBody').empty();
+					$('#listBody').html(tbodyHtml);
+				}
+			});
+		});
 	});
+
 
 </script>
 </body>

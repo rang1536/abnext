@@ -1,5 +1,8 @@
 package kr.or.abnext.payment;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,10 +36,21 @@ public class PaymentController {
 	public String requestInspect(Locale locale, Model model, String page) {
 		logger.info("payList Method is start {}.", locale);
 
-		String [] arr = {"1","2","3","4","5"};
-		List<TbRcept> list = insServ.recptList(arr);
-		model.addAttribute("rceptList", list);
 
+		Calendar cal = Calendar.getInstance();
+		System.out.println();
+
+		TbRcept bean = new TbRcept();
+		Date now = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy.MM", Locale.KOREA);
+		String strt = df.format(now)+".01";
+		String fnsh = df.format(now)+"."+cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		bean.setSearchStrtDt(strt);
+		bean.setSearchFnshDt(fnsh);
+		List<TbRcept> list = payServ.selectPaymentList(bean);
+		model.addAttribute("rceptList", list);
+		model.addAttribute("strt", strt);
+		model.addAttribute("fnsh", fnsh);
 		return "payment/payList";
 	}
 

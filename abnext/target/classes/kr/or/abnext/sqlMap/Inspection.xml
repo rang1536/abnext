@@ -227,4 +227,17 @@
 		</if>
 		 WHERE INSP_NO = #{inspNo}
 	</update>
+
+	<select id="selectPaymentList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
+		SELECT A.*
+		  FROM TB_RCEPT A
+		 WHERE 1=1
+  		<if test ="searchStrtDt != null and searchStrtDt != ''">
+  		   AND RQST_DT BETWEEN #{searchStrtDt} AND #{searchFnshDt}
+  		</if>
+  		<if test ="searchStr != null and searchStr != ''">
+		   AND (HOSP_NO LIKE CONCAT(CONCAT('%',#{searchStr}),'%') OR HOSP_NM LIKE CONCAT(CONCAT('%',#{searchStr}),'%'))
+  		</if>
+	</select>
+
 </mapper>

@@ -70,7 +70,7 @@
 									<c:forEach var="item" items="${rceptList }" varStatus="status">
 										<tr>
 											<td>${item.rqstNo }</td>
-											<td>${item.rqstDt }</td>
+											<td>${item.rqstDt }<input type="hidden" id="rqstNo_${status.index+1 }" value="${item.rqstNo }"/></td>
 											<td>${item.procStatNm }</td>
 											<td>${item.animNm }</td>
 											<td>${item.hospNm }</td>
@@ -141,12 +141,13 @@
 		});
 	});
 
-	$("#listBody").find("tr").on("click", function(){
-		var rqstNo = $(this).find("td:eq(0)").text();
+	$("#listBody").find("tr td:not(:first-child)").on("click", function(){
+		var rqstNo = $(this).parent().find("[id^=rqstNo]").val();
 		$("[name=rqstNo]").val(rqstNo);
 		$("#viewFrm").attr("action","viewInspect");
 		$("#viewFrm").submit();
 	})
+
 </script>
 </body>
 </html>
