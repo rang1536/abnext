@@ -58,7 +58,7 @@
 						<div class="card-header">
 							<div class="row">
 								<div class="col-sm-2" style="padding-top:30px;min-width:150px;">
-									<h5>신청목록  </h5>
+									<h5>* 신청목록  </h5>
 								</div>
 								<div class="col-sm-2">
 									<div class="form-group">
@@ -131,7 +131,12 @@
 											</td>
 											<td>
 												<c:if test="${item.payStat == '02' }">
-													납부완료
+													<div class="clearfix">
+														<div class="icheck-primary d-inline">
+															<input type="checkbox" disabled id="checkboxDanger${status.index+1 }">
+															<label for="checkboxDanger${status.index+1 }"></label>
+														</div>
+													</div>
 												</c:if>
 												<c:if test="${item.payStat == '01' }">
 													<div class="clearfix">
@@ -150,6 +155,42 @@
 						<!-- /.card-body -->
 					</div>
 					<!-- /.card -->
+
+					<div class="card">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-sm-2" style="padding-top:30px;min-width:150px;">
+									<h5>* 정산 내역  </h5>
+								</div>
+							</div>
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body table-responsive">
+							<table id="example3" class="table table-bordered text-nowrap">
+								<thead>
+									<tr>
+										<th>신청건수</th>
+										<th>검사비용 합계(원)</th>
+										<th>입금액합계(원)</th>
+										<th>정산액</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="item" items="${rceptList }" varStatus="status">
+										<tr>
+											<td>${status.index+1 }</td>
+											<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
+											<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
+											<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+
 				</div>
 				<!-- /.row -->
 			</div>
@@ -224,57 +265,89 @@
 			"paging": true,
 			"lengthChange": false,
 			"ordering": true,
-			"filter" : false,
-//			"info": true,
-//			"autoWidth": false,
-//			"responsive": true,
+			"filter" : false
+		});
+
+		$('#example3').DataTable({
+			"paging": false,
+			"lengthChange": false,
+			"ordering": false,
+			"filter" : false
 		});
 
 		$('.searchBtn').on('click',function(){
-			var data = {
+			var sdata = {
 					searchStrtDt : $('#strtDt').val(),
 					searchFnshDt : $('#fnshDt').val(),
 					searchStr : $('#searchStr').val()
 			}
-			console.log(data);
+
 			$.ajax({
 				url : "selectPaymentList",
-				data : data,
+				data : sdata,
 				type : "POST",
 				dataType : "JSON",
 				success : function(data){
-					console.log(data);
-					var tbodyHtml = '';
-					for(var i=0; i<data.length; i++){
-						tbodyHtml += '<tr>';
-						tbodyHtml += '	<td>'+(i+1)+'</td>';
-						tbodyHtml += '	<td>'+$.gfn_nvl(data[i].hospNm)+'</td>';
-						tbodyHtml += '	<td>'+$.gfn_nvl(data[i].rqstDt)+'</td>';
-						tbodyHtml += '	<td>'+$.gfn_nvl(data[i].finishDt)+'</td>';
-						tbodyHtml += '	<td>'+$.gfn_nvl(data[i].diagCdNm)+'</td>';
-						tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(data[i].price)+'</td>';
-						if(data[i].payStat == '02'){
-							tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(data[i].price)+'</td>';
-							tbodyHtml += '	<td>납부완료</td>';
-						}else {
-							tbodyHtml += '	<td class="txtr">'+0+'</td>';
-							tbodyHtml += '	<td>';
-							tbodyHtml += '		<div class="clearfix">';
-							tbodyHtml += '			<div class="icheck-primary d-inline">';
-							tbodyHtml += '				<input type="checkbox" id="checkboxDanger_'+(i+1)+'">';
-							tbodyHtml += '				<label for="checkboxDanger_'+(i+1)+'"></label>';
-							tbodyHtml += '			</div>';
-							tbodyHtml += '		</div>';
-							tbodyHtml += '	</td>';
-							tbodyHtml += '</tr>';
-						}
-					}
+					var table = $("#example2").DataTable();
+					table.destroy();
 
-					$('#listBody').empty();
-					$('#listBody').html(tbodyHtml);
+					$("#example2").DataTable({
+						"data" : data,
+						"paging": true,
+						"lengthChange": false,
+						"ordering": true,
+						"filter" : false,
+						'columnDefs': [{
+					        'targets': 0,
+					        'className': 'dt-body-center',
+					        'render': function (data, type, full, meta){
+					            return (meta.row+1);
+					        }
+					    }],
+					    "columns" : [
+					        {"data": "hospNo"},
+							{"data": "hospNm"},
+					        {"data": "rqstDt"},
+					        {"data": "finishDt"},
+					        {"data": "diagCdNm"},
+					        {"data": "price",
+								'className': 'txtr',
+								"render": function(data){
+									return $.gfn_setComma(data);
+								}
+							},
+							{"data": "payedPrice",
+								'className': 'txtr',
+								"render": function(data){
+									return $.gfn_setComma(data);
+								}
+							},
+							{"data": "payStat",
+								"render": function(data, type, row, meta){
+									if(data === '01'){
+				                        data = '<div class="clearfix">';
+				                        data += '			<div class="icheck-primary d-inline">';
+				                        data += '				<input type="checkbox" id="checkboxDanger_'+(meta.row+1)+'">';
+				                        data += '				<label for="checkboxDanger_'+(meta.row+1)+'"></label>';
+				                        data += '			</div>';
+				                        data += '		</div>';
+				                    }else {
+				                        data = '<div class="clearfix">';
+				                        data += '			<div class="icheck-primary d-inline">';
+				                        data += '				<input type="checkbox" disabled checked id="checkboxDanger_'+(meta.row+1)+'">';
+				                        data += '				<label for="checkboxDanger_'+(meta.row+1)+'"></label>';
+				                        data += '			</div>';
+				                        data += '		</div>';
+				                    }
+					                    return data;
+				                 }
+							}
+						]
+					});
 				}
 			});
 		});
+
 	});
 
 

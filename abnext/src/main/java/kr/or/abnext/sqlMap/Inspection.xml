@@ -230,6 +230,7 @@
 
 	<select id="selectPaymentList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
 		SELECT A.*
+		     , CASE WHEN PAY_STAT = '01' THEN 0 ELSE PRICE END PAYED_PRICE
 		  FROM TB_RCEPT A
 		 WHERE 1=1
   		<if test ="searchStrtDt != null and searchStrtDt != ''">

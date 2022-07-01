@@ -22,8 +22,8 @@ public class PaymentRestController {
 
 	@RequestMapping(value = "selectPaymentList", method = RequestMethod.POST)
 	public List<TbRcept> selectDoctorList(TbRcept bean) {
-		List<TbRcept> list = paymentServ.selectPaymentList(bean);
-		return list;
+		List<TbRcept> data = paymentServ.selectPaymentList(bean);
+		return data;
 	}
 
 
