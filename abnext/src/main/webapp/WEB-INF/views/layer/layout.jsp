@@ -200,7 +200,7 @@
 							<p>My-Farm</p>
 						</a>
 					</li>
-					<li class="nav-item menu-is-opening menu-open">
+					<li class="nav-item menu-is-opening">
 						<a href="introInspect.do" class="nav-link leftMenu">
 							<i class="nav-icon fas fa-copy"></i>
 							<p>진단검사
@@ -242,188 +242,178 @@
 						</ul>
 					</li>
 					<li class="nav-item">
-			            <a href="#" class="nav-link">
-			              <i class="nav-icon fas fa-book"></i>
-			              <p>
-			              	게시판
-			              	<i class="right fas fa-angle-left"></i>
-			              	<span class="badge badge-info right">1</span>
-			              </p>
-			            </a>
-			            <ul class="nav nav-treeview">
-			              <li class="nav-item">
-			                <a href="boardList" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>공지사항</p>
-			                </a>
-			              </li>
-			              <!-- <li class="nav-item">
-			                <a href="qnaList" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>QnA</p>
-			                </a>
-			              </li> -->
+									<a href="#" class="nav-link leftMenu">
+										<i class="nav-icon fas fa-book"></i>
+										<p>
+											게시판
+											<i class="right fas fa-angle-left"></i>
+											<span class="badge badge-info right">1</span>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="boardList" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>공지사항</p>
+											</a>
+										</li>
+										<!-- <li class="nav-item">
+											<a href="qnaList" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>QnA</p>
+											</a>
+										</li> -->
 
-			            </ul>
-			        </li>
+									</ul>
+							</li>
 
-			        <!-- 수납관리 -->
-			        <li class="nav-item">
-			            <a href="#" class="nav-link">
-			              <i class="nav-icon fas fa-box"></i>
-			              <p>
-			              	수납관리
-			              	<i class="right fas fa-angle-left"></i>
-			              	<span class="badge badge-info right">2</span>
-			              </p>
-			            </a>
-			            <ul class="nav nav-treeview">
-			              <li class="nav-item">
-			                <a href="payList" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>목록조회</p>
-			                </a>
-			              </li>
-			            </ul>
-			        </li>
+							<!-- 수납관리 -->
+							<li class="nav-item">
+									<a href="payList" class="nav-link leftMenu">
+										<i class="nav-icon fas fa-box"></i>
+										<p>
+											수납관리
+										</p>
+									</a>
+							</li>
 
-			        <!-- 상품
-			        <li class="nav-item">
-			            <a href="#" class="nav-link">
-			              <i class="nav-icon fas fa-box"></i>
-			              <p>
-			              	상품구매
-			              	<i class="right fas fa-angle-left"></i>
-			              	<span class="badge badge-info right">2</span>
-			              </p>
-			            </a>
-			            <ul class="nav nav-treeview">
-			              <li class="nav-item">
-			                <a href="productList" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>상품판매</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="productAdmin" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>판매관리</p>
-			                </a>
-			              </li>
+							<!-- 상품
+							<li class="nav-item">
+									<a href="#" class="nav-link">
+										<i class="nav-icon fas fa-box"></i>
+										<p>
+											상품구매
+											<i class="right fas fa-angle-left"></i>
+											<span class="badge badge-info right">2</span>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="productList" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>상품판매</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="productAdmin" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>판매관리</p>
+											</a>
+										</li>
 
-			            </ul>
-			        </li> -->
+									</ul>
+							</li> -->
 
-			        <!-- 통계 -->
-			        <li class="nav-item">
-			            <a href="#" class="nav-link">
-			              <i class="nav-icon fas fa-chart-pie"></i>
-			              <p>
-			              	통계
-			              	<i class="right fas fa-angle-left"></i>
-			              	<span class="badge badge-info right">9</span>
-			              </p>
-			            </a>
-			            <ul class="nav nav-treeview">
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>기본 통계</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>가검물 통계</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>진단명별 통계</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>월별 진단명별 통계</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>혈청검사 통계</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>지역별 혈청검사 통계</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>년도별 통계</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>일반보고서용 통계</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="#" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>국가보고서용 통계</p>
-			                </a>
-			              </li>
-			            </ul>
-			        </li>
+							<!-- 통계 -->
+							<li class="nav-item">
+									<a href="#" class="nav-link">
+										<i class="nav-icon fas fa-chart-pie"></i>
+										<p>
+											통계
+											<i class="right fas fa-angle-left"></i>
+											<span class="badge badge-info right">9</span>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="#" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>기본 통계</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>가검물 통계</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>진단명별 통계</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>월별 진단명별 통계</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>혈청검사 통계</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>지역별 혈청검사 통계</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>년도별 통계</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>일반보고서용 통계</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>국가보고서용 통계</p>
+											</a>
+										</li>
+									</ul>
+							</li>
 
 					<li class="nav-item">
-			            <a href="#" class="nav-link">
-			              <i class="nav-icon fas fa-th"></i>
-			              <p>
-			              	설정및관리
-			              	<i class="right fas fa-angle-left"></i>
-			              	<span class="badge badge-info right">4</span>
-			              </p>
-			            </a>
-			            <ul class="nav nav-treeview">
-			              <li class="nav-item">
-			                <a href="userList" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>회원관리</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="hospList" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>기관(병원)관리</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="farmList" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>농장관리</p>
-			                </a>
-			              </li>
-			              <li class="nav-item">
-			                <a href="codeList" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>코드관리</p>
-			                </a>
-			              </li>
-			              <!-- <li class="nav-item">
-			                <a href="levList" class="nav-link">
-			                  <i class="far fa-circle nav-icon"></i>
-			                  <p>권한관리</p>
-			                </a>
-			              </li> -->
-			            </ul>
-			        </li>
+									<a href="#" class="nav-link">
+										<i class="nav-icon fas fa-th"></i>
+										<p>
+											설정및관리
+											<i class="right fas fa-angle-left"></i>
+											<span class="badge badge-info right">4</span>
+										</p>
+									</a>
+									<ul class="nav nav-treeview">
+										<li class="nav-item">
+											<a href="userList" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>회원관리</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="hospList" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>기관(병원)관리</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="farmList" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>농장관리</p>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="codeList" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>코드관리</p>
+											</a>
+										</li>
+										<!-- <li class="nav-item">
+											<a href="levList" class="nav-link">
+												<i class="far fa-circle nav-icon"></i>
+												<p>권한관리</p>
+											</a>
+										</li> -->
+									</ul>
+							</li>
 
 
 				</ul>
@@ -441,16 +431,21 @@
 			$("#leftMenuSub").removeClass("active");
 			if(path.indexOf('myFarm') != -1){
 				$(".leftMenu").eq(0).addClass("active");
-			}else if(path.indexOf('Inspect') > -1){
+			}else if(path.indexOf('introInspect') > -1){
 				$(".leftMenu").eq(1).addClass("active");
-				//$(".leftMenu").eq(1).closest(".nav-item").addClass("menu-is-opening menu-open");
-				if(path.indexOf('request') > -1 || path.indexOf('register') > -1){
-					$(".leftMenuSub").eq(0).addClass("active");
-				}else if(path.indexOf('setting') > -1){
-					$(".leftMenuSub").eq(1).addClass("active");
-				}else if(path.indexOf('result') > -1){
-					$(".leftMenuSub").eq(2).addClass("active");
-				}
+			}else if(path.indexOf('request') > -1 || path.indexOf('register') > -1 || path.indexOf('modifyInspect') > -1){
+				$(".leftMenuSub").eq(0).addClass("active");
+			}else if(path.indexOf('setting') > -1){
+				$(".leftMenuSub").eq(1).addClass("active");
+			}else if(path.indexOf('result') > -1){
+				$(".leftMenuSub").eq(2).addClass("active");
+			}else if(path.indexOf('final') > -1){
+				$(".leftMenuSub").eq(3).addClass("active");
+			}else if(path.indexOf('all') > -1 || path.indexOf('view') > -1){
+				$(".leftMenuSub").eq(4).addClass("active");
+			}else if(path.indexOf('payList') > -1){
+				$(".leftMenu").eq(3).addClass("menu-is-opening menu-open");
+				$(".leftMenu").eq(3).addClass("active");
 			}
 
 			//userInfoIntro
@@ -461,7 +456,7 @@
 				html += userInfo.userNm+' 님';
 				if((userInfo.hospNm != null && userInfo.hospNm != '') || (userInfo.farmNm != null && userInfo.farmNm != '')){
 					html += '<b style="color:#A6A6A6;font-size:13px;">&nbsp;&nbsp;';
-					html += '  ['
+					html += ' ['
 					html += +userInfo.hospNm+userInfo.farmNm
 					html += ' ]';
 					html += '</b>'
