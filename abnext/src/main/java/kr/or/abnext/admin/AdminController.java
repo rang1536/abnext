@@ -106,13 +106,14 @@ public class AdminController {
 
 		tbUser = adminServ.getUserInfoServ(tbUser);
 
-		System.out.println(">>>> tbUser : "+tbUser);
+		//System.out.println(">>>> tbUser : "+tbUser);
 		TbHospital tbHospital = new TbHospital();
 		TbFarm tbFarm = new TbFarm();
 
 		if(tbUser.getUserLev() != null) {
 			if(tbUser.getUserLev().equals("2") || tbUser.getUserLev().equals("3") || tbUser.getUserLev().equals("5")) { //병원정보
-				if(tbUser.getHospNo() != null) {
+				//System.out.println(">>>> tbUser : "+tbUser.getHospNo());
+				if(tbUser.getHospNo() != null && !tbUser.getHospNo().equals("")) {
 					tbHospital.setHospNo(Integer.parseInt(tbUser.getHospNo()));
 
 					tbHospital = adminServ.getHospListServ(tbHospital, "");
@@ -120,7 +121,7 @@ public class AdminController {
 					model.addAttribute("hosp", tbHospital); //기관병원 정보
 				}
 			}else if(tbUser.getUserLev().equals("4") || tbUser.getUserLev().equals("5")) {
-				if(tbUser.getFarmNo() != null) {
+				if(tbUser.getFarmNo() != null && !tbUser.getFarmNo().equals("")) {
 					tbFarm.setFarmNo(Integer.parseInt(tbUser.getFarmNo()));
 
 					tbFarm = adminServ.getFarmListServ(tbFarm, "");

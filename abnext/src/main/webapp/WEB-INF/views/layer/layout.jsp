@@ -316,55 +316,55 @@
 									</a>
 									<ul class="nav nav-treeview">
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="basicChart" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
 												<p>기본 통계</p>
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="basicChart2" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
 												<p>가검물 통계</p>
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="basicChart3" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
 												<p>진단명별 통계</p>
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="basicChart4" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
 												<p>월별 진단명별 통계</p>
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="basicChart5" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
 												<p>혈청검사 통계</p>
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="basicChart6" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
 												<p>지역별 혈청검사 통계</p>
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="basicChart7" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
 												<p>년도별 통계</p>
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="basicChart8" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
 												<p>일반보고서용 통계</p>
 											</a>
 										</li>
 										<li class="nav-item">
-											<a href="#" class="nav-link">
+											<a href="basicChart9" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
 												<p>국가보고서용 통계</p>
 											</a>

@@ -80,9 +80,10 @@
 					                    <div class="input-group-prepend">
 					                      <span class="input-group-text"><i class="fas fa-user"></i></span>
 					                    </div>
-					                    <input type="text" class="form-control" id="userNm" name="userNm" value="${board.userNm }" readonly/>
+					                    <input type="text" class="form-control" id="userNm" value="${board.userNm }" readonly/>
 					                    <input type="hidden" name="userNo" id="userNo" value="${board.userNo }"/>
 					                    <input type="hidden" name="userId" id="userId" value=""/>
+					                    <input type="hidden" name="boardNo" id="boardNo" value="${board.boardNo}"/>
 					                  </div>
 					                  <!-- /.input group -->
 					                </div>
@@ -112,7 +113,7 @@
 					                    <div class="input-group-prepend">
 					                      <span class="input-group-text"><i class="fas fa-clipboard"></i></span>
 					                    </div>
-					                    <input type="text" class="form-control hospInput" id="subject" name="subject" value="${board.boardSubject }"/>
+					                    <input type="text" class="form-control hospInput" id="subject" name="subject" value="${board.subject }"/>
 					                    <input type="hidden" name="boardNo" id="boardNo" value="${board.boardNo }"/>
 					                  </div>
 					                  <!-- /.input group -->
@@ -126,7 +127,7 @@
 									<div class="form-group">
 										<label>본문 *</label>
 										<textarea id="content" name="content">
-
+											${board.content }
 										</textarea>
 									</div>
 								</div> <!-- /.col-->
@@ -138,7 +139,7 @@
 					                  <label>태그 *</label>
 					                  <div class="input-group">
 					                    <div class="input-group-prepend">
-					                      <span class="input-group-text"><i class="fas fa-clipboard"></i></span>
+					                      <span class="input-group-text"><i class="fas fa-star"></i></span>
 					                    </div>
 					                    <input type="text" class="form-control hospInput" id="tag" name="tag" value="${board.tag }" placeholder="#애완조류  #검사의뢰"/>
 					                  </div>
@@ -153,7 +154,7 @@
 
 		              <div class="card-footer">
 		                <button type="button" onclick="fn_boardList();" class="btn btn-sm btn-warning btn-flat" style="float:left;">목록가기</button>
-					  	<button type="button" onclick="fn_addBoard();" class="btn btn-sm btn-primary btn-flat" style="float:right;">글등록</button>
+					  	<button type="button" onclick="fn_modifyBoard();" class="btn btn-sm btn-primary btn-flat" style="float:right;">수정하기</button>
 					  </div>
 		            </div>
 		            <!-- /.card -->
@@ -245,8 +246,8 @@
 		location.href = 'boardList';
 	}
 
-	/*글 저장*/
-	function fn_addBoard(){
+
+	function fn_modifyBoard(){
 		var subject = $('#subject').val();
 		var content = $('#content').val();
 
@@ -265,19 +266,23 @@
 				'content' : content,
 				'userNo'  : $('#userNo').val(),
 				'userId'  : $('#userId').val(),
-				'tag'	  : $('#tag').val()
+				'tag'	  : $('#tag').val(),
+				'boardNo' : parseInt($('#boardNo').val())
 		}
+
+		console.log(formData);
+
 		$.ajax({
-			url : 'addBoardCtrl',
+			url : 'modifyBoardCtrl',
 			type : 'post',
 			dataType : 'json',
 			data : formData,
 			success : function(data){
 				if(data.result == 'succ'){
-					alert('등록되었습니다');
+					alert('수정되었습니다');
 					location.href = 'boardList';
 				}else{
-					alert('등록에 실패하였습니다');
+					alert('수정에 실패하였습니다');
 					return;
 				}
 			}

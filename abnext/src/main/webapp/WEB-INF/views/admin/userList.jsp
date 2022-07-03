@@ -58,7 +58,7 @@
 		</section>
 
 		<!-- Main content -->
-		 <section class="content">
+		 <section class="content" style="font-size:13px;">
  			<div class="container-fluid">
  				<div class="invoice p-3 mb-3">
 					<!-- Table row -->
@@ -104,7 +104,12 @@
 														</c:if>
 													</td>
 													<td onclick="fn_modifyUser('${item.userNo}');">${item.userId }</td>
-													<td onclick="fn_modifyUser('${item.userNo}');">${item.userNm }</td>
+													<td onclick="fn_modifyUser('${item.userNo}');">
+														<b>${item.userNm }</b>
+														<c:if test="${item.userStat eq 'F002-01'}">(신청)</c:if>
+														<c:if test="${item.userStat eq 'F002-02'}">(승인)</c:if>
+														<c:if test="${item.userStat eq 'F002-03'}">(정지)</c:if>
+													</td>
 													<td>${item.userTel }</td>
 													<td>${item.userHp}</td>
 													<td>${item.sidoNm}</td>

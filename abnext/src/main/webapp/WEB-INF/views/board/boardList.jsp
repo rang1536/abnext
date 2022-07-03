@@ -72,21 +72,33 @@
 										<thead>
 											<tr>
 												<th><input type="checkbox" id="allCheck"/></th>
-												<th>순번</th>
 												<th>제목</th>
 												<th>작성일</th>
 												<th>작성자</th>
 											</tr>
 										</thead>
 										<tbody>
+											<c:forEach var="item" items="${boardList }" varStatus="status">
+												<tr>
+													<td>
+														<input type="checkbox" name="boardNo" value="${item.boardNo }"/>
+													</td>
+													<td onclick="fn_modifyBoard('${item.boardNo }')">
+														${item.subject }
+														<!-- 댓글이나 파일수 카운팅 결과 필요하면 여기에 조건문으로 추가 -->
+													</td>
+													<td>${item.uptDt }</td>
+													<td>${item.userNm }</td>
 
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div> <!-- /.card-body -->
 
 								<!-- 수정페이지 키값 세팅 폼-->
-								<form id="modifyUserForm">
-									<input type="hidden" id="modifyUserNo" name="modifyUserNo" />
+								<form id="modifyBoardForm">
+									<input type="hidden" id="modifyBoardNo" name="modifyBoardNo" />
 								</form>
 
 								<div class="card-footer">
@@ -171,9 +183,29 @@
     });
 
 	$(document).on('click', '#addBoardBtn', function(){
-		alert('글쓰기');
+		var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+
+		if(userInfo == null || userInfo == ''){
+			if(confirm('로그인 후 사용가능합니다. \n로그인페이지로 이동하시겠습니까?')){
+				location.href = 'loginPage';
+			}
+		}else{
+			if(userInfo.userLev != '5'){
+				alert('관리자만 사용할 수 있습니다.');
+				return;
+			}else{
+				location.href = 'addBoardPage';
+			}
+		}
+
 	})
 
+	function fn_modifyBoard(boardNo){
+		$('#modifyBoardNo').val(boardNo);
+
+		$('#modifyBoardForm').prop('action', 'modifyBoard');
+		$('#modifyBoardForm').submit();
+	}
 
 </script>
 </html>

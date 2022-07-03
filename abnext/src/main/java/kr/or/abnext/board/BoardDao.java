@@ -18,4 +18,18 @@ public class BoardDao {
 		return sql.selectList("board.getBoardList");
 	}
 
+	/*공지목록조회*/
+	public TbBoard getBoardList(TbBoard tbBoard){
+		return sql.selectOne("board.getBoardList", tbBoard);
+	}
+
+	/*공지등록*/
+	public int addBoard(TbBoard tbBoard) {
+		return sql.insert("board.addBoard", tbBoard);
+	}
+
+	/*공지수정*/
+	public int modifyBoard(TbBoard tbBoard) {
+		return sql.update("board.modifyBoard", tbBoard);
+	}
 }

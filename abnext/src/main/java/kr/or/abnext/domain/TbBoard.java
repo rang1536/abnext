@@ -16,11 +16,15 @@ public class TbBoard {
 	private String commentCnt;
 	private String tag;
 	private String linkUrl;
-	private int userNo;
+	private String userNo;
 	private String insDt;
-	private int insId;
+	private String insId;
 	private String uptDt;
-	private int uptId;
+	private String uptId;
+
+	//추가
+	private String userNm;
+	private String userId;
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -75,10 +79,10 @@ public class TbBoard {
 	public void setLinkUrl(String linkUrl) {
 		this.linkUrl = linkUrl;
 	}
-	public int getUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 	public String getInsDt() {
@@ -87,10 +91,10 @@ public class TbBoard {
 	public void setInsDt(String insDt) {
 		this.insDt = insDt;
 	}
-	public int getInsId() {
+	public String getInsId() {
 		return insId;
 	}
-	public void setInsId(int insId) {
+	public void setInsId(String insId) {
 		this.insId = insId;
 	}
 	public String getUptDt() {
@@ -99,19 +103,31 @@ public class TbBoard {
 	public void setUptDt(String uptDt) {
 		this.uptDt = uptDt;
 	}
-	public int getUptId() {
+	public String getUptId() {
 		return uptId;
 	}
-	public void setUptId(int uptId) {
+	public void setUptId(String uptId) {
 		this.uptId = uptId;
+	}
+	public String getUserNm() {
+		return userNm;
+	}
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	@Override
 	public String toString() {
 		return "TbBoard [boardNo=" + boardNo + ", boardCd=" + boardCd + ", boardPass=" + boardPass + ", subject="
 				+ subject + ", content=" + content + ", fileCnt=" + fileCnt + ", commentCnt=" + commentCnt + ", tag="
 				+ tag + ", linkUrl=" + linkUrl + ", userNo=" + userNo + ", insDt=" + insDt + ", insId=" + insId
-				+ ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
+				+ ", uptDt=" + uptDt + ", uptId=" + uptId + ", userNm=" + userNm + ", userId=" + userId + "]";
 	}
-	
-	
+
+
 }
