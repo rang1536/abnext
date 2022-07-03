@@ -4,7 +4,9 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shotcut icon" href="resources/files/aviicon.png" />
   <title>avinext | (주)아비넥스트</title>
+
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -57,7 +59,7 @@
 		</section>
 
 		<!-- Main content -->
-		 <section class="content">
+		 <section class="content" style="font-size:13px;">
  			<div class="container-fluid">
  				<div class="invoice p-3 mb-3">
 					<!-- Table row -->
@@ -88,8 +90,8 @@
 								</form>
 
 								<div class="card-footer">
-									<button type="button" id="delUserBtn" class="btn btn-sm btn-danger">삭제</button>
-									<button type="button" id="addUserBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">회원등록</button>
+									<button type="button" id="delBoardrBtn" class="btn btn-sm btn-danger">삭제</button>
+									<button type="button" id="addBoardBtn" class="btn btn-sm btn-primary btn-flat" style="float:right;">글쓰기</button>
 								</div>
 							</div> <!-- /.card -->
 						</div> <!-- /.col-12 -->
@@ -168,7 +170,9 @@
 		});
     });
 
-
+	$(document).on('click', '#addBoardBtn', function(){
+		alert('글쓰기');
+	})
 
 
 </script>

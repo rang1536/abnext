@@ -18,4 +18,11 @@ public class BoardController {
 
 		return "board/boardList";
 	}
+
+	@RequestMapping(value = "addBoardPage", method = RequestMethod.GET)
+	public String addBoardPagetCtrl(Model model) {
+		System.out.println("공지등록 화면가기~!!");
+
+		return "board/add_board";
+	}
 }

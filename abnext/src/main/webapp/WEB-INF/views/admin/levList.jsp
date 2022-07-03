@@ -4,6 +4,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shotcut icon" href="resources/files/aviicon.png" />
   <title>avinext | (주)아비넥스트</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -16,17 +17,17 @@
   <link rel="stylesheet" href="resources/plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
-  
+
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
-  
+
   <style>
     th,td {text-align:center;}
   </style>
-  
-  
+
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -57,9 +58,9 @@
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
 	</div> <!-- End content-wrapper -->
-	
+
 	<c:import url="../layer/layout_footer.jsp"></c:import>
-	
+
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
 	<!-- Control sidebar content goes here -->
@@ -98,12 +99,12 @@
 	document.addEventListener('DOMContentLoaded', function () {
 	  window.stepper = new Stepper(document.querySelector('.bs-stepper'))
 	})
-	
+
 	$(function () {
       $('.select2').select2();
       bsCustomFileInput.init();
     });
-	
-	
+
+
 </script>
 </html>

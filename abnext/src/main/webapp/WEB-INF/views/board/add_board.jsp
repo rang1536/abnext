@@ -22,12 +22,12 @@
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
+  <!-- summernote -->
+  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.min.css">
 
+  <!-- SimpleMDE -->
+  <link rel="stylesheet" href="../../plugins/simplemde/simplemde.min.css">
   <style>
     th,td {text-align:center;}
   </style>
@@ -387,19 +387,12 @@
 <script src="resources/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
-<!-- DataTables	& Plugins -->
-<script src="resources/plugins/datatables/jquery.dataTables.js"></script>
-<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="resources/plugins/jszip/jszip.min.js"></script>
-<script src="resources/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="resources/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- Summernote -->
+<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
 
 <script>
 
@@ -407,80 +400,11 @@
 		$('.select2').select2();
 		bsCustomFileInput.init();
 
-		$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-			"responsive": true,
-		});
+		$('#summernote').summernote()
     });
 
 
-	/*====================================
-	* 기관병원등 수정
-	* 팝업 : fn_modifyHospital()
-	====================================*/
-	function fn_modifyHospital(){
-		var hospNm = $('#hospNm').val();
-		var hospHp = $('#hospHp').val();
-		var hospAdr = $('#hospAdr').val();
-		var payGb = $('#payGb').val();
-		var payManagerNm = $('#payManagerNm').val();
-		var payManagerHp = $('#payManagerHp').val();
 
-		if(hospNm == null || hospNm == ''){
-			alert('기관(병원)명은 필수입력입니다.');
-			return;
-		}
-
-		if(hospHp == null || hospHp == ''){
-			alert('핸드폰번호는 필수입력입니다.');
-			return;
-		}
-
-		if(hospAdr == null || hospAdr == ''){
-			alert('주소는 필수입력입니다.');
-			return;
-		}
-
-		if(payGb == '월간정산'){
-			if(payManagerNm == null || payManagerNm == ''){
-				alert('정산담당자를 입력하세요');
-				return;
-			}
-
-			if(payManagerHp == null || payManagerHp == ''){
-				alert('정산담당자 연락처를 입력하세요');
-				return;
-			}
-		}
-
-
-		//$('#hospInfoForm').serialize();
-		var params = new FormData($('#hospInfoForm')[0]);
-
-		toastr.info('등록중입니다');
-
-		$.ajax({
-			url : 'modifyHospCtrl',
-			data : params,
-			dataType : 'json',
-			type : 'post',
-			processData : false,
-			contentType : false,
-			success : function(data){
-				if(data.result == 'succ'){
-					alert('기관정보변경이 완료되었습니다.');
-					location.href = 'hospList';
-				}else{
-					toastr.error('기관(병원) 정보변경에 실패하였습니다.');
-				}
-			}
-		})
-
-	}
 
 
 
