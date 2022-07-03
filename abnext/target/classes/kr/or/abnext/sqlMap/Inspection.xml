@@ -241,4 +241,20 @@
   		</if>
 	</select>
 
+	<select id="selectInspect" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbInspection">
+		SELECT COUNT(*) AS SUM_CNT
+		     , SUM(INSP_PRICE) AS INSP_PRICE
+		     , (SELECT MAX(PAY_STAT) FROM TB_RCEPT B WHERE RQST_NO = B.RQST_NO AND RQST_NO = #{rqstNo}) AS PAY_STAT
+		  FROM TB_INSPECTION
+		 WHERE RQST_NO = #{rqstNo}
+	</select>
+
+	<update id="modifyPayment" parameterType="kr.or.abnext.domain.TbRcept">
+		UPDATE TB_RCEPT
+		   SET UPT_ID = #{uptId}
+		     , UPT_DT = NOW()
+		     , PAY_STAT = '02'
+		 WHERE RQST_NO = #{rqstNo}
+		   AND PAY_STAT = '01'
+	</update>
 </mapper>

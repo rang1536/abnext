@@ -66,6 +66,9 @@ public class TbRcept {
 	private String searchStr;
 	private String payedPrice;
 
+	//수금
+	private String sumCnt;
+
 	private List<MultipartFile> fileList;
 
 	public int getRqstNo() {
@@ -476,6 +479,14 @@ public class TbRcept {
 		this.payedPrice = payedPrice;
 	}
 
+	public String getSumCnt() {
+		return sumCnt;
+	}
+
+	public void setSumCnt(String sumCnt) {
+		this.sumCnt = sumCnt;
+	}
+
 	public List<MultipartFile> getFileList() {
 		return fileList;
 	}
@@ -500,7 +511,8 @@ public class TbRcept {
 				+ diagCdNm + ", finalMemo=" + finalMemo + ", inspList=" + inspList + ", smplList=" + smplList
 				+ ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt + ", insId=" + insId + ", uptDt="
 				+ uptDt + ", uptId=" + uptId + ", searchStrtDt=" + searchStrtDt + ", searchFnshDt=" + searchFnshDt
-				+ ", searchStr=" + searchStr + ", payedPrice=" + payedPrice + ", fileList=" + fileList + "]";
+				+ ", searchStr=" + searchStr + ", payedPrice=" + payedPrice + ", sumCnt=" + sumCnt + ", fileList="
+				+ fileList + "]";
 	}
 
 }

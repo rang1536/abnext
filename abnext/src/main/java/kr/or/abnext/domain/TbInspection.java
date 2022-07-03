@@ -29,6 +29,9 @@ public class TbInspection {
 	private String insId;
 	private String uptDt;
 	private String uptId;
+	// 수납
+	private String sumCnt;
+	private String payStat;
 
 	private List<TbFile> inspFileList;
 
@@ -159,6 +162,18 @@ public class TbInspection {
 	public void setUptId(String uptId) {
 		this.uptId = uptId;
 	}
+	public String getSumCnt() {
+		return sumCnt;
+	}
+	public void setSumCnt(String sumCnt) {
+		this.sumCnt = sumCnt;
+	}
+	public String getPayStat() {
+		return payStat;
+	}
+	public void setPayStat(String payStat) {
+		this.payStat = payStat;
+	}
 	@Override
 	public String toString() {
 		return "TbInspection [inspNo=" + inspNo + ", rqstNo=" + rqstNo + ", sampleCode=" + sampleCode + ", sampleName="
@@ -166,8 +181,8 @@ public class TbInspection {
 				+ ", inspFirstNm=" + inspFirstNm + ", inspSecondCd=" + inspSecondCd + ", inspSecondNm=" + inspSecondNm
 				+ ", inspThirdCd=" + inspThirdCd + ", inspThirdNm=" + inspThirdNm + ", inspType=" + inspType
 				+ ", inspTypeNm=" + inspTypeNm + ", inspPrice=" + inspPrice + ", inspResult=" + inspResult + ", insDt="
-				+ insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", inspFileList="
-				+ inspFileList + "]";
+				+ insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", sumCnt=" + sumCnt
+				+ ", payStat=" + payStat + ", inspFileList=" + inspFileList + "]";
 	}
 
 }

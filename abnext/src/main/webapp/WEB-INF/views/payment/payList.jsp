@@ -98,7 +98,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive">
-							<table id="example2" class="table table-bordered text-nowrap">
+							<table id="example2" class="table table-bordered table-hover text-nowrap">
 								<thead>
 									<tr>
 										<th>no</th>
@@ -110,16 +110,17 @@
 										<th>검사비</th>
 										<th>입금액</th>
 										<th>납부</th>
+										<th style="display:none"></th>
 									</tr>
 								</thead>
 								<tbody id="listBody">
 									<c:forEach var="item" items="${rceptList }" varStatus="status">
 										<tr>
 											<td>${status.index+1 }</td>
-											<td>${item.hospNm }</td>
-											<td>${item.rqstDt }</td>
-											<td>${item.finishDt }</td>
-											<td>${item.diagCdNm }</td>
+											<td class="txtr">${item.hospNm }</td>
+											<td class="txtr">${item.rqstDt }</td>
+											<td class="txtr">${item.finishDt }</td>
+											<td class="txtr">${item.diagCdNm }</td>
 											<td class="txtr"><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
 											<td class="txtr">
 												<c:if test="${item.payStat == '02' }">
@@ -166,7 +167,7 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive">
-							<table id="example3" class="table table-bordered text-nowrap">
+							<table class="table table-hover text-nowrap">
 								<thead>
 									<tr>
 										<th>신청건수</th>
@@ -175,7 +176,7 @@
 										<th>정산액</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="inspList">
 									<c:forEach var="item" items="${rceptList }" varStatus="status">
 										<tr>
 											<td>${status.index+1 }</td>
@@ -185,6 +186,13 @@
 										</tr>
 									</c:forEach>
 								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="4" class="txtc">
+											<button type="button" id="sett" style="width:121.2px" class="btn btn-primary btn-flat"><i class="fas fa-money-check-alt"></i> 입금확인</button>
+										</td>
+									</tr>
+								</tfoot>
 							</table>
 						</div>
 						<!-- /.card-body -->
@@ -262,18 +270,13 @@
 
 	$(function () {
 		$('#example2').DataTable({
+			"buttons": ["copy", "excel", "print"],
 			"paging": true,
 			"lengthChange": false,
 			"ordering": true,
-			"filter" : false
-		});
-
-		$('#example3').DataTable({
-			"paging": false,
-			"lengthChange": false,
-			"ordering": false,
-			"filter" : false
-		});
+			"filter" : false,
+			"autoWidth" : false
+		}).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
 		$('.searchBtn').on('click',function(){
 			var sdata = {
@@ -292,24 +295,20 @@
 					table.destroy();
 
 					$("#example2").DataTable({
+						"responsive": true,
+						"buttons": ["copy", "excel", "print"],
 						"data" : data,
 						"paging": true,
 						"lengthChange": false,
+						"autoWidth" : false,
 						"ordering": true,
 						"filter" : false,
-						'columnDefs': [{
-					        'targets': 0,
-					        'className': 'dt-body-center',
-					        'render': function (data, type, full, meta){
-					            return (meta.row+1);
-					        }
-					    }],
 					    "columns" : [
-					        {"data": "hospNo"},
-							{"data": "hospNm"},
-					        {"data": "rqstDt"},
-					        {"data": "finishDt"},
-					        {"data": "diagCdNm"},
+					        {"data": "rqstNo","className":"txtc"},
+							{"data": "hospNm","className":"txtc"},
+					        {"data": "rqstDt","className":"txtc"},
+					        {"data": "finishDt","className":"txtc"},
+					        {"data": "diagCdNm","className":"txtc"},
 					        {"data": "price",
 								'className': 'txtr',
 								"render": function(data){
@@ -324,32 +323,87 @@
 							},
 							{"data": "payStat",
 								"render": function(data, type, row, meta){
-									if(data === '01'){
-				                        data = '<div class="clearfix">';
-				                        data += '			<div class="icheck-primary d-inline">';
-				                        data += '				<input type="checkbox" id="checkboxDanger_'+(meta.row+1)+'">';
-				                        data += '				<label for="checkboxDanger_'+(meta.row+1)+'"></label>';
-				                        data += '			</div>';
-				                        data += '		</div>';
-				                    }else {
-				                        data = '<div class="clearfix">';
-				                        data += '			<div class="icheck-primary d-inline">';
-				                        data += '				<input type="checkbox" disabled checked id="checkboxDanger_'+(meta.row+1)+'">';
-				                        data += '				<label for="checkboxDanger_'+(meta.row+1)+'"></label>';
-				                        data += '			</div>';
-				                        data += '		</div>';
-				                    }
-					                    return data;
+									var chk = ""; var dis = "";
+									if(data === '02'){
+										chk = " checked "; dis = " disabled ";
+									}
+			                        data = '<div class="clearfix">';
+			                        data += '			<div class="icheck-primary d-inline">';
+			                        data += '				<input type="checkbox"'+chk+dis+' id="checkboxDanger_'+(meta.row+1)+'">';
+			                        data += '				<label for="checkboxDanger_'+(meta.row+1)+'"></label>';
+			                        data += '			</div>';
+			                        data += '		</div>';
+				                    return data;
 				                 }
 							}
 						]
-					});
+					}).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+				}
+			});
+		});
+
+		$("#sett").click(function(){
+			var arrayList = new Array();
+			$("#listBody").find("tr").each(function(){
+				if($(this).find("input[type=checkbox]").is(":checked")){
+					var tbl = $('#example2').dataTable();
+					var tr = tbl.fnGetPosition(this);
+					var curData = tbl.fnGetData(tr);
+					var saveData = {
+							rqstNo : curData.rqstNo
+					}
+					arrayList.push(saveData);
+				}
+			});
+
+			var data = {
+					uptId : sessionStorage.getItem("userId"),
+					inspList : arrayList
+			}
+
+			$.ajax({
+				url : "modifyPayment",
+				data : data,
+				type : "POST",
+				dataType : "JSON",
+				success : function(data){
+					alert("저장하였습니다.");
+					$('.searchBtn').trigger('click');
 				}
 			});
 		});
 
 	});
 
+	$(document).on('click','#example2 td', function(){
+		var tbl = $('#example2').dataTable();
+		var tr = tbl.fnGetPosition(this);
+		var curData = tbl.fnGetData(tr);
+		var rqstNo = curData.rqstNo;
+
+		var sdata = {
+				rqstNo : rqstNo
+		}
+		$.ajax({
+			url : "selectInspect",
+			data : sdata,
+			type : "POST",
+			dataType : "JSON",
+			success : function(data){
+				var html = '';
+				var price = 0;
+
+				if(data.payStat == '02') price = data.inspPrice;
+				html += '<tr>';
+				html += '<td>'+data.sumCnt+'</td>';
+				html += '<td>'+$.gfn_setComma(data.inspPrice);+'</td>';
+				html += '<td>'+$.gfn_setComma(price);+'</td>';
+				html += '<td>'+$.gfn_setComma(Number(data.inspPrice)-Number(price))+'</td>';
+				html += '</tr>';
+				$("#inspList").html(html);
+			}
+		});
+	});
 
 </script>
 </body>
