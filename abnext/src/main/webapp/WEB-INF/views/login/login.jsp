@@ -21,7 +21,7 @@
 	<!-- /.login-logo -->
 	<div class="card card-outline card-primary">
 	  <div class="card-header text-center">
-	    <a href="index" class="h1"><b>Avinext</b><!-- &nbsp;LOGIN --></a>
+	    <a href="index" class="h1"><img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:80%;"></a>
 	  </div>
 	  <div class="card-body">
 	    <p class="login-box-msg">LOGIN</p>
@@ -94,7 +94,7 @@
 	$(document).ready(function(){
 		//저장된 아이디가 있다면 미리 세팅함.
 		var userId = localStorage.getItem('userId');
-		var userPass = locaStorage.getItem('userPass');
+		var userPass = localStorage.getItem('userPass');
 
 		if(userId != null && userId != ''){
 			$('#userId').val(userId);
@@ -150,7 +150,7 @@
 						localStorage.setItem('userPass', userPass);
 					}
 
-					localStorage.setItem('userInfo', JSON.stringify(userInfo));
+					sessionStorage.setItem('userInfo', JSON.stringify(userInfo));
 					alert(userInfo.userNm+' 님 반갑습니다!!');
 					location.href = 'index';
 				}else if(result == 'stopId'){

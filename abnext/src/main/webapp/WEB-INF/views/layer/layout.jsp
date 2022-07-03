@@ -146,34 +146,36 @@
 	<!-- /.navbar -->
 
 	<!-- Main Sidebar Container -->
-	<aside class="main-sidebar sidebar-dark-primary elevation-4">
+	<aside class="main-sidebar sidebar-light-primary elevation-4">
 		<!-- Brand Logo -->
 		<a href="index" class="brand-link">
-			<img src="resources/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-			<span class="brand-text font-weight-light">Avinext</span>
+			<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:100%;">
+			<!-- <span class="brand-text font-weight-light">Avinext</span> -->
 		</a>
 
 		<!-- Sidebar -->
 		<div class="sidebar">
 			<!-- Sidebar user panel (optional) -->
-			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+			<div class="user-panel mt-3 mb-3 d-flex" style="background-color:#002266;">
 
-				<div class="image">
-					<img src="resources/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+				<div class="info userInfoIntro" style="font-weight:bold;color:#ffffff;">
+
 				</div>
-				<div class="info">
-					<a href="#" class="d-block">홍길동 님</a>
-				</div>
-				<br/>
 
 			</div>
-			<div style="text-align:right;">
-				<button class="btn btn-warning" onclick="fn_loginPage();">로그인</button>
-				<button class="btn btn-success" onclick="fn_addUserPage();">회원가입</button>
+			<div style="text-align:right;display:none;" id="userBtnGroup">
+				<button class="btn btn-default" onclick="fn_loginPage();">로그인</button>
+				<button class="btn btn-default" onclick="fn_addUserPage();">회원가입</button>
 			</div>
-			<br/>
+
+			<div style="text-align:right;display:none;font-size:13px;" id="logOutDiv">
+				<a href="#" onclick="fn_logOut();">로그아웃</a>
+			</div>
+
+			<div style="border-bottom:1px solid #ddd;margin-top:10px;"></div>
+
 			<!-- SidebarSearch Form -->
-			<!-- -->
+			<!--
 			<div class="form-inline">
 				<div class="input-group" data-widget="sidebar-search">
 					<input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -183,7 +185,7 @@
 						</button>
 					</div>
 				</div>
-			</div>
+			</div>-->
 
 			<!-- Sidebar Menu -->
 			<nav class="mt-2">
@@ -448,7 +450,37 @@
 					$(".leftMenuSub").eq(2).addClass("active");
 				}
 			}
+
+			//userInfoIntro
+			var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+
+			if(userInfo != null){
+				var html = '';
+				html += userInfo.userNm+' 님';
+				if((userInfo.hospNm != null && userInfo.hospNm != '') || (userInfo.farmNm != null && userInfo.farmNm != '')){
+					html += '  ['
+					html += +userInfo.hospNm+userInfo.farmNm
+					html += ' ]';
+				}else{
+
+				}
+
+				$('.userInfoIntro').empty();
+				$('.userInfoIntro').html(html);
+				$('#userBtnGroup').css('display', 'none');
+				$('#logOutDiv').css('display', '');
+			}else{
+				$('#userBtnGroup').css('display', '');
+				//alert('로그인 후 사용하실수 있습니다 ');
+				//location.href = 'loginPage';
+			}
 		});
+
+		function fn_logOut(){
+			sessionStorage.clear();
+			location.href = 'loginPage';
+		}
+
 
 		/*로그인*/
 		function fn_loginPage(){

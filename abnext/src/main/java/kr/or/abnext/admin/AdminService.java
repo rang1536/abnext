@@ -151,8 +151,17 @@ public class AdminService {
 	 * @param :
 	 * @return: TbHospital
 	 **/
-	public TbHospital getHospListServ(TbHospital tbHospital) {
-		return adminDao.getHospList(tbHospital);
+	public TbHospital getHospListServ(TbHospital tbHospital, String userNo) {
+		tbHospital = adminDao.getHospList(tbHospital);
+		if(tbHospital != null && !userNo.equals("")) {
+			TbUser tbUser = new TbUser();
+			tbUser.setHospNo(String.valueOf(tbHospital.getHospNo()));
+			tbUser.setUserNo(Integer.parseInt(userNo));
+
+			adminDao.modifyUser(tbUser);
+		}
+
+		return tbHospital;
 	}
 
 
@@ -170,12 +179,24 @@ public class AdminService {
 	/**
 	 * @function : getFarmListServ
 	 * @Description : 농장조회
-	 * @param :
+	 * @param : TbFarm, userNo
 	 * @return: TbFarm
+	 * @override
 	 **/
-	public TbFarm getFarmListServ(TbFarm tbFarm) {
-		return adminDao.getFarmList(tbFarm);
+	public TbFarm getFarmListServ(TbFarm tbFarm, String userNo) {
+		tbFarm = adminDao.getFarmList(tbFarm);
+
+		if(tbFarm != null && !userNo.equals("")) {
+			TbUser tbUser = new TbUser();
+			tbUser.setFarmNo(String.valueOf(tbFarm.getFarmNo()));
+			tbUser.setUserNo(Integer.parseInt(userNo));
+
+			adminDao.modifyUser(tbUser);
+		}
+
+		return tbFarm;
 	}
+
 
 
 	/**
@@ -386,5 +407,22 @@ public class AdminService {
 
 		return tbUser;
 	}
+
+
+
+	//resetPassword
+	/**
+	 * @function : resetPassword
+	 * @Description : 비번초기화
+	 * @param : TbUser
+	 * @return : Map<String, Object>
+	 **/
+	public Map<String, Object> resetPasswordServ(TbUser tbUser) {
+
+		return getResultMap(adminDao.modifyUser(tbUser));
+	}
+
+
+
 
 }

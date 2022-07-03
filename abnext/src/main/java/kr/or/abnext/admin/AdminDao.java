@@ -292,4 +292,18 @@ public class AdminDao {
 	public int removeFile(TbFile tbFile) {
 		return sql.delete("admin.removeFile", tbFile);
 	}
+
+	/**
+	 * @function : modifyUser
+	 * @Description : 회원정보수정
+	 * @param : TbUser
+	 * @return : int
+	 **/
+	public int modifyUser(TbUser tbUser) {
+		return sql.update("admin.modifyUser", tbUser);
+	}
+
+
+
+
 }

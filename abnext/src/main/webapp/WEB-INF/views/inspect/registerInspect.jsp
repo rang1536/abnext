@@ -409,7 +409,7 @@ $(document).ready(function(){
 	docList();
 
 	//로그인유저정보
-	var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
 
 	//신청자(userId, userNm)
 	$("#userNo").val(userInfo.userNo);

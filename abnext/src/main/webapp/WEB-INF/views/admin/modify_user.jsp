@@ -166,7 +166,7 @@
 									<div class="form-group">
 										<label>소속구분</label>
 										<select class="custom-select farmInput" name="gubun" id="gubun" disabled>
-											<option value="farm" selected>기관(병원)</option>
+											<option value="farm" selected>농장</option>
 										</select>
 									</div>
 								</div>
@@ -262,6 +262,8 @@
 		              <div class="card-body" style="font-size:13px;">
 					  	<!-- 유저정보입력 FORM -->
                    		<form onsubmit="return false" id="userInfoForm" method="post" encType="multipart/form-data">
+                   			<input type="hidden" name="userNo" id="userNo" value="${user.userNo }"/>
+
 							<div class="row">
 								<div class="col-sm-6">
 									<!-- select -->
@@ -299,12 +301,28 @@
 					                    <div class="input-group-prepend">
 					                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 					                    </div>
+					                    <input type="text" class="form-control" id="userTel" name="userTel" value="${user.userTel}" />
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+					                  <label>휴대폰번호</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
+					                    </div>
 					                    <input type="text" class="form-control" id="userHp" name="userHp" value="${fn:substring(user.userHp, 0, 3) }-${fn:substring(user.userHp, 3, 7) }-${fn:substring(user.userHp, 7, 11) }" />
 					                  </div>
 					                  <!-- /.input group -->
 					                </div>
 					                <!-- /.form group -->
 								</div>
+							</div>
+							<div class="row">
 			                  	<div class="col-sm-6">
 					                <div class="form-group">
 					                  <label>이메일</label>
@@ -318,8 +336,36 @@
 					                </div>
 					                <!-- /.form group -->
 				                </div>
+				                <div class="col-sm-6"></div>
 			                </div>
 
+							<div class="row">
+			                	<div class="input-group col-sm-4">
+				                  <input type="text" class="form-control" id="userZip" name="userZip" value="${user.userZip }">
+				                  <span class="input-group-append">
+				                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('user')" >주소검색</button>
+				                  </span>
+				                </div>
+				                <input type="hidden" id="sidoNm" name="sidoNm"  value="${user.sidoNm }"/>
+				                <input type="hidden" id="sigunguNm" name="sigunguNm"  value="${user.sigunguNm }"/>
+
+				             </div><br/>
+				             <div class="row">
+			                	<div class="input-group col-sm-9">
+				                  <span class="input-group-prepend">
+				                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
+				                  </span>
+				                  <input type="text" class="form-control" id="userAdr" name="userAdr" value="${user.userAdr }">
+				                </div>
+				            </div><br/>
+							<div class="row">
+				            	<div class="input-group col-sm-9">
+				            	  <div class="input-group-prepend">
+				                    <button type="button" class="btn btn-default">상세주소</button>
+				                  </div>
+				                  <input type="text" class="form-control" id="userDtlAdr" name="userDtlAdr" value="${user.userDtlAdr }">
+				            	</div>
+			                </div> <br/><!-- END input-group mb-3 -->
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
@@ -351,6 +397,10 @@
 			                </div>
 						</form>
 					  </div> <!-- card-body END -->
+
+					  <div class="card-footer">
+					  	<button type="button" onclick="fn_modifyUserCtrl();" class="btn btn-sm btn-primary btn-flat" style="float:right;">회원정보변경</button>
+					  </div>
 					</div>
 
 
@@ -377,7 +427,7 @@
 		                  	<div class="col-sm-6">
 				                <div class="form-group">
 				                  <label>권한</label>
-				                  <select class="custom-select" name="userStat" id="userStat" >
+				                  <select class="custom-select" name="adminYn" id="adminYn" >
 							     	  <option <c:if test="${user.adminYn eq 'N' }">selected</c:if> value="N">일반사용자</option>
 									  <option <c:if test="${user.adminYn eq 'Y' }">selected</c:if> value="Y">관리자</option>
 								  </select>
@@ -390,7 +440,7 @@
 
 
 		              <div class="card-footer">
-					  	<button type="button" onclick="fn_modifyUserCtrl();" class="btn btn-sm btn-primary btn-flat" style="float:right;">회원정보변경</button>
+					  	<button type="button" onclick="fn_modifyUserStat();" class="btn btn-sm btn-primary btn-flat" style="float:right;">회원상태변경</button>
 					  </div>
 
 
@@ -479,13 +529,12 @@
 	* 기관,병원 세팅
 	======================*/
 	function fn_setHospDataToForm(hospNo, gubun){
-		console.log('??')
 		if(gubun == 'farm'){
 			$.ajax({
 				url : 'getFarmInfo',
 				dataType : 'json',
 				type : 'post',
-				data : {'farmNo':hospNo},
+				data : {'farmNo':hospNo, 'userNo':$('#userNo').val()},
 				success : function(data){
 					var farmInfo = data.farmInfo;
 
@@ -493,7 +542,7 @@
 					$('#farmHp').val(fn_ifNull(farmInfo.farmHp.substring(0, 3)+'-'+farmInfo.farmHp.substring(3, 7)+'-'+farmInfo.farmHp.substring(7)));
 					$('#farmAdr').val(fn_ifNull(farmInfo.farmAdr)+' '+fn_ifNull(farmInfo.farmDtlAdr));
 
-					toastr.success(farmInfo.farmNm+' 이 선택되었습니다');
+					toastr.success('소속이 '+farmInfo.farmNm+' 으로 변경되었습니다.' );
 
 					$('#farmNo').val(farmInfo.farmNo);
 
@@ -508,7 +557,7 @@
 				url : 'getHospInfo',
 				dataType : 'json',
 				type : 'post',
-				data : {'hospNo':hospNo},
+				data : {'hospNo':hospNo, 'userNo':$('#userNo').val()},
 				success : function(data){
 					var hospInfo = data.hospInfo;
 
@@ -516,7 +565,7 @@
 					$('#hospHp').val(fn_ifNull(hospInfo.hospHp.substring(0, 3)+'-'+hospInfo.hospHp.substring(3, 7)+'-'+hospInfo.hospHp.substring(7)));
 					$('#hospAdr').val(fn_ifNull(hospInfo.hospAdr)+' '+fn_ifNull(hospInfo.hospDtlAdr));
 
-					toastr.success(hospInfo.hospNm+' 이 선택되었습니다');
+					toastr.success('소속이 '+hospInfo.hospNm+' 으로 변경되었습니다.');
 
 					$('#hospNo').val(hospInfo.hospNo);
 
@@ -535,12 +584,53 @@
 	* 비밀번호 초기화(세팅만 하고 저장할때 저장함.)
 	====================================*/
 	function fn_passReset(newPass){
-		//console.log(newPass.length, newPass);
-		if(confirm('비밀번호를 초기화 하시겠습니까?')){
-			$('#userPass').val('');
-			$('#userPass').val(newPass);
+		$('#userPass').val('');
+		$('#userPass').val(newPass);
 
-			toastr.info('변경된 비밀번호의 적용을 위해서는 하단의 저장버튼으로 저장하셔야 합니다.');
+		if(confirm('비밀번호를 초기화 하시겠습니까?')){
+			$.ajax({
+				url : 'resetPassword',
+				type : 'post',
+				dataType : 'json',
+				data : {'userNo':$('#userNo').val(), 'userPass':newPass},
+				success : function(data){
+					if(data.result == 'succ'){
+						toastr.info('비밀번호가 휴대폰 뒤4자리로 초기화 되었습니다.');
+					}else{
+						toastr.warning('비밀번호 초기화에 실패하였습니다.');
+					}
+				}
+			})
+		}
+	}
+
+
+	/*====================================
+	* 회원상태 및 권한변경.
+	====================================*/
+	function fn_modifyUserStat(){
+		if(confirm('해당회원의 승인상태 및 권한을 변경하시겠습니까?')){
+			$.ajax({
+				url : 'resetPassword',
+				type : 'post',
+				dataType : 'json',
+				data : {'userNo':$('#userNo').val()
+					, 'userStat':$('#userStat').val()
+					, 'adminYn':$('#adminYn').val()},
+				success : function(data){
+					if(data.result == 'succ'){
+						toastr.info('회원상태 및 권한이 변경되었습니다.');
+
+						setTimeout(function(){
+							if(confirm('회원목록으로 이동하시겠습니까?')){
+								location.href = 'userList';
+							}
+						}, 500);
+					}else{
+						toastr.warning('회원상태 및 권한 변경에 실패하였습니다.');
+					}
+				}
+			})
 		}
 	}
 
@@ -549,9 +639,22 @@
 	* 회원정보수정
 	====================================*/
 	function fn_modifyUserCtrl(){
-
+		if(confirm('해당회원정보를 변경하시겠습니까?')){
+			$.ajax({
+				url : 'resetPassword',
+				type : 'post',
+				dataType : 'json',
+				data : $('#userInfoForm').serialize(),
+				success : function(data){
+					if(data.result == 'succ'){
+						toastr.info('회원정보가 변경되었습니다.');
+					}else{
+						toastr.warning('회원장보 변경에 실패하였습니다.');
+					}
+				}
+			})
+		}
 	}
-
 
 </script>
 </html>

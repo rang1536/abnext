@@ -187,11 +187,12 @@ public class AdminRestController {
 	 * 병원조회 단건
 	 * */
 	@RequestMapping(value = "getHospInfo", method = RequestMethod.POST)
-	public Map<String, Object> getHospInfoCtrl(TbHospital tbHospital) {
+	public Map<String, Object> getHospInfoCtrl(TbHospital tbHospital
+			, @RequestParam(value="userNo") String userNo) {
 		System.out.println("병원정보 조회 시작~!!");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("hospInfo", adminServ.getHospListServ(tbHospital));
+		map.put("hospInfo", adminServ.getHospListServ(tbHospital, userNo));
 		return map;
 	}
 
@@ -200,11 +201,14 @@ public class AdminRestController {
 	 * 농장조회 단건
 	 * */
 	@RequestMapping(value = "getFarmInfo", method = RequestMethod.POST)
-	public Map<String, Object> getFarmInfoCtrl(TbFarm tbFarm) {
+	public Map<String, Object> getFarmInfoCtrl(TbFarm tbFarm
+			, @RequestParam(value="userNo") String userNo) {
 		System.out.println("농장정보 조회 시작~!!");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("farmInfo", adminServ.getFarmListServ(tbFarm));
+
+		map.put("farmInfo", adminServ.getFarmListServ(tbFarm, userNo));
+
 		return map;
 
 	}
@@ -244,7 +248,7 @@ public class AdminRestController {
 		return adminServ.modifyFarmServ(tbFarm);
 	}
 
-	//searchUserCtrl
+
 	/**
 	 * 농장수정
 	 * */
@@ -256,5 +260,18 @@ public class AdminRestController {
 		map.put("list", adminServ.getUserListServ(tbUser));
 		return map;
 	}
+
+
+	/**
+	 * 비번초기화
+	 * */
+	@RequestMapping(value = "resetPassword", method = RequestMethod.POST)
+	public Map<String, Object> resetPasswordCtrl(TbUser tbUser) {
+		System.out.println("비번초기화 시작~!!");
+
+		return adminServ.resetPasswordServ(tbUser);
+	}
+
+
 }
 

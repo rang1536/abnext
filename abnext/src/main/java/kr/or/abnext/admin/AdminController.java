@@ -71,7 +71,7 @@ public class AdminController {
 		TbHospital tbHospital = new TbHospital();
 		tbHospital.setHospNo(Integer.parseInt(hospNo));
 
-		model.addAttribute("hosp", adminServ.getHospListServ(tbHospital));
+		model.addAttribute("hosp", adminServ.getHospListServ(tbHospital, ""));
 		model.addAttribute("doctor", adminServ.getDoctorListServ(tbHospital));
 
 		return "admin/modify_hospital";
@@ -88,7 +88,7 @@ public class AdminController {
 		TbFarm tbFarm = new TbFarm();
 		tbFarm.setFarmNo(Integer.parseInt(farmNo));
 
-		model.addAttribute("farm", adminServ.getFarmListServ(tbFarm));
+		model.addAttribute("farm", adminServ.getFarmListServ(tbFarm, ""));
 
 		return "admin/modify_farm";
 	}
@@ -115,7 +115,7 @@ public class AdminController {
 				if(tbUser.getHospNo() != null) {
 					tbHospital.setHospNo(Integer.parseInt(tbUser.getHospNo()));
 
-					tbHospital = adminServ.getHospListServ(tbHospital);
+					tbHospital = adminServ.getHospListServ(tbHospital, "");
 
 					model.addAttribute("hosp", tbHospital); //기관병원 정보
 				}
@@ -123,7 +123,7 @@ public class AdminController {
 				if(tbUser.getFarmNo() != null) {
 					tbFarm.setFarmNo(Integer.parseInt(tbUser.getFarmNo()));
 
-					tbFarm = adminServ.getFarmListServ(tbFarm);
+					tbFarm = adminServ.getFarmListServ(tbFarm, "");
 
 					model.addAttribute("farm", tbFarm);
 				}

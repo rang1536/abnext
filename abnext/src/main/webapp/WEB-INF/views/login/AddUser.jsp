@@ -312,7 +312,7 @@
 									                </div>
 								                </div>
 
-								                <label for="userNm">주소  *<code>&nbsp;주소검색을 이용해주세요. (필수입력)</code></label>
+								                <label for="userZip">주소  *<code>&nbsp;주소검색을 이용해주세요. (필수입력)</code></label>
 								                <div class="row">
 								                	<div class="input-group col-sm-4">
 									                  <input type="text" class="form-control" id="userZip" name="userZip">

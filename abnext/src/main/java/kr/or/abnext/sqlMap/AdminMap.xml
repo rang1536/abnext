@@ -39,8 +39,8 @@
 			, #{userMemo}
 			, #{userLev}
 			, #{userId}
-			, #{userHp}
-			, #{userFax}
+			, replace(replace(#{userHp}, '-',''), '-', '')
+			, replace(replace(#{userFax}, '-',''), '-', '')
 			, #{userEmail}
 			, #{userDtlAdr}
 			, #{userBankNm}
@@ -60,27 +60,78 @@
 	<!-- 회원정보 수정 -->
 	<update id="modifyUser" parameterType="kr.or.abnext.domain.TbUser">
 		UPDATE TB_USER
-		   SET USER_ZIP
-			   , USER_TEL	= #{userTel}
-			   , USER_RN	= #{userRn}
-			   , USER_PASS	= #{userPass}
-			   , USER_NM	= #{userNm}
-			   , USER_MEMO	= #{userMemo}
-			   , USER_LEV	= #{userLev}
-			   , USER_ID	= #{userId}
-			   , USER_HP	= #{userHp}
-			   , USER_FAX	= #{userFax}
-			   , USER_EMAIL	= #{userEmail}
-			   , USER_DTL_ADR	= #{userDtlAdr}
-			   , USER_BANK_NM	= #{userBankNm}
-			   , USER_ADR		= #{userAdr}
-			   , USER_ACCOUNT_NO= #{userAccountNo}
-			   , UPT_ID		= #{uptId}
-			   , UPT_DT		= now()
-			   , SIGUNGU_NM	= #{sigunguNm}
-			   , SIDO_NM	= #{sidoNm}
-			   , HOSP_NO	= #{hospNo}
-			   , FARM_NO	= #{farmNo}
+		   SET UPT_DT		= now()
+		   	   <if test="userZip != null and userZip != ''">
+		   	   		, USER_ZIP	= #{userZip}
+		   	   </if>
+		   	   <if test="userTel != null and userTel != ''">
+		   	   		, USER_TEL	= #{userTel}
+		   	   </if>
+		   	   <if test="userRn != null and userRn != ''">
+		   	   		, USER_RN	= #{userRn}
+		   	   </if>
+		   	   <if test="userPass != null and userPass != ''">
+		   	   		, USER_PASS	= #{userPass}
+		   	   </if>
+		   	   <if test="userNm != null and userNm != ''">
+		   	   		, USER_NM	= #{userNm}
+		   	   </if>
+		   	   <if test="userMemo != null and userMemo != ''">
+		   	   		, USER_MEMO	= #{userMemo}
+		   	   </if>
+		   	   <if test="userLev != null and userLev != ''">
+		   	   		, USER_LEV	= #{userLev}
+		   	   </if>
+		   	   <if test="userId != null and userId != ''">
+		   	   		, USER_ID	= #{userId}
+		   	   </if>
+		   	   <if test="userHp != null and userHp != ''">
+		   	   		, USER_HP	= #{userHp}
+		   	   </if>
+		   	   <if test="userFax != null and userFax != ''">
+		   	   		, USER_FAX	= #{userFax}
+		   	   </if>
+		   	   <if test="userEmail != null and userEmail != ''">
+		   	   		, USER_EMAIL	= #{userEmail}
+		   	   </if>
+		   	   <if test="userDtlAdr != null and userDtlAdr != ''">
+		   	   		, USER_DTL_ADR	= #{userDtlAdr}
+		   	   </if>
+		   	   <if test="userBankNm != null and userBankNm != ''">
+		   	   		, USER_BANK_NM	= #{userBankNm}
+		   	   </if>
+		   	   <if test="userAdr != null and userAdr != ''">
+		   	   		, USER_ADR		= #{userAdr}
+		   	   </if>
+		   	   <if test="userAccountNo != null and userAccountNo != ''">
+		   	   		, USER_ACCOUNT_NO= #{userAccountNo}
+		   	   </if>
+		   	   <if test="uptId != null and uptId != ''">
+		   	   		, UPT_ID		= #{uptId}
+		   	   </if>
+		   	   <if test="sigunguNm != null and sigunguNm != ''">
+		   	   		, SIGUNGU_NM	= #{sigunguNm}
+		   	   </if>
+		   	   <if test="sidoNm != null and sidoNm != ''">
+		   	   		, SIDO_NM	= #{sidoNm}
+		   	   </if>
+		   	   <if test="adminYn != null and adminYn != ''">
+		   	   		, ADMIN_YN	= #{adminYn}
+		   	   </if>
+		   	   <if test="hospNo != null and hospNo != ''">
+		   	   		, HOSP_NO	= #{hospNo}
+		   	   		, FARM_NO	= ''
+		   	   </if>
+		   	   <if test="farmNo != null and farmNo != ''">
+		   	   		, FARM_NO	= #{farmNo}
+		   	   		, HOSP_NO	= ''
+		   	   </if>
+		   	   <if test="userStat != null and userStat != ''">
+		   	   		, USER_STAT	= #{userStat}
+		   	   </if>
+		   	   <if test="userWorkGb != null and userWorkGb != ''">
+		   	   		, USER_WORK_GB	= #{userWorkGb}
+		   	   </if>
 	     WHERE USER_NO = #{userNo}
 	</update>
 
@@ -476,4 +527,5 @@
 		</if>
 	</delete>
 
+	<!--  -->
 </mapper>
