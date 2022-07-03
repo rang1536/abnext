@@ -4,6 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shotcut icon" href="resources/files/aviicon.png" />
 	<title>avinext | (주)아비넥스트트</title>
 
 	<!-- Google Font: Source Sans Pro -->
@@ -122,9 +123,9 @@
 <!-- Page specific script -->
 <script>
 	$(function () {
-		
+
 		$("#a")
-		
+
 		/* BOOTSTRAP SLIDER */
 		$('.slider').bootstrapSlider()
 
@@ -188,7 +189,7 @@
 			}
 		})
 	})
-	
+
 	function movePage(idx){
 		//1:반려조류 2:가금류 3:돼지
 		if(idx == 1) location.href = "requestInspect";

@@ -93,8 +93,8 @@
 						<!-- small box -->
 						<div class="small-box" style="color:white;background-color:#002266;opacity:0.7">
 							<div class="inner">
-								<h3>신청</h3>
-								<p>REQUEST</p>
+								<h3>유전자검사</h3>
+								<p>PCR</p>
 							</div>
 							<div class="icon">
 								<i class="ion ion-bag"></i>
@@ -109,8 +109,8 @@
 						<!-- small box -->
 						<div class="small-box" style="color:white;background-color:#002266;opacity:0.8">
 							<div class="inner">
-								<h3>접수</h3>
-								<p>RECEIPT</p>
+								<h3>현미경적검사</h3>
+								<p>MICROSCOPIC</p>
 							</div>
 							<div class="icon">
 								<i class="ion ion-stats-bars"></i>
@@ -125,8 +125,8 @@
 						<!-- small box -->
 						<div class="small-box" style="color:white;background-color:#002266;opacity:0.9">
 							<div class="inner">
-								<h3>검사중</h3>
-								<p>PROCESSING</p>
+								<h3>조직검사</h3>
+								<p>Biopsy</p>
 							</div>
 							<div class="icon">
 								<i class="ion ion-person-add"></i>
@@ -141,8 +141,24 @@
 						<!-- small box -->
 						<div class="small-box" style="color:white;background-color:#002266;opacity:1">
 							<div class="inner">
-								<h3>검사완료</h3>
-								<p>FINISH</p>
+								<h3>부검검사</h3>
+								<p>Autopsy</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-pie-graph"></i>
+							</div>
+							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-6">
+						<!-- small box -->
+						<div class="small-box" style="color:white;background-color:#002266;opacity:1">
+							<div class="inner">
+								<h3>배양검사</h3>
+								<p>Germiculture</p>
 							</div>
 							<div class="icon">
 								<i class="ion ion-pie-graph"></i>

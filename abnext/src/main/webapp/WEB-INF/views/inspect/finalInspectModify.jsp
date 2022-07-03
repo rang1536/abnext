@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shotcut icon" href="resources/files/aviicon.png" />
 	<title>avinext | (주)아비넥스트</title>
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -29,6 +30,10 @@
 	<link rel="stylesheet" href="resources/plugins/dropzone/min/dropzone.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
+	<!-- summernote -->
+	<link rel="stylesheet" href="resources/plugins/summernote/summernote-bs4.min.css">
+	<!-- SimpleMDE -->
+	<link rel="stylesheet" href="resources/plugins/simplemde/simplemde.min.css">
 	<style>
 		.txtc {text-align:center;}
 	</style>
@@ -170,7 +175,7 @@
 												<c:forEach var="file" items="${item.inspFileList }" varStatus="status">
 													<b id="bFile_${file.fileNo }">
 														[<a href="javascript:void(0)" onclick="imgView('${file.fileNewNm}')">${file.fileNewNm}</a>]
-     												</b>
+		 												</b>
 												</c:forEach>
 												</td>
 											</tr>
@@ -214,7 +219,9 @@
 								</tr>
 								<tr>
 									<td class="txtc" style="background-color:#F2F2F2; width:20%;vertical-align:middle;">*종합소견</td>
-									<td><input type="text" class="form-control" placeholder="종합소견" id="finalMemo" value="${rceptInfo.finalMemo }"></td>
+									<td>
+										<textarea id="finalMemo" style="height:118.57px;">${rceptInfo.finalMemo }</textarea>
+									</td>
 								</tr>
 								<tr>
 									<td colspan="2" class="txtc">
@@ -273,12 +280,19 @@
 <script src="resources/plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <!-- dropzonejs -->
 <script src="resources/plugins/dropzone/min/dropzone.min.js"></script>
+<!-- Summernote -->
+<script src="resources/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- Customizing Js -->
 <script src="resources/js/common.js"></script>
 <!-- Page specific script -->
 <script>
 $(function () {
 	bsCustomFileInput.init();
+
+	$('#finalMemo').summernote({
+		height: 300,
+		lang: "ko-KR"
+	});
 
 	//Initialize Select2 Elements
 	$('.select2').select2()
