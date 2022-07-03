@@ -4,6 +4,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shotcut icon" href="resources/files/aviicon.png" />
   <title>avinext | (주)아비넥스트</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -57,7 +58,7 @@
 		</section>
 
 		<!-- Main content -->
-		 <section class="content">
+		 <section class="content" >
  			<div class="container-fluid">
  				<div class="invoice p-3 mb-3">
 					<!-- Table row -->

@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shotcut icon" href="resources/files/aviicon.png" />
+
 <title>avinext | (주)아비넥스트</title>
 <!-- 주소찾기 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -148,8 +150,8 @@
 	<!-- Main Sidebar Container -->
 	<aside class="main-sidebar sidebar-light-primary elevation-4">
 		<!-- Brand Logo -->
-		<a href="index" class="brand-link">
-			<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:100%;">
+		<a href="index" class="brand-link" style="text-align:center;">
+			<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:85%;">
 			<!-- <span class="brand-text font-weight-light">Avinext</span> -->
 		</a>
 
@@ -458,9 +460,11 @@
 				var html = '';
 				html += userInfo.userNm+' 님';
 				if((userInfo.hospNm != null && userInfo.hospNm != '') || (userInfo.farmNm != null && userInfo.farmNm != '')){
+					html += '<b style="color:#A6A6A6;font-size:13px;">&nbsp;&nbsp;';
 					html += '  ['
 					html += +userInfo.hospNm+userInfo.farmNm
 					html += ' ]';
+					html += '</b>'
 				}else{
 
 				}

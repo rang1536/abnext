@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="shotcut icon" href="resources/files/aviicon.png" />
 <title>Insert title here</title>
 </head>
 <body>
