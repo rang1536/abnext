@@ -414,7 +414,7 @@
 		              <!-- /.card-header 본문-->
 		              <div class="card-body" style="font-size:13px;">
 					  	<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<!-- select -->
 								<div class="form-group">
 									<label>승인상태</label>
@@ -425,12 +425,25 @@
 									</select>
 								</div>
 							</div>
-		                  	<div class="col-sm-6">
+		                  	<div class="col-sm-4">
 				                <div class="form-group">
 				                  <label>권한</label>
-				                  <select class="custom-select" name="adminYn" id="adminYn" >
+				                  <select class="custom-select" name="adminYn" id="adminYn" onchange="fn_chgAdminYn(this);">
 							     	  <option <c:if test="${user.adminYn eq 'N' }">selected</c:if> value="N">일반사용자</option>
 									  <option <c:if test="${user.adminYn eq 'Y' }">selected</c:if> value="Y">관리자</option>
+								  </select>
+				                  <!-- /.input group -->
+				                </div>
+				                <!-- /.form group -->
+			                </div>
+
+			                <div class="col-sm-4 adminLevDiv" style="display:none;">
+				                <div class="form-group">
+				                  <label>관리자레벨</label>
+				                  <select class="custom-select" id="adminLev"> <!-- name="adminLev" -->
+							     	  <c:forEach var="code" items="${user.adminLevList }" varStatus="status">
+							     	  	<option <c:if test="${code.codeId eq user.adminLev }">selected</c:if> value="${code.codeId }">${code.codeNm }</option>
+							     	  </c:forEach>
 								  </select>
 				                  <!-- /.input group -->
 				                </div>
@@ -517,7 +530,21 @@
 			"autoWidth": false,
 			"responsive": true,
 		});
+
+		console.log("${user.adminYn}");
+		if('${user.adminYn}' == 'Y'){
+			$('.adminLevDiv').css('display', '');
+		}
     });
+
+	function fn_chgAdminYn(obj){
+		var val = $(obj).val();
+		if(val == 'Y'){
+			$('.adminLevDiv').css('display', '');
+		}else{
+			$('.adminLevDiv').css('display', 'none');
+		}
+	}
 
 
 	function fn_openCompanyPop(){
