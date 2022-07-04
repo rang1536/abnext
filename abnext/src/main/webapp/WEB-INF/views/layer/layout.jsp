@@ -160,7 +160,7 @@
 			<!-- Sidebar user panel (optional) -->
 			<div class="user-panel mt-3 mb-3 d-flex" style="background-color:#002266;">
 
-				<div class="info userInfoIntro" style="font-weight:bold;color:#ffffff;">
+				<div class="info userInfoIntro" style="font-weight:bold;color:#ffffff;display:none;">
 
 				</div>
 
@@ -466,6 +466,7 @@
 
 				$('.userInfoIntro').empty();
 				$('.userInfoIntro').html(html);
+				$('.userInfoIntro').css('display', '');
 				$('#userBtnGroup').css('display', 'none');
 				$('#logOutDiv').css('display', '');
 			}else{

@@ -53,7 +53,7 @@
 		</section>
 
 		 <!-- Main content -->
-		 <section class="content">
+		 <section class="content" style="font-size:13px;">
  			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12"> <!-- left column -->
@@ -259,7 +259,7 @@
 									                </div>
 								                </div>
 
-								                <div class="row">
+								                <!-- <div class="row">
 									                <div class="col-md-4">
 										                <div class="form-group">
 										                  <label>입금은행명 </label>
@@ -294,7 +294,7 @@
 										                      </select>
 										                  </div>
 										                </div>
-										                <!-- /.form group -->
+										                /.form group
 									                </div>
 
 									                <div class="col-sm-8">
@@ -307,11 +307,11 @@
 										                    </div>
 										                    <input type="text" class="form-control" id="userAccountNo" name="userAccountNo" >
 										                  </div>
-										                  <!-- /.input group -->
+										                  /.input group
 										                </div>
-										                <!-- /.form group -->
+										                /.form group
 									                </div>
-								                </div>
+								                </div> -->
 
 								                <label for="userZip">주소  *<code>&nbsp;주소검색을 이용해주세요. (필수입력)</code></label>
 								                <div class="row">
@@ -374,7 +374,7 @@
 								                	<div class="col-5">
 						                                <div class="form-group clearfix">
 									                      <div class="icheck-danger d-inline">
-									                        <input type="radio" name="searchKey" id="searchKey1" value="hospital" onclick="fn_searchKeyChg('hospital')">
+									                        <input type="radio" name="searchKey" id="searchKey1" value="hospital" onclick="fn_searchKeyChg('hospital')" checked>
 									                        <label for="searchKey1">
 									                        	기관(병원)
 									                        </label>
@@ -405,7 +405,7 @@
 							                </form>
 							                <!-- 병원입력폼  -->
 							                <form onsubmit="return false" id="hospInfoForm" encType="multipart/form-data">
-								                <div class="hospitalDiv">
+								                <div class="hospitalDiv" style="display:none;">
 								                	<div class="row">
 										                <div class="col-sm-6">
 											                <div class="form-group">
@@ -815,7 +815,7 @@
 		var companyGb = $('input[name=searchKey]:checked').val();
 		var companyNm = $('#companyNm').val();
 
-		console.log(companyGb, companyNm);
+		//console.log(companyGb, companyNm);
 
 		if(companyGb == null || companyGb == ''){
 			alert('기관(병원)인지 농장인지 좌측에 카테고리를 선택한 후 검색해주세요.');
@@ -830,7 +830,7 @@
 			$('#popComNm').html('농장');
 		}
 
-		if(companyNm != null && companyNm != ''){ //검색값이 있을경우 조회먼저 시행.
+		//if(companyNm != null && companyNm != ''){ //검색값이 있을경우 조회먼저 시행.
 			$.ajax({
 				url : 'searchCompany',
 				data : {'companyGb':companyGb, 'companyNm': companyNm},
@@ -864,7 +864,7 @@
 						}else{
 							var html = '';
 							$.each(hospList, function(i, list){
-								html += '<tr ondblclick="fn_setHospDataToForm('+list.hospNo+');">';
+								html += '<tr onclick="fn_setHospDataToForm('+list.hospNo+');">';
 								html += '	<td>기관(병원)</td>';
 								html += '	<td>'+fn_ifNull(list.hospNm)+'</td>';
 								html += '	<td>'+fn_ifNull(list.hospCeo)+'</td>';
@@ -904,7 +904,7 @@
 						}else{
 							var html = '';
 							$.each(farmList, function(i, list){
-								html += '<tr ondblclick="fn_setfarmDataToForm('+list.farmNo+');">';
+								html += '<tr onclick="fn_setfarmDataToForm('+list.farmNo+');">';
 								html += '	<td>농장</td>';
 								html += '	<td>'+fn_ifNull(list.farmNm)+'</td>';
 								html += '	<td>'+fn_ifNull(list.farmCeo)+'</td>';
@@ -921,10 +921,10 @@
 					}
 				}
 			})
-		}else{
-			toastr.error('검색된 정보가 없습니다');
-			$('#popCompany').modal();
-		}
+		//}else{
+		//	toastr.error('검색된 정보가 없습니다');
+		//	$('#popCompany').modal();
+		//}
 
 	})
 
@@ -933,6 +933,7 @@
 	* 기관,병원 세팅
 	======================*/
 	function fn_setHospDataToForm(hospNo){
+		console.log(hospNo)
 		$.ajax({
 			url : 'getHospInfo',
 			dataType : 'json',
@@ -957,6 +958,9 @@
 				$('#hospNo').val(hospInfo.hospNo);
 
 				$('#modalCloseBtn').click();
+
+				$('.farmDiv').css('display', 'none');
+				$('.hospitalDiv').css('display', '');
 			}
 		})
 	}
@@ -990,6 +994,10 @@
 				$('#farmNo').val(farmInfo.farmNo);
 
 				$('#modalCloseBtn').click();
+
+				$('.hospitalDiv').css('display', 'none');
+				$('.farmDiv').css('display', '');
+
 			}
 		})
 	}

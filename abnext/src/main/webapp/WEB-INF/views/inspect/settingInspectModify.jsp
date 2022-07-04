@@ -376,6 +376,8 @@ $("#sett").on("click",function (){
 		smplList : smplData
 	}
 
+	console.log(data);
+	//return;
 	$.ajax({
 		url : "modifySetting",
 		data : data,

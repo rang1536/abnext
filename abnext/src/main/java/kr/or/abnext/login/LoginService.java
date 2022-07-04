@@ -55,7 +55,7 @@ public class LoginService {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 
 		int result = loginDao.idChk(tbUser);
-
+		System.out.println("IDCHK : "+result);
 		if(result == 0) {
 			resMap.put("result", "succ");
 		}else {

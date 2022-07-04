@@ -143,37 +143,42 @@ public class InspectRestController {
 
 	@RequestMapping(value = "modifySetting", method = RequestMethod.POST)
 	public Map<String, Object> modifySetting(TbRcept tbRcept) {
-
-		for(int i=0; i<tbRcept.getSmplList().size(); i++) {
-			TbSample bean = new TbSample();
-			bean.setSampleNo(tbRcept.getSmplList().get(i).get("sampleNo").toString());
-			bean.setSampleStatus(tbRcept.getSmplList().get(i).get("sampleStatus").toString());
-			bean.setUptId(tbRcept.getUptId());
-			//시료 테이블 수정
-			inspectServ.updateSampleStatus(bean);
-		}
-
-		for(int i=0; i<tbRcept.getInspList().size(); i++) {
-			TbInspection bean = new TbInspection();
-			if(tbRcept.getInspList().get(i).get("inspNo") != null && !tbRcept.getInspList().get(i).get("inspNo").equals("")) {
-				bean.setInspNo(tbRcept.getInspList().get(i).get("inspNo").toString());
-			}
-			bean.setWorkerNo(tbRcept.getInspList().get(i).get("workerNo").toString());
-			bean.setWorkerNm(tbRcept.getInspList().get(i).get("workerNm").toString());
-			bean.setSampleCode(tbRcept.getInspList().get(i).get("sampleCode").toString());
-			bean.setSampleName(tbRcept.getInspList().get(i).get("sampleName").toString());
-			bean.setInspType(tbRcept.getInspList().get(i).get("inspType").toString());
-			bean.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
-			bean.setUptId(tbRcept.getUptId());
-			//시료 테이블 수정
-			if(tbRcept.getInspList().get(i).get("inspNo") != null && !tbRcept.getInspList().get(i).get("inspNo").equals("")) {
-				inspectServ.updateInspect(bean);
-			}else {
-				bean.setRqstNo(""+tbRcept.getRqstNo());
-				bean.setInsId(tbRcept.getUptId());
-				inspectServ.insertInspection(bean);
+		//윤재호 nullpointException...
+		if(tbRcept.getSmplList().size() > 0) {
+			for(int i=0; i<tbRcept.getSmplList().size(); i++) {
+				TbSample bean = new TbSample();
+				bean.setSampleNo(tbRcept.getSmplList().get(i).get("sampleNo").toString());
+				bean.setSampleStatus(tbRcept.getSmplList().get(i).get("sampleStatus").toString());
+				bean.setUptId(tbRcept.getUptId());
+				//시료 테이블 수정
+				inspectServ.updateSampleStatus(bean);
 			}
 		}
+
+		if(tbRcept.getInspList().size() > 0) {
+			for(int i=0; i<tbRcept.getInspList().size(); i++) {
+				TbInspection bean = new TbInspection();
+				if(tbRcept.getInspList().get(i).get("inspNo") != null && !tbRcept.getInspList().get(i).get("inspNo").equals("")) {
+					bean.setInspNo(tbRcept.getInspList().get(i).get("inspNo").toString());
+				}
+				bean.setWorkerNo(tbRcept.getInspList().get(i).get("workerNo").toString());
+				bean.setWorkerNm(tbRcept.getInspList().get(i).get("workerNm").toString());
+				bean.setSampleCode(tbRcept.getInspList().get(i).get("sampleCode").toString());
+				bean.setSampleName(tbRcept.getInspList().get(i).get("sampleName").toString());
+				bean.setInspType(tbRcept.getInspList().get(i).get("inspType").toString());
+				bean.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
+				bean.setUptId(tbRcept.getUptId());
+				//시료 테이블 수정
+				if(tbRcept.getInspList().get(i).get("inspNo") != null && !tbRcept.getInspList().get(i).get("inspNo").equals("")) {
+					inspectServ.updateInspect(bean);
+				}else {
+					bean.setRqstNo(""+tbRcept.getRqstNo());
+					bean.setInsId(tbRcept.getUptId());
+					inspectServ.insertInspection(bean);
+				}
+			}
+		}
+
 
 		TbRcept rcpt = new TbRcept();
 		rcpt.setRqstNo(tbRcept.getRqstNo());
