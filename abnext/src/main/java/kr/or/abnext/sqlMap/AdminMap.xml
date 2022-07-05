@@ -132,6 +132,9 @@
 		   	   <if test="userWorkGb != null and userWorkGb != ''">
 		   	   		, USER_WORK_GB	= #{userWorkGb}
 		   	   </if>
+		   	   <if test="adminLev != null and adminLev != ''">
+		   	   		, ADMIN_LEV	= #{adminLev}
+		   	   </if>
 	     WHERE USER_NO = #{userNo}
 	</update>
 

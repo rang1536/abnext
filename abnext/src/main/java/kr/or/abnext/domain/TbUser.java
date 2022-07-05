@@ -46,7 +46,22 @@ public class TbUser {
 	private String userWorkGb;
 	private String userWorkGbNm;
 
+	private String adminLev;
+	private List<TbCode> adminLevList;
 
+
+	public List<TbCode> getAdminLevList() {
+		return adminLevList;
+	}
+	public void setAdminLevList(List<TbCode> adminLevList) {
+		this.adminLevList = adminLevList;
+	}
+	public String getAdminLev() {
+		return adminLev;
+	}
+	public void setAdminLev(String adminLev) {
+		this.adminLev = adminLev;
+	}
 	public String getUserWorkGbNm() {
 		return userWorkGbNm;
 	}
@@ -256,7 +271,8 @@ public class TbUser {
 				+ insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", userNm=" + userNm + ", hospNm=" + hospNm
 				+ ", farmNm=" + farmNm + ", sidoNm=" + sidoNm + ", sigunguNm=" + sigunguNm + ", sidoCd=" + sidoCd
 				+ ", sigunguCd=" + sigunguCd + ", userStat=" + userStat + ", adminYn=" + adminYn + ", userStatList="
-				+ userStatList + ", userWorkGb=" + userWorkGb + ", userWorkGbNm=" + userWorkGbNm + "]";
+				+ userStatList + ", userWorkGb=" + userWorkGb + ", userWorkGbNm=" + userWorkGbNm + ", adminLev="
+				+ adminLev + ", adminLevList=" + adminLevList + "]";
 	}
 
 

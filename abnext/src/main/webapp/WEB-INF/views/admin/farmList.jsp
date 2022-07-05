@@ -58,7 +58,7 @@
 		</section>
 
 		<!-- Main content -->
-		 <section class="content" >
+		 <section class="content" style="font-size:13px;">
  			<div class="container-fluid">
  				<div class="invoice p-3 mb-3">
 					<!-- Table row -->

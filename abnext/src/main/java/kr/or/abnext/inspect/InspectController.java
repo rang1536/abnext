@@ -114,6 +114,7 @@ public class InspectController {
 		TbRcept rcept = insServ.getRcept(searchRcept);
 
 		//시료정보
+		System.out.println(">>>>>>>>>>> 신청번호 확인 : "+""+searchRcept.getRqstNo());
 		TbSample tbSample = new TbSample();
 		tbSample.setRqstNo(""+searchRcept.getRqstNo());
 		List<TbSample> smplList = insServ.selectSampleList(tbSample);

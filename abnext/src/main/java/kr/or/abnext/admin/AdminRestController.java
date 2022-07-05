@@ -188,7 +188,7 @@ public class AdminRestController {
 	 * */
 	@RequestMapping(value = "getHospInfo", method = RequestMethod.POST)
 	public Map<String, Object> getHospInfoCtrl(TbHospital tbHospital
-			, @RequestParam(value="userNo") String userNo) {
+			, @RequestParam(value="userNo", defaultValue="") String userNo) {
 		System.out.println("병원정보 조회 시작~!!");
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -202,7 +202,7 @@ public class AdminRestController {
 	 * */
 	@RequestMapping(value = "getFarmInfo", method = RequestMethod.POST)
 	public Map<String, Object> getFarmInfoCtrl(TbFarm tbFarm
-			, @RequestParam(value="userNo") String userNo) {
+			, @RequestParam(value="userNo", defaultValue="") String userNo) {
 		System.out.println("농장정보 조회 시작~!!");
 
 		Map<String, Object> map = new HashMap<String, Object>();
