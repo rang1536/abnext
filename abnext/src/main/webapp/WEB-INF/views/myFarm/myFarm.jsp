@@ -19,9 +19,6 @@
 	<link rel="stylesheet" href="resources/plugins/daterangepicker/daterangepicker.css">
 	<!-- Bootstrap Color Picker -->
 	<link rel="stylesheet" href="resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-	<!-- Select2 -->
-	<link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
-	<link rel="stylesheet" href="resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- iCheck for checkboxes and radio inputs -->
@@ -99,9 +96,12 @@
 							<div class="icon">
 								<i class="ion ion-bag"></i>
 							</div>
+							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">&nbsp;<span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<%--
 							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							 --%>
 						</div>
 					</div>
 					<!-- ./col -->
@@ -115,9 +115,12 @@
 							<div class="icon">
 								<i class="ion ion-stats-bars"></i>
 							</div>
+							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<%--
 							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							 --%>
 						</div>
 					</div>
 					<!-- ./col -->
@@ -131,9 +134,12 @@
 							<div class="icon">
 								<i class="ion ion-person-add"></i>
 							</div>
+							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<%--
 							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							 --%>
 						</div>
 					</div>
 					<!-- ./col -->
@@ -147,159 +153,15 @@
 							<div class="icon">
 								<i class="ion ion-pie-graph"></i>
 							</div>
+							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<%--
 							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							 --%>
 						</div>
 					</div>
 					<!-- ./col -->
-				</div>
-
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">*진단비용</h3>
-							</div>
-							<!-- /.card-header -->
-							<div class="card-body">
-								<ul class="pagination pagination-month justify-content-center" style="overflow:scroll;">
-									<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="changeYear(1)">«</a></li>
-									<li class="page-item Jan">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Jan</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Feb">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Feb</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Mar">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Mar</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Apr">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Apr</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item May">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">May</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Jun">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Jun</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Jul">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Jul</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Aug">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Aug</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Sep">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Sep</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Oct">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Oct</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Nov">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Nov</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Dec">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Dec</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="changeYear(2)">»</a></li>
-								</ul>
-							</div>
-							<div class="card-body table-responsive p-0" style="height: 500px;">
-								<table class="table table-bordered table-head-fixed text-nowrap">
-									<thead>
-										<tr>
-											<td class="txtc txtb">날짜</td>
-											<td class="txtc txtb">의뢰번호</td>
-											<td class="txtc txtb">청구액</td>
-											<td class="txtc txtb">납부액</td>
-											<td class="txtc txtb">납부예정</td>
-										</tr>
-									</thead>
-									<tbody id="tbodyList">
-										<c:set var="rqstTot" value="0"/>
-										<c:set var="payedTot" value="0"/>
-										<c:set var="payingTot" value="0"/>
-										<c:forEach var="item" items="${ak01Monthdata }" varStatus="status">
-											<tr>
-												<td class="txtc">${item.rqstDt }</td>
-												<td class="txtc">${item.rqstNo }</td>
-												<td class="txtr"><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
-												<td class="txtr">
-													<c:choose>
-														<c:when test="${item.payStat == '02' }">
-															<fmt:formatNumber value="${item.price }" pattern="#,###"/>
-															<c:set var="payedTot" value="${payedTot+ item.price}"/>
-														</c:when>
-														<c:otherwise>
-															0
-														</c:otherwise>
-													</c:choose>
-												</td>
-												<td class="txtr">
-													<c:choose>
-														<c:when test="${item.payStat == '01' }">
-															<fmt:formatNumber value="${item.price }" pattern="#,###"/>
-															<c:set var="payingTot" value="${payingTot+ item.price}"/>
-														</c:when>
-														<c:otherwise>
-															0
-														</c:otherwise>
-													</c:choose>
-												</td>
-											</tr>
-											<c:set var="rqstTot" value="${rqstTot+ item.price}"/>
-										</c:forEach>
-									</tbody>
-									<tfoot id="tfootList">
-										<tr>
-											<td class="txtr" colspan="2">합계</td>
-											<td class="txtr"><fmt:formatNumber value="${rqstTot }" pattern="#,###"/></td>
-											<td class="txtr"><fmt:formatNumber value="${payedTot }" pattern="#,###"/></td>
-											<td class="txtr"><fmt:formatNumber value="${payingTot }" pattern="#,###"/></td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
-					</div>
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>
@@ -327,8 +189,6 @@
 <script src="resources/dist/js/demo.js"></script>
 <!-- date-range-picker -->
 <script src="resources/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Select2 -->
-<script src="resources/plugins/select2/js/select2.full.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bootstrap color picker -->
@@ -347,38 +207,11 @@
 	$(function () {
 		bsCustomFileInput.init();
 
-		//Initialize Select2 Elements
-		$('.select2').select2()
-
-		//Initialize Select2 Elements
-		$('.select2bs4').select2({
-			theme: 'bootstrap4'
-		})
-
 		//Date picker
 		$('#reservationdate').datetimepicker({
-			format: 'YYYY'
+			format: 'YYYY.MM'
 		});
 
-		var now = new Date();
-		$("#searchYear").val(now.getFullYear());
-		var nowMonth = now.getMonth()+1;
-		var monthTxt = "";
-		switch(nowMonth) {
-		  case 1 : monthTxt = 'Jan'; break;
-		  case 2 : monthTxt = "Feb"; break;
-		  case 3 : monthTxt = "Mar"; break;
-		  case 4 : monthTxt = "Apr"; break;
-		  case 5 : monthTxt = "May"; break;
-		  case 6 : monthTxt = "Jun"; break;
-		  case 7 : monthTxt = "Jul"; break;
-		  case 8 : monthTxt = "Aug"; break;
-		  case 9 : monthTxt = "Sep"; break;
-		  case 10 : monthTxt = "Oct"; break;
-		  case 11 : monthTxt = "Nov"; break;
-		  case 12 : monthTxt = "Dec"; break;
-		}
-		$("."+monthTxt).addClass("active");
 	 });
 
 	$('#reservationdate').on('change.datetimepicker', function (e) {

@@ -195,9 +195,9 @@
 					<!-- Add icons to the links using the .nav-icon class
 							 with font-awesome or any other icon font library -->
 					<li class="nav-item">
-						<a href="myFarm.do" class="nav-link leftMenu">
+						<a href="myFarm" class="nav-link leftMenu">
 							<i class="nav-icon fas fa-tachometer-alt"></i>
-							<p>My-Farm</p>
+							<p>MyPage</p>
 						</a>
 					</li>
 					<li class="nav-item menu-is-opening">

@@ -17,7 +17,4 @@ public class MyFarmDao {
 		return sql.selectOne("myFarm.getDataYear", bean);
 	}
 
-	public List<MyFarm> getDataMonth(MyFarm bean) {
-		return sql.selectList("myFarm.getDataMonth", bean);
-	}
 }

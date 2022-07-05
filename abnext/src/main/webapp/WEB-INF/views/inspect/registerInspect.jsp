@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,14 +79,17 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*신청자(기관)</label>
-												<input type="text" class="form-control" placeholder="ㅇㅇ동물병원" readonly id="hospNm">
-												<input type="hidden" id="hospNo"/>
+												<select class="form-control select2" id="hospNo">
+													<c:forEach var="item" items="${hospital }" varStatus="status">
+														<option value="${item.hospNo }" data-paygb="${item.payGb }" data-adr="${item.hospSigunguNm }">${item.hospNm }</option>
+													</c:forEach>
+												</select>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*주소</label>
-												<input type="text" class="form-control" placeholder="서울 서대문구" readonly>
+												<input type="text" id="hospAdr" class="form-control" placeholder="서울 서대문구" readonly value="${hospital[0].hospSigunguNm }">
 											</div>
 										</div>
 									</div>
@@ -92,13 +97,17 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*담당수의사</label>
-												<select class="form-control" id="docNo"></select>
+												<select class="form-control" id="docNo">
+													<c:forEach var="item" items="${doctor }" varStatus="status">
+														<option value="${item.userId }">${item.userNm }</option>
+													</c:forEach>
+												</select>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*연락처</label>
-												<input type="text" class="form-control" placeholder="전화번호" readonly>
+												<input type="text" class="form-control" placeholder="전화번호" readonly value="${doctor[0].userHp }">
 											</div>
 										</div>
 									</div>
@@ -415,8 +424,6 @@ $(document).ready(function(){
 	//신청자(userId, userNm)
 	$("#userNo").val(userInfo.userNo);
 	$("#userNm").val(userInfo.userNm);
-	$("#hospNo").val(userInfo.hospNo);
-	$("#hospNm").val(userInfo.hospNm);
 
 });
 
@@ -567,12 +574,9 @@ $(".btn-save").on('click',function(){
 	});
 
 	var price = $("#sumPrice").text().replace(/,/gi,'').replace('원','');
-	var hospNo = 0;
-	if($("#hospNo").val() != null && $("#hospNo").val() != '' && $("#hospNo").val() == 'null')
-		hospNo = $("#hospNo").val();
 	var data = {
-			hospNo : hospNo,
-			hospNm : $("#hospNm").val(),
+			hospNo : $("#hospNo").val(),
+			hospNm : $("#hospNo option:selected").text(),
 			userNo : $("#userNo").val(),
 			userNm : $("#userNm").val(),
 			animNo : '0',
@@ -591,7 +595,7 @@ $(".btn-save").on('click',function(){
 			procStat : '1',
 			procStatNm : '신청',
 			rqstMemo : $("#rqstMemo").val(),
-			payGb : '',
+			payGb : $("#hospNo option:selected").data("paygb"),
 			price : price,
 			payStat : '01',
 			insId : localStorage.getItem("userId"),
@@ -665,6 +669,26 @@ function docList(){
 	});
 }
 
+$(document).on('change','#hospNo',function(){
+	$("#hospAdr").val($("#hospNo option:selected").data("adr"));
+	var dt = {hospNo : $("#hospNo").val()};
+	console.log(dt);
+	$.ajax({
+		url : "selectDoctorListByHosp",
+		data : dt,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			console.log(data);
+			var optHtml = '';
+			for(var i=0; i<data.length; i++){
+				optHtml += '<option value="'+data[i].userNo+'">'+data[i].userNm+'</option>';
+			}
+			$("#docNo").html(optHtml);
+
+		}
+	});
+})
 </script>
 </body>
 </html>

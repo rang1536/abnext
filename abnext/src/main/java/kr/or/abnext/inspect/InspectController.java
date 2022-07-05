@@ -11,17 +11,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
+import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
+import kr.or.abnext.domain.TbUser;
 
 @Controller
+@SessionAttributes({"userInfo"})
 public class InspectController {
 
 	@Autowired
@@ -73,10 +78,20 @@ public class InspectController {
 	}
 
 	@RequestMapping(value = "registerInspect")
-	public String registerInspect(Locale locale, Model model) {
+	public String registerInspect(Locale locale, Model model,
+			@ModelAttribute("userInfo") TbUser userBean) {
 		logger.info("registerInspect Method is start {}.", locale);
 
-		//model.addAttribute("serverTime", formattedDate );
+		logger.info(userBean.toString());
+		TbHospital hospBean = new TbHospital();
+		TbUser docBean = new TbUser();
+		if(!userBean.getHospNo().equals("")) {
+			hospBean.setHospNo(Integer.parseInt(userBean.getHospNo()));
+			docBean.setUserId(userBean.getUserId());
+		}
+
+		model.addAttribute("hospital", insServ.selectHospitalList(hospBean));
+		model.addAttribute("doctor", insServ.selectDoctorList(docBean));
 
 		return "inspect/registerInspect";
 	}

@@ -13,8 +13,13 @@
 	<select id="selectDoctorList" parameterType="kr.or.abnext.domain.TbUser" resultType="kr.or.abnext.domain.TbUser">
 		SELECT *
 		  FROM TB_USER
-		 WHERE HOSP_NO = (SELECT HOSP_NO FROM TB_USER WHERE USER_ID = #{userId})
-		   AND USER_LEV = '2'
+		 WHERE HOSP_NO = CASE WHEN (SELECT HOSP_NO FROM TB_USER WHERE USER_ID = #{userId}) = '' THEN (SELECT HOSP_NO FROM TB_HOSPITAL ORDER BY HOSP_NO LIMIT 1) ELSE (SELECT HOSP_NO FROM TB_USER WHERE USER_ID = #{userId}) END
+	</select>
+
+	<select id="selectDoctorListByHosp" parameterType="kr.or.abnext.domain.TbHospital" resultType="kr.or.abnext.domain.TbUser">
+		SELECT *
+		  FROM TB_USER
+		 WHERE HOSP_NO = #{hospNo}
 	</select>
 
 	<insert id="insertRcept" parameterType="kr.or.abnext.domain.TbRcept">
@@ -105,6 +110,16 @@
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_TYPE) AS INSP_TYPE_NM
 		  FROM TB_INSPECTION A
 		 WHERE RQST_NO = #{rqstNo}
+	</select>
+
+	<select id="selectHospitalList" parameterType="kr.or.abnext.domain.TbHospital" resultType="kr.or.abnext.domain.TbHospital">
+		SELECT A.*
+		  FROM TB_HOSPITAL A
+		 WHERE 1=1
+		<if test="hospNo != null and hospNo != ''">
+		   AND HOSP_NO = #{hospNo}
+		</if>
+		 ORDER BY HOSP_NO
 	</select>
 
 	<select id="selectInspFileList" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbFile">

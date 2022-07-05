@@ -16,13 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.or.abnext.domain.MyFarm;
 import kr.or.abnext.domain.TbUser;
 
 @Controller
-//@SessionAttributes({"userInfo"})
+@SessionAttributes({"userInfo"})
 public class MyFarmController {
 
 	@Autowired
@@ -31,24 +32,32 @@ public class MyFarmController {
 	private static final Logger logger = LoggerFactory.getLogger(MyFarmController.class);
 
 	@RequestMapping(value = "myFarm" , method = RequestMethod.GET)
-	public String myFarm(Locale locale, Model model, MyFarm searchBean) {
+	public String myFarm(Locale locale, Model model, MyFarm searchBean,
+			@ModelAttribute("userInfo") TbUser userBean) {
 
-		//String lvl = session.getAttribute("userLevel").toString();
+		if(userBean == null) return "index";
+		String lvl = userBean.getUserLev();
 		//권한에 따라 사용자 화면과 관리자 화면으로 분리하여 리턴
+		if(lvl.equals("1")) {
+			logger.info(userBean.toString());
+			Date now = new Date();
+			SimpleDateFormat df = new SimpleDateFormat("yyyy", Locale.KOREA);
+			searchBean.setSearchStr(df.format(now));
+			searchBean.setInsId(userBean.getUserId());
+			MyFarm mfBean = myFarmServ.getDataYear(searchBean);
+			model.addAttribute("ak01Yeardata",mfBean);
 
-		Date now = new Date();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy", Locale.KOREA);
-		searchBean.setSearchStr(df.format(now));
-		MyFarm mfBean = myFarmServ.getDataYear(searchBean);
-		model.addAttribute("ak01Yeardata",mfBean);
+			//return "myFarm/myFarm";
+			return "myFarm/myFarm";
+		}else {
+			Date now = new Date();
+			SimpleDateFormat df = new SimpleDateFormat("yyyy", Locale.KOREA);
+			searchBean.setSearchStr(df.format(now));
+			MyFarm mfBean = myFarmServ.getDataYear(searchBean);
+			model.addAttribute("ak01Yeardata",mfBean);
 
-		df = new SimpleDateFormat("yyyyMM", Locale.KOREA);
-		searchBean.setSearchStr(df.format(now));
-		List<MyFarm> list = myFarmServ.getDataMonth(searchBean);
-		model.addAttribute("ak01Monthdata",list);
-
-
-		//return "myFarm/myFarm";
-		return "myFarm/myFarm2";
+			//return "myFarm/myFarm";
+			return "myFarm/myFarm2";
+		}
 	}
 }

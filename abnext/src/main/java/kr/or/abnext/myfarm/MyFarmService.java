@@ -17,7 +17,4 @@ public class MyFarmService {
 		return myFarmDao.getDataYear(bean);
 	}
 
-	public List<MyFarm> getDataMonth(MyFarm bean){
-		return myFarmDao.getDataMonth(bean);
-	}
 }

@@ -21,6 +21,7 @@ import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
+import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
@@ -90,6 +91,17 @@ public class InspectRestController {
 	public List<TbUser> selectDoctorList(TbUser tbUser) {
 		System.out.println("의사조회 시작~!!");
 		List<TbUser> list = inspectServ.selectDoctorList(tbUser);
+		return list;
+	}
+
+	/*
+	 * 코드조회
+	 **/
+	@RequestMapping(value = "selectDoctorListByHosp", method = RequestMethod.POST)
+	public List<TbUser> selectDoctorListByHosp(TbHospital srchBean) {
+		System.out.println("의사조회 시작~!!!!!!!!!!!!!!");
+		logger.info(srchBean.toString());
+		List<TbUser> list = inspectServ.selectDoctorListByHosp(srchBean);
 		return list;
 	}
 

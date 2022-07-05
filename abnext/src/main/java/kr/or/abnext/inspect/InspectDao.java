@@ -69,8 +69,16 @@ public class InspectDao {
 		return sql.insert("inspection.insertAnimal", anim);
 	}
 
-	public List<TbUser> selectDoctorList(TbUser tbUser){
-		return sql.selectList("inspection.selectDoctorList", tbUser);
+	public List<TbUser> selectDoctorList(TbUser bean){
+		return sql.selectList("inspection.selectDoctorList", bean);
+	}
+
+	public List<TbUser> selectDoctorListByHosp(TbHospital tbUser){
+		return sql.selectList("inspection.selectDoctorListByHosp", tbUser);
+	}
+
+	public List<TbHospital> selectHospitalList(TbHospital bean){
+		return sql.selectList("inspection.selectHospitalList", bean);
 	}
 
 	public List<TbInspection> selectInspList(TbInspection tbInspection){

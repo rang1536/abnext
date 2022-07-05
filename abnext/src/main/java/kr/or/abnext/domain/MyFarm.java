@@ -18,6 +18,9 @@ public class MyFarm {
 	private String price;
 	private String payStat;
 
+	//등록자
+	private String insId;
+
 	// 조회조건
 	private String searchStr;
 
@@ -85,6 +88,14 @@ public class MyFarm {
 		this.payStat = payStat;
 	}
 
+	public String getInsId() {
+		return insId;
+	}
+
+	public void setInsId(String insId) {
+		this.insId = insId;
+	}
+
 	public String getSearchStr() {
 		return searchStr;
 	}
@@ -96,8 +107,8 @@ public class MyFarm {
 	@Override
 	public String toString() {
 		return "MyFarm [reqCnt=" + reqCnt + ", recCnt=" + recCnt + ", procCnt=" + procCnt + ", finCnt=" + finCnt
-				+ ", rqstDt=" + rqstDt + ", rqstNo=" + rqstNo + ", price=" + price + ", payStat=" + payStat
-				+ ", searchStr=" + searchStr + "]";
+				+ ", rqstDt=" + rqstDt + ", rqstNo=" + rqstNo + ", price=" + price + ", payStat=" + payStat + ", insId="
+				+ insId + ", searchStr=" + searchStr + "]";
 	}
 
 

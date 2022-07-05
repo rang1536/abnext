@@ -35,16 +35,4 @@ public class MyFarmRestController {
 		return map;
 	}
 
-	/*
-	 * 월별데이터
-	 **/
-	@RequestMapping(value = "getDataMonth", method = RequestMethod.POST)
-	public Map<String, Object> getDataMonth(MyFarm searchBean) {
-
-		List<MyFarm> list = myFarmServ.getDataMonth(searchBean);
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("list", list);
-
-		return map;
-	}
 }

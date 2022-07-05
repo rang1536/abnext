@@ -4,19 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myFarm">
 	<select id="getDataYear" parameterType="kr.or.abnext.domain.MyFarm" resultType="kr.or.abnext.domain.MyFarm">
-		SELECT (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE DATE_FORMAT(INS_DT,'%Y') = #{searchStr} AND PROC_STAT = 1) AS REQ_CNT
-		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE DATE_FORMAT(INS_DT,'%Y') = #{searchStr} AND PROC_STAT = 2) AS REC_CNT
-		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE DATE_FORMAT(INS_DT,'%Y') = #{searchStr} AND PROC_STAT = 3) AS PROC_CNT
-		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE DATE_FORMAT(INS_DT,'%Y') = #{searchStr} AND PROC_STAT IN (4,5)) AS FIN_CNT
-		  FROM DUAL
-	</select>
-
-	<select id="getDataMonth" parameterType="kr.or.abnext.domain.MyFarm" resultType="kr.or.abnext.domain.MyFarm">
-		SELECT RQST_DT
-		     , RQST_NO
-		     , PRICE
-		     , PAY_STAT
+		SELECT (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE DATE_FORMAT(INS_DT,'%Y%m') = #{searchStr} AND PROC_STAT = 1) AS REQ_CNT
+		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE DATE_FORMAT(INS_DT,'%Y%m') = #{searchStr} AND PROC_STAT = 2) AS REC_CNT
+		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE DATE_FORMAT(INS_DT,'%Y%m') = #{searchStr} AND PROC_STAT = 3) AS PROC_CNT
+		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE DATE_FORMAT(INS_DT,'%Y%m') = #{searchStr} AND PROC_STAT IN (4,5)) AS FIN_CNT
 		  FROM TB_RCEPT
-		 WHERE DATE_FORMAT(INS_DT,'%Y%m') = #{searchStr}
+		 WHERE 1=1
+		<if test="insId != null and insId != ''">
+		   AND INS_ID = #{insId}
+		</if>
+		   AND DATE_FORMAT(INS_DT,'%Y%m') = #{searchStr}
+		 GROUP BY DATE_FORMAT(INS_DT,'%Y%m')
 	</select>
 </mapper>
