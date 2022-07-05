@@ -117,5 +117,3 @@ $.gfn_nvl = function(x){
 	}
 }
 
-
-

@@ -567,9 +567,11 @@ $(".btn-save").on('click',function(){
 	});
 
 	var price = $("#sumPrice").text().replace(/,/gi,'').replace('원','');
-
+	var hospNo = 0;
+	if($("#hospNo").val() != null && $("#hospNo").val() != '' && $("#hospNo").val() == 'null')
+		hospNo = $("#hospNo").val();
 	var data = {
-			hospNo : $("#hospNo").val(),
+			hospNo : hospNo,
 			hospNm : $("#hospNm").val(),
 			userNo : $("#userNo").val(),
 			userNm : $("#userNm").val(),

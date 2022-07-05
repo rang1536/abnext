@@ -259,4 +259,12 @@ public class InspectRestController {
 
 		return map;
 	}
+	
+	@RequestMapping(value = "makePdf", method = RequestMethod.POST)
+	public Map<String, Object> makePdf(TbRcept tbRcept) {
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("result", "ok");
+
+		return map;
+	}
 }

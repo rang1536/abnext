@@ -284,14 +284,18 @@
 <script src="resources/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- Customizing Js -->
 <script src="resources/js/common.js"></script>
+
 <!-- Page specific script -->
 <script>
 $(function () {
 	bsCustomFileInput.init();
 
+    var fontList = ['NotoSansKR'];
 	$('#finalMemo').summernote({
 		height: 300,
-		lang: "ko-KR"
+		lang: "ko-KR",
+        fontNames: fontList,
+        fontNamesIgnoreCheck: fontList
 	});
 
 	//Initialize Select2 Elements
@@ -379,6 +383,7 @@ function imgView(name){
 	$(".image").attr("src",path+name);
 	$('#imgView').modal();
 }
+
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>

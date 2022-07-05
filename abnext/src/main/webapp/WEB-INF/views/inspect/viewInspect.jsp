@@ -215,7 +215,7 @@
 									<td colspan="2" class="txtc">
 										<button type="button" id="list" style="width:142.2px" class="btn btn-success btn-flat"><i class="fas fa-credit-card"></i> 목록</button>
 										<c:if test="${rceptInfo.procStat == '5'}">
-											<button type="button" id="print" style="width:142.2px" class="btn btn-primary btn-flat"><i class="fas fa-copy"></i> 결과출력</button>
+											<button type="button" onclick="makePdf()" style="width:142.2px" class="btn btn-primary btn-flat"><i class="fas fa-copy"></i> 결과출력</button>
 										</c:if>
 									</td>
 								</tr>
@@ -231,7 +231,14 @@
 		<!-- /.content -->
 	</div>
 
-
+	<%-- <jsp:include page="resultPdf.jsp"></jsp:include> --%>
+<div id="pdf" width="240" height="297" style="border:1px solid #d3d3d3;">
+<table><tbody><tr><td>1234</td><td>5678</td></tr>
+<tr><td>1234</td><td>5678</td></tr>
+<tr><td>1234</td><td>5678</td></tr>
+<tr><td>1234</td><td>5678</td></tr>
+</tbody></table>
+</div>
 	<jsp:include page="../layer/layout_footer.jsp"></jsp:include>
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
@@ -272,6 +279,11 @@
 <script src="resources/plugins/dropzone/min/dropzone.min.js"></script>
 <!-- Customizing Js -->
 <script src="resources/js/common.js"></script>
+<script src="resources/pdf/bluebird.min.js"></script>
+<script src="resources/pdf/html2canvas.min.js"></script>
+<script src="resources/pdf/jspdf.min.js"></script>
+<script src="resources/pdf/gulim.js"></script>
+<script src="resources/pdf/common.js"></script>
 <!-- Page specific script -->
 <script>
 $(function () {
@@ -332,6 +344,28 @@ $("#print").on("click",function (){
 $("#list").on("click",function (){
 	location.href = "allInspectList";
 });
+
+function makePdf(){
+	//base64enc
+	var _fonts = base64enc;  //해당 내용이 엄청 길어서..따로 분리하여 사용하세요!
+
+	var doc = new jsPDF("p", "mm", "a4");
+	doc.addFileToVFS('malgun.ttf', _fonts);  //_fonts 변수는 Base64 형태로 변환된 내용입니다.
+	doc.addFont('malgun.ttf','malgun', 'normal');
+	doc.setFont('malgun');
+	var div = $("#pdf")[0];
+	var myImage = '';
+		html2canvas(div).then(function(canvas){
+			myImage = canvas.toDataURL();console.log(myImage);
+			var info = new Image();
+			info.src = myImage;
+		    doc.addImage(info, 'png', 15, 19, 195, 19); //이미지 그리기
+		    doc.save('web.pdf');  //결과 출력
+		});
+
+}
+
+
 
 </script>
 </body>
