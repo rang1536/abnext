@@ -83,6 +83,10 @@ public class InspectService {
 		return inspectDao.selectDoctorListByHosp(bean);
 	}
 
+	public List<TbCode> selectSpeciesList(){
+		return inspectDao.selectSpeciesList();
+	}
+
 	public List<TbHospital> selectHospitalList(TbHospital bean){
 		return inspectDao.selectHospitalList(bean);
 	}

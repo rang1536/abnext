@@ -77,6 +77,10 @@ public class InspectDao {
 		return sql.selectList("inspection.selectDoctorListByHosp", tbUser);
 	}
 
+	public List<TbCode> selectSpeciesList(){
+		return sql.selectList("inspection.selectSpeciesList");
+	}
+
 	public List<TbHospital> selectHospitalList(TbHospital bean){
 		return sql.selectList("inspection.selectHospitalList", bean);
 	}

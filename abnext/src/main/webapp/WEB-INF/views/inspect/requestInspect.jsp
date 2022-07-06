@@ -21,6 +21,7 @@
 
 	<style>
 		th,td {text-align:center;}
+		.txtr {text-align:right;}
 	</style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -63,9 +64,7 @@
 											<th>동물명</th>
 											<th>신청자(기관)</th>
 											<th>담당수의사</th>
-											<th>검사구분</th>
-											<th>진단명</th>
-											<th>검사결과</th>
+											<th>비용</th>
 										</tr>
 									</thead>
 									<tbody id="listBody">
@@ -77,9 +76,7 @@
 												<td>${item.animNm }</td>
 												<td>${item.hospNm }</td>
 												<td>${item.docNm }</td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td class="txtr"><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
 											</tr>
 										</c:forEach>
 									</tbody>

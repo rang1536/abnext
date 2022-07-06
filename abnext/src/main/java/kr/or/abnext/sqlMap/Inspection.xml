@@ -16,6 +16,13 @@
 		 WHERE HOSP_NO = CASE WHEN (SELECT HOSP_NO FROM TB_USER WHERE USER_ID = #{userId}) = '' THEN (SELECT HOSP_NO FROM TB_HOSPITAL ORDER BY HOSP_NO LIMIT 1) ELSE (SELECT HOSP_NO FROM TB_USER WHERE USER_ID = #{userId}) END
 	</select>
 
+	<select id="selectSpeciesList" resultType="kr.or.abnext.domain.TbCode">
+		SELECT *
+		  FROM TB_CODE
+		 WHERE CODE_ID LIKE 'C001%'
+		   AND CODE_LEVEL = '4'
+	</select>
+
 	<select id="selectDoctorListByHosp" parameterType="kr.or.abnext.domain.TbHospital" resultType="kr.or.abnext.domain.TbUser">
 		SELECT *
 		  FROM TB_USER

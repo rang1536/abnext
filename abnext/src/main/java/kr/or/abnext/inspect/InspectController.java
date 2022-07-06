@@ -92,6 +92,7 @@ public class InspectController {
 
 		model.addAttribute("hospital", insServ.selectHospitalList(hospBean));
 		model.addAttribute("doctor", insServ.selectDoctorList(docBean));
+		model.addAttribute("species", insServ.selectSpeciesList());
 
 		return "inspect/registerInspect";
 	}

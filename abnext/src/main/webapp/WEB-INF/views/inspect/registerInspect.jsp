@@ -12,8 +12,6 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="resources/plugins/fontawesome-free/css/all.min.css">
-	<!-- daterange picker -->
-	<link rel="stylesheet" href="resources/plugins/daterangepicker/daterangepicker.css">
 	<!-- iCheck for checkboxes and radio inputs -->
 	<link rel="stylesheet" href="resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 	<!-- Bootstrap Color Picker -->
@@ -21,7 +19,7 @@
 	<!-- Tempusdominus Bootstrap 4 -->
 	<link rel="stylesheet" href="resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 	<!-- Select2 -->
-	<link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
+	<link rel="stylesheet" href="resources/plugins/select2/css/select2.css">
 	<link rel="stylesheet" href="resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<!-- Bootstrap4 Duallistbox -->
 	<link rel="stylesheet" href="resources/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
@@ -123,9 +121,7 @@
 							<div class="card-body">
 								<form>
 									<div class="row">
-										<div class="col-sm-12">
-											<label>*종</label>
-										</div>
+										<!--
 										<div class="col-sm-4">
 											<div class="form-group">
 												<select class="form-control" id="animFirstCd"></select>
@@ -136,29 +132,44 @@
 												<select class="form-control" id="animSecondCd"></select>
 											</div>
 										</div>
-										<div class="col-sm-4">
+										-->
+										<div class="col-sm-6">
 											<div class="form-group">
-												<select class="form-control" id="animThirdCd"></select>
+												<label>*종</label>
+												<select class="form-control select2" id="animThirdCd">
+													<c:forEach var="item" items="${species }" varStatus="status">
+														<option value="${item.codeId }" data-uppcd="${item.uppCodeId }">${item.codeNm }</option>
+													</c:forEach>
+												</select>
+												<input type="hidden" id="animFirstCd"/>
+												<input type="hidden" id="animSecondCd"/>
 											</div>
 										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>*동물이름</label>
+												<input type="text" class="form-control" placeholder="동물명" id="animNm">
+											</div>
+										</div>
+
 									</div>
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label>*동물명</label>
-												<input type="text" class="form-control" placeholder="동물명" id="animNm">
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="form-group">
 												<label>*생년월일</label>
-												<div class="input-group date" id="reservationdate" data-target-input="nearest">
-													<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" data-toggle="datetimepicker" placeholder="생년월일" id="animBirth">
-													<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-														<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+												<div class="form-group">
+													<div class="input-group date" id="reservationdate" data-target-input="nearest">
+														<input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" data-toggle="datetimepicker" placeholder="생년월일" id="animBirth">
+														<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+															<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+														</div>
 													</div>
 												</div>
 											</div>
+										</div>
+										<div class="col-sm-6">
+											<label>&nbsp;</label>
+											<input type="number" class="form-control" placeholder="월령" id="animMonth">
 										</div>
 									</div>
 									<div class="row">
@@ -166,8 +177,9 @@
 											<div class="form-group">
 												<label>*성별</label>
 												<select class="form-control" id="animSex">
-													<option>수컷</option>
-													<option>암컷</option>
+													<option value="M">수컷</option>
+													<option value="F">암컷</option>
+													<option value="X">모름</option>
 												</select>
 											</div>
 										</div>
@@ -361,8 +373,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- date-range-picker -->
-<script src="resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Bootstrap 4 -->
 <script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bs-custom-file-input -->
@@ -382,8 +392,6 @@
 <script src="resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Select2 -->
-<script src="resources/plugins/select2/js/select2.full.min.js"></script>
 <!-- Customizing Js -->
 <script src="resources/js/common.js"></script>
 <!-- Page specific script -->
@@ -392,7 +400,7 @@ $(function () {
 	bsCustomFileInput.init();
 
 	//Initialize Select2 Elements
-	$('.select2').select2()
+	$('.select2').select2();
 
 	//Initialize Select2 Elements
 	$('.select2bs4').select2({
@@ -401,8 +409,8 @@ $(function () {
 
 	//Date picker
 	$('#reservationdate').datetimepicker({
-			format: 'YYYY.MM.DD'
-	});
+		format: 'YYYY.MM.DD'
+	})
 });
 
 $(document).ready(function(){
@@ -411,9 +419,9 @@ $(document).ready(function(){
 	//시료방법
 	$.gfn_getCode('A003',callBackFn,'sampleType');
 	//검사항목
-	$.gfn_getCode('B001',callBackFn,'inspFirstCd');
+	//$.gfn_getCode('B001',callBackFn,'inspFirstCd');
 	//동물 종
-	$.gfn_getCode('C001',callBackFn,'animFirstCd');
+	//$.gfn_getCode('C001',callBackFn,'animFirstCd');
 
 	//의사목록
 	docList();
@@ -441,18 +449,18 @@ function callBackFn(data,col){
 	}else if(col == 'animFirstCd'){
 		$.gfn_getCode(data[0].codeId,callBackFn,'animSecondCd');
 	}else if(col == 'animSecondCd'){
-		$.gfn_getCode(data[0].codeId,callBackFn,'animThirdCd');
+		//$.gfn_getCode(data[0].codeId,callBackFn,'animThirdCd');
 	}else if(col == 'inspThirdCd'){
 		$("#inspPrice").val(data[0].codeDtlMemo);
 	}
 }
 
 $("#animFirstCd").on('change',function(){
-	$.gfn_getCode($(this).val(),callBackFn,'animSecondCd');
+	//$.gfn_getCode($(this).val(),callBackFn,'animSecondCd');
 });
 
 $("#animSecondCd").on('change',function(){
-	$.gfn_getCode($(this).val(),callBackFn,'animThirdCd');
+	//$.gfn_getCode($(this).val(),callBackFn,'animThirdCd');
 });
 
 $("#inspFirstCd").on('change',function(){
@@ -672,14 +680,12 @@ function docList(){
 $(document).on('change','#hospNo',function(){
 	$("#hospAdr").val($("#hospNo option:selected").data("adr"));
 	var dt = {hospNo : $("#hospNo").val()};
-	console.log(dt);
 	$.ajax({
 		url : "selectDoctorListByHosp",
 		data : dt,
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			console.log(data);
 			var optHtml = '';
 			for(var i=0; i<data.length; i++){
 				optHtml += '<option value="'+data[i].userNo+'">'+data[i].userNm+'</option>';
@@ -689,6 +695,32 @@ $(document).on('change','#hospNo',function(){
 		}
 	});
 })
+
+window.onload = function(){
+	animControl();
+}
+
+$(document).on('change','#animThirdCd',function(){
+	animControl();
+})
+
+function animControl(){
+	var codeId = $("#animThirdCd").val();
+	var codeArr = codeId.split('-');
+
+	$("#animFirstCd").val(codeArr[0]+'-'+codeArr[1]);
+	$("#animSecondCd").val(codeArr[0]+'-'+codeArr[1]+'-'+codeArr[2]);
+}
+
+$(document).on('keyup','#animMonth',function(){
+	var month = $(this).val();
+	var now = new Date();
+	var chgMon = Number(now.getMonth()) - Number(month);
+	var chgDate = new Date(now.getFullYear(),chgMon,now.getDate());
+	$("#animBirth").val(chgDate.getFullYear()+'.'+(chgDate.getMonth()+1)+'.'+chgDate.getDate());
+});
+
+
 </script>
 </body>
 </html>

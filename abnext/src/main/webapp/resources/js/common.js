@@ -16,6 +16,22 @@ $.gfn_getCode = function(uppCodeId,callBackFn,obj){
 
 
 /*****************************************************
+ *                   코 드 정 보 (역순)                  *
+ *****************************************************/
+$.gfn_getCode = function(uppCodeId,callBackFn,obj){
+	$.ajax({
+		url : "selectCodeList",
+		data : {uppCodeId : uppCodeId},
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			callBackFn(data,obj);
+		}
+	});
+}
+
+
+/*****************************************************
  *                코 드 상 세 정 보                      *
  *****************************************************/
 $.gfn_getCodeDtl = function(codeId,callBackFn){
