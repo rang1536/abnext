@@ -97,7 +97,7 @@
 												<label>*담당수의사</label>
 												<select class="form-control" id="docNo">
 													<c:forEach var="item" items="${doctor }" varStatus="status">
-														<option value="${item.userId }">${item.userNm }</option>
+														<option value="${item.userId }" data-hp="${item.userHp }">${item.userNm }</option>
 													</c:forEach>
 												</select>
 											</div>
@@ -105,7 +105,7 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*연락처</label>
-												<input type="text" class="form-control" placeholder="전화번호" readonly value="${doctor[0].userHp }">
+												<input type="text" id="userHp" class="form-control" placeholder="전화번호" readonly value="${doctor[0].userHp }">
 											</div>
 										</div>
 									</div>
@@ -114,7 +114,7 @@
 						</div><!-- card-primary -->
 					</div><!-- col-md-6 -->
 					<div class="col-md-6">
-						<div class="card card-indigo">
+						<div class="card card-primary">
 							<div class="card-header">
 								<h3 class="card-title">동물정보</h3>
 							</div>
@@ -221,13 +221,34 @@
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-6">
+											<div class="form-group">
+												<label>*사육형태</label>
+												<div class="form-group clearfix">
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="single" name="chk" class="chkc">
+														<label for="single">단일사육</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="multi" name="chk" class="chkc">
+														<label for="multi">동거사육</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-6">
+											<label>&nbsp;</label>
+											<input type="number" class="form-control" placeholder="동거중인 반려동물 수" id="animCnt" style="display:none">
+										</div>
+									</div>
 								</form>
 							</div>
 						</div><!-- /.card-body -->
 					</div><!-- /.col-md-6 -->
 				</div><!-- /.row -->
 
-
+<!--
 				<div class="card card-success">
 					<div class="card-header">
 						<h3 class="card-title">시료정보</h3>
@@ -278,12 +299,100 @@
 						</form>
 					</div>
 				</div>
-
-				<div class="card card-warning">
+ -->
+				<div class="card card-primary">
 					<div class="card-header">
 						<h3 class="card-title">검사정보</h3>
 					</div>
 					<div class="card-body">
+						<div class="row">
+							<div class="form-group">
+								<label>*시료정보</label>
+								<div class="form-group clearfix">
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk01" class="chks">
+										<label for="chk01">분변</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk02" class="chks">
+										<label for="chk02">깃털</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk03" class="chks">
+										<label for="chk03">혈액</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk04" class="chks">
+										<label for="chk04">총배설강스왑</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk05" class="chks">
+										<label for="chk05">기타</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label>*임상증상 및 병력내용</label>
+								<div class="form-group clearfix">
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk11" class="chkw">
+										<label for="chk11">깃털이상</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk12" class="chkw">
+										<label for="chk12">호흡이상</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk13" class="chkw">
+										<label for="chk13">선위확장</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk14" class="chkw">
+										<label for="chk14">설사</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk15" class="chkw">
+										<label for="chk15">체중감소</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk16" class="chkw">
+										<label for="chk16">기타</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label>*임상증상 및 병력내용</label>
+								<div class="form-group clearfix">
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk21" class="chkw">
+										<label for="chk21">PBFD</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk22" class="chkw">
+										<label for="chk22">APV</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk23" class="chkw">
+										<label for="chk23">PDD</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk24" class="chkw">
+										<label for="chk24">chlamydia(앵무병)</label>
+									</div>
+									<div class="icheck-primary d-inline">
+										<input type="checkbox" id="chk25" class="chkw">
+										<label for="chk25">성감별</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div class="row">
 							<div class="col-md-11">
 								<div class="row">
@@ -330,7 +439,7 @@
 											<td class="th">번호</td>
 											<td class="th">검사항목구분</td>
 											<td class="th">검사항목</td>
-											<td class="th">검사항복세부</td>
+											<td class="th">검사항목세부</td>
 											<td class="th">검사비</td>
 											<td class="th">삭제</td>
 										</tr>
@@ -351,10 +460,11 @@
 					<!-- /.card-body -->
 					<div class="card-body">
 						<div class="row">
-							<div class="col-sm-12">
-								<div class="form-group">
-									<button type="button" class="btn btn-block btn-primary btn-flat btn-save"><i class="fas fa-pencil-alt"></i> 신청하기</button>
-								</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-block btn-success btn-flat btn-list"><i class="fas fa-list"></i> 목록</button>
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-block btn-primary btn-flat btn-save"><i class="fas fa-pencil"></i> 신청하기</button>
 							</div>
 						</div>
 					</div>
@@ -410,6 +520,21 @@ $(function () {
 	//Date picker
 	$('#reservationdate').datetimepicker({
 		format: 'YYYY.MM.DD'
+	});
+
+	$('#reservationdate').on("change.datetimepicker", function (e) {
+		var curDt = new Date();
+		var birthArr = $("#animBirth").val().split(".");
+		var setYear = curDt.getFullYear()-birthArr[0];
+		var setMonth = curDt.getMonth()+1-birthArr[1];
+		var setDate = curDt.getDate()-birthArr[2];
+		var month = setYear*12;
+		if(setDate >= 0){
+			month += setMonth+1;
+		}else {
+			month += setMonth;
+		}
+		$("#animMonth").val(month);
 	})
 });
 
@@ -624,6 +749,12 @@ $(".btn-save").on('click',function(){
 });
 
 function validSave(){
+	var chkLen = 0;
+	$(".chkc").each(function(){
+		if($(this).is(":checked"))
+			chkLen++;
+	});
+
 	var inspLen = 0;
 	$('#inspectTbody').find("tr").each(function(idx){
 		inspLen++;
@@ -640,13 +771,16 @@ function validSave(){
 	}else if(smplLen == 0){
 		alert('하나이상의 시료정보를 입력해주세요.');
 		validFlag = false;
+	}else if(chkLen == 0){
+		alert('사육형태를 체크해주세요.');
+		validFlag = false;
 	}else {
 		var validFlag = true;
 		var validItem = ['docNo', 'animFirstCd', 'animSecondCd', 'animThirdCd', 'animNm', 'animBirth'
-			            ,'animSex', 'animButler', 'butlerSido', 'butlerSigungu'
+									,'animSex', 'animButler', 'butlerSido', 'butlerSigungu'
 			];
 		var validItemNm = ['담당수의사', '동물 종 첫번째', '동물 종 두번째', '동물 종 세번째', '동물이름', '동물생년월일'
-			            ,'동물성별', '보호자이름', '보호자주소(시도)', '보호자주소(시군구)'
+									,'동물성별', '보호자이름', '보호자주소(시도)', '보호자주소(시군구)'
 			];
 		for(var i=0; i<validItem.length; i++){
 			if($("#"+validItem[i]).val() == '' || $("#"+validItem[i]).val() == null){
@@ -670,7 +804,7 @@ function docList(){
 		success : function(data){
 			var optHtml = '';
 			for(var i=0; i<data.length; i++){
-				optHtml += '<option value="'+data[i].userNo+'">'+data[i].userNm+'</option>';
+				optHtml += '<option value="'+data[i].userNo+'" data-hp="'+data[i].userHp+'">'+data[i].userNm+'</option>';
 			}
 			$("#docNo").html(optHtml);
 		}
@@ -691,9 +825,13 @@ $(document).on('change','#hospNo',function(){
 				optHtml += '<option value="'+data[i].userNo+'">'+data[i].userNm+'</option>';
 			}
 			$("#docNo").html(optHtml);
-
 		}
 	});
+});
+
+$(document).on('change','#docNo',function(){
+	console.log($("#docNo option:selected").data('hp'));
+	$("#userHp").val($("#docNo option:selected").data('hp'));
 })
 
 window.onload = function(){
@@ -717,9 +855,33 @@ $(document).on('keyup','#animMonth',function(){
 	var now = new Date();
 	var chgMon = Number(now.getMonth()) - Number(month);
 	var chgDate = new Date(now.getFullYear(),chgMon,now.getDate());
-	$("#animBirth").val(chgDate.getFullYear()+'.'+(chgDate.getMonth()+1)+'.'+chgDate.getDate());
+	var mon = chgDate.getMonth()+1;
+	if(mon < 10) mon = "0"+mon;
+	var dt = chgDate.getDate();
+	if(dt < 10) dt = "0"+dt;
+	$("#animBirth").val(chgDate.getFullYear()+'.'+mon+'.'+dt);
 });
 
+$(document).on('click','.chkc',function(){
+	$(".chkc").each(function(){
+		$(this).prop("checked", false);
+	})
+	var id = $(this).attr('id');
+	$("#"+id).prop("checked", true);
+
+	if(id == 'single'){
+		$("#animCnt").val("1");
+		$("#animCnt").hide();
+	}else {
+		$("#animCnt").show();
+		$("#animCnt").focus();
+		$("#animCnt").val("");
+	}
+});
+
+$(".btn-list").click(function (){
+	location.href = 'requestInspect';
+})
 
 </script>
 </body>
