@@ -145,22 +145,20 @@
 													<div class="line" style="background-color:#C90000;"></div>
 												</div>
 
-												<div class="row">
+												<!-- <div class="row">
 								                  <div class="col-sm-6">
-								                    <!-- select -->
+								                    select
 								                    <div class="form-group">
 								                      <label>회원구분</label>
 								                      <select class="custom-select" name="userLev" id="userLev">
 								                        <option value="1">일반회원</option>
-								                        <option value="2">수의사</option>
-								                        <option value="3">기관(병원)</option>
-								                        <option value="4">농장</option>
-								                        <option value="5">관리자</option>
+								                        <option value="2">연구원</option>
+								                        <option value="3">접수자</option>
 								                      </select>
 								                    </div>
 								                  </div>
 								                  <div class="col-sm-6">
-								                    <!-- <div class="form-group">
+								                   <div class="form-group">
 								                      <label>Custom Select Disabled</label>
 								                      <select class="custom-select" disabled>
 								                        <option>option 1</option>
@@ -169,9 +167,9 @@
 								                        <option>option 4</option>
 								                        <option>option 5</option>
 								                      </select>
-								                    </div> -->
+								                    </div>
 								                  </div>
-								                </div>
+								                </div>-->
 
 									            <div class="row">
 									                <div class="col-sm-6">
@@ -1082,6 +1080,7 @@
 		var searchKey = 'hospital';
 
 		//라디오 name="searchKey" id 기관 searchKey1 농장 searchKey2 // 값 hospital, farm 변화시 폼 이벤트 fn_searchKeyChg(searchKey)
+		/*
 		if(userLev == '2' || userLev == '3'){ //수의사, 병원
 			$('#searchKey1').prop('checked', true);
 			toastr.info('수의사 혹은 기관소속인 경우 아래 기관(병원)정보 입력이 필수입니다.');
@@ -1095,8 +1094,9 @@
 			$('#searchKey1').prop('checked', false);
 			$('#searchKey2').prop('checked', false);
 		}
+		*/
 
-		fn_searchKeyChg(searchKey);
+		//fn_searchKeyChg(searchKey);
 	})
 
 

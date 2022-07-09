@@ -402,7 +402,7 @@ public class AdminService {
 		List<TbCode> codeList = adminDao.getCodeList(param);
 
 		param = new HashMap<String, Object>();
-		param.put("codeId", "F004");
+		param.put("codeId", "B001");
 		List<TbCode> adminLevCodeList = adminDao.getCodeList(param);
 
 		if(codeList != null) {

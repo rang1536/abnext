@@ -267,19 +267,6 @@
 
 							<div class="row">
 								<div class="col-sm-6">
-									<!-- select -->
-									<div class="form-group">
-										<label>사용자구분</label>
-										<select class="custom-select" name="userLev" id="userLev" >
-											<option <c:if test="${user.userLev eq '1' }">selected</c:if> value="1">일반회원</option>
-					                        <option <c:if test="${user.userLev eq '2' }">selected</c:if> value="2">수의사</option>
-					                        <option <c:if test="${user.userLev eq '3' }">selected</c:if> value="3">기관(병원)</option>
-					                        <option <c:if test="${user.userLev eq '4' }">selected</c:if> value="4">농장</option>
-					                        <option <c:if test="${user.userLev eq '5' }">selected</c:if> value="5">관리자</option>
-										</select>
-									</div>
-								</div>
-			                  	<div class="col-sm-6">
 					                <div class="form-group">
 					                  <label>이름</label>
 					                  <div class="input-group">
@@ -287,6 +274,19 @@
 					                      <span class="input-group-text"><i class="fas fa-building"></i></span>
 					                    </div>
 					                    <input type="text" class="form-control" id="userNm" name="userNm" value="${user.userNm }" />
+					                  </div>
+					                  <!-- /.input group -->
+					                </div>
+					                <!-- /.form group -->
+				                </div>
+				                <div class="col-sm-6">
+					                <div class="form-group">
+					                  <label>이메일</label>
+					                  <div class="input-group">
+					                    <div class="input-group-prepend">
+					                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+					                    </div>
+					                    <input type="text" class="form-control" id="userEmail" name="userEmail" value="${user.userEmail }">
 					                  </div>
 					                  <!-- /.input group -->
 					                </div>
@@ -323,22 +323,7 @@
 					                <!-- /.form group -->
 								</div>
 							</div>
-							<div class="row">
-			                  	<div class="col-sm-6">
-					                <div class="form-group">
-					                  <label>이메일</label>
-					                  <div class="input-group">
-					                    <div class="input-group-prepend">
-					                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-					                    </div>
-					                    <input type="text" class="form-control" id="userEmail" name="userEmail" value="${user.userEmail }">
-					                  </div>
-					                  <!-- /.input group -->
-					                </div>
-					                <!-- /.form group -->
-				                </div>
-				                <div class="col-sm-6"></div>
-			                </div>
+
 
 							<div class="row">
 			                	<div class="input-group col-sm-4">
@@ -425,7 +410,7 @@
 									</select>
 								</div>
 							</div>
-		                  	<div class="col-sm-4">
+		                  	<%-- <div class="col-sm-4">
 				                <div class="form-group">
 				                  <label>권한</label>
 				                  <select class="custom-select" name="adminYn" id="adminYn" onchange="fn_chgAdminYn(this);">
@@ -435,12 +420,25 @@
 				                  <!-- /.input group -->
 				                </div>
 				                <!-- /.form group -->
-			                </div>
+			                </div> --%>
+			               <div class="col-sm-4">
+								<!-- select -->
+								<div class="form-group">
+									<label>사용자구분</label>
+									<select class="custom-select" name="userLev" id="userLev" onchange="fn_chgAdminYn(this);">
+										<option <c:if test="${user.userLev eq '1' }">selected</c:if> value="1">일반회원</option>
+				                        <option <c:if test="${user.userLev eq '2' }">selected</c:if> value="2">연구원</option>
+				                        <option <c:if test="${user.userLev eq '3' }">selected</c:if> value="3">접수자</option>
+				                        <option <c:if test="${user.userLev eq '4' }">selected</c:if> value="4">책임자</option>
+				                    </select>
+								</div>
+							</div>
 
 			                <div class="col-sm-4 adminLevDiv" style="display:none;">
 				                <div class="form-group">
-				                  <label>관리자레벨</label>
+				                  <label>업무구분</label>
 				                  <select class="custom-select" id="adminLev"> <!-- name="adminLev" -->
+				                  	  <option value="">업무선택</option>
 							     	  <c:forEach var="code" items="${user.adminLevList }" varStatus="status">
 							     	  	<option <c:if test="${code.codeId eq user.adminLev }">selected</c:if> value="${code.codeId }">${code.codeNm }</option>
 							     	  </c:forEach>
@@ -539,10 +537,12 @@
 
 	function fn_chgAdminYn(obj){
 		var val = $(obj).val();
-		if(val == 'Y'){
+		if(val == '2'){
 			$('.adminLevDiv').css('display', '');
 		}else{
 			$('.adminLevDiv').css('display', 'none');
+
+			$('#adminLev').val("");
 		}
 	}
 

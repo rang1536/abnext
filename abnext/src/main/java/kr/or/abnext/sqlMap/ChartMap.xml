@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chart">
+
+	<!-- 기본통계 -->
+	<select id="getBasicChartList" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
+		SELECT RQST_NO
+			   , RQST_DT
+			   , ANIM_BUTLER
+			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-01'), 0) AS SAMPLE1
+			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-02'), 0) AS SAMPLE2
+			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-3'), 0) AS SAMPLE3
+			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-4'), 0) AS SAMPLE4
+			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-5'), 0) AS SAMPLE5
+			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-6'), 0) AS SAMPLE6
+			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO), 0) AS TOTAL
+			   , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = A.ANIM_THIRD_CD) AS ANIM_NM
+			   , ANIM_BIRTH
+			   , IFNULL(ANIM_CNT, 1) AS ANIM_CNT
+			   , HOSP_NM
+			   , DOC_NM
+	     FROM TB_RCEPT A
+	    WHERE 1=1
+	    <if test="stDt != null and stDt != '' ">
+	    	AND RQST_DT <![CDATA[>=]]> replace(replace(#{stDt},'-',''),'-','')
+	    </if>
+	    <if test="endDt != null and endDt != '' ">
+	    	AND RQST_DT <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
+	    </if>
+	</select>
+
+	<select id="getBasicChartList2" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
+		SELECT B.*
+		  FROM (
+				SELECT A.RQST_DT
+					   , SUM(A.SAMPLE1) AS SAMPLE1
+					   , SUM(A.SAMPLE2) AS SAMPLE2
+					   , SUM(A.SAMPLE3) AS SAMPLE3
+					   , SUM(A.SAMPLE4) AS SAMPLE4
+					   , SUM(A.SAMPLE5) AS SAMPLE5
+					   , (SUM(A.TOTAL) - (SUM(A.SAMPLE1)+SUM(A.SAMPLE2)+SUM(A.SAMPLE3)+SUM(A.SAMPLE4)+SUM(A.SAMPLE5))) AS SAMPLE6
+					   , SUM(A.TOTAL) AS TOTAL
+			      FROM (
+						SELECT REPLACE(SUBSTR(RQST_DT,1,7),'.','-') AS RQST_DT
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'PBFD','%') )
+							   		 )
+							   	, 0) AS SAMPLE1
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'APV','%') )
+							   		 )
+							   	, 0) AS SAMPLE2
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'PDD','%') )
+							   		 )
+							   	, 0) AS SAMPLE3
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'chlamydiasis','%') )
+							   		 )
+							   	, 0) AS SAMPLE4
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'aspergilosis','%') )
+							   		 )
+							   	, 0) AS SAMPLE5
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		 )
+							   	, 0) AS TOTAL
+						  FROM TB_RCEPT A
+						 WHERE 1=1
+						   AND RQST_DT LIKE CONCAT('%', #{stDt},'%')
+						) A
+				 GROUP BY RQST_DT
+				 UNION
+				SELECT '2022-01', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-02', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-03', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-04', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-05', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-06', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+			  ) B
+		ORDER BY B.RQST_DT
+	</select>
+
+
+</mapper>

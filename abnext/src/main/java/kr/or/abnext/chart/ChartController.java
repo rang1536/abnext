@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.abnext.domain.ChartView1;
+
 @Controller
 public class ChartController {
 	@Autowired
@@ -16,7 +18,7 @@ public class ChartController {
 	public String basicChartCtrl(Model model) {
 		System.out.println("기본통계 화면가기~!!");
 
-		//model.addAttribute("boardList", boardServ.getBoardListServ());
+		//model.addAttribute("chartList", ChartServ.getBasicChartListServ(chartView));
 		return "chart/basic_chart";
 	}
 

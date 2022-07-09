@@ -54,96 +54,6 @@
 		<!-- Main content -->
 		 <section class="content" style="font-size:13px;">
  			<div class="container-fluid">
- 				<div class="card">
-					<div class="card-header" style="background-color:#002266;color:#000000;">
-						<h3 class="card-title">
-							<b></b>
-						</h3>
-					</div>
-
-					<div class="card-body">
-						<div class="row">
-							<div class="col-sm-2">
-								<div class="form-group">
-									<div class="input-group">
-										<input type="date" class="form-control"/>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-2">
-								<div class="form-group">
-									<div class="input-group">
-										<input type="date" class="form-control"/>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-2">
-								<div class="form-group">
-									<div class="input-group">
-										<button type="button" class="searchBtn btn btn-primary btn-flat btn-block" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--
-					<div class="card-body">
-						<div class="row">
-							<div class="col-sm-6"></div>
-							<div class="col-sm-2">
-								<div class="form-group">
-									<div class="input-group date" id="searchStrtDt" data-target-input="nearest">
-										<input type="text" class="form-control datetimepicker-input" data-target="#searchStrtDt" data-toggle="datetimepicker" placeholder="시작일자" id="strtDt" value="2022.01.01">
-										<div class="input-group-append" data-target="#searchStrtDt" data-toggle="datetimepicker">
-											<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-2">
-								<div class="form-group">
-									<div class="input-group date" id="searchFnshDt" data-target-input="nearest">
-										<input type="text" class="form-control datetimepicker-input" data-target="#searchFnshDt" data-toggle="datetimepicker" placeholder="종료일자" id="fnshDt" value="2022.07.31">
-										<div class="input-group-append" data-target="#searchFnshDt" data-toggle="datetimepicker">
-											<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-sm-1">
-								<div class="form-group">
-									<button type="button" class="searchBtn btn btn-primary btn-flat btn-block" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					 -->
-					<!-- /.card-body -->
-				</div>
-
-				<div class="card">
-					<div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>Chart</b></h3>
-
-						<div class="card-tools">
-							<button type="button" class="btn btn-tool" data-card-widget="collapse">
-								<i class="fas fa-minus"></i>
-							</button>
-							<button type="button" class="btn btn-tool" data-card-widget="remove">
-								<i class="fas fa-times"></i>
-							</button>
-						</div>
-					</div>
-
-					<div class="card-body">
-						<div class="chart">
-							<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-						</div>
-					</div>
-					<!-- /.card-body -->
-				</div>
-				<!-- /.card -->
 
 				<div class="card">
 					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
@@ -160,6 +70,23 @@
 					</div>
 
 					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-8"></div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<div class="input-group">
+										<input type="date" class="form-control-sm" name="stDt" id="stDt"/>&nbsp;&nbsp;&nbsp;
+										<input type="date" class="form-control-sm" name="endDt" id="endDt"/>&nbsp;&nbsp;&nbsp;
+										<div class="btn-group">
+	                  						<button type="button" class="searchBtn btn-sm btn-primary" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
+	                  						&nbsp;&nbsp;
+	                  						<button type="button" class="excelBtn btn-sm btn-success" onclick="excelDown();" style="max-width:100px;min-width:82px;"><i class="fa fa-copy"></i> EXCEL</button>
+                  						</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div id="jsGrid1"></div>
 					</div>
 					<!-- /.card-body -->
@@ -214,6 +141,7 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 
+<script src="resources/js/common.js"></script>
 <script>
 
 	//BS-Stepper Init
@@ -225,150 +153,61 @@
 		$('.select2').select2();
 		bsCustomFileInput.init();
 
-		$("#jsGrid1").jsGrid({
-	        height: "100%",
-	        width: "100%",
-
-	        sorting: true,
-	        paging: true,
-
-	        data: db.clients,
-
-	        fields: [
-	            { name: "Name", type: "text", width: 150 },
-	            { name: "Age", type: "number", width: 50 },
-	            { name: "Address", type: "text", width: 200 },
-	            { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-	            { name: "Married", type: "checkbox", title: "Is Married" }
-	        ]
-	    });
+		getData();
     });
 
-	//Date picker
-	$('#searchStrtDt').datetimepicker({
-		format: 'YYYY.MM.DD'
-	});
+	function getData(){
+		$.ajax({
+			url : 'basicChartList',
+			dataType : 'json',
+			type : 'post',
+			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
+			success:function(data){
+				setGrid(data);
+			}
+		})
+	}
 
-	//Date picker
-	$('#searchFnshDt').datetimepicker({
-		format: 'YYYY.MM.DD'
-	});
+	function setGrid(data){
+		$("#jsGrid1").jsGrid({
+	        height: "auto",
+	        width: "100%",
+	        sorting: true,
+	        paging: true,
+			data: data,
+	        fields: [
+	            { name: "rqstNo", 		type: "text", 	width: 100, title:"의뢰번호", 	align: "center"},
+	            { name: "rqstDt",   	type: "number", width: 80, 	title:"접수일", 	align: "center"},
+	            { name: "animButler", 	type: "text", 	width: 100, title:"보호자명", 	align: "center"},
+	            { name: "sample1", 		type: "number", width: 50, 	title:"깃털", 	align: "center"},
+	            { name: "sample2", 		type: "number", width: 50, 	title:"분변", 	align: "center"},
+	            { name: "sample3", 		type: "number", width: 50, 	title:"스왑", 	align: "center"},
+	            { name: "sample4", 		type: "number", width: 50, 	title:"혈액", 	align: "center"},
+	            { name: "sample5", 		type: "number", width: 50, 	title:"혈청", 	align: "center"},
+	            { name: "sample6", 		type: "number", width: 50, 	title:"기타", 	align: "center"},
+	            { name: "total", 		type: "number", width: 80, 	title:"총시료수", 	align: "center"},
+	            { name: "animNm", 		type: "text", 	width: 120, title:"품종", 	align: "center"},
+	            { name: "animBirth", 	type: "text", 	width: 80, 	title:"주령", 	align: "center"},
+	            { name: "animCnt", 		type: "number", width: 80, 	title:"사육수", 	align: "center"},
+	            { name: "hospNm", 		type: "text", 	width: 150, title:"회사", 	align: "center"},
+	            { name: "docNm", 		type: "text", 	width: 100, title:"담당", 	align: "center"}
+	        ]
+	    });
+	}
 
-	//-------------
-    //- BAR CHART -
-    //-------------
-    var areaChartData = {
-      labels  : ['1월', '2월', '3월', '4월', '5월', '6월', '7월'],
-      datasets: [
-        {
-          label               : '생환',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : '폐사',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label               : '혈액',
-          backgroundColor     : '#476600',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#476600',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : '혈청',
-          backgroundColor     : '#FAED7D',
-          borderColor         : '#FAED7D',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [0, 0, 80, 31, 56, 155, 40]
-        },
-        {
-          label               : '분변',
-          backgroundColor     : '#030066',
-          borderColor         : '#030066',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [128, 148, 140, 119, 186, 27, 0]
-        },
-        {
-          label               : '조직',
-          backgroundColor     : '#FF0000',
-          borderColor         : '#FF0000',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [15, 29, 30, 41, 56, 65, 70]
-        },
-        {
-          label               : '기타',
-          backgroundColor     : '#FFB2D9',
-          borderColor         : '#FFB2D9',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [18, 58, 20, 49, 86, 37, 90]
-        },
-        {
-          label               : '합계',
-          backgroundColor     : '#000000',
-          borderColor         : '#000000',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [150, 200, 180, 250, 300, 250, 210]
-        },
-      ]
-    }
 
-    var barChartCanvas = $('#barChart').get(0).getContext('2d')
-    var barChartData = $.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
-    var temp1 = areaChartData.datasets[1]
-    barChartData.datasets[0] = temp1
-    barChartData.datasets[1] = temp0
+	function excelDown(){
+		$("#jsGrid1").table2excel({
+			exclude : ".excludeThisClass",
+			name : "기본통계",
+			filename : "기본통계",
+			fileext : ".xlsx",
+			exclude_img : true,
+			exclude_links : true,
+			exclude_inputs : true        
+		});    
+	}
 
-    var barChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      datasetFill             : false
-    }
-
-    new Chart(barChartCanvas, {
-      type: 'bar',
-      data: barChartData,
-      options: barChartOptions
-    })
 
 </script>
 </html>

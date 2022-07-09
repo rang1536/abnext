@@ -495,7 +495,13 @@
 		  FROM TB_CODE
 		 WHERE 1=1
 		<if test="codeId != null and codeId != ''">
-			AND CODE_ID LIKE CONCAT('%',#{codeId},'%')
+			<if test="codeId == 'B001'">
+				AND UPP_CODE_ID = #{codeId}
+			</if>
+			<if test="codeId != 'B001'">
+				AND CODE_ID LIKE CONCAT('%',#{codeId},'%')
+			</if>
+
 		</if>
 		<if test="codeNm != null and codeNm != ''">
 			AND CODE_NM LIKE CONCAT('%',#{codeNm},'%')
