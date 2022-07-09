@@ -138,7 +138,7 @@
 												<label>*종</label>
 												<select class="form-control select2" id="animThirdCd">
 													<c:forEach var="item" items="${species }" varStatus="status">
-														<option value="${item.codeId }" data-uppcd="${item.uppCodeId }">${item.codeNm }</option>
+														<option value="${item.codeId }">${item.codeNm }</option>
 													</c:forEach>
 												</select>
 												<input type="hidden" id="animFirstCd"/>
@@ -306,87 +306,99 @@
 					</div>
 					<div class="card-body">
 						<div class="row">
-							<div class="form-group">
-								<label>*시료정보</label>
-								<div class="form-group clearfix">
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk01" class="chks">
-										<label for="chk01">분변</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk02" class="chks">
-										<label for="chk02">깃털</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk03" class="chks">
-										<label for="chk03">혈액</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk04" class="chks">
-										<label for="chk04">총배설강스왑</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk05" class="chks">
-										<label for="chk05">기타</label>
+							<div class="col-6">
+								<div class="form-group">
+									<label>*시료정보</label>
+									<div class="form-group">
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk01" class="chks" value="A002-01">
+											<label for="chk01" style="width:80px">분변</label>
+										</div>
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk02" class="chks" value="A002-02">
+											<label for="chk02" style="width:80px">깃털</label>
+										</div>
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk03" class="chks" value="A002-4">
+											<label for="chk03" style="width:80px">혈액</label>
+										</div>
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk04" class="chks" value="A002-3">
+											<label for="chk04" style="width:125px">총배설강스왑</label>
+										</div>
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk05" class="chks" value="A002-6">
+											<label for="chk05">기타</label>
+										</div>
 									</div>
 								</div>
+							</div>
+							<div class="col-6">
+								<label>&nbsp;</label>
+								<input type="text" class="form-control" id="chk06" style="display:none">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group">
+									<label>*임상증상 및 병력내용</label>
+									<div class="form-group clearfix">
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
+											<label for="chk11">깃털이상</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk12" class="chkh" value="ERR001-02">
+											<label for="chk12">호흡이상</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk13" class="chkh" value="ERR001-03">
+											<label for="chk13">선위확장</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk14" class="chkh" value="ERR001-04">
+											<label for="chk14">설사</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk15" class="chkh" value="ERR001-05">
+											<label for="chk15">체중감소</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk16" class="chkh" value="ERR001-06">
+											<label for="chk16">기타</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<label>&nbsp;</label>
+								<input type="text" class="form-control" id="chk17" style="display:none">
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group">
-								<label>*임상증상 및 병력내용</label>
+								<label>*검사항목</label>
 								<div class="form-group clearfix">
 									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk11" class="chkw">
-										<label for="chk11">깃털이상</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk12" class="chkw">
-										<label for="chk12">호흡이상</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk13" class="chkw">
-										<label for="chk13">선위확장</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk14" class="chkw">
-										<label for="chk14">설사</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk15" class="chkw">
-										<label for="chk15">체중감소</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk16" class="chkw">
-										<label for="chk16">기타</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="form-group">
-								<label>*임상증상 및 병력내용</label>
-								<div class="form-group clearfix">
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk21" class="chkw">
+										<input type="checkbox" id="chk21" class="chkw" value="B001-01-01-001">
 										<label for="chk21">PBFD</label>
 									</div>
 									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk22" class="chkw">
+										<input type="checkbox" id="chk22" class="chkw" value="B001-01-01-002">
 										<label for="chk22">APV</label>
 									</div>
 									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk23" class="chkw">
+										<input type="checkbox" id="chk23" class="chkw" value="B001-01-02-003">
 										<label for="chk23">PDD</label>
 									</div>
 									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk24" class="chkw">
+										<input type="checkbox" id="chk24" class="chkw" value="B001-01-01-101">
 										<label for="chk24">chlamydia(앵무병)</label>
 									</div>
 									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk25" class="chkw">
+										<input type="checkbox" id="chk25" class="chkw" value="B001-01-01-999">
 										<label for="chk25">성감별</label>
 									</div>
 								</div>
@@ -394,14 +406,16 @@
 						</div>
 
 						<div class="row">
-							<div class="col-md-11">
+							<div class="col-md-10">
 								<div class="row">
-									<div class="col-sm-12">
-										<label>*검사항목</label>
-									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-5">
 										<div class="form-group">
-											<select class="form-control" id="inspFirstCd"></select>
+											<select class="form-control select2" id="inspThirdCd">
+												<c:forEach var="item" items="${inspTypeList }" varStatus="status">
+													<option value="${item.codeId }" data-price="${item.codeDtlMemo }">${item.codeNm }</option>
+												</c:forEach>
+											</select>
+											<input type="hidden" id="inspPrice"/>
 										</div>
 									</div>
 									<div class="col-sm-4">
@@ -409,19 +423,17 @@
 											<select class="form-control" id="inspSecondCd"></select>
 										</div>
 									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-3">
 										<div class="form-group">
-											<select class="form-control" id="inspThirdCd"></select>
-											<input type="hidden" id="inspPrice"/>
+											<select class="form-control" id="inspFirstCd"></select>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-1">
+							<div class="col-md-2">
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="form-group">
-											<label>&nbsp;</label>
 											<button type="button" class="btn btn-block btn-success btn-flat" id="addInspBtn">추가</button>
 										</div>
 									</div>
@@ -536,17 +548,33 @@ $(function () {
 		}
 		$("#animMonth").val(month);
 	})
+
+	$("#chk05").click(function(){
+		if($(this).is(":checked")){
+			$("#chk06").show();
+			$("#chk06").focus();
+		}else {
+			$("#chk06").hide();
+			$("#chk06").val("");
+		}
+	});
+
+	$("#chk16").click(function(){
+		if($(this).is(":checked")){
+			$("#chk17").show();
+			$("#chk17").focus();
+		}else {
+			$("#chk17").hide();
+			$("#chk17").val("");
+		}
+	});
+
+	console.log("${doctor[0]}");
 });
 
 $(document).ready(function(){
 	//시료정보
 	$.gfn_getCode('A002',callBackFn,'sampleCode');
-	//시료방법
-	$.gfn_getCode('A003',callBackFn,'sampleType');
-	//검사항목
-	//$.gfn_getCode('B001',callBackFn,'inspFirstCd');
-	//동물 종
-	//$.gfn_getCode('C001',callBackFn,'animFirstCd');
 
 	//의사목록
 	docList();
@@ -557,52 +585,7 @@ $(document).ready(function(){
 	//신청자(userId, userNm)
 	$("#userNo").val(userInfo.userNo);
 	$("#userNm").val(userInfo.userNm);
-
 });
-
-function callBackFn(data,col){
-	var optHtml = '';
-	for(var i=0; i<data.length; i++){
-		optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>';
-	}
-
-	$("#"+col).html(optHtml);
-	if(col == 'inspFirstCd'){
-		$.gfn_getCode(data[0].codeId,callBackFn,'inspSecondCd');
-	}else if(col == 'inspSecondCd'){
-		$.gfn_getCode(data[0].codeId,callBackFn,'inspThirdCd');
-	}else if(col == 'animFirstCd'){
-		$.gfn_getCode(data[0].codeId,callBackFn,'animSecondCd');
-	}else if(col == 'animSecondCd'){
-		//$.gfn_getCode(data[0].codeId,callBackFn,'animThirdCd');
-	}else if(col == 'inspThirdCd'){
-		$("#inspPrice").val(data[0].codeDtlMemo);
-	}
-}
-
-$("#animFirstCd").on('change',function(){
-	//$.gfn_getCode($(this).val(),callBackFn,'animSecondCd');
-});
-
-$("#animSecondCd").on('change',function(){
-	//$.gfn_getCode($(this).val(),callBackFn,'animThirdCd');
-});
-
-$("#inspFirstCd").on('change',function(){
-	$.gfn_getCode($(this).val(),callBackFn,'inspSecondCd');
-});
-
-$("#inspSecondCd").on('change',function(){
-	$.gfn_getCode($(this).val(),callBackFn,'inspThirdCd');
-});
-
-$("#inspThirdCd").on('change',function(){
-	$.gfn_getCodeDtl($(this).val(),callBackFnGetPrice);
-});
-
-function callBackFnGetPrice(data){
-	$("#inspPrice").val(data.codeDtlMemo);
-}
 
 function delInspect(target){
 	$(target).parent().parent().remove();
@@ -610,33 +593,81 @@ function delInspect(target){
 }
 
 $("#addInspBtn").click(function(){
-	var tblNo = Number($("#inspectTbody").find("tr:last").find("td:eq(0)").text())+1;
-	var td2Text = $("#inspFirstCd option:selected").text();
-	var td3Text = $("#inspSecondCd option:selected").text();
-	var td4Text = $("#inspThirdCd option:selected").text();
-	var td8Text = $.gfn_setComma($("#inspPrice").val())+"원";
+	var addHtml = '';
+	var tblNo = 1;
+	$("#inspectTbody").find("tr").each(function(){
+		tblNo++;
+	});
 
-	var inspFirstCd = $("#inspFirstCd").val();
-	var inspSecondCd = $("#inspSecondCd").val();
-	var inspThirdCd = $("#inspThirdCd").val();
-	var inspPrice = $("#inspPrice").val();
+	$(".chkw").each(function(){
+		if($(this).is(":checked")){
+			var inspThirdCd = $(this).val();
+			var contiFlag = true;
+			$("#inspectTbody").find("tr").each(function(){
+				if($(this).find("[id^=inspThirdCd]").val() == inspThirdCd){
+					contiFlag = false;
+				}
+			});
 
-	var addHtml = '<tr>';
-	addHtml += '	<td class="txtc">'+tblNo+'</td>';
-	addHtml += '	<td class="txtc">'+td2Text;
-	addHtml += '		<input type="hidden" id="inspFirstCd_'+tblNo+'" value="'+inspFirstCd+'"/>';
-	addHtml += '		<input type="hidden" id="inspSecondCd_'+tblNo+'" value="'+inspSecondCd+'"/>';
-	addHtml += '		<input type="hidden" id="inspThirdCd_'+tblNo+'" value="'+inspThirdCd+'"/>';
-	addHtml += '		<input type="hidden" id="inspPrice_'+tblNo+'" value="'+inspPrice+'"/>';
-	addHtml += '	</td>';
-	addHtml += '	<td class="txtc">'+td3Text+'</td>';
-	addHtml += '	<td class="txtc">'+td4Text+'</td>';
-	addHtml += '	<td class="txtr">'+td8Text+'</td>';
-	addHtml += '	<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delInspect(this)"><i class="fas fa-trash"></i> 삭제 </a></td>';
-	addHtml += '</tr>';
+			if(contiFlag){
+				var inspArr = inspThirdCd.split('-');
+				var inspSecondCd = inspArr[0]+'-'+inspArr[1]+'-'+inspArr[2];
+				var inspFirstCd = inspArr[0]+'-'+inspArr[1];
+				var inspPrice = "40,000";
+
+				addHtml += '<tr>';
+				addHtml += '	<td class="txtc">'+tblNo+'</td>';
+				addHtml += '	<td class="txtc">'+$.gfn_getCodeNm(inspFirstCd);
+				addHtml += '		<input type="hidden" id="inspFirstCd_'+tblNo+'" value="'+inspFirstCd+'"/>';
+				addHtml += '		<input type="hidden" id="inspSecondCd_'+tblNo+'" value="'+inspSecondCd+'"/>';
+				addHtml += '		<input type="hidden" id="inspThirdCd_'+tblNo+'" value="'+inspThirdCd+'"/>';
+				addHtml += '		<input type="hidden" id="inspPrice_'+tblNo+'" value="'+inspPrice+'"/>';
+				addHtml += '	</td>';
+				addHtml += '	<td class="txtc">'+$.gfn_getCodeNm(inspSecondCd)+'</td>';
+				addHtml += '	<td class="txtc">'+$.gfn_getCodeNm(inspThirdCd)+'</td>';
+				addHtml += '	<td class="txtr">'+inspPrice+'</td>';
+				addHtml += '	<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delInspect(this)"><i class="fas fa-trash"></i> 삭제 </a></td>';
+				addHtml += '</tr>';
+				tblNo++;
+			}
+		}
+	});
+
+	if($("#inspThirdCd").val() != '' && $("#inspThirdCd").val() != 'undefined'){
+		var inspThirdCd = $("#inspThirdCd").val();
+		var contiFlag = true;
+		$("#inspectTbody").find("tr").each(function(){
+			if($(this).find("[id^=inspThirdCd]").val() == inspThirdCd){
+				contiFlag = false;
+			}
+		});
+
+		if(contiFlag){
+			var inspArr = inspThirdCd.split('-');
+			var inspSecondCd = inspArr[0]+'-'+inspArr[1]+'-'+inspArr[2];
+			var inspFirstCd = inspArr[0]+'-'+inspArr[1];
+			var inspPrice = "40,000";
+
+			addHtml += '<tr>';
+			addHtml += '	<td class="txtc">'+tblNo+'</td>';
+			addHtml += '	<td class="txtc">'+$.gfn_getCodeNm(inspFirstCd);
+			addHtml += '		<input type="hidden" id="inspFirstCd_'+tblNo+'" value="'+inspFirstCd+'"/>';
+			addHtml += '		<input type="hidden" id="inspSecondCd_'+tblNo+'" value="'+inspSecondCd+'"/>';
+			addHtml += '		<input type="hidden" id="inspThirdCd_'+tblNo+'" value="'+inspThirdCd+'"/>';
+			addHtml += '		<input type="hidden" id="inspPrice_'+tblNo+'" value="'+inspPrice+'"/>';
+			addHtml += '	</td>';
+			addHtml += '	<td class="txtc">'+$.gfn_getCodeNm(inspSecondCd)+'</td>';
+			addHtml += '	<td class="txtc">'+$.gfn_getCodeNm(inspThirdCd)+'</td>';
+			addHtml += '	<td class="txtr">'+inspPrice+'</td>';
+			addHtml += '	<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delInspect(this)"><i class="fas fa-trash"></i> 삭제 </a></td>';
+			addHtml += '</tr>';
+			tblNo++;
+		}
+	}
 
 	$("#inspectTbody").append(addHtml);
 	calcPrice();
+
 });
 
 $("#addSampleBtn").click(function(){
@@ -697,13 +728,25 @@ $(".btn-save").on('click',function(){
 	});
 
 	var arraySmpl = [];
-	$("#sampleTbody").find("tr").each(function(){
-		var smpl = {
-				sampleCode : $(this).find("[id^=sampleCode]").val(),
-				sampleMemo : $(this).find("[id^=sampleMemo]").val(),
+	$(".chks").each(function(){
+		if($(this).is(":checked")){
+			var smpl = {
+				sampleCode : $(this).val(),
 				insId : localStorage.getItem("userId")
+			}
+			arraySmpl.push(smpl);
 		}
-		arraySmpl.push(smpl);
+	});
+
+	var arrayHist = [];
+	$(".chkh").each(function(){
+		if($(this).is(":checked")){
+			var hist = {
+				histCode : $(this).val(),
+				insId : localStorage.getItem("userId")
+			}
+			arrayHist.push(hist);
+		}
 	});
 
 	var price = $("#sumPrice").text().replace(/,/gi,'').replace('원','');
@@ -733,7 +776,8 @@ $(".btn-save").on('click',function(){
 			payStat : '01',
 			insId : localStorage.getItem("userId"),
 			inspList : arrayInsp,
-			smplList : arraySmpl
+			smplList : arraySmpl,
+			histList : arrayHist
 	}
 
 	$.ajax({
@@ -759,18 +803,20 @@ function validSave(){
 	$('#inspectTbody').find("tr").each(function(idx){
 		inspLen++;
 	});
-
+/*
 	var smplLen = 0;
-	$('#sampleTbody').find("tr").each(function(idx){
-		smplLen++;
+	$('.chks').each(function(idx){
+		if($(this).is(":checked")) smplLen++;
 	});
-
+ */
 	if(inspLen == 0){
 		alert('하나이상의 검사정보를 입력해주세요.');
 		validFlag = false;
+		/*
 	}else if(smplLen == 0){
 		alert('하나이상의 시료정보를 입력해주세요.');
 		validFlag = false;
+		 */
 	}else if(chkLen == 0){
 		alert('사육형태를 체크해주세요.');
 		validFlag = false;
@@ -814,6 +860,7 @@ function docList(){
 $(document).on('change','#hospNo',function(){
 	$("#hospAdr").val($("#hospNo option:selected").data("adr"));
 	var dt = {hospNo : $("#hospNo").val()};
+	$("#userHp").val("");
 	$.ajax({
 		url : "selectDoctorListByHosp",
 		data : dt,
@@ -822,25 +869,36 @@ $(document).on('change','#hospNo',function(){
 		success : function(data){
 			var optHtml = '';
 			for(var i=0; i<data.length; i++){
-				optHtml += '<option value="'+data[i].userNo+'">'+data[i].userNm+'</option>';
+				optHtml += '<option value="'+data[i].userNo+'" data-hp="'+data[i].userHp+'">'+data[i].userNm+'</option>';
 			}
 			$("#docNo").html(optHtml);
+			if(data != null){
+				$("#userHp").val(data[0].userHp);
+			}
 		}
 	});
 });
 
 $(document).on('change','#docNo',function(){
-	console.log($("#docNo option:selected").data('hp'));
 	$("#userHp").val($("#docNo option:selected").data('hp'));
 })
 
 window.onload = function(){
 	animControl();
+	inspControl();
+	$("#inspThirdCd").prepend('<option value="">선택</option>');
+	$("#inspThirdCd").val("");
 }
 
 $(document).on('change','#animThirdCd',function(){
 	animControl();
-})
+});
+
+
+$(document).on('change','#inspThirdCd',function(){
+	inspControl();
+});
+
 
 function animControl(){
 	var codeId = $("#animThirdCd").val();
@@ -848,6 +906,38 @@ function animControl(){
 
 	$("#animFirstCd").val(codeArr[0]+'-'+codeArr[1]);
 	$("#animSecondCd").val(codeArr[0]+'-'+codeArr[1]+'-'+codeArr[2]);
+}
+
+function inspControl(){
+	var codeId = $("#inspThirdCd").val();
+	var codeArr = codeId.split('-');
+
+	$("#inspFirstCd").val(codeArr[0]+'-'+codeArr[1]);
+	$("#inspSecondCd").val(codeArr[0]+'-'+codeArr[1]+'-'+codeArr[2]);
+
+	$.gfn_getCode(codeArr[0]+'-'+codeArr[1],callBackFn,'inspSecondCd');
+}
+
+function callBackFn(data,col){
+	var optHtml = '';
+	var codeId = $("#inspThirdCd").val();
+	var codeArr = codeId.split('-');
+
+	if(col == 'inspSecondCd'){
+		for(var i=0; i<data.length; i++){
+			if(data[i].codeId == codeArr[0]+'-'+codeArr[1]+'-'+codeArr[2]) {
+				optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>';
+			}
+		}
+		$.gfn_getCode(codeArr[0],callBackFn,'inspFirstCd');
+	}else if(col == 'inspFirstCd'){
+		for(var i=0; i<data.length; i++){
+			if(data[i].codeId == codeArr[0]+'-'+codeArr[1]) {
+				optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>';
+			}
+		}
+	}
+	$("#"+col).html(optHtml);
 }
 
 $(document).on('keyup','#animMonth',function(){
@@ -882,6 +972,8 @@ $(document).on('click','.chkc',function(){
 $(".btn-list").click(function (){
 	location.href = 'requestInspect';
 })
+
+
 
 </script>
 </body>

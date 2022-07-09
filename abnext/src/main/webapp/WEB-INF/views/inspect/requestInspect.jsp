@@ -70,7 +70,7 @@
 									<tbody id="listBody">
 										<c:forEach var="item" items="${rceptList }" varStatus="status">
 											<tr>
-												<td>${item.rqstNo }</td>
+												<td>${item.pdlNo }</td>
 												<td>${item.rqstDt }<input type="hidden" id="rqstNo_${status.index+1 }" value="${item.rqstNo }"/></td>
 												<td <c:if test="${item.procStat == 1}">class='text-danger'</c:if>> ${item.procStatNm }</td>
 												<td>${item.animNm }</td>

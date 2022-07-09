@@ -89,7 +89,7 @@
 								</tr>
 								<tr>
 									<td style="width:20%;background-color:#F2F2F2" class="txtc">성별</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.animSex}</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.animSexNm}</td>
 									<td style="width:20%;background-color:#F2F2F2" class="txtc">신청일</td>
 									<td style="width:30%;" class="txtc">${rceptInfo.rqstDt}</td>
 								</tr>
@@ -105,7 +105,7 @@
 					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
-
+<%--
 				<div class="card card-success">
 					<div class="card-header">
 						<h3 class="card-title">시료정보</h3>
@@ -151,13 +151,84 @@
 					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
-
-				<div class="card card-info">
+ --%>
+				<div class="card card-primary">
 					<div class="card-header">
 						<h3 class="card-title">검사정보 설정</h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group">
+									<label>*시료정보</label>
+									<div class="form-group">
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk01" class="chks" value="A002-01">
+											<label for="chk01" style="width:80px">분변</label>
+										</div>
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk02" class="chks" value="A002-02">
+											<label for="chk02" style="width:80px">깃털</label>
+										</div>
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk03" class="chks" value="A002-4">
+											<label for="chk03" style="width:80px">혈액</label>
+										</div>
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk04" class="chks" value="A002-3">
+											<label for="chk04" style="width:125px">총배설강스왑</label>
+										</div>
+										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+											<input type="checkbox" id="chk05" class="chks" value="A002-6">
+											<label for="chk05">기타</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<label>&nbsp;</label>
+								<input type="text" class="form-control" id="chk06" style="display:none">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group">
+									<label>*임상증상 및 병력내용</label>
+									<div class="form-group clearfix">
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
+											<label for="chk11">깃털이상</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk12" class="chkh" value="ERR001-02">
+											<label for="chk12">호흡이상</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk13" class="chkh" value="ERR001-03">
+											<label for="chk13">선위확장</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk14" class="chkh" value="ERR001-04">
+											<label for="chk14">설사</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk15" class="chkh" value="ERR001-05">
+											<label for="chk15">체중감소</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk16" class="chkh" value="ERR001-06">
+											<label for="chk16">기타</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<label>&nbsp;</label>
+								<input type="text" class="form-control" id="chk17" style="display:none">
+							</div>
+						</div>
 						<form>
 							<div class="row">
 								<div class="col-md-10">
@@ -342,7 +413,42 @@ $(function () {
 	$.gfn_getCode('B001',callBackFn,'inspFirstCd');
 	$.gfn_getCode('AE001',callBackFn,'inspType');
 
+	$(".chkh, .chks").each(function(){
+		$(this).attr("disabled",true);
+	});
 
+	$.ajax({
+		url : "sampleList",
+		data : {rqstNo : "${rceptInfo.rqstNo}"},
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			$(".chks").each(function(){
+				for(var i=0; i<data.length; i++){
+					if($(this).val() == data[i].sampleCode){
+						$(this).prop("checked", true);
+					}
+				}
+			})
+		}
+	});
+
+	$.ajax({
+		url : "histList",
+		data : {rqstNo : "${rceptInfo.rqstNo}"},
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			console.log(data);
+			$(".chkh").each(function(){
+				for(var i=0; i<data.length; i++){
+					if($(this).val() == data[i].histCode){
+						$(this).prop("checked", true);
+					}
+				}
+			})
+		}
+	});
 });
 
 $("#sett").on("click",function (){
