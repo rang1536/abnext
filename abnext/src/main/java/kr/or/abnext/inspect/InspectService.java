@@ -14,6 +14,7 @@ import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspection;
+import kr.or.abnext.domain.TbMediHistory;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
 import kr.or.abnext.domain.TbUser;
@@ -31,20 +32,20 @@ public class InspectService {
 		return inspectDao.rceptList(arr);
 	}
 
-	public TbUser getUser(TbUser user) {
-		return inspectDao.getUser(user);
+	public TbUser getUser(TbUser bean) {
+		return inspectDao.getUser(bean);
 	}
 
-	public int duplAnimChk(TbAnimal anim) {
-		return inspectDao.duplAnimChk(anim);
+	public int duplAnimChk(TbAnimal bean) {
+		return inspectDao.duplAnimChk(bean);
 	}
 
-	public TbRcept getRcept(TbRcept rcept) {
-		return inspectDao.getRcept(rcept);
+	public TbRcept getRcept(TbRcept bean) {
+		return inspectDao.getRcept(bean);
 	}
 
-	public TbAnimal getAnimal(TbAnimal anim) {
-		return inspectDao.getAnimal(anim);
+	public TbAnimal getAnimal(TbAnimal bean) {
+		return inspectDao.getAnimal(bean);
 	}
 
 	public TbHospital getHospital(int hospNo) {
@@ -59,20 +60,24 @@ public class InspectService {
 		return inspectDao.getNextKey();
 	}
 
-	public int insertRcept(TbRcept rcept) {
-		return inspectDao.insertRcept(rcept);
+	public int insertRcept(TbRcept bean) {
+		return inspectDao.insertRcept(bean);
 	}
 
-	public int insertInspection(TbInspection insp) {
-		return inspectDao.insertInspection(insp);
+	public int insertInspection(TbInspection bean) {
+		return inspectDao.insertInspection(bean);
 	}
 
-	public int insertSample(TbSample smpl) {
-		return inspectDao.insertSample(smpl);
+	public int insertSample(TbSample bean) {
+		return inspectDao.insertSample(bean);
 	}
 
-	public int insertAnimal(TbAnimal anim) {
-		return inspectDao.insertAnimal(anim);
+	public int insertMediHist(TbMediHistory bean) {
+		return inspectDao.insertMediHist(bean);
+	}
+
+	public int insertAnimal(TbAnimal bean) {
+		return inspectDao.insertAnimal(bean);
 	}
 
 	public List<TbUser> selectDoctorList(TbUser bean){
@@ -87,12 +92,20 @@ public class InspectService {
 		return inspectDao.selectSpeciesList();
 	}
 
+	public List<TbCode> selectMediHistList(){
+		return inspectDao.selectMediHistList();
+	}
+
+	public List<TbCode> selectInspTypeList(){
+		return inspectDao.selectInspTypeList();
+	}
+
 	public List<TbHospital> selectHospitalList(TbHospital bean){
 		return inspectDao.selectHospitalList(bean);
 	}
 
-	public List<TbInspection> selectInspList(TbInspection tbInspection){
-		List<TbInspection> list = inspectDao.selectInspList(tbInspection);
+	public List<TbInspection> selectInspList(TbInspection bean){
+		List<TbInspection> list = inspectDao.selectInspList(bean);
 
 		if(list.size() > 0) {
 			for(int i=0; i<list.size(); i++) {
@@ -102,24 +115,28 @@ public class InspectService {
 		return list;
 	}
 
-	public int removeFile(TbFile tbFile) {
-		return adminDao.removeFile(tbFile);
+	public int removeFile(TbFile bean) {
+		return adminDao.removeFile(bean);
 	}
 
-	public List<TbSample> selectSampleList(TbSample tbSample){
-		return inspectDao.selectSampleList(tbSample);
+	public List<TbSample> selectSampleList(TbSample bean){
+		return inspectDao.selectSampleList(bean);
 	}
 
-	public int updateInspectStatus(TbRcept rcpt) {
-		return inspectDao.updateInspectStatus(rcpt);
+	public List<TbMediHistory> selectMediHistList(TbMediHistory bean){
+		return inspectDao.selectMediHistList(bean);
 	}
 
-	public int updateSampleStatus(TbSample smpl) {
-		return inspectDao.updateSampleStatus(smpl);
+	public int updateInspectStatus(TbRcept bean) {
+		return inspectDao.updateInspectStatus(bean);
 	}
 
-	public int updateInspect(TbInspection insp) {
-		return inspectDao.updateInspect(insp);
+	public int updateSampleStatus(TbSample bean) {
+		return inspectDao.updateSampleStatus(bean);
+	}
+
+	public int updateInspect(TbInspection bean) {
+		return inspectDao.updateInspect(bean);
 	}
 
 	//inspFileUploadServ
@@ -152,5 +169,10 @@ public class InspectService {
 		}
 
 		return map;
+	}
+
+
+	public String getPdlNo(String pdlNo) {
+		return inspectDao.getPdlNo(pdlNo);
 	}
 }

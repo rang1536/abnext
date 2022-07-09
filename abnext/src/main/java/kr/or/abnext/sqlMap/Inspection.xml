@@ -10,6 +10,12 @@
 		   AND TABLE_NAME = 'TB_RCEPT'
 	</select>
 
+	<select id="getPdlNo" resultType="java.lang.String">
+		SELECT SUBSTR(MAX(PDL_NO),6)+1
+		  FROM TB_RCEPT
+		 WHERE PDL_NO LIKE CONCAT(#{pdlNo},'%')
+	</select>
+
 	<select id="selectDoctorList" parameterType="kr.or.abnext.domain.TbUser" resultType="kr.or.abnext.domain.TbUser">
 		SELECT *
 		  FROM TB_USER
@@ -20,6 +26,20 @@
 		SELECT *
 		  FROM TB_CODE
 		 WHERE CODE_ID LIKE 'C001%'
+		   AND CODE_LEVEL = '4'
+	</select>
+
+	<select id="selectMediHistList" resultType="kr.or.abnext.domain.TbCode">
+		SELECT *
+		  FROM TB_CODE
+		 WHERE CODE_ID LIKE 'MH001%'
+		   AND CODE_LEVEL = '3'
+	</select>
+
+	<select id="selectInspTypeList" resultType="kr.or.abnext.domain.TbCode">
+		SELECT *
+		  FROM TB_CODE
+		 WHERE CODE_ID LIKE 'B001%'
 		   AND CODE_LEVEL = '4'
 	</select>
 
@@ -41,7 +61,7 @@
 		     , ANIM_BIRTH    , ANIM_SEX       , RQST_DT        , RQST_MEMO
 		     , PROC_STAT     , PROC_STAT_NM
 		     , PAY_GB        , PRICE          , PAY_STAT
-		     , INS_DT        , INS_ID
+		     , INS_DT        , INS_ID         , PDL_NO
 		     )
 		VALUES
 		     (
@@ -53,7 +73,7 @@
 		     , #{animBirth}    , #{animSex}       , DATE_FORMAT(NOW(),'%Y.%m.%d') , #{rqstMemo}
 		     , #{procStat}     , #{procStatNm}
 		     , #{payGb}        , #{price}         , #{payStat}
-		     , NOW()           , #{insId}
+		     , NOW()           , #{insId}         , #{pdlNo}
 		     )
 	</insert>
 
@@ -89,6 +109,20 @@
 		     )
 	</insert>
 
+	<insert id="insertMediHist" parameterType="kr.or.abnext.domain.TbMediHistory">
+		INSERT
+		  INTO TB_MEDI_HISTORY
+		     (
+		       RQST_NO       , HIST_CODE    , HIST_MEMO
+		     , INS_DT        , INS_ID
+		     )
+		VALUES
+		     (
+		       #{rqstNo}     , #{histCode}  , #{histMemo}
+		     , NOW()         , #{insId}
+		     )
+	</insert>
+
 	<select id="selectRceptList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
 		SELECT RQST_NO, HOSP_NO, HOSP_NM, USER_NO
 		     , USER_NM, ANIM_NO, ANIM_NM, FARM_NO
@@ -102,6 +136,7 @@
 		     , (SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.RESULT_WRITER) AS RESULT_WRITER_NM
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.DIAG_CD) AS DIAG_CD_NM
 		     , CONVERT(FINAL_MEMO USING UTF8) AS FINAL_MEMO
+		     , PDL_NO
 		  FROM TB_RCEPT A
 		 WHERE PROC_STAT IN
 		<foreach item="arr" collection="array" open="(" separator="," close=")">
@@ -144,6 +179,12 @@
 		 WHERE RQST_NO = #{rqstNo}
 	</select>
 
+	<select id="mediHistList" parameterType="kr.or.abnext.domain.TbMediHistory" resultType="kr.or.abnext.domain.TbMediHistory">
+		SELECT *
+		  FROM TB_MEDI_HISTORY
+		 WHERE RQST_NO = #{rqstNo}
+	</select>
+
 	<select id="getTbRcept" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
 		SELECT RQST_NO, HOSP_NO, HOSP_NM, USER_NO
 		     , USER_NM, ANIM_NO, ANIM_NM, FARM_NO
@@ -160,6 +201,7 @@
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.ANIM_FIRST_CD) AS ANIM_FIRST_NM
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.ANIM_SECOND_CD) AS ANIM_SECOND_NM
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.ANIM_THIRD_CD) AS ANIM_THIRD_NM
+		     , CASE WHEN ANIM_SEX = 'M' THEN '수컷' WHEN ANIM_SEX = 'F' THEN '암컷' ELSE '모름' END ANIM_SEX_NM
 		  FROM TB_RCEPT A
 		 WHERE RQST_NO = #{rqstNo}
 	</select>

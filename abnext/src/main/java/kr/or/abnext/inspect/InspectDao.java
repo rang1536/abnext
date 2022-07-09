@@ -12,6 +12,7 @@ import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspection;
+import kr.or.abnext.domain.TbMediHistory;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
 import kr.or.abnext.domain.TbUser;
@@ -25,20 +26,20 @@ public class InspectDao {
 		return sql.selectList("inspection.selectRceptList", arr);
 	}
 
-	public TbRcept getRcept(TbRcept rcept) {
-		return sql.selectOne("inspection.getTbRcept", rcept);
+	public TbRcept getRcept(TbRcept bean) {
+		return sql.selectOne("inspection.getTbRcept", bean);
 	}
 
-	public TbAnimal getAnimal(TbAnimal anim) {
-		return sql.selectOne("inspection.getAnimal", anim);
+	public TbAnimal getAnimal(TbAnimal bean) {
+		return sql.selectOne("inspection.getAnimal", bean);
 	}
 
-	public TbUser getUser(TbUser user) {
-		return sql.selectOne("inspection.getUser", user);
+	public TbUser getUser(TbUser bean) {
+		return sql.selectOne("inspection.getUser", bean);
 	}
 
-	public int duplAnimChk(TbAnimal anim) {
-		return sql.selectOne("inspection.duplAnimChk", anim);
+	public int duplAnimChk(TbAnimal bean) {
+		return sql.selectOne("inspection.duplAnimChk", bean);
 	}
 
 	public TbHospital getHospital(int hospNo) {
@@ -53,59 +54,79 @@ public class InspectDao {
 		return sql.selectOne("inspection.getNextKey");
 	}
 
-	public int insertRcept(TbRcept rcept) {
-		return sql.insert("inspection.insertRcept", rcept);
+	public String getPdlNo(String pdlNo) {
+		return sql.selectOne("inspection.getPdlNo", pdlNo);
 	}
 
-	public int insertInspection(TbInspection insp) {
-		return sql.insert("inspection.insertInspection", insp);
+	public int insertRcept(TbRcept bean) {
+		return sql.insert("inspection.insertRcept", bean);
 	}
 
-	public int insertSample(TbSample smpl) {
-		return sql.insert("inspection.insertSample", smpl);
+	public int insertInspection(TbInspection bean) {
+		return sql.insert("inspection.insertInspection", bean);
 	}
 
-	public int insertAnimal(TbAnimal anim) {
-		return sql.insert("inspection.insertAnimal", anim);
+	public int insertSample(TbSample bean) {
+		return sql.insert("inspection.insertSample", bean);
+	}
+
+	public int insertMediHist(TbMediHistory bean) {
+		return sql.insert("inspection.insertMediHist", bean);
+	}
+
+	public int insertAnimal(TbAnimal bean) {
+		return sql.insert("inspection.insertAnimal", bean);
 	}
 
 	public List<TbUser> selectDoctorList(TbUser bean){
 		return sql.selectList("inspection.selectDoctorList", bean);
 	}
 
-	public List<TbUser> selectDoctorListByHosp(TbHospital tbUser){
-		return sql.selectList("inspection.selectDoctorListByHosp", tbUser);
+	public List<TbUser> selectDoctorListByHosp(TbHospital bean){
+		return sql.selectList("inspection.selectDoctorListByHosp", bean);
 	}
 
 	public List<TbCode> selectSpeciesList(){
 		return sql.selectList("inspection.selectSpeciesList");
 	}
 
+	public List<TbCode> selectMediHistList(){
+		return sql.selectList("inspection.selectMediHistList");
+	}
+
+	public List<TbCode> selectInspTypeList(){
+		return sql.selectList("inspection.selectInspTypeList");
+	}
+
 	public List<TbHospital> selectHospitalList(TbHospital bean){
 		return sql.selectList("inspection.selectHospitalList", bean);
 	}
 
-	public List<TbInspection> selectInspList(TbInspection tbInspection){
-		return sql.selectList("inspection.selectInspList", tbInspection);
+	public List<TbInspection> selectInspList(TbInspection bean){
+		return sql.selectList("inspection.selectInspList", bean);
 	}
 
-	public List<TbSample> selectSampleList(TbSample tbSample){
-		return sql.selectList("inspection.selectSampleList", tbSample);
+	public List<TbSample> selectSampleList(TbSample bean){
+		return sql.selectList("inspection.selectSampleList", bean);
 	}
 
-	public int updateInspectStatus(TbRcept rcpt) {
-		return sql.insert("inspection.updateInspectStatus", rcpt);
+	public List<TbMediHistory> selectMediHistList(TbMediHistory bean){
+		return sql.selectList("inspection.mediHistList", bean);
 	}
 
-	public int updateSampleStatus(TbSample smpl) {
-		return sql.insert("inspection.updateSampleStatus", smpl);
+	public int updateInspectStatus(TbRcept bean) {
+		return sql.insert("inspection.updateInspectStatus", bean);
 	}
 
-	public int updateInspect(TbInspection insp) {
-		return sql.insert("inspection.updateInspect", insp);
+	public int updateSampleStatus(TbSample bean) {
+		return sql.insert("inspection.updateSampleStatus", bean);
 	}
 
-	public List<TbFile> selectInspFileList(TbInspection insp) {
-		return sql.selectList("inspection.selectInspFileList", insp);
+	public int updateInspect(TbInspection bean) {
+		return sql.insert("inspection.updateInspect", bean);
+	}
+
+	public List<TbFile> selectInspFileList(TbInspection bean) {
+		return sql.selectList("inspection.selectInspFileList", bean);
 	}
 }

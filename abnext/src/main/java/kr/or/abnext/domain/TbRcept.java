@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class TbRcept {
 	private int rqstNo;
+	private String pdlNo;
 	private String hospNo;
 	private String hospNm;
 	private String userNo;
@@ -36,6 +37,7 @@ public class TbRcept {
 	private String animSecondNm;
 	private String AnimThirdNm;
 	private String animSex;
+	private String animSexNm;
 	private String rqstDt;
 	private String procStat;
 	private String procStatNm;
@@ -55,6 +57,7 @@ public class TbRcept {
 	private String finalMemo;
 	private List<Map<String , Object>> inspList;
 	private List<Map<String , Object>> smplList;
+	private List<Map<String , Object>> histList;
 	private String [] sampleArr;
 	private String insDt;
 	private String insId;
@@ -77,6 +80,14 @@ public class TbRcept {
 
 	public void setRqstNo(int rqstNo) {
 		this.rqstNo = rqstNo;
+	}
+
+	public String getPdlNo() {
+		return pdlNo;
+	}
+
+	public void setPdlNo(String pdlNo) {
+		this.pdlNo = pdlNo;
 	}
 
 	public String getHospNo() {
@@ -255,6 +266,14 @@ public class TbRcept {
 		this.animSex = animSex;
 	}
 
+	public String getAnimSexNm() {
+		return animSexNm;
+	}
+
+	public void setAnimSexNm(String animSexNm) {
+		this.animSexNm = animSexNm;
+	}
+
 	public String getRqstDt() {
 		return rqstDt;
 	}
@@ -407,6 +426,14 @@ public class TbRcept {
 		this.smplList = smplList;
 	}
 
+	public List<Map<String, Object>> getHistList() {
+		return histList;
+	}
+
+	public void setHistList(List<Map<String, Object>> histList) {
+		this.histList = histList;
+	}
+
 	public String[] getSampleArr() {
 		return sampleArr;
 	}
@@ -497,18 +524,19 @@ public class TbRcept {
 
 	@Override
 	public String toString() {
-		return "TbRcept [rqstNo=" + rqstNo + ", hospNo=" + hospNo + ", hospNm=" + hospNm + ", userNo=" + userNo
-				+ ", userNm=" + userNm + ", animNo=" + animNo + ", animNm=" + animNm + ", farmNo=" + farmNo
-				+ ", farmNm=" + farmNm + ", docNo=" + docNo + ", docNm=" + docNm + ", animButler=" + animButler
-				+ ", butlerSido=" + butlerSido + ", butlerSigungu=" + butlerSigungu + ", butlerSigunguCd="
-				+ butlerSigunguCd + ", animBirth=" + animBirth + ", animFirstCd=" + animFirstCd + ", animSecondCd="
-				+ animSecondCd + ", AnimThirdCd=" + AnimThirdCd + ", animFirstNm=" + animFirstNm + ", animSecondNm="
-				+ animSecondNm + ", AnimThirdNm=" + AnimThirdNm + ", animSex=" + animSex + ", rqstDt=" + rqstDt
-				+ ", procStat=" + procStat + ", procStatNm=" + procStatNm + ", rqstMemo=" + rqstMemo + ", payGb="
-				+ payGb + ", price=" + price + ", payStat=" + payStat + ", payedDt=" + payedDt + ", result=" + result
-				+ ", resultWriter=" + resultWriter + ", resultWriterNm=" + resultWriterNm + ", finishDt=" + finishDt
-				+ ", diagUpCd=" + diagUpCd + ", diagUpCdNm=" + diagUpCdNm + ", diagCd=" + diagCd + ", diagCdNm="
-				+ diagCdNm + ", finalMemo=" + finalMemo + ", inspList=" + inspList + ", smplList=" + smplList
+		return "TbRcept [rqstNo=" + rqstNo + ", pdlNo=" + pdlNo + ", hospNo=" + hospNo + ", hospNm=" + hospNm
+				+ ", userNo=" + userNo + ", userNm=" + userNm + ", animNo=" + animNo + ", animNm=" + animNm
+				+ ", farmNo=" + farmNo + ", farmNm=" + farmNm + ", docNo=" + docNo + ", docNm=" + docNm
+				+ ", animButler=" + animButler + ", butlerSido=" + butlerSido + ", butlerSigungu=" + butlerSigungu
+				+ ", butlerSigunguCd=" + butlerSigunguCd + ", animBirth=" + animBirth + ", animFirstCd=" + animFirstCd
+				+ ", animSecondCd=" + animSecondCd + ", AnimThirdCd=" + AnimThirdCd + ", animFirstNm=" + animFirstNm
+				+ ", animSecondNm=" + animSecondNm + ", AnimThirdNm=" + AnimThirdNm + ", animSex=" + animSex
+				+ ", animSexNm=" + animSexNm + ", rqstDt=" + rqstDt + ", procStat=" + procStat + ", procStatNm="
+				+ procStatNm + ", rqstMemo=" + rqstMemo + ", payGb=" + payGb + ", price=" + price + ", payStat="
+				+ payStat + ", payedDt=" + payedDt + ", result=" + result + ", resultWriter=" + resultWriter
+				+ ", resultWriterNm=" + resultWriterNm + ", finishDt=" + finishDt + ", diagUpCd=" + diagUpCd
+				+ ", diagUpCdNm=" + diagUpCdNm + ", diagCd=" + diagCd + ", diagCdNm=" + diagCdNm + ", finalMemo="
+				+ finalMemo + ", inspList=" + inspList + ", smplList=" + smplList + ", histList=" + histList
 				+ ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt + ", insId=" + insId + ", uptDt="
 				+ uptDt + ", uptId=" + uptId + ", searchStrtDt=" + searchStrtDt + ", searchFnshDt=" + searchFnshDt
 				+ ", searchStr=" + searchStr + ", payedPrice=" + payedPrice + ", sumCnt=" + sumCnt + ", fileList="

@@ -1,7 +1,10 @@
 package kr.or.abnext.inspect;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +26,7 @@ import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspection;
+import kr.or.abnext.domain.TbMediHistory;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
 import kr.or.abnext.domain.TbUser;
@@ -49,6 +53,23 @@ public class InspectRestController {
 		//접수 테이블  pk 세팅
 		tbRcept.setRqstNo(Integer.parseInt(rqstNo));
 
+		//접수번호 생성
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yy", new Locale("ko", "KR"));
+		String yy = sdf.format(new Date());
+		String pdlNo = "PDL"+yy;
+
+		String strContext = inspectServ.getPdlNo(pdlNo);
+		String strLpad = "";
+		if(strContext == null) {
+			strLpad = "0001";
+		}else {
+			strLpad = setLPad(strContext, 4, "0");
+		}
+
+		pdlNo = pdlNo + strLpad;
+		tbRcept.setPdlNo(pdlNo);
+
 		//접수 테이블 등록
 		int k = inspectServ.insertRcept(tbRcept);
 		int l = tbRcept.getInspList().size();
@@ -69,11 +90,20 @@ public class InspectRestController {
 			TbSample ts = new TbSample();
 			ts.setRqstNo(rqstNo);
 			ts.setSampleCode(tbRcept.getSmplList().get(i).get("sampleCode").toString());
-			ts.setSampleMemo(tbRcept.getSmplList().get(i).get("sampleMemo").toString());
 			ts.setInsId(tbRcept.getInsId());
 			//시료 테이블 등록
 			inspectServ.insertSample(ts);
 		}
+
+		for(int i=0; i<tbRcept.getHistList().size(); i++) {
+			TbMediHistory mh = new TbMediHistory();
+			mh.setRqstNo(rqstNo);
+			mh.setHistCode(tbRcept.getHistList().get(i).get("histCode").toString());
+			mh.setInsId(tbRcept.getInsId());
+			//시료 테이블 등록
+			inspectServ.insertMediHist(mh);
+		}
+
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(k > 0 && l > 0) {
@@ -275,5 +305,30 @@ public class InspectRestController {
 		map.put("result", "ok");
 
 		return map;
+	}
+
+	@RequestMapping(value = "sampleList", method = RequestMethod.POST)
+	public List<TbSample> sampleList(TbSample bean) {
+		List<TbSample> smplList = inspectServ.selectSampleList(bean);
+		return smplList;
+	}
+
+	@RequestMapping(value = "histList", method = RequestMethod.POST)
+	public List<TbMediHistory> histList(TbMediHistory bean) {
+		List<TbMediHistory> histList = inspectServ.selectMediHistList(bean);
+		return histList;
+	}
+
+
+	private static String setLPad(String strContext, int iLen, String strChar ) {
+
+		String strResult = "";
+		StringBuilder sbAddChar = new StringBuilder();
+		for(int i=strContext.length(); i<iLen; i++) {  // iLen길이 만큼 strChar문자로 채운다.
+			sbAddChar.append( strChar );
+		}
+
+		strResult = sbAddChar + strContext;  // LPAD이므로, 채울문자열 + 원래문자열로 Concate한다.
+		return strResult;
 	}
 }

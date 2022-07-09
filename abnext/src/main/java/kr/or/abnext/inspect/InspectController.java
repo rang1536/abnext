@@ -87,12 +87,15 @@ public class InspectController {
 		TbUser docBean = new TbUser();
 		if(!userBean.getHospNo().equals("")) {
 			hospBean.setHospNo(Integer.parseInt(userBean.getHospNo()));
-			docBean.setUserId(userBean.getUserId());
 		}
+
+		docBean.setUserId(userBean.getUserId());
 
 		model.addAttribute("hospital", insServ.selectHospitalList(hospBean));
 		model.addAttribute("doctor", insServ.selectDoctorList(docBean));
 		model.addAttribute("species", insServ.selectSpeciesList());
+		model.addAttribute("mediHist", insServ.selectMediHistList());
+		model.addAttribute("inspTypeList", insServ.selectInspTypeList());
 
 		return "inspect/registerInspect";
 	}
