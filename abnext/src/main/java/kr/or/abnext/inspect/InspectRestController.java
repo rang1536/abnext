@@ -186,6 +186,7 @@ public class InspectRestController {
 	@RequestMapping(value = "modifySetting", method = RequestMethod.POST)
 	public Map<String, Object> modifySetting(TbRcept tbRcept) {
 		//윤재호 nullpointException...
+		/*
 		if(tbRcept.getSmplList().size() > 0) {
 			for(int i=0; i<tbRcept.getSmplList().size(); i++) {
 				TbSample bean = new TbSample();
@@ -196,7 +197,7 @@ public class InspectRestController {
 				inspectServ.updateSampleStatus(bean);
 			}
 		}
-
+		*/
 		if(tbRcept.getInspList().size() > 0) {
 			for(int i=0; i<tbRcept.getInspList().size(); i++) {
 				TbInspection bean = new TbInspection();
@@ -207,7 +208,7 @@ public class InspectRestController {
 				bean.setWorkerNm(tbRcept.getInspList().get(i).get("workerNm").toString());
 				bean.setSampleCode(tbRcept.getInspList().get(i).get("sampleCode").toString());
 				bean.setSampleName(tbRcept.getInspList().get(i).get("sampleName").toString());
-				bean.setInspType(tbRcept.getInspList().get(i).get("inspType").toString());
+				bean.setInspThirdCd(tbRcept.getInspList().get(i).get("inspThirdCd").toString());
 				bean.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
 				bean.setUptId(tbRcept.getUptId());
 				//시료 테이블 수정

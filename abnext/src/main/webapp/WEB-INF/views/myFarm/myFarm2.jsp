@@ -99,15 +99,18 @@
 							<div class="icon">
 								<i class="ion ion-bag"></i>
 							</div>
+							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">&nbsp;<span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<%--
 							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							 --%>
 						</div>
 					</div>
 					<!-- ./col -->
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#002266;opacity:0.8">
+						<div class="small-box" style="color:white;background-color:#0080FF;">
 							<div class="inner">
 								<h3>현미경적검사</h3>
 								<p>MICROSCOPIC</p>
@@ -115,15 +118,18 @@
 							<div class="icon">
 								<i class="ion ion-stats-bars"></i>
 							</div>
+							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<%--
 							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							 --%>
 						</div>
 					</div>
 					<!-- ./col -->
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#002266;opacity:0.9">
+						<div class="small-box" style="color:white;background-color:#0067a3;">
 							<div class="inner">
 								<h3>조직검사</h3>
 								<p>Biopsy</p>
@@ -131,15 +137,18 @@
 							<div class="icon">
 								<i class="ion ion-person-add"></i>
 							</div>
+							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<%--
 							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							 --%>
 						</div>
 					</div>
 					<!-- ./col -->
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#002266;opacity:1">
+						<div class="small-box" style="color:white;background-color:#464964;">
 							<div class="inner">
 								<h3>부검검사</h3>
 								<p>Autopsy</p>
@@ -147,15 +156,18 @@
 							<div class="icon">
 								<i class="ion ion-pie-graph"></i>
 							</div>
+							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<%--
 							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							 --%>
 						</div>
 					</div>
 					<!-- ./col -->
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#002266;opacity:1">
+						<div class="small-box" style="color:white;background-color:#000080;">
 							<div class="inner">
 								<h3>배양검사</h3>
 								<p>Germiculture</p>
@@ -163,159 +175,15 @@
 							<div class="icon">
 								<i class="ion ion-pie-graph"></i>
 							</div>
+							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<%--
 							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							 --%>
 						</div>
 					</div>
 					<!-- ./col -->
-				</div>
-
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">*진단비용</h3>
-							</div>
-							<!-- /.card-header -->
-							<div class="card-body">
-								<ul class="pagination pagination-month justify-content-center" style="overflow:scroll;">
-									<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="changeYear(1)">«</a></li>
-									<li class="page-item Jan">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Jan</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Feb">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Feb</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Mar">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Mar</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Apr">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Apr</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item May">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">May</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Jun">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Jun</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Jul">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Jul</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Aug">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Aug</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Sep">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Sep</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Oct">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Oct</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Nov">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Nov</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item Dec">
-										<a class="page-link" href="javascript:void(0)" onclick="selCal(this)">
-											<p class="page-month">Dec</p>
-											<p class="page-year">2022</p>
-										</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="javascript:void(0)" onclick="changeYear(2)">»</a></li>
-								</ul>
-							</div>
-							<div class="card-body table-responsive p-0" style="height: 500px;">
-								<table class="table table-bordered table-head-fixed text-nowrap">
-									<thead>
-										<tr>
-											<td class="txtc txtb">날짜</td>
-											<td class="txtc txtb">의뢰번호</td>
-											<td class="txtc txtb">청구액</td>
-											<td class="txtc txtb">납부액</td>
-											<td class="txtc txtb">납부예정</td>
-										</tr>
-									</thead>
-									<tbody id="tbodyList">
-										<c:set var="rqstTot" value="0"/>
-										<c:set var="payedTot" value="0"/>
-										<c:set var="payingTot" value="0"/>
-										<c:forEach var="item" items="${ak01Monthdata }" varStatus="status">
-											<tr>
-												<td class="txtc">${item.rqstDt }</td>
-												<td class="txtc">${item.rqstNo }</td>
-												<td class="txtr"><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
-												<td class="txtr">
-													<c:choose>
-														<c:when test="${item.payStat == '02' }">
-															<fmt:formatNumber value="${item.price }" pattern="#,###"/>
-															<c:set var="payedTot" value="${payedTot+ item.price}"/>
-														</c:when>
-														<c:otherwise>
-															0
-														</c:otherwise>
-													</c:choose>
-												</td>
-												<td class="txtr">
-													<c:choose>
-														<c:when test="${item.payStat == '01' }">
-															<fmt:formatNumber value="${item.price }" pattern="#,###"/>
-															<c:set var="payingTot" value="${payingTot+ item.price}"/>
-														</c:when>
-														<c:otherwise>
-															0
-														</c:otherwise>
-													</c:choose>
-												</td>
-											</tr>
-											<c:set var="rqstTot" value="${rqstTot+ item.price}"/>
-										</c:forEach>
-									</tbody>
-									<tfoot id="tfootList">
-										<tr>
-											<td class="txtr" colspan="2">합계</td>
-											<td class="txtr"><fmt:formatNumber value="${rqstTot }" pattern="#,###"/></td>
-											<td class="txtr"><fmt:formatNumber value="${payedTot }" pattern="#,###"/></td>
-											<td class="txtr"><fmt:formatNumber value="${payingTot }" pattern="#,###"/></td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
-					</div>
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>

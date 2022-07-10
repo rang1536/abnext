@@ -68,6 +68,7 @@ public class TbRcept {
 	private String searchFnshDt;
 	private String searchStr;
 	private String payedPrice;
+	private int limitCnt;
 
 	//수금
 	private String sumCnt;
@@ -506,6 +507,14 @@ public class TbRcept {
 		this.payedPrice = payedPrice;
 	}
 
+	public int getLimitCnt() {
+		return limitCnt;
+	}
+
+	public void setLimitCnt(int limitCnt) {
+		this.limitCnt = limitCnt;
+	}
+
 	public String getSumCnt() {
 		return sumCnt;
 	}
@@ -539,8 +548,8 @@ public class TbRcept {
 				+ finalMemo + ", inspList=" + inspList + ", smplList=" + smplList + ", histList=" + histList
 				+ ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt + ", insId=" + insId + ", uptDt="
 				+ uptDt + ", uptId=" + uptId + ", searchStrtDt=" + searchStrtDt + ", searchFnshDt=" + searchFnshDt
-				+ ", searchStr=" + searchStr + ", payedPrice=" + payedPrice + ", sumCnt=" + sumCnt + ", fileList="
-				+ fileList + "]";
+				+ ", searchStr=" + searchStr + ", payedPrice=" + payedPrice + ", limitCnt=" + limitCnt + ", sumCnt="
+				+ sumCnt + ", fileList=" + fileList + "]";
 	}
 
 }

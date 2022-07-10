@@ -152,6 +152,7 @@ public class InspectController {
 		model.addAttribute("codeList", codeList);
 		model.addAttribute("smplList", smplList);
 		model.addAttribute("inspList", inspList);
+		model.addAttribute("inspTypeList", insServ.selectInspTypeList());
 		return "inspect/settingInspectModify";
 	}
 

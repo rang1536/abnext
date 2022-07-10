@@ -88,7 +88,7 @@
 				<div class="row">
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#002266;opacity:0.7">
+						<div class="small-box" style="color:white;background-color:#0080FF;">
 							<div class="inner">
 								<h3>신청</h3>
 								<p>REQUEST</p>
@@ -96,7 +96,7 @@
 							<div class="icon">
 								<i class="ion ion-bag"></i>
 							</div>
-							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">&nbsp;<span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" class="small-box-footer">&nbsp;<span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<!-- <i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i> --></span></a>
 							<%--
 							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
@@ -107,7 +107,7 @@
 					<!-- ./col -->
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#002266;opacity:0.8">
+						<div class="small-box" style="color:white;background-color:#0067a3">
 							<div class="inner">
 								<h3>접수</h3>
 								<p>RECEIPT</p>
@@ -115,7 +115,7 @@
 							<div class="icon">
 								<i class="ion ion-stats-bars"></i>
 							</div>
-							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건</span></a>
 							<%--
 							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
@@ -126,7 +126,7 @@
 					<!-- ./col -->
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#002266;opacity:0.9">
+						<div class="small-box" style="color:white;background-color:#1b315e">
 							<div class="inner">
 								<h3>검사중</h3>
 								<p>PROCESSING</p>
@@ -134,7 +134,7 @@
 							<div class="icon">
 								<i class="ion ion-person-add"></i>
 							</div>
-							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건</span></a>
 							<%--
 							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
@@ -145,7 +145,7 @@
 					<!-- ./col -->
 					<div class="col-lg-3 col-6">
 						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#002266;opacity:1">
+						<div class="small-box" style="color:white;background-color:#000080">
 							<div class="inner">
 								<h3>검사완료</h3>
 								<p>FINISH</p>
@@ -153,7 +153,7 @@
 							<div class="icon">
 								<i class="ion ion-pie-graph"></i>
 							</div>
-							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건</span></a>
 							<%--
 							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
@@ -163,6 +163,45 @@
 					</div>
 					<!-- ./col -->
 				</div>
+
+
+				<div class="card">
+					<!-- /.card-header -->
+					<div class="card-body">
+						<table id="example2" class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>의뢰번호</th>
+									<th>신청일</th>
+									<th>상태</th>
+									<th>동물명</th>
+									<th>신청자(기관)</th>
+									<th>담당수의사</th>
+									<th>결과입력자</th>
+									<th>진단명</th>
+									<th>검사완료일</th>
+								</tr>
+							</thead>
+							<tbody id="listBody">
+								<c:forEach var="item" items="${rceptList }" varStatus="status">
+									<tr>
+										<td>${item.pdlNo }</td>
+										<td>${item.rqstDt }<input type="hidden" id="rqstNo_${status.index+1 }" value="${item.rqstNo }"/></td>
+										<td>${item.procStatNm }</td>
+										<td>${item.animNm }</td>
+										<td>${item.hospNm }</td>
+										<td>${item.docNm }</td>
+										<td>${item.resultWriterNm }</td>
+										<td></td>
+										<td></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
 			</div><!-- /.container-fluid -->
 		</section>
 		<!-- /.content -->
@@ -209,7 +248,8 @@
 
 		//Date picker
 		$('#reservationdate').datetimepicker({
-			format: 'YYYY.MM'
+			format: 'YYYY.MM',
+			defaultDate : new Date()
 		});
 
 	 });
@@ -217,7 +257,8 @@
 	$('#reservationdate').on('change.datetimepicker', function (e) {
 		var searchStr = $("#searchYear").val();
 		var data = {
-				searchStr : searchStr
+				searchStr : searchStr,
+				insId : sessionStorage.getItem("userId")
 		}
 		$.ajax({
 			url : "getDataYear",
@@ -225,10 +266,17 @@
 			type : "POST",
 			dataType : "JSON",
 			success : function(data){
-				 $("#ak01ReqCnt").text(data.myFarm.reqCnt);
-				 $("#ak01RecCnt").text(data.myFarm.recCnt);
-				 $("#ak01ProcCnt").text(data.myFarm.procCnt);
-				 $("#ak01FinCnt").text(data.myFarm.finCnt);
+				if(data.myFarm != null) {
+					$("#ak01ReqCnt").text(data.myFarm.reqCnt);
+					$("#ak01RecCnt").text(data.myFarm.recCnt);
+					$("#ak01ProcCnt").text(data.myFarm.procCnt);
+					$("#ak01FinCnt").text(data.myFarm.finCnt);
+				}else {
+					$("#ak01ReqCnt").text("0");
+					$("#ak01RecCnt").text("0");
+					$("#ak01ProcCnt").text("0");
+					$("#ak01FinCnt").text("0");
+				}
 			}
 		});
 	});

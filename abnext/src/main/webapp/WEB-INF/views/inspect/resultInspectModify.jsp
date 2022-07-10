@@ -100,7 +100,7 @@
 							<thead>
 								<tr>
 									<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰번호</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.rqstNo }</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.pdlNo }</td>
 									<td style="width:20%;background-color:#F2F2F2" class="txtc">상태</td>
 									<td style="width:30%;" class="txtc">${rceptInfo.procStatNm }</td>
 								</tr>
@@ -118,7 +118,7 @@
 								</tr>
 								<tr>
 									<td style="width:20%;background-color:#F2F2F2" class="txtc">성별</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.animSex}</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.animSexNm}</td>
 									<td style="width:20%;background-color:#F2F2F2" class="txtc">신청일</td>
 									<td style="width:30%;" class="txtc">${rceptInfo.rqstDt}</td>
 								</tr>
@@ -134,7 +134,7 @@
 					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
-
+<%--
 				<div class="card card-success">
 					<div class="card-header">
 						<h3 class="card-title">시료정보</h3>
@@ -167,8 +167,8 @@
 					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
-
-				<div class="card card-info">
+ --%>
+				<div class="card card-primary">
 					<div class="card-header">
 						<h3 class="card-title">실험결과</h3>
 					</div>
@@ -228,7 +228,7 @@
 				</div>
 				<!-- /.card -->
 
-				<div class="card card-danger">
+				<div class="card card-primary">
 					<div class="card-header">
 						<h3 class="card-title">결과메모</h3>
 					</div>
