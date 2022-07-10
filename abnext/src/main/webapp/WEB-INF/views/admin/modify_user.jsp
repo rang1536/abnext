@@ -644,7 +644,7 @@
 				dataType : 'json',
 				data : {'userNo':$('#userNo').val()
 					, 'userStat':$('#userStat').val()
-					, 'adminYn':$('#adminYn').val()},
+					, 'userWorkGb':$('#userWorkGb').val()},
 				success : function(data){
 					if(data.result == 'succ'){
 						toastr.info('회원상태 및 권한이 변경되었습니다.');
