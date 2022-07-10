@@ -144,11 +144,11 @@ $.gfn_setJqGrid = function(colList, typeList, widthList, titleList, gridId){
 
 	for(var i=0; i<colList.length; i++){
 		row = {
-			'name'	: colList[i],
-			'type'	: typeList[i],
-			'width' : widthList[i],
-			'title'	: titleList[i],
-			'align'	: 'center'
+			"name"	: colList[i],
+			"type"	: typeList[i],
+			"width" : widthList[i],
+			"title"	: titleList[i],
+			"align"	: "center"
 		}
 
 		fields.push(row);
