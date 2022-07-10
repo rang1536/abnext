@@ -437,10 +437,10 @@
 			                <div class="col-sm-4 adminLevDiv" style="display:none;">
 				                <div class="form-group">
 				                  <label>업무구분</label>
-				                  <select class="custom-select" id="adminLev"> <!-- name="adminLev" -->
+				                  <select class="custom-select" name="userWorkGb" id="userWorkGb"> <!-- name="adminLev" -->
 				                  	  <option value="">업무선택</option>
 							     	  <c:forEach var="code" items="${user.adminLevList }" varStatus="status">
-							     	  	<option <c:if test="${code.codeId eq user.adminLev }">selected</c:if> value="${code.codeId }">${code.codeNm }</option>
+							     	  	<option <c:if test="${code.codeId eq user.userWorkGb }">selected</c:if> value="${code.codeId }">${code.codeNm }</option>
 							     	  </c:forEach>
 								  </select>
 				                  <!-- /.input group -->

@@ -247,7 +247,6 @@
 	//-------------
     //- BAR CHART -
     //-------------
-    var areaChartData = '';
     function setChartData(data){
 		var areaChartData = '';
 
@@ -259,7 +258,7 @@
 		var yArr = new Array();
 		var yArrDetail ='';
 
-		for(var j=0; j < monList; j++){
+		for(var j=0; j < 7; j++){
 			yArrDetail = new Array();
 
 			for(var i=0; i < monList; i++){
@@ -289,7 +288,7 @@
 
 		var dataSets= new Array();
 		var dataSet = '';
-		for(var i=0; i < monList; i++){
+		for(var i=0; i < 7; i++){
 			dataSet = {
 				label               : labels[i],
 				backgroundColor     : backgroundColors[i],
