@@ -29,4 +29,11 @@ public class ChartRestController {
 
 		return chartServ.getBasicChartList2Serv(chartView);
 	}
+
+	@RequestMapping(value = "basicChartList3", method = RequestMethod.POST)
+	public List<ChartView1> basicChartList3Ctrl(ChartView1 chartView, Model model) {
+		System.out.println("가검물통계 화면가기~!!");
+
+		return chartServ.getBasicChartList3Serv(chartView);
+	}
 }

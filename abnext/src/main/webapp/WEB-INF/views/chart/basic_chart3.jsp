@@ -39,12 +39,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>기본통계</b></h1>
+						<h1><b>진단명별통계</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>기본통계</b></li>
+							<li class="breadcrumb-item active"><b>진단명별통계</b></li>
 						</ol>
 					</div>
 				</div>
@@ -152,13 +152,13 @@
 		$('.select2').select2();
 		bsCustomFileInput.init();
 
+		setGrid();
 
-	    });
     });
 
     function getData(){
 		$.ajax({
-			url : 'basicChartList2',
+			url : 'basicChartList3',
 			dataType : 'json',
 			type : 'post',
 			data : {'stDt':$('#stDt').val()},
@@ -178,14 +178,30 @@
 	        paging: true,
 			data: data,
 	        fields: [
-	            { name: "rqstDt",   type: "text", 	width: 100, title:"일자", 	align: "center"},
-	            { name: "sample1", 	type: "number", width: 100, title:"PBFD", 	align: "center"},
-	            { name: "sample2", 	type: "number", width: 100, title:"APV", 	align: "center"},
-	            { name: "sample3", 	type: "number", width: 100, title:"PDD", 	align: "center"},
-	            { name: "sample4", 	type: "number", width: 100, title:"chlamydiasis", 	align: "center"},
-	            { name: "sample5", 	type: "number", width: 100, title:"aspergilosis", 	align: "center"},
-	            { name: "sample6", 	type: "number", width: 100, title:"기타", 	align: "center"},
-	            { name: "total", 	type: "number", width: 100, title:"합계", 	align: "center", background:"#ddd"}
+	            { name: "rqstDt",   type: "text", 	width: 150, title:"질병명", 	align: "center"},
+	            { name: "sample1", 	type: "number", width: 60, title:"농가", 	align: "center"},
+	            { name: "sample2", 	type: "number", width: 60, title:"시료", 	align: "center"},
+	            { name: "sample3", 	type: "number", width: 100, title:"총", 	align: "center"},
+	            { name: "sample4", 	type: "number", width: 100, title:"계군", 	align: "center"},
+	            { name: "sample5", 	type: "number", width: 60, title:"강원", 	align: "center"},
+	            { name: "sample6", 	type: "number", width: 60, title:"경기", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"충남", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"충북", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"세종", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"전북", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"전남", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"경북", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"경남", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"제주", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"서울", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"인천", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"대전", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"광주", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"대구", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"울산", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"부산", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"기타", 	align: "center"}
+
 	        ]
 	    });
 	}
@@ -207,12 +223,12 @@
 	//-------------
     //- BAR CHART -
     //-------------
+    var xArr = ['강원', '경기', '충남', '충북', '세종', '전북', '전남', '경북', '경남', '제주', '서울', '인천', '대전', '광주', '대구', '울산', '부산', '기타'];
     function setChartData(data){
 		var areaChartData = '';
 
 		// x축값 구하기
-		var xArr = new Array();
-		var monList = new Date().getMonth()+1;
+		xArr = ['강원', '경기', '충남', '충북', '세종', '전북', '전남', '경북', '경남', '제주', '서울', '인천', '대전', '광주', '대구', '울산', '부산', '기타']
 
 		// y축값 구하기
 		var yArr = new Array();
@@ -234,9 +250,7 @@
 			yArr[j]= yArrDetail;
 		}
 
-		for(var i=1; i <= monList; i++){
-			xArr.push(i+'월');
-		}
+
 
 
 		var labels = ['PBFD', 'APV', 'PDD', 'chlamydiasis', 'aspergilosis', '기타', '합계'];
@@ -296,7 +310,7 @@
     //- STACKED BAR CHART -
     //---------------------
     var areaChartData = {
-      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels  : xArr,
       datasets: [
         {
           label               : 'Digital Goods',
@@ -307,7 +321,7 @@
           pointStrokeColor    : 'rgba(60,141,188,1)',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
+          data                : [28, 48, 40, 19, 86, 27, 90,28, 48, 40, 19, 86, 27, 90,28, 48, 40]
         },
         {
           label               : 'Electronics',
@@ -318,7 +332,7 @@
           pointStrokeColor    : '#c1c7d1',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
+          data                : [65, 59, 80, 81, 56, 55, 40,28, 48, 40, 19, 86, 27, 90,28, 48, 40]
         },
       ]
     }

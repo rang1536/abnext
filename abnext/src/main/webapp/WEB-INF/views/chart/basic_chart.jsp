@@ -71,8 +71,8 @@
 
 					<div class="card-body">
 						<div class="row">
-							<div class="col-sm-8"></div>
-							<div class="col-sm-4">
+							<div class="col-sm-7"></div>
+							<div class="col-sm-5">
 								<div class="form-group">
 									<div class="input-group">
 										<input type="date" class="form-control-sm" name="stDt" id="stDt"/>&nbsp;&nbsp;&nbsp;

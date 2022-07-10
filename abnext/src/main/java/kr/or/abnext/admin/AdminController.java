@@ -52,11 +52,11 @@ public class AdminController {
 		return "admin/codeList";
 	}
 
-	@RequestMapping(value = "levList", method = RequestMethod.GET)
+	@RequestMapping(value = "menuList", method = RequestMethod.GET)
 	public String levListCtrl(Model model) {
 		System.out.println("권한관리~!!");
 
-		return "admin/levList";
+		return "admin/menuList";
 	}
 
 	/*======================================== 수정페이지 ======================================== */
@@ -110,25 +110,20 @@ public class AdminController {
 		TbHospital tbHospital = new TbHospital();
 		TbFarm tbFarm = new TbFarm();
 
-		if(tbUser.getUserLev() != null) {
-			if(tbUser.getUserLev().equals("2") || tbUser.getUserLev().equals("3") || tbUser.getUserLev().equals("5")) { //병원정보
-				//System.out.println(">>>> tbUser : "+tbUser.getHospNo());
-				if(tbUser.getHospNo() != null && !tbUser.getHospNo().equals("")) {
-					tbHospital.setHospNo(Integer.parseInt(tbUser.getHospNo()));
+		if(tbUser.getHospNo() != null && !tbUser.getHospNo().equals("")) {
+			tbHospital.setHospNo(Integer.parseInt(tbUser.getHospNo()));
 
-					tbHospital = adminServ.getHospListServ(tbHospital, "");
+			tbHospital = adminServ.getHospListServ(tbHospital, "");
 
-					model.addAttribute("hosp", tbHospital); //기관병원 정보
-				}
-			}else if(tbUser.getUserLev().equals("4") || tbUser.getUserLev().equals("5")) {
-				if(tbUser.getFarmNo() != null && !tbUser.getFarmNo().equals("")) {
-					tbFarm.setFarmNo(Integer.parseInt(tbUser.getFarmNo()));
+			model.addAttribute("hosp", tbHospital); //기관병원 정보
+		}
 
-					tbFarm = adminServ.getFarmListServ(tbFarm, "");
+		if(tbUser.getFarmNo() != null && !tbUser.getFarmNo().equals("")) {
+			tbFarm.setFarmNo(Integer.parseInt(tbUser.getFarmNo()));
 
-					model.addAttribute("farm", tbFarm);
-				}
-			}
+			tbFarm = adminServ.getFarmListServ(tbFarm, "");
+
+			model.addAttribute("farm", tbFarm);
 		}
 
 		model.addAttribute("user", tbUser); //회원정보

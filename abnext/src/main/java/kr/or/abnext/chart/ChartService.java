@@ -25,4 +25,8 @@ public class ChartService {
 	}
 
 
+	/*진단명별 차트*/
+	public List<ChartView1> getBasicChartList3Serv(ChartView1 chartView){
+		return chartDao.getBasicChart3List(chartView);
+	}
 }

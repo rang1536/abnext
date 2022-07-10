@@ -21,4 +21,9 @@ public class ChartDao {
 	public List<ChartView1> getBasicChart2List(ChartView1 chartView){
 		return sql.selectList("chart.getBasicChartList2", chartView);
 	}
+
+	//getBasicChartList2
+	public List<ChartView1> getBasicChart3List(ChartView1 chartView){
+		return sql.selectList("chart.getBasicChartList3", chartView);
+	}
 }

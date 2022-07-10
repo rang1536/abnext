@@ -107,4 +107,8 @@
 	</select>
 
 
+	<select id="getBasicChartList3" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
+
+	</select>
+
 </mapper>

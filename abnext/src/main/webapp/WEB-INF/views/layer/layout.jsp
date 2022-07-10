@@ -12,15 +12,27 @@
 	<!-- Navbar -->
 	<nav class="main-header navbar navbar-expand navbar-white navbar-light">
 		<!-- Left navbar links -->
-		<ul class="navbar-nav">
+		<ul class="navbar-nav" style="font-weight:bold;color:#000000;" >
 			<li class="nav-item">
 				<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 			</li>
 			<li class="nav-item d-none d-sm-inline-block">
-				<a href="index" class="nav-link">Home</a>
+				<a href="#" class="nav-link">MYPAGE</a>
 			</li>
 			<li class="nav-item d-none d-sm-inline-block">
-				<a href="#" class="nav-link">Contact</a>
+				<a href="#" class="nav-link">진단검사</a>
+			</li>
+			<li class="nav-item d-none d-sm-inline-block">
+				<a href="#" class="nav-link">게시판</a>
+			</li>
+			<li class="nav-item d-none d-sm-inline-block">
+				<a href="#" class="nav-link">수납관리</a>
+			</li>
+			<li class="nav-item d-none d-sm-inline-block">
+				<a href="#" class="nav-link">통계</a>
+			</li>
+			<li class="nav-item d-none d-sm-inline-block">
+				<a href="#" class="nav-link">설정및관리</a>
 			</li>
 		</ul>
 
@@ -372,7 +384,7 @@
 									</ul>
 							</li>
 
-					<li class="nav-item">
+							<li class="nav-item">
 									<a href="#" class="nav-link">
 										<i class="nav-icon fas fa-th"></i>
 										<p>
@@ -406,12 +418,12 @@
 												<p>코드관리</p>
 											</a>
 										</li>
-										<!-- <li class="nav-item">
-											<a href="levList" class="nav-link">
+										<li class="nav-item">
+											<a href="menuList" class="nav-link">
 												<i class="far fa-circle nav-icon"></i>
-												<p>권한관리</p>
+												<p>메뉴권한관리</p>
 											</a>
-										</li> -->
+										</li>
 									</ul>
 							</li>
 
@@ -499,6 +511,7 @@
 		function fn_searchAdr(type){
 			new daum.Postcode({
 				oncomplete: function(data){
+					console.log(data.sido);
 					if(type == 'user'){
 						$("#userAdr").val(data.jibunAddress);
 						$("#userZip").val(data.zonecode);
