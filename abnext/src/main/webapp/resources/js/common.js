@@ -138,7 +138,7 @@ $.gfn_nvl = function(x){
 /************************************************************
  *                   	   JqGrid		                    *
  ************************************************************/
-$.gfn_setJqGrid = function(colList, typeList, widthList, titleList, gridId){
+$.gfn_setJqGrid = function(colList, typeList, widthList, titleList, gridId, data){
 	var fields = new Array();
 	var row = '';
 
