@@ -71,7 +71,7 @@
 							<thead>
 								<tr>
 									<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰번호</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.rqstNo }</td>
+									<td style="width:30%;" class="txtc">${rceptInfo.pdlNo }</td>
 									<td style="width:20%;background-color:#F2F2F2" class="txtc">상태</td>
 									<td style="width:30%;" class="txtc">${rceptInfo.procStatNm }</td>
 								</tr>
@@ -242,7 +242,11 @@
 										<div class="col-sm-4">
 											<div class="form-group">
 												<label>검사방법</label>
-												<select class="form-control" id="inspType"></select>
+												<select class="form-control select2" id="inspThirdCd">
+													<c:forEach var="item" items="${inspTypeList }" varStatus="status">
+														<option value="${item.codeId }" data-price="${item.codeDtlMemo }">${item.codeNm }</option>
+													</c:forEach>
+												</select>
 											</div>
 										</div>
 										<div class="col-sm-4">
@@ -294,7 +298,7 @@
 											<tr>
 												<td>
 													<input type="hidden" id="inspFirstCd_${status.index+1 }" value="${item.inspFirstCd }"/>
-													<input type="hidden" id="inspType_${status.index+1 }" value="${item.inspType }"/>
+													<input type="hidden" id="inspThirdCd_${status.index+1 }" value="${item.inspThirdCd }"/>
 													<input type="hidden" id="sampleCode_${status.index+1 }" value="${item.sampleCode }"/>
 													<input type="hidden" id="sampleName_${status.index+1 }" value="${item.sampleName }"/>
 													<input type="hidden" id="workerNo_${status.index+1 }" value="${item.workerNo }"/>
@@ -311,12 +315,12 @@
 													<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
 												</td>
 												<td class="txtc">${item.inspFirstNm }</td>
-												<td class="txtc">${item.inspTypeNm }</td>
+												<td class="txtc">${item.inspThirdNm }</td>
 												<td class="txtc">${item.sampleName }</td>
 												<td class="txtc">
 													<input type="hidden" id="workerNo_${status.index+1 }">
 													<input type="hidden" id="workerNm_${status.index+1 }">
-													<a href="javascript:void(0)" onclick="popOpenUser2('${item.inspType }','${status.index+1 }')">
+													<a href="javascript:void(0)" onclick="popOpenUser2('${item.inspFirstCd }','${status.index+1 }')">
 														<c:if test="${item.workerNo == null || item.workerNo == ''}">
 															<span id="workerView_${status.index+1 }">담당자</span>
 														</c:if>
@@ -411,7 +415,6 @@ $(function () {
 
 	//검사항목
 	$.gfn_getCode('B001',callBackFn,'inspFirstCd');
-	$.gfn_getCode('AE001',callBackFn,'inspType');
 
 	$(".chkh, .chks").each(function(){
 		$(this).attr("disabled",true);
@@ -460,13 +463,14 @@ $("#sett").on("click",function (){
 			workerNm : $(this).find("[id^=workerNm]").val(),
 			sampleCode : $(this).find("[id^=sampleCode]").val(),
 			sampleName : $(this).find("[id^=sampleName]").val(),
-			inspType : $(this).find("[id^=inspType]").val(),
+			inspThirdCd : $(this).find("[id^=inspThirdCd]").val(),
 			inspFirstCd : $(this).find("[id^=inspFirstCd]").val()
 		}
 		inspData.push(sData);
 	});
 
 	var smplData = [];
+	/*
 	$("#smplList").find("tr").each(function(){
 		var sData = {
 			sampleNo : $(this).find("[id^=sampleNo]").val(),
@@ -474,16 +478,13 @@ $("#sett").on("click",function (){
 		}
 		smplData.push(sData);
 	});
-
+	*/
 	var data = {
 		rqstNo : "${rceptInfo.rqstNo }",
 		uptId : localStorage.getItem("userId"),
-		inspList : inspData,
-		smplList : smplData
+		inspList : inspData
 	}
 
-	console.log(data);
-	//return;
 	$.ajax({
 		url : "modifySetting",
 		data : data,
@@ -538,9 +539,9 @@ $("#modBtn").on("click",function(){
 		if($(this).find("[id^=chk]").is(":checked")){
 			$(this).find("[id^=inspFirstCd]").val($("#inspFirstCd").val());
 			$(this).find("td:eq(2)").text($("#inspFirstCd option:selected").text());
-			$(this).find("[id^=inspType]").val($("#inspType").val());
-			$(this).find("[id^=inspType]").val($("#inspType").val());
-			$(this).find("td:eq(3)").text($("#inspType option:selected").text());
+			$(this).find("[id^=inspThirdCd]").val($("#inspThirdCd").val());
+			$(this).find("[id^=inspThirdCd]").val($("#inspThirdCd").val());
+			$(this).find("td:eq(3)").text($("#inspThirdCd option:selected").text());
 			var str = JSON.stringify($("#sampleCode").val());
 			str = str.replace('[','').replace(']','').replace(/\"/gi,'');
 			var strArr = str.split(',');
@@ -565,17 +566,24 @@ $("#addBtn").on("click",function(){
 
 	var inspFirstCd = $("#inspFirstCd").val();
 	var inspFirstCdNm = $("#inspFirstCd option:selected").text();
-	var inspType = $("#inspType").val();
-	var inspTypeNm = $("#inspType option:selected").text();
+	var inspThirdCd = $("#inspThirdCd").val();
+	var inspThirdCdNm = $("#inspThirdCd option:selected").text();
 	var sampleCode = $("#sampleCode").val();
-	var str = JSON.stringify(sampleCode);
-	str = str.replace('[','').replace(']','').replace(/\"/gi,'');
-	var strArr = str.split(',');
-	var sampleName = "";
-	for(var i=0; i<strArr.length; i++){
-		if(i == 0) sampleName = $.gfn_getCodeNm(strArr[i]);
-		else sampleName += ","+$.gfn_getCodeNm(strArr[i]);
+	if(sampleCode == undefined || sampleCode == 'undefined'){
+		sampleCode = "";
 	}
+	var sampleName = "";
+	if(sampleCode != ''){
+		var str = JSON.stringify(sampleCode);
+		str = str.replace('[','').replace(']','').replace(/\"/gi,'');
+		var strArr = str.split(',');
+
+		for(var i=0; i<strArr.length; i++){
+			if(i == 0) sampleName = $.gfn_getCodeNm(strArr[i]);
+			else sampleName += ","+$.gfn_getCodeNm(strArr[i]);
+		}
+	}
+
 	var workerNo = '';
 	var workerNm = '';
 
@@ -584,7 +592,7 @@ $("#addBtn").on("click",function(){
 	html += '	<td>';
 	html += '		<input type="hidden" id="inspNo_'+idx+'" value="${item.inspNo}"/>';
 	html += '		<input type="hidden" id="inspFirstCd_'+idx+'" value="'+inspFirstCd+'"/>';
-	html += '		<input type="hidden" id="inspType_'+idx+'" value="'+inspType+'"/>';
+	html += '		<input type="hidden" id="inspThirdCd_'+idx+'" value="'+inspThirdCd+'"/>';
 	html += '		<input type="hidden" id="sampleCode_'+idx+'" value="'+sampleCode+'"/>';
 	html += '		<input type="hidden" id="sampleName_'+idx+'" value="'+sampleName+'"/>';
 	html += '		<input type="hidden" id="workerNo_'+idx+'" value="'+workerNo+'"/>';
@@ -598,16 +606,22 @@ $("#addBtn").on("click",function(){
 	html += '		</td>';
 	html += '		<td class="txtc">'+idx+'</td>';
 	html += '		<td class="txtc">'+inspFirstCdNm+'</td>';
-	html += '		<td class="txtc">'+inspTypeNm+'</td>';
+	html += '		<td class="txtc">'+inspThirdCdNm+'</td>';
 	html += '		<td class="txtc">'+sampleName+'</td>';
 	html += '		<td class="txtc">';
-	html += '			<a href="javascript:void(0)" onclick="popOpenUser2(\''+inspType+'\',\''+idx+'\')">';
+	html += '			<a href="javascript:void(0)" onclick="popOpenUser2(\''+inspFirstCd+'\',\''+idx+'\')">';
 	html += '					<span id="workerView_'+idx+'">담당자</span>';
 	html += '			</a>';
 	html += '		</td>';
 	html += '		<td class="txtc">0</td>';
 	html += '	</tr>';
 	$("#inspList").append(html);
+
+	$("#inspList").find("tr").click(function(){
+		$("#inspList").find("tr").find("[id^=chk]").prop("checked",false);
+		$(this).find("[id^=chk]").prop("checked",true);
+	});
+
 });
 
 function popOpenUser2(workGb,objId){
@@ -655,6 +669,8 @@ function fn_setUserDataToForm2(userNo,userNm,objId){
 	$("#workerView_"+objId).text(userNm);
 	$('#popUser').modal('hide');
 }
+
+
 </script>
 </body>
 </html>

@@ -202,6 +202,7 @@
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.ANIM_SECOND_CD) AS ANIM_SECOND_NM
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.ANIM_THIRD_CD) AS ANIM_THIRD_NM
 		     , CASE WHEN ANIM_SEX = 'M' THEN '수컷' WHEN ANIM_SEX = 'F' THEN '암컷' ELSE '모름' END ANIM_SEX_NM
+		     , PDL_NO
 		  FROM TB_RCEPT A
 		 WHERE RQST_NO = #{rqstNo}
 	</select>
@@ -294,6 +295,9 @@
 		<if test="inspFirstCd != null and inspFirstCd != ''">
 		     , INSP_FIRST_CD = #{inspFirstCd}
 		</if>
+		<if test="inspThirdCd != null and inspThirdCd != ''">
+		     , INSP_THIRD_CD = #{inspThirdCd}
+		</if>
 		<if test="sampleCode != null and sampleCode != ''">
 		     , SAMPLE_CODE = #{sampleCode}
 		</if>
@@ -322,6 +326,12 @@
   		</if>
   		<if test ="searchStr != null and searchStr != ''">
 		   AND (HOSP_NO LIKE CONCAT(CONCAT('%',#{searchStr}),'%') OR HOSP_NM LIKE CONCAT(CONCAT('%',#{searchStr}),'%'))
+  		</if>
+  		<if test ="insId != null and insId != ''">
+		   AND INS_ID = #{insId}
+  		</if>
+  		<if test="limitCnt != null and limitCnt != ''">
+  		 LIMIT #{limitCnt}
   		</if>
 	</select>
 
