@@ -11,8 +11,12 @@ public class TbMenu {
 	private String menuNm;
 	private int uppMenuNo;
 	private int menuOrder; //대중소분류
-	private int menuLev; //사용자 권한변 오픈할 권한레벨
+	private String menuLev; //사용자 권한변 오픈할 권한레벨
 	private String menuDtlMemo;
+
+	private String menuUrl;
+	private boolean menuLevChk;
+	private String uppMenuNm;
 	public int getMenuNo() {
 		return menuNo;
 	}
@@ -37,10 +41,10 @@ public class TbMenu {
 	public void setMenuOrder(int menuOrder) {
 		this.menuOrder = menuOrder;
 	}
-	public int getMenuLev() {
+	public String getMenuLev() {
 		return menuLev;
 	}
-	public void setMenuLev(int menuLev) {
+	public void setMenuLev(String menuLev) {
 		this.menuLev = menuLev;
 	}
 	public String getMenuDtlMemo() {
@@ -49,11 +53,30 @@ public class TbMenu {
 	public void setMenuDtlMemo(String menuDtlMemo) {
 		this.menuDtlMemo = menuDtlMemo;
 	}
+	public String getMenuUrl() {
+		return menuUrl;
+	}
+	public void setMenuUrl(String menuUrl) {
+		this.menuUrl = menuUrl;
+	}
+	public boolean isMenuLevChk() {
+		return menuLevChk;
+	}
+	public void setMenuLevChk(boolean menuLevChk) {
+		this.menuLevChk = menuLevChk;
+	}
+	public String getUppMenuNm() {
+		return uppMenuNm;
+	}
+	public void setUppMenuNm(String uppMenuNm) {
+		this.uppMenuNm = uppMenuNm;
+	}
 	@Override
 	public String toString() {
 		return "TbMenu [menuNo=" + menuNo + ", menuNm=" + menuNm + ", uppMenuNo=" + uppMenuNo + ", menuOrder="
-				+ menuOrder + ", menuLev=" + menuLev + ", menuDtlMemo=" + menuDtlMemo + "]";
+				+ menuOrder + ", menuLev=" + menuLev + ", menuDtlMemo=" + menuDtlMemo + ", menuUrl=" + menuUrl
+				+ ", menuLevChk=" + menuLevChk + ", uppMenuNm=" + uppMenuNm + "]";
 	}
-	
-	
+
+
 }

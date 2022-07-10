@@ -12,6 +12,7 @@ import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbMenu;
 import kr.or.abnext.domain.TbUser;
 import kr.or.abnext.util.UtilFile;
 
@@ -431,6 +432,16 @@ public class AdminService {
 	}
 
 
+	//getMenuList
+	public List<TbMenu> getMenuListServ(TbMenu tbMenu){
+		return adminDao.getMenuList(tbMenu);
+	}
 
+
+	//modifyMenu
+	public Map<String, Object> modifyMenuServ(TbMenu tbMenu) {
+
+		return getResultMap(adminDao.modifyMenu(tbMenu));
+	}
 
 }

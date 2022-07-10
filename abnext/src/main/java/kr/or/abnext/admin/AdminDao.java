@@ -12,6 +12,7 @@ import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbMenu;
 import kr.or.abnext.domain.TbUser;
 
 @Repository
@@ -304,6 +305,13 @@ public class AdminDao {
 	}
 
 
+	public List<TbMenu> getMenuList(TbMenu tbMenu){
+		return sql.selectList("admin.getMenuList", tbMenu);
+	}
 
 
+	//modifyMenu
+	public int modifyMenu(TbMenu tbMenu) {
+		return sql.update("admin.modifyMenu", tbMenu);
+	}
 }

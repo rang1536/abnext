@@ -168,6 +168,8 @@
 	  window.stepper = new Stepper(document.querySelector('.bs-stepper'))
 	})
 
+	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+
 	$(function () {
 		$('.select2').select2();
 		bsCustomFileInput.init();
@@ -180,17 +182,22 @@
 			"autoWidth": false,
 			"responsive": true,
 		});
+
+		if(userInfo.userLev != '4'){
+			$('#addBoardBtn').css('display', 'none');
+			$('#delBoardrBtn').css('display', 'none');
+		}
     });
 
 	$(document).on('click', '#addBoardBtn', function(){
-		var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+
 
 		if(userInfo == null || userInfo == ''){
 			if(confirm('로그인 후 사용가능합니다. \n로그인페이지로 이동하시겠습니까?')){
 				location.href = 'loginPage';
 			}
 		}else{
-			if(userInfo.userLev != '5'){
+			if(userInfo.userLev != '4'){
 				alert('관리자만 사용할 수 있습니다.');
 				return;
 			}else{
@@ -201,10 +208,15 @@
 	})
 
 	function fn_modifyBoard(boardNo){
-		$('#modifyBoardNo').val(boardNo);
+		if(userInfo.userLev == '4'){
+			$('#modifyBoardNo').val(boardNo);
 
-		$('#modifyBoardForm').prop('action', 'modifyBoard');
-		$('#modifyBoardForm').submit();
+			$('#modifyBoardForm').prop('action', 'modifyBoard');
+			$('#modifyBoardForm').submit();
+		}else{ //상세보기화면을 만들어야 할듯?
+
+		}
+
 	}
 
 </script>

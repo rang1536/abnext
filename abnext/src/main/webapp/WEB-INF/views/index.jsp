@@ -22,10 +22,9 @@
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- jsGrid -->
+  <link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid.min.css">
+  <link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid-theme.min.css">
 
 
   <style>
@@ -41,13 +40,15 @@
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
-		<section class="content-header">
+		<section class="content-header" style="height:688px;">
 			<div class="container-fluid">
-				<h1><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AVINEXT</b></h1>
-				<div class="row">
+				<h1><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:25%;"></b></h1>
+
+				<!-- <div class="row">
 					<div class="col-md-8" >
 
 					</div>
+
 					<div class="col-md-4" style="opacity:0.8;color:#212121;font-weight:bold;">
 						<div class="card">
 		                  <div class="card-header">
@@ -63,7 +64,8 @@
 		                      </button>
 		                    </div>
 		                  </div>
-		                  <!-- /.card-header -->
+		                  /.card-header
+
 		                  <div class="card-body p-0">
 		                    <ul class="users-list clearfix">
 		                      <li>
@@ -107,26 +109,82 @@
 		                        <span class="users-list-date">15 Jan</span>
 		                      </li>
 		                    </ul>
-		                    <!-- /.users-list -->
+		                    /.users-list
 		                  </div>
-		                  <!-- /.card-body -->
+		                  /.card-body
 		                  <div class="card-footer text-center" style="background-color:#002266;color:#FFFFFF;">
 		                      <b>Avinext에 방문에 주셔서 감사합니다</b>
 		                  </div>
-		                  <!-- /.card-footer -->
+		                  /.card-footer
 		                </div>
-		                <!--/.card -->
+		                /.card
 
 					</div>
-				</div>
+				</div> -->
 
 
 			</div><!-- /.container-fluid -->
 		</section>
 
 		<!-- Main content -->
-		 <section class="content">
+		 <section class="content" style="font-size:13px;">
  			<div class="container-fluid">
+				<!-- <img src="resources/files/bird3.jpg" style="width:99%;"> -->
+				<br/><br/>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header" style="background-color:#002266;color:#ffffff;">
+								<h3 class="card-title"><b>공지사항</b></h3>
+
+								<div class="card-tools">
+									<button type="button" class="btn btn-tool" data-card-widget="collapse">
+										<i class="fas fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-tool" data-card-widget="remove">
+										<i class="fas fa-times"></i>
+									</button>
+								</div>
+							</div>
+
+							<div class="card-body">
+								<div class="row">
+									<div id="jsGrid1"></div>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header" style="background-color:#002266;color:#ffffff;">
+								<h3 class="card-title"><b>Data</b></h3>
+
+								<div class="card-tools">
+									<button type="button" class="btn btn-tool" data-card-widget="collapse">
+										<i class="fas fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-tool" data-card-widget="remove">
+										<i class="fas fa-times"></i>
+									</button>
+								</div>
+							</div>
+
+							<div class="card-body">
+								<div class="row">
+
+								</div>
+
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+				</div>
+
 
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
@@ -177,24 +235,48 @@
 <script src="resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
+<script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
 <script>
 
 	$(function () {
-		$('.select2').select2();
-		bsCustomFileInput.init();
+		$('body').removeClass('sidebar-mini');
+		$('body').addClass('sidebar-collapse');
+	    $(window).trigger('resize');
 
-		$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-			"responsive": true,
-		});
+	    getData();
+
     });
 
+	function getData(){
+		$.ajax({
+			url : 'getBoardListRest',
+			dataType : 'json',
+			type : 'post',
+			success:function(data){
+				//console.log(JSON.stringify(data));
+				setGrid(data);
+			}
+		})
+	}
 
+	function setGrid(data){
+		$("#jsGrid1").jsGrid({
+	        height: "auto",
+	        width: "100%",
+	        sorting: true,
+	        paging: true,
+	        data: data,
+	        rowClick : function(item){
+	        	location.href = 'boardList';
+	        },
+	        fields: [
+	            { name: "boardNo", 		type: "text", 	width: 40, 	title:"NO", 	align: "center"},
+	            { name: "subject",   	type: "number", width: 250, title:"제목", 	align: "center"},
+	            { name: "uptDt", 	type: "text", 	width: 100, title:"작성일", 	align: "center"},
+	            { name: "userNm", 	type: "number", width: 100, title:"작성자", 	align: "center"}
+	        ]
+	    });
+	}
 
 
 

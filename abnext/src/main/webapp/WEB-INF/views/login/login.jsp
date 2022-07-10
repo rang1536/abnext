@@ -70,7 +70,8 @@
 	    <!-- /.social-auth-links -->
 		<br/>
 	    <p class="mb-1">
-	      <a href="#" class="btn btn-sm btn-info">비밀번호찾기</a>
+	      <!-- <a href="#" class="btn btn-sm btn-info">비밀번호찾기</a> -->
+	      <a href="index" class="btn btn-sm btn-info">메인화면가기</a>
 	      <a href="addUserPage" class="btn btn-sm btn-warning" style="float:right;">회원가입하기</a>
 	    </p>
 

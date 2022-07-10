@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +13,8 @@
 	<!-- Navbar -->
 	<nav class="main-header navbar navbar-expand navbar-white navbar-light">
 		<!-- Left navbar links -->
-		<ul class="navbar-nav" style="font-weight:bold;color:#000000;" >
-			<li class="nav-item">
+		<ul class="navbar-nav" style="font-weight:bold;color:#000000;" id="headNavUl" >
+			<!-- <li class="nav-item">
 				<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 			</li>
 			<li class="nav-item d-none d-sm-inline-block">
@@ -33,7 +34,7 @@
 			</li>
 			<li class="nav-item d-none d-sm-inline-block">
 				<a href="#" class="nav-link">설정및관리</a>
-			</li>
+			</li> -->
 		</ul>
 
 		<!-- Right navbar links -->
@@ -60,90 +61,9 @@
 				</div>
 			</li>
 
-			<!-- Messages Dropdown Menu -->
-			<li class="nav-item dropdown">
-				<a class="nav-link" data-toggle="dropdown" href="#">
-					<i class="far fa-comments"></i>
-					<span class="badge badge-danger navbar-badge">3</span>
-				</a>
-				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-					<a href="#" class="dropdown-item">
-						<!-- Message Start -->
-						<div class="media">
-							<img src="resources/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-							<div class="media-body">
-								<h3 class="dropdown-item-title">
-									Brad Diesel
-									<span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-								</h3>
-								<p class="text-sm">Call me whenever you can...</p>
-								<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-							</div>
-						</div>
-						<!-- Message End -->
-					</a>
-					<div class="dropdown-divider"></div>
-					<a href="#" class="dropdown-item">
-						<!-- Message Start -->
-						<div class="media">
-							<img src="resources/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-							<div class="media-body">
-								<h3 class="dropdown-item-title">
-									John Pierce
-									<span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-								</h3>
-								<p class="text-sm">I got your message bro</p>
-								<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-							</div>
-						</div>
-						<!-- Message End -->
-					</a>
-					<div class="dropdown-divider"></div>
-					<a href="#" class="dropdown-item">
-						<!-- Message Start -->
-						<div class="media">
-							<img src="resources/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-							<div class="media-body">
-								<h3 class="dropdown-item-title">
-									Nora Silvester
-									<span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-								</h3>
-								<p class="text-sm">The subject goes here</p>
-								<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-							</div>
-						</div>
-						<!-- Message End -->
-					</a>
-					<div class="dropdown-divider"></div>
-					<a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-				</div>
-			</li>
 			<!-- Notifications Dropdown Menu -->
-			<li class="nav-item dropdown">
-				<a class="nav-link" data-toggle="dropdown" href="#">
-					<i class="far fa-bell"></i>
-					<span class="badge badge-warning navbar-badge">15</span>
-				</a>
-				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-					<span class="dropdown-item dropdown-header">15 Notifications</span>
-					<div class="dropdown-divider"></div>
-					<a href="#" class="dropdown-item">
-						<i class="fas fa-envelope mr-2"></i> 4 new messages
-						<span class="float-right text-muted text-sm">3 mins</span>
-					</a>
-					<div class="dropdown-divider"></div>
-					<a href="#" class="dropdown-item">
-						<i class="fas fa-users mr-2"></i> 8 friend requests
-						<span class="float-right text-muted text-sm">12 hours</span>
-					</a>
-					<div class="dropdown-divider"></div>
-					<a href="#" class="dropdown-item">
-						<i class="fas fa-file mr-2"></i> 3 new reports
-						<span class="float-right text-muted text-sm">2 days</span>
-					</a>
-					<div class="dropdown-divider"></div>
-					<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-				</div>
+			<li class="nav-item dropdown" id="bellLi">
+
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -203,231 +123,7 @@
 
 			<!-- Sidebar Menu -->
 			<nav class="mt-2">
-				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-					<!-- Add icons to the links using the .nav-icon class
-							 with font-awesome or any other icon font library -->
-					<li class="nav-item">
-						<a href="myFarm" class="nav-link leftMenu">
-							<i class="nav-icon fas fa-tachometer-alt"></i>
-							<p>MyPage</p>
-						</a>
-					</li>
-					<li class="nav-item menu-is-opening">
-						<a href="introInspect.do" class="nav-link leftMenu">
-							<i class="nav-icon fas fa-copy"></i>
-							<p>진단검사
-								<i class="fas fa-angle-left right"></i>
-								<span class="badge badge-info right">5</span>
-							</p>
-						</a>
-						<ul class="nav nav-view">
-							<li class="nav-item">
-								<a href="requestInspect.do" class="nav-link leftMenuSub">
-									<i class="far fa-circle nav-icon"></i>
-									<p>신청접수</p>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="settingInspectList.do" class="nav-link leftMenuSub">
-									<i class="far fa-circle nav-icon"></i>
-									<p>진단설정</p>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="resultInspectList.do" class="nav-link leftMenuSub">
-									<i class="far fa-circle nav-icon"></i>
-									<p>결과입력</p>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="finalInspectList.do" class="nav-link leftMenuSub">
-									<i class="far fa-circle nav-icon"></i>
-									<p>최종진단</p>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="allInspectList.do" class="nav-link leftMenuSub">
-									<i class="far fa-circle nav-icon"></i>
-									<p>전체목록</p>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="nav-item">
-									<a href="#" class="nav-link leftMenu">
-										<i class="nav-icon fas fa-book"></i>
-										<p>
-											게시판
-											<i class="right fas fa-angle-left"></i>
-											<span class="badge badge-info right">1</span>
-										</p>
-									</a>
-									<ul class="nav nav-treeview">
-										<li class="nav-item">
-											<a href="boardList" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>공지사항</p>
-											</a>
-										</li>
-										<!-- <li class="nav-item">
-											<a href="qnaList" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>QnA</p>
-											</a>
-										</li> -->
-
-									</ul>
-							</li>
-
-							<!-- 수납관리 -->
-							<li class="nav-item">
-									<a href="payList" class="nav-link leftMenu">
-										<i class="nav-icon fas fa-box"></i>
-										<p>
-											수납관리
-										</p>
-									</a>
-							</li>
-
-							<!-- 상품
-							<li class="nav-item">
-									<a href="#" class="nav-link">
-										<i class="nav-icon fas fa-box"></i>
-										<p>
-											상품구매
-											<i class="right fas fa-angle-left"></i>
-											<span class="badge badge-info right">2</span>
-										</p>
-									</a>
-									<ul class="nav nav-treeview">
-										<li class="nav-item">
-											<a href="productList" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>상품판매</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="productAdmin" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>판매관리</p>
-											</a>
-										</li>
-
-									</ul>
-							</li> -->
-
-							<!-- 통계 -->
-							<li class="nav-item">
-									<a href="#" class="nav-link">
-										<i class="nav-icon fas fa-chart-pie"></i>
-										<p>
-											통계
-											<i class="right fas fa-angle-left"></i>
-											<span class="badge badge-info right">9</span>
-										</p>
-									</a>
-									<ul class="nav nav-treeview">
-										<li class="nav-item">
-											<a href="basicChart" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>기본 통계</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="basicChart2" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>가검물 통계</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="basicChart3" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>진단명별 통계</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="basicChart4" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>월별 진단명별 통계</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="basicChart5" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>혈청검사 통계</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="basicChart6" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>지역별 혈청검사 통계</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="basicChart7" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>년도별 통계</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="basicChart8" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>일반보고서용 통계</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="basicChart9" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>국가보고서용 통계</p>
-											</a>
-										</li>
-									</ul>
-							</li>
-
-							<li class="nav-item">
-									<a href="#" class="nav-link">
-										<i class="nav-icon fas fa-th"></i>
-										<p>
-											설정및관리
-											<i class="right fas fa-angle-left"></i>
-											<span class="badge badge-info right">4</span>
-										</p>
-									</a>
-									<ul class="nav nav-treeview">
-										<li class="nav-item">
-											<a href="userList" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>회원관리</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="hospList" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>기관(병원)관리</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="farmList" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>농장관리</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="codeList" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>코드관리</p>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a href="menuList" class="nav-link">
-												<i class="far fa-circle nav-icon"></i>
-												<p>메뉴권한관리</p>
-											</a>
-										</li>
-									</ul>
-							</li>
-
-
+				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="menuUl">
 				</ul>
 			</nav>
 			<!-- /.sidebar-menu -->
@@ -438,42 +134,24 @@
 	<script src="resources/plugins/jquery/jquery.min.js"></script>
 	<script>
 		$(function () {
-			var path = $(location).attr('pathname');
-			$("#leftMenu").removeClass("active");
-			$("#leftMenuSub").removeClass("active");
-			if(path.indexOf('myFarm') != -1){
-				$(".leftMenu").eq(0).addClass("active");
-			}else if(path.indexOf('introInspect') > -1){
-				$(".leftMenu").eq(1).addClass("active");
-			}else if(path.indexOf('request') > -1 || path.indexOf('register') > -1 || path.indexOf('modifyInspect') > -1){
-				$(".leftMenuSub").eq(0).addClass("active");
-			}else if(path.indexOf('setting') > -1){
-				$(".leftMenuSub").eq(1).addClass("active");
-			}else if(path.indexOf('result') > -1){
-				$(".leftMenuSub").eq(2).addClass("active");
-			}else if(path.indexOf('final') > -1){
-				$(".leftMenuSub").eq(3).addClass("active");
-			}else if(path.indexOf('all') > -1 || path.indexOf('view') > -1){
-				$(".leftMenuSub").eq(4).addClass("active");
-			}else if(path.indexOf('payList') > -1){
-				$(".leftMenu").eq(3).addClass("menu-is-opening menu-open");
-				$(".leftMenu").eq(3).addClass("active");
-			}
-
 			//userInfoIntro
 			var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 
 			if(userInfo != null){
 				var html = '';
 				html += userInfo.userNm+' 님';
-				if((userInfo.hospNm != null && userInfo.hospNm != '') || (userInfo.farmNm != null && userInfo.farmNm != '')){
+				if(userInfo.hospNm != null && userInfo.hospNm != ''){
 					html += '<b style="color:#A6A6A6;font-size:13px;">&nbsp;&nbsp;';
 					html += ' ['
-					html += +userInfo.hospNm+userInfo.farmNm
+					html += userInfo.hospNm;
 					html += ' ]';
 					html += '</b>'
-				}else{
-
+				}else if(userInfo.farmNm != null && userInfo.farmNm != ''){
+					html += '<b style="color:#A6A6A6;font-size:13px;">&nbsp;&nbsp;';
+					html += ' ['
+					html += userInfo.farmNm;
+					html += ' ]';
+					html += '</b>'
 				}
 
 				$('.userInfoIntro').empty();
@@ -481,12 +159,208 @@
 				$('.userInfoIntro').css('display', '');
 				$('#userBtnGroup').css('display', 'none');
 				$('#logOutDiv').css('display', '');
+
+				if(userInfo.userLev == '4'){
+					setMenuList('2');
+					setBellMsg();
+				}else{
+					setMenuList('1');
+				}
 			}else{
 				$('#userBtnGroup').css('display', '');
 				//alert('로그인 후 사용하실수 있습니다 ');
 				//location.href = 'loginPage';
+				setMenuList('1');
 			}
+
+			var path = $(location).attr('pathname');
+
+			setTimeout(function(){
+
+				$("#leftMenu").removeClass("active");
+				$("#leftMenuSub").removeClass("active");
+				if(path.indexOf('myFarm') != -1){
+					$(".leftMenu").eq(0).addClass("active");
+				}else if(path.indexOf('introInspect') > -1){
+					$(".leftMenu").eq(1).addClass("active");
+				}else if(path.indexOf('request') > -1 || path.indexOf('register') > -1 || path.indexOf('modifyInspect') > -1){
+					$(".leftMenuSub").eq(0).addClass("active");
+				}else if(path.indexOf('setting') > -1){
+					$(".leftMenuSub").eq(1).addClass("active");
+				}else if(path.indexOf('result') > -1){
+					$(".leftMenuSub").eq(2).addClass("active");
+				}else if(path.indexOf('final') > -1){
+					$(".leftMenuSub").eq(3).addClass("active");
+				}else if(path.indexOf('all') > -1 || path.indexOf('view') > -1){
+					$(".leftMenuSub").eq(4).addClass("active");
+				}else if(path.indexOf('payList') > -1){
+					$(".leftMenu").eq(3).addClass("menu-is-opening menu-open");
+					$(".leftMenu").eq(3).addClass("active");
+				}
+			}, 500)
+
 		});
+
+		function setMenuList(menuLev){
+			console.log('menuLev : '+menuLev);
+			$.ajax({
+				url :'getMenuList',
+				dataType :'json',
+				type :'post',
+				data : {'menuLev' : menuLev},
+				success:function(data){
+
+					var html = '';
+					var html2 ='';
+
+					html2 += '<li class="nav-item">';
+					html2 += '	<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>';
+					html2 += '</li>';
+
+
+
+
+					$.each(data, function(i, list){
+						if(list.uppMenuNo == 0){
+							//상단
+							html2 += '<li class="nav-item d-none d-sm-inline-block">';
+							if(list.menuUrl == '#'){
+								if(list.menuNm == '게시판'){
+									html2 += '	<a href="boardList" class="nav-link">'+list.menuNm+'</a>';
+								}else if(list.menuNm == '통계'){
+									html2 += '	<a href="basicChart" class="nav-link">'+list.menuNm+'</a>';
+								}else if(list.menuNm == '설정및관리'){
+									html2 += '	<a href="userList" class="nav-link">'+list.menuNm+'</a>';
+								}
+							}else{
+								html2 += '	<a href="#" onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')" class="nav-link">'+list.menuNm+'</a>';
+							}
+
+							html2 += '</li>';
+
+
+							//사이드바
+							html += '<li class="nav-item">';
+							html += '	<a href="'+list.menuUrl+'" class="nav-link leftMenu">';
+
+							var menuNm = list.menuNm;
+							if(menuNm == 'MyPage'){
+								html += '		<i class="nav-icon fas fa-tachometer-alt"></i>';
+								html += '		<p>'+list.menuNm+'</p>';
+								html += '	</a>';
+							}else if(menuNm == '진단검사'){
+								html += '		<i class="nav-icon fas fa-copy"></i>';
+								html += '		<p>'+list.menuNm;
+								html += '			<i class="fas fa-angle-left right"></i>';
+								html += '			<span class="badge badge-info right">5</span>';
+								html += '		</p>';
+								html += '	</a>';
+							}else if(menuNm == '게시판'){
+								html += '		<i class="nav-icon fas fa-book"></i>';
+								html += '		<p>'+list.menuNm;
+								html += '			<i class="fas fa-angle-left right"></i>';
+								html += '			<span class="badge badge-info right">1</span>';
+								html += '		</p>';
+								html += '	</a>';
+							}else if(menuNm == '수납관리'){
+								html += '		<i class="nav-icon fas fa-box"></i>';
+								html += '		<p>'+list.menuNm+'</p>';
+								html += '	</a>';
+							}else if(menuNm == '통계'){
+								html += '		<i class="nav-icon fas fa-chart-pie"></i>';
+								html += '		<p>'+list.menuNm;
+								html += '			<i class="fas fa-angle-left right"></i>';
+								html += '			<span class="badge badge-info right">8</span>';
+								html += '		</p>';
+								html += '	</a>';
+							}else if(menuNm == '설정및관리'){
+								html += '		<i class="nav-icon fas fa-th"></i>';
+								html += '		<p>'+list.menuNm;
+								html += '			<i class="fas fa-angle-left right"></i>';
+								html += '			<span class="badge badge-info right">5</span>';
+								html += '		</p>';
+								html += '	</a>';
+							}
+
+							html += '	<ul class="nav nav-treeview">';
+
+							$.each(data, function(j, secondList){
+								if(secondList.uppMenuNo == list.menuNo){
+									html += '<li class="nav-item">';
+									html += '	<a href="'+secondList.menuUrl+'" class="nav-link leftMenuSub">';
+									html += '		<i class="far fa-circle nav-icon"></i>';
+									html += '		<p>'+secondList.menuNm+'</p>';
+									html += '	</a>';
+									html += '</li>';
+								}
+							})
+
+							html += '	</ul>';
+							html += '</li>';
+						}
+					})
+
+					$('#menuUl').empty();
+					$('#menuUl').html(html);
+
+					$('#headNavUl').empty();
+					$('#headNavUl').html(html2);
+				}
+			})
+		}
+
+		/*페이지이동전 로그인 체크*/
+		function movePageChk(menuUrl, menuNm){
+			var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+
+			if(menuNm == '진단검사' || menuNm == 'MyPage'){
+				if(userInfo == null){
+					if(confirm('로그인후 사용가능한 메뉴입니다. \n로그인페이지로 이동하시겠습니까?')){
+						fn_loginPage();
+					}
+				}else{
+					location.href = menuUrl;
+				}
+			}
+		}
+
+		/*알림세팅*/
+		function setBellMsg(){
+			$.ajax({
+				url : 'searchUserCtrl',
+				dataType : 'json',
+				type :'post',
+				data:{'userStat':'F002-01'},
+				success : function(data){
+					var list = data.list;
+					var html = '';
+
+					html = '<a class="nav-link" data-toggle="dropdown" href="#">';
+					html += '	<i class="far fa-bell"></i>';
+					html += '	<span class="badge badge-warning navbar-badge">2</span>';
+					html += '</a>';
+					html += '<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="font-size:12px;">';
+					html += '	<span class="dropdown-item dropdown-header">2개의 알림이 있습니다</span>';
+					html += '	<div class="dropdown-divider"></div>';
+					html += '	<a href="userList" class="dropdown-item">';
+					html += '		<i class="fas fa-envelope mr-2"></i> '+list.length+'명의 승인대기회원';
+					html += '		<span class="float-right text-muted text-sm">lastest</span>';
+					html += '	</a>';
+					html += '	<div class="dropdown-divider"></div>'
+					html += '	<a href="#" class="dropdown-item">'
+					html += '		<i class="fas fa-file mr-2"></i> 3 건의 진단신청 있음'
+					html += '		<span class="float-right text-muted text-sm">lastest</span>'
+					html += '	</a>'
+					html += '	<div class="dropdown-divider"></div>'
+					html += '</div>';
+
+					$('#bellLi').empty();
+					$('#bellLi').html(html);
+
+				}
+
+			})
+		}
 
 		function fn_logOut(){
 			sessionStorage.clear();

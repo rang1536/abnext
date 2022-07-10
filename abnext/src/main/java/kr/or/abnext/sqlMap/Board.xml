@@ -17,7 +17,7 @@
 			   , USER_NO
 			   , INS_DT
 			   , INS_ID
-			   , UPT_DT
+			   , DATE_FORMAT(UPT_DT, '%Y-%m-%d') as UPT_DT
 			   , UPT_ID
 			   , (SELECT USER_NM FROM TB_USER WHERE USER_NO = A.USER_NO) AS USER_NM
 		  FROM TB_BOARD A

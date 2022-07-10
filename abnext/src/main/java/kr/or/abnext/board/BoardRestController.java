@@ -1,5 +1,6 @@
 package kr.or.abnext.board;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,12 @@ public class BoardRestController {
 		return boardServ.modifyBoardServ(tbBoard);
 	}
 
+	//getBoardListRest
+	@RequestMapping(value = "getBoardListRest", method = RequestMethod.POST)
+	public List<TbBoard> getBoardListRestCtrl(TbBoard tbBoard) {
+		System.out.println("공지조회 ~!!");
+
+		return boardServ.getBoardListServ();
+	}
 
 }

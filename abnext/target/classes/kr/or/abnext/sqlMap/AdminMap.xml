@@ -175,6 +175,9 @@
 		 <if test="userWorkGb != null and userWorkGb != ''">
 		    AND USER_WORK_GB = #{userWorkGb}
 		 </if>
+		 <if test="userStat != null and userStat != ''">
+		 	AND USER_STAT = #{userStat}
+		 </if>
 		 ORDER BY USER_NO
 	</select>
 
@@ -536,5 +539,31 @@
 		</if>
 	</delete>
 
-	<!--  -->
+	<!-- 메뉴조회 -->
+	<select id="getMenuList" parameterType="kr.or.abnext.domain.TbMenu" resultType="kr.or.abnext.domain.TbMenu">
+		SELECT MENU_NO
+			   , MENU_NM
+			   , UPP_MENU_NO
+			   , (SELECT MENU_NM FROM TB_MENU WHERE MENU_NO = A.MENU_NO) as UPP_MENU_NM
+			   , MENU_ORDER
+			   , CASE WHEN MENU_LEV = '1' THEN false ELSE true END AS MENU_LEV_CHK
+			   , MENU_LEV
+			   , MENU_DTL_MEMO
+			   , MENU_URL
+		  FROM TB_MENU A
+		 WHERE 1=1
+		 <if test='menuLev != null and menuLev.equals("1")'>
+		 	AND MENU_LEV = #{menuLev}
+		 </if>
+		 ORDER BY MENU_NO
+
+	</select>
+
+	<!-- 메뉴권한수정 -->
+	<update id="modifyMenu" parameterType="kr.or.abnext.domain.TbMenu">
+		UPDATE TB_MENU
+		   SET MENU_LEV = #{menuLev}
+		 WHERE MENU_NO = #{menuNo}
+	</update>
+
 </mapper>

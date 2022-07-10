@@ -16,6 +16,7 @@ import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbMenu;
 import kr.or.abnext.domain.TbUser;
 import kr.or.abnext.util.UtilFile;
 
@@ -273,5 +274,19 @@ public class AdminRestController {
 	}
 
 
+	@RequestMapping(value = "getMenuList", method = RequestMethod.POST)
+	public List<TbMenu> selectCodeList(TbMenu tbMenu) {
+		System.out.println("메뉴조회 시작~!!"+tbMenu);
+		List<TbMenu> list = adminServ.getMenuListServ(tbMenu);
+		System.out.println(">>>> list : "+list);
+		return list;
+	}
+
+	@RequestMapping(value = "modifyMenu", method = RequestMethod.POST)
+	public Map<String, Object> modifyMenuCtrl(TbMenu tbMenu) {
+		System.out.println("메뉴권한 수정 시작~!!");
+
+		return adminServ.modifyMenuServ(tbMenu);
+	}
 }
 
