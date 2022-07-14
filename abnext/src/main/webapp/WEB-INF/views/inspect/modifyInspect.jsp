@@ -69,7 +69,7 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>*의뢰번호</label>
-										<input type="text" class="form-control" placeholder="의뢰번호" readonly value="${rceptInfo.rqstNo }" id="rqstNo"/>
+										<input type="text" class="form-control" placeholder="의뢰번호" readonly value="${rceptInfo.pdlNo }" id="rqstNo"/>
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -318,7 +318,7 @@
 										</tr>
 										<tr>
 											<td colspan="7" align="center">
-												<button type="button" id="list" style="width:109.2px" class="btn btn-success btn-flat"><i class="fas fa-credit-card"></i> 목록</button>
+												<button type="button" id="list" style="width:109.2px" class="btn btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
 												<button type="button" id="acpt" style="width:109.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 접수확인</button>
 											</td>
 										</tr>

@@ -48,7 +48,7 @@ public class InspectController {
 	public String requestInspect(Locale locale, Model model, String page) {
 		logger.info("requestInspect Method is start {}.", locale);
 
-		String [] arr = {"1" , "2"};
+		String[] arr = { "1", "2" };
 		List<TbRcept> list = insServ.recptList(arr);
 		model.addAttribute("rceptList", list);
 
@@ -58,17 +58,17 @@ public class InspectController {
 	@RequestMapping(value = "modifyInspect")
 	public String modifyInspect(Locale locale, Model model, TbRcept searchRcept) {
 		logger.info("modifyInspect Method is start {}.", locale);
-		//접수정보
+		// 접수정보
 		TbRcept rcept = insServ.getRcept(searchRcept);
 
-		//시료정보
+		// 시료정보
 		TbSample tbSample = new TbSample();
-		tbSample.setRqstNo(""+searchRcept.getRqstNo());
+		tbSample.setRqstNo("" + rcept.getRqstNo());
 		List<TbSample> smplList = insServ.selectSampleList(tbSample);
 
-		//검사정보
+		// 검사정보
 		TbInspection tbInspection = new TbInspection();
-		tbInspection.setRqstNo(""+searchRcept.getRqstNo());
+		tbInspection.setRqstNo("" + rcept.getRqstNo());
 		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
 
 		model.addAttribute("rceptInfo", rcept);
@@ -78,14 +78,13 @@ public class InspectController {
 	}
 
 	@RequestMapping(value = "registerInspect")
-	public String registerInspect(Locale locale, Model model,
-			@ModelAttribute("userInfo") TbUser userBean) {
+	public String registerInspect(Locale locale, Model model, @ModelAttribute("userInfo") TbUser userBean) {
 		logger.info("registerInspect Method is start {}.", locale);
 
 		logger.info(userBean.toString());
 		TbHospital hospBean = new TbHospital();
 		TbUser docBean = new TbUser();
-		if(!userBean.getHospNo().equals("")) {
+		if (!userBean.getHospNo().equals("")) {
 			hospBean.setHospNo(Integer.parseInt(userBean.getHospNo()));
 		}
 
@@ -109,7 +108,7 @@ public class InspectController {
 
 		String formattedDate = dateFormat.format(date);
 
-		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("serverTime", formattedDate);
 
 		return "inspect/registerInspect2";
 	}
@@ -118,7 +117,7 @@ public class InspectController {
 	public String settingInspectList(Locale locale, Model model) {
 		logger.info("settingInspectList Method is start {}.", locale);
 
-		String [] arr = {"2"};
+		String[] arr = { "2" };
 		List<TbRcept> list = insServ.recptList(arr);
 		model.addAttribute("rceptList", list);
 
@@ -129,27 +128,28 @@ public class InspectController {
 	public String settingInspectModify(Locale locale, Model model, TbRcept searchRcept) {
 		logger.info("settingInspectModify Method is start {}.", locale);
 
-		//접수정보
+		// 접수정보
 		TbRcept rcept = insServ.getRcept(searchRcept);
 
-		//시료정보
-		System.out.println(">>>>>>>>>>> 신청번호 확인 : "+""+searchRcept.getRqstNo());
+		// 시료정보
+		System.out.println(">>>>>>>>>>> 신청번호 확인 : " + "" + rcept.getRqstNo());
 		TbSample tbSample = new TbSample();
-		tbSample.setRqstNo(""+searchRcept.getRqstNo());
+		tbSample.setRqstNo("" + rcept.getRqstNo());
 		List<TbSample> smplList = insServ.selectSampleList(tbSample);
 
-		//검사정보
+		// 검사정보
 		TbInspection tbInspection = new TbInspection();
-		tbInspection.setRqstNo(""+searchRcept.getRqstNo());
+		tbInspection.setRqstNo("" + rcept.getRqstNo());
 		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
 
-		//시료상태
+		// 시료상태
+		/*
 		TbCode code = new TbCode();
 		code.setUppCodeId("S001");
 		List<TbCode> codeList = admServ.selectCodeList(code);
-
+		*/
 		model.addAttribute("rceptInfo", rcept);
-		model.addAttribute("codeList", codeList);
+		//model.addAttribute("codeList", codeList);
 		model.addAttribute("smplList", smplList);
 		model.addAttribute("inspList", inspList);
 		model.addAttribute("inspTypeList", insServ.selectInspTypeList());
@@ -159,7 +159,7 @@ public class InspectController {
 	@RequestMapping(value = "resultInspectList")
 	public String resultInspectList(Locale locale, Model model) {
 		logger.info("resultInspectList Method is start {}.", locale);
-		String [] arr = {"3","4"};
+		String[] arr = { "3", "4" };
 		List<TbRcept> list = insServ.recptList(arr);
 		model.addAttribute("rceptList", list);
 		return "inspect/resultInspectList";
@@ -169,20 +169,20 @@ public class InspectController {
 	public String resultInspectModify(Locale locale, Model model, TbRcept searchRcept) {
 		logger.info("resultInspectModify Method is start {}.", locale);
 
-		//접수정보
+		// 접수정보
 		TbRcept rcept = insServ.getRcept(searchRcept);
 
-		//시료정보
+		// 시료정보
 		TbSample tbSample = new TbSample();
-		tbSample.setRqstNo(""+searchRcept.getRqstNo());
+		tbSample.setRqstNo("" + searchRcept.getRqstNo());
 		List<TbSample> smplList = insServ.selectSampleList(tbSample);
 
-		//검사정보
+		// 검사정보
 		TbInspection tbInspection = new TbInspection();
-		tbInspection.setRqstNo(""+searchRcept.getRqstNo());
+		tbInspection.setRqstNo("" + searchRcept.getRqstNo());
 		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
 
-		//시료상태
+		// 시료상태
 		TbCode code = new TbCode();
 		code.setUppCodeId("S001");
 		List<TbCode> codeList = admServ.selectCodeList(code);
@@ -195,11 +195,10 @@ public class InspectController {
 		return "inspect/resultInspectModify";
 	}
 
-
 	@RequestMapping(value = "finalInspectList")
 	public String finalInspectList(Locale locale, Model model) {
 		logger.info("finalInspectList Method is start {}.", locale);
-		String [] arr = {"4","5"};
+		String[] arr = { "4", "5" };
 		List<TbRcept> list = insServ.recptList(arr);
 		model.addAttribute("rceptList", list);
 		return "inspect/finalInspectList";
@@ -209,20 +208,20 @@ public class InspectController {
 	public String finalInspectModify(Locale locale, Model model, TbRcept searchRcept) {
 		logger.info("finalInspectModify Method is start {}.", locale);
 
-		//접수정보
+		// 접수정보
 		TbRcept rcept = insServ.getRcept(searchRcept);
 
-		//시료정보
+		// 시료정보
 		TbSample tbSample = new TbSample();
-		tbSample.setRqstNo(""+searchRcept.getRqstNo());
+		tbSample.setRqstNo("" + rcept.getRqstNo());
 		List<TbSample> smplList = insServ.selectSampleList(tbSample);
 
-		//검사정보
+		// 검사정보
 		TbInspection tbInspection = new TbInspection();
-		tbInspection.setRqstNo(""+searchRcept.getRqstNo());
+		tbInspection.setRqstNo("" + rcept.getRqstNo());
 		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
 
-		//시료상태
+		// 시료상태
 		TbCode code = new TbCode();
 		code.setUppCodeId("S001");
 		List<TbCode> codeList = admServ.selectCodeList(code);
@@ -238,7 +237,7 @@ public class InspectController {
 	@RequestMapping(value = "allInspectList")
 	public String allInspectList(Locale locale, Model model) {
 		logger.info("allInspectList Method is start {}.", locale);
-		String [] arr = {"1","2","3","4","5"};
+		String[] arr = { "1", "2", "3", "4", "5" };
 		List<TbRcept> list = insServ.recptList(arr);
 		model.addAttribute("rceptList", list);
 		return "inspect/allInspectList";
@@ -248,20 +247,20 @@ public class InspectController {
 	public String viewInspect(Locale locale, Model model, TbRcept searchRcept) {
 		logger.info("viewInspect Method is start {}.", locale);
 
-		//접수정보
+		// 접수정보
 		TbRcept rcept = insServ.getRcept(searchRcept);
 
-		//시료정보
+		// 시료정보
 		TbSample tbSample = new TbSample();
-		tbSample.setRqstNo(""+searchRcept.getRqstNo());
+		tbSample.setRqstNo("" + searchRcept.getRqstNo());
 		List<TbSample> smplList = insServ.selectSampleList(tbSample);
 
-		//검사정보
+		// 검사정보
 		TbInspection tbInspection = new TbInspection();
-		tbInspection.setRqstNo(""+searchRcept.getRqstNo());
+		tbInspection.setRqstNo("" + searchRcept.getRqstNo());
 		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
 
-		//시료상태
+		// 시료상태
 		TbCode code = new TbCode();
 		code.setUppCodeId("S001");
 		List<TbCode> codeList = admServ.selectCodeList(code);

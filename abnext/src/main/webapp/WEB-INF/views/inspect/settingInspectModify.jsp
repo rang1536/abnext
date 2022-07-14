@@ -336,7 +336,7 @@
 									<tfoot>
 										<tr>
 											<td colspan="6" class="txtc">
-												<button type="button" id="list" style="width:121.2px" class="btn btn-success btn-flat"><i class="fas fa-credit-card"></i> 목록</button>
+												<button type="button" id="list" style="width:121.2px" class="btn btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
 												<button type="button" id="sett" style="width:121.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 설정확인</button>
 											</td>
 										</tr>

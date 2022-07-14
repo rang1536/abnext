@@ -204,7 +204,13 @@
 		     , CASE WHEN ANIM_SEX = 'M' THEN '수컷' WHEN ANIM_SEX = 'F' THEN '암컷' ELSE '모름' END ANIM_SEX_NM
 		     , PDL_NO
 		  FROM TB_RCEPT A
-		 WHERE RQST_NO = #{rqstNo}
+		 WHERE 1=1
+		<if test="rqstNo != null and rqstNo != ''">
+		   AND RQST_NO = #{rqstNo}
+		</if>
+		<if test="pdlNo != null and pdlNo != ''">
+		   AND PDL_NO = #{pdlNo}
+		</if>
 	</select>
 
 	<select id="getUser" parameterType="kr.or.abnext.domain.TbUser" resultType="kr.or.abnext.domain.TbUser">
@@ -325,7 +331,10 @@
   		   AND RQST_DT BETWEEN #{searchStrtDt} AND #{searchFnshDt}
   		</if>
   		<if test ="searchStr != null and searchStr != ''">
-		   AND (HOSP_NO LIKE CONCAT(CONCAT('%',#{searchStr}),'%') OR HOSP_NM LIKE CONCAT(CONCAT('%',#{searchStr}),'%'))
+		   AND HOSP_NM LIKE CONCAT(CONCAT('%',#{searchStr}),'%')
+  		</if>
+  		<if test ="payGb != null and payGb != ''">
+		   AND PAY_GB = #{payGb}
   		</if>
   		<if test ="insId != null and insId != ''">
 		   AND INS_ID = #{insId}
@@ -340,7 +349,7 @@
 		     , SUM(INSP_PRICE) AS INSP_PRICE
 		     , (SELECT MAX(PAY_STAT) FROM TB_RCEPT B WHERE RQST_NO = B.RQST_NO AND RQST_NO = #{rqstNo}) AS PAY_STAT
 		  FROM TB_INSPECTION
-		 WHERE RQST_NO = #{rqstNo}
+		 WHERE RQST_NO = (SELECT RQST_NO FROM TB_RCEPT WHERE PDL_NO = #{rqstNo})
 	</select>
 
 	<update id="modifyPayment" parameterType="kr.or.abnext.domain.TbRcept">
@@ -348,7 +357,7 @@
 		   SET UPT_ID = #{uptId}
 		     , UPT_DT = NOW()
 		     , PAY_STAT = '02'
-		 WHERE RQST_NO = #{rqstNo}
+		 WHERE PDL_NO = #{pdlNo}
 		   AND PAY_STAT = '01'
 	</update>
 </mapper>

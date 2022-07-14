@@ -46,7 +46,7 @@ public class PaymentRestController {
 		for(int i=0; i<tbRcept.getInspList().size(); i++) {
 
 			TbRcept bean = new TbRcept();
-			bean.setRqstNo(Integer.parseInt(tbRcept.getInspList().get(i).get("rqstNo").toString()));
+			bean.setPdlNo(tbRcept.getInspList().get(i).get("pdlNo").toString());
 			paymentServ.modifyPayment(bean);
 		}
 

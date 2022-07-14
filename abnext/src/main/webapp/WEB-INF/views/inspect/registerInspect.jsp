@@ -569,7 +569,6 @@ $(function () {
 		}
 	});
 
-	console.log("${doctor[0]}");
 });
 
 $(document).ready(function(){

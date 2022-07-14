@@ -17,7 +17,9 @@
 	<link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
-
+	<!-- jsGrid -->
+	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid.min.css">
+	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid-theme.min.css">
 	<!-- iCheck for checkboxes and radio inputs -->
 	<link rel="stylesheet" href="resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
@@ -59,7 +61,7 @@
 						<div class="card-header">
 							<div class="row">
 								<div class="col-sm-2" style="padding-top:30px;min-width:150px;">
-									<h5>* 신청목록  </h5>
+									<h5>* 신청목록	</h5>
 								</div>
 								<div class="col-sm-2">
 									<div class="form-group">
@@ -83,7 +85,17 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-5">
+								<div class="col-sm-2">
+									<div class="form-group">
+										<label>납입방법</label>
+										<select class="form-control" id="payGb">
+											<option value="">전체</option>
+											<option value="즉시납부">즉시납부</option>
+											<option value="월간정산">월간정산</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-3">
 									<div class="form-group">
 										<label>신청기관</label>
 										<input type="text" class="form-control" placeholder="신청기관" id="searchStr">
@@ -99,6 +111,8 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive">
+						<div id="jsGrid1"></div>
+						<%--
 							<table id="example2" class="table table-bordered table-hover text-nowrap">
 								<thead>
 									<tr>
@@ -106,8 +120,7 @@
 										<th>신청기관명</th>
 										<th>신청일</th>
 										<th>검사완료일</th>
-										<th>진단명</th>
-										<!-- <th>검사구분</th> -->
+										<th>납입방법</th>
 										<th>검사비</th>
 										<th>입금액</th>
 										<th>납부</th>
@@ -118,10 +131,10 @@
 									<c:forEach var="item" items="${rceptList }" varStatus="status">
 										<tr>
 											<td>${status.index+1 }</td>
-											<td class="txtr">${item.hospNm }</td>
-											<td class="txtr">${item.rqstDt }</td>
-											<td class="txtr">${item.finishDt }</td>
-											<td class="txtr">${item.diagCdNm }</td>
+											<td class="txtc">${item.hospNm }</td>
+											<td class="txtc">${item.rqstDt }</td>
+											<td class="txtc">${item.finishDt }</td>
+											<td class="txtc">${item.payGb }</td>
 											<td class="txtr"><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
 											<td class="txtr">
 												<c:if test="${item.payStat == '02' }">
@@ -153,6 +166,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							 --%>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -162,7 +176,7 @@
 						<div class="card-header">
 							<div class="row">
 								<div class="col-sm-2" style="padding-top:30px;min-width:150px;">
-									<h5>* 정산 내역  </h5>
+									<h5>* 정산 내역	</h5>
 								</div>
 							</div>
 						</div>
@@ -178,14 +192,6 @@
 									</tr>
 								</thead>
 								<tbody id="inspList">
-									<c:forEach var="item" items="${rceptList }" varStatus="status">
-										<tr>
-											<td>${status.index+1 }</td>
-											<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
-											<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
-											<td><fmt:formatNumber value="${item.price }" pattern="#,###"/></td>
-										</tr>
-									</c:forEach>
 								</tbody>
 								<tfoot>
 									<tr>
@@ -255,6 +261,9 @@
 <script src="resources/dist/js/demo.js"></script>
 <!-- Customizing Js -->
 <script src="resources/js/common.js"></script>
+<!-- jsGrid -->
+<script src="resources/plugins/jsgrid/demos/db.js"></script>
+<script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
 
 <!-- Page specific script -->
 <script>
@@ -270,95 +279,21 @@
 
 
 	$(function () {
-		$('#example2').DataTable({
-			"buttons": ["excel", "print"],
-			"paging": true,
-			"lengthChange": false,
-			"ordering": true,
-			"filter" : false,
-			"autoWidth" : false
-		}).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
-
-		$('.searchBtn').on('click',function(){
-			var sdata = {
-					searchStrtDt : $('#strtDt').val(),
-					searchFnshDt : $('#fnshDt').val(),
-					searchStr : $('#searchStr').val()
-			}
-
-			$.ajax({
-				url : "selectPaymentList",
-				data : sdata,
-				type : "POST",
-				dataType : "JSON",
-				success : function(data){
-					var table = $("#example2").DataTable();
-					table.destroy();
-
-					$("#example2").DataTable({
-						"responsive": true,
-						"buttons": ["excel", "print"],
-						"data" : data,
-						"paging": true,
-						"lengthChange": false,
-						"autoWidth" : false,
-						"ordering": true,
-						"filter" : false,
-					    "columns" : [
-					        {"data": "rqstNo","className":"txtc"},
-							{"data": "hospNm","className":"txtc"},
-					        {"data": "rqstDt","className":"txtc"},
-					        {"data": "finishDt","className":"txtc"},
-					        {"data": "diagCdNm","className":"txtc"},
-					        {"data": "price",
-								'className': 'txtr',
-								"render": function(data){
-									return $.gfn_setComma(data);
-								}
-							},
-							{"data": "payedPrice",
-								'className': 'txtr',
-								"render": function(data){
-									return $.gfn_setComma(data);
-								}
-							},
-							{"data": "payStat",
-								"render": function(data, type, row, meta){
-									var chk = ""; var dis = "";
-									if(data === '02'){
-										chk = " checked "; dis = " disabled ";
-									}
-			                        data = '<div class="clearfix">';
-			                        data += '			<div class="icheck-primary d-inline">';
-			                        data += '				<input type="checkbox"'+chk+dis+' id="checkboxDanger_'+(meta.row+1)+'">';
-			                        data += '				<label for="checkboxDanger_'+(meta.row+1)+'"></label>';
-			                        data += '			</div>';
-			                        data += '		</div>';
-				                    return data;
-				                 }
-							}
-						]
-					}).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
-				}
-			});
-		});
+		search();
 
 		$("#sett").click(function(){
 			var arrayList = new Array();
-			$("#listBody").find("tr").each(function(){
+			$(".jsgrid-table").find("tr").each(function(){
 				if($(this).find("input[type=checkbox]").is(":checked")){
-					var tbl = $('#example2').dataTable();
-					var tr = tbl.fnGetPosition(this);
-					var curData = tbl.fnGetData(tr);
 					var saveData = {
-							rqstNo : curData.rqstNo
+							pdlNo : $(this).find("td:eq(0)").text()
 					}
 					arrayList.push(saveData);
 				}
 			});
 
 			var data = {
-					uptId : sessionStorage.getItem("userId"),
+					uptId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
 					inspList : arrayList
 			}
 
@@ -374,38 +309,115 @@
 			});
 		});
 
+		$('.searchBtn').click(function(){
+			search();
+		})
+
 	});
 
-	$(document).on('click','#example2 td', function(){
-		var tbl = $('#example2').dataTable();
-		var tr = tbl.fnGetPosition(this);
-		var curData = tbl.fnGetData(tr);
-		var rqstNo = curData.rqstNo;
-
+	function search(){
 		var sdata = {
-				rqstNo : rqstNo
+				searchStrtDt : $('#strtDt').val(),
+				searchFnshDt : $('#fnshDt').val(),
+				payGb : $("#payGb").val(),
+				searchStr : $('#searchStr').val()
 		}
-		$.ajax({
-			url : "selectInspect",
+
+		console.log(sdata);
+	 	$.ajax({
+			url : 'selectPaymentList',
+			dataType : 'json',
+			type : 'post',
 			data : sdata,
-			type : "POST",
-			dataType : "JSON",
-			success : function(data){
-				var html = '';
-				var price = 0;
+			success:function(data){
+				var colList = ['pdlNo','hospNm','rqstDt','finishDt','payGb','price','payedPrice','payStat'];
+				var typeList = ['text','text','text','text','text','text','text','checkbox'];
+				var widthList = ['120','150','100','100','130','120','120','60'];
+				var titleList = ['접수번호','신청기관명','신청일','검사완료일','납입방법','검사비','입금액','납부'];
+				var alignList = ['center','center','center','center','center','center','center','center'];
+				var gridId = 'jsGrid1';
+				var fields = new Array();
+				var row = '';
 
-				if(data.payStat == '02') price = data.inspPrice;
-				html += '<tr>';
-				html += '<td>'+data.sumCnt+'</td>';
-				html += '<td>'+$.gfn_setComma(data.inspPrice);+'</td>';
-				html += '<td>'+$.gfn_setComma(price);+'</td>';
-				html += '<td>'+$.gfn_setComma(Number(data.inspPrice)-Number(price))+'</td>';
-				html += '</tr>';
-				$("#inspList").html(html);
+				for(var i=0; i<colList.length; i++){
+					if(i == colList.length-1){
+						row = {
+								"name"	: colList[i],
+								"type"	: typeList[i],
+								"width" : widthList[i],
+								"title"	: titleList[i],
+								"align"	: alignList[i],
+								"itemTemplate" :
+									function(value, item) {
+										var flag = false;
+										if(value == '01') {
+											return $("<input>").attr("type", "checkbox").attr("checked", false);
+										}else {
+											return $("<input>").attr("type", "checkbox").attr("checked", true).attr("disabled", true);
+										}
+									}
+								}
+					}else if(i == 5 || i == 6){
+						row = {
+								"name"	: colList[i],
+								"type"	: typeList[i],
+								"width" : widthList[i],
+								"title"	: titleList[i],
+								"align"	: alignList[i],
+								"itemTemplate" : setComma,
+								"css" : "txtr"
+							}
+					}else {
+						row = {
+								"name"	: colList[i],
+								"type"	: typeList[i],
+								"width" : widthList[i],
+								"title"	: titleList[i],
+								"align"	: alignList[i]
+							}
+					}
+					fields.push(row);
+				}
+
+				$("#jsGrid1").jsGrid({
+					height: "auto",
+					width: "100%",
+					sorting: true,
+					paging: true,
+					data: data,
+					fields: fields,
+					rowClick : function(args){
+						let $target  = $(args.event.target);
+						if($target.attr("class") != null) {
+							$.ajax({
+								url : "selectInspect",
+								data : {rqstNo : $target.parent().find("td:eq(0)").text()},
+								type : "POST",
+								dataType : "JSON",
+								success : function(data){
+									var html = '';
+									var price = 0;
+
+									if(data.payStat == '02') price = data.inspPrice;
+									html += '<tr>';
+									html += '<td>'+data.sumCnt+'</td>';
+									html += '<td>'+$.gfn_setComma(data.inspPrice);+'</td>';
+									html += '<td>'+$.gfn_setComma(price);+'</td>';
+									html += '<td>'+$.gfn_setComma(Number(data.inspPrice)-Number(price))+'</td>';
+									html += '</tr>';
+									$("#inspList").html(html);
+								}
+							});
+						}
+					}
+				});
 			}
-		});
-	});
+		})
+	}
 
+	function setComma(value,y){
+		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
 </script>
 </body>
 </html>

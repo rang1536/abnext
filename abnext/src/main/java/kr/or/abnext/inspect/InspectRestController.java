@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -331,5 +332,29 @@ public class InspectRestController {
 
 		strResult = sbAddChar + strContext;  // LPAD이므로, 채울문자열 + 원래문자열로 Concate한다.
 		return strResult;
+	}
+
+	@RequestMapping(value = "requestInspectList")
+	public List<TbRcept> requestInspect() {
+		String [] arr = {"1" , "2"};
+		return inspectServ.recptList(arr);
+	}
+
+	@RequestMapping(value = "settingInspectList2")
+	public List<TbRcept> settingInspectList(Locale locale, Model model) {
+		String [] arr = {"2"};
+		return inspectServ.recptList(arr);
+	}
+
+	@RequestMapping(value = "resultInspectList2")
+	public List<TbRcept> resultInspectList2(Locale locale, Model model) {
+		String[] arr = { "3", "4" };
+		return inspectServ.recptList(arr);
+	}
+
+	@RequestMapping(value = "finalInspectList2")
+	public List<TbRcept> finalInspectList(Locale locale, Model model) {
+		String [] arr = {"4","5"};
+		return inspectServ.recptList(arr);
 	}
 }

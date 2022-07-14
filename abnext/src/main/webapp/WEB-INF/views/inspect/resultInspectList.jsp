@@ -17,7 +17,9 @@
 	<link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
-
+	<!-- jsGrid -->
+	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid.min.css">
+	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid-theme.min.css">
 	<style>
 		th,td {text-align:center;}
 	</style>
@@ -53,7 +55,8 @@
 					<div class="card">
 						<!-- /.card-header -->
 						<div class="card-body">
-							<table id="example2" class="table table-bordered table-hover">
+							<div id="jsGrid1"></div>
+							<%-- <table id="example2" class="table table-bordered table-hover">
 								<thead>
 								<tr>
 									<th>의뢰번호</th>
@@ -81,6 +84,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							 --%>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -100,7 +104,7 @@
 	</aside>
 	<!-- /.control-sidebar -->
 	<form id="viewFrm" method="POST">
-		<input type="hidden" name="rqstNo"/>
+		<input type="hidden" name="pdlNo"/>
 	</form>
 
 </div>
@@ -127,25 +131,57 @@
 <script src="resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="resources/dist/js/demo.js"></script>
+<!-- jsGrid -->
+<script src="resources/plugins/jsgrid/demos/db.js"></script>
+<script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
 <!-- Page specific script -->
 <script>
 	$(function () {
-		$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-			"responsive": true,
-		});
+		$.ajax({
+			url : 'resultInspectList2',
+			dataType : 'json',
+			type : 'post',
+			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
+			success:function(data){
+				var colList = ['pdlNo','rqstDt','procStatNm','animNm','animNo','hospNm','docNm','gubun'];
+				var typeList = ['text','text','text','text','text','text','text','text'];
+				var widthList = ['120','100','100','150','180','150','120','120'];
+				var titleList = ['의뢰번호','신청일','상태','동물이름','동물번호','신청자(기관)','담당수의사','검사구분'];
+				var alignList = ['center','center','center','center','center','center','center','center'];
+				var gridId = 'jsGrid1';
+				var fields = new Array();
+				var row = '';
+
+				for(var i=0; i<colList.length; i++){
+					row = {
+						"name"	: colList[i],
+						"type"	: typeList[i],
+						"width" : widthList[i],
+						"title"	: titleList[i],
+						"align"	: alignList[i],
+
+					}
+					fields.push(row);
+				}
+
+				$("#"+gridId).jsGrid({
+			        height: "auto",
+			        width: "100%",
+			        sorting: true,
+			        paging: true,
+					data: data,
+			        fields: fields,
+			        rowClick: function(args){
+						var $target = $(args.event.target);
+						$("[name=pdlNo]").val($target.parent().find("td:eq(0)").text());
+						$("#viewFrm").attr("action","resultInspectModify");
+						$("#viewFrm").submit();
+			        }
+			    });
+			}
+		})
 	});
 
-	$("#listBody").find("tr td:not(:first-child)").on("click", function(){
-		var rqstNo = $(this).parent().find("[id^=rqstNo]").val();
-		$("[name=rqstNo]").val(rqstNo);
-		$("#viewFrm").attr("action","resultInspectModify");
-		$("#viewFrm").submit();
-	})
 </script>
 </body>
 </html>

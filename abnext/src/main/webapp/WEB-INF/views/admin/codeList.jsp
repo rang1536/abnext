@@ -59,7 +59,10 @@
 							</div>
 							<!-- ./card-header -->
 							<div class="card-body p-0" style="display:block;width:100%;height:500px;overflow:auto;font-size:14px;">
-								<table class="table table-hover" id="codeListTable" ></table>
+								<table class="table table-hover" id="codeListTable" >
+
+
+								</table>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -178,6 +181,9 @@
 			success : function(data){
 				var codeListHtml = '';
 				var viewedCodeArr = new Array();
+				codeListHtml += '<colgroup>';
+				codeListHtml += '<col style="width:60%"><col>';
+				codeListHtml += '</colgroup>';
 				codeListHtml += '<tbody>';
 				console.log(data);
 				for(var i=0; i<data.length; i++){

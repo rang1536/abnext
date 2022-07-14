@@ -133,40 +133,6 @@ $.gfn_nvl = function(x){
 	}
 }
 
-
-
-/************************************************************
- *                   	   JqGrid		                    *
- ************************************************************/
-$.gfn_setJqGrid = function(colList, typeList, widthList, titleList, gridId, data){
-	var fields = new Array();
-	var row = '';
-
-	for(var i=0; i<colList.length; i++){
-		row = {
-			"name"	: colList[i],
-			"type"	: typeList[i],
-			"width" : widthList[i],
-			"title"	: titleList[i],
-			"align"	: "center"
-		}
-
-		fields.push(row);
-	}
-
-	$("#"+gridId).jsGrid({
-        height: "auto",
-        width: "100%",
-        sorting: true,
-        paging: true,
-		data: data,
-        fields: fields
-    });
-}
-
-
-
-
 /************************************************************/
 /* 엑셀다운 jqGrid
  *  jQuery table2excel - v1.1.2
