@@ -729,8 +729,13 @@ $(".btn-save").on('click',function(){
 	var arraySmpl = [];
 	$(".chks").each(function(){
 		if($(this).is(":checked")){
+			var smplMemo = '';
+			if($(this).val() == 'A002-6'){
+				smplMemo = $("#chk06").val();
+			}
 			var smpl = {
 				sampleCode : $(this).val(),
+				sampleMemo : smplMemo,
 				insId : localStorage.getItem("userId")
 			}
 			arraySmpl.push(smpl);
@@ -740,8 +745,13 @@ $(".btn-save").on('click',function(){
 	var arrayHist = [];
 	$(".chkh").each(function(){
 		if($(this).is(":checked")){
+			var histMemo = '';
+			if($(this).val() == 'ERR001-06'){
+				histMemo = $("#chk17").val();
+			}
 			var hist = {
 				histCode : $(this).val(),
+				histMemo : histMemo,
 				insId : localStorage.getItem("userId")
 			}
 			arrayHist.push(hist);
@@ -972,7 +982,57 @@ $(".btn-list").click(function (){
 	location.href = 'requestInspect';
 })
 
+$(document).on('click','.chkw',function(){
+	var addHtml = '';
+	var tblNo = 1;
+	$("#inspectTbody").find("tr").each(function(){
+		tblNo++;
+	});
+	if($(this).is(":checked")){
+		var inspThirdCd = $(this).val();
+		var contiFlag = true;
+		$("#inspectTbody").find("tr").each(function(){
+			if($(this).find("[id^=inspThirdCd]").val() == inspThirdCd){
+				contiFlag = false;
+			}
+		});
 
+		if(contiFlag){
+			var inspArr = inspThirdCd.split('-');
+			var inspSecondCd = inspArr[0]+'-'+inspArr[1]+'-'+inspArr[2];
+			var inspFirstCd = inspArr[0]+'-'+inspArr[1];
+			var inspPrice = "40,000";
+
+			addHtml += '<tr>';
+			addHtml += '	<td class="txtc">'+tblNo+'</td>';
+			addHtml += '	<td class="txtc">'+$.gfn_getCodeNm(inspFirstCd);
+			addHtml += '		<input type="hidden" id="inspFirstCd_'+tblNo+'" value="'+inspFirstCd+'"/>';
+			addHtml += '		<input type="hidden" id="inspSecondCd_'+tblNo+'" value="'+inspSecondCd+'"/>';
+			addHtml += '		<input type="hidden" id="inspThirdCd_'+tblNo+'" value="'+inspThirdCd+'"/>';
+			addHtml += '		<input type="hidden" id="inspPrice_'+tblNo+'" value="'+inspPrice+'"/>';
+			addHtml += '	</td>';
+			addHtml += '	<td class="txtc">'+$.gfn_getCodeNm(inspSecondCd)+'</td>';
+			addHtml += '	<td class="txtc">'+$.gfn_getCodeNm(inspThirdCd)+'</td>';
+			addHtml += '	<td class="txtr">'+inspPrice+'</td>';
+			addHtml += '	<td class="txtc"><a class="btn btn-danger btn-sm btn-flat" href="javascript:void(0)" onclick="delInspect(this)"><i class="fas fa-trash"></i> 삭제 </a></td>';
+			addHtml += '</tr>';
+			tblNo++;
+		}
+
+		$("#inspectTbody").append(addHtml);
+		calcPrice();
+
+	}else {
+		var chkVal = $(this).val();
+		$("#inspectTbody").find("tr").each(function(){
+			if($(this).find("[id^=inspThirdCd]").val() == chkVal){
+				$(this).remove();
+			}
+		});
+
+		calcPrice();
+	}
+})
 
 </script>
 </body>

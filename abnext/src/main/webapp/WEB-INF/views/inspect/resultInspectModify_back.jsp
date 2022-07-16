@@ -31,34 +31,34 @@
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.css">
 	<!-- Toastr -->
-		<link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
+    <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
 
 
 	<style>
 		.txtc {text-align:center;}
 		.fileBox label {
-			display: inline-block;
-			padding: .5em .75em;
-			color: #000000;
-			font-size: inherit;
-			line-height: normal;
-			vertical-align: middle;
-			background-color: #fdfdfd;
-			cursor: pointer;
-			border: 1px solid #ebebeb;
-			border-bottom-color: #e2e2e2;
-			border-radius: .25em;
+		  display: inline-block;
+		  padding: .5em .75em;
+		  color: #000000;
+		  font-size: inherit;
+		  line-height: normal;
+		  vertical-align: middle;
+		  background-color: #fdfdfd;
+		  cursor: pointer;
+		  border: 1px solid #ebebeb;
+		  border-bottom-color: #e2e2e2;
+		  border-radius: .25em;
 		}
 
-		.fileBox input[type="file"] {	/* 파일 필드 숨기기 */
-			position: absolute;
-			width: 1px;
-			height: 1px;
-			padding: 0;
-			margin: -1px;
-			overflow: hidden;
-			clip:rect(0,0,0,0);
-			border: 0;
+		.fileBox input[type="file"] {  /* 파일 필드 숨기기 */
+		  position: absolute;
+		  width: 1px;
+		  height: 1px;
+		  padding: 0;
+		  margin: -1px;
+		  overflow: hidden;
+		  clip:rect(0,0,0,0);
+		  border: 0;
 		}
 
 	</style>
@@ -139,59 +139,6 @@
 					<!-- /.card -->
 					</div>
 				</div>
-
-				<div class="row">
-					<div class="col-12">
-						<div class="card card-primary">
-							<div class="card-header">
-								<h3 class="card-title">실험결과</h3>
-							</div>
-							<!-- /.card-header -->
-							<div class="card-body table-responsive">
-								<table class="table table-bordered table-hover text-nowrap">
-									<thead>
-										<tr>
-											<td class="txtc" style="width:5%;background-color:#F2F2F2"></td>
-											<td class="txtc" style="width:10%;background-color:#F2F2F2">No</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">검사구분</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">검사방법</td>
-											<td class="txtc" style="width:*;background-color:#F2F2F2">검사항목</td>
-										</tr>
-									</thead>
-									<tbody id="inspList">
-										<c:forEach var="item" items="${inspList }" varStatus="status">
-											<tr>
-												<td>
-													<div class="form-group clearfix" style="margin-left:9px;margin-bottom:-3px;">
-														<div class="icheck-primary d-inline">
-															<input type="checkbox" id="chk_${status.index+1 }">
-															<label for="chk_${status.index+1 }">&nbsp;</label>
-														</div>
-													</div>
-												</td>
-												<td class="txtc">
-													${status.index+1 }
-													<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
-												</td>
-												<td class="txtc">${item.inspFirstNm }</td>
-												<td class="txtc">${item.inspSecondNm }</td>
-												<td class="txtc">${item.inspThirdNm }</td>
-												<%--
-												<td class="txtc">
-													<input type="text" id="inspResult_${status.index+1 }" class="form-control" placeholder="실험결과" value="${item.inspResult}">
-												</td>
-												 --%>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
-					</div>
-				</div>
-				<%--
 				<div class="card card-primary">
 					<div class="card-header">
 						<h3 class="card-title">실험결과</h3>
@@ -233,9 +180,9 @@
 													<c:forEach var="file" items="${item.inspFileList }" varStatus="status">
 														<b id="bFile_${file.fileNo }">
 															[<a href="javascript:void(0)" onclick="imgView('${file.fileNewNm}')">${file.fileNewNm}</a>]
-																	<a class="delete" onclick="deleteServerFile('${file.fileNo}');"><i class="far fa-minus-square"></i></a>
-				 													&nbsp;&nbsp;
-			 													</b>
+	        												<a class="delete" onclick="deleteServerFile('${file.fileNo}');"><i class="far fa-minus-square"></i></a>
+	       													&nbsp;&nbsp;
+       													</b>
 													</c:forEach>
 												</td>
 											</tr>
@@ -247,84 +194,29 @@
 					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
- --%>
-				<div class="row inputType1">
-	 				<div class="col-md-6">
-						<div class="card card-primary">
-							<div class="card-header">
-								<h3 class="card-title">검사메모</h3>
-							</div>
-							<div class="card-body">
-								<table class="table">
-									<tbody>
-										<tr>
-											<td>
-												<textarea class="form-control" rows="3">${rceptInfo.result}</textarea>
-											</td>
-										</tr>
-										<tr>
-											<td class="txtc">
-												<button type="button" id="save" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사메모저장</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
-	 				</div>
-					<div class="col-md-6">
-						<div class="card card-primary">
-							<div class="card-header">
-								<h3 class="card-title">검사사진</h3>
-							</div>
-							<div class="card-body">
-								<div class="fileBox">
-									<label for="inspResultFile">결과사진추가</label>
-									<input type="file" id="inspResultFile" onchange="addFileSet(this, '');">
-								</div>
 
-								<div>
-									<div class="filter-container row previewList">
-									<!--
-										<div class="filtr-item col-sm-3" id="preview1">
-											<a href="https://via.placeholder.com/1200/000000.png">
-												<img src="https://via.placeholder.com/500/000000" class="img-fluid mb-2" style="width:140px;height:140px"/>
-											</a>
-										</div>
-										<div class="col-sm-9">
-											<div class="row">
-												<div class="col-8">
-													<input type="text" class="form-control">
-												</div>
-												<div class="col-4" style="padding-top:-9px">
-													<label for="chk1"></label>
-													<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">
-														<div class="icheck-primary d-inline">
-															<input type="checkbox" id="chk1">
-															<label for="chk1">비공개</label>
-														</div>
-													</div>
-												</div>
-
-											</div>
-											<div class="row">
-												<div class="col-12">
-													<textarea class="form-control" rows="3"></textarea>
-												</div>
-											</div>
-										</div>
-										 -->
-									</div>
-								</div>
-
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
-	 				</div>
-	 			</div>
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title">결과메모</h3>
+					</div>
+					<div class="card-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<td><input type="text" id="result" class="form-control" placeholder="결과메모" value="${rceptInfo.result}"></td>
+								</tr>
+								<tr>
+									<td class="txtc">
+										<button type="button" id="list" style="width:121.2px" class="btn btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
+										<button type="button" id="save" style="width:121.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 결과저장</button>
+									</td>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
 			</div>
 			<!-- /.container-fluid -->
 		</section>
@@ -393,83 +285,60 @@ var fileNo = 0;
 var filesArr = new Array();
 
 /* 첨부파일 추가 */
-function addFileSet(obj){
+function addFileSet(obj, rowNum){
+	for (var i=0; i<obj.files.length; i++) {
+		var file = obj.files[i];
+	    // 첨부파일 검증
+	    if (validation(file)) {
+	        // 파일 배열에 담기
+	        var reader = new FileReader();
+	        reader.onload = function () {
+	            filesArr.push(file);
+	        };
+	        reader.readAsDataURL(file);
 
-	var file = obj.files[0];
-	// 첨부파일 검증
-	if (validation(file)) {
+	        // 목록 추가
+	        let htmlData = '';
+	        htmlData += '   <span id="file' + fileNo + '">' + file.name;
+	        htmlData += '   	<a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="far fa-minus-square"></i></a>';
+	        htmlData += '	</span>';
+	        htmlData += '&nbsp;&nbsp;';
 
-		var len = $(".filtr-item").length+1;
-		// 목록 추가
-		let htmlData = '';
-		htmlData += '<div class="filtr-item col-sm-3" id="preview'+len+'">';
-		htmlData += '	<a id="imgLoad'+len+'">';
-		htmlData += '		<img id="imgPreview'+len+'" class="img-fluid mb-2" style="width:140px;height:140px"/>';
-		htmlData += '	</a>';
-		htmlData += '</div>';
-		htmlData += '<div class="col-sm-9">';
-		htmlData += '	<div class="row">';
-		htmlData += '		<div class="col-8">';
-		htmlData += '			<input type="text" class="form-control" id="title'+len+'" placeholder="장기">';
-		htmlData += '		</div>';
-		htmlData += '		<div class="col-4" style="padding-top:-9px">';
-		htmlData += '			<label for="chk1"></label>';
-		htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
-		htmlData += '				<div class="icheck-primary d-inline">';
-		htmlData += '					<input type="checkbox" id="chk'+len+'">';
-		htmlData += '					<label for="chk1">비공개</label>';
-		htmlData += '				</div>';
-		htmlData += '			</div>';
-		htmlData += '		</div>';
-		htmlData += '	</div>';
-		htmlData += '	<div class="row">';
-		htmlData += '		<div class="col-12">';
-		htmlData += '			<textarea class="form-control" rows="3" id="content'+len+'" placeholder="메모"></textarea>';
-		htmlData += '		</div>';
-		htmlData += '	</div>';
-		htmlData += '</div>';
-
-		$(".previewList").append(htmlData);
-
-		// 파일 배열에 담기
-		var reader = new FileReader();
-		reader.onload = function (e) {
-			filesArr.push(file);
-			var res = e.target.result;
-			$('#imgPreview'+len).attr("src", res);
-		};
-		reader.readAsDataURL(file);
-
+	        $('#'+rowNum+'tr').find('td:eq(0)').append(htmlData);
+	        fileNo++;
+	    } else {
+	        continue;
+	    }
 	}
-
-	// 초기화
-	document.querySelector("input[type=file]").value = "";
+    //}
+    // 초기화
+    document.querySelector("input[type=file]").value = "";
 }
 
 /* 첨부파일 검증 */
 function validation(obj){
-	const fileTypes = ['application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tif', 'application/haansofthwp', 'application/x-hwp'];
-	if (obj.name.length > 100) {
-		alert("파일명이 100자 이상인 파일은 제외되었습니다.");
-		return false;
-	} else if (obj.size > (100 * 1024 * 1024)) {
-		alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
-		return false;
-	} else if (obj.name.lastIndexOf('.') == -1) {
-		alert("확장자가 없는 파일은 제외되었습니다.");
-		return false;
-	} else if (!fileTypes.includes(obj.type)) {
-		alert("첨부가 불가능한 파일은 제외되었습니다.");
-		return false;
-	} else {
-		return true;
-	}
+    const fileTypes = ['application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tif', 'application/haansofthwp', 'application/x-hwp'];
+    if (obj.name.length > 100) {
+        alert("파일명이 100자 이상인 파일은 제외되었습니다.");
+        return false;
+    } else if (obj.size > (100 * 1024 * 1024)) {
+        alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
+        return false;
+    } else if (obj.name.lastIndexOf('.') == -1) {
+        alert("확장자가 없는 파일은 제외되었습니다.");
+        return false;
+    } else if (!fileTypes.includes(obj.type)) {
+        alert("첨부가 불가능한 파일은 제외되었습니다.");
+        return false;
+    } else {
+        return true;
+    }
 }
 
 /* 첨부파일 삭제 */
 function deleteFile(num) {
-	document.querySelector("#file" + num).remove();
-	filesArr[num].is_delete = true;
+    document.querySelector("#file" + num).remove();
+    filesArr[num].is_delete = true;
 }
 
 /*서버파일삭제
@@ -510,15 +379,15 @@ function fileSave(){
 				})
 
 				for (var i = 0; i < filesArr.length; i++) {
-					// 삭제되지 않은 파일만 폼데이터에 담기
-					if (!filesArr[i].is_delete) {
-						for (var j=0; j<fileNames.length; j++){
-							if(filesArr[i].name == fileNames[j].trim()){
-								formData.append('fileList',filesArr[i]);
+			        // 삭제되지 않은 파일만 폼데이터에 담기
+			        if (!filesArr[i].is_delete) {
+			        	for (var j=0; j<fileNames.length; j++){
+			        		if(filesArr[i].name == fileNames[j].trim()){
+			        			formData.append('fileList',filesArr[i]);
 							}
-						}
-					}
-				}
+			        	}
+			        }
+			    }
 
 				formData.append('inspNo', $(this).find("[id^=inspNo]").val());
 				formData.append('rqstNo', '${rceptInfo.rqstNo }');

@@ -31,6 +31,14 @@
 	<link rel="stylesheet" href="resources/plugins/dropzone/min/dropzone.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.min.css">
+
+	<style>
+		.th{text-align:center; font-weight:bold;}
+		.txtc{text-align:center;}
+		.txtr{text-align:right;}
+	</style>
+
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -69,7 +77,8 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label>*의뢰번호</label>
-										<input type="text" class="form-control" placeholder="의뢰번호" readonly value="${rceptInfo.pdlNo }" id="rqstNo"/>
+										<input type="text" class="form-control" placeholder="의뢰번호" readonly value="${rceptInfo.pdlNo }" id="pdlNo"/>
+										<input type="hidden" value="${rceptInfo.rqstNo }" id="rqstNo"/>
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -175,161 +184,147 @@
 					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
-<%--
-				<div class="card card-success">
-					<div class="card-header">
-						<h3 class="card-title">시료정보</h3>
-					</div>
-					<!-- /.card-header -->
-					<div class="card-body">
-						<form>
-							<div class="row">
-								<table class="table table-bordered table-hover">
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>시료</th>
-											<th>메모</th>
-										</tr>
-									</thead>
-									<tbody id="sampleTbody">
-										<c:forEach var="item" items="${smplList }" varStatus="status">
-											<tr>
-												<td>${status.index+1 }</td>
-												<td>${item.sampleName }</td>
-												<td>${item.sampleMemo }</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-						</form>
-					</div>
-					<!-- /.card-body -->
-				</div>
- --%>
-				<div class="card card-primary">
-					<div class="card-header">
-						<h3 class="card-title">검사정보</h3>
-					</div>
-					<!-- /.card-header -->
-					<div class="card-body">
-						<div class="row">
-							<div class="col-6">
-								<div class="form-group">
-									<label>*시료정보</label>
-									<div class="form-group">
-										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
-											<input type="checkbox" id="chk01" class="chks" value="A002-01" disabled>
-											<label for="chk01" style="width:80px">분변</label>
-										</div>
-										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
-											<input type="checkbox" id="chk02" class="chks" value="A002-02" disabled>
-											<label for="chk02" style="width:80px">깃털</label>
-										</div>
-										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
-											<input type="checkbox" id="chk03" class="chks" value="A002-4" disabled>
-											<label for="chk03" style="width:80px">혈액</label>
-										</div>
-										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
-											<input type="checkbox" id="chk04" class="chks" value="A002-3" disabled>
-											<label for="chk04" style="width:125px">총배설강스왑</label>
-										</div>
-										<div class="icheck-primary d-inline" style="vertical-align:bottom;">
-											<input type="checkbox" id="chk05" class="chks" value="A002-6" disabled>
-											<label for="chk05">기타</label>
+
+				<div class="row">
+					<div class="col-12">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">검사정보</h3>
+								<!--
+								<div class="card-tools">
+									<div class="input-group input-group-sm" style="width: 150px;">
+										<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-default">
+												<i class="fas fa-search"></i>
+											</button>
 										</div>
 									</div>
 								</div>
+								 -->
 							</div>
-							<div class="col-6">
-								<label>&nbsp;</label>
-								<input type="text" class="form-control" id="chk06" style="display:none">
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-6">
-								<div class="form-group">
-									<label>*임상증상 및 병력내용</label>
-									<div class="form-group clearfix">
-										<div class="icheck-primary d-inline">
-											<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
-											<label for="chk11">깃털이상</label>
+							<!-- /.card-header -->
+							<div class="card-body table-responsive">
+								<div class="col-12">
+									<div class="row">
+										<div class="col-6">
+											<div class="form-group">
+												<label>*시료정보</label>
+												<div class="form-group">
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk01" class="chks" value="A002-01" disabled>
+														<label for="chk01" style="width:80px">분변</label>
+													</div>
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk02" class="chks" value="A002-02" disabled>
+														<label for="chk02" style="width:80px">깃털</label>
+													</div>
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk03" class="chks" value="A002-4" disabled>
+														<label for="chk03" style="width:80px">혈액</label>
+													</div>
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk04" class="chks" value="A002-3" disabled>
+														<label for="chk04" style="width:125px">총배설강스왑</label>
+													</div>
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk05" class="chks" value="A002-6" disabled>
+														<label for="chk05">기타</label>
+													</div>
+												</div>
+											</div>
 										</div>
-										<div class="icheck-primary d-inline">
-											<input type="checkbox" id="chk12" class="chkh" value="ERR001-02">
-											<label for="chk12">호흡이상</label>
-										</div>
-										<div class="icheck-primary d-inline">
-											<input type="checkbox" id="chk13" class="chkh" value="ERR001-03">
-											<label for="chk13">선위확장</label>
-										</div>
-										<div class="icheck-primary d-inline">
-											<input type="checkbox" id="chk14" class="chkh" value="ERR001-04">
-											<label for="chk14">설사</label>
-										</div>
-										<div class="icheck-primary d-inline">
-											<input type="checkbox" id="chk15" class="chkh" value="ERR001-05">
-											<label for="chk15">체중감소</label>
-										</div>
-										<div class="icheck-primary d-inline">
-											<input type="checkbox" id="chk16" class="chkh" value="ERR001-06">
-											<label for="chk16">기타</label>
+										<div class="col-6">
+											<label>&nbsp;</label>
+											<input type="text" class="form-control" id="chk06" style="display:none" disabled>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-6">
-								<label>&nbsp;</label>
-								<input type="text" class="form-control" id="chk17" style="display:none">
-							</div>
-						</div>
-
-						<form>
-							<div class="row">
-								<table id="example2" class="table table-bordered table-hover">
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>검사항목구분</th>
-											<th>검사항목</th>
-											<th>검사항복세부</th>
-											<th>검사비</th>
-										</tr>
-									</thead>
-									<tbody id="inspTbody">
-										<c:set var="totPrice" value="0"/>
-										<c:forEach var="item" items="${inspList }" varStatus="status">
+								<div class="col-12">
+									<div class="row">
+										<div class="col-6">
+											<div class="form-group">
+												<label>*임상증상 및 병력내용</label>
+												<div class="form-group clearfix">
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
+														<label for="chk11">깃털이상</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk12" class="chkh" value="ERR001-02">
+														<label for="chk12">호흡이상</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk13" class="chkh" value="ERR001-03">
+														<label for="chk13">선위확장</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk14" class="chkh" value="ERR001-04">
+														<label for="chk14">설사</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk15" class="chkh" value="ERR001-05">
+														<label for="chk15">체중감소</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk16" class="chkh" value="ERR001-06">
+														<label for="chk16">기타</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-6">
+											<label>&nbsp;</label>
+											<input type="text" class="form-control" id="chk17" style="display:none" disabled>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<table class="table table-hover table-bordered">
+										<thead>
 											<tr>
-												<td>${status.index+1 }</td>
-												<td>${item.inspFirstNm }</td>
-												<td>${item.inspSecondNm }</td>
-												<td>${item.inspThirdNm }</td>
-												<td style="text-align:right;"><fmt:formatNumber value="${item.inspPrice }" pattern="#,###"/></td>
+												<th class="txtc" style="border-top:1px;">번호</th>
+												<th class="txtc">검사항목구분</th>
+												<th class="txtc">검사항목</th>
+												<th class="txtc">검사항복세부</th>
+												<th class="txtc">검사비</th>
 											</tr>
-											<c:set var="totPrice" value="${totPrice+ item.inspPrice}"/>
-										</c:forEach>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="4" align="center">검시비용 계</td>
-											<th id="totPrice" style="text-align:right;"><fmt:formatNumber value="${totPrice }" pattern="#,###"/></th>
-										</tr>
-										<tr>
-											<td colspan="7" align="center">
-												<button type="button" id="list" style="width:109.2px" class="btn btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
-												<button type="button" id="acpt" style="width:109.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 접수확인</button>
-											</td>
-										</tr>
-									</tfoot>
-								</table>
+										</thead>
+										<tbody id="inspTbody">
+											<c:set var="totPrice" value="0"/>
+											<c:forEach var="item" items="${inspList }" varStatus="status">
+												<tr>
+													<td class="txtc">${status.index+1 }</td>
+													<td class="txtc">${item.inspFirstNm }</td>
+													<td class="txtc">${item.inspSecondNm }</td>
+													<td>${item.inspThirdNm }</td>
+													<td style="text-align:right;"><fmt:formatNumber value="${item.inspPrice }" pattern="#,###"/></td>
+												</tr>
+												<c:set var="totPrice" value="${totPrice+ item.inspPrice}"/>
+											</c:forEach>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="4" align="center">검시비용 계</td>
+												<th id="totPrice" style="text-align:right;"><fmt:formatNumber value="${totPrice }" pattern="#,###"/></th>
+											</tr>
+											<tr>
+												<td colspan="7" align="center">
+													<button type="button" id="list" style="width:111.2px" class="btn btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
+													<button type="button" id="acpt" style="width:111.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 접수확인</button>
+												</td>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
 							</div>
-						</form>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
 					</div>
-					<!-- /.card-body -->
 				</div>
-				<!-- /.card -->
+
 			</div><!-- /.container-fluid -->
 		</section>
 		<!-- /.content -->
@@ -437,6 +432,10 @@ $(function () {
 				for(var i=0; i<data.length; i++){
 					if($(this).val() == data[i].sampleCode){
 						$(this).prop("checked", true);
+						if($(this).val() == 'A002-6'){
+							$("#chk06").val(data[i].sampleMemo);
+							$("#chk06").show();
+						}
 					}
 				}
 			})
@@ -454,6 +453,10 @@ $(function () {
 				for(var i=0; i<data.length; i++){
 					if($(this).val() == data[i].histCode){
 						$(this).prop("checked", true);
+						if($(this).val() == 'ERR001-06'){
+							$("#chk17").val(data[i].histMemo);
+							$("#chk17").show();
+						}
 					}
 				}
 			})

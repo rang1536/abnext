@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,45 +62,50 @@
 		<section class="content">
 			<div class="container-fluid">
 				<!-- general form elements disabled -->
-				<div class="card card-primary">
-					<div class="card-header">
-						<h3 class="card-title">신청정보</h3>
-					</div>
-					<div class="card-body">
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰번호</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.pdlNo }</td>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">상태</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.procStatNm }</td>
-								</tr>
-								<tr>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">신청자(기관)</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.hospNm }</td>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">담당수의사</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.docNm }</td>
-								</tr>
-								<tr>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">품종</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.animFirstNm }/${rceptInfo.animSecondNm }/${rceptInfo.animThirdNm }</td>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">생년월일</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.animBirth }</td>
-								</tr>
-								<tr>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">성별</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.animSexNm}</td>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">신청일</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.rqstDt}</td>
-								</tr>
-								<tr>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">동물명(번호)</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.animNm }(${rceptInfo.animNo})</td>
-									<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰메모</td>
-									<td style="width:30%;" class="txtc">${rceptInfo.rqstMemo }</td>
-								</tr>
-							</thead>
-						</table>
+				<div class="row">
+					<div class="col-12">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">신청정보</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body table-responsive">
+								<table class="table table-bordered text-nowrap">
+									<tbody>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰번호</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.pdlNo }</td>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">상태</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.procStatNm }</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">신청자(기관)</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.hospNm }</td>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">담당수의사</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.docNm }</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">품종</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.animFirstNm }/${rceptInfo.animSecondNm }/${rceptInfo.animThirdNm }</td>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">생년월일</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.animBirth }</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">성별</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.animSexNm}</td>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">신청일</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.rqstDt}</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">동물명(번호)</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.animNm }(${rceptInfo.animNo})</td>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰메모</td>
+											<td style="width:30%;" class="txtc">${rceptInfo.rqstMemo }</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 					<!-- /.card-body -->
 				</div>
@@ -188,7 +193,7 @@
 							</div>
 							<div class="col-6">
 								<label>&nbsp;</label>
-								<input type="text" class="form-control" id="chk06" style="display:none">
+								<input type="text" class="form-control" id="chk06" style="display:none" disabled>
 							</div>
 						</div>
 
@@ -226,7 +231,7 @@
 							</div>
 							<div class="col-6">
 								<label>&nbsp;</label>
-								<input type="text" class="form-control" id="chk17" style="display:none">
+								<input type="text" class="form-control" id="chk17" style="display:none" disabled>
 							</div>
 						</div>
 						<form>
@@ -280,16 +285,16 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
-								<table id="example2" class="table table-bordered table-hover">
+							<div class="row table-responsive">
+								<table class="table table-bordered table-hover text-nowrap">
 									<thead>
 										<tr>
-											<td class="txtc" style="width:5%;background-color:#F2F2F2"></td>
+											<td class="txtc" style="width:3%;background-color:#F2F2F2"></td>
 											<td class="txtc" style="width:5%;background-color:#F2F2F2">No</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">검사구분</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">검사방법</td>
+											<td class="txtc" style="width:18%;background-color:#F2F2F2">검사구분</td>
+											<td class="txtc" style="width:22%;background-color:#F2F2F2">검사방법</td>
 											<td class="txtc" style="width:20%;background-color:#F2F2F2">시료</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">담당자</td>
+											<td class="txtc" style="width:17%;background-color:#F2F2F2">담당자</td>
 											<td class="txtc" style="width:*;background-color:#F2F2F2">비용</td>
 										</tr>
 									</thead>
@@ -303,7 +308,7 @@
 													<input type="hidden" id="sampleName_${status.index+1 }" value="${item.sampleName }"/>
 													<input type="hidden" id="workerNo_${status.index+1 }" value="${item.workerNo }"/>
 													<input type="hidden" id="workerNm_${status.index+1 }" value="${item.workerNm }"/>
-													<div class="form-group clearfix">
+													<div class="form-group clearfix" style="margin-left:9px">
 														<div class="icheck-primary d-inline">
 															<input type="checkbox" id="chk_${status.index+1 }">
 															<label for="chk_${status.index+1 }">&nbsp;</label>
@@ -335,7 +340,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="6" class="txtc">
+											<td colspan="7" class="txtc">
 												<button type="button" id="list" style="width:121.2px" class="btn btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
 												<button type="button" id="sett" style="width:121.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 설정확인</button>
 											</td>
@@ -430,6 +435,10 @@ $(function () {
 				for(var i=0; i<data.length; i++){
 					if($(this).val() == data[i].sampleCode){
 						$(this).prop("checked", true);
+						if($(this).val() == 'A002-6'){
+							$("#chk06").val(data[i].sampleMemo);
+							$("#chk06").show();
+						}
 					}
 				}
 			})
@@ -447,6 +456,10 @@ $(function () {
 				for(var i=0; i<data.length; i++){
 					if($(this).val() == data[i].histCode){
 						$(this).prop("checked", true);
+						if($(this).val() == 'ERR001-06'){
+							$("#chk17").val(data[i].histMemo);
+							$("#chk17").show();
+						}
 					}
 				}
 			})
@@ -530,8 +543,14 @@ function callBackFnGetPrice(data){
 }
 
 $("#inspList").find("tr").click(function(){
-	$("#inspList").find("tr").find("[id^=chk]").prop("checked",false);
-	$(this).find("[id^=chk]").prop("checked",true);
+	if($(this).find("[id^=chk]").is(":checked")){
+		$(this).find("[id^=chk]").prop("checked",false);
+	}else {
+		$("#inspList").find("tr").find("[id^=chk]").prop("checked",false);
+		$(this).find("[id^=chk]").prop("checked",true);
+		$("#inspThirdCd").val($(this).find("[id^=inspThirdCd]").val()).trigger('change');
+		$("#inspFirstCd").val($(this).find("[id^=inspFirstCd]").val());
+	}
 });
 
 $("#modBtn").on("click",function(){
@@ -547,8 +566,19 @@ $("#modBtn").on("click",function(){
 			var strArr = str.split(',');
 			var sampleNm = "";
 			for(var i=0; i<strArr.length; i++){
-				if(i == 0) sampleNm = $.gfn_getCodeNm(strArr[i]);
-				else sampleNm += ","+$.gfn_getCodeNm(strArr[i]);
+				if(i == 0) {
+					if(strArr[i] == 'A002-6'){
+						sampleNm = $("#chk06").val();
+					}else {
+						sampleNm = $.gfn_getCodeNm(strArr[i]);
+					}
+				}else {
+					if(strArr[i] == 'A002-6'){
+						sampleNm += ","+$("#chk06").val();
+					}else {
+						sampleNm += ","+$.gfn_getCodeNm(strArr[i]);
+					}
+				}
 			}
 			$(this).find("td:eq(4)").text(sampleNm);
 			$(this).find("[id^=sampleCode]").val(str);
@@ -579,8 +609,19 @@ $("#addBtn").on("click",function(){
 		var strArr = str.split(',');
 
 		for(var i=0; i<strArr.length; i++){
-			if(i == 0) sampleName = $.gfn_getCodeNm(strArr[i]);
-			else sampleName += ","+$.gfn_getCodeNm(strArr[i]);
+			if(i == 0) {
+				if(strArr[i] == 'A002-6'){
+					sampleName = $("#chk06").val();
+				}else {
+					sampleName = $.gfn_getCodeNm(strArr[i]);
+				}
+			}else {
+				if(strArr[i] == 'A002-6'){
+					sampleName += ","+$("#chk06").val();
+				}else {
+					sampleName += ","+$.gfn_getCodeNm(strArr[i]);
+				}
+			}
 		}
 	}
 
@@ -597,7 +638,7 @@ $("#addBtn").on("click",function(){
 	html += '		<input type="hidden" id="sampleName_'+idx+'" value="'+sampleName+'"/>';
 	html += '		<input type="hidden" id="workerNo_'+idx+'" value="'+workerNo+'"/>';
 	html += '		<input type="hidden" id="workerNm_'+idx+'" value="'+workerNm+'"/>';
-	html += '		<div class="form-group clearfix">';
+	html += '		<div class="form-group clearfix" style="margin-left:9px">';
 	html += '			<div class="icheck-primary d-inline">';
 	html += '					<input type="checkbox" id="chk_'+idx+'">';
 	html += '					<label for="chk_'+idx+'">&nbsp;</label>';

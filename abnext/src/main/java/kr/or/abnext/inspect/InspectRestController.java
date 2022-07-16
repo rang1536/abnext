@@ -91,6 +91,7 @@ public class InspectRestController {
 			TbSample ts = new TbSample();
 			ts.setRqstNo(rqstNo);
 			ts.setSampleCode(tbRcept.getSmplList().get(i).get("sampleCode").toString());
+			ts.setSampleMemo(tbRcept.getSmplList().get(i).get("sampleMemo").toString());
 			ts.setInsId(tbRcept.getInsId());
 			//시료 테이블 등록
 			inspectServ.insertSample(ts);
@@ -100,6 +101,7 @@ public class InspectRestController {
 			TbMediHistory mh = new TbMediHistory();
 			mh.setRqstNo(rqstNo);
 			mh.setHistCode(tbRcept.getHistList().get(i).get("histCode").toString());
+			mh.setHistMemo(tbRcept.getHistList().get(i).get("histMemo").toString());
 			mh.setInsId(tbRcept.getInsId());
 			//시료 테이블 등록
 			inspectServ.insertMediHist(mh);
