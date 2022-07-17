@@ -443,7 +443,12 @@
 							     	  	<option <c:if test="${code.codeId eq user.userWorkGb }">selected</c:if> value="${code.codeId }">${code.codeNm }</option>
 							     	  </c:forEach>
 								  </select>
+								  <br/><br/>
 				                  <!-- /.input group -->
+				                  <div class="icheck-primary d-inline" style="padding-top:5px;font-size:14px;">
+									  <input type="checkbox" id="adminYn" name="adminYn" class="chkc" <c:if test="${user.adminYn eq 'Y'}">checked</c:if> />
+									  <label for="adminYn">업무책임자</label>
+								  </div>
 				                </div>
 				                <!-- /.form group -->
 			                </div>
@@ -529,8 +534,10 @@
 			"responsive": true,
 		});
 
-		console.log("${user.adminYn}");
-		if('${user.adminYn}' == 'Y'){
+		var userLev = '${user.userLev}';
+
+		console.log(userLev, '${user.adminYn}');
+		if(userLev == '2'){
 			$('.adminLevDiv').css('display', '');
 		}
     });
@@ -543,6 +550,7 @@
 			$('.adminLevDiv').css('display', 'none');
 
 			$('#adminLev').val("");
+			$('#adminYn').prop('checked', false);
 		}
 	}
 
@@ -637,6 +645,7 @@
 	* 회원상태 및 권한변경.
 	====================================*/
 	function fn_modifyUserStat(){
+		console.log($('#adminYn').is(':checked'));
 		if(confirm('해당회원의 승인상태 및 권한을 변경하시겠습니까?')){
 			$.ajax({
 				url : 'resetPassword',
@@ -644,7 +653,9 @@
 				dataType : 'json',
 				data : {'userNo':$('#userNo').val()
 					, 'userStat':$('#userStat').val()
-					, 'userWorkGb':$('#userWorkGb').val()},
+					, 'userLev' :$('#userLev').val()
+					, 'userWorkGb':$('#userWorkGb').val()
+					, 'adminYn'	: $('#adminYn').is(':checked') ? 'Y' : 'N' },
 				success : function(data){
 					if(data.result == 'succ'){
 						toastr.info('회원상태 및 권한이 변경되었습니다.');

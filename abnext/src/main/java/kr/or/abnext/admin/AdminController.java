@@ -100,7 +100,7 @@ public class AdminController {
 	@RequestMapping(value = "modifyUser", method = RequestMethod.GET)
 	public String modifyUser(@RequestParam(value="modifyUserNo")String userNo
 			, Model model) {
-		System.out.println("농장정보 수정페이지 연결~!!");
+		System.out.println("회원수정페이지 연결~!!");
 		TbUser tbUser = new TbUser();
 		tbUser.setUserNo(Integer.parseInt(userNo));
 
