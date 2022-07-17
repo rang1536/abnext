@@ -18,7 +18,7 @@
 
               </div>
               <!-- /.card-header 본문-->
-              <div class="card-body">
+              <div class="card-body" style="font-size:13px;">
 				<!-- 병원입력폼  -->
                 <form onsubmit="return false" id="hospInfoForm" encType="multipart/form-data">
 	                <div class="hospitalDiv">

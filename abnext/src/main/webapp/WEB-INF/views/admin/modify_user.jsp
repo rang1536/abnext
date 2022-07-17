@@ -645,7 +645,7 @@
 	* 회원상태 및 권한변경.
 	====================================*/
 	function fn_modifyUserStat(){
-		console.log($('#adminYn').is(':checked'));
+
 		if(confirm('해당회원의 승인상태 및 권한을 변경하시겠습니까?')){
 			$.ajax({
 				url : 'resetPassword',

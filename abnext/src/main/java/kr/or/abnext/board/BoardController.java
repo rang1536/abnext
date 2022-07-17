@@ -23,7 +23,7 @@ public class BoardController {
 	public String boardListCtrl(Model model) {
 		System.out.println("공지사항 화면가기~!!");
 
-		model.addAttribute("boardList", boardServ.getBoardListServ());
+		//model.addAttribute("boardList", boardServ.getBoardListServ());
 		return "board/boardList";
 	}
 
@@ -42,5 +42,16 @@ public class BoardController {
 
 		model.addAttribute("board", boardServ.getBoardListServ(tbBoard));
 		return "board/modify_board";
+	}
+
+
+	@RequestMapping(value = "boardDetail", method = RequestMethod.GET)
+	public String boardDetailCtrl(Model model, @RequestParam(value="boardNo") String boardNo) {
+		System.out.println("공지상세보기 화면가기~!!");
+		TbBoard tbBoard = new TbBoard();
+		tbBoard.setBoardNo(Integer.parseInt(boardNo));
+
+		model.addAttribute("board", boardServ.getBoardListServ(tbBoard));
+		return "board/board_detail";
 	}
 }

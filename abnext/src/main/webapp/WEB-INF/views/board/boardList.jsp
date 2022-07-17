@@ -18,15 +18,13 @@
   <link rel="stylesheet" href="resources/plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
-
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
-  <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="resources/plugins/toastr/toastr.min.css">
+  <!-- jsGrid -->
+  <link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid.min.css">
+  <link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid-theme.min.css">
 
 
   <style>
@@ -65,35 +63,14 @@
 					<!-- Table row -->
 					<div class="row">
 						<div class="col-12">
-							<div class="card">
+							<div class="card card-primary card-outline"">
 								<!-- /.card-header -->
-								<div class="card-body">
-									<table id="example2" class="table table-bordered table-hover">
-										<thead>
-											<tr>
-												<th><input type="checkbox" id="allCheck"/></th>
-												<th>제목</th>
-												<th>작성일</th>
-												<th>작성자</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="item" items="${boardList }" varStatus="status">
-												<tr>
-													<td>
-														<input type="checkbox" name="boardNo" value="${item.boardNo }"/>
-													</td>
-													<td onclick="fn_modifyBoard('${item.boardNo }')">
-														${item.subject }
-														<!-- 댓글이나 파일수 카운팅 결과 필요하면 여기에 조건문으로 추가 -->
-													</td>
-													<td>${item.uptDt }</td>
-													<td>${item.userNm }</td>
+								<div class="card-header">
+					              <h3 class="card-title"><b>공지사항</b></h3>
+					            </div>
 
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
+								<div class="card-body">
+									<div id="jsGrid1"></div>
 								</div> <!-- /.card-body -->
 
 								<!-- 수정페이지 키값 세팅 폼-->
@@ -102,8 +79,8 @@
 								</form>
 
 								<div class="card-footer">
-									<button type="button" id="delBoardrBtn" class="btn btn-sm btn-danger">삭제</button>
-									<button type="button" id="addBoardBtn" class="btn btn-sm btn-primary btn-flat" style="float:right;">글쓰기</button>
+									<!-- <button type="button" id="delBoardrBtn" class="btn btn-sm btn-danger">삭제</button> -->
+									<button type="button" id="addBoardBtn" class="btn btn-sm btn-primary btn-flat" style="float:right;">공지작성</button>
 								</div>
 							</div> <!-- /.card -->
 						</div> <!-- /.col-12 -->
@@ -147,19 +124,18 @@
 <script src="resources/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
-<!-- DataTables	& Plugins -->
-<script src="resources/plugins/datatables/jquery.dataTables.js"></script>
-<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="resources/plugins/jszip/jszip.min.js"></script>
-<script src="resources/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="resources/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- ChartJS -->
+<script src="resources/plugins/chart.js/Chart.min.js"></script>
+<!-- jsGrid -->
+<script src="resources/plugins/jsgrid/demos/db.js"></script>
+<script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
+<script src="resources/js/common.js"></script>
+
+<!-- bootstrap color picker -->
+<script src="resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
 
 <script>
 
@@ -171,32 +147,50 @@
 	var userInfo = '';
 
 	$(function () {
-		$('.select2').select2();
-		bsCustomFileInput.init();
-
-		$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-			"responsive": true,
-		});
-
 		userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
 
 		if(userInfo != null){
 			if(userInfo.userLev != '4'){
 				$('#addBoardBtn').css('display', 'none');
-				$('#delBoardrBtn').css('display', 'none');
 			}
 		}else{
 			$('#addBoardBtn').css('display', 'none');
-			$('#delBoardrBtn').css('display', 'none');
-
 		}
 
+		getData();
+
     });
+
+	function getData(){
+		$.ajax({
+			url : 'getBoardListRest',
+			dataType : 'json',
+			type : 'post',
+			success:function(data){
+				setGrid(data);
+			}
+		})
+	}
+
+	function setGrid(data){
+		$("#jsGrid1").jsGrid({
+	        height: "auto",
+	        width: "100%",
+	        sorting: true,
+	        paging: true,
+	        data: data,
+	        rowClick : function(value){
+	        	fn_modifyBoard(value.item.boardNo);
+	        },
+	        fields: [
+	            { name: "boardNo", 		type: "text", 	width: 40, 	title:"-", 	align: "center"},
+	            { name: "subject",   	type: "text", 	width: 250, title:"제목", 	align: "center"},
+	            { name: "uptDt", 		type: "text", 	width: 120, title:"작성일", 	align: "center"},
+	            { name: "userNm", 		type: "text", width: 100, title:"작성자", 	align: "center"}
+	        ]
+	    });
+	}
+
 
 	$(document).on('click', '#addBoardBtn', function(){
 
@@ -213,7 +207,6 @@
 				location.href = 'addBoardPage';
 			}
 		}
-
 	})
 
 	function fn_modifyBoard(boardNo){
@@ -223,7 +216,7 @@
 			$('#modifyBoardForm').prop('action', 'modifyBoard');
 			$('#modifyBoardForm').submit();
 		}else{ //상세보기화면을 만들어야 할듯?
-
+			location.href = 'boardDetail?boardNo='+boardNo;
 		}
 
 	}
