@@ -8,24 +8,24 @@ package kr.or.abnext.domain;
 
 public class TbInspOpinion {
 	private int opinNo;
-	private int inspNo;
+	private String inspNo;
 	private String inspCd;
 	private String inspSickCd;
 	private String opinComment;
 	private String insDt;
-	private int insId;
+	private String insId;
 	private String uptDt;
-	private int uptId;
+	private String uptId;
 	public int getOpinNo() {
 		return opinNo;
 	}
 	public void setOpinNo(int opinNo) {
 		this.opinNo = opinNo;
 	}
-	public int getInspNo() {
+	public String getInspNo() {
 		return inspNo;
 	}
-	public void setInspNo(int inspNo) {
+	public void setInspNo(String inspNo) {
 		this.inspNo = inspNo;
 	}
 	public String getInspCd() {
@@ -52,10 +52,10 @@ public class TbInspOpinion {
 	public void setInsDt(String insDt) {
 		this.insDt = insDt;
 	}
-	public int getInsId() {
+	public String getInsId() {
 		return insId;
 	}
-	public void setInsId(int insId) {
+	public void setInsId(String insId) {
 		this.insId = insId;
 	}
 	public String getUptDt() {
@@ -64,10 +64,10 @@ public class TbInspOpinion {
 	public void setUptDt(String uptDt) {
 		this.uptDt = uptDt;
 	}
-	public int getUptId() {
+	public String getUptId() {
 		return uptId;
 	}
-	public void setUptId(int uptId) {
+	public void setUptId(String uptId) {
 		this.uptId = uptId;
 	}
 	@Override
@@ -76,7 +76,5 @@ public class TbInspOpinion {
 				+ inspSickCd + ", opinComment=" + opinComment + ", insDt=" + insDt + ", insId=" + insId + ", uptDt="
 				+ uptDt + ", uptId=" + uptId + "]";
 	}
-	
-	
 
 }

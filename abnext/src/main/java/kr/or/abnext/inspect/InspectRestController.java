@@ -26,6 +26,7 @@ import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbInspOpinion;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbMediHistory;
 import kr.or.abnext.domain.TbRcept;
@@ -240,30 +241,23 @@ public class InspectRestController {
 	}
 
 	@RequestMapping(value = "modifyResult", method = RequestMethod.POST)
-	public Map<String, Object> modifyResult(TbRcept tbRcept) {
+	public Map<String, Object> modifyResult(TbInspOpinion tbOpin) {
+		// 검사결과소견 등록
+		inspectServ.insertOpinion(tbOpin);
 
-		for(int i=0; i<tbRcept.getInspList().size(); i++) {
-			System.out.println("fileLsit : "+tbRcept.getInspList().get(i).get("fileList"));
-		}
+		// 진단테이블 결과 업데이트
+		TbInspection tbInsp = new TbInspection();
+		tbInsp.setInspNo(tbOpin.getInspNo());
+		tbInsp.setInspResult(tbOpin.getOpinComment());
+		inspectServ.updateInspect(tbInsp);
 
-		for(int i=0; i<tbRcept.getInspList().size(); i++) {
-
-			TbInspection bean = new TbInspection();
-			bean.setInspNo(tbRcept.getInspList().get(i).get("inspNo").toString());
-			bean.setInspResult(tbRcept.getInspList().get(i).get("inspResult").toString());
-			bean.setUptId(tbRcept.getUptId());
-			//시료 테이블 수정
-			inspectServ.updateInspect(bean);
-		}
-
+		// 접수테이블 결과등록으로 변경
 		TbRcept rcpt = new TbRcept();
-		rcpt.setRqstNo(tbRcept.getRqstNo());
-		rcpt.setUptId(tbRcept.getUptId());
+		rcpt.setInspNo(tbOpin.getInspNo());
+		rcpt.setUptId(tbOpin.getInsId());
 		rcpt.setProcStat("4");
 		rcpt.setProcStatNm("결과입력");
-		rcpt.setResult(tbRcept.getResult());
-
-		inspectServ.updateInspectStatus(rcpt);
+		inspectServ.updateResult(rcpt);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");
 
@@ -273,13 +267,14 @@ public class InspectRestController {
 	//결과사진업로드
 	@RequestMapping(value = "inspFileUpload", method = RequestMethod.POST)
 	public Map<String, Object> inspFileUpload(TbRcept tbRcept, String inspNo
-			, @RequestParam("fileList") List<MultipartFile> files) {
-		System.out.println("inspNo : "+inspNo);
+			, @RequestParam("fileList") List<MultipartFile> files
+			, @RequestParam("titleList") List<String> titles
+			, @RequestParam("contentList") List<String> contents
+			, @RequestParam("closeYnList") List<String> closeYns) {
 
 		Map<String, Object> map = new HashMap<String,Object>();
 		if(files.size() > 0) {
-			System.out.println("파일넘어옴");
-			map = inspectServ.inspFileUploadServ(tbRcept, inspNo, files);
+			map = inspectServ.inspFileUploadServ(tbRcept, inspNo, files, titles, contents, closeYns);
 		}
 
 		return map;
@@ -359,4 +354,18 @@ public class InspectRestController {
 		String [] arr = {"4","5"};
 		return inspectServ.recptList(arr);
 	}
+
+	@RequestMapping(value = "getFileList")
+	public List<TbFile> getFileList(TbFile file) {
+		return inspectServ.getFileList(file);
+	}
+
+	@RequestMapping(value = "getInspResult", method = RequestMethod.POST)
+	public TbInspection getInspResult(TbInspection bean) {
+		// 검사정보
+		TbInspection insp = inspectServ.getInspResult(bean);
+		return insp;
+	}
+
+
 }

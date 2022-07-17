@@ -11,6 +11,7 @@ import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbInspOpinion;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbMediHistory;
 import kr.or.abnext.domain.TbRcept;
@@ -106,6 +107,10 @@ public class InspectDao {
 		return sql.selectList("inspection.selectInspList", bean);
 	}
 
+	public TbInspection getInspResult(TbInspection bean){
+		return sql.selectOne("inspection.getInspResult", bean);
+	}
+
 	public List<TbSample> selectSampleList(TbSample bean){
 		return sql.selectList("inspection.selectSampleList", bean);
 	}
@@ -114,8 +119,20 @@ public class InspectDao {
 		return sql.selectList("inspection.mediHistList", bean);
 	}
 
+	public List<TbFile> getFileList(TbFile bean){
+		return sql.selectList("inspection.getFileList", bean);
+	}
+
 	public int updateInspectStatus(TbRcept bean) {
 		return sql.insert("inspection.updateInspectStatus", bean);
+	}
+
+	public int insertOpinion(TbInspOpinion bean) {
+		return sql.insert("inspection.insertOpinion", bean);
+	}
+
+	public int updateResult(TbRcept bean) {
+		return sql.insert("inspection.updateResult", bean);
 	}
 
 	public int updateSampleStatus(TbSample bean) {

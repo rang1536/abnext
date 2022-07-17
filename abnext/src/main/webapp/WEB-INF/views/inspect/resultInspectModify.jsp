@@ -19,9 +19,6 @@
 	<link rel="stylesheet" href="resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
 	<!-- Tempusdominus Bootstrap 4 -->
 	<link rel="stylesheet" href="resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-	<!-- Select2 -->
-	<link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
-	<link rel="stylesheet" href="resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<!-- Bootstrap4 Duallistbox -->
 	<link rel="stylesheet" href="resources/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
 	<!-- BS Stepper -->
@@ -152,10 +149,11 @@
 									<thead>
 										<tr>
 											<td class="txtc" style="width:5%;background-color:#F2F2F2"></td>
-											<td class="txtc" style="width:10%;background-color:#F2F2F2">No</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">검사구분</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">검사방법</td>
+											<td class="txtc" style="width:5%;background-color:#F2F2F2">No</td>
+											<td class="txtc" style="width:17%;background-color:#F2F2F2">검사구분</td>
+											<td class="txtc" style="width:17%;background-color:#F2F2F2">검사방법</td>
 											<td class="txtc" style="width:*;background-color:#F2F2F2">검사항목</td>
+											<td class="txtc" style="width:20%;background-color:#F2F2F2">시료</td>
 										</tr>
 									</thead>
 									<tbody id="inspList">
@@ -172,10 +170,13 @@
 												<td class="txtc">
 													${status.index+1 }
 													<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
+													<input type="hidden" id="inspResult_${status.index+1 }" value="${item.inspResult}"/>
+													<input type="hidden" id="inspThirdCd_${status.index+1 }" value="${item.inspThirdCd}"/>
 												</td>
 												<td class="txtc">${item.inspFirstNm }</td>
 												<td class="txtc">${item.inspSecondNm }</td>
 												<td class="txtc">${item.inspThirdNm }</td>
+												<td class="txtc">${item.sampleName }</td>
 												<%--
 												<td class="txtc">
 													<input type="text" id="inspResult_${status.index+1 }" class="form-control" placeholder="실험결과" value="${item.inspResult}">
@@ -248,7 +249,7 @@
 				</div>
 				<!-- /.card -->
  --%>
-				<div class="row inputType1">
+				<div class="row inputType1" style="display:none">
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
@@ -259,12 +260,12 @@
 									<tbody>
 										<tr>
 											<td>
-												<textarea class="form-control" rows="3">${rceptInfo.result}</textarea>
+												<textarea class="form-control" rows="3" id="inspResult"></textarea>
 											</td>
 										</tr>
 										<tr>
 											<td class="txtc">
-												<button type="button" id="save" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사메모저장</button>
+												<button type="button" id="memoSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사메모저장</button>
 											</td>
 										</tr>
 									</tbody>
@@ -286,45 +287,54 @@
 								</div>
 
 								<div>
-									<div class="filter-container row previewList">
-									<!--
-										<div class="filtr-item col-sm-3" id="preview1">
-											<a href="https://via.placeholder.com/1200/000000.png">
-												<img src="https://via.placeholder.com/500/000000" class="img-fluid mb-2" style="width:140px;height:140px"/>
-											</a>
-										</div>
-										<div class="col-sm-9">
-											<div class="row">
-												<div class="col-8">
-													<input type="text" class="form-control">
-												</div>
-												<div class="col-4" style="padding-top:-9px">
-													<label for="chk1"></label>
-													<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">
-														<div class="icheck-primary d-inline">
-															<input type="checkbox" id="chk1">
-															<label for="chk1">비공개</label>
+									<form id="fileForm" method="post" enctype="multipart/form-data">
+										<input type="hidden" id="inspNo" name="inspNo"/>
+										<input type="hidden" id="rqstNo" name="rqstNo" value="${rceptInfo.rqstNo }"/>
+										<div class="filter-container row previewList">
+										<!--
+											<div class="filtr-item col-sm-3" id="preview1">
+												<a href="https://via.placeholder.com/1200/000000.png">
+													<img src="https://via.placeholder.com/500/000000" class="img-fluid mb-2" style="width:140px;height:140px"/>
+												</a>
+											</div>
+											<div class="col-sm-9">
+												<div class="row">
+													<div class="col-8">
+														<input type="text" class="form-control">
+													</div>
+													<div class="col-4" style="padding-top:-9px">
+														<label for="chk1"></label>
+														<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">
+															<div class="icheck-primary d-inline">
+																<input type="checkbox" id="chk1">
+																<label for="chk1">비공개</label>
+															</div>
 														</div>
 													</div>
-												</div>
 
-											</div>
-											<div class="row">
-												<div class="col-12">
-													<textarea class="form-control" rows="3"></textarea>
+												</div>
+												<div class="row">
+													<div class="col-12">
+														<textarea class="form-control" rows="3"></textarea>
+													</div>
 												</div>
 											</div>
+											 -->
 										</div>
-										 -->
-									</div>
+									</form>
 								</div>
-
+								<div style="text-align:center">
+									<button type="button" id="fileSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+								</div>
 							</div>
 							<!-- /.card-body -->
 						</div>
 						<!-- /.card -->
 	 				</div>
 	 			</div>
+	 			<form id="inspOpinion">
+	 				<input type="hidden" id="inspSickCd" name="inspSickCd"/>
+	 			</form>
 			</div>
 			<!-- /.container-fluid -->
 		</section>
@@ -353,8 +363,6 @@
 <script src="resources/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="resources/dist/js/demo.js"></script>
-<!-- Select2 -->
-<script src="resources/plugins/select2/js/select2.full.min.js"></script>
 <!-- Bootstrap4 Duallistbox -->
 <script src="resources/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 <!-- InputMask -->
@@ -377,15 +385,6 @@
 <script src="resources/plugins/toastr/toastr.min.js"></script>
 <script>
 $(function () {
-	bsCustomFileInput.init();
-
-	//Initialize Select2 Elements
-	$('.select2').select2()
-
-	//Initialize Select2 Elements
-	$('.select2bs4').select2({
-		theme: 'bootstrap4'
-	})
 
 });
 
@@ -402,29 +401,31 @@ function addFileSet(obj){
 		var len = $(".filtr-item").length+1;
 		// 목록 추가
 		let htmlData = '';
-		htmlData += '<div class="filtr-item col-sm-3" id="preview'+len+'">';
-		htmlData += '	<a id="imgLoad'+len+'">';
-		htmlData += '		<img id="imgPreview'+len+'" class="img-fluid mb-2" style="width:140px;height:140px"/>';
+		htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+fileNo+'">';
+		htmlData += '	<a id="imgLoad'+fileNo+'">';
+		htmlData += '		<img id="imgPreview'+fileNo+'" class="img-fluid mb-2" style="width:140px;height:140px"/>';
 		htmlData += '	</a>';
 		htmlData += '</div>';
-		htmlData += '<div class="col-sm-9">';
+		htmlData += '<div class="col-sm-9 preview" id="preview'+fileNo+'">';
 		htmlData += '	<div class="row">';
 		htmlData += '		<div class="col-8">';
-		htmlData += '			<input type="text" class="form-control" id="title'+len+'" placeholder="장기">';
+		htmlData += '			<input type="text" class="form-control" id="title'+fileNo+'" placeholder="장기">';
 		htmlData += '		</div>';
 		htmlData += '		<div class="col-4" style="padding-top:-9px">';
 		htmlData += '			<label for="chk1"></label>';
 		htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
 		htmlData += '				<div class="icheck-primary d-inline">';
-		htmlData += '					<input type="checkbox" id="chk'+len+'">';
-		htmlData += '					<label for="chk1">비공개</label>';
+		htmlData += '					<input type="checkbox" id="chk'+fileNo+'">';
+		htmlData += '					<label for="chk'+fileNo+'">비공개</label>';
 		htmlData += '				</div>';
+		htmlData += '				<a class="delete" onclick="deleteFile('+fileNo+');"><i class="far fa-minus-square"></i></a>';
+        htmlData += '				<input type="hidden" id="file'+fileNo+'" value="'+file.name+'">';
 		htmlData += '			</div>';
 		htmlData += '		</div>';
 		htmlData += '	</div>';
 		htmlData += '	<div class="row">';
 		htmlData += '		<div class="col-12">';
-		htmlData += '			<textarea class="form-control" rows="3" id="content'+len+'" placeholder="메모"></textarea>';
+		htmlData += '			<textarea class="form-control" rows="3" id="content'+fileNo+'" placeholder="메모"></textarea>';
 		htmlData += '		</div>';
 		htmlData += '	</div>';
 		htmlData += '</div>';
@@ -436,10 +437,10 @@ function addFileSet(obj){
 		reader.onload = function (e) {
 			filesArr.push(file);
 			var res = e.target.result;
-			$('#imgPreview'+len).attr("src", res);
+			$('#imgPreview'+fileNo).attr("src", res);
+			fileNo++;
 		};
 		reader.readAsDataURL(file);
-
 	}
 
 	// 초기화
@@ -468,7 +469,8 @@ function validation(obj){
 
 /* 첨부파일 삭제 */
 function deleteFile(num) {
-	document.querySelector("#file" + num).remove();
+	$("#previewImg"+num).remove();
+	$("#preview"+num).remove();
 	filesArr[num].is_delete = true;
 }
 
@@ -484,108 +486,16 @@ function deleteServerFile(fileNo){
 			type :'post',
 			success:function(data){
 				if(data.result == 'succ'){
-					$('#bFile_'+fileNo).remove();
+					$("#previewImg"+fileNo).remove();
+					$("#preview"+fileNo).remove();
 					toastr.info('선택하신 파일이 삭제되었습니다.');
 				}
-
 			}
 		})
 	}
 }
 
-function fileSave(){
-	$("#inspList").find("tr").each(function(){
-		if($(this).find("[id^=inspNo]").length != 0){
-			var fileList = new Array();
-			var rowNum = $(this).find("[id^=inspNo]").prop('id');
-			rowNum = rowNum.split('_')[1];
-			var formData = new FormData($('#inspResultForm_'+rowNum)[0]);
 
-			var fileCnt = $('#'+rowNum+'tr').find('td:eq(0)').find('span').length;
-			var fileNames = new Array();
-
-			if(fileCnt > 0){
-				$('#'+rowNum+'tr').find('td:eq(0)').find('span').each(function(){
-					fileNames.push($(this).text());
-				})
-
-				for (var i = 0; i < filesArr.length; i++) {
-					// 삭제되지 않은 파일만 폼데이터에 담기
-					if (!filesArr[i].is_delete) {
-						for (var j=0; j<fileNames.length; j++){
-							if(filesArr[i].name == fileNames[j].trim()){
-								formData.append('fileList',filesArr[i]);
-							}
-						}
-					}
-				}
-
-				formData.append('inspNo', $(this).find("[id^=inspNo]").val());
-				formData.append('rqstNo', '${rceptInfo.rqstNo }');
-				formData.append('uptId', localStorage.getItem("userId"));
-
-				$.ajax({
-					url : 'inspFileUpload',
-					data : formData,
-					dataType : 'json',
-					type : 'post',
-					processData : false,
-					contentType : false,
-					success : function(data){
-						if(data.result == 'succ'){
-							console.log("결과사진등록 성공~!!");
-						}else{
-							console.log("결과사진등록 실패~!!");
-						}
-					}
-				})
-
-			}
-		}
-	});
-}
-
-$("#save").on("click",function (){
-	var inspData = [];
-	fileSave();
-
-	$("#inspList").find("tr").each(function(){
-		if($(this).find("[id^=inspNo]").length != 0){
-			var sData = {
-				inspNo : $(this).find("[id^=inspNo]").val(),
-				inspResult : $(this).find("[id^=inspResult]").val()
-			}
-
-			inspData.push(sData);
-		}
-	});
-
-	var data = {
-		rqstNo : "${rceptInfo.rqstNo }",
-		uptId : localStorage.getItem("userId"),
-		result : $("#result").val(),
-		inspList : inspData
-	}
-
-	$.ajax({
-		url : "modifyResult",
-		data : data,
-		type : "POST",
-		dataType : "JSON",
-		success : function(data){
-			setTimeout(function(){
-				alert("저장하였습니다.");
-				location.href = "resultInspectList";
-			}, 1500);
-
-		}
-	});
-
-});
-
-$("#list").on("click",function (){
-	location.href = "resultInspectList";
-});
 
 function imgView(name){
 	//호스팅
@@ -594,6 +504,172 @@ function imgView(name){
 	$(".image").attr("src",path+name);
 	$('#imgView').modal();
 }
+
+
+
+
+/*****************************************************************
+ *                  검 사 클 릭 이 벤 트                                                                           *
+ *****************************************************************/
+$("#inspList").find("tr").click(function(){
+	if($(this).find("input:checkbox[id^=chk]").is(":checked")){
+		$(this).find("input:checkbox[id^=chk]").prop("checked", false);
+		$("#inspNo").val("");
+		$(".inputType1").hide();
+	}else {
+		$("#inspList").find("tr").each(function(){
+			$(this).find("input:checkbox[id^=chk]").prop("checked", false);
+		});
+		$(this).find("input:checkbox[id^=chk]").prop("checked", true);
+		$(".inputType1").show();
+		$("#inspNo").val($(this).find("[id^=inspNo]").val());
+		$("#inspSickCd").val($(this).find("[id^=inspThirdCd]").val());
+	}
+
+	$.ajax({
+		url : 'getFileList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			let htmlData = '';
+			$(".previewList").empty();
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var len = i+1;
+				var checked = '';
+				if(item.closeYn == 'Y'){
+					checked = 'checked';
+				}
+				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
+				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
+				htmlData += '	</a>';
+				htmlData += '</div>';
+				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-8">';
+				htmlData += '			<input type="text" class="form-control" id="title'+item.fileNo+'" placeholder="장기" value="'+item.title+'">';
+				htmlData += '		</div>';
+				htmlData += '		<div class="col-4" style="padding-top:-9px">';
+				htmlData += '			<label for="chk1"></label>';
+				htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
+				htmlData += '				<div class="icheck-primary d-inline">';
+				htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+'>';
+				htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
+				htmlData += '				</div>';
+				htmlData += '				<a class="delete" onclick="deleteServerFile('+item.fileNo+');"><i class="far fa-minus-square"></i></a>';
+		        htmlData += '				<input type="hidden" id="file'+item.fileNo+'" value="'+item.fileNewNm+'">';
+				htmlData += '			</div>';
+				htmlData += '		</div>';
+				htmlData += '	</div>';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-12">';
+				htmlData += '			<textarea class="form-control" rows="3" id="content'+item.fileNo+'" placeholder="메모">'+item.content+'</textarea>';
+				htmlData += '		</div>';
+				htmlData += '	</div>';
+				htmlData += '</div>';
+			}
+			$(".previewList").append(htmlData);
+		}
+	});
+
+	$.ajax({
+		url : 'getInspResult',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			$("#inspResult").val(data.inspResult)
+		}
+	});
+});
+
+
+
+/*****************************************************************
+ *                  검 사 메 모 저 장                                                                              *
+ *****************************************************************/
+$("#memoSave").on("click",function (){
+	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+	var data = {
+		inspNo : $("#inspNo").val(),
+		inspSickCd : $("#inspSickCd").val(),
+		insId : userInfo.userId,
+		opinComment : $("#inspResult").val()
+	}
+
+	$.ajax({
+		url : "modifyResult",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			alert("저장하였습니다.");
+		}
+	});
+
+});
+
+/*****************************************************************
+ *                  검 사 사 진 저 장                                                                              *
+ *****************************************************************/
+$("#fileSave").click(function(){
+
+	var fileList = new Array();
+	var formData = new FormData($('#fileForm')[0]);
+
+	var fileNames = new Array();
+	var fileTitles = new Array();
+	var fileContents = new Array();
+	var fileCloseYn = new Array();
+	var chkYn;
+
+	var fileInfoList = {};
+
+	$('.preview').each(function(){
+		fileNames.push($(this).find("[id^=file]").val());
+		fileTitles.push($(this).find("[id^=title]").val());
+		fileContents.push($(this).find("[id^=content]").val());
+		if($(this).find("input:checkbox[id^=chk]").is(":checked")){
+			chkYn = 'Y';
+		}else {
+			chkYn = 'N';
+		}
+		fileCloseYn.push(chkYn);
+	});
+
+	for (var i = 0; i < filesArr.length; i++) {
+        if (!filesArr[i].is_delete) {
+        	for (var j=0; j<fileNames.length; j++){
+        		if(filesArr[i].name == fileNames[j].trim()){
+        			formData.append('fileList',filesArr[i]);
+        			formData.append('titleList',fileTitles[i]);
+        			formData.append('contentList',fileContents[i]);
+        			formData.append('closeYnList',fileCloseYn[i]);
+        		}
+        	}
+        }
+	}
+
+	//로그인유저정보
+	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+	formData.append('uptId', userInfo.userId);
+
+	$.ajax({
+		url : 'inspFileUpload',
+		data : formData,
+		dataType : 'json',
+		type : 'post',
+		processData : false,
+		contentType : false,
+		success : function(data){
+			if(data.result == 'succ'){
+				alert("사진등록하였습니다.");
+			}
+		}
+	});
+});
 
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
