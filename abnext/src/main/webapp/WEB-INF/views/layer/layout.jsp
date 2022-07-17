@@ -246,11 +246,11 @@
 							var menuNm = list.menuNm;
 							if(menuNm == 'MyPage'){
 								html += '		<i class="nav-icon fas fa-tachometer-alt"></i>';
-								html += '		<p>'+list.menuNm+'</p>';
+								html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm+'</p>';
 								html += '	</a>';
 							}else if(menuNm == '진단검사'){
 								html += '		<i class="nav-icon fas fa-copy"></i>';
-								html += '		<p>'+list.menuNm;
+								html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm;
 								html += '			<i class="fas fa-angle-left right"></i>';
 								html += '			<span class="badge badge-info right">5</span>';
 								html += '		</p>';
@@ -264,7 +264,7 @@
 								html += '	</a>';
 							}else if(menuNm == '수납관리'){
 								html += '		<i class="nav-icon fas fa-box"></i>';
-								html += '		<p>'+list.menuNm+'</p>';
+								html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm+'</p>';
 								html += '	</a>';
 							}else if(menuNm == '통계'){
 								html += '		<i class="nav-icon fas fa-chart-pie"></i>';
@@ -321,6 +321,9 @@
 				}else{
 					location.href = menuUrl;
 				}
+			}else{
+				console.log(menuNm);
+				location.href = menuUrl;
 			}
 		}
 

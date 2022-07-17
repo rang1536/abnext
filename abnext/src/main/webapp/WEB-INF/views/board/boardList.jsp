@@ -168,7 +168,7 @@
 	  window.stepper = new Stepper(document.querySelector('.bs-stepper'))
 	})
 
-	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+	var userInfo = '';
 
 	$(function () {
 		$('.select2').select2();
@@ -183,10 +183,19 @@
 			"responsive": true,
 		});
 
-		if(userInfo.userLev != '4'){
+		userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+
+		if(userInfo != null){
+			if(userInfo.userLev != '4'){
+				$('#addBoardBtn').css('display', 'none');
+				$('#delBoardrBtn').css('display', 'none');
+			}
+		}else{
 			$('#addBoardBtn').css('display', 'none');
 			$('#delBoardrBtn').css('display', 'none');
+
 		}
+
     });
 
 	$(document).on('click', '#addBoardBtn', function(){
