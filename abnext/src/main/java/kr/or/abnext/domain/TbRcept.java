@@ -73,6 +73,8 @@ public class TbRcept {
 	//수금
 	private String sumCnt;
 
+	private String inspNo;
+
 	private List<MultipartFile> fileList;
 
 	public int getRqstNo() {
@@ -529,6 +531,14 @@ public class TbRcept {
 
 	public void setFileList(List<MultipartFile> fileList) {
 		this.fileList = fileList;
+	}
+
+	public String getInspNo() {
+		return inspNo;
+	}
+
+	public void setInspNo(String inspNo) {
+		this.inspNo = inspNo;
 	}
 
 	@Override

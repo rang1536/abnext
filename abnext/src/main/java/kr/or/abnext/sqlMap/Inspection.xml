@@ -90,7 +90,7 @@
 		     (
 		       #{rqstNo}      , #{sampleCode}   , #{sampleName}  , #{inspType}
 		     , #{inspFirstCd} , #{inspSecondCd} , #{inspThirdCd} , #{inspPrice}
-		     , #{workerNo}    , #{workerNm}
+		     , (SELECT USER_ID FROM TB_USER WHERE USER_WORK_GB = #{inspSecondCd} AND ADMIN_YN = 'Y')    , #{workerNm}
 		     , NOW()          , #{insId}
 		     )
 	</insert>
@@ -360,4 +360,41 @@
 		 WHERE PDL_NO = #{pdlNo}
 		   AND PAY_STAT = '01'
 	</update>
+
+	<insert id="insertOpinion" parameterType="kr.or.abnext.domain.TbInspOpinion">
+		INSERT
+		  INTO TB_INSP_OPINION
+		     (
+		       INSP_NO         , INSP_SICK_CD
+		     , OPIN_COMMENT
+		     , INS_DT          , INS_ID
+		     )
+		VALUES
+		     (
+		       #{inspNo}       , #{inspSickCd}
+		     , #{opinComment}
+		     , NOW()           , #{insId}
+		     )
+	</insert>
+
+	<insert id="updateResult" parameterType="kr.or.abnext.domain.TbRcept">
+		UPDATE TB_RCEPT
+		   SET UPT_ID       = #{uptId}
+		     , UPT_DT       = NOW()
+		     , PROC_STAT    = #{procStat}
+		     , PROC_STAT_NM = #{procStatNm}
+		 WHERE RQST_NO = (SELECT RQST_NO FROM TB_INSPECTION WHERE INSP_NO = #{inspNo} LIMIT 1)
+	</insert>
+
+	<select id="getFileList" parameterType="kr.or.abnext.domain.TbFile" resultType="kr.or.abnext.domain.TbFile">
+		SELECT *
+		  FROM TB_FILE
+		 WHERE INSP_NO = #{inspNo}
+	</select>
+
+	<select id="getInspResult" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbInspection">
+		SELECT *
+		  FROM TB_INSPECTION
+		 WHERE INSP_NO = #{inspNo}
+	</select>
 </mapper>

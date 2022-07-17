@@ -182,13 +182,7 @@ public class InspectController {
 		tbInspection.setRqstNo("" + rcept.getRqstNo());
 		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
 
-		// 시료상태
-		TbCode code = new TbCode();
-		code.setUppCodeId("S001");
-		List<TbCode> codeList = admServ.selectCodeList(code);
-
 		model.addAttribute("rceptInfo", rcept);
-		model.addAttribute("codeList", codeList);
 		model.addAttribute("smplList", smplList);
 		model.addAttribute("inspList", inspList);
 

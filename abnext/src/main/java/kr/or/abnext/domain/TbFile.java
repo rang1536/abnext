@@ -20,7 +20,9 @@ public class TbFile {
 	private int farmNo;
 	private int boardNo;
 	private int inspNo;
-
+	private String title;
+	private String content;
+	private String closeYn;
 
 	public int getInspNo() {
 		return inspNo;
@@ -100,13 +102,30 @@ public class TbFile {
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getCloseYn() {
+		return closeYn;
+	}
+	public void setCloseYn(String closeYn) {
+		this.closeYn = closeYn;
+	}
 	@Override
 	public String toString() {
 		return "TbFile [fileNo=" + fileNo + ", fileGb=" + fileGb + ", filePath=" + filePath + ", fileOriNm=" + fileOriNm
 				+ ", fileNewNm=" + fileNewNm + ", fileMemo=" + fileMemo + ", rqstNo=" + rqstNo + ", hospNo=" + hospNo
 				+ ", userNo=" + userNo + ", animNo=" + animNo + ", farmNo=" + farmNo + ", boardNo=" + boardNo
-				+ ", inspNo=" + inspNo + "]";
+				+ ", inspNo=" + inspNo + ", title=" + title + ", content=" + content + ", closeYn=" + closeYn + "]";
 	}
-
 
 }

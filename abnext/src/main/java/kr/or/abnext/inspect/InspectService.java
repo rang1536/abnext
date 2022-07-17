@@ -13,6 +13,7 @@ import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbInspOpinion;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbMediHistory;
 import kr.or.abnext.domain.TbRcept;
@@ -127,6 +128,10 @@ public class InspectService {
 		return inspectDao.selectMediHistList(bean);
 	}
 
+	public List<TbFile> getFileList(TbFile bean){
+		return inspectDao.getFileList(bean);
+	}
+
 	public int updateInspectStatus(TbRcept bean) {
 		return inspectDao.updateInspectStatus(bean);
 	}
@@ -139,8 +144,18 @@ public class InspectService {
 		return inspectDao.updateInspect(bean);
 	}
 
+	public int insertOpinion(TbInspOpinion bean) {
+		return inspectDao.insertOpinion(bean);
+	}
+
+	public int updateResult(TbRcept bean) {
+		return inspectDao.updateResult(bean);
+	}
+
 	//inspFileUploadServ
-	public Map<String, Object> inspFileUploadServ(TbRcept tbRcept, String inspNo, List<MultipartFile> files){
+	public Map<String, Object> inspFileUploadServ(TbRcept tbRcept, String inspNo, List<MultipartFile> files
+			, List<String> titles, List<String> contents, List<String> closeYns){
+
 		UtilFile utilFile = new UtilFile();
 		List<TbFile> tbFileList = utilFile.multiUploadFile(files);
 		int result = 0;
@@ -156,7 +171,9 @@ public class InspectService {
 				tbFileList.get(i).setRqstNo(tbRcept.getRqstNo());
 				tbFileList.get(i).setInspNo(Integer.parseInt(inspNo));
 				tbFileList.get(i).setFileGb("F001-07");
-
+				tbFileList.get(i).setTitle(titles.get(i));
+				tbFileList.get(i).setContent(contents.get(i));
+				tbFileList.get(i).setCloseYn(closeYns.get(i));
 				result += adminDao.addFile(tbFileList.get(i));
 			}
 
@@ -171,6 +188,9 @@ public class InspectService {
 		return map;
 	}
 
+	public TbInspection getInspResult(TbInspection bean){
+		return inspectDao.getInspResult(bean);
+	}
 
 	public String getPdlNo(String pdlNo) {
 		return inspectDao.getPdlNo(pdlNo);

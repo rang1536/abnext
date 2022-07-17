@@ -416,6 +416,9 @@
 			, FARM_NO
 			, BOARD_NO
 			, INSP_NO
+			, TITLE
+			, CONTENT
+			, CLOSE_YN
 		) VALUES(
 			#{fileGb}
 			, #{filePath}
@@ -429,6 +432,9 @@
 			, #{farmNo}
 			, #{boardNo}
 			, #{inspNo}
+			, #{title}
+			, #{content}
+			, #{closeYn}
 		)
 	</select>
 
