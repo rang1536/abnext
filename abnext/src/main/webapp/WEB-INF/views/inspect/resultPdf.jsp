@@ -37,7 +37,7 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content" id="pdf">
+		<section class="content" style="font-size:13px;" id="pdf">
 			<div class="container-fluid">
 			1234
 			</div><!-- /.container-fluid -->

@@ -23,6 +23,7 @@ public class TbFile {
 	private String title;
 	private String content;
 	private String closeYn;
+	private String inspResult;
 
 	public int getInspNo() {
 		return inspNo;
@@ -120,12 +121,19 @@ public class TbFile {
 	public void setCloseYn(String closeYn) {
 		this.closeYn = closeYn;
 	}
+	public String getInspResult() {
+		return inspResult;
+	}
+	public void setInspResult(String inspResult) {
+		this.inspResult = inspResult;
+	}
 	@Override
 	public String toString() {
 		return "TbFile [fileNo=" + fileNo + ", fileGb=" + fileGb + ", filePath=" + filePath + ", fileOriNm=" + fileOriNm
 				+ ", fileNewNm=" + fileNewNm + ", fileMemo=" + fileMemo + ", rqstNo=" + rqstNo + ", hospNo=" + hospNo
 				+ ", userNo=" + userNo + ", animNo=" + animNo + ", farmNo=" + farmNo + ", boardNo=" + boardNo
-				+ ", inspNo=" + inspNo + ", title=" + title + ", content=" + content + ", closeYn=" + closeYn + "]";
+				+ ", inspNo=" + inspNo + ", title=" + title + ", content=" + content + ", closeYn=" + closeYn
+				+ ", inspResult=" + inspResult + "]";
 	}
 
 }

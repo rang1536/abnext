@@ -63,7 +63,7 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content" style="font-size:13px;">
 			<div class="container-fluid">
 				<!-- general form elements disabled -->
 				<div class="card card-primary">
@@ -174,7 +174,7 @@
 
 								<div class="col-sm-12">
 									<div class="form-group">
-										<label><font color="red">의뢰참고</font></label>
+										<label>의뢰참고</label>
 										<textarea class="form-control" rows="3" placeholder="특이사항... 참고할 만한 사항 작성">${rceptInfo.rqstMemo }</textarea>
 									</div>
 								</div>

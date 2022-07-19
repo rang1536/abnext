@@ -85,7 +85,7 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content" style="font-size:13px;">
 			<div class="container-fluid">
 				<!-- general form elements disabled -->
 				<div class="row">
@@ -127,6 +127,66 @@
 											<td style="width:30%;" class="txtc">${rceptInfo.animNm }(${rceptInfo.animNo})</td>
 											<td style="width:20%;background-color:#F2F2F2" class="txtc">의뢰메모</td>
 											<td style="width:30%;" class="txtc">${rceptInfo.rqstMemo }</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">시료정보</td>
+											<td colspan="3" class="txtl">
+												<div class="form-group" style="margin-bottom:-1px;">
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk01" class="chks" value="A002-01">
+														<label for="chk01" style="width:80px">분변</label>
+													</div>
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk02" class="chks" value="A002-02">
+														<label for="chk02" style="width:80px">깃털</label>
+													</div>
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk03" class="chks" value="A002-4">
+														<label for="chk03" style="width:80px">혈액</label>
+													</div>
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk04" class="chks" value="A002-3">
+														<label for="chk04" style="width:125px">총배설강스왑</label>
+													</div>
+													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+														<input type="checkbox" id="chk05" class="chks" value="A002-6">
+														<label for="chk05">기타</label>
+													</div>
+													<input type="text" class="" id="chk06" style="display:none" disabled>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td style="width:20%;background-color:#F2F2F2" class="txtc">임상증상 및 병력내용</td>
+											<td colspan="3" class="txtl">
+												<div class="form-group clearfix" style="margin-bottom:-1px;">
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
+														<label for="chk11">깃털이상</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk12" class="chkh" value="ERR001-02">
+														<label for="chk12">호흡이상</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk13" class="chkh" value="ERR001-03">
+														<label for="chk13">선위확장</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk14" class="chkh" value="ERR001-04">
+														<label for="chk14">설사</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk15" class="chkh" value="ERR001-05">
+														<label for="chk15">체중감소</label>
+													</div>
+													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk16" class="chkh" value="ERR001-06">
+														<label for="chk16">기타</label>
+													</div>
+													<input type="text" class="" id="chk17" style="display:none" disabled>
+												</div>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -290,37 +350,7 @@
 									<form id="fileForm" method="post" enctype="multipart/form-data">
 										<input type="hidden" id="inspNo" name="inspNo"/>
 										<input type="hidden" id="rqstNo" name="rqstNo" value="${rceptInfo.rqstNo }"/>
-										<div class="filter-container row previewList">
-										<!--
-											<div class="filtr-item col-sm-3" id="preview1">
-												<a href="https://via.placeholder.com/1200/000000.png">
-													<img src="https://via.placeholder.com/500/000000" class="img-fluid mb-2" style="width:140px;height:140px"/>
-												</a>
-											</div>
-											<div class="col-sm-9">
-												<div class="row">
-													<div class="col-8">
-														<input type="text" class="form-control">
-													</div>
-													<div class="col-4" style="padding-top:-9px">
-														<label for="chk1"></label>
-														<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">
-															<div class="icheck-primary d-inline">
-																<input type="checkbox" id="chk1">
-																<label for="chk1">비공개</label>
-															</div>
-														</div>
-													</div>
-
-												</div>
-												<div class="row">
-													<div class="col-12">
-														<textarea class="form-control" rows="3"></textarea>
-													</div>
-												</div>
-											</div>
-											 -->
-										</div>
+										<div class="filter-container row previewList"></div>
 									</form>
 								</div>
 								<div style="text-align:center">
@@ -385,7 +415,48 @@
 <script src="resources/plugins/toastr/toastr.min.js"></script>
 <script>
 $(function () {
+	$.ajax({
+		url : "sampleList",
+		data : {rqstNo : "${rceptInfo.rqstNo}"},
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			$(".chks").each(function(){
+				for(var i=0; i<data.length; i++){
+					if($(this).val() == data[i].sampleCode){
+						$(this).prop("checked", true);
+						if($(this).val() == 'A002-6'){
+							$("#chk06").val(data[i].sampleMemo);
+							$("#chk06").show();
+						}
+					}
+				}
+			})
+		}
+	});
 
+	$.ajax({
+		url : "histList",
+		data : {rqstNo : "${rceptInfo.rqstNo}"},
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			console.log(data);
+			$(".chkh").each(function(){
+				for(var i=0; i<data.length; i++){
+					if($(this).val() == data[i].histCode){
+						$(this).prop("checked", true);
+						if($(this).val() == 'ERR001-06'){
+							$("#chk17").val(data[i].histMemo);
+							$("#chk17").show();
+						}
+					}
+				}
+			})
+		}
+	});
+
+	$(".chks , .chkh").prop("disabled", true);
 });
 
 var fileNo = 0;

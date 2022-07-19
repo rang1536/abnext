@@ -48,52 +48,54 @@
 		</section>
 
 		<!-- Main content -->
-		<div class="invoice p-3 mb-3">
-			<!-- Table row -->
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<!-- /.card-header -->
-						<div class="card-body">
-							<div id="jsGrid1"></div>
-							<%-- <table id="example2" class="table table-bordered table-hover">
-								<thead>
-								<tr>
-									<th>의뢰번호</th>
-									<th>신청일</th>
-									<th>상태</th>
-									<th>동물명</th>
-									<th>동물번호</th>
-									<th>신청자(기관)</th>
-									<th>담당수의사</th>
-									<th>검사구분</th>
-								</tr>
-								</thead>
-								<tbody id="listBody">
-									<c:forEach var="item" items="${rceptList }" varStatus="status">
-										<tr>
-											<td>${item.pdlNo }</td>
-											<td>${item.rqstDt }<input type="hidden" id="rqstNo_${status.index+1 }" value="${item.rqstNo }"/></td>
-											<td>${item.procStatNm }</td>
-											<td>${item.animNm }</td>
-											<td>${item.animNo }</td>
-											<td>${item.hospNm }</td>
-											<td>${item.docNm }</td>
-											<td></td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							 --%>
+		<section class="content" style="font-size:13px;">
+			<div class="invoice p-3 mb-3">
+				<!-- Table row -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<!-- /.card-header -->
+							<div class="card-body">
+								<div id="jsGrid1"></div>
+								<%-- <table id="example2" class="table table-bordered table-hover">
+									<thead>
+									<tr>
+										<th>의뢰번호</th>
+										<th>신청일</th>
+										<th>상태</th>
+										<th>동물명</th>
+										<th>동물번호</th>
+										<th>신청자(기관)</th>
+										<th>담당수의사</th>
+										<th>검사구분</th>
+									</tr>
+									</thead>
+									<tbody id="listBody">
+										<c:forEach var="item" items="${rceptList }" varStatus="status">
+											<tr>
+												<td>${item.pdlNo }</td>
+												<td>${item.rqstDt }<input type="hidden" id="rqstNo_${status.index+1 }" value="${item.rqstNo }"/></td>
+												<td>${item.procStatNm }</td>
+												<td>${item.animNm }</td>
+												<td>${item.animNo }</td>
+												<td>${item.hospNm }</td>
+												<td>${item.docNm }</td>
+												<td></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+								 --%>
+							</div>
+							<!-- /.card-body -->
 						</div>
-						<!-- /.card-body -->
+						<!-- /.card -->
 					</div>
-					<!-- /.card -->
+					<!-- /.row -->
 				</div>
-				<!-- /.row -->
-			</div>
-			 <!-- /.col -->
-		</div><!-- /.container-fluid -->
+				 <!-- /.col -->
+			</div><!-- /.container-fluid -->
+		</section>
 	<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->

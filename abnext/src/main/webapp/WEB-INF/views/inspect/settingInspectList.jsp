@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,23 +48,25 @@
 		</section>
 
 		<!-- Main content -->
-		<div class="invoice p-3 mb-3">
-			<!-- Table row -->
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<!-- /.card-header -->
-						<div class="card-body">
-							<div id="jsGrid1"></div>
+		<section class="content" style="font-size:13px;">
+			<div class="invoice p-3 mb-3">
+				<!-- Table row -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<!-- /.card-header -->
+							<div class="card-body">
+								<div id="jsGrid1"></div>
+							</div>
+							<!-- /.card-body -->
 						</div>
-						<!-- /.card-body -->
+						<!-- /.card -->
 					</div>
-					<!-- /.card -->
+					<!-- /.row -->
 				</div>
-				<!-- /.row -->
-			</div>
-			 <!-- /.col -->
-		</div><!-- /.container-fluid -->
+				 <!-- /.col -->
+			</div><!-- /.container-fluid -->
+		</section>
 	<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->

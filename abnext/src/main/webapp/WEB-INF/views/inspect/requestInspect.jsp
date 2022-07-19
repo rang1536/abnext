@@ -51,6 +51,7 @@
 		</section>
 
 		<!-- Main content -->
+		<section class="content" style="font-size:13px;">
 			<div class="invoice p-3 mb-3">
 				<!-- Table row -->
 				<div class="row">
@@ -72,6 +73,7 @@
 				 <!-- /.row -->
 			</div><!-- /.container-fluid -->
 		<!-- /.content -->
+		</section>
 	</div>
 	<form id="viewFrm" method="POST">
 		<input type="hidden" name="pdlNo"/>

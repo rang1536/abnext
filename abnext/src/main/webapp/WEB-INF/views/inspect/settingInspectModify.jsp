@@ -49,17 +49,17 @@
 						<h1>* 진단검사 설정</h1>
 					</div>
 					<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
+						<ul class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
 							<li class="breadcrumb-item active">직접접수</li>
-						</ol>
+						</ul>
 					</div>
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content" style="font-size:13px;">
 			<div class="container-fluid">
 				<!-- general form elements disabled -->
 				<div class="row">

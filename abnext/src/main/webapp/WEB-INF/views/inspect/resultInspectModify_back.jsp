@@ -88,7 +88,7 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content" style="font-size:13px;">
 			<div class="container-fluid">
 				<!-- general form elements disabled -->
 				<div class="row">

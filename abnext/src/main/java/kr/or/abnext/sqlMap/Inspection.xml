@@ -387,8 +387,9 @@
 	</insert>
 
 	<select id="getFileList" parameterType="kr.or.abnext.domain.TbFile" resultType="kr.or.abnext.domain.TbFile">
-		SELECT *
-		  FROM TB_FILE
+		SELECT A.*
+		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
+		  FROM TB_FILE A
 		 WHERE INSP_NO = #{inspNo}
 	</select>
 

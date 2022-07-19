@@ -59,7 +59,7 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content" style="font-size:13px;">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-6">
@@ -216,7 +216,7 @@
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<label><font color="red">의뢰참고</font></label>
+												<label>의뢰참고</label>
 												<input type="text" class="form-control" placeholder="의뢰참고" id="rqstMemo">
 											</div>
 										</div>
