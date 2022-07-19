@@ -1159,6 +1159,7 @@
 			var userLev = $('#userLev option:selected').val();
 			//console.log('userLev : '+userLev);
 
+			/*
 			if(userLev == '2'){ //수의사
 				if($('#hospNo').val() == null || $('#hospNo').val() == ''){
 					alert('수의사인 경우 소속병원을 선택하세요');
@@ -1180,7 +1181,7 @@
 					return;
 				}
 			}
-
+			*/
 
 			var params = $('#userInfoForm').serialize();
 			//console.log('params : '+params);

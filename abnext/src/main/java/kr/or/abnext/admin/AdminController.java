@@ -31,7 +31,7 @@ public class AdminController {
 	public String hospListCtrl(Model model) {
 		System.out.println("병원관리~!!");
 
-		model.addAttribute("hospList", adminServ.getHospListServ());
+		//model.addAttribute("hospList", adminServ.getHospListServ());
 		return "admin/hospList";
 	}
 

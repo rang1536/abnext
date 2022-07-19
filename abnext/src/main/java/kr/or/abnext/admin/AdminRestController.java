@@ -278,7 +278,7 @@ public class AdminRestController {
 	public List<TbMenu> selectCodeList(TbMenu tbMenu) {
 		System.out.println("메뉴조회 시작~!!"+tbMenu);
 		List<TbMenu> list = adminServ.getMenuListServ(tbMenu);
-		System.out.println(">>>> list : "+list);
+		//System.out.println(">>>> list : "+list);
 		return list;
 	}
 

@@ -133,6 +133,57 @@ $.gfn_nvl = function(x){
 	}
 }
 
+
+/************************************************************
+ *                   휴 대 폰 번 호 정 규 식                     *
+ ************************************************************/
+function gfn_validation_hp(text){
+	var regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    if(regPhone.test(text)) {
+        return true;
+    }else{
+    	return false;
+    }
+}
+
+
+/************************************************************
+ *                   이 메 일 정 규 식                          *
+ ************************************************************/
+function gfn_validation_email(text){
+	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    if(regEmail.test(text)) {
+    	return true;
+    }else{
+    	return false;
+    }
+}
+
+
+/************************************************************
+ *                   화면PDF 출력 	                        *
+ ************************************************************/
+var initBobyHtml;
+var printTagId;
+
+function fn_print(tagId){
+	printTagId = tagId;
+	window.print();
+}
+
+function beforePrint(){
+	initBobyHtml = document.body.innerHTML;
+	document.body.innerHTML = document.getElementById(printTagId).innerHTML;
+}
+
+function afterPrint(){
+	document.body.innerHTML = initBobyHtml;
+}
+
+window.onbeforeprint = beforePrint;
+window.onafterprint = afterPrint;
+
+
 /************************************************************/
 /* 엑셀다운 jqGrid
  *  jQuery table2excel - v1.1.2

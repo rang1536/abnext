@@ -88,7 +88,7 @@
 		</a>
 
 		<!-- Sidebar -->
-		<div class="sidebar">
+		<div class="sidebar" style="font-size:14px;">
 			<!-- Sidebar user panel (optional) -->
 			<div class="user-panel mt-3 mb-3 d-flex" style="background-color:#002266;">
 
@@ -435,6 +435,7 @@
 			var hospAdr = $('#hospAdr').val();
 			var payManagerNm = $('#payManagerNm').val();
 			var payManagerHp = $('#payManagerHp').val();
+			var hospEmail = $('#hospEmail').val();
 
 			if(hospNm == null || hospNm == ''){
 				alert('기관(병원)명은 필수입력입니다.');
@@ -444,11 +445,23 @@
 			if(hospHp == null || hospHp == ''){
 				alert('핸드폰번호는 필수입력입니다.');
 				return;
+			}else{
+				if(!gfn_validation_hp(hospHp)){
+					alert('올바른 휴대폰번호를 입력해주세요');
+					return;
+				}
 			}
 
 			if(hospAdr == null || hospAdr == ''){
 				alert('주소는 필수입력입니다.');
 				return;
+			}
+
+			if(hospEmail != null && hospEmail != ''){
+				if(!gfn_validation_email(hospEmail)){
+					alert('올바른 이메일주소를 입력해주세요');
+					return;
+				}
 			}
 
 			if(payManagerNm == null || payManagerNm == ''){
@@ -513,7 +526,13 @@
 			if(farmHp == null || farmHp == ''){
 				alert('핸드폰번호는 필수입력입니다.');
 				return;
+			}else{
+				if(!gfn_validation_hp(farmHp)){
+					alert('올바른 휴대폰번호를 입력해주세요');
+					return;
+				}
 			}
+
 
 			if(farmAdr == null || farmAdr == ''){
 				alert('주소는 필수입력입니다.');

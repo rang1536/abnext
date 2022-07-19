@@ -46,7 +46,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-5">
-						<div class="card">
+						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<h3 class="card-title" style="float:right;">
 									<div class="input-group mb-2">
@@ -69,7 +69,7 @@
 						<!-- /.card -->
 					</div>
 					<div class="col-md-7">
-						<div class="card">
+						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<div class="row">
 									<div class="col-sm-6">&nbsp;</div>

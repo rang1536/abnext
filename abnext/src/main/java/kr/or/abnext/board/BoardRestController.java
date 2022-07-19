@@ -36,7 +36,7 @@ public class BoardRestController {
 
 	//getBoardListRest
 	@RequestMapping(value = "getBoardListRest", method = RequestMethod.POST)
-	public List<TbBoard> getBoardListRestCtrl(TbBoard tbBoard) {
+	public List<TbBoard> getBoardListRestCtrl() {
 		System.out.println("공지조회 ~!!");
 
 		return boardServ.getBoardListServ();

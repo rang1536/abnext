@@ -22,10 +22,9 @@
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="resources/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="resources/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="resources/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- jsGrid -->
+  <link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid.min.css">
+  <link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid-theme.min.css">
 
 
   <style>
@@ -64,10 +63,16 @@
 					<!-- Table row -->
 					<div class="row">
 						<div class="col-12">
-							<div class="card">
+							<div class="card card-primary card-outline"">
 								<!-- /.card-header -->
+								<div class="card-header">
+					              <h3 class="card-title"><b>회원목록</b></h3>
+					            </div>
+								<!-- /.card-header -->
+
 								<div class="card-body">
-									<table id="example2" class="table table-bordered table-hover">
+									<div id="jsGrid1"></div>
+									<%-- <table id="example2" class="table table-bordered table-hover">
 										<thead>
 											<tr>
 												<th><input type="checkbox" id="allCheck"/></th>
@@ -117,7 +122,7 @@
 												</tr>
 											</c:forEach>
 										</tbody>
-									</table>
+									</table> --%>
 								</div> <!-- /.card-body -->
 
 								<!-- 수정페이지 키값 세팅 폼-->
@@ -126,8 +131,7 @@
 								</form>
 
 								<div class="card-footer">
-									<button type="button" id="delUserBtn" class="btn btn-sm btn-danger">삭제</button>
-									<button type="button" id="addUserBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">회원등록</button>
+									<button type="button" id="addUserBtn" class="btn btn-sm btn-primary btn-flat" style="float:right;">회원등록</button>
 								</div>
 							</div> <!-- /.card -->
 						</div> <!-- /.col-12 -->
@@ -171,41 +175,82 @@
 <script src="resources/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
-<!-- DataTables	& Plugins -->
-<script src="resources/plugins/datatables/jquery.dataTables.js"></script>
-<script src="resources/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="resources/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="resources/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="resources/plugins/jszip/jszip.min.js"></script>
-<script src="resources/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="resources/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="resources/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- jsGrid -->
+<script src="resources/plugins/jsgrid/demos/db.js"></script>
+<script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
+<script src="resources/js/common.js"></script>
 
 <script>
 
-	//BS-Stepper Init
-	document.addEventListener('DOMContentLoaded', function () {
-	  window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-	})
-
 	$(function () {
-		$('.select2').select2();
-		bsCustomFileInput.init();
-
-		$('#example2').DataTable({
-			"paging": true,
-			"lengthChange": false,
-			"ordering": true,
-			"info": true,
-			"autoWidth": false,
-			"responsive": true,
-		});
+		getData();
     });
 
+
+	function getData(){
+		$.ajax({
+			url : 'searchUserCtrl',
+			dataType : 'json',
+			type : 'post',
+			success:function(data){
+				setGrid(data.list);
+			}
+		})
+	}
+
+	function setGrid(data){
+		$("#jsGrid1").jsGrid({
+	        height: "auto",
+	        width: "100%",
+	        sorting: true,
+	        paging: true,
+	        data: data,
+	        deleteConfirm : function(item){
+				console.log(item);
+	        },
+	        rowClick : function(args){
+	        	fn_modifyUser(args.item.userNo);
+	        },
+	        fields: [
+	            { name: "userLev", 		type: "text", 	width: 80, 	title:"구분", 	align: "center",
+	            	  itemTemplate: function(value, item) {
+		              	var retText = '-';
+	            		if(value == '1') retText = '일반회원';
+	            		else if(value == '2') retText = '연구원';
+	            		else if(value == '3') retText = '접수자';
+	            		else if(value == '4') retText = '책임자';
+
+	            		return retText;
+		              }
+	            },
+	            { name: "userId",   	type: "text", 	width: 120, title:"아이디", 	align: "center"},
+	            { name: "userNm", 		type: "text", 	width: 80, 	title:"이름", 	align: "center"},
+	            { name: "userStat", 	type: "text", 	width: 80, 	title:"상태", 	align: "center",
+	            	  itemTemplate: function(value, item) {
+		              	var retText = '신청';
+	            		if(value == 'F002-02') retText = '승인';
+	            		else if(value == 'F002-03') retText = '사용정지';
+
+	            		return retText;
+		              }
+	            },
+	            { name: "userTel", 		type: "text", 	width: 100, title:"전화번호", 	align: "center"},
+	            { name: "userHp", 		type: "text", 	width: 100, title:"핸드폰", 	align: "center"},
+	            { name: "sidoNm", 		type: "text", 	width: 110, title:"시도", 	align: "center"},
+	            { name: "hospNm", 		type: "text", 	width: 140, title:"소속", 	align: "center",
+	            	 itemTemplate: function(value, item) {
+	            		 var retText = value;
+
+	            		 if(retText == null || retText == ''){
+	            			 retText = item.farmNm;
+	            		 }
+
+	            		 return retText;
+		             }
+	            }
+	        ]
+	    });
+	}
 
 	/*
 	* 회원등록 페이지 연결
