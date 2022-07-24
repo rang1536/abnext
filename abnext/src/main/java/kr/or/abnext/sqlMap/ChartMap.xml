@@ -343,4 +343,96 @@
 				 ) D
 	</select>
 
+
+	<!-- 월별 진단명별 통계 -->
+	<select id="getBasicChartList5" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
+		SELECT IFNULL((SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = B.DIAG_CD), '기타') AS DIAG_NM
+			   , SUM(B.SAMPLE1) AS SAMPLE1
+			   , SUM(B.SAMPLE2) AS SAMPLE2
+			   , SUM(B.SAMPLE3) AS SAMPLE3
+			   , SUM(B.SAMPLE4) AS SAMPLE4
+			   , SUM(B.SAMPLE5) AS SAMPLE5
+			   , SUM(B.SAMPLE6) AS SAMPLE6
+			   , SUM(B.SAMPLE7) AS SAMPLE7
+			   , SUM(B.SAMPLE8) AS SAMPLE8
+			   , SUM(B.SAMPLE9) AS SAMPLE9
+			   , SUM(B.SAMPLE10) AS SAMPLE10
+			   , SUM(B.SAMPLE11) AS SAMPLE11
+			   , SUM(B.SAMPLE12) AS SAMPLE12
+	     FROM (
+				SELECT A.DIAG_CD
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'01') THEN 1 ELSE 0 END AS SAMPLE1
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'02') THEN 1 ELSE 0 END AS SAMPLE2
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'03') THEN 1 ELSE 0 END AS SAMPLE3
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'04') THEN 1 ELSE 0 END AS SAMPLE4
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'05') THEN 1 ELSE 0 END AS SAMPLE5
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'06') THEN 1 ELSE 0 END AS SAMPLE6
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'07') THEN 1 ELSE 0 END AS SAMPLE7
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'08') THEN 1 ELSE 0 END AS SAMPLE8
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'09') THEN 1 ELSE 0 END AS SAMPLE9
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'10') THEN 1 ELSE 0 END AS SAMPLE10
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'11') THEN 1 ELSE 0 END AS SAMPLE11
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'12') THEN 1 ELSE 0 END AS SAMPLE12
+				  FROM (
+						SELECT DIAG_CD
+							   , REPLACE(SUBSTR(RQST_DT,1,7),'.','-') AS RQST_DT
+						  FROM TB_RCEPT A
+						 WHERE DIAG_CD IS NOT NULL
+						 /*검색기간*/
+						 <if test="stDt != null and stDt != '' ">
+					      	AND RQST_DT LIKE CONCAT(#{stDt}, '%')
+					     </if>
+					     <if test="stDt == null or stDt == '' ">
+					     	AND RQST_DT LIKE CONCAT(DATE_FORMAT(NOW(), 'Y%'), '%')
+					     </if>
+						) A
+				 UNION
+				SELECT CODE_ID AS DIAG_CD
+					     , 2, 3, 4, 2, 3, 4, 3, 4, 5, 5, 3, 2
+					   /*, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0*/
+				  FROM TB_CODE
+				 WHERE UPP_CODE_ID = 'D001'
+			  ) B
+	    GROUP BY B.DIAG_CD
+	</select>
+
+
+	<!-- 혈청검사 -->
+	<select id="getBasicChartList6" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
+		SELECT PDL_NO as RQST_NO
+			   , RQST_DT
+			   , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = A.ANIM_THIRD_CD) AS ANIM_NM
+			   , ANIM_BIRTH
+			   , 1 AS SAMPLE1
+			   , 2 AS SAMPLE2
+			   , 3 AS SAMPLE3
+			   , 1 AS SAMPLE4
+			   , 13.1 AS SAMPLE5
+			   , 14.2 AS SAMPLE6
+			   , 11.4 AS SAMPLE7
+			   , 9 AS SAMPLE8
+			   , 10 AS SAMPLE9
+			   , 8.2 AS SAMPLE10
+			   , 9.0 AS SAMPLE11
+			   , 3.5 AS SAMPLE12
+			   , 6 AS SAMPLE13
+			   , 7 AS SAMPLE14
+	     FROM TB_RCEPT A
+	    /* 혈청검사지 나오면 INNER JOIN */
+	    WHERE 1=1
+	    <if test="stDt != null and stDt != '' ">
+	    	AND A.RQST_DT <![CDATA[>=]]> replace(replace(#{stDt},'-',''),'-','')
+	    </if>
+	    <if test="endDt != null and endDt != '' ">
+	    	AND A.RQST_DT <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
+	    </if>
+	    /* AND RQST_NO IN (
+	    	  	SELECT RQST_NO
+	    	  	  FROM TB_INSPECTION B
+	    	  	 WHERE RQST_NO = A.RQST_NO
+	    	  	   AND INSP_SECOND_CD = 'B001-04-23'
+	    	  )
+	    */
+	</select>
+
 </mapper>

@@ -36,4 +36,14 @@ public class ChartDao {
 	public List<ChartView1> getBasicChart4List(ChartView1 chartView){
 		return sql.selectList("chart.getBasicChartList4", chartView);
 	}
+
+	//getBasicChartList5
+	public List<ChartView1> getBasicChart5List(ChartView1 chartView){
+		return sql.selectList("chart.getBasicChartList5", chartView);
+	}
+
+	//getBasicChartList5
+	public List<ChartView1> getBasicChart6List(ChartView1 chartView){
+		return sql.selectList("chart.getBasicChartList6", chartView);
+	}
 }

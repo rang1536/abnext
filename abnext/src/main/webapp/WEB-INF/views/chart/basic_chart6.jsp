@@ -39,12 +39,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>기본통계</b></h1>
+						<h1><b>혈청검사 통계</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>기본통계</b></li>
+							<li class="breadcrumb-item active"><b>혈청검사 통계</b></li>
 						</ol>
 					</div>
 				</div>
@@ -54,9 +54,10 @@
 		<!-- Main content -->
 		 <section class="content" style="font-size:13px;">
  			<div class="container-fluid">
+
 				<div class="card">
-					<div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>Chart</b></h3>
+					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
+						<h3 class="card-title"><b>혈청검사 통계</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -69,17 +70,41 @@
 					</div>
 
 					<div class="card-body">
-						<div class="chart">
-							<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<div class="input-group">
+										<input type="date" class="form-control-sm" name="stDt" id="stDt"/>&nbsp;&nbsp;&nbsp;
+										<input type="date" class="form-control-sm" name="endDt" id="endDt"/>&nbsp;&nbsp;&nbsp;
+										<div class="btn-group">
+	                  						<button type="button" class="searchBtn btn-sm btn-primary" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
+	                  						&nbsp;&nbsp;
+	                  						<button type="button" class="excelBtn btn-sm btn-success" onclick="excelDown();" style="max-width:100px;min-width:82px;"><i class="fa fa-copy"></i> EXCEL</button>
+                  						</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div id="jsGrid1"></div>
+					</div>
+
+					<div class="card-footer" style="background-color:#D4F4FA;color:#000000;">
+						<div class="row">
+							<div class="col-sm-12">
+
+							</div>
 						</div>
 					</div>
+
 					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
 
 				<div class="card">
 					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>Data</b></h3>
+						<h3 class="card-title"><b>평균치</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -92,11 +117,10 @@
 					</div>
 
 					<div class="card-body">
-						<div id="jsGrid1"></div>
+						<div id="jsGrid2"></div>
 					</div>
-					<!-- /.card-body -->
+
 				</div>
-				<!-- /.card -->
 
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
@@ -152,140 +176,221 @@
 		$('.select2').select2();
 		bsCustomFileInput.init();
 
-		$("#jsGrid1").jsGrid({
-	        height: "100%",
-	        width: "100%",
+		getData();
 
-	        sorting: true,
-	        paging: true,
-
-	        data: db.clients,
-
-	        fields: [
-	            { name: "Name", type: "text", width: 150 },
-	            { name: "Age", type: "number", width: 50 },
-	            { name: "Address", type: "text", width: 200 },
-	            { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-	            { name: "Married", type: "checkbox", title: "Is Married" }
-	        ]
-	    });
     });
 
-	//-------------
-    //- BAR CHART -
-    //-------------
-    var areaChartData = {
-      labels  : ['1월', '2월', '3월', '4월', '5월', '6월', '7월'],
-      datasets: [
-        {
-          label               : '생환',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : '폐사',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label               : '혈액',
-          backgroundColor     : '#476600',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#476600',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : '혈청',
-          backgroundColor     : '#FAED7D',
-          borderColor         : '#FAED7D',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [0, 0, 80, 31, 56, 155, 40]
-        },
-        {
-          label               : '분변',
-          backgroundColor     : '#030066',
-          borderColor         : '#030066',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [128, 148, 140, 119, 186, 27, 0]
-        },
-        {
-          label               : '조직',
-          backgroundColor     : '#FF0000',
-          borderColor         : '#FF0000',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [15, 29, 30, 41, 56, 65, 70]
-        },
-        {
-          label               : '기타',
-          backgroundColor     : '#FFB2D9',
-          borderColor         : '#FFB2D9',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [18, 58, 20, 49, 86, 37, 90]
-        },
-        {
-          label               : '합계',
-          backgroundColor     : '#000000',
-          borderColor         : '#000000',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [150, 200, 180, 250, 300, 250, 210]
-        },
-      ]
-    }
+    function getData(){
+		$.ajax({
+			url : 'basicChartList6',
+			dataType : 'json',
+			type : 'post',
+			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
+			success:function(data){
 
-    var barChartCanvas = $('#barChart').get(0).getContext('2d')
-    var barChartData = $.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
-    var temp1 = areaChartData.datasets[1]
-    barChartData.datasets[0] = temp1
-    barChartData.datasets[1] = temp0
+				if(($('#stDt').val() == null || $('#stDt').val() == '') && ($('#endDt').val() == null || $('#endDt').val() == '')){
+					toastr.success('전체 데이터가 조회 되었습니다,');
+				}else{
+					toastr.success($('#stDt').val()+ '~'+$('#endDt').val()+' 기간의 데이터가 조회 되었습니다,');
+				}
 
-    var barChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      datasetFill             : false
-    }
+				setGrid(data);
 
-    new Chart(barChartCanvas, {
-      type: 'bar',
-      data: barChartData,
-      options: barChartOptions
-    })
+			}
+		})
+	}
+
+    var chkRowCnt = 0;
+    var update_item ={};
+
+	function setGrid(data){
+		console.log(JSON.stringify(data[0]))
+
+		$("#jsGrid1").jsGrid({
+	        height: "auto",
+	        width: "100%",
+	        sorting: true,
+	        paging: true,
+	       	pageSize: 12,
+			data: data,
+	        fields: [
+	        	{ name: "sumChk",   type: "checkbox", 	width: 60, title:"", align: "center"
+	        		, itemTemplate: function(value, item) {
+	        			return $("<input>").attr("type", "checkbox").attr("checked", value || item.Checked)
+	        			.on("change", function() {
+	        				item.Checked = $(this).is(":checked");
+
+	        				if(item.Checked){
+	        					if(chkRowCnt == 0){
+	        						chkRowCnt++;
+		        					addSumRow(item);
+		        				}else{
+		        					chkRowCnt++;
+		        					updateSumRow(item);
+		        				}
+	        				}
+	        			})
+	        		}
+	        	},
+	            { name: "rqstNo",   type: "text", width: 150, 	title:"의뢰번호", 	align: "center"},
+	            { name: "rqstDt",   type: "text", width: 100, 	title:"의뢰일", 	align: "center"},
+	            { name: "animNm",   type: "text", width: 100, 	title:"품종", 	align: "center"},
+	            { name: "animBirth",type: "text", width: 100, 	title:"생년월일", 	align: "center"},
+	            { name: "sample1", 	type: "number", width: 60, 	title:"TP", 	align: "center"},
+	            { name: "sample2", 	type: "number", width: 60, 	title:"Alb", 	align: "center"},
+	            { name: "sample3", 	type: "number", width: 60, 	title:"Glob", 	align: "center"},
+	            { name: "sample4", 	type: "number", width: 60, 	title:"A/G ratio", 	align: "center"},
+	            { name: "sample5", 	type: "number", width: 60, 	title:"GLU", 	align: "center"},
+	            { name: "sample6", 	type: "number", width: 60, 	title:"AST", 	align: "center"},
+	            { name: "sample7", 	type: "number", width: 60, 	title:"CK", 	align: "center"},
+	            { name: "sample8", 	type: "number", width: 60, 	title:"CA", 	align: "center"},
+	            { name: "sample9", 	type: "number", width: 60, 	title:"PHOS", 	align: "center"},
+	            { name: "sample10", type: "number", width: 60, 	title:"Na", 	align: "center"},
+	            { name: "sample11", type: "number", width: 60, 	title:"K", 		align: "center"},
+	            { name: "sample12", type: "number", width: 60, 	title:"Na/K ratio", 	align: "center"},
+	            { name: "sample13", type: "number", width: 60, 	title:"BA", 	align: "center"},
+	            { name: "sample14", type: "number", width: 60, 	title:"UA", 	align: "center"}
+	        ]
+	    });
+
+		var data2 = { "sumTitle":'평균치'
+			   ,"sample1" : 0
+			   ,"sample2" : 0
+			   ,"sample3" : 0
+			   ,"sample4" : 0
+			   ,"sample5" : 0
+			   ,"sample6" : 0
+			   ,"sample7" : 0
+			   ,"sample8" : 0
+			   ,"sample9" : 0
+			   ,"sample10" : 0
+			   ,"sample11" : 0
+			   ,"sample12" : 0
+			   ,"sample13" : 0
+			   ,"sample14" : 0
+		}
+
+		var dataArr = new Array();
+		dataArr.push(data2);
+
+		setGrid2(dataArr);
+	}
+
+	function setGrid2(dataArr){
+
+		$("#jsGrid2").jsGrid({
+			 height: "auto",
+			 width: "100%",
+			 sorting: true,
+			 paging: true,
+			 data: dataArr,
+			 fields: [
+			 	{ name: "sumTitle",   type: "text", width: 510, title:"-", align: "center"},
+			     { name: "sample1", 	type: "number", width: 60, 	title:"TP", 	align: "center"},
+			     { name: "sample2", 	type: "number", width: 60, 	title:"Alb", 	align: "center"},
+			     { name: "sample3", 	type: "number", width: 60, 	title:"Glob", 	align: "center"},
+			     { name: "sample4", 	type: "number", width: 60, 	title:"A/G ratio", 	align: "center"},
+			     { name: "sample5", 	type: "number", width: 60, 	title:"GLU", 	align: "center"},
+			     { name: "sample6", 	type: "number", width: 60, 	title:"AST", 	align: "center"},
+			     { name: "sample7", 	type: "number", width: 60, 	title:"CK", 	align: "center"},
+			     { name: "sample8", 	type: "number", width: 60, 	title:"CA", 	align: "center"},
+			     { name: "sample9", 	type: "number", width: 60, 	title:"PHOS", 	align: "center"},
+			     { name: "sample10", type: "number", width: 60, 	title:"Na", 	align: "center"},
+			     { name: "sample11", type: "number", width: 60, 	title:"K", 		align: "center"},
+			     { name: "sample12", type: "number", width: 60, 	title:"Na/K ratio", 	align: "center"},
+			     { name: "sample13", type: "number", width: 60, 	title:"BA", 	align: "center"},
+			     { name: "sample14", type: "number", width: 60, 	title:"UA", 	align: "center"}
+			 ]
+		});
+	}
+
+	//버튼 클릭시 grid에 데이터를 추가
+	function addSumRow(item) {
+		var insert_item = {};
+		var dataArr = new Array();
+		//데이터를 추가를 위해서 json object 생성
+		insert_item.sumTitle = '평균값';
+		insert_item.sample1 = item.sample1/chkRowCnt;
+		insert_item.sample2 = item.sample2/chkRowCnt;
+		insert_item.sample3 = item.sample3/chkRowCnt;
+		insert_item.sample4 = item.sample4/chkRowCnt;
+		insert_item.sample5 = item.sample5/chkRowCnt;
+		insert_item.sample6 = item.sample6/chkRowCnt;
+		insert_item.sample7 = item.sample7/chkRowCnt;
+		insert_item.sample8 = item.sample8/chkRowCnt;
+		insert_item.sample9 = item.sample9/chkRowCnt;
+		insert_item.sample10 = item.sample10/chkRowCnt;
+		insert_item.sample11 = item.sample11/chkRowCnt;
+		insert_item.sample12 = item.sample12/chkRowCnt;
+		insert_item.sample13 = item.sample13/chkRowCnt;
+		insert_item.sample14 = item.sample14/chkRowCnt;
+
+		dataArr.push(insert_item);
+		//수정을 위한 세팅 추가
+		update_item.sumTitle = '평균값';
+		update_item.sample1 = item.sample1;
+		update_item.sample2 = item.sample2;
+		update_item.sample3 = item.sample3;
+		update_item.sample4 = item.sample4;
+		update_item.sample5 = item.sample5;
+		update_item.sample6 = item.sample6;
+		update_item.sample7 = item.sample7;
+		update_item.sample8 = item.sample8;
+		update_item.sample9 = item.sample9;
+		update_item.sample10 = item.sample10;
+		update_item.sample11 = item.sample11;
+		update_item.sample12 = item.sample12;
+		update_item.sample13 = item.sample13;
+		update_item.sample14 = item.sample14;
+
+		setGrid2(dataArr);
+
+	};
+
+
+	function updateSumRow(item) {
+		var insert_item = {};
+		var dataArr = new Array();
+
+		insert_item.sumTitle = '평균값';
+
+		insert_item.sample1 = update_item.sample1 + item.sample1;
+		insert_item.sample2 = update_item.sample2 + item.sample2;
+		insert_item.sample3 = update_item.sample3 + item.sample3;
+		insert_item.sample4 = update_item.sample4 + item.sample4;
+		insert_item.sample5 = update_item.sample5 + item.sample5;
+		insert_item.sample6 = update_item.sample6 + item.sample6;
+		insert_item.sample7 = update_item.sample7 + item.sample7;
+		insert_item.sample8 = update_item.sample8 + item.sample8;
+		insert_item.sample9 = update_item.sample9 + item.sample9;
+		insert_item.sample10 = update_item.sample10 + item.sample10;
+		insert_item.sample11 = update_item.sample11 + item.sample11;
+		insert_item.sample12 = update_item.sample12 + item.sample12;
+		insert_item.sample13 = update_item.sample13 + item.sample13;
+		insert_item.sample14 = update_item.sample14 + item.sample14;
+
+		dataArr.push(insert_item);
+		setGrid2(dataArr);
+
+		update_item = insert_item;
+
+	};
+
+
+	function excelDown(){
+		$("#jsGrid1").table2excel({
+			exclude : ".excludeThisClass",
+			name : "월별 진단명별 통계",
+			filename : "월별 진단명별 통계",
+			fileext : ".xlsx",
+			exclude_img : true,
+			exclude_links : true,
+			exclude_inputs : true        
+		});    
+	}
+
+
+
 
 </script>
 </html>

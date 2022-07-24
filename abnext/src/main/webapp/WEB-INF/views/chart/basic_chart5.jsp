@@ -39,12 +39,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>기본통계</b></h1>
+						<h1><b>월별 진단명별통계</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>기본통계</b></li>
+							<li class="breadcrumb-item active"><b>월별 진단명별통계</b></li>
 						</ol>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
  			<div class="container-fluid">
 				<div class="card">
 					<div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>Chart</b></h3>
+						<h3 class="card-title"><b>월별 진단명별 Chart</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -69,8 +69,24 @@
 					</div>
 
 					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-9"></div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<div class="input-group">
+										<select name="stDt" id="stDt" class="form-control-sm">
+											<option value="2022">2022</option>
+										</select>&nbsp;&nbsp;&nbsp;&nbsp;
+										<div class="btn-group">
+	                  						<button type="button" class="searchBtn btn-sm btn-primary" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
+                  						</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div class="chart">
-							<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+							<canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
 						</div>
 					</div>
 					<!-- /.card-body -->
@@ -79,7 +95,7 @@
 
 				<div class="card">
 					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>Data</b></h3>
+						<h3 class="card-title"><b>월별 진단명별 Data</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -92,6 +108,19 @@
 					</div>
 
 					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-10"></div>
+							<div class="col-sm-2">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="btn-group">
+	                  						<button type="button" class="excelBtn btn-sm btn-success" onclick="excelDown();" style="max-width:100px;min-width:82px;"><i class="fa fa-copy"></i> EXCEL</button>
+                  						</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div id="jsGrid1"></div>
 					</div>
 					<!-- /.card-body -->
@@ -152,140 +181,171 @@
 		$('.select2').select2();
 		bsCustomFileInput.init();
 
-		$("#jsGrid1").jsGrid({
-	        height: "100%",
-	        width: "100%",
+		//년도세팅
+		$('#stDt').empty();
+		var nowYy = new Date().getFullYear();
+		$('#stDt').append('<option value="'+nowYy+'" selected>'+nowYy+'</option>');
 
+		for(var i=0; i<9; i++){
+			nowYy = nowYy-1;
+			$('#stDt').append('<option value="'+nowYy+'">'+nowYy+'</option>');
+		}
+
+		getData();
+
+    });
+
+    function getData(){
+		$.ajax({
+			url : 'basicChartList5',
+			dataType : 'json',
+			type : 'post',
+			data : {'stDt':$('#stDt').val()},
+			success:function(data){
+				//console.log(data);
+
+				toastr.success($('#stDt').val()+ '년도 데이터가 조회 되었습니다,');
+				setGrid(data);
+				setChartData(data);
+			}
+		})
+	}
+
+	function setGrid(data){
+		$("#jsGrid1").jsGrid({
+	        height: "auto",
+	        width: "100%",
 	        sorting: true,
 	        paging: true,
-
-	        data: db.clients,
-
+			data: data,
 	        fields: [
-	            { name: "Name", type: "text", width: 150 },
-	            { name: "Age", type: "number", width: 50 },
-	            { name: "Address", type: "text", width: 200 },
-	            { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-	            { name: "Married", type: "checkbox", title: "Is Married" }
+	            { name: "diagNm",   type: "text", 	width: 150, title:"질병명", 	align: "center"},
+	            { name: "sample1", 	type: "number", width: 60, 	title:"1월", 	align: "center"},
+	            { name: "sample2", 	type: "number", width: 60, 	title:"2월", 	align: "center"},
+	            { name: "sample3", 	type: "number", width: 60, 	title:"3월", 	align: "center"},
+	            { name: "sample4", 	type: "number", width: 60, 	title:"4월", 	align: "center"},
+	            { name: "sample5", 	type: "number", width: 60, 	title:"5월", 	align: "center"},
+	            { name: "sample6", 	type: "number", width: 60, 	title:"6월", 	align: "center"},
+	            { name: "sample7", 	type: "number", width: 60, 	title:"7월", 	align: "center"},
+	            { name: "sample8", 	type: "number", width: 60, 	title:"8월", 	align: "center"},
+	            { name: "sample9", 	type: "number", width: 60, 	title:"9월", 	align: "center"},
+	            { name: "sample10", type: "number", width: 60, 	title:"10월", 	align: "center"},
+	            { name: "sample11", type: "number", width: 60, 	title:"11월", 	align: "center"},
+	            { name: "sample12", type: "number", width: 60, 	title:"12월", 	align: "center"}
+
 	        ]
 	    });
-    });
+	}
+
+
+	function excelDown(){
+		$("#jsGrid1").table2excel({
+			exclude : ".excludeThisClass",
+			name : "월별 진단명별 통계",
+			filename : "월별 진단명별 통계",
+			fileext : ".xlsx",
+			exclude_img : true,
+			exclude_links : true,
+			exclude_inputs : true        
+		});    
+	}
+
 
 	//-------------
     //- BAR CHART -
     //-------------
-    var areaChartData = {
-      labels  : ['1월', '2월', '3월', '4월', '5월', '6월', '7월'],
-      datasets: [
-        {
-          label               : '생환',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : '폐사',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label               : '혈액',
-          backgroundColor     : '#476600',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#476600',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : '혈청',
-          backgroundColor     : '#FAED7D',
-          borderColor         : '#FAED7D',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [0, 0, 80, 31, 56, 155, 40]
-        },
-        {
-          label               : '분변',
-          backgroundColor     : '#030066',
-          borderColor         : '#030066',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [128, 148, 140, 119, 186, 27, 0]
-        },
-        {
-          label               : '조직',
-          backgroundColor     : '#FF0000',
-          borderColor         : '#FF0000',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [15, 29, 30, 41, 56, 65, 70]
-        },
-        {
-          label               : '기타',
-          backgroundColor     : '#FFB2D9',
-          borderColor         : '#FFB2D9',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [18, 58, 20, 49, 86, 37, 90]
-        },
-        {
-          label               : '합계',
-          backgroundColor     : '#000000',
-          borderColor         : '#000000',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [150, 200, 180, 250, 300, 250, 210]
-        },
-      ]
-    }
+    function setChartData(data){
+		var areaChartData = '';
 
-    var barChartCanvas = $('#barChart').get(0).getContext('2d')
-    var barChartData = $.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
-    var temp1 = areaChartData.datasets[1]
-    barChartData.datasets[0] = temp1
-    barChartData.datasets[1] = temp0
+		// x축값 구하기
+		var xArr = new Array();
+		for(var i=0; i < 12; i++){
+			xArr[i] = (i+1)+'월';
+		}
 
-    var barChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      datasetFill             : false
-    }
 
-    new Chart(barChartCanvas, {
-      type: 'bar',
-      data: barChartData,
-      options: barChartOptions
-    })
+		// y축값 구하기
+		var yArr = new Array();
+		var yArrDetail ='';
+
+		var labels = new Array()
+		for(var i=0; i < data.length; i++){
+			yArrDetail = new Array();
+			yArrDetail.push(data[i].sample1);
+			yArrDetail.push(data[i].sample2);
+			yArrDetail.push(data[i].sample3);
+			yArrDetail.push(data[i].sample4);
+			yArrDetail.push(data[i].sample5);
+			yArrDetail.push(data[i].sample6);
+			yArrDetail.push(data[i].sample7);
+			yArrDetail.push(data[i].sample8);
+			yArrDetail.push(data[i].sample9);
+			yArrDetail.push(data[i].sample10);
+			yArrDetail.push(data[i].sample11);
+			yArrDetail.push(data[i].sample12);
+
+			yArr[i]= yArrDetail;
+			labels[i] = data[i].diagNm;
+		}
+
+		console.log(labels);
+		var backgroundColors = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5', '#FFB2D9', '#8041D9', '#6B9900', '#22741C', '#5CD1E5', '#F2CB61', '#993800', '#D941C5', '#664B00', '#670000', '#6799FF' ];
+		var pointColors = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5', '#FFB2D9', '#8041D9', '#6B9900', '#22741C', '#5CD1E5', '#F2CB61', '#993800', '#D941C5', '#664B00', '#670000', '#6799FF' ];
+		var pointStrokeColors = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5', '#FFB2D9', '#8041D9', '#6B9900', '#22741C', '#5CD1E5', '#F2CB61', '#993800', '#D941C5', '#664B00', '#670000', '#6799FF' ];
+		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff','fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff','fff', 'fff', 'fff'];
+		var pointHighlightStrokes = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5', '#FFB2D9', '#8041D9', '#6B9900', '#22741C', '#5CD1E5', '#F2CB61', '#993800', '#D941C5', '#664B00', '#670000', '#6799FF'];
+
+		var dataSets= new Array();
+		var dataSet = '';
+		for(var i=0; i < data.length; i++){
+			dataSet = {
+				label               : labels[i],
+				backgroundColor     : backgroundColors[i],
+				borderColor         : backgroundColors[i],
+				pointRadius          : false,
+				pointColor          : pointColors[i],
+				pointStrokeColor    : pointStrokeColors[i],
+				pointHighlightFill  : '#fff',
+				pointHighlightStroke: pointHighlightStrokes[i],
+				data                : yArr[i]
+			}
+
+			dataSets.push(dataSet);
+		}
+
+		//console.log(dataSets);
+		var areaChartData = {
+			labels  :	xArr,
+			datasets: dataSets
+		}
+
+		//console.log(areaChartData);
+
+		var barChartData = $.extend(true, {}, areaChartData)
+	    var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+	    var stackedBarChartData = $.extend(true, {}, barChartData)
+
+	    var stackedBarChartOptions = {
+	      responsive              : true,
+	      maintainAspectRatio     : false,
+	      scales: {
+	        xAxes: [{
+	          stacked: true,
+	        }],
+	        yAxes: [{
+	          stacked: true
+	        }]
+	      }
+	    }
+
+	    new Chart(stackedBarChartCanvas, {
+	      type: 'bar',
+	      data: stackedBarChartData,
+	      options: stackedBarChartOptions
+	    })
+	}
+
+
 
 </script>
 </html>

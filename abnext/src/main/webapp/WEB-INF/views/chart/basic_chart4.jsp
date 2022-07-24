@@ -56,7 +56,7 @@
  			<div class="container-fluid">
 				<div class="card">
 					<div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>Chart</b></h3>
+						<h3 class="card-title"><b>지역별 진단명별 통계차트</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -79,7 +79,7 @@
 
 				<div class="card">
 					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>Data</b></h3>
+						<h3 class="card-title"><b>지역별 진단명별 통계 DATA</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -92,6 +92,23 @@
 					</div>
 
 					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-7"></div>
+							<div class="col-sm-5">
+								<div class="form-group">
+									<div class="input-group">
+										<input type="date" class="form-control-sm" name="stDt" id="stDt"/>&nbsp;&nbsp;&nbsp;
+										<input type="date" class="form-control-sm" name="endDt" id="endDt"/>&nbsp;&nbsp;&nbsp;
+										<div class="btn-group">
+	                  						<button type="button" class="searchBtn btn-sm btn-primary" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
+	                  						&nbsp;&nbsp;
+	                  						<button type="button" class="excelBtn btn-sm btn-success" onclick="excelDown();" style="max-width:100px;min-width:82px;"><i class="fa fa-copy"></i> EXCEL</button>
+                  						</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div id="jsGrid1"></div>
 					</div>
 					<!-- /.card-body -->
@@ -161,7 +178,7 @@
 			url : 'basicChartList4',
 			dataType : 'json',
 			type : 'post',
-			data : {'stDt':$('#stDt').val()},
+			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
 			success:function(data){
 				//console.log(data);
 				setGrid(data);

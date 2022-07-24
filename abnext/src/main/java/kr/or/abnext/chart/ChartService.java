@@ -39,4 +39,14 @@ public class ChartService {
 	public List<ChartView1> getBasicChartList4Serv(ChartView1 chartView){
 		return chartDao.getBasicChart4List(chartView);
 	}
+
+	/*월별 진단명별통계*/
+	public List<ChartView1> getBasicChartList5Serv(ChartView1 chartView){
+		return chartDao.getBasicChart5List(chartView);
+	}
+
+	/*혈청검사통계*/
+	public List<ChartView1> getBasicChartList6Serv(ChartView1 chartView){
+		return chartDao.getBasicChart6List(chartView);
+	}
 }

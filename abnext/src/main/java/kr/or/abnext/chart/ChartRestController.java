@@ -41,7 +41,18 @@ public class ChartRestController {
 	@RequestMapping(value = "basicChartList4", method = RequestMethod.POST)
 	public List<ChartView1> basicChartList4Ctrl(ChartView1 chartView, Model model) {
 		System.out.println("진단명별통계 화면가기~!!");
-		System.out.println(chartServ.getBasicChartList4Serv(chartView));
 		return chartServ.getBasicChartList4Serv(chartView);
+	}
+
+	@RequestMapping(value = "basicChartList5", method = RequestMethod.POST)
+	public List<ChartView1> basicChartList5Ctrl(ChartView1 chartView, Model model) {
+		System.out.println("진단명별통계 화면가기~!!");
+		return chartServ.getBasicChartList5Serv(chartView);
+	}
+
+	@RequestMapping(value = "basicChartList6", method = RequestMethod.POST)
+	public List<ChartView1> basicChartList6Ctrl(ChartView1 chartView, Model model) {
+		System.out.println("진단명별통계 화면가기~!!");
+		return chartServ.getBasicChartList6Serv(chartView);
 	}
 }
