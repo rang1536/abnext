@@ -204,6 +204,7 @@
 			data : {'stDt':$('#stDt').val()},
 			success:function(data){
 				//console.log(data);
+				toastr.info($('#stDt').val()+' 년도 데이터가 조회되었습니다.')
 				setGrid(data);
 				setChartData(data);
 			}
@@ -219,12 +220,11 @@
 			data: data,
 	        fields: [
 	            { name: "rqstDt",   type: "text", 	width: 100, title:"일자", 	align: "center"},
-	            { name: "sample1", 	type: "number", width: 100, title:"PBFD", 	align: "center"},
-	            { name: "sample2", 	type: "number", width: 100, title:"APV", 	align: "center"},
-	            { name: "sample3", 	type: "number", width: 100, title:"PDD", 	align: "center"},
-	            { name: "sample4", 	type: "number", width: 100, title:"chlamydiasis", 	align: "center"},
-	            { name: "sample5", 	type: "number", width: 100, title:"aspergilosis", 	align: "center"},
-	            { name: "sample6", 	type: "number", width: 100, title:"기타", 	align: "center"},
+	            { name: "sample2", 	type: "number", width: 100, title:"깃털", 	align: "center"},
+	            { name: "sample1", 	type: "number", width: 100, title:"분변", 	align: "center"},
+	            { name: "sample3", 	type: "number", width: 100, title:"총배설강스왑", 	align: "center"},
+	            { name: "sample4", 	type: "number", width: 100, title:"혈액", 	align: "center"},
+	            { name: "sample5", 	type: "number", width: 100, title:"기타", 	align: "center"},
 	            { name: "total", 	type: "number", width: 100, title:"합계", 	align: "center", background:"#ddd"}
 	        ]
 	    });
@@ -258,7 +258,7 @@
 		var yArr = new Array();
 		var yArrDetail ='';
 
-		for(var j=0; j < 7; j++){
+		for(var j=0; j < 6; j++){
 			yArrDetail = new Array();
 
 			for(var i=0; i < monList; i++){
@@ -267,9 +267,7 @@
 				if(j == 2) yArrDetail.push(data[i].sample3);
 				if(j == 3) yArrDetail.push(data[i].sample4);
 				if(j == 4) yArrDetail.push(data[i].sample5);
-				if(j == 5) yArrDetail.push(data[i].sample6);
-				if(j == 6) yArrDetail.push(data[i].total);
-
+				if(j == 5) yArrDetail.push(data[i].total);
 			}
 			yArr[j]= yArrDetail;
 		}
@@ -279,16 +277,16 @@
 		}
 
 
-		var labels = ['PBFD', 'APV', 'PDD', 'chlamydiasis', 'aspergilosis', '기타', '합계'];
-		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000' ];
-		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', '#F2CB61', 'rgba(210, 214, 222, 1)'];
-		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
+		var labels = ['분변', '깃털', '총배설강스왑', '혈액', '기타', '합계'];
+		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#FF0000' ];
+		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', 'rgba(210, 214, 222, 1)'];
+		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
 		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff'];
-		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
+		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
 
 		var dataSets= new Array();
 		var dataSet = '';
-		for(var i=0; i < 7; i++){
+		for(var i=0; i < 6; i++){
 			dataSet = {
 				label               : labels[i],
 				backgroundColor     : backgroundColors[i],
@@ -333,6 +331,18 @@
 	}
 
 
+	$(document).on('click', '.searchBtn', function(){
+		var stDt = $('#stDt').val();
+
+		if(stDt != '2022'){
+			alert('2022년 이전데이터가 없습니다.');
+			return;
+		}else{
+			getData();
+		}
+
+
+	});
 
 </script>
 </html>

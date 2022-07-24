@@ -39,12 +39,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>기본통계</b></h1>
+						<h1><b>가검물통계</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>기본통계</b></li>
+							<li class="breadcrumb-item active"><b>가검물통계</b></li>
 						</ol>
 					</div>
 				</div>
@@ -54,6 +54,44 @@
 		<!-- Main content -->
 		 <section class="content" style="font-size:13px;">
  			<div class="container-fluid">
+				<div class="card">
+					<div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
+						<h3 class="card-title"><b>Chart</b></h3>
+
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse">
+								<i class="fas fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-tool" data-card-widget="remove">
+								<i class="fas fa-times"></i>
+							</button>
+						</div>
+					</div>
+
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-9"></div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<div class="input-group">
+										<select name="stDt" id="stDt" class="form-control-sm">
+											<option value="2022">2022</option>
+										</select>&nbsp;&nbsp;&nbsp;&nbsp;
+										<div class="btn-group">
+	                  						<button type="button" class="searchBtn btn-sm btn-primary" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
+                  						</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="chart">
+							<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+						</div>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
 
 				<div class="card">
 					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
@@ -71,15 +109,11 @@
 
 					<div class="card-body">
 						<div class="row">
-							<div class="col-sm-7"></div>
-							<div class="col-sm-5">
+							<div class="col-sm-10"></div>
+							<div class="col-sm-2">
 								<div class="form-group">
 									<div class="input-group">
-										<input type="date" class="form-control-sm" name="stDt" id="stDt"/>&nbsp;&nbsp;&nbsp;
-										<input type="date" class="form-control-sm" name="endDt" id="endDt"/>&nbsp;&nbsp;&nbsp;
 										<div class="btn-group">
-	                  						<button type="button" class="searchBtn btn-sm btn-primary" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
-	                  						&nbsp;&nbsp;
 	                  						<button type="button" class="excelBtn btn-sm btn-success" onclick="excelDown();" style="max-width:100px;min-width:82px;"><i class="fa fa-copy"></i> EXCEL</button>
                   						</div>
 									</div>
@@ -136,12 +170,8 @@
 <script src="resources/plugins/jsgrid/demos/db.js"></script>
 <script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
 
-<!-- bootstrap color picker -->
-<script src="resources/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="resources/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-
 <script src="resources/js/common.js"></script>
+
 <script>
 
 	//BS-Stepper Init
@@ -153,17 +183,29 @@
 		$('.select2').select2();
 		bsCustomFileInput.init();
 
+		//년도세팅
+		$('#stDt').empty();
+		var nowYy = new Date().getFullYear();
+		$('#stDt').append('<option value="'+nowYy+'" selected>'+nowYy+'</option>');
+
+		for(var i=0; i<9; i++){
+			nowYy = nowYy-1;
+			$('#stDt').append('<option value="'+nowYy+'">'+nowYy+'</option>');
+		}
+
 		getData();
     });
 
 	function getData(){
 		$.ajax({
-			url : 'basicChartList',
+			url : 'basicChartList2',
 			dataType : 'json',
 			type : 'post',
-			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
+			data : {'stDt':$('#stDt').val()},
 			success:function(data){
+				//console.log(data);
 				setGrid(data);
+				setChartData(data);
 			}
 		})
 	}
@@ -176,20 +218,14 @@
 	        paging: true,
 			data: data,
 	        fields: [
-	            { name: "rqstNo", 		type: "text", 	width: 100, title:"의뢰번호", 	align: "center"},
-	            { name: "rqstDt",   	type: "text", 	width: 80, 	title:"접수일", 	align: "center"},
-	            { name: "animButler", 	type: "text", 	width: 100, title:"보호자명", 	align: "center"},
-	            { name: "sample1", 		type: "number", width: 50, 	title:"깃털", 	align: "center"},
-	            { name: "sample2", 		type: "number", width: 50, 	title:"분변", 	align: "center"},
-	            { name: "sample3", 		type: "number", width: 80, 	title:"총배설강스왑", 	align: "center"},
-	            { name: "sample4", 		type: "number", width: 50, 	title:"혈액", 	align: "center"},
-	            { name: "sample5", 		type: "number", width: 50, 	title:"기타", 	align: "center"},
-	            { name: "total", 		type: "number", width: 80, 	title:"총시료수", 	align: "center"},
-	            { name: "animNm", 		type: "text", 	width: 120, title:"품종", 	align: "center"},
-	            { name: "animBirth", 	type: "text", 	width: 80, 	title:"주령", 	align: "center"},
-	            { name: "animCnt", 		type: "number", width: 80, 	title:"사육수", 	align: "center"},
-	            { name: "hospNm", 		type: "text", 	width: 150, title:"회사", 	align: "center"},
-	            { name: "docNm", 		type: "text", 	width: 100, title:"담당", 	align: "center"}
+	            { name: "rqstDt",   type: "text", 	width: 100, title:"일자", 	align: "center"},
+	            { name: "sample1", 	type: "number", width: 100, title:"PBFD", 	align: "center"},
+	            { name: "sample2", 	type: "number", width: 100, title:"APV", 	align: "center"},
+	            { name: "sample3", 	type: "number", width: 100, title:"PDD", 	align: "center"},
+	            { name: "sample4", 	type: "number", width: 100, title:"chlamydiasis", 	align: "center"},
+	            { name: "sample5", 	type: "number", width: 100, title:"aspergilosis", 	align: "center"},
+	            { name: "sample6", 	type: "number", width: 100, title:"기타", 	align: "center"},
+	            { name: "total", 	type: "number", width: 100, title:"합계", 	align: "center", background:"#ddd"}
 	        ]
 	    });
 	}
@@ -198,14 +234,104 @@
 	function excelDown(){
 		$("#jsGrid1").table2excel({
 			exclude : ".excludeThisClass",
-			name : "기본통계",
-			filename : "기본통계",
+			name : "가검물통계",
+			filename : "가검물통계",
 			fileext : ".xlsx",
 			exclude_img : true,
 			exclude_links : true,
 			exclude_inputs : true        
 		});    
 	}
+
+
+	//-------------
+    //- BAR CHART -
+    //-------------
+    function setChartData(data){
+		var areaChartData = '';
+
+		// x축값 구하기
+		var xArr = new Array();
+		var monList = new Date().getMonth()+1;
+
+		// y축값 구하기
+		var yArr = new Array();
+		var yArrDetail ='';
+
+		for(var j=0; j < 7; j++){
+			yArrDetail = new Array();
+
+			for(var i=0; i < monList; i++){
+				if(j == 0) yArrDetail.push(data[i].sample1);
+				if(j == 1) yArrDetail.push(data[i].sample2);
+				if(j == 2) yArrDetail.push(data[i].sample3);
+				if(j == 3) yArrDetail.push(data[i].sample4);
+				if(j == 4) yArrDetail.push(data[i].sample5);
+				if(j == 5) yArrDetail.push(data[i].sample6);
+				if(j == 6) yArrDetail.push(data[i].total);
+
+			}
+			yArr[j]= yArrDetail;
+		}
+
+		for(var i=1; i <= monList; i++){
+			xArr.push(i+'월');
+		}
+
+
+		var labels = ['PBFD', 'APV', 'PDD', 'chlamydiasis', 'aspergilosis', '기타', '합계'];
+		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000' ];
+		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', '#F2CB61', 'rgba(210, 214, 222, 1)'];
+		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
+		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff'];
+		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
+
+		var dataSets= new Array();
+		var dataSet = '';
+		for(var i=0; i < 7; i++){
+			dataSet = {
+				label               : labels[i],
+				backgroundColor     : backgroundColors[i],
+				borderColor         : backgroundColors[i],
+				pointRadius          : false,
+				pointColor          : pointColors[i],
+				pointStrokeColor    : pointStrokeColors[i],
+				pointHighlightFill  : '#fff',
+				pointHighlightStroke: pointHighlightStrokes[i],
+				data                : yArr[i]
+			}
+
+			dataSets.push(dataSet);
+		}
+
+		//console.log(dataSets);
+		var areaChartData = {
+			labels  :	xArr,
+			datasets: dataSets
+		}
+
+		//console.log(areaChartData);
+
+	    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+	    var barChartData = $.extend(true, {}, areaChartData)
+	    var temp0 = areaChartData.datasets[0]
+	    var temp1 = areaChartData.datasets[1]
+	    barChartData.datasets[0] = temp1
+	    barChartData.datasets[1] = temp0
+
+	    var barChartOptions = {
+	      responsive              : true,
+	      maintainAspectRatio     : false,
+	      datasetFill             : false
+	    }
+
+	    new Chart(barChartCanvas, {
+	      type: 'bar',
+	      data: barChartData,
+	      options: barChartOptions
+	    })
+	}
+
 
 
 </script>

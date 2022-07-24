@@ -43,7 +43,7 @@ public class ChartController {
 	//basicChart
 	@RequestMapping(value = "basicChart4", method = RequestMethod.GET)
 	public String basicChart4Ctrl(Model model) {
-		System.out.println("기본통계 화면가기~!!");
+		System.out.println("진단명별 화면가기~!!");
 
 		//model.addAttribute("boardList", boardServ.getBoardListServ());
 		return "chart/basic_chart4";

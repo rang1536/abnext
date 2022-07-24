@@ -6,7 +6,7 @@
 
 	<!-- 기본통계 -->
 	<select id="getBasicChartList" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
-		SELECT RQST_NO
+		SELECT PDL_NO as RQST_NO
 			   , RQST_DT
 			   , ANIM_BUTLER
 			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-01'), 0) AS SAMPLE1
@@ -14,7 +14,7 @@
 			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-3'), 0) AS SAMPLE3
 			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-4'), 0) AS SAMPLE4
 			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-5'), 0) AS SAMPLE5
-			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-6'), 0) AS SAMPLE6
+			   /*, IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-6'), 0) AS SAMPLE6*/
 			   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO), 0) AS TOTAL
 			   , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = A.ANIM_THIRD_CD) AS ANIM_NM
 			   , ANIM_BIRTH
@@ -31,7 +31,53 @@
 	    </if>
 	</select>
 
+	<!-- 가검물통계 -->
 	<select id="getBasicChartList2" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
+
+		SELECT B.RQST_DT
+			   , SUM(B.SAMPLE1) AS SAMPLE1
+			   , SUM(B.SAMPLE2) AS SAMPLE2
+			   , SUM(B.SAMPLE3) AS SAMPLE3
+			   , SUM(B.SAMPLE4) AS SAMPLE4
+			   , SUM(B.SAMPLE5) AS SAMPLE5
+			   , SUM(B.TOTAL) AS TOTAL
+		  FROM (
+				SELECT REPLACE(SUBSTR(RQST_DT,1,7),'.','-') AS RQST_DT
+					   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-01'), 0) AS SAMPLE1
+					   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-02'), 0) AS SAMPLE2
+					   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-3'), 0) AS SAMPLE3
+					   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-4'), 0) AS SAMPLE4
+					   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO AND SAMPLE_CODE = 'A002-5'), 0) AS SAMPLE5
+					   , IFNULL((SELECT COUNT(*) FROM TB_SAMPLE WHERE RQST_NO = A.RQST_NO), 0) AS TOTAL
+			     FROM TB_RCEPT A
+			    WHERE 1=1
+			    <if test="stDt != null and stDt != '' ">
+			    	AND RQST_DT LIKE CONCAT(#{stDt}, '%')
+			    </if>
+			    <if test="stDt == null or stDt == '' ">
+			    	AND RQST_DT LIKE CONCAT(DATE_FORMAT(now(), '%Y'), '%')
+			    </if>
+			     UNION
+				SELECT '2022-01', 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-02', 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-03', 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-04', 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-05', 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-06', 0, 0, 0, 0, 0, 0 FROM DUAL
+			    ) B
+	    GROUP BY RQST_DT
+	    ORDER BY RQST_DT
+	</select>
+
+
+
+	<!-- 검사통계 -->
+	<select id="getBasicChartList3" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
 		SELECT B.*
 		  FROM (
 				SELECT A.RQST_DT
@@ -40,75 +86,261 @@
 					   , SUM(A.SAMPLE3) AS SAMPLE3
 					   , SUM(A.SAMPLE4) AS SAMPLE4
 					   , SUM(A.SAMPLE5) AS SAMPLE5
-					   , (SUM(A.TOTAL) - (SUM(A.SAMPLE1)+SUM(A.SAMPLE2)+SUM(A.SAMPLE3)+SUM(A.SAMPLE4)+SUM(A.SAMPLE5))) AS SAMPLE6
-					   , SUM(A.TOTAL) AS TOTAL
+					   , SUM(A.SAMPLE6) AS SAMPLE6
+					   , SUM(A.SAMPLE7) AS SAMPLE7
+					   , SUM(A.SAMPLE1)+SUM(A.SAMPLE2)+SUM(A.SAMPLE3)+SUM(A.SAMPLE4)+SUM(A.SAMPLE5)+SUM(A.SAMPLE6)+SUM(A.SAMPLE7) AS TOTAL
 			      FROM (
 						SELECT REPLACE(SUBSTR(RQST_DT,1,7),'.','-') AS RQST_DT
 							   , IFNULL(
 							   		(SELECT COUNT(*)
 							   		   FROM TB_INSPECTION
 							   		  WHERE RQST_NO = A.RQST_NO
-							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'PBFD','%') )
+							   		    AND INSP_THIRD_CD = 'B001-02-01-0001'  /* 생체검사 - PCR - PBFD*/
 							   		 )
 							   	, 0) AS SAMPLE1
 							   , IFNULL(
 							   		(SELECT COUNT(*)
 							   		   FROM TB_INSPECTION
 							   		  WHERE RQST_NO = A.RQST_NO
-							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'APV','%') )
+							   		    AND INSP_THIRD_CD = 'B001-02-01-0002' /* 생체검사 - PCR - APV*/
 							   		 )
 							   	, 0) AS SAMPLE2
 							   , IFNULL(
 							   		(SELECT COUNT(*)
 							   		   FROM TB_INSPECTION
 							   		  WHERE RQST_NO = A.RQST_NO
-							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'PDD','%') )
+							   		    AND INSP_THIRD_CD = 'B001-02-01-0003'  /* 생체검사 - PCR - PDD*/
 							   		 )
 							   	, 0) AS SAMPLE3
 							   , IFNULL(
 							   		(SELECT COUNT(*)
 							   		   FROM TB_INSPECTION
 							   		  WHERE RQST_NO = A.RQST_NO
-							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'chlamydiasis','%') )
+							   		    AND INSP_THIRD_CD = 'B001-02-01-0010'  /* 생체검사 - PCR - chlamydia*/
 							   		 )
 							   	, 0) AS SAMPLE4
 							   , IFNULL(
 							   		(SELECT COUNT(*)
 							   		   FROM TB_INSPECTION
 							   		  WHERE RQST_NO = A.RQST_NO
-							   		    AND INSP_THIRD_CD IN (SELECT CODE_ID FROM TB_CODE WHERE code_nm LIKE CONCAT('%', 'aspergilosis','%') )
+							   		    AND INSP_SECOND_CD = 'B001-02-16' 	  /* 생체검사 - 성감별PCR */
 							   		 )
 							   	, 0) AS SAMPLE5
 							   , IFNULL(
 							   		(SELECT COUNT(*)
 							   		   FROM TB_INSPECTION
 							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_SECOND_CD = 'B001-02-11' 		/* 생체검사 - 분변검사 */
 							   		 )
-							   	, 0) AS TOTAL
+							   	, 0) AS SAMPLE6
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		 )
+							   	, 0) AS SAMPLE7
 						  FROM TB_RCEPT A
 						 WHERE 1=1
-						   AND RQST_DT LIKE CONCAT('%', #{stDt},'%')
+						   AND RQST_DT LIKE CONCAT(#{stDt},'%')
 						) A
 				 GROUP BY RQST_DT
 				 UNION
-				SELECT '2022-01', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				SELECT '2022-01', 0, 0, 0, 0, 0, 0, 0, 0 FROM DUAL
 				 UNION
-				SELECT '2022-02', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				SELECT '2022-02', 0, 0, 0, 0, 0, 0, 0, 0 FROM DUAL
 				 UNION
-				SELECT '2022-03', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				SELECT '2022-03', 0, 0, 0, 0, 0, 0, 0, 0 FROM DUAL
 				 UNION
-				SELECT '2022-04', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				SELECT '2022-04', 0, 0, 0, 0, 0, 0, 0, 0 FROM DUAL
 				 UNION
-				SELECT '2022-05', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				SELECT '2022-05', 0, 0, 0, 0, 0, 0, 0, 0 FROM DUAL
 				 UNION
-				SELECT '2022-06', 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				SELECT '2022-06', 0, 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+			  ) B
+		ORDER BY B.RQST_DT
+	</select>
+
+	<select id="getBasicChartList31" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
+		SELECT B.*
+		  FROM (
+				SELECT A.RQST_DT
+					   , SUM(A.SAMPLE1) AS SAMPLE1
+					   , SUM(A.SAMPLE2) AS SAMPLE2
+					   , SUM(A.SAMPLE3) AS SAMPLE3
+					   , SUM(A.SAMPLE4) AS SAMPLE4
+					   , SUM(A.SAMPLE5) AS SAMPLE5
+					   , SUM(A.SAMPLE6) AS SAMPLE6
+					   , SUM(A.SAMPLE7) AS SAMPLE7
+					   , SUM(A.SAMPLE1)+SUM(A.SAMPLE2)+SUM(A.SAMPLE3)+SUM(A.SAMPLE4)+SUM(A.SAMPLE5)+SUM(A.SAMPLE6)+SUM(A.SAMPLE7) AS TOTAL
+			      FROM (
+						SELECT RQST_DT
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_THIRD_CD = 'B001-02-01-0001'  /* 생체검사 - PCR - PBFD*/
+							   		 )
+							   	, 0) AS SAMPLE1
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_THIRD_CD = 'B001-02-01-0002' /* 생체검사 - PCR - APV*/
+							   		 )
+							   	, 0) AS SAMPLE2
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_THIRD_CD = 'B001-02-01-0003'  /* 생체검사 - PCR - PDD*/
+							   		 )
+							   	, 0) AS SAMPLE3
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_THIRD_CD = 'B001-02-01-0010'  /* 생체검사 - PCR - chlamydia*/
+							   		 )
+							   	, 0) AS SAMPLE4
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_SECOND_CD = 'B001-02-16' 	  /* 생체검사 - 성감별PCR */
+							   		 )
+							   	, 0) AS SAMPLE5
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		    AND INSP_SECOND_CD = 'B001-02-11' 		/* 생체검사 - 분변검사 */
+							   		 )
+							   	, 0) AS SAMPLE6
+							   , IFNULL(
+							   		(SELECT COUNT(*)
+							   		   FROM TB_INSPECTION
+							   		  WHERE RQST_NO = A.RQST_NO
+							   		 )
+							   	, 0) AS SAMPLE7
+						  FROM TB_RCEPT A
+						 WHERE 1=1
+						   AND RQST_DT LIKE CONCAT(#{stDt},'%')
+						) A
+				  GROUP BY A.RQST_DT
 			  ) B
 		ORDER BY B.RQST_DT
 	</select>
 
 
-	<select id="getBasicChartList3" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
-
+	<!-- 진단명별 통계 -->
+	<select id="getBasicChartList4" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
+		   SELECT D.*
+		  		  , (SELECT COUNT(*)
+							FROM TB_INSPECTION
+					  WHERE INSP_THIRD_CD = (SELECT CODE_ID FROM TB_CODE WHERE CODE_NM = D.DIAG_NM AND UPP_CODE_ID = 'B02-02-01')
+					    AND RQST_NO IN (SELECT RQST_NO
+						                   FROM TB_RCEPT
+												WHERE 1=1
+												/*검색기간*/
+											 )
+					) AS SAMPLE18
+		  	     , IFNULL(((TOTAL / IFNULL((SELECT COUNT(*)
+				 					FROM TB_INSPECTION
+								  WHERE INSP_THIRD_CD = (SELECT CODE_ID FROM TB_CODE WHERE CODE_NM = D.DIAG_NM AND UPP_CODE_ID = 'B02-02-01')
+								    AND RQST_NO IN (SELECT RQST_NO
+									                  FROM TB_RCEPT
+													 WHERE 1=1
+													/*검색기간*/
+													<if test="stDt != null and stDt != '' ">
+											       	   AND RQST_DT <![CDATA[>=]]> replace(replace(#{stDt},'-',''),'-','')
+											        </if>
+											        <if test="endDt != null and endDt != '' ">
+											     	   AND RQST_DT <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
+											        </if>
+												  )
+								), 0)
+					)*100), 0) AS SAMPLE19 /* 총 */
+				 , IFNULL(((IFNULL((SELECT COUNT(DISTINCT RQST_NO)
+				 	   FROM TB_MEDI_HISTORY
+				 	  WHERE RQST_NO IN (SELECT RQST_NO
+						                  FROM TB_RCEPT
+										 WHERE 1=1
+										/*검색기간*/
+										<if test="stDt != null and stDt != '' ">
+								       	   AND RQST_DT <![CDATA[>=]]> replace(replace(#{stDt},'-',''),'-','')
+								        </if>
+								        <if test="endDt != null and endDt != '' ">
+								     	   AND RQST_DT <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
+								        </if>
+										)
+							  ), 0) / IFNULL((SELECT COUNT(*)
+								 		 			  FROM TB_INSPECTION
+										 		    WHERE INSP_THIRD_CD = (SELECT CODE_ID FROM TB_CODE WHERE CODE_NM = D.DIAG_NM AND UPP_CODE_ID = 'B02-02-01')
+												      AND RQST_NO IN (SELECT RQST_NO
+													                     FROM TB_RCEPT
+														 					  WHERE 1=1
+																			  /*검색기간*/
+																			  <if test="stDt != null and stDt != '' ">
+																		       	 AND RQST_DT <![CDATA[>=]]> replace(replace(#{stDt},'-',''),'-','')
+																		      </if>
+																		      <if test="endDt != null and endDt != '' ">
+																		     	 AND RQST_DT <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
+																		      </if>
+																		   )
+												 ), 0)
+					)  * 100), 0) AS SAMPLE20 /*계군*/
+		  FROM (
+					SELECT IFNULL((SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = C.DIAG_CD), '기타') AS DIAG_NM
+				   		 , SAMPLE1, SAMPLE2, SAMPLE3, SAMPLE4
+				   		 , SAMPLE5, SAMPLE6, SAMPLE7, SAMPLE8
+				   		 , SAMPLE9, SAMPLE10, SAMPLE11, SAMPLE12
+				   		 , SAMPLE13, SAMPLE14, SAMPLE15, SAMPLE16
+				   		 , GREATEST(TOTAL - (SAMPLE1+SAMPLE2+SAMPLE3+SAMPLE4+SAMPLE5+SAMPLE6+SAMPLE7+SAMPLE8+SAMPLE9+SAMPLE10+SAMPLE11+SAMPLE12+SAMPLE13+SAMPLE14+SAMPLE15+SAMPLE16),0) AS SAMPLE17 /*지역기타*/
+				   		 , TOTAL /*농가(양성수)*/
+				     FROM (
+								SELECT CASE WHEN B.DIAG_CD IN ('D001-0001', 'D001-0002', 'D001-0003', 'D001-0010', 'D001-0011', 'D001-0015', 'D001-0016') THEN B.DIAG_CD
+							     		 ELSE '기타' END AS DIAG_CD
+									   , CASE WHEN B.SIDO_NM = '강원' THEN 1 ELSE 0 END AS SAMPLE1
+									   , CASE WHEN B.SIDO_NM = '경기' THEN 1 ELSE 0 END AS SAMPLE2
+									   , CASE WHEN B.SIDO_NM = '충남' THEN 1 ELSE 0 END AS SAMPLE3
+									   , CASE WHEN B.SIDO_NM = '충북' THEN 1 ELSE 0 END AS SAMPLE4
+									   , CASE WHEN B.SIDO_NM = '전북' THEN 1 ELSE 0 END AS SAMPLE5
+									   , CASE WHEN B.SIDO_NM = '전남' THEN 1 ELSE 0 END AS SAMPLE6
+									   , CASE WHEN B.SIDO_NM = '경북' THEN 1 ELSE 0 END AS SAMPLE7
+									   , CASE WHEN B.SIDO_NM = '경남' THEN 1 ELSE 0 END AS SAMPLE8
+									   , CASE WHEN B.SIDO_NM = '제주특별자치도' THEN 1 ELSE 0 END AS SAMPLE9
+									   , CASE WHEN B.SIDO_NM = '서울' THEN 1 ELSE 0 END AS SAMPLE10
+									   , CASE WHEN B.SIDO_NM = '인천' THEN 1 ELSE 0 END AS SAMPLE11
+									   , CASE WHEN B.SIDO_NM = '대전' THEN 1 ELSE 0 END AS SAMPLE12
+									   , CASE WHEN B.SIDO_NM = '광주' THEN 1 ELSE 0 END AS SAMPLE13
+									   , CASE WHEN B.SIDO_NM = '대구' THEN 1 ELSE 0 END AS SAMPLE14
+									   , CASE WHEN B.SIDO_NM = '울산' THEN 1 ELSE 0 END AS SAMPLE15
+									   , CASE WHEN B.SIDO_NM = '부산' THEN 1 ELSE 0 END AS SAMPLE16
+									   , IFNULL(SUM(B.CNT),0) AS TOTAL
+								  FROM (
+										SELECT DIAG_CD
+											   , BUTLER_SIDO AS SIDO_NM
+											   , 1 AS CNT
+										  FROM TB_RCEPT A
+										 WHERE DIAG_CD IS NOT NULL
+										 /*검색기간*/
+										 <if test="stDt != null and stDt != '' ">
+									      	AND RQST_DT <![CDATA[>=]]> replace(replace(#{stDt},'-',''),'-','')
+									     </if>
+									     <if test="endDt != null and endDt != '' ">
+									     	AND RQST_DT <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
+									     </if>
+										) B
+								UNION
+								SELECT CASE WHEN CODE_ID IN ('D001-0001', 'D001-0002', 'D001-0003', 'D001-0010', 'D001-0011', 'D001-0015', 'D001-0016') THEN CODE_ID
+							     		 ELSE '기타' END AS DIAG_CD
+							     		 , 20, 30, 40, 50, 26, 27, 38, 31, 42, 43, 44, 55, 10, 20, 23, 25, 48
+										 /*, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0*/
+								  FROM TB_CODE
+								 WHERE UPP_CODE_ID = 'D001'
+							 ) C
+					   GROUP BY DIAG_CD
+				 ) D
 	</select>
 
 </mapper>

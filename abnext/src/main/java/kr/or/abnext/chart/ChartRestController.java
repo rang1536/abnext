@@ -1,6 +1,7 @@
 package kr.or.abnext.chart;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,16 @@ public class ChartRestController {
 	}
 
 	@RequestMapping(value = "basicChartList3", method = RequestMethod.POST)
-	public List<ChartView1> basicChartList3Ctrl(ChartView1 chartView, Model model) {
+	public Map<String, List<ChartView1>> basicChartList3Ctrl(ChartView1 chartView, Model model) {
 		System.out.println("가검물통계 화면가기~!!");
 
 		return chartServ.getBasicChartList3Serv(chartView);
+	}
+
+	@RequestMapping(value = "basicChartList4", method = RequestMethod.POST)
+	public List<ChartView1> basicChartList4Ctrl(ChartView1 chartView, Model model) {
+		System.out.println("진단명별통계 화면가기~!!");
+		System.out.println(chartServ.getBasicChartList4Serv(chartView));
+		return chartServ.getBasicChartList4Serv(chartView);
 	}
 }

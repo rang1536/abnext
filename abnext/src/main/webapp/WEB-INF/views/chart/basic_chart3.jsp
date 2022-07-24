@@ -39,12 +39,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>진단명별통계</b></h1>
+						<h1><b>검사통계</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>진단명별통계</b></li>
+							<li class="breadcrumb-item active"><b>검사통계</b></li>
 						</ol>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
  			<div class="container-fluid">
 				<div class="card">
 					<div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>Chart</b></h3>
+						<h3 class="card-title"><b>월별 검사통계 Chart</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -69,8 +69,24 @@
 					</div>
 
 					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-9"></div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<div class="input-group">
+										<select name="stDt" id="stDt" class="form-control-sm">
+											<option value="2022">2022</option>
+										</select>&nbsp;&nbsp;&nbsp;&nbsp;
+										<div class="btn-group">
+	                  						<button type="button" class="searchBtn btn-sm btn-primary" style="max-width:100px;min-width:82px;"><i class="fa fa-search"></i> 조회</button>
+                  						</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div class="chart">
-							<canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+							<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
 						</div>
 					</div>
 					<!-- /.card-body -->
@@ -79,7 +95,7 @@
 
 				<div class="card">
 					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>Data</b></h3>
+						<h3 class="card-title"><b>일자별 검사통계</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -92,6 +108,19 @@
 					</div>
 
 					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-10"></div>
+							<div class="col-sm-2">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="btn-group">
+	                  						<button type="button" class="excelBtn btn-sm btn-success" onclick="excelDown();" style="max-width:100px;min-width:82px;"><i class="fa fa-copy"></i> EXCEL</button>
+                  						</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div id="jsGrid1"></div>
 					</div>
 					<!-- /.card-body -->
@@ -141,6 +170,8 @@
 <script src="resources/plugins/jsgrid/demos/db.js"></script>
 <script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
 
+<script src="resources/js/common.js"></script>
+
 <script>
 
 	//BS-Stepper Init
@@ -152,11 +183,20 @@
 		$('.select2').select2();
 		bsCustomFileInput.init();
 
-		setGrid();
+		//년도세팅
+		$('#stDt').empty();
+		var nowYy = new Date().getFullYear();
+		$('#stDt').append('<option value="'+nowYy+'" selected>'+nowYy+'</option>');
 
+		for(var i=0; i<9; i++){
+			nowYy = nowYy-1;
+			$('#stDt').append('<option value="'+nowYy+'">'+nowYy+'</option>');
+		}
+
+		getData();
     });
 
-    function getData(){
+	function getData(){
 		$.ajax({
 			url : 'basicChartList3',
 			dataType : 'json',
@@ -164,8 +204,8 @@
 			data : {'stDt':$('#stDt').val()},
 			success:function(data){
 				//console.log(data);
-				setGrid(data);
-				setChartData(data);
+				setGrid(data.dayData);
+				setChartData(data.monthData);
 			}
 		})
 	}
@@ -178,30 +218,15 @@
 	        paging: true,
 			data: data,
 	        fields: [
-	            { name: "rqstDt",   type: "text", 	width: 150, title:"질병명", 	align: "center"},
-	            { name: "sample1", 	type: "number", width: 60, title:"농가", 	align: "center"},
-	            { name: "sample2", 	type: "number", width: 60, title:"시료", 	align: "center"},
-	            { name: "sample3", 	type: "number", width: 100, title:"총", 	align: "center"},
-	            { name: "sample4", 	type: "number", width: 100, title:"계군", 	align: "center"},
-	            { name: "sample5", 	type: "number", width: 60, title:"강원", 	align: "center"},
-	            { name: "sample6", 	type: "number", width: 60, title:"경기", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"충남", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"충북", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"세종", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"전북", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"전남", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"경북", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"경남", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"제주", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"서울", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"인천", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"대전", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"광주", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"대구", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"울산", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"부산", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, title:"기타", 	align: "center"}
-
+	            { name: "rqstDt",   type: "text", 	width: 100, title:"일자", 	align: "center"},
+	            { name: "sample1", 	type: "number", width: 100, title:"PBFD", 	align: "center"},
+	            { name: "sample2", 	type: "number", width: 100, title:"APV", 	align: "center"},
+	            { name: "sample3", 	type: "number", width: 100, title:"PDD", 	align: "center"},
+	            { name: "sample4", 	type: "number", width: 100, title:"chlamydiasis", 	align: "center"},
+	            { name: "sample5", 	type: "number", width: 100, title:"성감별PCR", 	align: "center"},
+	            { name: "sample6", 	type: "number", width: 100, title:"분변검사", 	align: "center"},
+	            { name: "sample7", 	type: "number", width: 100, title:"기타", 	align: "center"},
+	            { name: "total", 	type: "number", width: 100, title:"합계", 	align: "center", background:"#ddd"}
 	        ]
 	    });
 	}
@@ -223,18 +248,18 @@
 	//-------------
     //- BAR CHART -
     //-------------
-    var xArr = ['강원', '경기', '충남', '충북', '세종', '전북', '전남', '경북', '경남', '제주', '서울', '인천', '대전', '광주', '대구', '울산', '부산', '기타'];
     function setChartData(data){
 		var areaChartData = '';
 
 		// x축값 구하기
-		xArr = ['강원', '경기', '충남', '충북', '세종', '전북', '전남', '경북', '경남', '제주', '서울', '인천', '대전', '광주', '대구', '울산', '부산', '기타']
+		var xArr = new Array();
+		var monList = new Date().getMonth()+1;
 
 		// y축값 구하기
 		var yArr = new Array();
 		var yArrDetail ='';
 
-		for(var j=0; j < 7; j++){
+		for(var j=0; j < 8; j++){
 			yArrDetail = new Array();
 
 			for(var i=0; i < monList; i++){
@@ -244,25 +269,28 @@
 				if(j == 3) yArrDetail.push(data[i].sample4);
 				if(j == 4) yArrDetail.push(data[i].sample5);
 				if(j == 5) yArrDetail.push(data[i].sample6);
-				if(j == 6) yArrDetail.push(data[i].total);
+				if(j == 6) yArrDetail.push(data[i].sample7);
+				if(j == 7) yArrDetail.push(data[i].total);
 
 			}
 			yArr[j]= yArrDetail;
 		}
 
+		for(var i=1; i <= monList; i++){
+			xArr.push(i+'월');
+		}
 
 
-
-		var labels = ['PBFD', 'APV', 'PDD', 'chlamydiasis', 'aspergilosis', '기타', '합계'];
-		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000' ];
-		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', '#F2CB61', 'rgba(210, 214, 222, 1)'];
-		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
-		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff'];
-		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
+		var labels = ['PBFD', 'APV', 'PDD', 'chlamydiasis', '성감별PCR', '분변검사', '기타', '합계'];
+		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#000000' ];
+		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', '#F2CB61', 'rgba(210, 214, 222, 1)', '#000000'];
+		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#000000'];
+		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff'];
+		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#000000'];
 
 		var dataSets= new Array();
 		var dataSet = '';
-		for(var i=0; i < 7; i++){
+		for(var i=0; i < 8; i++){
 			dataSet = {
 				label               : labels[i],
 				backgroundColor     : backgroundColors[i],
@@ -306,59 +334,7 @@
 	    })
 	}
 
-	//---------------------
-    //- STACKED BAR CHART -
-    //---------------------
-    var areaChartData = {
-      labels  : xArr,
-      datasets: [
-        {
-          label               : 'PBFD',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90,28, 48, 40, 19, 86, 27, 90,28, 48, 40]
-        },
-        {
-          label               : 'APV',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40,28, 48, 40, 19, 86, 27, 90,28, 48, 40]
-        },
-      ]
-    }
 
-    var barChartData = $.extend(true, {}, areaChartData)
-    var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-    var stackedBarChartData = $.extend(true, {}, barChartData)
-
-    var stackedBarChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      scales: {
-        xAxes: [{
-          stacked: true,
-        }],
-        yAxes: [{
-          stacked: true
-        }]
-      }
-    }
-
-    new Chart(stackedBarChartCanvas, {
-      type: 'bar',
-      data: stackedBarChartData,
-      options: stackedBarChartOptions
-    })
 
 </script>
 </html>

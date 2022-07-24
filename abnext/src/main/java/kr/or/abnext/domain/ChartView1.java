@@ -38,6 +38,23 @@ public class ChartView1 {
 
 	private String stDt;
 	private String endDt;
+
+	private String diagNm;
+	private String diagCd;
+
+
+	public String getDiagNm() {
+		return diagNm;
+	}
+	public void setDiagNm(String diagNm) {
+		this.diagNm = diagNm;
+	}
+	public String getDiagCd() {
+		return diagCd;
+	}
+	public void setDiagCd(String diagCd) {
+		this.diagCd = diagCd;
+	}
 	public String getRqstNo() {
 		return rqstNo;
 	}
@@ -259,9 +276,7 @@ public class ChartView1 {
 				+ ", sample20=" + sample20 + ", sample21=" + sample21 + ", sample22=" + sample22 + ", sample23="
 				+ sample23 + ", sample24=" + sample24 + ", total=" + total + ", animNm=" + animNm + ", animBirth="
 				+ animBirth + ", animCnt=" + animCnt + ", hospNm=" + hospNm + ", docNm=" + docNm + ", stDt=" + stDt
-				+ ", endDt=" + endDt + "]";
+				+ ", endDt=" + endDt + ", diagNm=" + diagNm + ", diagCd=" + diagCd + "]";
 	}
-
-
 
 }

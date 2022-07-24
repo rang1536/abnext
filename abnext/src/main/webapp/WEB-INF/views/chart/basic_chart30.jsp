@@ -152,13 +152,13 @@
 		$('.select2').select2();
 		bsCustomFileInput.init();
 
-		getData();
+		setGrid();
 
     });
 
     function getData(){
 		$.ajax({
-			url : 'basicChartList4',
+			url : 'basicChartList3',
 			dataType : 'json',
 			type : 'post',
 			data : {'stDt':$('#stDt').val()},
@@ -171,17 +171,6 @@
 	}
 
 	function setGrid(data){
-		//기타 항목이 젤 뒤로 가기 위함.
-		var gridData = new Array();
-		for(var i=0; i <= data.length; i++){
-			if(i > 0 && i < data.length){
-				gridData[i-1] = data[i];
-			}else if(i == data.length){
-				gridData[i-1] = data[0];
-			}
-		}
-
-		//console.log(JSON.stringify(gridData))
 		$("#jsGrid1").jsGrid({
 	        height: "auto",
 	        width: "100%",
@@ -189,28 +178,30 @@
 	        paging: true,
 			data: data,
 	        fields: [
-	            { name: "diagNm",   type: "text", 	width: 150, title:"질병명", 	align: "center"},
-	            { name: "total", 	type: "number", width: 60, 	title:"양성수", 	align: "center"},
-	            { name: "sample18", type: "number", width: 70, 	title:"검사건수", 	align: "center"},
-	            { name: "sample19", type: "number", width: 60, 	title:"양성률", 	align: "center"},
-	            { name: "sample20", type: "number", width: 100, title:"유증상양성률", 	align: "center"},
-	            { name: "sample1", 	type: "number", width: 60, 	title:"강원", 	align: "center"},
-	            { name: "sample2", 	type: "number", width: 60, 	title:"경기", 	align: "center"},
-	            { name: "sample3", 	type: "number", width: 60, 	title:"충남", 	align: "center"},
-	            { name: "sample4", 	type: "number", width: 60, 	title:"충북", 	align: "center"},
-	            { name: "sample5", 	type: "number", width: 60, 	title:"전북", 	align: "center"},
-	            { name: "sample6", 	type: "number", width: 60, 	title:"전남", 	align: "center"},
-	            { name: "sample7", 	type: "number", width: 60, 	title:"경북", 	align: "center"},
-	            { name: "sample8", 	type: "number", width: 60, 	title:"경남", 	align: "center"},
-	            { name: "sample9", 	type: "number", width: 60, 	title:"제주", 	align: "center"},
-	            { name: "sample10", type: "number", width: 60, 	title:"서울", 	align: "center"},
-	            { name: "sample11", type: "number", width: 60, 	title:"인천", 	align: "center"},
-	            { name: "sample12", type: "number", width: 60, 	title:"대전", 	align: "center"},
-	            { name: "sample13", type: "number", width: 60, 	title:"광주", 	align: "center"},
-	            { name: "sample14", type: "number", width: 60, 	title:"대구", 	align: "center"},
-	            { name: "sample15", type: "number", width: 60, 	title:"울산", 	align: "center"},
-	            { name: "sample16", type: "number", width: 60, 	title:"부산", 	align: "center"},
-	            { name: "sample17", type: "number", width: 60, 	title:"기타", 	align: "center"},
+	            { name: "rqstDt",   type: "text", 	width: 150, title:"질병명", 	align: "center"},
+	            { name: "sample1", 	type: "number", width: 60, title:"농가", 	align: "center"},
+	            { name: "sample2", 	type: "number", width: 60, title:"시료", 	align: "center"},
+	            { name: "sample3", 	type: "number", width: 100, title:"총", 	align: "center"},
+	            { name: "sample4", 	type: "number", width: 100, title:"계군", 	align: "center"},
+	            { name: "sample5", 	type: "number", width: 60, title:"강원", 	align: "center"},
+	            { name: "sample6", 	type: "number", width: 60, title:"경기", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"충남", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"충북", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"세종", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"전북", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"전남", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"경북", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"경남", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"제주", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"서울", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"인천", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"대전", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"광주", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"대구", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"울산", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"부산", 	align: "center"},
+	            { name: "total", 	type: "number", width: 60, title:"기타", 	align: "center"}
+
 	        ]
 	    });
 	}
@@ -219,8 +210,8 @@
 	function excelDown(){
 		$("#jsGrid1").table2excel({
 			exclude : ".excludeThisClass",
-			name : "지역별 진단명별 통계",
-			filename : "지역별 진단명별 통계",
+			name : "가검물통계",
+			filename : "가검물통계",
 			fileext : ".xlsx",
 			exclude_img : true,
 			exclude_links : true,
@@ -232,52 +223,46 @@
 	//-------------
     //- BAR CHART -
     //-------------
-    //var xArr = ['강원', '경기', '충남', '충북', '세종', '전북', '전남', '경북', '경남', '제주', '서울', '인천', '대전', '광주', '대구', '울산', '부산', '기타'];
+    var xArr = ['강원', '경기', '충남', '충북', '세종', '전북', '전남', '경북', '경남', '제주', '서울', '인천', '대전', '광주', '대구', '울산', '부산', '기타'];
     function setChartData(data){
 		var areaChartData = '';
 
 		// x축값 구하기
-		var xArr = ['강원', '경기', '충남', '충북', '전북', '전남', '경북', '경남', '제주', '서울', '인천', '대전', '광주', '대구', '울산', '부산', '기타']
+		xArr = ['강원', '경기', '충남', '충북', '세종', '전북', '전남', '경북', '경남', '제주', '서울', '인천', '대전', '광주', '대구', '울산', '부산', '기타']
 
 		// y축값 구하기
 		var yArr = new Array();
 		var yArrDetail ='';
 
-		var labels = new Array()
-		for(var i=0; i < data.length; i++){
+		for(var j=0; j < 7; j++){
 			yArrDetail = new Array();
-			yArrDetail.push(data[i].sample1);
-			yArrDetail.push(data[i].sample2);
-			yArrDetail.push(data[i].sample3);
-			yArrDetail.push(data[i].sample4);
-			yArrDetail.push(data[i].sample5);
-			yArrDetail.push(data[i].sample6);
-			yArrDetail.push(data[i].sample7);
-			yArrDetail.push(data[i].sample8);
-			yArrDetail.push(data[i].sample9);
-			yArrDetail.push(data[i].sample10);
-			yArrDetail.push(data[i].sample11);
-			yArrDetail.push(data[i].sample12);
-			yArrDetail.push(data[i].sample13);
-			yArrDetail.push(data[i].sample14);
-			yArrDetail.push(data[i].sample15);
-			yArrDetail.push(data[i].sample16);
-			yArrDetail.push(data[i].sample17);
 
-			yArr[i]= yArrDetail;
-			labels[i] = data[i].diagNm;
+			for(var i=0; i < monList; i++){
+				if(j == 0) yArrDetail.push(data[i].sample1);
+				if(j == 1) yArrDetail.push(data[i].sample2);
+				if(j == 2) yArrDetail.push(data[i].sample3);
+				if(j == 3) yArrDetail.push(data[i].sample4);
+				if(j == 4) yArrDetail.push(data[i].sample5);
+				if(j == 5) yArrDetail.push(data[i].sample6);
+				if(j == 6) yArrDetail.push(data[i].total);
+
+			}
+			yArr[j]= yArrDetail;
 		}
 
-		console.log(labels);
-		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5' ];
-		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', '#F2CB61', 'rgba(210, 214, 222, 1)', '#5CD1E5'];
-		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#5CD1E5'];
-		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff'];
-		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#5CD1E5'];
+
+
+
+		var labels = ['PBFD', 'APV', 'PDD', 'chlamydiasis', 'aspergilosis', '기타', '합계'];
+		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000' ];
+		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', '#F2CB61', 'rgba(210, 214, 222, 1)'];
+		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
+		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff'];
+		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
 
 		var dataSets= new Array();
 		var dataSet = '';
-		for(var i=0; i < 8; i++){
+		for(var i=0; i < 7; i++){
 			dataSet = {
 				label               : labels[i],
 				backgroundColor     : backgroundColors[i],
@@ -301,34 +286,29 @@
 
 		//console.log(areaChartData);
 
-		var barChartData = $.extend(true, {}, areaChartData)
-	    var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-	    var stackedBarChartData = $.extend(true, {}, barChartData)
+	    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+	    var barChartData = $.extend(true, {}, areaChartData)
+	    var temp0 = areaChartData.datasets[0]
+	    var temp1 = areaChartData.datasets[1]
+	    barChartData.datasets[0] = temp1
+	    barChartData.datasets[1] = temp0
 
-	    var stackedBarChartOptions = {
+	    var barChartOptions = {
 	      responsive              : true,
 	      maintainAspectRatio     : false,
-	      scales: {
-	        xAxes: [{
-	          stacked: true,
-	        }],
-	        yAxes: [{
-	          stacked: true
-	        }]
-	      }
+	      datasetFill             : false
 	    }
 
-	    new Chart(stackedBarChartCanvas, {
+	    new Chart(barChartCanvas, {
 	      type: 'bar',
-	      data: stackedBarChartData,
-	      options: stackedBarChartOptions
+	      data: barChartData,
+	      options: barChartOptions
 	    })
 	}
 
 	//---------------------
     //- STACKED BAR CHART -
     //---------------------
-    /*
     var areaChartData = {
       labels  : xArr,
       datasets: [
@@ -379,7 +359,6 @@
       data: stackedBarChartData,
       options: stackedBarChartOptions
     })
-	*/
 
 </script>
 </html>
