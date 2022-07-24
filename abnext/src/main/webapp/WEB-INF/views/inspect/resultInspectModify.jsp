@@ -28,8 +28,7 @@
 	<!-- Theme style -->
 	<link rel="stylesheet" href="resources/dist/css/adminlte.css">
 	<!-- Toastr -->
-		<link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
-
+	<link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
 
 	<style>
 		.txtc {text-align:center;}
@@ -58,6 +57,9 @@
 			border: 0;
 		}
 
+		table td {text-align:center}
+		.w60 {width:60px}
+		.w200 {width:200px}
 	</style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -130,7 +132,7 @@
 										</tr>
 										<tr>
 											<td style="width:20%;background-color:#F2F2F2" class="txtc">시료정보</td>
-											<td colspan="3" class="txtl">
+											<th colspan="3" class="txtl">
 												<div class="form-group" style="margin-bottom:-1px;">
 													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
 														<input type="checkbox" id="chk01" class="chks" value="A002-01">
@@ -154,11 +156,11 @@
 													</div>
 													<input type="text" class="" id="chk06" style="display:none" disabled>
 												</div>
-											</td>
+											</th>
 										</tr>
 										<tr>
 											<td style="width:20%;background-color:#F2F2F2" class="txtc">임상증상 및 병력내용</td>
-											<td colspan="3" class="txtl">
+											<th colspan="3" class="txtl">
 												<div class="form-group clearfix" style="margin-bottom:-1px;">
 													<div class="icheck-primary d-inline">
 														<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
@@ -186,7 +188,7 @@
 													</div>
 													<input type="text" class="" id="chk17" style="display:none" disabled>
 												</div>
-											</td>
+											</th>
 										</tr>
 									</tbody>
 								</table>
@@ -231,6 +233,7 @@
 													${status.index+1 }
 													<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
 													<input type="hidden" id="inspResult_${status.index+1 }" value="${item.inspResult}"/>
+													<input type="hidden" id="inspSecondCd_${status.index+1 }" value="${item.inspSecondCd}"/>
 													<input type="hidden" id="inspThirdCd_${status.index+1 }" value="${item.inspThirdCd}"/>
 												</td>
 												<td class="txtc">${item.inspFirstNm }</td>
@@ -320,12 +323,12 @@
 									<tbody>
 										<tr>
 											<td>
-												<textarea class="form-control" rows="3" id="inspResult"></textarea>
+												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
 											</td>
 										</tr>
 										<tr>
 											<td class="txtc">
-												<button type="button" id="memoSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사메모저장</button>
+												<button type="button" onclick="saveMemo(1)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사메모저장</button>
 											</td>
 										</tr>
 									</tbody>
@@ -362,6 +365,507 @@
 						<!-- /.card -->
 	 				</div>
 	 			</div>
+				<div class="row inputType2" style="display:none">
+	 				<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">검사메모</h3>
+							</div>
+							<div class="card-body">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(2)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div style="height:10px;">
+
+							</div>
+							<div class="card-header">
+								<h3 class="card-title">사진</h3>
+							</div>
+							<div class="card-body">
+								<div class="fileBox">
+									<label for="inspResultFile2">결과사진추가</label>
+									<input type="file" id="inspResultFile2" onchange="addFileSet2(this, '');">
+								</div>
+
+								<div>
+									<form id="fileForm2" method="post" enctype="multipart/form-data">
+										<input type="hidden" id="inspNo" name="inspNo"/>
+										<input type="hidden" id="rqstNo" name="rqstNo" value="${rceptInfo.rqstNo }"/>
+										<div class="filter-container row previewList2"></div>
+									</form>
+								</div>
+								<div style="text-align:center">
+									<button type="button" id="fileSave2" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+					<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">항생제 감수성 검사 기록지</h3>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered text-nowrap">
+										<thead>
+											<tr>
+												<td rowspan="2">번호</td>
+												<td rowspan="2">항생제(㎍)</td>
+												<td rowspan="2">약자</td>
+												<td colspan="3">zone diameter (mm)</td>
+												<td colspan="2">검사결과</td>
+												<td rowspan="2" class="w200">비고</td>
+											</tr>
+											<tr>
+												<td>R<br/>≤</td>
+												<td>I</td>
+												<td>S<br/>≥</td>
+												<td class="w60">(mm)</td>
+												<td class="w60">R.I.S.</td>
+											</tr>
+										</thead>
+										<tbody id="antibiotic">
+											<tr>
+												<td>1</td>
+												<td>Ampicilin (10)</td>
+												<td>AM10</td>
+												<td>13</td>
+												<td>14-16</td>
+												<td>17</td>
+												<td id="res1_1"></td>
+												<td id="res2_1"></td>
+												<td id="resMemo_1"></td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td>Ceftiofur(30)</td>
+												<td>FUR30</td>
+												<td>17</td>
+												<td>18-20</td>
+												<td>21</td>
+												<td id="res1_2"></td>
+												<td id="res2_2"></td>
+												<td id="resMemo_2"></td>
+											</tr>
+											<tr>
+												<td>3</td>
+												<td>Enrofloxacin(5)</td>
+												<td>ENR5</td>
+												<td>12</td>
+												<td>13-15</td>
+												<td>16</td>
+												<td id="res1_3"></td>
+												<td id="res2_3"></td>
+												<td id="resMemo_3"></td>
+											</tr>
+											<tr>
+												<td>4</td>
+												<td>Colistin(10)</td>
+												<td>CT10</td>
+												<td>8</td>
+												<td>9-10</td>
+												<td>11</td>
+												<td id="res1_4"></td>
+												<td id="res2_4"></td>
+												<td id="resMemo_4"></td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>Gentamycin(10)</td>
+												<td>GM10</td>
+												<td>12</td>
+												<td>13-14</td>
+												<td>15</td>
+												<td id="res1_5"></td>
+												<td id="res2_5"></td>
+												<td id="resMemo_5"></td>
+											</tr>
+											<tr>
+												<td>6</td>
+												<td>Oxytetracycin</td>
+												<td>T30</td>
+												<td>14</td>
+												<td>15-18</td>
+												<td>19</td>
+												<td id="res1_6"></td>
+												<td id="res2_6"></td>
+												<td id="resMemo_6"></td>
+											</tr>
+											<tr>
+												<td>7</td>
+												<td>Trimethoprim +<br/>Sulfamethoxazole<br/>(1.25+23.75)</td>
+												<td>SXT25</td>
+												<td>10</td>
+												<td>11-15</td>
+												<td>16</td>
+												<td id="res1_7"></td>
+												<td id="res2_7"></td>
+												<td id="resMemo_7"></td>
+											</tr>
+											<tr>
+												<td>8</td>
+												<td>Tilmicosin(15)</td>
+												<td>TIL15</td>
+												<td>10</td>
+												<td>11</td>
+												<td>12</td>
+												<td id="res1_8"></td>
+												<td id="res2_8"></td>
+												<td id="resMemo_8"></td>
+											</tr>
+											<tr>
+												<td>9</td>
+												<td>Tylosin</td>
+												<td>TY30</td>
+												<td>10</td>
+												<td>11-19</td>
+												<td>20</td>
+												<td id="res1_9"></td>
+												<td id="res2_9"></td>
+												<td id="resMemo_9"></td>
+											</tr>
+											<tr>
+												<td>10</td>
+												<td>Florfenicol</td>
+												<td>FFC30</td>
+												<td>14</td>
+												<td>15-18</td>
+												<td>19</td>
+												<td id="res1_10"></td>
+												<td id="res2_10"></td>
+												<td id="resMemo_10"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div style="text-align:center">
+									<button type="button" id="antiSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+	 			</div><!-- /.inputType2 -->
+
+				<div class="row inputType3" style="display:none">
+					<div class="col-md-12">
+						<div class="card card-primary">
+							<div class="card-body">
+								<div class="chart">
+									<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+	 				<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">검사메모</h3>
+							</div>
+							<div class="card-body">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(3)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+					<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered text-nowrap">
+										<thead>
+											<tr>
+												<td style="width:50%;background-color:#F2F2F2">시료명</td>
+												<td style="width:50%;background-color:#F2F2F2">데이터</td>
+											</tr>
+										</thead>
+										<tbody id="serum">
+											<tr>
+												<td id="nm_1">No. 1</td>
+												<td id="dt_1"></td>
+											</tr>
+											<tr>
+												<td id="nm_2">No. 2</td>
+												<td id="dt_2"></td>
+											</tr>
+											<tr>
+												<td id="nm_3">No. 3</td>
+												<td id="dt_3"></td>
+											</tr>
+											<tr>
+												<td id="nm_4">No. 4</td>
+												<td id="dt_4"></td>
+											</tr>
+											<tr>
+												<td id="nm_5">No. 5</td>
+												<td id="dt_5"></td>
+											</tr>
+											<tr>
+												<td id="nm_6">No. 6</td>
+												<td id="dt_6"></td>
+											</tr>
+											<tr>
+												<td id="nm_7">No. 7</td>
+												<td id="dt_7"></td>
+											</tr>
+											<tr>
+												<td id="nm_8">No. 8</td>
+												<td id="dt_8"></td>
+											</tr>
+											<tr>
+												<td id="nm_9">No. 9</td>
+												<td id="dt_9"></td>
+											</tr>
+											<tr>
+												<td id="nm_10">No.10</td>
+												<td id="dt_10"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div style="text-align:center">
+									<button type="button" id="serumSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+	 			</div><!-- /.inputType3 -->
+				<div class="row inputType4" style="display:none">
+	 				<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">검사메모</h3>
+							</div>
+							<div class="card-body">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(4)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+					<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered text-nowrap">
+										<thead>
+											<tr>
+												<td style="background-color:#F2F2F2;width:10%;">No.</td>
+												<td style="background-color:#F2F2F2;width:*;">시료</td>
+												<td style="background-color:#F2F2F2;width:10%;">시료량</td>
+												<td style="background-color:#F2F2F2;width:10%;">결과</td>
+												<td style="background-color:#F2F2F2;width:25%;">비고</td>
+											</tr>
+										</thead>
+										<tbody id="pcr">
+											<tr>
+												<td>1</td>
+												<td id="sample_1"></td>
+												<td id="capacity_1"></td>
+												<td id="result_1"></td>
+												<td id="rmk_1"></td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="sample_2"></td>
+												<td id="capacity_2"></td>
+												<td id="result_2"></td>
+												<td id="rmk_2"></td>
+											</tr>
+											<tr>
+												<td>3</td>
+												<td id="sample_3"></td>
+												<td id="capacity_3"></td>
+												<td id="result_3"></td>
+												<td id="rmk_3"></td>
+											</tr>
+											<tr>
+												<td>4</td>
+												<td id="sample_4"></td>
+												<td id="capacity_4"></td>
+												<td id="result_4"></td>
+												<td id="rmk_4"></td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td id="sample_5"></td>
+												<td id="capacity_5"></td>
+												<td id="result_5"></td>
+												<td id="rmk_5"></td>
+											</tr>
+											<tr>
+												<td>6</td>
+												<td id="sample_6"></td>
+												<td id="capacity_6"></td>
+												<td id="result_6"></td>
+												<td id="rmk_6"></td>
+											</tr>
+											<tr>
+												<td>7</td>
+												<td id="sample_7"></td>
+												<td id="capacity_7"></td>
+												<td id="result_7"></td>
+												<td id="rmk_7"></td>
+											</tr>
+											<tr>
+												<td>8</td>
+												<td id="sample_8"></td>
+												<td id="capacity_8"></td>
+												<td id="result_8"></td>
+												<td id="rmk_8"></td>
+											</tr>
+											<tr>
+												<td>9</td>
+												<td id="sample_9"></td>
+												<td id="capacity_9"></td>
+												<td id="result_9"></td>
+												<td id="rmk_9"></td>
+											</tr>
+											<tr>
+												<td>10</td>
+												<td id="sample_10"></td>
+												<td id="capacity_10"></td>
+												<td id="result_10"></td>
+												<td id="rmk_10"></td>
+											</tr>
+											<tr>
+												<td>11</td>
+												<td id="sample_11"></td>
+												<td id="capacity_11"></td>
+												<td id="result_11"></td>
+												<td id="rmk_11"></td>
+											</tr>
+											<tr>
+												<td>12</td>
+												<td id="sample_12"></td>
+												<td id="capacity_12"></td>
+												<td id="result_12"></td>
+												<td id="rmk_12"></td>
+											</tr>
+											<tr>
+												<td>13</td>
+												<td id="sample_13"></td>
+												<td id="capacity_13"></td>
+												<td id="result_13"></td>
+												<td id="rmk_13"></td>
+											</tr>
+											<tr>
+												<td>14</td>
+												<td id="sample_14"></td>
+												<td id="capacity_14"></td>
+												<td id="result_14"></td>
+												<td id="rmk_14"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div style="text-align:center">
+									<button type="button" id="pcrSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+	 			</div><!-- /.inputType4 -->
+				<div class="row inputType5" style="display:none">
+	 				<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">검사메모</h3>
+							</div>
+							<div class="card-body">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(5)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+					<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered text-nowrap">
+										<thead>
+											<tr>
+												<td style="background-color:#F2F2F2">시료명</td>
+												<td style="background-color:#F2F2F2">데이터</td>
+											</tr>
+										</thead>
+										<tbody id="">
+											<tr>
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div style="text-align:center">
+									<button type="button" id="antiSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+	 			</div><!-- /.inputType5 -->
 	 			<form id="inspOpinion">
 	 				<input type="hidden" id="inspSickCd" name="inspSickCd"/>
 	 			</form>
@@ -413,7 +917,11 @@
 <!-- Page specific script -->
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
+<!-- ChartJS -->
+<script src="resources/plugins/chart.js/Chart.min.js"></script>
+
 <script>
+var chartObj;
 $(function () {
 	$.ajax({
 		url : "sampleList",
@@ -441,7 +949,6 @@ $(function () {
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			console.log(data);
 			$(".chkh").each(function(){
 				for(var i=0; i<data.length; i++){
 					if($(this).val() == data[i].histCode){
@@ -457,6 +964,7 @@ $(function () {
 	});
 
 	$(".chks , .chkh").prop("disabled", true);
+
 });
 
 var fileNo = 0;
@@ -469,9 +977,8 @@ function addFileSet(obj){
 	// 첨부파일 검증
 	if (validation(file)) {
 
-		var len = $(".filtr-item").length+1;
 		// 목록 추가
-		let htmlData = '';
+		var htmlData = '';
 		htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+fileNo+'">';
 		htmlData += '	<a id="imgLoad'+fileNo+'">';
 		htmlData += '		<img id="imgPreview'+fileNo+'" class="img-fluid mb-2" style="width:140px;height:140px"/>';
@@ -517,6 +1024,40 @@ function addFileSet(obj){
 	// 초기화
 	document.querySelector("input[type=file]").value = "";
 }
+
+/* 첨부파일 추가 */
+function addFileSet2(obj){
+
+	var file = obj.files[0];
+	// 첨부파일 검증
+	if (validation(file)) {
+
+		// 목록 추가
+		var htmlData = '';
+		htmlData += '<div class="filtr-item" id="previewImg'+fileNo+'">';
+		htmlData += '	<a id="imgLoad'+fileNo+'">';
+		htmlData += '		<img id="imgPreview'+fileNo+'" class="img-fluid mb-2" style="width:140px;height:140px"/>';
+		htmlData += '	</a>';
+        htmlData += '	<input type="hidden" id="file'+fileNo+'" value="'+file.name+'">';
+		htmlData += '</div>';
+
+		$(".previewList2").append(htmlData);
+
+		// 파일 배열에 담기
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			filesArr.push(file);
+			var res = e.target.result;
+			$('#imgPreview'+fileNo).attr("src", res);
+			fileNo++;
+		};
+		reader.readAsDataURL(file);
+	}
+
+	// 초기화
+	document.querySelector("input[type=file]").value = "";
+}
+
 
 /* 첨부파일 검증 */
 function validation(obj){
@@ -566,8 +1107,6 @@ function deleteServerFile(fileNo){
 	}
 }
 
-
-
 function imgView(name){
 	//호스팅
 	//var path = '/home/hosting_users/avinext/tomcat/webapps/files/';
@@ -575,8 +1114,6 @@ function imgView(name){
 	$(".image").attr("src",path+name);
 	$('#imgView').modal();
 }
-
-
 
 
 /*****************************************************************
@@ -587,73 +1124,40 @@ $("#inspList").find("tr").click(function(){
 		$(this).find("input:checkbox[id^=chk]").prop("checked", false);
 		$("#inspNo").val("");
 		$(".inputType1").hide();
+		$(".inputType2").hide();
+		$(".inputType3").hide();
+		$(".inputType4").hide();
+		$(".inputType5").hide();
+		$(".inputType6").hide();
 	}else {
+		filesArr = new Array();
+		fileNo = 0;
 		$("#inspList").find("tr").each(function(){
 			$(this).find("input:checkbox[id^=chk]").prop("checked", false);
 		});
 		$(this).find("input:checkbox[id^=chk]").prop("checked", true);
-		$(".inputType1").show();
-		$("#inspNo").val($(this).find("[id^=inspNo]").val());
+
+		$("[name=inspNo]").val($(this).find("[id^=inspNo]").val());
 		$("#inspSickCd").val($(this).find("[id^=inspThirdCd]").val());
+
+		if($(this).find("[id^=inspSecondCd]").val() == 'B001-01-01'){
+			fnPcr();
+		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-01-14'){
+			fnAnti();
+		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-03-18'){
+			fnSerum();
+		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-04-23'){
+			$(".inputType1").hide();
+			$(".inputType2").hide();
+			$(".inputType3").hide();
+			$(".inputType4").hide();
+			$(".inputType5").show();
+
+		}else {
+			fnElse();
+		}
 	}
 
-	$.ajax({
-		url : 'getFileList',
-		data : {inspNo : $("#inspNo").val()},
-		dataType : 'json',
-		type : 'post',
-		success : function(data){
-			let htmlData = '';
-			$(".previewList").empty();
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				var len = i+1;
-				var checked = '';
-				if(item.closeYn == 'Y'){
-					checked = 'checked';
-				}
-				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
-				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
-				htmlData += '	</a>';
-				htmlData += '</div>';
-				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
-				htmlData += '	<div class="row">';
-				htmlData += '		<div class="col-8">';
-				htmlData += '			<input type="text" class="form-control" id="title'+item.fileNo+'" placeholder="장기" value="'+item.title+'">';
-				htmlData += '		</div>';
-				htmlData += '		<div class="col-4" style="padding-top:-9px">';
-				htmlData += '			<label for="chk1"></label>';
-				htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
-				htmlData += '				<div class="icheck-primary d-inline">';
-				htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+'>';
-				htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
-				htmlData += '				</div>';
-				htmlData += '				<a class="delete" onclick="deleteServerFile('+item.fileNo+');"><i class="far fa-minus-square"></i></a>';
-		        htmlData += '				<input type="hidden" id="file'+item.fileNo+'" value="'+item.fileNewNm+'">';
-				htmlData += '			</div>';
-				htmlData += '		</div>';
-				htmlData += '	</div>';
-				htmlData += '	<div class="row">';
-				htmlData += '		<div class="col-12">';
-				htmlData += '			<textarea class="form-control" rows="3" id="content'+item.fileNo+'" placeholder="메모">'+item.content+'</textarea>';
-				htmlData += '		</div>';
-				htmlData += '	</div>';
-				htmlData += '</div>';
-			}
-			$(".previewList").append(htmlData);
-		}
-	});
-
-	$.ajax({
-		url : 'getInspResult',
-		data : {inspNo : $("#inspNo").val()},
-		dataType : 'json',
-		type : 'post',
-		success : function(data){
-			$("#inspResult").val(data.inspResult)
-		}
-	});
 });
 
 
@@ -661,13 +1165,15 @@ $("#inspList").find("tr").click(function(){
 /*****************************************************************
  *                  검 사 메 모 저 장                                                                              *
  *****************************************************************/
-$("#memoSave").on("click",function (){
+function saveMemo(type){
 	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+	var opinComment = $(".inputType"+type).find("#inspResult").val();
+
 	var data = {
 		inspNo : $("#inspNo").val(),
 		inspSickCd : $("#inspSickCd").val(),
 		insId : userInfo.userId,
-		opinComment : $("#inspResult").val()
+		opinComment : opinComment
 	}
 
 	$.ajax({
@@ -680,7 +1186,7 @@ $("#memoSave").on("click",function (){
 		}
 	});
 
-});
+}
 
 /*****************************************************************
  *                  검 사 사 진 저 장                                                                              *
@@ -742,7 +1248,457 @@ $("#fileSave").click(function(){
 	});
 });
 
+
+$("#fileSave2").click(function(){
+
+	var fileList = new Array();
+	var formData = new FormData($('#fileForm2')[0]);
+
+	var fileNames = new Array();
+	$('.previewList2').find(".filtr-item").each(function(){
+		fileNames.push($(this).find("[id^=file]").val());
+	});
+
+	for (var i = 0; i < filesArr.length; i++) {
+        if (!filesArr[i].is_delete) {
+        	for (var j=0; j<fileNames.length; j++){
+				if(filesArr[i].name == fileNames[j].trim()){
+        			formData.append('fileList',filesArr[i]);
+        		}
+        	}
+        }
+	}
+
+	//로그인유저정보
+	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+	formData.append('uptId', userInfo.userId);
+
+	$.ajax({
+		url : 'inspFileUpload2',
+		data : formData,
+		dataType : 'json',
+		type : 'post',
+		processData : false,
+		contentType : false,
+		success : function(data){
+			if(data.result == 'succ'){
+				alert("사진등록하였습니다.");
+			}
+		}
+	});
+});
+
+
+/*****************************************************************
+ *                        항 생 제                                                                             *
+ *****************************************************************/
+$("#antibiotic").find("tr").find("td:eq(6),td:eq(7),td:eq(8)").click(function(){
+	var txt = $(this).text();
+	var selId = $(this).attr("id");
+	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
+	$(this).html(html);
+	$("#target").focus();
+})
+
+function makeTd(target){
+	var val = $("#"+target).find("[id=target]").val();
+	$("#"+target).text(val);
+}
+
+$("#antiSave").click(function(){
+
+	var antiList = [];
+	$("#antibiotic").find("tr").each(function(idx){
+		var res1 = $(this).find("td:eq(6)").text();
+		var res2 = $(this).find("td:eq(7)").text();
+		var antiMemo = $(this).find("td:eq(8)").text();
+		var antiNo = idx+1;
+
+		var anti = {
+			antiNo : antiNo,
+			res1 : res1,
+			res2 : res2,
+			antiMemo : antiMemo,
+			insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
+		}
+
+		antiList.push(anti);
+	})
+
+	var data = {
+		inspNo : $("#inspNo").val(),
+		insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+		antiList : antiList
+	}
+
+	$.ajax({
+		url : "insertAntibiotic",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			alert("등록되었습니다.");
+		}
+	});
+
+})
+
+
+/*****************************************************************
+ *                        혈 청                                                                                 *
+ *****************************************************************/
+$("#serum").find("tr").find("td:eq(0),td:eq(1)").click(function(){
+	var txt = $(this).text();
+	var selId = $(this).attr("id");
+	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
+	$(this).html(html);
+	$("#target").focus();
+})
+
+$("#serumSave").click(function(){
+
+	var serumList = [];
+	$("#serum").find("tr").each(function(idx){
+		var serName = $(this).find("td:eq(0)").text();
+		var serData = $(this).find("td:eq(1)").text();
+
+		var serum = {
+			serName : serName,
+			serData : serData,
+			insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
+		}
+
+		serumList.push(serum);
+	})
+
+	var data = {
+		inspNo : $("#inspNo").val(),
+		insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+		serumList : serumList
+	}
+
+	$.ajax({
+		url : "insertSerum",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			alert("등록되었습니다.");
+		}
+	});
+
+})
+
+function setChartData(data){
+	var areaChartData = '';
+	// x축값 구하기
+	var xArr = new Array();
+	var maxData = 0;
+	for(var i=0; i<data.length; i++){
+		if(maxData < data[i].serData){
+			maxData = data[i].serData;
+		}
+	}
+
+	if(maxData < 10) maxData = 10;
+
+	for(var i=0; i<=maxData; i++){
+		xArr.push(i);
+	}
+
+	// y축값 구하기
+	var yArr = new Array();
+
+	for(var i=0; i<=maxData; i++){
+		var flag = false;
+		for(var j=0; j<data.length; j++){
+			if(i == data[j].serData){
+				yArr.push(Number(data[j].cnt));
+				flag = true;
+			}
+		}
+		if(!flag){
+			yArr.push(0);
+		}
+
+	}
+
+	var dataSet = '';
+	var dataSets = new Array();
+	dataSet = {
+			label               : '혈청개수',
+			backgroundColor     : 'rgba(60,141,188,0.9)',
+			borderColor         : '#3b8bba',
+			pointRadius          : false,
+			pointColor          : 'rgba(60,141,188,1)',
+			pointStrokeColor    : 'fff',
+			pointHighlightFill  : '#fff',
+			pointHighlightStroke: 'rgba(60,141,188,1)',
+			data                : yArr
+		}
+	dataSets.push(dataSet);
+
+	var areaChartData = {
+		labels  :	xArr,
+		datasets: dataSets
+	}
+
+    var barChartCanvas = $('#barChart').get(0).getContext('2d');
+    var barChartData = $.extend(true, {}, areaChartData);
+    var temp0 = areaChartData.datasets[0];
+    barChartData.datasets[0] = temp0;
+
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+
+    chartObj = new Chart(barChartCanvas, {
+      type: 'bar',
+      data: barChartData,
+      options: barChartOptions
+    })
+}
+
+
+/*****************************************************************
+ *                        P C R                                  *
+ *****************************************************************/
+$("#pcr").find("tr").find("td:eq(1),td:eq(2),td:eq(3),td:eq(4)").click(function(){
+	var txt = $(this).text();
+	var selId = $(this).attr("id");
+	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
+	$(this).html(html);
+	$("#target").focus();
+})
+
+$("#pcrSave").click(function(){
+
+	var pcrList = [];
+	$("#pcr").find("tr").each(function(idx){
+		var smplName = $(this).find("td:eq(1)").text();
+		var capacity = $(this).find("td:eq(2)").text();
+		var result = $(this).find("td:eq(3)").text();
+		var rmk = $(this).find("td:eq(4)").text();
+
+
+		var pcr = {
+			smplName : smplName,
+			capacity : capacity,
+			result : result,
+			rmk : rmk,
+			insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
+		}
+		if(smplName != '') {
+			pcrList.push(pcr);
+		}
+	})
+
+	var data = {
+		inspNo : $("#inspNo").val(),
+		insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+		pcrList : pcrList
+	}
+
+	$.ajax({
+		url : "insertPcr",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			alert("등록되었습니다.");
+		}
+	});
+
+})
+
+
+
+function fnAnti(){
+	$(".inputType1").hide();
+	$(".inputType2").show();
+	$(".inputType3").hide();
+	$(".inputType4").hide();
+	$(".inputType5").hide();
+	$(".inputType6").hide();
+
+	$.ajax({
+		url : 'getAntiList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			$("[name=inspResult]").val(data[0].inspResult);
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var no = item.antiNo;
+				$("#res1_"+no).text(item.res1);
+				$("#res2_"+no).text(item.res2);
+				$("#resMemo_"+no).text(item.antiMemo);
+			}
+		}
+	});
+
+	$.ajax({
+		url : 'getFileList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var htmlData = '';
+			$(".previewList").empty();
+			$(".previewList2").empty();
+
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				htmlData += '<div id="previewImg'+item.fileNo+'">';
+				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
+				htmlData += '	</a>';
+				htmlData += '</div>';
+			}
+			$(".previewList2").append(htmlData);
+		}
+	});
+}
+
+function fnSerum(){
+	$(".inputType1").hide();
+	$(".inputType2").hide();
+	$(".inputType3").show();
+	$(".inputType4").hide();
+	$(".inputType5").hide();
+	$(".inputType6").hide();
+
+	$.ajax({
+		url : 'getSerumList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			if(data != ''){
+				$("[name=inspResult]").val(data[0].inspResult);
+				for(var i=0; i<data.length; i++){
+					var item = data[i];
+					var no = i+1;
+					$("#nm_"+no).text(item.serName);
+					$("#dt_"+no).text(item.serData);
+				}
+			}else {
+				$("[name=inspResult]").val("");
+				for(var i=0; i<10; i++){
+					var item = data[i];
+					var no = i+1;
+					$("#nm_"+no).text("No."+no);
+					$("#dt_"+no).text("");
+				}
+			}
+		}
+	});
+
+	$.ajax({
+		url : 'getSerumChart',
+		dataType : 'json',
+		type : 'post',
+		data : {inspNo : $("#inspNo").val()},
+		success:function(data){
+			$("#barChart").empty();
+			if(chartObj != null){
+				chartObj.destroy();
+			}
+			setChartData(data);
+		}
+	})
+}
+
+function fnPcr(){
+	$(".inputType1").hide();
+	$(".inputType2").hide();
+	$(".inputType3").hide();
+	$(".inputType4").show();
+	$(".inputType5").hide();
+	$(".inputType6").hide();
+
+	$.ajax({
+		url : 'getPcrList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			$("[name=inspResult]").val(data[0].inspResult);
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var no = i+1;
+				$("#sample_"+no).text(item.smplName);
+				$("#capacity_"+no).text(item.capacity);
+				$("#result_"+no).text(item.result);
+				$("#rmk_"+no).text(item.rmk);
+			}
+		}
+	});
+}
+
+function fnElse(){
+	$(".inputType1").show();
+	$(".inputType2").hide();
+	$(".inputType3").hide();
+	$(".inputType4").hide();
+	$(".inputType5").hide();
+	$(".inputType6").hide();
+	$.ajax({
+		url : 'getFileList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var htmlData = '';
+			$(".previewList").empty();
+			$("[name=inspResult]").val(data[0].inspResult);
+
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var len = i+1;
+				var checked = '';
+				if(item.closeYn == 'Y'){
+					checked = 'checked';
+				}
+				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
+				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
+				htmlData += '	</a>';
+				htmlData += '</div>';
+				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-8">';
+				htmlData += '			<input type="text" class="form-control" id="title'+item.fileNo+'" placeholder="장기" value="'+item.title+'">';
+				htmlData += '		</div>';
+				htmlData += '		<div class="col-4" style="padding-top:-9px">';
+				htmlData += '			<label for="chk1"></label>';
+				htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
+				htmlData += '				<div class="icheck-primary d-inline">';
+				htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+'>';
+				htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
+				htmlData += '				</div>';
+				htmlData += '				<a class="delete" onclick="deleteServerFile('+item.fileNo+');"><i class="far fa-minus-square"></i></a>';
+		        htmlData += '				<input type="hidden" id="file'+item.fileNo+'" value="'+item.fileNewNm+'">';
+				htmlData += '			</div>';
+				htmlData += '		</div>';
+				htmlData += '	</div>';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-12">';
+				htmlData += '			<textarea class="form-control" rows="3" id="content'+item.fileNo+'" placeholder="메모">'+item.content+'</textarea>';
+				htmlData += '		</div>';
+				htmlData += '	</div>';
+				htmlData += '</div>';
+			}
+			$(".previewList").append(htmlData);
+		}
+	});
+}
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>
 </html>
+

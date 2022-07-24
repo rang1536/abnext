@@ -398,4 +398,87 @@
 		  FROM TB_INSPECTION
 		 WHERE INSP_NO = #{inspNo}
 	</select>
+
+	<insert id="insertAntibiotic" parameterType="kr.or.abnext.domain.TbAntibiotic">
+		INSERT
+		  INTO TB_ANTIBIOTIC (
+		       INSP_NO , ANTI_NO
+		     , RES1    , RES2    , ANTI_MEMO
+		     , INS_DT  , INS_ID )
+		VALUES (
+		       #{inspNo} , #{antiNo}
+		     , #{res1}   , #{res2}   , #{antiMemo}
+		     , NOW()     , #{insId} )
+		    ON DUPLICATE KEY
+		UPDATE RES1 = #{res1}
+		     , RES2 = #{res2}
+		     , ANTI_MEMO = #{antiMemo}
+		     , UPT_DT = NOW()
+		     , UPT_ID = #{insId}
+	</insert>
+
+	<select id="getAntiList" parameterType="kr.or.abnext.domain.TbAntibiotic" resultType="kr.or.abnext.domain.TbAntibiotic">
+		SELECT A.*
+		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
+		  FROM TB_ANTIBIOTIC A
+		 WHERE INSP_NO = #{inspNo}
+		 ORDER BY CAST(ANTI_NO AS UNSIGNED)
+	</select>
+
+	<insert id="insertSerum" parameterType="kr.or.abnext.domain.TbSerum">
+		INSERT
+		  INTO TB_SERUM (
+		       INSP_NO , SER_NAME , SER_DATA
+		     , INS_DT  , INS_ID )
+		VALUES (
+		       #{inspNo} , #{serName} , #{serData}
+		     , NOW()     , #{insId} )
+		    ON DUPLICATE KEY
+		UPDATE SER_DATA = #{serData}
+		     , UPT_DT = NOW()
+		     , UPT_ID = #{insId}
+	</insert>
+
+	<select id="getSerumList" parameterType="kr.or.abnext.domain.TbSerum" resultType="kr.or.abnext.domain.TbSerum">
+		SELECT A.*
+		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
+		  FROM TB_SERUM A
+		 WHERE INSP_NO = #{inspNo}
+		 ORDER BY SER_NAME
+	</select>
+
+	<select id="getSerumChart" parameterType="kr.or.abnext.domain.TbSerum" resultType="kr.or.abnext.domain.TbSerum">
+		SELECT SER_DATA
+		     , COUNT(*) AS CNT
+		  FROM TB_SERUM
+		 WHERE INSP_NO =  #{inspNo}
+		 GROUP BY SER_DATA
+	</select>
+
+	<insert id="insertPcr" parameterType="kr.or.abnext.domain.TbPcr">
+		INSERT
+		  INTO TB_PCR (
+		       INSP_NO , SMPL_NAME , CAPACITY
+		     , RESULT  , RMK
+		     , INS_DT  , INS_ID )
+		VALUES (
+		       #{inspNo} , #{smplName} , #{capacity}
+		     , #{result} , #{rmk}
+		     , NOW()     , #{insId} )
+		    ON DUPLICATE KEY
+		UPDATE RESULT = #{result}
+		     , CAPACITY = #{capacity}
+		     , RMK = #{rmk}
+		     , UPT_DT = NOW()
+		     , UPT_ID = #{insId}
+	</insert>
+
+
+	<select id="getPcrList" parameterType="kr.or.abnext.domain.TbPcr" resultType="kr.or.abnext.domain.TbPcr">
+		SELECT A.*
+		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
+		  FROM TB_PCR A
+		 WHERE INSP_NO = #{inspNo}
+		 ORDER BY SMPL_NAME
+	</select>
 </mapper>

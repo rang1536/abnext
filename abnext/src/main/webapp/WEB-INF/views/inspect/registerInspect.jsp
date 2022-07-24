@@ -721,7 +721,7 @@ $(".btn-save").on('click',function(){
 				inspSecondCd : $(this).find("[id^=inspSecondCd]").val(),
 				inspThirdCd : $(this).find("[id^=inspThirdCd]").val(),
 				inspPrice : $(this).find("[id^=inspPrice]").val().replace(/,/gi,'').replace('원',''),
-				insId : localStorage.getItem("userId")
+				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
 		}
 		arrayInsp.push(insp);
 	});
@@ -736,7 +736,7 @@ $(".btn-save").on('click',function(){
 			var smpl = {
 				sampleCode : $(this).val(),
 				sampleMemo : smplMemo,
-				insId : localStorage.getItem("userId")
+				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
 			}
 			arraySmpl.push(smpl);
 		}
@@ -752,7 +752,7 @@ $(".btn-save").on('click',function(){
 			var hist = {
 				histCode : $(this).val(),
 				histMemo : histMemo,
-				insId : localStorage.getItem("userId")
+				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
 			}
 			arrayHist.push(hist);
 		}
@@ -783,7 +783,7 @@ $(".btn-save").on('click',function(){
 			payGb : $("#hospNo option:selected").data("paygb"),
 			price : price,
 			payStat : '01',
-			insId : localStorage.getItem("userId"),
+			insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
 			inspList : arrayInsp,
 			smplList : arraySmpl,
 			histList : arrayHist
@@ -853,7 +853,7 @@ function validSave(){
 function docList(){
 	$.ajax({
 		url : "selectDoctorList",
-		data : {userId : localStorage.getItem("userId")},
+		data : {userId : JSON.parse(sessionStorage.getItem("userInfo")).userId},
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){

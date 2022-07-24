@@ -23,14 +23,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.TbAnimal;
+import kr.or.abnext.domain.TbAntibiotic;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspOpinion;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbMediHistory;
+import kr.or.abnext.domain.TbPcr;
 import kr.or.abnext.domain.TbRcept;
+import kr.or.abnext.domain.TbResult;
 import kr.or.abnext.domain.TbSample;
+import kr.or.abnext.domain.TbSerum;
 import kr.or.abnext.domain.TbUser;
 import kr.or.abnext.util.UtilFile;
 
@@ -56,7 +60,6 @@ public class InspectRestController {
 		tbRcept.setRqstNo(Integer.parseInt(rqstNo));
 
 		//접수번호 생성
-
 		SimpleDateFormat sdf = new SimpleDateFormat("yy", new Locale("ko", "KR"));
 		String yy = sdf.format(new Date());
 		String pdlNo = "PDL"+yy;
@@ -280,6 +283,19 @@ public class InspectRestController {
 		return map;
 	}
 
+	//결과사진업로드
+	@RequestMapping(value = "inspFileUpload2", method = RequestMethod.POST)
+	public Map<String, Object> inspFileUpload2(TbRcept tbRcept, String inspNo
+			, @RequestParam("fileList") List<MultipartFile> files){
+
+		Map<String, Object> map = new HashMap<String,Object>();
+		if(files.size() > 0) {
+			map = inspectServ.inspFileUploadServ2(tbRcept, inspNo, files);
+		}
+
+		return map;
+	}
+
 	//removeFileByFileNo
 	@RequestMapping(value = "removeFileByFileNo", method = RequestMethod.POST)
 	public Map<String, Object> removeFileByFileNo(TbFile tbFile) {
@@ -367,5 +383,104 @@ public class InspectRestController {
 		return insp;
 	}
 
+	@RequestMapping(value = "insertAntibiotic")
+	public Map<String, Object> insertAntibiotic(TbResult tbResult) {
+		logger.info(tbResult.toString());
+
+		int resCnt = 0;
+		for(int i=0; i<tbResult.getAntiList().size(); i++) {
+			TbAntibiotic anti = new TbAntibiotic();
+			anti.setAntiNo(tbResult.getAntiList().get(i).get("antiNo").toString());
+			anti.setInspNo(tbResult.getInspNo());
+			anti.setRes1(tbResult.getAntiList().get(i).get("res1").toString());
+			anti.setRes2(tbResult.getAntiList().get(i).get("res2").toString());
+			anti.setAntiMemo(tbResult.getAntiList().get(i).get("antiMemo").toString());
+			anti.setInsId(tbResult.getInsId());
+			//검사 테이블 등록
+			resCnt += inspectServ.insertAntibiotic(anti);
+
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(resCnt > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
+
+	@RequestMapping(value = "getAntiList")
+	public List<TbAntibiotic> getAntiList(TbAntibiotic anti) {
+		return inspectServ.getAntiList(anti);
+	}
+
+	@RequestMapping(value = "insertSerum")
+	public Map<String, Object> insertSerum(TbResult tbResult) {
+		logger.info(tbResult.toString());
+
+		int resCnt = 0;
+		for(int i=0; i<tbResult.getSerumList().size(); i++) {
+			TbSerum serum = new TbSerum();
+			serum.setSerName(tbResult.getSerumList().get(i).get("serName").toString());
+			serum.setInspNo(tbResult.getInspNo());
+			serum.setSerData(tbResult.getSerumList().get(i).get("serData").toString());
+			serum.setInsId(tbResult.getInsId());
+			//검사 테이블 등록
+			resCnt += inspectServ.insertSerum(serum);
+
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(resCnt > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
+
+	@RequestMapping(value = "getSerumList")
+	public List<TbSerum> getSerumList(TbSerum serum) {
+		return inspectServ.getSerumList(serum);
+	}
+
+	@RequestMapping(value = "getSerumChart")
+	public List<TbSerum> getSerumChart(TbSerum serum) {
+		return inspectServ.getSerumChart(serum);
+	}
+
+	@RequestMapping(value = "insertPcr")
+	public Map<String, Object> insertPcr(TbResult tbResult) {
+		logger.info(tbResult.toString());
+
+		int resCnt = 0;
+		for(int i=0; i<tbResult.getPcrList().size(); i++) {
+			TbPcr pcr = new TbPcr();
+			pcr.setSmplName(tbResult.getPcrList().get(i).get("smplName").toString());
+			pcr.setInspNo(tbResult.getInspNo());
+			pcr.setCapacity(tbResult.getPcrList().get(i).get("capacity").toString());
+			pcr.setResult(tbResult.getPcrList().get(i).get("result").toString());
+			pcr.setRmk(tbResult.getPcrList().get(i).get("rmk").toString());
+
+			pcr.setInsId(tbResult.getInsId());
+			//검사 테이블 등록
+			resCnt += inspectServ.insertPcr(pcr);
+
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(resCnt > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
+
+	@RequestMapping(value = "getPcrList")
+	public List<TbPcr> getPcrList(TbPcr serum) {
+		return inspectServ.getPcrList(serum);
+	}
 
 }

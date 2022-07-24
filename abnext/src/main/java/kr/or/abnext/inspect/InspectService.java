@@ -10,14 +10,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.abnext.admin.AdminDao;
 import kr.or.abnext.domain.TbAnimal;
+import kr.or.abnext.domain.TbAntibiotic;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspOpinion;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbMediHistory;
+import kr.or.abnext.domain.TbPcr;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
+import kr.or.abnext.domain.TbSerum;
 import kr.or.abnext.domain.TbUser;
 import kr.or.abnext.util.UtilFile;
 
@@ -188,11 +191,71 @@ public class InspectService {
 		return map;
 	}
 
+	//inspFileUploadServ
+	public Map<String, Object> inspFileUploadServ2(TbRcept tbRcept, String inspNo, List<MultipartFile> files){
+
+		UtilFile utilFile = new UtilFile();
+		List<TbFile> tbFileList = utilFile.multiUploadFile(files);
+		int result = 0;
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		if(tbFileList.size() > 0) {
+			TbFile tbFile = new TbFile();
+			tbFile.setFileGb("F001-07");
+			tbFile.setRqstNo(tbRcept.getRqstNo());
+			tbFile.setInspNo(Integer.parseInt(inspNo));
+
+			for(int i=0; i<tbFileList.size(); i++) {
+				tbFileList.get(i).setRqstNo(tbRcept.getRqstNo());
+				tbFileList.get(i).setInspNo(Integer.parseInt(inspNo));
+				tbFileList.get(i).setFileGb("F001-07");
+				result += adminDao.addFile(tbFileList.get(i));
+			}
+
+			if(tbFileList.size() == result) {
+				map.put("result", "succ");
+			}else {
+				map.put("result", "fail");
+			}
+
+		}
+
+		return map;
+	}
+
 	public TbInspection getInspResult(TbInspection bean){
 		return inspectDao.getInspResult(bean);
 	}
 
 	public String getPdlNo(String pdlNo) {
 		return inspectDao.getPdlNo(pdlNo);
+	}
+
+	public int insertAntibiotic(TbAntibiotic bean) {
+		return inspectDao.insertAntibiotic(bean);
+	}
+
+	public List<TbAntibiotic> getAntiList(TbAntibiotic bean){
+		return inspectDao.getAntiList(bean);
+	}
+
+	public int insertSerum(TbSerum bean) {
+		return inspectDao.insertSerum(bean);
+	}
+
+	public List<TbSerum> getSerumList(TbSerum bean){
+		return inspectDao.getSerumList(bean);
+	}
+
+	public List<TbSerum> getSerumChart(TbSerum bean){
+		return inspectDao.getSerumChart(bean);
+	}
+
+	public int insertPcr(TbPcr bean) {
+		return inspectDao.insertPcr(bean);
+	}
+
+	public List<TbPcr> getPcrList(TbPcr bean){
+		return inspectDao.getPcrList(bean);
 	}
 }

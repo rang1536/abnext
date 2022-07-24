@@ -8,14 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.abnext.domain.TbAnimal;
+import kr.or.abnext.domain.TbAntibiotic;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbInspOpinion;
 import kr.or.abnext.domain.TbInspection;
 import kr.or.abnext.domain.TbMediHistory;
+import kr.or.abnext.domain.TbPcr;
 import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbSample;
+import kr.or.abnext.domain.TbSerum;
 import kr.or.abnext.domain.TbUser;
 
 @Repository
@@ -145,5 +148,33 @@ public class InspectDao {
 
 	public List<TbFile> selectInspFileList(TbInspection bean) {
 		return sql.selectList("inspection.selectInspFileList", bean);
+	}
+
+	public int insertAntibiotic(TbAntibiotic bean) {
+		return sql.insert("inspection.insertAntibiotic", bean);
+	}
+
+	public List<TbAntibiotic> getAntiList(TbAntibiotic bean){
+		return sql.selectList("inspection.getAntiList", bean);
+	}
+
+	public int insertSerum(TbSerum bean) {
+		return sql.insert("inspection.insertSerum", bean);
+	}
+
+	public List<TbSerum> getSerumList(TbSerum bean){
+		return sql.selectList("inspection.getSerumList", bean);
+	}
+
+	public List<TbSerum> getSerumChart(TbSerum bean){
+		return sql.selectList("inspection.getSerumChart", bean);
+	}
+
+	public int insertPcr(TbPcr bean) {
+		return sql.insert("inspection.insertPcr", bean);
+	}
+
+	public List<TbPcr> getPcrList(TbPcr bean){
+		return sql.selectList("inspection.getPcrList", bean);
 	}
 }
