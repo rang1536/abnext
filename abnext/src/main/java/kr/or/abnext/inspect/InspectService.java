@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.abnext.admin.AdminDao;
 import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbAntibiotic;
+import kr.or.abnext.domain.TbBloodChem;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
@@ -166,14 +167,14 @@ public class InspectService {
 
 		if(tbFileList.size() > 0) {
 			TbFile tbFile = new TbFile();
-			tbFile.setFileGb("F001-07");
+			tbFile.setFileGb("F001-05");
 			tbFile.setRqstNo(tbRcept.getRqstNo());
 			tbFile.setInspNo(Integer.parseInt(inspNo));
 
 			for(int i=0; i<tbFileList.size(); i++) {
 				tbFileList.get(i).setRqstNo(tbRcept.getRqstNo());
 				tbFileList.get(i).setInspNo(Integer.parseInt(inspNo));
-				tbFileList.get(i).setFileGb("F001-07");
+				tbFileList.get(i).setFileGb("F001-05");
 				tbFileList.get(i).setTitle(titles.get(i));
 				tbFileList.get(i).setContent(contents.get(i));
 				tbFileList.get(i).setCloseYn(closeYns.get(i));
@@ -257,5 +258,21 @@ public class InspectService {
 
 	public List<TbPcr> getPcrList(TbPcr bean){
 		return inspectDao.getPcrList(bean);
+	}
+
+	public int insertBloodChem(TbBloodChem bean) {
+		return inspectDao.insertBloodChem(bean);
+	}
+
+	public List<TbBloodChem> getBcList(TbBloodChem bean){
+		return inspectDao.getBcList(bean);
+	}
+
+	public int insertCbc(TbBloodChem bean) {
+		return inspectDao.insertCbc(bean);
+	}
+
+	public List<TbBloodChem> getCbcList(TbBloodChem bean){
+		return inspectDao.getCbcList(bean);
 	}
 }

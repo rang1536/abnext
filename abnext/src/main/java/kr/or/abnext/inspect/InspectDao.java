@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbAntibiotic;
+import kr.or.abnext.domain.TbBloodChem;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
@@ -176,5 +177,21 @@ public class InspectDao {
 
 	public List<TbPcr> getPcrList(TbPcr bean){
 		return sql.selectList("inspection.getPcrList", bean);
+	}
+
+	public int insertBloodChem(TbBloodChem bean) {
+		return sql.insert("inspection.insertBloodChem", bean);
+	}
+
+	public List<TbBloodChem> getBcList(TbBloodChem bean){
+		return sql.selectList("inspection.getBcList", bean);
+	}
+
+	public int insertCbc(TbBloodChem bean) {
+		return sql.insert("inspection.insertCbc", bean);
+	}
+
+	public List<TbBloodChem> getCbcList(TbBloodChem bean){
+		return sql.selectList("inspection.getCbcList", bean);
 	}
 }

@@ -31,6 +31,8 @@
 	<link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
 	<style>
 		.txtc {text-align:center;}
+
+		td {text-align:center}
 	</style>
 
 </head>
@@ -104,7 +106,7 @@
 										</tr>
 										<tr>
 											<td style="width:20%;background-color:#F2F2F2" class="txtc">시료정보</td>
-											<td colspan="3" class="txtl">
+											<th colspan="3" class="txtl">
 												<div class="form-group" style="margin-bottom:-1px;">
 													<div class="icheck-primary d-inline" style="vertical-align:bottom;">
 														<input type="checkbox" id="chk01" class="chks" value="A002-01">
@@ -128,11 +130,11 @@
 													</div>
 													<input type="text" class="" id="chk06" style="display:none" disabled>
 												</div>
-											</td>
+											</th>
 										</tr>
 										<tr>
 											<td style="width:20%;background-color:#F2F2F2" class="txtc">임상증상 및 병력내용</td>
-											<td colspan="3" class="txtl">
+											<th colspan="3" class="txtl">
 												<div class="form-group clearfix" style="margin-bottom:-1px;">
 													<div class="icheck-primary d-inline">
 														<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
@@ -160,7 +162,7 @@
 													</div>
 													<input type="text" class="" id="chk17" style="display:none" disabled>
 												</div>
-											</td>
+											</th>
 										</tr>
 									</tbody>
 								</table>
@@ -197,6 +199,7 @@
 													<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
 													<input type="hidden" id="inspResult_${status.index+1 }" value="${item.inspResult}"/>
 													<input type="hidden" id="inspFirstCd_${status.index+1 }" value="${item.inspFirstCd}"/>
+													<input type="hidden" id="inspSecondCd_${status.index+1 }" value="${item.inspSecondCd}"/>
 													<input type="hidden" id="inspThirdCd_${status.index+1 }" value="${item.inspThirdCd}"/>
 												</td>
 												<td class="txtc">${item.inspFirstNm }</td>
@@ -218,44 +221,25 @@
 						<!-- /.card -->
 					</div>
 				</div>
-<!--
-				<div class="row inputType1">
-	 				<div class="col-md-6">
-						<div class="card card-primary">
-							<div class="card-header">
-								<h3 class="card-title">검사메모</h3>
-							</div>
-							<div class="card-body">
-								<table class="table">
-									<tbody>
-										<tr>
-											<td>
-												<textarea class="form-control" rows="3" id="inspResult"></textarea>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-	 				</div>
-					<div class="col-md-6">
-						<div class="card card-primary">
-							<div class="card-header">
-								<h3 class="card-title">검사사진</h3>
-							</div>
-							<div class="card-body">
-								<div>
-									<form id="fileForm" method="post" enctype="multipart/form-data">
-										<div class="filter-container row previewList"></div>
-									</form>
+				<div style="z-index:9">
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-primary">
+								<div class="card-header">
+									<h3 class="card-title">종합소견</h3>
+									<nav style="float:right">
+										<button class="btn btn-primary btn-flat sign"><i class="fas fa-pencil-alt"></i> 서명추가</button>
+									</nav>
+								</div>
+								<div class="card-body">
+									<textarea class="form-control" id="finalMemo" rows="4">${rceptInfo.finalMemo}</textarea>
+									<button type="button" class="btn btn-default btn-block save"><i class="fas fa-save"></i> 저장</button>
 								</div>
 							</div>
 						</div>
-	 				</div>
-	 			</div>
- -->
- 				<div class="result">
- 				</div>
+					</div>
+				</div>
+ 				<div class="result"></div>
 			</div>
 			<!-- /.container-fluid -->
 		</section>
@@ -304,9 +288,14 @@
 <!-- Page specific script -->
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
+<!-- ChartJS -->
+<script src="resources/plugins/chart.js/Chart.min.js"></script>
+
 <script>
 
 var inputType1Cnt = 1;
+var resultCnt = 1;
+
 $(function () {
 	$.ajax({
 		url : "sampleList",
@@ -350,19 +339,25 @@ $(function () {
 
 	$(".chks , .chkh").prop("disabled", true);
 
-	$("#inspList").find("tr").each(function(){
-		//if(this).find("[id^=inspFirstCd]").val() == 'B001-01'){
-			//drawImg($(this).find("[id^=inspNo]").val());
-		//}
-	});
-
 });
 
 window.onload = function(){
-	$("#inspList").find("tr").each(function(){
-		//if(this).find("[id^=inspFirstCd]").val() == 'B001-01'){
-			drawImg($(this).find("[id^=inspNo]").val());
-		//}
+	$("#inspList").find("tr").each(function(idx){
+		var k = idx+1;
+		var secVal = $(this).find("[id^=inspSecondCd]").val();
+		if(secVal == 'B001-01-01'){
+			fnPcr($(this).find("[id^=inspNo]").val(),k);
+		}else if(secVal == 'B001-01-14'){
+			fnAnti($(this).find("[id^=inspNo]").val(),k);
+		}else if(secVal == 'B001-03-18'){
+			fnSerum($(this).find("[id^=inspNo]").val(),k);
+		}else if(secVal == 'B001-04-23'){
+			fnBloodChem($(this).find("[id^=inspNo]").val(),k);
+		}else if(secVal == 'B001-04-24'){
+			fnCbc($(this).find("[id^=inspNo]").val(),k);
+		}else {
+			drawImg($(this).find("[id^=inspNo]").val(),k);
+		}
 	});
 }
 
@@ -378,103 +373,823 @@ function imgView(name){
 /*****************************************************************
  *                  검 사 클 릭 이 벤 트                                                                           *
  *****************************************************************/
-function drawImg(inspNo){
+function drawImg(inspNo,k){
 	$.ajax({
 		url : 'getFileList',
+		data : {inspNo : inspNo, fileGb : 'F001-05'},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var htmlData = '';
+			var inputType1 = '';
+			inputType1 += '<div class="row">';
+			inputType1 += '	<div class="col-md-6">';
+			inputType1 += '		<div class="card card-primary">';
+			inputType1 += '			<div class="card-header">';
+			inputType1 += '				<h3 class="card-title">검사메모</h3>';
+			inputType1 += '			</div>';
+			inputType1 += '			<div class="card-body">';
+			inputType1 += '				<table class="table">';
+			inputType1 += '					<tbody>';
+			inputType1 += '						<tr>';
+			inputType1 += '							<td style="width:40%;background-color:#F2F2F2">검사번호</td>';
+			inputType1 += '							<td id="inspNo'+k+'"></td>';
+			inputType1 += '						</tr>';
+			inputType1 += '						<tr>';
+			inputType1 += '							<td style="width:40%;background-color:#F2F2F2">시료</td>';
+			inputType1 += '							<td id="sample'+k+'"></td>';
+			inputType1 += '						</tr>';
+			inputType1 += '						<tr>';
+			inputType1 += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
+			inputType1 += '							<td id="inspCd'+k+'"></td>';
+			inputType1 += '						</tr>';
+			inputType1 += '						<tr>';
+			inputType1 += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
+			inputType1 += '							<td id="worker'+k+'"></td>';
+			inputType1 += '						</tr>';
+			inputType1 += '						<tr>';
+			inputType1 += '							<td style="width:40%;background-color:#F2F2F2">등록일</td>';
+			inputType1 += '							<td id="uptDt'+k+'"></td>';
+			inputType1 += '						</tr>';
+			inputType1 += '						<tr>';
+			inputType1 += '							<td style="width:40%;background-color:#F2F2F2">검사메모</td>';
+			inputType1 += '							<td id="inspResult'+k+'"></td>';
+			inputType1 += '						</tr>';
+			inputType1 += '					</tbody>';
+			inputType1 += '				</table>';
+			inputType1 += '			</div>';
+			inputType1 += '		</div>';
+			inputType1 += '	</div>';
+			inputType1 += '	<div class="col-md-6">';
+			inputType1 += '		<div class="card card-primary">';
+			inputType1 += '			<div class="card-header">';
+			inputType1 += '				<h3 class="card-title">검사사진</h3>';
+			inputType1 += '			</div>';
+			inputType1 += '			<div class="card-body">';
+			inputType1 += '				<div>';
+			inputType1 += '					<div class="filter-container row previewList'+inputType1Cnt+'"></div>';
+			inputType1 += '				</div>';
+			inputType1 += '			</div>';
+			inputType1 += '		</div>';
+			inputType1 += '	</div>';
+			inputType1 += '</div>';
+			$(".result").append(inputType1);
+
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var checked = '';
+				if(item.closeYn == 'Y'){
+					checked = 'checked';
+				}
+				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
+				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+				htmlData += '	</a>';
+				htmlData += '</div>';
+				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-8">'+item.title+'</div>';
+				htmlData += '		<div class="col-4">';
+				htmlData += '			<label for="chk1"></label>';
+				htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
+				htmlData += '				<div class="icheck-primary d-inline">';
+				htmlData += '					<input type="checkbox" disabled id="chk'+item.fileNo+'" '+checked+'>';
+				htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
+				htmlData += '				</div>';
+				htmlData += '			</div>';
+				htmlData += '		</div>';
+				htmlData += '	</div>';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-12">'+item.content+'</div>';
+				htmlData += '	</div>';
+				htmlData += '</div>';
+
+			}
+			$(".previewList"+inputType1Cnt).append(htmlData);
+			inputType1Cnt++;
+
+			$.ajax({
+				url : 'getInspResult',
+				data : {inspNo : inspNo},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					$("#inspNo"+k).text(data.inspNo);
+					$("#sample"+k).text(data.sampleName);
+					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#worker"+k).text(data.workerNm);
+					$("#uptDt"+k).text(data.uptDt);
+					$("#inspResult"+k).text(data.inspResult);
+				}
+			});
+		}
+	});
+}
+
+function fnCbc(inspNo,k){
+	$.ajax({
+		url : 'getCbcList',
 		data : {inspNo : inspNo},
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			let htmlData = '';
-			if(data.length > 0){
-				var inputType1 = '';
-				inputType1 += '<div class="row inputType1">';
-				inputType1 += '	<div class="col-md-6">';
-				inputType1 += '		<div class="card card-primary">';
-				inputType1 += '			<div class="card-header">';
-				inputType1 += '				<h3 class="card-title">검사메모</h3>';
-				inputType1 += '			</div>';
-				inputType1 += '			<div class="card-body">';
-				inputType1 += '				<table class="table">';
-				inputType1 += '					<tbody>';
-				inputType1 += '						<tr>';
-				inputType1 += '							<td>';
-				inputType1 += '								<textarea readonly class="form-control" rows="3">'+data[0].inspResult+'</textarea>';
-				inputType1 += '							</td>';
-				inputType1 += '						</tr>';
-				inputType1 += '					</tbody>';
-				inputType1 += '				</table>';
-				inputType1 += '			</div>';
-				inputType1 += '		</div>';
-				inputType1 += '	</div>';
-				inputType1 += '	<div class="col-md-6">';
-				inputType1 += '		<div class="card card-primary">';
-				inputType1 += '			<div class="card-header">';
-				inputType1 += '				<h3 class="card-title">검사사진</h3>';
-				inputType1 += '			</div>';
-				inputType1 += '			<div class="card-body">';
-				inputType1 += '				<div>';
-				inputType1 += '					<div class="filter-container row previewList'+inputType1Cnt+'"></div>';
-				inputType1 += '				</div>';
-				inputType1 += '			</div>';
-				inputType1 += '		</div>';
-				inputType1 += '	</div>';
-				inputType1 += '</div>';
-				$(".result").append(inputType1);
+			var html = "";
+			html += '<div class="row">';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<table class="table">';
+			html += '					<tbody>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사번호</td>';
+			html += '							<td id="inspNo'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">시료</td>';
+			html += '							<td id="sample'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
+			html += '							<td id="inspCd'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
+			html += '							<td id="worker'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">등록일</td>';
+			html += '							<td id="uptDt'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사메모</td>';
+			html += '							<td id="inspResult'+k+'"></td>';
+			html += '						</tr>';
+			html += '					</tbody>';
+			html += '				</table>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">혈구검사</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<div class="table-responsive">';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<colgroup>';
+			html += '							<col style="width:50%"/>';
+			html += '							<col style="width:50%"/>';
+			html += '						</colgroup>';
+			html += '						<tbody id="cbc">';
+			html += '						</tbody>';
+			html += '					</table>';
+			html += '				</div>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '</div>';
+			$(".result").append(html);
 
-				for(var i=0; i<data.length; i++){
-					var item = data[i];
-					var checked = '';
-					if(item.closeYn == 'Y'){
-						checked = 'checked';
-					}
-					htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
-					htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-					htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
-					htmlData += '	</a>';
-					htmlData += '</div>';
-					htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
-					htmlData += '	<div class="row">';
-					htmlData += '		<div class="col-8">';
-					htmlData += '			<input type="text" readonly class="form-control" id="title'+item.fileNo+'" placeholder="장기" value="'+item.title+'">';
-					htmlData += '		</div>';
-					htmlData += '		<div class="col-4" style="padding-top:-9px">';
-					htmlData += '			<label for="chk1"></label>';
-					htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
-					htmlData += '				<div class="icheck-primary d-inline">';
-					htmlData += '					<input type="checkbox" disabled id="chk'+item.fileNo+'" '+checked+'>';
-					htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
-					htmlData += '				</div>';
-					htmlData += '			</div>';
-					htmlData += '		</div>';
-					htmlData += '	</div>';
-					htmlData += '	<div class="row">';
-					htmlData += '		<div class="col-12">';
-					htmlData += '			<textarea readonly class="form-control" rows="3" id="content'+item.fileNo+'" placeholder="메모">'+item.content+'</textarea>';
-					htmlData += '		</div>';
-					htmlData += '	</div>';
-					htmlData += '</div>';
-
-				}
-				$(".previewList"+inputType1Cnt).append(htmlData);
-				inputType1Cnt++;
-
-				$.ajax({
-					url : 'getInspResult',
-					data : {inspNo : inspNo},
-					dataType : 'json',
-					type : 'post',
-					success : function(data){
-						$("#inspResult"+inputType1Cnt).val(data.inspResult)
-					}
-				});
+			var subHtml = '';
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				subHtml += '<tr>';
+				subHtml += '<td>'+item.itemName+'</td>';
+				subHtml += '<td>'+item.val+'</td>';
+				subHtml += '</tr>';
 			}
+			$("#cbc").html(subHtml);
+
+			$.ajax({
+				url : 'getInspResult',
+				data : {inspNo : inspNo},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					$("#inspNo"+k).text(data.inspNo);
+					$("#sample"+k).text(data.sampleName);
+					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#worker"+k).text(data.workerNm);
+					$("#uptDt"+k).text(data.uptDt);
+					$("#inspResult"+k).text(data.inspResult);
+				}
+			});
+		}
+	});
+}
+
+function fnBloodChem(inspNo,k){
+	$.ajax({
+		url : 'getBcList',
+		data : {inspNo : inspNo},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var html = "";
+			html += '<div class="row">';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<table class="table">';
+			html += '					<tbody>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사번호</td>';
+			html += '							<td id="inspNo'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">시료</td>';
+			html += '							<td id="sample'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
+			html += '							<td id="inspCd'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
+			html += '							<td id="worker'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">등록일</td>';
+			html += '							<td id="uptDt'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사메모</td>';
+			html += '							<td id="inspResult'+k+'"></td>';
+			html += '						</tr>';
+			html += '					</tbody>';
+			html += '				</table>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">혈액화학검사</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<div class="table-responsive">';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<colgroup>';
+			html += '							<col style="width:50%"/>';
+			html += '							<col style="width:50%"/>';
+			html += '						</colgroup>';
+			html += '						<tbody id="bloodChem">';
+			html += '						</tbody>';
+			html += '					</table>';
+			html += '				</div>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '</div>';
+			$(".result").append(html);
+
+			var subHtml = '';
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				subHtml += '<tr>';
+				subHtml += '<td>'+item.itemName+'</td>';
+				subHtml += '<td>'+item.val+'</td>';
+				subHtml += '</tr>';
+			}
+			$("#bloodChem").html(subHtml);
+
+			$.ajax({
+				url : 'getInspResult',
+				data : {inspNo : inspNo},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					$("#inspNo"+k).text(data.inspNo);
+					$("#sample"+k).text(data.sampleName);
+					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#worker"+k).text(data.workerNm);
+					$("#uptDt"+k).text(data.uptDt);
+					$("#inspResult"+k).text(data.inspResult);
+				}
+			});
+		}
+
+	});
+}
+
+function fnPcr(inspNo,k){
+	$.ajax({
+		url : 'getPcrList',
+		data : {inspNo : inspNo},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var html = '';
+			html += '<div class="row">';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<table class="table">';
+			html += '					<tbody>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사번호</td>';
+			html += '							<td id="inspNo'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">시료</td>';
+			html += '							<td id="sample'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
+			html += '							<td id="inspCd'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
+			html += '							<td id="worker'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">등록일</td>';
+			html += '							<td id="uptDt'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사메모</td>';
+			html += '							<td id="inspResult'+k+'"></td>';
+			html += '						</tr>';
+			html += '					</tbody>';
+			html += '				</table>';
+			html += '			</div>';
+			html += '			<div style="height:10px;"></div>';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">사진</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<div class="filter-container row previewList'+inputType1Cnt+'"></div>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">PCR</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<div class="table-responsive">';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<thead>';
+			html += '							<tr>';
+			html += '								<td style="background-color:#F2F2F2;width:10%;">No.</td>';
+			html += '								<td style="background-color:#F2F2F2;width:*;">시료</td>';
+			html += '								<td style="background-color:#F2F2F2;width:10%;">시료량</td>';
+			html += '								<td style="background-color:#F2F2F2;width:10%;">결과</td>';
+			html += '								<td style="background-color:#F2F2F2;width:25%;">비고</td>';
+			html += '							</tr>';
+			html += '						</thead>';
+			html += '						<tbody id="pcr">';
+			html += '						</tbody>';
+			html += '					</table>';
+			html += '				</div>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '</div>';
+
+			$(".result").append(html);
+
+			var subHtml = '';
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var no = i+1;
+				subHtml += '<tr>';
+				subHtml += '	<td>'+no+'</td>';
+				subHtml += '	<td>'+item.smplName+'</td>';
+				subHtml += '	<td>'+item.capacity+'</td>';
+				subHtml += '	<td>'+item.result+'</td>';
+				subHtml += '	<td>'+item.rmk+'</td>';
+				subHtml += '</tr>';
+			}
+			$("#pcr").html(subHtml);
+
+			$.ajax({
+				url : 'getFileList',
+				data : {inspNo : inspNo},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					var htmlData = '';
+
+					for(var i=0; i<data.length; i++){
+						var item = data[i];
+						htmlData += '<div id="previewImg'+item.fileNo+'">';
+						htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+						htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+						htmlData += '	</a>';
+						htmlData += '</div>';
+					}
+					$(".previewList"+inputType1Cnt).append(htmlData);
+
+					inputType1Cnt++;
+				}
+			});
+
+			$.ajax({
+				url : 'getInspResult',
+				data : {inspNo : inspNo},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					$("#inspNo"+k).text(data.inspNo);
+					$("#sample"+k).text(data.sampleName);
+					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#worker"+k).text(data.workerNm);
+					$("#uptDt"+k).text(data.uptDt);
+					$("#inspResult"+k).text(data.inspResult);
+				}
+			});
+		}
+	});
+
+}
+
+function fnSerum(inspNo,k){
+	$.ajax({
+		url : 'getSerumList',
+		data : {inspNo : inspNo},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var html = '';
+			html += '<div class="row">';
+			html += '	<div class="col-md-12">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-body">';
+			html += '				<div class="chart">';
+			html += '					<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>';
+			html += '				</div>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<table class="table">';
+			html += '					<tbody>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사번호</td>';
+			html += '							<td id="inspNo'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">시료</td>';
+			html += '							<td id="sample'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
+			html += '							<td id="inspCd'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
+			html += '							<td id="worker'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">등록일</td>';
+			html += '							<td id="uptDt'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사메모</td>';
+			html += '							<td id="inspResult'+k+'"></td>';
+			html += '						</tr>';
+			html += '					</tbody>';
+			html += '				</table>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">혈청</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<div class="table-responsive">';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<thead>';
+			html += '							<tr>';
+			html += '								<td style="width:50%;background-color:#F2F2F2">시료명</td>';
+			html += '								<td style="width:50%;background-color:#F2F2F2">데이터</td>';
+			html += '							</tr>';
+			html += '						</thead>';
+			html += '						<tbody id="serum">';
+			html += '						</tbody>';
+			html += '					</table>';
+			html += '				</div>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '</div>';
+			$(".result").append(html);
+
+			var subHtml = '';
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				subHtml += '<tr>';
+				subHtml += '<td>'+item.serName+'</td>';
+				subHtml += '<td>'+item.serData+'</td>';
+				subHtml += '</tr>';
+			}
+			$("#serum").html(subHtml);
+
+			$.ajax({
+				url : 'getSerumChart',
+				dataType : 'json',
+				type : 'post',
+				data : {inspNo : inspNo},
+				success:function(data){
+					setChartData(data);
+				}
+			})
+
+			$.ajax({
+				url : 'getInspResult',
+				data : {inspNo : inspNo},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					$("#inspNo"+k).text(data.inspNo);
+					$("#sample"+k).text(data.sampleName);
+					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#worker"+k).text(data.workerNm);
+					$("#uptDt"+k).text(data.uptDt);
+					$("#inspResult"+k).text(data.inspResult);
+				}
+			});
 		}
 	});
 }
 
 
+function setChartData(data){
+	var areaChartData = '';
+	// x축값 구하기
+	var xArr = new Array();
+	var maxData = 0;
+	for(var i=0; i<data.length; i++){
+		if(maxData < data[i].serData){
+			maxData = data[i].serData;
+		}
+	}
+
+	if(maxData < 10) maxData = 10;
+
+	for(var i=0; i<=maxData; i++){
+		xArr.push(i);
+	}
+
+	// y축값 구하기
+	var yArr = new Array();
+
+	for(var i=0; i<=maxData; i++){
+		var flag = false;
+		for(var j=0; j<data.length; j++){
+			if(i == data[j].serData){
+				yArr.push(Number(data[j].cnt));
+				flag = true;
+			}
+		}
+		if(!flag){
+			yArr.push(0);
+		}
+
+	}
+
+	var dataSet = '';
+	var dataSets = new Array();
+	dataSet = {
+			label               : '혈청개수',
+			backgroundColor     : 'rgba(60,141,188,0.9)',
+			borderColor         : '#3b8bba',
+			pointRadius          : false,
+			pointColor          : 'rgba(60,141,188,1)',
+			pointStrokeColor    : 'fff',
+			pointHighlightFill  : '#fff',
+			pointHighlightStroke: 'rgba(60,141,188,1)',
+			data                : yArr
+		}
+	dataSets.push(dataSet);
+
+	var areaChartData = {
+		labels  :	xArr,
+		datasets: dataSets
+	}
+
+    var barChartCanvas = $('#barChart').get(0).getContext('2d');
+    var barChartData = $.extend(true, {}, areaChartData);
+    var temp0 = areaChartData.datasets[0];
+    barChartData.datasets[0] = temp0;
+
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+
+    new Chart(barChartCanvas, {
+      type: 'bar',
+      data: barChartData,
+      options: barChartOptions
+    })
+}
+
+function fnAnti(inspNo,k){
+	$.ajax({
+		url : 'getAntiList',
+		data : {inspNo : inspNo},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var html = '';
+			html += '<div class="row">';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<table class="table">';
+			html += '					<tbody>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사번호</td>';
+			html += '							<td id="inspNo'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">시료</td>';
+			html += '							<td id="sample'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
+			html += '							<td id="inspCd'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
+			html += '							<td id="worker'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">등록일</td>';
+			html += '							<td id="uptDt'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사메모</td>';
+			html += '							<td id="inspResult'+k+'"></td>';
+			html += '						</tr>';
+			html += '					</tbody>';
+			html += '				</table>';
+			html += '			</div>';
+			html += '			<div style="height:10px;"></div>';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">사진</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<div class="filter-container row previewList'+inputType1Cnt+'"></div>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">항생제 감수성 검사 기록지</h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<div class="table-responsive">';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<thead>';
+			html += '							<tr>';
+			html += '								<td rowspan="2">번호</td>';
+			html += '								<td rowspan="2">항생제(㎍)</td>';
+			html += '								<td rowspan="2">약자</td>';
+			html += '								<td colspan="3">zone diameter (mm)</td>';
+			html += '								<td colspan="2">검사결과</td>';
+			html += '								<td rowspan="2" class="w200">비고</td>';
+			html += '							</tr>';
+			html += '							<tr>';
+			html += '								<td>R<br/>≤</td>';
+			html += '								<td>I</td>';
+			html += '								<td>S<br/>≥</td>';
+			html += '								<td class="w60">(mm)</td>';
+			html += '								<td class="w60">R.I.S.</td>';
+			html += '							</tr>';
+			html += '						</thead>';
+			html += '						<tbody id="antibiotic"></tbody>';
+			html += '					</table>';
+			html += '				</div>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '</div>';
+
+			$(".result").append(html);
+
+			var case1html = '<td>Ampicilin (10)</td><td>AM10</td><td>13</td><td>14-16</td><td>17</td>';
+			var case2html = '<td>Ceftiofur(30)</td><td>FUR30</td><td>17</td><td>18-20</td><td>21</td>';
+			var case3html = '<td>Enrofloxacin(5)</td><td>ENR5</td><td>12</td><td>13-15</td><td>16</td>';
+			var case4html = '<td>Colistin(10)</td><td>CT10</td><td>8</td><td>9-10</td><td>11</td>';
+			var case5html = '<td>Gentamycin(10)</td><td>GM10</td><td>12</td><td>13-14</td><td>15</td>';
+			var case6html = '<td>Oxytetracycin</td><td>T30</td><td>14</td><td>15-18</td><td>19</td>';
+			var case7html = '<td>Trimethoprim +<br/>Sulfamethoxazole<br/>(1.25+23.75)</td><td>SXT25</td><td>10</td><td>11-15</td><td>16</td>';
+			var case8html = '<td>Tilmicosin(15)</td><td>TIL15</td><td>10</td><td>11</td><td>12</td>';
+			var case9html = '<td>Tylosin</td><td>TY30</td><td>10</td><td>11-19</td><td>20</td>';
+			var case10html = '<td>Florfenicol</td><td>FFC30</td><td>14</td><td>15-18</td><td>19</td>';
+
+			var subHtml = '';
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var no = item.antiNo;
+				switch(i) {
+					case 0 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case1html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+					case 1 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case2html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+					case 2 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case3html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+					case 3 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case4html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+					case 4 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case5html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+					case 5 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case6html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+					case 6 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case7html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+					case 7 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case8html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+					case 8 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case9html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+					case 9 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case10html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
+				}
+			}
+			$("#antibiotic").html(subHtml);
+
+			$.ajax({
+				url : 'getFileList',
+				data : {inspNo : inspNo},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					var htmlData = '';
+					for(var i=0; i<data.length; i++){
+						var item = data[i];
+						htmlData += '<div id="previewImg'+item.fileNo+'">';
+						htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+						htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+						htmlData += '	</a>';
+						htmlData += '</div>';
+					}
+					$(".previewList"+inputType1Cnt).append(htmlData);
+					inputType1Cnt++;
+				}
+			});
+
+			$.ajax({
+				url : 'getInspResult',
+				data : {inspNo : inspNo},
+				dataType : 'json',
+				type : 'post',
+				success : function(data){
+					$("#inspNo"+k).text(data.inspNo);
+					$("#sample"+k).text(data.sampleName);
+					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#worker"+k).text(data.workerNm);
+					$("#uptDt"+k).text(data.uptDt);
+					$("#inspResult"+k).text(data.inspResult);
+				}
+			});
+		}
+	});
+
+
+}
+
+$(".sign").click(function(){
+	var fm = $("#finalMemo").val();
+	var sn = "\n\n아비넥스트 CEO / 충북대학교 수의과대학 명예교수 모인필";
+	$("#finalMemo").val(fm+sn);
+})
+
+$(".save").click(function(){
+	var rqstNo = "${rceptInfo.rqstNo }";
+
+	var data = {
+		rqstNo : rqstNo,
+		finalMemo : $("#finalMemo").val(),
+		uptId : JSON.parse(sessionStorage.getItem("userInfo")).userId
+	}
+	$.ajax({
+		url : 'modifyFinal',
+		data : data,
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			alert("저장하였습니다.");
+		}
+	});
+})
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>
 </html>
+
