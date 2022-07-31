@@ -1,12 +1,17 @@
 package kr.or.abnext.chart;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.abnext.domain.ChartView1;
+import kr.or.abnext.domain.SearchView;
+import kr.or.abnext.domain.SickCdView;
+import kr.or.abnext.domain.TbLocal;
+import kr.or.abnext.domain.TbRcept;
 
 @Repository
 public class ChartDao {
@@ -45,5 +50,27 @@ public class ChartDao {
 	//getBasicChartList5
 	public List<ChartView1> getBasicChart6List(ChartView1 chartView){
 		return sql.selectList("chart.getBasicChartList6", chartView);
+	}
+
+	//getBasicChartList5
+	public List<ChartView1> getBasicChart7List(ChartView1 chartView){
+		return sql.selectList("chart.getBasicChartList7", chartView);
+	}
+
+	public List<ChartView1> getBasicChart8List(SearchView searchView){
+		return sql.selectList("chart.getBasicChartList8", searchView);
+	}
+
+	public List<TbRcept> getButlerList(){
+		return sql.selectList("chart.getButlerList");
+	}
+
+	public List<TbLocal> getLocalList(){
+		return sql.selectList("chart.getLocalList");
+	}
+
+	//getSickCdList
+	public List<SickCdView> getSickCdList(Map<String, Object> param){
+		return sql.selectList("chart.getSickCdList", param);
 	}
 }

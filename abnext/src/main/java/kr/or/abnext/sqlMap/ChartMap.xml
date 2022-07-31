@@ -435,4 +435,191 @@
 	    */
 	</select>
 
+	<!-- 지역별 혈청검사(혈구검사)
+		혈구검사 코드  B001-04-24
+	-->
+	<select id="getBasicChartList7" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
+		SELECT PDL_NO as RQST_NO
+			   , RQST_DT
+			   , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = A.ANIM_THIRD_CD) AS ANIM_NM
+			   , ANIM_BIRTH
+			   , 1 AS SAMPLE1
+			   , 2 AS SAMPLE2
+			   , 3 AS SAMPLE3
+			   , 1 AS SAMPLE4
+			   , 13.1 AS SAMPLE5
+			   , 14.2 AS SAMPLE6
+			   , 11.4 AS SAMPLE7
+			   , 9 AS SAMPLE8
+			   , 10 AS SAMPLE9
+			   , 8.2 AS SAMPLE10
+			   , 9.0 AS SAMPLE11
+			   , 3.5 AS SAMPLE12
+			   , 6 AS SAMPLE13
+			   , 7 AS SAMPLE14
+			   , 6 AS SAMPLE15
+			   , 7 AS SAMPLE16
+	     FROM TB_RCEPT A
+	    /* 혈구검사지 나오면 INNER JOIN */
+	    WHERE 1=1
+	    <if test="stDt != null and stDt != '' ">
+	    	AND A.RQST_DT <![CDATA[>=]]> replace(replace(#{stDt},'-',''),'-','')
+	    </if>
+	    <if test="endDt != null and endDt != '' ">
+	    	AND A.RQST_DT <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
+	    </if>
+	    /* AND RQST_NO IN (
+	    	  	SELECT RQST_NO
+	    	  	  FROM TB_INSPECTION B
+	    	  	 WHERE RQST_NO = A.RQST_NO
+	    	  	   AND INSP_SECOND_CD = 'B001-04-24'
+	    	  )
+	    */
+	</select>
+
+
+	<!-- 보호자조회 -->
+	<select id="getButlerList" resultType="kr.or.abnext.domain.TbRcept">
+		SELECT ANIM_BUTLER
+		  FROM TB_RCEPT A
+	</select>
+
+	<!-- 지역조회 -->
+	<select id="getLocalList" resultType="kr.or.abnext.domain.TbLocal">
+		SELECT LOCAL_NO
+			   , LOCAL_NM
+		  FROM TB_LOCAL A
+	</select>
+
+	<!-- 질병목록 조회 -->
+	<select id="getSickCdList" parameterType="Map" resultType="kr.or.abnext.domain.SickCdView">
+		SELECT C.*
+		  FROM (
+				SELECT CODE_ID
+					   , (SELECT CODE_NM
+					   	    FROM TB_CODE
+					   	   WHERE CODE_ID = (SELECT UPP_CODE_ID
+					   	   					  FROM TB_CODE
+					   	   					 WHERE CODE_ID = (SELECT UPP_CODE_ID
+									   	   					    FROM TB_CODE
+									   	   					   WHERE CODE_ID = B.UPP_CODE_ID
+									   	   					  )
+					   	   					)
+					   	  ) CATE1
+					   , (SELECT CODE_NM
+					   	    FROM TB_CODE
+					   	   WHERE CODE_ID = (SELECT UPP_CODE_ID
+					   	   					  FROM TB_CODE
+					   	   					 WHERE CODE_ID = B.UPP_CODE_ID
+					   	   					)
+					   	  ) CATE2
+					   , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = B.UPP_CODE_ID) CATE3
+					   , CODE_NM AS CATE4
+					   , CODE_DTL_MEMO AS MEMO
+				  FROM (
+						SELECT CODE_ID
+							   , UPP_CODE_ID
+							   , CODE_NM
+							   , CODE_DTL_MEMO
+						  FROM TB_CODE A
+						 WHERE 1=1
+						   AND CODE_ID LIKE CONCAT('%', #{codeId}, '-%')
+						) B
+				 UNION
+				SELECT CODE_ID
+					   , (SELECT CODE_NM
+					   	    FROM TB_CODE
+					   	   WHERE CODE_ID = (SELECT UPP_CODE_ID
+					   	   					  FROM TB_CODE
+					   	   					 WHERE CODE_ID = B.UPP_CODE_ID
+					   	   					)
+					   	  ) CATE1
+					   , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = B.UPP_CODE_ID) CATE2
+					   , CODE_NM AS CATE3
+					   , '' AS CATE4
+					   , CODE_DTL_MEMO AS MEMO
+				  FROM (
+						SELECT CODE_ID
+							   , UPP_CODE_ID
+							   , CODE_NM
+							   , CODE_DTL_MEMO
+						  FROM TB_CODE A
+						 WHERE 1=1
+						   AND CODE_ID LIKE CONCAT('%', #{codeId})
+						   AND 0 = (SELECT COUNT(*) FROM TB_CODE WHERE CODE_ID LIKE CONCAT('%', A.CODE_ID, '-%'))
+						) B
+				) C
+		ORDER BY CODE_ID
+	</select>
+
+
+	<select id="getBasicChartList8" parameterType="kr.or.abnext.domain.SearchView" resultType="kr.or.abnext.domain.ChartView1">
+		SELECT A.PDL_NO as RQST_NO
+			   , A.HOSP_NM
+			   , A.ANIM_BUTLER
+			   , A.DOC_NM
+			   , A.BUTLER_SIDO as VALUE1
+			   , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = A.ANIM_THIRD_CD) AS ANIM_NM
+			   , A.ANIM_BIRTH
+			   , A.ANIM_SEX AS VALUE2
+			   , (SELECT CODE_NM
+			        FROM TB_CODE
+			       WHERE CODE_ID = B.INSP_FIRST_CD) as VALUE3
+			   , (SELECT CODE_NM
+			        FROM TB_CODE
+			       WHERE CODE_ID = B.INSP_SECOND_CD) as VALUE4
+			   , (SELECT CODE_NM
+			        FROM TB_CODE
+			       WHERE CODE_ID = B.INSP_THIRD_CD) as VALUE5
+			   , (SELECT CODE_NM
+			        FROM TB_CODE
+			       WHERE CODE_ID = A.DIAG_CD) AS DIAG_NM /*최종진단명*/
+			   , PROC_STAT_NM as VALUE6
+	     FROM TB_RCEPT A
+	 	INNER JOIN TB_INSPECTION B
+	 	   ON (A.RQST_NO = B.RQST_NO)
+	    WHERE 1=1
+	    <if test="stDt != null and stDt != '' ">
+	    	AND A.ANIM_BIRTH <![CDATA[>=]]> replace(replace(#{stDt},'-',''),'-','')
+	    </if>
+	    <if test="endDt != null and endDt != '' ">
+	    	AND A.ANIM_BIRTH <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
+	    </if>
+	    <if test="sidoNo != null and sidoNo != '' ">
+	    	AND A.BUTLER_SIDO IN
+	    	<foreach collection="sidoNo" item="item" index="index" separator="," open="(" close=")">        
+		    	#{item}     
+		    </foreach>
+
+	    </if>
+		<if test="animThirdCd != null and animThirdCd != '' ">
+	    	AND A.ANIM_THIRD_CD IN
+	    	<foreach collection="animThirdCd" item="thirdCd" index="index" separator="," open="(" close=")">        
+		    	#{thirdCd}     
+		    </foreach>
+	    </if>
+		<if test="hospNo != null and hospNo != '' ">
+	    	AND A.HOSP_NO = #{hospNo}
+	    </if>
+	    <if test="animButler != null and animButler != '' ">
+	    	AND A.ANIM_BUTLER = #{animButler}
+	    </if>
+	    <if test="animButler != null and animButler != '' ">
+	    	AND A.DOC_NO = #{docNo}
+	    </if>
+		<if test="cate4 != null and cate4 != '' ">
+	    	AND (B.INSP_THIRD_CD IN
+	    	<foreach collection="cate4" item="thirdCd" index="index" separator="," open="(" close=")">        
+		    	#{thirdCd}     
+		    </foreach>
+		    OR B.INSP_SECOND_CD IN
+		    <foreach collection="cate4" item="secondCd" index="index" separator="," open="(" close=")">        
+		    	#{secondCd}     
+		    </foreach>
+	    </if>
+
+	</select>
+
+
+
 </mapper>

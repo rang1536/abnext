@@ -417,7 +417,9 @@ public class AdminService {
 		return tbUser;
 	}
 
-
+	public List<TbCode> getCodeListServ(Map<String, Object> param){
+		return adminDao.getCodeList(param);
+	}
 
 	//resetPassword
 	/**

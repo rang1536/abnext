@@ -102,7 +102,7 @@
 				</div>
 				<!-- /.card -->
 
-				<div class="card">
+				<div class="card sumAvgDiv" style="display:none;">
 					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
 						<h3 class="card-title"><b>평균치</b></h3>
 
@@ -204,8 +204,6 @@
     var update_item ={};
 
 	function setGrid(data){
-		console.log(JSON.stringify(data[0]))
-
 		$("#jsGrid1").jsGrid({
 	        height: "auto",
 	        width: "100%",
@@ -222,12 +220,16 @@
 
 	        				if(item.Checked){
 	        					if(chkRowCnt == 0){
+	        						$('.sumAvgDiv').css('display', '');
 	        						chkRowCnt++;
 		        					addSumRow(item);
 		        				}else{
 		        					chkRowCnt++;
-		        					updateSumRow(item);
+		        					updateSumRow(item, 'plus');
 		        				}
+	        				}else{
+	        					chkRowCnt--;
+	        					updateSumRow(item, 'minus');
 	        				}
 	        			})
 	        		}
@@ -310,20 +312,20 @@
 		var dataArr = new Array();
 		//데이터를 추가를 위해서 json object 생성
 		insert_item.sumTitle = '평균값';
-		insert_item.sample1 = item.sample1/chkRowCnt;
-		insert_item.sample2 = item.sample2/chkRowCnt;
-		insert_item.sample3 = item.sample3/chkRowCnt;
-		insert_item.sample4 = item.sample4/chkRowCnt;
-		insert_item.sample5 = item.sample5/chkRowCnt;
-		insert_item.sample6 = item.sample6/chkRowCnt;
-		insert_item.sample7 = item.sample7/chkRowCnt;
-		insert_item.sample8 = item.sample8/chkRowCnt;
-		insert_item.sample9 = item.sample9/chkRowCnt;
-		insert_item.sample10 = item.sample10/chkRowCnt;
-		insert_item.sample11 = item.sample11/chkRowCnt;
-		insert_item.sample12 = item.sample12/chkRowCnt;
-		insert_item.sample13 = item.sample13/chkRowCnt;
-		insert_item.sample14 = item.sample14/chkRowCnt;
+		insert_item.sample1 = (item.sample1/chkRowCnt).toFixed(2);
+		insert_item.sample2 = (item.sample2/chkRowCnt).toFixed(2);
+		insert_item.sample3 = (item.sample3/chkRowCnt).toFixed(2);
+		insert_item.sample4 = (item.sample4/chkRowCnt).toFixed(2);
+		insert_item.sample5 = (item.sample5/chkRowCnt).toFixed(2);
+		insert_item.sample6 = (item.sample6/chkRowCnt).toFixed(2);
+		insert_item.sample7 = (item.sample7/chkRowCnt).toFixed(2);
+		insert_item.sample8 = (item.sample8/chkRowCnt).toFixed(2);
+		insert_item.sample9 = (item.sample9/chkRowCnt).toFixed(2);
+		insert_item.sample10 = (item.sample10/chkRowCnt).toFixed(2);
+		insert_item.sample11 = (item.sample11/chkRowCnt).toFixed(2);
+		insert_item.sample12 = (item.sample12/chkRowCnt).toFixed(2);
+		insert_item.sample13 = (item.sample13/chkRowCnt).toFixed(2);
+		insert_item.sample14 = (item.sample14/chkRowCnt).toFixed(2);
 
 		dataArr.push(insert_item);
 		//수정을 위한 세팅 추가
@@ -348,31 +350,82 @@
 	};
 
 
-	function updateSumRow(item) {
+	function updateSumRow(item, type) {
 		var insert_item = {};
 		var dataArr = new Array();
 
 		insert_item.sumTitle = '평균값';
 
-		insert_item.sample1 = update_item.sample1 + item.sample1;
-		insert_item.sample2 = update_item.sample2 + item.sample2;
-		insert_item.sample3 = update_item.sample3 + item.sample3;
-		insert_item.sample4 = update_item.sample4 + item.sample4;
-		insert_item.sample5 = update_item.sample5 + item.sample5;
-		insert_item.sample6 = update_item.sample6 + item.sample6;
-		insert_item.sample7 = update_item.sample7 + item.sample7;
-		insert_item.sample8 = update_item.sample8 + item.sample8;
-		insert_item.sample9 = update_item.sample9 + item.sample9;
-		insert_item.sample10 = update_item.sample10 + item.sample10;
-		insert_item.sample11 = update_item.sample11 + item.sample11;
-		insert_item.sample12 = update_item.sample12 + item.sample12;
-		insert_item.sample13 = update_item.sample13 + item.sample13;
-		insert_item.sample14 = update_item.sample14 + item.sample14;
+		if(type == 'plus'){
+
+			update_item.sample1 = update_item.sample1 + item.sample1;
+			update_item.sample2 = update_item.sample2 + item.sample2;
+			update_item.sample3 = update_item.sample3 + item.sample3;
+			update_item.sample4 = update_item.sample4 + item.sample4;
+			update_item.sample5 = update_item.sample5 + item.sample5;
+			update_item.sample6 = update_item.sample6 + item.sample6;
+			update_item.sample7 = update_item.sample7 + item.sample7;
+			update_item.sample8 = update_item.sample8 + item.sample8;
+			update_item.sample9 = update_item.sample9 + item.sample9;
+			update_item.sample10 = update_item.sample10 + item.sample10;
+			update_item.sample11 = update_item.sample11 + item.sample11;
+			update_item.sample12 = update_item.sample12 + item.sample12;
+			update_item.sample13 = update_item.sample13 + item.sample13;
+			update_item.sample14 = update_item.sample14 + item.sample14;
+
+		}else{
+
+			update_item.sample1 = update_item.sample1 - item.sample1;
+			update_item.sample2 = update_item.sample2 - item.sample2;
+			update_item.sample3 = update_item.sample3 - item.sample3;
+			update_item.sample4 = update_item.sample4 - item.sample4;
+			update_item.sample5 = update_item.sample5 - item.sample5;
+			update_item.sample6 = update_item.sample6 - item.sample6;
+			update_item.sample7 = update_item.sample7 - item.sample7;
+			update_item.sample8 = update_item.sample8 - item.sample8;
+			update_item.sample9 = update_item.sample9 - item.sample9;
+			update_item.sample10 = update_item.sample10 - item.sample10;
+			update_item.sample11 = update_item.sample11 - item.sample11;
+			update_item.sample12 = update_item.sample12 - item.sample12;
+			update_item.sample13 = update_item.sample13 - item.sample13;
+			update_item.sample14 = update_item.sample14 - item.sample14;
+		}
+
+		if(chkRowCnt == 0){
+			insert_item.sample1 = 0.00;
+			insert_item.sample2 = 0.00;
+			insert_item.sample3 = 0.00;
+			insert_item.sample4 = 0.00;
+			insert_item.sample5 = 0.00;
+			insert_item.sample6 = 0.00;
+			insert_item.sample7 = 0.00;
+			insert_item.sample8 = 0.00;
+			insert_item.sample9 = 0.00;
+			insert_item.sample10 = 0.00;
+			insert_item.sample11 = 0.00;
+			insert_item.sample12 = 0.00;
+			insert_item.sample13 = 0.00;
+			insert_item.sample14 = 0.00;
+
+		}else{
+			insert_item.sample1 = (update_item.sample1/chkRowCnt).toFixed(2);
+			insert_item.sample2 = (update_item.sample2/chkRowCnt).toFixed(2);
+			insert_item.sample3 = (update_item.sample3/chkRowCnt).toFixed(2);
+			insert_item.sample4 = (update_item.sample4/chkRowCnt).toFixed(2);
+			insert_item.sample5 = (update_item.sample5/chkRowCnt).toFixed(2);
+			insert_item.sample6 = (update_item.sample6/chkRowCnt).toFixed(2);
+			insert_item.sample7 = (update_item.sample7/chkRowCnt).toFixed(2);
+			insert_item.sample8 = (update_item.sample8/chkRowCnt).toFixed(2);
+			insert_item.sample9 = (update_item.sample9/chkRowCnt).toFixed(2);
+			insert_item.sample10 = (update_item.sample10/chkRowCnt).toFixed(2);
+			insert_item.sample11 = (update_item.sample11/chkRowCnt).toFixed(2);
+			insert_item.sample12 = (update_item.sample12/chkRowCnt).toFixed(2);
+			insert_item.sample13 = (update_item.sample13/chkRowCnt).toFixed(2);
+			insert_item.sample14 = (update_item.sample14/chkRowCnt).toFixed(2);
+		}
 
 		dataArr.push(insert_item);
 		setGrid2(dataArr);
-
-		update_item = insert_item;
 
 	};
 
@@ -380,8 +433,8 @@
 	function excelDown(){
 		$("#jsGrid1").table2excel({
 			exclude : ".excludeThisClass",
-			name : "월별 진단명별 통계",
-			filename : "월별 진단명별 통계",
+			name : "혈청검사 통계",
+			filename : "혈청검사 통계",
 			fileext : ".xlsx",
 			exclude_img : true,
 			exclude_links : true,
@@ -390,6 +443,9 @@
 	}
 
 
+	$(document).on('click', '.searchBtn', function(){
+		getData();
+	});
 
 
 </script>

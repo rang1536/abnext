@@ -1,24 +1,31 @@
 package kr.or.abnext.chart;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.ChartView1;
+import kr.or.abnext.domain.TbCode;
 
 @Controller
 public class ChartController {
 	@Autowired
-	private ChartService ChartServ;
+	private ChartService chartServ;
+
+	@Autowired
+	private AdminService adminServ;
 
 	//basicChart
 	@RequestMapping(value = "basicChart", method = RequestMethod.GET)
 	public String basicChartCtrl(Model model) {
 		System.out.println("기본통계 화면가기~!!");
 
-		//model.addAttribute("chartList", ChartServ.getBasicChartListServ(chartView));
 		return "chart/basic_chart";
 	}
 
@@ -27,7 +34,6 @@ public class ChartController {
 	public String basicChart2Ctrl(Model model) {
 		System.out.println("기본통계 화면가기~!!");
 
-		//model.addAttribute("boardList", boardServ.getBoardListServ());
 		return "chart/basic_chart2";
 	}
 
@@ -36,7 +42,6 @@ public class ChartController {
 	public String basicChart3Ctrl(Model model) {
 		System.out.println("기본통계 화면가기~!!");
 
-		//model.addAttribute("boardList", boardServ.getBoardListServ());
 		return "chart/basic_chart3";
 	}
 
@@ -45,7 +50,6 @@ public class ChartController {
 	public String basicChart4Ctrl(Model model) {
 		System.out.println("진단명별 화면가기~!!");
 
-		//model.addAttribute("boardList", boardServ.getBoardListServ());
 		return "chart/basic_chart4";
 	}
 
@@ -54,7 +58,6 @@ public class ChartController {
 	public String basicChart5Ctrl(Model model) {
 		System.out.println("기본통계 화면가기~!!");
 
-		//model.addAttribute("boardList", boardServ.getBoardListServ());
 		return "chart/basic_chart5";
 	}
 
@@ -63,7 +66,6 @@ public class ChartController {
 	public String basicChart6Ctrl(Model model) {
 		System.out.println("기본통계 화면가기~!!");
 
-		//model.addAttribute("boardList", boardServ.getBoardListServ());
 		return "chart/basic_chart6";
 	}
 
@@ -72,25 +74,25 @@ public class ChartController {
 	public String basicChart7Ctrl(Model model) {
 		System.out.println("기본통계 화면가기~!!");
 
-		//model.addAttribute("boardList", boardServ.getBoardListServ());
 		return "chart/basic_chart7";
 	}
 
 	//basicChart
 	@RequestMapping(value = "basicChart8", method = RequestMethod.GET)
 	public String basicChart8Ctrl(Model model) {
-		System.out.println("기본통계 화면가기~!!");
+		System.out.println("칙몬통계 화면가기~!!");
 
-		//model.addAttribute("boardList", boardServ.getBoardListServ());
+		model.addAttribute("hospList", adminServ.getHospListServ());
+		model.addAttribute("buttlerList", chartServ.getButlerListServ());
+		model.addAttribute("localList", chartServ.getLocalListServ());
+
+		System.out.println("지역조회결과"+chartServ.getLocalListServ());
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("codeId", "C001-0_-0_-");
+		model.addAttribute("animGbList", adminServ.getCodeListServ(param));
+
 		return "chart/basic_chart8";
 	}
 
-	//basicChart
-	@RequestMapping(value = "basicChart9", method = RequestMethod.GET)
-	public String basicChart9Ctrl(Model model) {
-		System.out.println("기본통계 화면가기~!!");
 
-		//model.addAttribute("boardList", boardServ.getBoardListServ());
-		return "chart/basic_chart9";
-	}
 }

@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.ChartView1;
+import kr.or.abnext.domain.SearchView;
+import kr.or.abnext.domain.SickCdView;
 
 @RestController
 public class ChartRestController {
 	@Autowired
 	private ChartService chartServ;
+
+	@Autowired
+	private AdminService adminServ;
 
 	@RequestMapping(value = "basicChartList", method = RequestMethod.POST)
 	public List<ChartView1> basicChartListCtrl(ChartView1 chartView, Model model) {
@@ -46,13 +52,35 @@ public class ChartRestController {
 
 	@RequestMapping(value = "basicChartList5", method = RequestMethod.POST)
 	public List<ChartView1> basicChartList5Ctrl(ChartView1 chartView, Model model) {
-		System.out.println("진단명별통계 화면가기~!!");
+		System.out.println("월별 진단명별통계 화면가기~!!");
 		return chartServ.getBasicChartList5Serv(chartView);
 	}
 
 	@RequestMapping(value = "basicChartList6", method = RequestMethod.POST)
 	public List<ChartView1> basicChartList6Ctrl(ChartView1 chartView, Model model) {
-		System.out.println("진단명별통계 화면가기~!!");
+		System.out.println("혈청통계 화면가기~!!");
 		return chartServ.getBasicChartList6Serv(chartView);
+	}
+
+	@RequestMapping(value = "basicChartList7", method = RequestMethod.POST)
+	public List<ChartView1> basicChartList7Ctrl(ChartView1 chartView, Model model) {
+		System.out.println("혈구통계 화면가기~!!");
+		return chartServ.getBasicChartList7Serv(chartView);
+	}
+
+	@RequestMapping(value = "getSickCodeList", method = RequestMethod.POST)
+	public List<SickCdView> getSickCodeListCtrl() {
+		System.out.println("질병코드 화면가기~!!");
+		return chartServ.getSickCdListServ();
+	}
+
+
+	@RequestMapping(value = "basicChartList8", method = RequestMethod.POST)
+	public List<ChartView1> basicChartList8Ctrl(SearchView searchView) {
+		System.out.println("칙몬통계 화면가기~!!");
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>SearchView ");
+		System.out.println(searchView);
+
+		return chartServ.getBasicChartList8Serv(searchView);
 	}
 }
