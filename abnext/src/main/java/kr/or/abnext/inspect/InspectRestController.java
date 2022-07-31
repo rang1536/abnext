@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.TbAnimal;
 import kr.or.abnext.domain.TbAntibiotic;
+import kr.or.abnext.domain.TbBloodChem;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
@@ -481,6 +482,66 @@ public class InspectRestController {
 	@RequestMapping(value = "getPcrList")
 	public List<TbPcr> getPcrList(TbPcr serum) {
 		return inspectServ.getPcrList(serum);
+	}
+
+	@RequestMapping(value = "insertBloodChem")
+	public Map<String, Object> insertBloodChem(TbResult tbResult) {
+		logger.info(tbResult.toString());
+
+		int resCnt = 0;
+		for(int i=0; i<tbResult.getBcList().size(); i++) {
+			TbBloodChem bc = new TbBloodChem();
+			bc.setInspNo(tbResult.getInspNo());
+			bc.setItemName(tbResult.getBcList().get(i).get("itemName").toString());
+			bc.setVal(tbResult.getBcList().get(i).get("val").toString());
+			bc.setInsId(tbResult.getInsId());
+			//검사 테이블 등록
+			resCnt += inspectServ.insertBloodChem(bc);
+
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(resCnt > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
+
+	@RequestMapping(value = "getBcList")
+	public List<TbBloodChem> getBcList(TbBloodChem anti) {
+		return inspectServ.getBcList(anti);
+	}
+
+	@RequestMapping(value = "insertCbc")
+	public Map<String, Object> insertCbc(TbResult tbResult) {
+		logger.info(tbResult.toString());
+
+		int resCnt = 0;
+		for(int i=0; i<tbResult.getBcList().size(); i++) {
+			TbBloodChem bc = new TbBloodChem();
+			bc.setInspNo(tbResult.getInspNo());
+			bc.setItemName(tbResult.getBcList().get(i).get("itemName").toString());
+			bc.setVal(tbResult.getBcList().get(i).get("val").toString());
+			bc.setInsId(tbResult.getInsId());
+			//검사 테이블 등록
+			resCnt += inspectServ.insertCbc(bc);
+
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(resCnt > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
+
+	@RequestMapping(value = "getCbcList")
+	public List<TbBloodChem> getCbcList(TbBloodChem anti) {
+		return inspectServ.getCbcList(anti);
 	}
 
 }

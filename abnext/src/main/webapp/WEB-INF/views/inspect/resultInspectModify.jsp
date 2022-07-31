@@ -60,6 +60,8 @@
 		table td {text-align:center}
 		.w60 {width:60px}
 		.w200 {width:200px}
+
+		.tblPad{padding:0 3px 0 3px}
 	</style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -312,7 +314,7 @@
 				</div>
 				<!-- /.card -->
  --%>
-				<div class="row inputType1" style="display:none">
+				<div class="row inputType1 iptPop" style="display:none">
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
@@ -365,7 +367,7 @@
 						<!-- /.card -->
 	 				</div>
 	 			</div>
-				<div class="row inputType2" style="display:none">
+				<div class="row inputType2 iptPop" style="display:none">
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
@@ -447,9 +449,9 @@
 												<td>13</td>
 												<td>14-16</td>
 												<td>17</td>
-												<td id="res1_1"></td>
-												<td id="res2_1"></td>
-												<td id="resMemo_1"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_1"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_1"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_1"></td>
 											</tr>
 											<tr>
 												<td>2</td>
@@ -458,9 +460,9 @@
 												<td>17</td>
 												<td>18-20</td>
 												<td>21</td>
-												<td id="res1_2"></td>
-												<td id="res2_2"></td>
-												<td id="resMemo_2"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_2"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_2"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_2"></td>
 											</tr>
 											<tr>
 												<td>3</td>
@@ -469,9 +471,9 @@
 												<td>12</td>
 												<td>13-15</td>
 												<td>16</td>
-												<td id="res1_3"></td>
-												<td id="res2_3"></td>
-												<td id="resMemo_3"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_3"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_3"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_3"></td>
 											</tr>
 											<tr>
 												<td>4</td>
@@ -480,9 +482,9 @@
 												<td>8</td>
 												<td>9-10</td>
 												<td>11</td>
-												<td id="res1_4"></td>
-												<td id="res2_4"></td>
-												<td id="resMemo_4"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_4"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_4"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_4"></td>
 											</tr>
 											<tr>
 												<td>5</td>
@@ -491,9 +493,9 @@
 												<td>12</td>
 												<td>13-14</td>
 												<td>15</td>
-												<td id="res1_5"></td>
-												<td id="res2_5"></td>
-												<td id="resMemo_5"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_5"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_5"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_5"></td>
 											</tr>
 											<tr>
 												<td>6</td>
@@ -502,9 +504,9 @@
 												<td>14</td>
 												<td>15-18</td>
 												<td>19</td>
-												<td id="res1_6"></td>
-												<td id="res2_6"></td>
-												<td id="resMemo_6"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_6"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_6"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_6"></td>
 											</tr>
 											<tr>
 												<td>7</td>
@@ -513,9 +515,9 @@
 												<td>10</td>
 												<td>11-15</td>
 												<td>16</td>
-												<td id="res1_7"></td>
-												<td id="res2_7"></td>
-												<td id="resMemo_7"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_7"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_7"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_7"></td>
 											</tr>
 											<tr>
 												<td>8</td>
@@ -524,9 +526,9 @@
 												<td>10</td>
 												<td>11</td>
 												<td>12</td>
-												<td id="res1_8"></td>
-												<td id="res2_8"></td>
-												<td id="resMemo_8"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_8"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_8"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_8"></td>
 											</tr>
 											<tr>
 												<td>9</td>
@@ -535,9 +537,9 @@
 												<td>10</td>
 												<td>11-19</td>
 												<td>20</td>
-												<td id="res1_9"></td>
-												<td id="res2_9"></td>
-												<td id="resMemo_9"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_9"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_9"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_9"></td>
 											</tr>
 											<tr>
 												<td>10</td>
@@ -546,9 +548,9 @@
 												<td>14</td>
 												<td>15-18</td>
 												<td>19</td>
-												<td id="res1_10"></td>
-												<td id="res2_10"></td>
-												<td id="resMemo_10"></td>
+												<td style="padding: 0 3px 0 3px;" id="res1_10"></td>
+												<td style="padding: 0 3px 0 3px;" id="res2_10"></td>
+												<td style="padding: 0 3px 0 3px;" id="resMemo_10"></td>
 											</tr>
 										</tbody>
 									</table>
@@ -563,7 +565,7 @@
 	 				</div>
 	 			</div><!-- /.inputType2 -->
 
-				<div class="row inputType3" style="display:none">
+				<div class="row inputType3 iptPop" style="display:none">
 					<div class="col-md-12">
 						<div class="card card-primary">
 							<div class="card-body">
@@ -611,44 +613,44 @@
 										</thead>
 										<tbody id="serum">
 											<tr>
-												<td id="nm_1">No. 1</td>
-												<td id="dt_1"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_1">No. 1</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_1"></td>
 											</tr>
 											<tr>
-												<td id="nm_2">No. 2</td>
-												<td id="dt_2"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_2">No. 2</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_2"></td>
 											</tr>
 											<tr>
-												<td id="nm_3">No. 3</td>
-												<td id="dt_3"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_3">No. 3</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_3"></td>
 											</tr>
 											<tr>
-												<td id="nm_4">No. 4</td>
-												<td id="dt_4"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_4">No. 4</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_4"></td>
 											</tr>
 											<tr>
-												<td id="nm_5">No. 5</td>
-												<td id="dt_5"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_5">No. 5</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_5"></td>
 											</tr>
 											<tr>
-												<td id="nm_6">No. 6</td>
-												<td id="dt_6"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_6">No. 6</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_6"></td>
 											</tr>
 											<tr>
-												<td id="nm_7">No. 7</td>
-												<td id="dt_7"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_7">No. 7</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_7"></td>
 											</tr>
 											<tr>
-												<td id="nm_8">No. 8</td>
-												<td id="dt_8"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_8">No. 8</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_8"></td>
 											</tr>
 											<tr>
-												<td id="nm_9">No. 9</td>
-												<td id="dt_9"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_9">No. 9</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_9"></td>
 											</tr>
 											<tr>
-												<td id="nm_10">No.10</td>
-												<td id="dt_10"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="nm_10">No.10</td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="dt_10"></td>
 											</tr>
 										</tbody>
 									</table>
@@ -662,7 +664,7 @@
 						<!-- /.card -->
 	 				</div>
 	 			</div><!-- /.inputType3 -->
-				<div class="row inputType4" style="display:none">
+				<div class="row inputType4 iptPop" style="display:none">
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
@@ -685,6 +687,31 @@
 								</table>
 							</div>
 							<!-- /.card-body -->
+
+							<div style="height:10px;">
+
+							</div>
+							<div class="card-header">
+								<h3 class="card-title">사진</h3>
+							</div>
+							<div class="card-body">
+								<div class="fileBox">
+									<label for="inspResultFile3">결과사진추가</label>
+									<input type="file" id="inspResultFile3" onchange="addFileSet3(this, '');">
+								</div>
+
+								<div>
+									<form id="fileForm3" method="post" enctype="multipart/form-data">
+										<input type="hidden" id="inspNo" name="inspNo"/>
+										<input type="hidden" id="rqstNo" name="rqstNo" value="${rceptInfo.rqstNo }"/>
+										<div class="filter-container row previewList3"></div>
+									</form>
+								</div>
+								<div style="text-align:center">
+									<button type="button" id="fileSave3" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+								</div>
+							</div>
+							<!-- /.card-body -->
 						</div>
 						<!-- /.card -->
 	 				</div>
@@ -705,101 +732,101 @@
 										<tbody id="pcr">
 											<tr>
 												<td>1</td>
-												<td id="sample_1"></td>
-												<td id="capacity_1"></td>
-												<td id="result_1"></td>
-												<td id="rmk_1"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_1"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_1"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_1"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_1"></td>
 											</tr>
 											<tr>
 												<td>2</td>
-												<td id="sample_2"></td>
-												<td id="capacity_2"></td>
-												<td id="result_2"></td>
-												<td id="rmk_2"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_2"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_2"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_2"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_2"></td>
 											</tr>
 											<tr>
 												<td>3</td>
-												<td id="sample_3"></td>
-												<td id="capacity_3"></td>
-												<td id="result_3"></td>
-												<td id="rmk_3"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_3"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_3"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_3"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_3"></td>
 											</tr>
 											<tr>
 												<td>4</td>
-												<td id="sample_4"></td>
-												<td id="capacity_4"></td>
-												<td id="result_4"></td>
-												<td id="rmk_4"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_4"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_4"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_4"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_4"></td>
 											</tr>
 											<tr>
 												<td>5</td>
-												<td id="sample_5"></td>
-												<td id="capacity_5"></td>
-												<td id="result_5"></td>
-												<td id="rmk_5"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_5"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_5"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_5"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_5"></td>
 											</tr>
 											<tr>
 												<td>6</td>
-												<td id="sample_6"></td>
-												<td id="capacity_6"></td>
-												<td id="result_6"></td>
-												<td id="rmk_6"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_6"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_6"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_6"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_6"></td>
 											</tr>
 											<tr>
 												<td>7</td>
-												<td id="sample_7"></td>
-												<td id="capacity_7"></td>
-												<td id="result_7"></td>
-												<td id="rmk_7"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_7"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_7"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_7"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_7"></td>
 											</tr>
 											<tr>
 												<td>8</td>
-												<td id="sample_8"></td>
-												<td id="capacity_8"></td>
-												<td id="result_8"></td>
-												<td id="rmk_8"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_8"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_8"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_8"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_8"></td>
 											</tr>
 											<tr>
 												<td>9</td>
-												<td id="sample_9"></td>
-												<td id="capacity_9"></td>
-												<td id="result_9"></td>
-												<td id="rmk_9"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_9"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_9"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_9"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_9"></td>
 											</tr>
 											<tr>
 												<td>10</td>
-												<td id="sample_10"></td>
-												<td id="capacity_10"></td>
-												<td id="result_10"></td>
-												<td id="rmk_10"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_10"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_10"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_10"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_10"></td>
 											</tr>
 											<tr>
 												<td>11</td>
-												<td id="sample_11"></td>
-												<td id="capacity_11"></td>
-												<td id="result_11"></td>
-												<td id="rmk_11"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_11"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_11"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_11"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_11"></td>
 											</tr>
 											<tr>
 												<td>12</td>
-												<td id="sample_12"></td>
-												<td id="capacity_12"></td>
-												<td id="result_12"></td>
-												<td id="rmk_12"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_12"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_12"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_12"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_12"></td>
 											</tr>
 											<tr>
 												<td>13</td>
-												<td id="sample_13"></td>
-												<td id="capacity_13"></td>
-												<td id="result_13"></td>
-												<td id="rmk_13"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_13"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_13"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_13"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_13"></td>
 											</tr>
 											<tr>
 												<td>14</td>
-												<td id="sample_14"></td>
-												<td id="capacity_14"></td>
-												<td id="result_14"></td>
-												<td id="rmk_14"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_14"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_14"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_14"></td>
+												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_14"></td>
 											</tr>
 										</tbody>
 									</table>
@@ -813,7 +840,7 @@
 						<!-- /.card -->
 	 				</div>
 	 			</div><!-- /.inputType4 -->
-				<div class="row inputType5" style="display:none">
+				<div class="row inputType5 iptPop" style="display:none">
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
@@ -844,21 +871,18 @@
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered text-nowrap">
-										<thead>
-											<tr>
-												<td style="background-color:#F2F2F2">시료명</td>
-												<td style="background-color:#F2F2F2">데이터</td>
-											</tr>
-										</thead>
-										<tbody id="">
-											<tr>
+										<colgroup>
+											<col style="width:50%"/>
+											<col style="width:50%"/>
+										</colgroup>
 
-											</tr>
+										<tbody id="bloodChem">
+
 										</tbody>
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="antiSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="bcSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -866,6 +890,58 @@
 						<!-- /.card -->
 	 				</div>
 	 			</div><!-- /.inputType5 -->
+
+				<div class="row inputType6 iptPop" style="display:none">
+	 				<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">검사메모</h3>
+							</div>
+							<div class="card-body">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(6)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+					<div class="col-md-6">
+						<div class="card card-primary">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered text-nowrap">
+										<colgroup>
+											<col style="width:50%"/>
+											<col style="width:50%"/>
+										</colgroup>
+
+										<tbody id="cbc">
+
+										</tbody>
+									</table>
+								</div>
+								<div style="text-align:center">
+									<button type="button" id="cbcSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+	 				</div>
+	 			</div><!-- /.inputType6 -->
+
 	 			<form id="inspOpinion">
 	 				<input type="hidden" id="inspSickCd" name="inspSickCd"/>
 	 			</form>
@@ -923,6 +999,10 @@
 <script>
 var chartObj;
 $(function () {
+
+	$.gfn_getCode('B001-04-23',callBackBloodChem);
+	$.gfn_getCode('B001-04-24',callBackCbc);
+
 	$.ajax({
 		url : "sampleList",
 		data : {rqstNo : "${rceptInfo.rqstNo}"},
@@ -1058,6 +1138,39 @@ function addFileSet2(obj){
 	document.querySelector("input[type=file]").value = "";
 }
 
+/* 첨부파일 추가 */
+function addFileSet3(obj){
+
+	var file = obj.files[0];
+	// 첨부파일 검증
+	if (validation(file)) {
+
+		// 목록 추가
+		var htmlData = '';
+		htmlData += '<div class="filter-item" id="previewImg'+fileNo+'">';
+		htmlData += '	<a id="imgLoad'+fileNo+'">';
+		htmlData += '		<img id="imgPreview'+fileNo+'" class="img-fluid mb-2" style="width:140px;height:140px"/>';
+		htmlData += '	</a>';
+        htmlData += '	<input type="hidden" id="file'+fileNo+'" value="'+file.name+'">';
+		htmlData += '</div>';
+
+		$(".previewList3").append(htmlData);
+
+		// 파일 배열에 담기
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			filesArr.push(file);
+			var res = e.target.result;
+			$('#imgPreview'+fileNo).attr("src", res);
+			fileNo++;
+		};
+		reader.readAsDataURL(file);
+	}
+
+	// 초기화
+	document.querySelector("input[type=file]").value = "";
+}
+
 
 /* 첨부파일 검증 */
 function validation(obj){
@@ -1123,12 +1236,7 @@ $("#inspList").find("tr").click(function(){
 	if($(this).find("input:checkbox[id^=chk]").is(":checked")){
 		$(this).find("input:checkbox[id^=chk]").prop("checked", false);
 		$("#inspNo").val("");
-		$(".inputType1").hide();
-		$(".inputType2").hide();
-		$(".inputType3").hide();
-		$(".inputType4").hide();
-		$(".inputType5").hide();
-		$(".inputType6").hide();
+		$(".iptPop").hide();
 	}else {
 		filesArr = new Array();
 		fileNo = 0;
@@ -1147,12 +1255,9 @@ $("#inspList").find("tr").click(function(){
 		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-03-18'){
 			fnSerum();
 		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-04-23'){
-			$(".inputType1").hide();
-			$(".inputType2").hide();
-			$(".inputType3").hide();
-			$(".inputType4").hide();
-			$(".inputType5").show();
-
+			fnBloodChem();
+		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-04-24'){
+			fnCbc();
 		}else {
 			fnElse();
 		}
@@ -1289,6 +1394,45 @@ $("#fileSave2").click(function(){
 });
 
 
+$("#fileSave3").click(function(){
+
+	var fileList = new Array();
+	var formData = new FormData($('#fileForm3')[0]);
+
+	var fileNames = new Array();
+	$('.previewList3').find(".filter-item").each(function(){
+		fileNames.push($(this).find("[id^=file]").val());
+	});
+
+	for (var i = 0; i < filesArr.length; i++) {
+        if (!filesArr[i].is_delete) {
+        	for (var j=0; j<fileNames.length; j++){
+				if(filesArr[i].name == fileNames[j].trim()){
+        			formData.append('fileList',filesArr[i]);
+        		}
+        	}
+        }
+	}
+
+	//로그인유저정보
+	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+	formData.append('uptId', userInfo.userId);
+
+	$.ajax({
+		url : 'inspFileUpload2',
+		data : formData,
+		dataType : 'json',
+		type : 'post',
+		processData : false,
+		contentType : false,
+		success : function(data){
+			if(data.result == 'succ'){
+				alert("사진등록하였습니다.");
+			}
+		}
+	});
+});
+
 /*****************************************************************
  *                        항 생 제                                                                             *
  *****************************************************************/
@@ -1342,6 +1486,51 @@ $("#antiSave").click(function(){
 	});
 
 })
+
+function fnAnti(){
+	$(".iptPop").hide();
+	$(".inputType2").show();
+
+	$.ajax({
+		url : 'getAntiList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			$("[name=inspResult]").val(data[0].inspResult);
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var no = item.antiNo;
+				$("#res1_"+no).text(item.res1);
+				$("#res2_"+no).text(item.res2);
+				$("#resMemo_"+no).text(item.antiMemo);
+			}
+		}
+	});
+
+	$.ajax({
+		url : 'getFileList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var htmlData = '';
+			$(".previewList").empty();
+			$(".previewList2").empty();
+			$(".previewList3").empty();
+
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				htmlData += '<div id="previewImg'+item.fileNo+'">';
+				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
+				htmlData += '	</a>';
+				htmlData += '</div>';
+			}
+			$(".previewList2").append(htmlData);
+		}
+	});
+}
 
 
 /*****************************************************************
@@ -1462,6 +1651,51 @@ function setChartData(data){
     })
 }
 
+function fnSerum(){
+	$(".iptPop").hide();
+	$(".inputType3").show();
+
+	$.ajax({
+		url : 'getSerumList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			if(data != ''){
+				$("[name=inspResult]").val(data[0].inspResult);
+				for(var i=0; i<data.length; i++){
+					var item = data[i];
+					var no = i+1;
+					$("#nm_"+no).text(item.serName);
+					$("#dt_"+no).text(item.serData);
+				}
+			}else {
+				$("[name=inspResult]").val("");
+				for(var i=0; i<10; i++){
+					var item = data[i];
+					var no = i+1;
+					$("#nm_"+no).text("No."+no);
+					$("#dt_"+no).text("");
+				}
+			}
+		}
+	});
+
+	$.ajax({
+		url : 'getSerumChart',
+		dataType : 'json',
+		type : 'post',
+		data : {inspNo : $("#inspNo").val()},
+		success:function(data){
+			$("#barChart").empty();
+			if(chartObj != null){
+				chartObj.destroy();
+			}
+			setChartData(data);
+		}
+	})
+}
+
 
 /*****************************************************************
  *                        P C R                                  *
@@ -1514,112 +1748,9 @@ $("#pcrSave").click(function(){
 
 })
 
-
-
-function fnAnti(){
-	$(".inputType1").hide();
-	$(".inputType2").show();
-	$(".inputType3").hide();
-	$(".inputType4").hide();
-	$(".inputType5").hide();
-	$(".inputType6").hide();
-
-	$.ajax({
-		url : 'getAntiList',
-		data : {inspNo : $("#inspNo").val()},
-		dataType : 'json',
-		type : 'post',
-		success : function(data){
-			$("[name=inspResult]").val(data[0].inspResult);
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				var no = item.antiNo;
-				$("#res1_"+no).text(item.res1);
-				$("#res2_"+no).text(item.res2);
-				$("#resMemo_"+no).text(item.antiMemo);
-			}
-		}
-	});
-
-	$.ajax({
-		url : 'getFileList',
-		data : {inspNo : $("#inspNo").val()},
-		dataType : 'json',
-		type : 'post',
-		success : function(data){
-			var htmlData = '';
-			$(".previewList").empty();
-			$(".previewList2").empty();
-
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				htmlData += '<div id="previewImg'+item.fileNo+'">';
-				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
-				htmlData += '	</a>';
-				htmlData += '</div>';
-			}
-			$(".previewList2").append(htmlData);
-		}
-	});
-}
-
-function fnSerum(){
-	$(".inputType1").hide();
-	$(".inputType2").hide();
-	$(".inputType3").show();
-	$(".inputType4").hide();
-	$(".inputType5").hide();
-	$(".inputType6").hide();
-
-	$.ajax({
-		url : 'getSerumList',
-		data : {inspNo : $("#inspNo").val()},
-		dataType : 'json',
-		type : 'post',
-		success : function(data){
-			if(data != ''){
-				$("[name=inspResult]").val(data[0].inspResult);
-				for(var i=0; i<data.length; i++){
-					var item = data[i];
-					var no = i+1;
-					$("#nm_"+no).text(item.serName);
-					$("#dt_"+no).text(item.serData);
-				}
-			}else {
-				$("[name=inspResult]").val("");
-				for(var i=0; i<10; i++){
-					var item = data[i];
-					var no = i+1;
-					$("#nm_"+no).text("No."+no);
-					$("#dt_"+no).text("");
-				}
-			}
-		}
-	});
-
-	$.ajax({
-		url : 'getSerumChart',
-		dataType : 'json',
-		type : 'post',
-		data : {inspNo : $("#inspNo").val()},
-		success:function(data){
-			$("#barChart").empty();
-			if(chartObj != null){
-				chartObj.destroy();
-			}
-			setChartData(data);
-		}
-	})
-}
-
 function fnPcr(){
-	$(".inputType1").hide();
-	$(".inputType2").hide();
-	$(".inputType3").hide();
+	$(".iptPop").hide();
 	$(".inputType4").show();
-	$(".inputType5").hide();
-	$(".inputType6").hide();
 
 	$.ajax({
 		url : 'getPcrList',
@@ -1638,15 +1769,38 @@ function fnPcr(){
 			}
 		}
 	});
+
+	$.ajax({
+		url : 'getFileList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var htmlData = '';
+			$(".previewList").empty();
+			$(".previewList2").empty();
+			$(".previewList3").empty();
+
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				htmlData += '<div id="previewImg'+item.fileNo+'">';
+				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
+				htmlData += '	</a>';
+				htmlData += '</div>';
+			}
+			$(".previewList3").append(htmlData);
+		}
+	});
 }
 
+
+/*****************************************************************
+ *                        기 타                                                                                 *
+ *****************************************************************/
 function fnElse(){
+	$(".iptPop").hide();
 	$(".inputType1").show();
-	$(".inputType2").hide();
-	$(".inputType3").hide();
-	$(".inputType4").hide();
-	$(".inputType5").hide();
-	$(".inputType6").hide();
 	$.ajax({
 		url : 'getFileList',
 		data : {inspNo : $("#inspNo").val()},
@@ -1672,13 +1826,13 @@ function fnElse(){
 				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
 				htmlData += '	<div class="row">';
 				htmlData += '		<div class="col-8">';
-				htmlData += '			<input type="text" class="form-control" id="title'+item.fileNo+'" placeholder="장기" value="'+item.title+'">';
+				htmlData += '			<input type="text" class="form-control" id="title'+item.fileNo+'" placeholder="장기" value="'+item.title+'" disabled>';
 				htmlData += '		</div>';
 				htmlData += '		<div class="col-4" style="padding-top:-9px">';
 				htmlData += '			<label for="chk1"></label>';
 				htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
 				htmlData += '				<div class="icheck-primary d-inline">';
-				htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+'>';
+				htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+' disabled>';
 				htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
 				htmlData += '				</div>';
 				htmlData += '				<a class="delete" onclick="deleteServerFile('+item.fileNo+');"><i class="far fa-minus-square"></i></a>';
@@ -1688,7 +1842,7 @@ function fnElse(){
 				htmlData += '	</div>';
 				htmlData += '	<div class="row">';
 				htmlData += '		<div class="col-12">';
-				htmlData += '			<textarea class="form-control" rows="3" id="content'+item.fileNo+'" placeholder="메모">'+item.content+'</textarea>';
+				htmlData += '			<textarea class="form-control" rows="3" id="content'+item.fileNo+'" placeholder="메모" disabled>'+item.content+'</textarea>';
 				htmlData += '		</div>';
 				htmlData += '	</div>';
 				htmlData += '</div>';
@@ -1697,6 +1851,175 @@ function fnElse(){
 		}
 	});
 }
+
+
+
+/*****************************************************************
+ *                       혈 액 화 학 검 사                                                                   *
+ *****************************************************************/
+function fnBloodChem(){
+	$(".iptPop").hide();
+	$(".inputType5").show();
+
+	$.ajax({
+		url : 'getBcList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			$("[name=inspResult]").val(data[0].inspResult);
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				$("#bloodChem").find("tr").each(function(){
+					if($(this).find("td:eq(0)").text() == item.itemName){
+						$(this).find("td:eq(1)").text(item.val);
+					}
+				})
+			}
+		}
+	});
+}
+
+$("#bcSave").click(function(){
+
+	var bcList = [];
+	$("#bloodChem").find("tr").each(function(idx){
+		var itemName = $(this).find("td:eq(0)").text();
+		var val = $(this).find("td:eq(1)").text();
+
+		if(val != ''){
+			var bloodChem = {
+				itemName : itemName,
+				val : val,
+				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
+			}
+			bcList.push(bloodChem);
+		}
+	})
+
+	var data = {
+		inspNo : $("#inspNo").val(),
+		insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+		bcList : bcList
+	}
+
+	$.ajax({
+		url : "insertBloodChem",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			alert("등록되었습니다.");
+		}
+	});
+
+})
+
+function callBackBloodChem(data){
+	console.log(data);
+	var html = '';
+	$("#bloodChem").empty();
+	for(var i=0; i<data.length; i++){
+		html += '<tr>';
+		html += '	<td id="bcnm_'+(i+1)+'">'+data[i].codeNm+'</td>';
+		html += '	<td style="height:34px; padding: 1px 3px 1px 3px;" id="bcvl_'+(i+1)+'"></td>';
+		html += '</tr>';
+	}
+	$("#bloodChem").html(html);
+
+	$("#bloodChem").find("tr").find("td:eq(1)").click(function(){
+		var txt = $(this).text();
+		var selId = $(this).attr("id");
+		var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
+		$(this).html(html);
+		$("#target").focus();
+
+	})
+}
+
+
+/*****************************************************************
+ *                       혈 구 검 사                                                                           *
+ *****************************************************************/
+  $("#cbcSave").click(function(){
+
+	var bcList = [];
+	$("#cbc").find("tr").each(function(idx){
+		var itemName = $(this).find("td:eq(0)").text();
+		var val = $(this).find("td:eq(1)").text();
+
+		if(val != ''){
+			var cbc = {
+				itemName : itemName,
+				val : val,
+				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
+			}
+			bcList.push(cbc);
+		}
+	})
+
+	var data = {
+		inspNo : $("#inspNo").val(),
+		insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+		bcList : bcList
+	}
+
+	$.ajax({
+		url : "insertCbc",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			alert("등록되었습니다.");
+		}
+	});
+
+})
+
+function fnCbc(){
+	$(".iptPop").hide();
+	$(".inputType6").show();
+
+	$.ajax({
+		url : 'getCbcList',
+		data : {inspNo : $("#inspNo").val()},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			$("[name=inspResult]").val(data[0].inspResult);
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				$("#cbc").find("tr").each(function(){
+					if($(this).find("td:eq(0)").text() == item.itemName){
+						$(this).find("td:eq(1)").text(item.val);
+					}
+				})
+			}
+		}
+	});
+
+}
+
+function callBackCbc(data){
+	var html = '';
+	$("#cbc").empty();
+	for(var i=0; i<data.length; i++){
+		html += '<tr>';
+		html += '	<td id="cbcnm_'+(i+1)+'">'+data[i].codeNm+'</td>';
+		html += '	<td style="height:34px; padding: 1px 3px 1px 3px;" id="cbcvl_'+(i+1)+'"></td>';
+		html += '</tr>';
+	}
+	$("#cbc").html(html);
+
+	$("#cbc").find("tr").find("td:eq(1)").click(function(){
+		var txt = $(this).text();
+		var selId = $(this).attr("id");
+		var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
+		$(this).html(html);
+		$("#target").focus();
+	})
+}
+
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>

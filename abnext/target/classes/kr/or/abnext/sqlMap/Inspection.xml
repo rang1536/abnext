@@ -391,11 +391,17 @@
 		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
 		  FROM TB_FILE A
 		 WHERE INSP_NO = #{inspNo}
+		<if test="fileGb != null and fileGb != ''">
+		   AND FILE_GB = #{fileGb}
+		</if>
 	</select>
 
 	<select id="getInspResult" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbInspection">
-		SELECT *
-		  FROM TB_INSPECTION
+		SELECT A.*
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_FIRST_CD) AS INSP_FIRST_NM
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_SECOND_CD) AS INSP_SECOND_NM
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.INSP_THIRD_CD) AS INSP_THIRD_NM
+		  FROM TB_INSPECTION A
 		 WHERE INSP_NO = #{inspNo}
 	</select>
 
@@ -480,5 +486,49 @@
 		  FROM TB_PCR A
 		 WHERE INSP_NO = #{inspNo}
 		 ORDER BY SMPL_NAME
+	</select>
+
+	<insert id="insertBloodChem" parameterType="kr.or.abnext.domain.TbBloodChem">
+		INSERT
+		  INTO TB_BLOOD_CHEM (
+		       INSP_NO , ITEM_NAME , VAL
+		     , INS_DT  , INS_ID )
+		VALUES (
+		       #{inspNo} , #{itemName} , #{val}
+		     , NOW()     , #{insId} )
+		    ON DUPLICATE KEY
+		UPDATE VAL = #{val}
+		     , UPT_DT = NOW()
+		     , UPT_ID = #{insId}
+	</insert>
+
+	<select id="getBcList" parameterType="kr.or.abnext.domain.TbBloodChem" resultType="kr.or.abnext.domain.TbBloodChem">
+		SELECT A.*
+		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
+		  FROM TB_BLOOD_CHEM A
+		 WHERE INSP_NO = #{inspNo}
+		 ORDER BY INS_DT
+	</select>
+
+	<insert id="insertCbc" parameterType="kr.or.abnext.domain.TbBloodChem">
+		INSERT
+		  INTO TB_CBC (
+		       INSP_NO , ITEM_NAME , VAL
+		     , INS_DT  , INS_ID )
+		VALUES (
+		       #{inspNo} , #{itemName} , #{val}
+		     , NOW()     , #{insId} )
+		    ON DUPLICATE KEY
+		UPDATE VAL = #{val}
+		     , UPT_DT = NOW()
+		     , UPT_ID = #{insId}
+	</insert>
+
+	<select id="getCbcList" parameterType="kr.or.abnext.domain.TbBloodChem" resultType="kr.or.abnext.domain.TbBloodChem">
+		SELECT A.*
+		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
+		  FROM TB_CBC A
+		 WHERE INSP_NO = #{inspNo}
+		 ORDER BY INS_DT
 	</select>
 </mapper>

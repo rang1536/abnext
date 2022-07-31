@@ -20,6 +20,8 @@ public class TbResult {
 	private List<Map<String , Object>> serumList;
 	//PCR
 	private List<Map<String , Object>> pcrList;
+	//혈액
+	private List<Map<String , Object>> bcList;
 
 	public String getInspNo() {
 		return inspNo;
@@ -51,10 +53,16 @@ public class TbResult {
 	public void setPcrList(List<Map<String, Object>> pcrList) {
 		this.pcrList = pcrList;
 	}
+	public List<Map<String, Object>> getBcList() {
+		return bcList;
+	}
+	public void setBcList(List<Map<String, Object>> bcList) {
+		this.bcList = bcList;
+	}
 	@Override
 	public String toString() {
 		return "TbResult [inspNo=" + inspNo + ", insId=" + insId + ", antiList=" + antiList + ", serumList=" + serumList
-				+ ", pcrList=" + pcrList + "]";
+				+ ", pcrList=" + pcrList + ", bcList=" + bcList + "]";
 	}
 
 }
