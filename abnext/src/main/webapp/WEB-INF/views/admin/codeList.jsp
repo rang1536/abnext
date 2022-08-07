@@ -74,10 +74,10 @@
 								<div class="row">
 									<div class="col-sm-6">&nbsp;</div>
 									<div class="col-sm-3">
-										<button type="button" class="btn btn-block btn-danger btn-flat" onclick="inputClear()">초기화</button>
+										<button type="button" class="btn btn-sm btn-block btn-danger btn-flat" onclick="inputClear()">초기화</button>
 									</div>
 									<div class="col-sm-3">
-										<button type="button" class="btn btn-block btn-primary btn-flat" onclick="saveCode()">저장</button>
+										<button type="button" class="btn btn-sm btn-block btn-primary btn-flat" onclick="saveCode()">저장</button>
 									</div>
 								</div>
 							</div>

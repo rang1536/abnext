@@ -60,19 +60,19 @@
 		</section>
 
 		<!-- Main content -->
-		 <section class="content">
+		 <section class="content" style="font-size:13px;">
  			<div class="container-fluid">
- 				<div class="row">
-		          <div class="col-12">
+ 				<!-- <div class="row">
+		          <div class="col-12"> -->
 
 		          	<!-- 소속정보 -->
-		            <div class="card">
-		              <div class="card-header" style="background-color:#002266;">
-		                <h5 class="card-title"><b style="color:#FFFFFF;">소속정보</b></h5>
+		            <div class="card card-primary card-outline">
+		              <div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
+		                <h5 class="card-title"><b>소속정보</b></h5>
 
 		              </div>
 		              <!-- /.card-header 본문-->
-		              <div class="card-body" style="font-size:13px;">
+		              <div class="card-body">
 						<div id="hospInfoDiv" <c:if test="${user.hospNo eq null or user.hospNo eq ''}"> style="display:none;" </c:if>>
 							<div class="row">
 								<div class="col-sm-6">
@@ -254,9 +254,9 @@
 		            <!-- /.card -->
 
 					<br/>
-		            <div class="card">
-		              <div class="card-header" style="background-color:#002266;">
-		                <h5 class="card-title"><b style="color:#FFFFFF;">사용자정보</b></h5>
+		            <div class="card card-primary card-outline">
+		              <div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
+		                <h5 class="card-title"><b>사용자정보</b></h5>
 
 		              </div>
 		              <!-- /.card-header 본문-->
@@ -391,9 +391,9 @@
 
 
 					<br/>
-		            <div class="card">
-		              <div class="card-header" style="background-color:#002266;">
-		                <h5 class="card-title"><b style="color:#FFFFFF;">사용자상태 및 권한</b></h5>
+		            <div class="card card-primary card-outline">
+		              <div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
+		                <h5 class="card-title"><b>사용자상태 및 권한</b></h5>
 
 		              </div>
 		              <!-- /.card-header 본문-->
@@ -463,8 +463,8 @@
 
 
 		          </div><!-- /.card -->
-		        </div>
-		        <!-- /.row -->
+		        <!--</div>
+		         /.row -->
 
  			</div> <!-- End container-fluid -->
 		</section> <!-- End content -->
