@@ -269,35 +269,72 @@
 		var yArrDetail ='';
 
 		var labels = new Array()
-		for(var i=0; i < data.length; i++){
+		for(var i=0; i < 5; i++){
 			yArrDetail = new Array();
-			yArrDetail.push(data[i].sample1);
-			yArrDetail.push(data[i].sample2);
-			yArrDetail.push(data[i].sample3);
-			yArrDetail.push(data[i].sample4);
-			yArrDetail.push(data[i].sample5);
-			yArrDetail.push(data[i].sample6);
-			yArrDetail.push(data[i].sample7);
-			yArrDetail.push(data[i].sample8);
-			yArrDetail.push(data[i].sample9);
-			yArrDetail.push(data[i].sample10);
-			yArrDetail.push(data[i].sample11);
-			yArrDetail.push(data[i].sample12);
+
+			if(i < 4){
+				yArrDetail.push(data[i].sample1);
+				yArrDetail.push(data[i].sample2);
+				yArrDetail.push(data[i].sample3);
+				yArrDetail.push(data[i].sample4);
+				yArrDetail.push(data[i].sample5);
+				yArrDetail.push(data[i].sample6);
+				yArrDetail.push(data[i].sample7);
+				yArrDetail.push(data[i].sample8);
+				yArrDetail.push(data[i].sample9);
+				yArrDetail.push(data[i].sample10);
+				yArrDetail.push(data[i].sample11);
+				yArrDetail.push(data[i].sample12);
+			}else if(i == 4){
+				var sam1=0, sam2=0, sam3=0, sam4=0, sam5=0, sam6=0, sam7=0, sam8=0, sam9=0, sam10=0, sam11=0, sam12=0;
+				for(var j=4; j<data.length; j++){
+					sam1 += data[j].sample1;
+					sam2 += data[j].sample2;
+					sam3 += data[j].sample3;
+					sam4 += data[j].sample4;
+					sam5 += data[j].sample5;
+					sam6 += data[j].sample6;
+					sam7 += data[j].sample7;
+					sam8 += data[j].sample8;
+					sam9 += data[j].sample9;
+					sam10 += data[j].sample10;
+					sam11 += data[j].sample11;
+					sam12 += data[j].sample12;
+				}
+
+				yArrDetail.push(sam1);
+				yArrDetail.push(sam2);
+				yArrDetail.push(sam3);
+				yArrDetail.push(sam4);
+				yArrDetail.push(sam5);
+				yArrDetail.push(sam6);
+				yArrDetail.push(sam7);
+				yArrDetail.push(sam8);
+				yArrDetail.push(sam9);
+				yArrDetail.push(sam10);
+				yArrDetail.push(sam11);
+				yArrDetail.push(sam12);
+			}
 
 			yArr[i]= yArrDetail;
-			labels[i] = data[i].diagNm;
+
+			if(i == 4){
+				labels[i] = '기타';
+			}else{
+				labels[i] = data[i].diagNm;
+			}
 		}
 
-		console.log(labels);
-		var backgroundColors = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5', '#FFB2D9', '#8041D9', '#6B9900', '#22741C', '#5CD1E5', '#F2CB61', '#993800', '#D941C5', '#664B00', '#670000', '#6799FF' ];
-		var pointColors = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5', '#FFB2D9', '#8041D9', '#6B9900', '#22741C', '#5CD1E5', '#F2CB61', '#993800', '#D941C5', '#664B00', '#670000', '#6799FF' ];
-		var pointStrokeColors = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5', '#FFB2D9', '#8041D9', '#6B9900', '#22741C', '#5CD1E5', '#F2CB61', '#993800', '#D941C5', '#664B00', '#670000', '#6799FF' ];
-		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff','fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff','fff', 'fff', 'fff'];
-		var pointHighlightStrokes = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5', '#FFB2D9', '#8041D9', '#6B9900', '#22741C', '#5CD1E5', '#F2CB61', '#993800', '#D941C5', '#664B00', '#670000', '#6799FF'];
+
+		var backgroundColors = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#0100FF' ];
+		var pointColors = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066'];
+		var pointStrokeColors = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066' ];
+		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff'];
+		var pointHighlightStrokes = ['#670000', '#DAD9FF', '#476600', '#FAED7D', '#030066'];
 
 		var dataSets= new Array();
 		var dataSet = '';
-		for(var i=0; i < data.length; i++){
+		for(var i=0; i <5; i++){
 			dataSet = {
 				label               : labels[i],
 				backgroundColor     : backgroundColors[i],

@@ -39,12 +39,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>혈청검사 통계</b></h1>
+						<h1><b>혈액화학통계</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>혈청검사 통계</b></li>
+							<li class="breadcrumb-item active"><b>혈액화학통계</b></li>
 						</ol>
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 
 				<div class="card">
 					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>혈청검사 통계</b></h3>
+						<h3 class="card-title"><b>혈액화학통계</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -204,6 +204,25 @@
     var update_item ={};
 
 	function setGrid(data){
+		//월령구하기 추가
+		for(var i=0; i < data.length; i++){
+
+			var rqstDtArr = data[i].rqstDt.split(".");
+			var birthArr = data[i].animBirth.split(".");
+
+			var setYear = rqstDtArr[0]-birthArr[0];
+			var setMonth = rqstDtArr[1]-birthArr[1];
+			var setDate = rqstDtArr[2]-birthArr[2];
+			var month = setYear*12;
+			if(setDate >= 0){
+				month += setMonth+1;
+			}else {
+				month += setMonth;
+			}
+
+			data[i].animBirth = month;
+		}
+
 		$("#jsGrid1").jsGrid({
 	        height: "auto",
 	        width: "100%",
@@ -237,7 +256,7 @@
 	            { name: "rqstNo",   type: "text", width: 150, 	title:"의뢰번호", 	align: "center"},
 	            { name: "rqstDt",   type: "text", width: 100, 	title:"의뢰일", 	align: "center"},
 	            { name: "animNm",   type: "text", width: 100, 	title:"품종", 	align: "center"},
-	            { name: "animBirth",type: "text", width: 100, 	title:"생년월일", 	align: "center"},
+	            { name: "animBirth",type: "text", width: 100, 	title:"월령", 	align: "center"},
 	            { name: "sample1", 	type: "number", width: 60, 	title:"TP", 	align: "center"},
 	            { name: "sample2", 	type: "number", width: 60, 	title:"Alb", 	align: "center"},
 	            { name: "sample3", 	type: "number", width: 60, 	title:"Glob", 	align: "center"},
@@ -433,8 +452,8 @@
 	function excelDown(){
 		$("#jsGrid1").table2excel({
 			exclude : ".excludeThisClass",
-			name : "혈청검사 통계",
-			filename : "혈청검사 통계",
+			name : "혈액화학검사통계",
+			filename : "혈액화학검사통계",
 			fileext : ".xlsx",
 			exclude_img : true,
 			exclude_links : true,

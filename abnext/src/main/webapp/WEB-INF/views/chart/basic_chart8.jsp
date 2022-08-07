@@ -48,12 +48,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>기본통계</b></h1>
+						<h1><b>칙몬통계</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>기본통계</b></li>
+							<li class="breadcrumb-item active"><b>칙몬통계</b></li>
 						</ol>
 					</div>
 				</div>
@@ -83,7 +83,7 @@
 								<div class="col-sm-3">
 									<div class="form-group">
 										<label>*동물병원명</label>
-										<select class="form-control select2" id="hospNo" name="hospNo">
+										<select class="form-control select2" id="hospNo" name="hospNo" onchange="fn_hospChgSetDoctor()">
 											<option value="">전체</option>
 											<c:forEach var="item" items="${hospList}" varStatus="status">
 												<option value="${item.hospNo }">${item.hospNm }</option>
@@ -94,11 +94,9 @@
 								<div class="col-sm-3">
 									<div class="form-group">
 										<label>*수의사 <a style="color:red;">(병원선택 후 선택가능)</a></label>
-										<select class="form-control select2" id="userNo" name="userNo">
+										<select class="form-control select2" id="docNo" name="docNo">
 											<option value="">전체</option>
-											<c:forEach var="item" items="${hospital }" varStatus="status">
-												<option value="${item.hospNo }" data-paygb="${item.payGb }" data-adr="${item.hospSigunguNm }">${item.hospNm }</option>
-											</c:forEach>
+
 										</select>
 									</div>
 								</div>
@@ -158,21 +156,38 @@
 									</div>
 								</div>
 							</div>
-						</form>
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="form-group">
-									<label>*질병</label>
-								</div>
 
-								<div id="jsGrid"></div>
-								<br/>
-								<div style="text-align:center;">
-									<button class="btn btn-sm btn-success btn-flat" onclick="setSickCd();">항목설정</button>
-									<button class="btn btn-sm btn-default btn-flat" onclick="setSickCdAll();">설정취소</button>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>*질병</label>
+									</div>
+
+									<div id="jsGrid"></div>
+									<br/>
+									<div style="text-align:center;">
+										<button class="btn btn-sm btn-success btn-flat" onclick="setSickCd();">항목설정</button>
+										<button class="btn btn-sm btn-default btn-flat" onclick="setSickCdAll();">설정취소</button>
+									</div>
 								</div>
 							</div>
-						</div>
+							<br/>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>*진단명</label>
+										<div class="form-group">
+											<c:forEach var="item" items="${diagCdList}" varStatus="status">
+												<div class="icheck-primary d-inline" style="vertical-align:bottom;">
+													<input type="checkbox" id="diagCdChk${status.index }" name="diagCd" value="${item.codeId}">
+													<label for="diagCdChk${status.index }" style="width:300px">${item.codeNm}</label>
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 					<!-- /.card-body -->
 
@@ -197,6 +212,18 @@
 					</div>
 
 					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="btn-group">
+	                  						<button type="button" class="excelBtn btn-sm btn-success" onclick="excelDown();" style="max-width:100px;min-width:82px;"><i class="fa fa-copy"></i> EXCEL</button>
+                  						</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div id="jsGrid1"></div>
 					</div>
 					<!-- /.card-body -->
@@ -361,7 +388,7 @@
 		$.ajax({
 			url : 'basicChartList8',
 			type : 'post',
-			//data : formData,
+			data : formData,
 			dataType :'json',
 			success : function(data){
 				setGrid1(data);
@@ -382,7 +409,7 @@
 	            { name: "hospNm",   type: "text", width: 120, 	title:"병원명", 	align: "center"},
 	            { name: "docNm",   	type: "text", width: 80, 	title:"수의사", 	align: "center"},
 	            { name: "animButler",type: "text", width: 80, 	title:"보호자", 	align: "center"},
-	            { name: "animBirth",type: "text", width: 70, 	title:"생년월일", 	align: "center"},
+	            { name: "animBirth",type: "text", width: 80, 	title:"생년월일", 	align: "center"},
 	            { name: "value1", 	type: "text", width: 50, 	title:"지역", 	align: "center"},
 	            { name: "animNm", 	type: "text", width: 80, 	title:"이름", 	align: "center"},
 	            { name: "value2", 	type: "text", width: 50, 	title:"성별",		align: "center"},
@@ -390,11 +417,45 @@
 	            { name: "value4", 	type: "text", width: 120, 	title:"중분류", 	align: "center"},
 	            { name: "value5", 	type: "text", width: 150, 	title:"검사항목", 	align: "center"},
 	            { name: "diagNm", 	type: "text", width: 150, 	title:"최종진단", 	align: "center"},
-	            { name: "value6", 	type: "text", width: 60, 	title:"진행상태", 	align: "center"}
+	            { name: "value6", 	type: "text", width: 80, 	title:"진행상태", 	align: "center"}
 	        ]
 	    });
-
-
 	}
+
+
+	function excelDown(){
+		$("#jsGrid1").table2excel({
+			exclude : ".excludeThisClass",
+			name : "칙몬통계",
+			filename : "칙몬통계",
+			fileext : ".xlsx",
+			exclude_img : true,
+			exclude_links : true,
+			exclude_inputs : true        
+		});    
+	}
+
+
+	function fn_hospChgSetDoctor(){
+
+		$.ajax({
+			url : 'getDocList',
+			data : {'hospNo':$('#hospNo').val()},
+			dataType :'json',
+			type :'post',
+			success: function(data){
+				var html = '<option value="">전체</option>';
+
+				$.each(data, function(i, list){
+					html += '<option value="'+list.userNo+'">'+list.userNm+'</option>';
+				})
+
+				$('#userNo').empty();
+				$('#userNo').html(html);
+
+			}
+		})
+	}
+
 </script>
 </html>

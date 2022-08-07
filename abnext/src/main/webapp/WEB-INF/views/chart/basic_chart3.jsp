@@ -39,12 +39,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>검사통계</b></h1>
+						<h1><b>월별 검사통계</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>검사통계</b></li>
+							<li class="breadcrumb-item active"><b>월별 검사통계</b></li>
 						</ol>
 					</div>
 				</div>
@@ -235,8 +235,8 @@
 	function excelDown(){
 		$("#jsGrid1").table2excel({
 			exclude : ".excludeThisClass",
-			name : "가검물통계",
-			filename : "가검물통계",
+			name : "월별 검사통계",
+			filename : "월별 검사통계",
 			fileext : ".xlsx",
 			exclude_img : true,
 			exclude_links : true,
@@ -259,18 +259,18 @@
 		var yArr = new Array();
 		var yArrDetail ='';
 
-		for(var j=0; j < 8; j++){
+		for(var j=0; j < 6; j++){
 			yArrDetail = new Array();
 
 			for(var i=0; i < monList; i++){
-				if(j == 0) yArrDetail.push(data[i].sample1);
-				if(j == 1) yArrDetail.push(data[i].sample2);
+				if(j == 0) yArrDetail.push(data[i].sample2);
+				if(j == 1) yArrDetail.push(data[i].sample1);
 				if(j == 2) yArrDetail.push(data[i].sample3);
 				if(j == 3) yArrDetail.push(data[i].sample4);
-				if(j == 4) yArrDetail.push(data[i].sample5);
-				if(j == 5) yArrDetail.push(data[i].sample6);
-				if(j == 6) yArrDetail.push(data[i].sample7);
-				if(j == 7) yArrDetail.push(data[i].total);
+				if(j == 4) yArrDetail.push(data[i].sample5+data[i].sample6+data[i].sample7);
+				//if(j == 5) yArrDetail.push(data[i].sample6);
+				//if(j == 6) yArrDetail.push(data[i].sample7);
+				if(j == 5) yArrDetail.push(data[i].total);
 
 			}
 			yArr[j]= yArrDetail;
@@ -281,16 +281,16 @@
 		}
 
 
-		var labels = ['PBFD', 'APV', 'PDD', 'chlamydiasis', '성감별PCR', '분변검사', '기타', '합계'];
-		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#000000' ];
-		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', '#F2CB61', 'rgba(210, 214, 222, 1)', '#000000'];
-		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#000000'];
+		var labels = ['APV', 'PBFD', 'PDD', 'chlamydiasis', '기타', '합계'];
+		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#F2CB61'];
+		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', '#F2CB61'];
+		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
 		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff'];
-		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#000000'];
+		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)'];
 
 		var dataSets= new Array();
 		var dataSet = '';
-		for(var i=0; i < 8; i++){
+		for(var i=0; i < 6; i++){
 			dataSet = {
 				label               : labels[i],
 				backgroundColor     : backgroundColors[i],

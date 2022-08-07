@@ -14,6 +14,8 @@ import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.ChartView1;
 import kr.or.abnext.domain.SearchView;
 import kr.or.abnext.domain.SickCdView;
+import kr.or.abnext.domain.TbHospital;
+import kr.or.abnext.domain.TbUser;
 
 @RestController
 public class ChartRestController {
@@ -78,9 +80,16 @@ public class ChartRestController {
 	@RequestMapping(value = "basicChartList8", method = RequestMethod.POST)
 	public List<ChartView1> basicChartList8Ctrl(SearchView searchView) {
 		System.out.println("칙몬통계 화면가기~!!");
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>SearchView ");
-		System.out.println(searchView);
 
 		return chartServ.getBasicChartList8Serv(searchView);
 	}
+
+
+	@RequestMapping(value = "getDocList", method = RequestMethod.POST)
+	public List<TbUser> getDocListCtrl(TbHospital tbHospital) {
+		System.out.println("의사조회 화면가기~!!");
+
+		return adminServ.getDoctorListServ(tbHospital);
+	}
+
 }

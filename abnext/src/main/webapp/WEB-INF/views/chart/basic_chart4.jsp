@@ -39,12 +39,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>진단명별통계</b></h1>
+						<h1><b>지역별 진단명별 통계</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active"><b>진단명별통계</b></li>
+							<li class="breadcrumb-item active"><b>지역별 진단명별 통계</b></li>
 						</ol>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
  			<div class="container-fluid">
 				<div class="card">
 					<div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>지역별 진단명별 통계차트</b></h3>
+						<h3 class="card-title"><b>지역별 진단명별 Chart</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -79,7 +79,7 @@
 
 				<div class="card">
 					<div class="card-header" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>지역별 진단명별 통계 DATA</b></h3>
+						<h3 class="card-title"><b>지역별 진단명별 DATA</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -249,7 +249,6 @@
 	//-------------
     //- BAR CHART -
     //-------------
-    //var xArr = ['강원', '경기', '충남', '충북', '세종', '전북', '전남', '경북', '경남', '제주', '서울', '인천', '대전', '광주', '대구', '울산', '부산', '기타'];
     function setChartData(data){
 		var areaChartData = '';
 
@@ -261,40 +260,88 @@
 		var yArrDetail ='';
 
 		var labels = new Array()
-		for(var i=0; i < data.length; i++){
+
+		for(var i=0; i < 5; i++){
 			yArrDetail = new Array();
-			yArrDetail.push(data[i].sample1);
-			yArrDetail.push(data[i].sample2);
-			yArrDetail.push(data[i].sample3);
-			yArrDetail.push(data[i].sample4);
-			yArrDetail.push(data[i].sample5);
-			yArrDetail.push(data[i].sample6);
-			yArrDetail.push(data[i].sample7);
-			yArrDetail.push(data[i].sample8);
-			yArrDetail.push(data[i].sample9);
-			yArrDetail.push(data[i].sample10);
-			yArrDetail.push(data[i].sample11);
-			yArrDetail.push(data[i].sample12);
-			yArrDetail.push(data[i].sample13);
-			yArrDetail.push(data[i].sample14);
-			yArrDetail.push(data[i].sample15);
-			yArrDetail.push(data[i].sample16);
-			yArrDetail.push(data[i].sample17);
+
+			if(i < 4){
+				yArrDetail.push(data[i].sample1);
+				yArrDetail.push(data[i].sample2);
+				yArrDetail.push(data[i].sample3);
+				yArrDetail.push(data[i].sample4);
+				yArrDetail.push(data[i].sample5);
+				yArrDetail.push(data[i].sample6);
+				yArrDetail.push(data[i].sample7);
+				yArrDetail.push(data[i].sample8);
+				yArrDetail.push(data[i].sample9);
+				yArrDetail.push(data[i].sample10);
+				yArrDetail.push(data[i].sample11);
+				yArrDetail.push(data[i].sample12);
+				yArrDetail.push(data[i].sample13);
+				yArrDetail.push(data[i].sample14);
+				yArrDetail.push(data[i].sample15);
+				yArrDetail.push(data[i].sample16);
+				yArrDetail.push(data[i].sample17);
+			}else if(i == 4){
+				var sam1=0, sam2=0, sam3=0, sam4=0, sam5=0, sam6=0, sam7=0, sam8=0, sam9=0, sam10=0, sam11=0, sam12=0, sam13=0, sam14=0, sam15=0, sam16=0, sam17=0;
+				for(var j=4; j<data.length; j++){
+					sam1 += data[j].sample1;
+					sam2 += data[j].sample2;
+					sam3 += data[j].sample3;
+					sam4 += data[j].sample4;
+					sam5 += data[j].sample5;
+					sam6 += data[j].sample6;
+					sam7 += data[j].sample7;
+					sam8 += data[j].sample8;
+					sam9 += data[j].sample9;
+					sam10 += data[j].sample10;
+					sam11 += data[j].sample11;
+					sam12 += data[j].sample12;
+					sam13 += data[j].sample13;
+					sam14 += data[j].sample14;
+					sam15 += data[j].sample15;
+					sam16 += data[j].sample16;
+					sam17 += data[j].sample17;
+				}
+
+				yArrDetail.push(sam1);
+				yArrDetail.push(sam2);
+				yArrDetail.push(sam3);
+				yArrDetail.push(sam4);
+				yArrDetail.push(sam5);
+				yArrDetail.push(sam6);
+				yArrDetail.push(sam7);
+				yArrDetail.push(sam8);
+				yArrDetail.push(sam9);
+				yArrDetail.push(sam10);
+				yArrDetail.push(sam11);
+				yArrDetail.push(sam12);
+				yArrDetail.push(sam13);
+				yArrDetail.push(sam14);
+				yArrDetail.push(sam15);
+				yArrDetail.push(sam16);
+				yArrDetail.push(sam17);
+			}
 
 			yArr[i]= yArrDetail;
-			labels[i] = data[i].diagNm;
+
+			if(i == 4){
+				labels[i] = '기타';
+			}else{
+				labels[i] = data[i].diagNm;
+			}
+
 		}
 
-		console.log(labels);
-		var backgroundColors = ['rgba(60,141,188,0.9)', 'rgba(210, 214, 222, 1)', '#476600', '#FAED7D', '#030066', '#F2CB61', '#FF0000', '#5CD1E5' ];
-		var pointColors = ['#3b8bba', 'rgba(210, 214, 222, 1)', '#476600', 'rgba(210, 214, 222, 1)', '#3b8bba', '#F2CB61', 'rgba(210, 214, 222, 1)', '#5CD1E5'];
-		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#5CD1E5'];
-		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff', 'fff'];
-		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#5CD1E5'];
+		var backgroundColors = ['#030066', '#476600', '#FF0000', '#4374D9', '#B7F0B1' ];
+		var pointColors = ['rgba(210, 214, 222, 1)', '#3b8bba', '#476600', 'rgba(210, 214, 222, 1)', '#4374D9'];
+		var pointStrokeColors = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#476600', 'rgba(60,141,188,1)', '#4374D9'];
+		var pointHighlightFills = ['fff', 'fff', 'fff', 'fff', 'fff'];
+		var pointHighlightStrokes = ['rgba(60,141,188,1)', 'rgba(60,141,188,1)', '#476600', 'rgba(60,141,188,1)', '#4374D9'];
 
 		var dataSets= new Array();
 		var dataSet = '';
-		for(var i=0; i < 8; i++){
+		for(var i=0; i < 5; i++){
 			dataSet = {
 				label               : labels[i],
 				backgroundColor     : backgroundColors[i],
@@ -342,61 +389,7 @@
 	    })
 	}
 
-	//---------------------
-    //- STACKED BAR CHART -
-    //---------------------
-    /*
-    var areaChartData = {
-      labels  : xArr,
-      datasets: [
-        {
-          label               : 'PBFD',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90,28, 48, 40, 19, 86, 27, 90,28, 48, 40]
-        },
-        {
-          label               : 'APV',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40,28, 48, 40, 19, 86, 27, 90,28, 48, 40]
-        },
-      ]
-    }
 
-    var barChartData = $.extend(true, {}, areaChartData)
-    var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-    var stackedBarChartData = $.extend(true, {}, barChartData)
-
-    var stackedBarChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      scales: {
-        xAxes: [{
-          stacked: true,
-        }],
-        yAxes: [{
-          stacked: true
-        }]
-      }
-    }
-
-    new Chart(stackedBarChartCanvas, {
-      type: 'bar',
-      data: stackedBarChartData,
-      options: stackedBarChartOptions
-    })
-	*/
 
 </script>
 </html>

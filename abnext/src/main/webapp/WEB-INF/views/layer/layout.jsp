@@ -390,7 +390,7 @@
 				oncomplete: function(data){
 					console.log(data.sido);
 					if(type == 'user'){
-						$("#userAdr").val(data.jibunAddress);
+						$("#userAdr").val(data.roadAddress);
 						$("#userZip").val(data.zonecode);
 						$('#sidoNm').val(data.sido);
 						$('#sigunguNm').val(data.sigungu);
@@ -398,7 +398,7 @@
 
 						$('#userDtlAdr').focus();
 					}else if(type == 'hospital'){
-						$("#hospAdr").val(data.jibunAddress);
+						$("#hospAdr").val(data.roadAddress);
 						$("#hospZip").val(data.zonecode);
 						$('#hospSidoNm').val(data.sido);
 						$('#hospSigunguNm').val(data.sigungu);
@@ -406,7 +406,7 @@
 
 						$('#hospDtlAdr').focus();
 					}else if(type == 'farm'){
-						$("#farmAdr").val(data.jibunAddress);
+						$("#farmAdr").val(data.roadAddress);
 						$("#farmZip").val(data.zonecode);
 						$('#farmSidoNm').val(data.sido);
 						$('#farmSigunguNm').val(data.sigungu);

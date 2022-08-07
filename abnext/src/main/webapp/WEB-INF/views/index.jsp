@@ -40,7 +40,7 @@
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
-		<section class="content-header" style="height:688px;">
+		<section class="content-header" style="width:auto;height:688px;background-image:url('resources/files/backimg1.jpg')">
 			<div class="container-fluid">
 				<h1><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:25%;"></b></h1>
 

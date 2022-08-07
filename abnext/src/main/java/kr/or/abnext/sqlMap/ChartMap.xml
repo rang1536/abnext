@@ -392,12 +392,63 @@
 					   /*, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0*/
 				  FROM TB_CODE
 				 WHERE UPP_CODE_ID = 'D001'
+				   AND CODE_ID IN ('D001-0001', 'D001-0002', 'D001-0003', 'D001-0010')
+			  ) B
+	    GROUP BY B.DIAG_CD
+	    UNION ALL
+	   SELECT IFNULL((SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = B.DIAG_CD), '기타') AS DIAG_NM
+			   , SUM(B.SAMPLE1) AS SAMPLE1
+			   , SUM(B.SAMPLE2) AS SAMPLE2
+			   , SUM(B.SAMPLE3) AS SAMPLE3
+			   , SUM(B.SAMPLE4) AS SAMPLE4
+			   , SUM(B.SAMPLE5) AS SAMPLE5
+			   , SUM(B.SAMPLE6) AS SAMPLE6
+			   , SUM(B.SAMPLE7) AS SAMPLE7
+			   , SUM(B.SAMPLE8) AS SAMPLE8
+			   , SUM(B.SAMPLE9) AS SAMPLE9
+			   , SUM(B.SAMPLE10) AS SAMPLE10
+			   , SUM(B.SAMPLE11) AS SAMPLE11
+			   , SUM(B.SAMPLE12) AS SAMPLE12
+	     FROM (
+				SELECT A.DIAG_CD
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'01') THEN 1 ELSE 0 END AS SAMPLE1
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'02') THEN 1 ELSE 0 END AS SAMPLE2
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'03') THEN 1 ELSE 0 END AS SAMPLE3
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'04') THEN 1 ELSE 0 END AS SAMPLE4
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'05') THEN 1 ELSE 0 END AS SAMPLE5
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'06') THEN 1 ELSE 0 END AS SAMPLE6
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'07') THEN 1 ELSE 0 END AS SAMPLE7
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'08') THEN 1 ELSE 0 END AS SAMPLE8
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'09') THEN 1 ELSE 0 END AS SAMPLE9
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'10') THEN 1 ELSE 0 END AS SAMPLE10
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'11') THEN 1 ELSE 0 END AS SAMPLE11
+					   , CASE WHEN A.RQST_DT = CONCAT(#{stDt},'12') THEN 1 ELSE 0 END AS SAMPLE12
+				  FROM (
+						SELECT DIAG_CD
+							   , REPLACE(SUBSTR(RQST_DT,1,7),'.','-') AS RQST_DT
+						  FROM TB_RCEPT A
+						 WHERE DIAG_CD IS NOT NULL
+						 /*검색기간*/
+						 <if test="stDt != null and stDt != '' ">
+					      	AND RQST_DT LIKE CONCAT(#{stDt}, '%')
+					     </if>
+					     <if test="stDt == null or stDt == '' ">
+					     	AND RQST_DT LIKE CONCAT(DATE_FORMAT(NOW(), 'Y%'), '%')
+					     </if>
+						) A
+				 UNION
+				SELECT CODE_ID AS DIAG_CD
+					     , 2, 3, 4, 2, 3, 4, 3, 4, 5, 5, 3, 2
+					   /*, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0*/
+				  FROM TB_CODE
+				 WHERE UPP_CODE_ID = 'D001'
+				   AND CODE_ID not IN ('D001-0001', 'D001-0002', 'D001-0003', 'D001-0010')
 			  ) B
 	    GROUP BY B.DIAG_CD
 	</select>
 
 
-	<!-- 혈청검사 -->
+	<!-- 혈액화학통계 -->
 	<select id="getBasicChartList6" parameterType="kr.or.abnext.domain.ChartView1" resultType="kr.or.abnext.domain.ChartView1">
 		SELECT PDL_NO as RQST_NO
 			   , RQST_DT
@@ -585,41 +636,62 @@
 	    <if test="endDt != null and endDt != '' ">
 	    	AND A.ANIM_BIRTH <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
 	    </if>
-	    <if test="sidoNo != null and sidoNo != '' ">
-	    	AND A.BUTLER_SIDO IN
-	    	<foreach collection="sidoNo" item="item" index="index" separator="," open="(" close=")">        
-		    	#{item}     
-		    </foreach>
 
-	    </if>
-		<if test="animThirdCd != null and animThirdCd != '' ">
-	    	AND A.ANIM_THIRD_CD IN
-	    	<foreach collection="animThirdCd" item="thirdCd" index="index" separator="," open="(" close=")">        
-		    	#{thirdCd}     
-		    </foreach>
-	    </if>
 		<if test="hospNo != null and hospNo != '' ">
 	    	AND A.HOSP_NO = #{hospNo}
 	    </if>
 	    <if test="animButler != null and animButler != '' ">
 	    	AND A.ANIM_BUTLER = #{animButler}
 	    </if>
-	    <if test="animButler != null and animButler != '' ">
-	    	AND A.DOC_NO = #{docNo}
+	    <if test="docNo != null and docNo != '' ">
+	    	AND A.HOSP_FIRST_DOCTOR = #{docNo}
 	    </if>
-		<if test="cate4 != null and cate4 != '' ">
-	    	AND (B.INSP_THIRD_CD IN
-	    	<foreach collection="cate4" item="thirdCd" index="index" separator="," open="(" close=")">        
-		    	#{thirdCd}     
-		    </foreach>
-		    OR B.INSP_SECOND_CD IN
-		    <foreach collection="cate4" item="secondCd" index="index" separator="," open="(" close=")">        
-		    	#{secondCd}     
-		    </foreach>
-	    </if>
+		${sql}
 
 	</select>
 
 
+	<select id="getBasicChartList82" parameterType="Map" resultType="kr.or.abnext.domain.ChartView1">
+		SELECT A.PDL_NO as RQST_NO
+			   , A.HOSP_NM
+			   , A.ANIM_BUTLER
+			   , A.DOC_NM
+			   , A.BUTLER_SIDO as VALUE1
+			   , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = A.ANIM_THIRD_CD) AS ANIM_NM
+			   , A.ANIM_BIRTH
+			   , A.ANIM_SEX AS VALUE2
+			   , (SELECT CODE_NM
+			        FROM TB_CODE
+			       WHERE CODE_ID = B.INSP_FIRST_CD) as VALUE3
+			   , (SELECT CODE_NM
+			        FROM TB_CODE
+			       WHERE CODE_ID = B.INSP_SECOND_CD) as VALUE4
+			   , (SELECT CODE_NM
+			        FROM TB_CODE
+			       WHERE CODE_ID = B.INSP_THIRD_CD) as VALUE5
+			   , (SELECT CODE_NM
+			        FROM TB_CODE
+			       WHERE CODE_ID = A.DIAG_CD) AS DIAG_NM /*최종진단명*/
+			   , PROC_STAT_NM as VALUE6
+	     FROM TB_RCEPT A
+	 	INNER JOIN TB_INSPECTION B
+	 	   ON (A.RQST_NO = B.RQST_NO)
+	    WHERE 1=1
+		  and ${sql}
 
+
+
+
+	</select>
+
+	<select id="getSidoNmChart" resultType= "String">
+		SELECT LOCAL_NM
+		  FROM TB_LOCAL
+		 WHERE 1=1
+		   AND LOCAL_NM IN
+		   		<foreach collection="list" item="item" index="i" separator="," open="(" close=")">
+					${item}
+				</foreach>
+
+	</select>
 </mapper>

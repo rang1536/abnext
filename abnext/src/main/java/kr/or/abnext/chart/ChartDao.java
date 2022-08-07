@@ -61,6 +61,10 @@ public class ChartDao {
 		return sql.selectList("chart.getBasicChartList8", searchView);
 	}
 
+	public List<ChartView1> getBasicChart82List(Map<String, Object> map){
+		return sql.selectList("chart.getBasicChartList82", map);
+	}
+
 	public List<TbRcept> getButlerList(){
 		return sql.selectList("chart.getButlerList");
 	}

@@ -86,10 +86,14 @@ public class ChartController {
 		model.addAttribute("buttlerList", chartServ.getButlerListServ());
 		model.addAttribute("localList", chartServ.getLocalListServ());
 
-		System.out.println("지역조회결과"+chartServ.getLocalListServ());
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("codeId", "C001-0_-0_-");
 		model.addAttribute("animGbList", adminServ.getCodeListServ(param));
+
+		//진단명목록
+		Map<String, Object> param2 = new HashMap<String, Object>();
+		param2.put("codeId", "D001-");
+		model.addAttribute("diagCdList", adminServ.getCodeListServ(param2));
 
 		return "chart/basic_chart8";
 	}

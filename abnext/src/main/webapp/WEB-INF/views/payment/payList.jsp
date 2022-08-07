@@ -53,11 +53,11 @@
 		</section>
 
 		<!-- Main content -->
-		<div class="invoice p-3 mb-3">
+		<div class="invoice p-3 mb-3"  style="font-size:13px;">
 			<!-- Table row -->
 			<div class="row">
 				<div class="col-12">
-					<div class="card">
+					<div class="card card-primary card-outline">
 						<div class="card-header">
 							<div class="row">
 								<div class="col-sm-2" style="padding-top:30px;min-width:150px;">
@@ -172,7 +172,7 @@
 					</div>
 					<!-- /.card -->
 
-					<div class="card">
+					<div class="card card-primaryr card-outline">
 						<div class="card-header">
 							<div class="row">
 								<div class="col-sm-2" style="padding-top:30px;min-width:150px;">
@@ -196,7 +196,7 @@
 								<tfoot>
 									<tr>
 										<td colspan="4" class="txtc">
-											<button type="button" id="sett" style="width:121.2px" class="btn btn-primary btn-flat"><i class="fas fa-money-check-alt"></i> 입금확인</button>
+											<button type="button" id="sett" style="width:121.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-money-check-alt"></i> 입금확인</button>
 										</td>
 									</tr>
 								</tfoot>

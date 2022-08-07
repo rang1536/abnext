@@ -63,7 +63,7 @@
 					<!-- Table row -->
 					<div class="row">
 						<div class="col-12">
-							<div class="card card-primary card-outline"">
+							<div class="card card-primary card-outline">
 								<div class="card-header">
 					              <h3 class="card-title"><b>농장목록</b></h3>
 					            </div>

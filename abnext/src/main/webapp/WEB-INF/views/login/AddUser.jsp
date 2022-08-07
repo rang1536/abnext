@@ -170,7 +170,7 @@
 								                    </div>
 								                  </div>
 								                </div>-->
-
+												<input type="hidden" name="userLev" value="1"/>
 									            <div class="row">
 									                <div class="col-sm-6">
 										                <div class="form-group">
@@ -715,8 +715,8 @@
 											</div>
 
 											<!-- <button type="button" class="btn btn-primary" onclick="stepper.previous()">이전</button> -->
-											<button type="button" onclick="fn_userListPage();" class="btn btn-success btn-flat" style="float:right;">회원목록 바로가기</button>
-
+											<button type="button" onclick="fn_userListPage();" class="btn btn-success btn-flat userListGo" style="float:right;display:none;">회원목록 바로가기</button>
+											<button type="button" onclick="fn_mainPage();" class="btn btn-success btn-flat mainPageGo" style="float:right;display:none;">메인화면 바로가기</button>
 
 										</div>
 
@@ -1194,6 +1194,16 @@
 				success : function(data){
 					if(data.result == 'succ'){
 						toastr.success('회원등록이 완료되었습니다.');
+
+						var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+						if(userInfo != null){
+							if(userInfo.userLev == '4'){
+								$('.userListGo').css('display','');
+							}
+						}else{
+							$('.mainPageGo').css('display','');
+						}
+
 						stepper.next();
 					}else{
 						toastr.error('회원등록에 실패하였습니다.');
@@ -1207,7 +1217,9 @@
 		}
 	}
 
-
+	function fn_mainPage(){
+		location.href="index";
+	}
 
 </script>
 </body>

@@ -162,6 +162,18 @@
 			}
 		})
 	}
+
+
+	/*==================================
+	* 앤터키 Event
+	* onkeyup = "fn_enterKey(pgmId)"
+	==================================*/
+	function fn_enterKey(pgmId){
+		if(window.event.keyCode == 13){
+			fn_login();
+
+		}
+	}
 </script>
 </html>
 
