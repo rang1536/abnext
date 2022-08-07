@@ -20,11 +20,13 @@
 	<!-- jsGrid -->
 	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid.min.css">
 	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid-theme.min.css">
+	<!-- iCheck for checkboxes and radio inputs -->
+	<link rel="stylesheet" href="resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 	<style>
 		th,td {text-align:center;}
 	</style>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onselectstart='return false'>
 <div class="wrapper">
 	<jsp:include page="../layer/layout.jsp"></jsp:include>
 
@@ -35,7 +37,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1> * 전체목록</h1>
+						<h1> * 진단검사신청 현황</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -54,11 +56,30 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
+							<div class="card-header">
+								* 의뢰목록
+							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
+								<div>
+									<div class="form-group clearfix" style="float:right">
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk1" class="chkbox">
+											<label for="chk1">점검중</label>
+										</div>
+										<div class="icheck-primary d-inline" style="margin-left:15px">
+											<input type="checkbox" id="chk2" class="chkbox">
+											<label for="chk2">점검완료</label>
+										</div>
+									</div>
+								</div>
 								<div id="jsGrid1"></div>
 							</div>
 							<!-- /.card-body -->
+							<div class="card-footer">
+								<button type="button" class="btn btn-primary btn-flat" style="float:right;">신규신청</button>
+							</div>
+							<!-- /.card-footer -->
 						</div>
 						<!-- /.card -->
 					</div>
@@ -110,16 +131,57 @@
 <!-- Page specific script -->
 <script>
 	$(function () {
+		getList();
+	});
+
+	$(".btn-primary").on("click",function(){
+		location.href = "registerInspect";
+	});
+
+	$(".chkbox").click(function(){
+		if($(this).hasClass("on")){
+			$(this).prop("checked", false);
+			$(this).removeClass("on");
+		}else {
+			$(".chkbox").each(function(){
+				$(".chkbox").prop("checked", false);
+				$(".chkbox").removeClass("on");
+			});
+			$(this).prop("checked", true);
+			$(this).addClass("on");
+		}
+		getList();
+	});
+
+	function getList(){
+		var data = {};
+
+		if($("#chk1").is(":checked")){
+			data = {
+				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+				searchStr : "01"
+			};
+		}else if($("#chk2").is(":checked")){
+			data = {
+				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+				searchStr : "02"
+			};
+		}else {
+			data = {
+				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
+			};
+		}
+
 		$.ajax({
-			url : 'allInspectList2',
+			url : 'selectCustomerInspectList',
 			dataType : 'json',
 			type : 'post',
-			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
+			data : data,
 			success:function(data){
-				var colList = ['pdlNo','rqstDt','procStatNm','animNm','hospNm','docNm','resultWriter','gubun'];
+				var colList = ['pdlNo','rqstDt','procStatNm','animNm','animButler','docNm','gubun','payStat'];
 				var typeList = ['text','text','text','text','text','text','text','text'];
 				var widthList = ['120','100','100','150','180','150','120','120'];
-				var titleList = ['의뢰번호','신청일','상태','동물이름','신청자(기관)','담당수의사','겸과입력자','검사구분'];
+				var titleList = ['의뢰번호','신청일','상태','동물이름','보호자','담당수의사','검사구분','비용'];
 				var alignList = ['center','center','center','center','center','center','center','center'];
 				var gridId = 'jsGrid1';
 				var fields = new Array();
@@ -132,29 +194,38 @@
 						"width" : widthList[i],
 						"title"	: titleList[i],
 						"align"	: alignList[i],
-
+						"itemTemplate" :
+							function(value, item) {
+								var flag = false;
+								if(value == '01') {
+									return "미납";
+								}else if(value == '02') {
+									return "수납";
+								}else {
+									return value;
+								}
+							}
 					}
 					fields.push(row);
 				}
 
 				$("#"+gridId).jsGrid({
-			        height: "auto",
-			        width: "100%",
-			        sorting: true,
-			        paging: true,
+					height: "auto",
+					width: "100%",
+					sorting: true,
+					paging: true,
 					data: data,
-			        fields: fields,
-			        rowClick: function(args){
+					fields: fields,
+					rowClick: function(args){
 						var $target = $(args.event.target);
 						$("[name=pdlNo]").val($target.parent().find("td:eq(0)").text());
-						$("#viewFrm").attr("action","viewInspect");
+						$("#viewFrm").attr("action","customerViewInspect");
 						$("#viewFrm").submit();
-			        }
-			    });
+					}
+				});
 			}
 		})
-	});
-
+	}
 </script>
 </body>
 </html>

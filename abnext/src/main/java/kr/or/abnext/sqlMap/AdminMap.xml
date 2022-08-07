@@ -175,6 +175,9 @@
 		 <if test="userWorkGb != null and userWorkGb != ''">
 		    AND USER_WORK_GB = #{userWorkGb}
 		 </if>
+		 <if test="adminYn != null and adminYn != ''">
+		    AND ADMIN_YN = #{adminYn}
+		 </if>
 		 <if test="userStat != null and userStat != ''">
 		 	AND USER_STAT = #{userStat}
 		 </if>

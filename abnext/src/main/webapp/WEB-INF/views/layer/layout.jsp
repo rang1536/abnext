@@ -183,26 +183,34 @@
 					$(".leftMenu").eq(0).addClass("active");
 				}else if(path.indexOf('introInspect') > -1){
 					$(".leftMenu").eq(1).addClass("active");
+					$(".inspect").addClass("menu-is-opening menu-open");
 				}else if(path.indexOf('request') > -1 || path.indexOf('register') > -1 || path.indexOf('modifyInspect') > -1){
 					$(".leftMenuSub").eq(0).addClass("active");
+					$(".inspect").addClass("menu-is-opening menu-open");
 				}else if(path.indexOf('setting') > -1){
 					$(".leftMenuSub").eq(1).addClass("active");
+					$(".inspect").addClass("menu-is-opening menu-open");
 				}else if(path.indexOf('result') > -1){
 					$(".leftMenuSub").eq(2).addClass("active");
+					$(".inspect").addClass("menu-is-opening menu-open");
 				}else if(path.indexOf('final') > -1){
 					$(".leftMenuSub").eq(3).addClass("active");
+					$(".inspect").addClass("menu-is-opening menu-open");
 				}else if(path.indexOf('all') > -1 || path.indexOf('view') > -1){
 					$(".leftMenuSub").eq(4).addClass("active");
+					$(".inspect").addClass("menu-is-opening menu-open");
+				}else if(path.indexOf('customer') > -1){
+					$(".leftMenuSub").eq(0).addClass("active");
+					$(".inspect").addClass("menu-is-opening menu-open");
 				}else if(path.indexOf('payList') > -1){
 					$(".leftMenu").eq(3).addClass("menu-is-opening menu-open");
 					$(".leftMenu").eq(3).addClass("active");
 				}
-			}, 500)
+			}, 200)
 
 		});
 
 		function setMenuList(menuLev){
-			console.log('menuLev : '+menuLev);
 			$.ajax({
 				url :'getMenuList',
 				dataType :'json',
@@ -216,9 +224,6 @@
 					html2 += '<li class="nav-item">';
 					html2 += '	<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>';
 					html2 += '</li>';
-
-
-
 
 					$.each(data, function(i, list){
 						if(list.uppMenuNo == 0){
@@ -239,11 +244,15 @@
 							html2 += '</li>';
 
 
-							//사이드바
-							html += '<li class="nav-item">';
+							var menuNm = list.menuNm;
+							if(menuNm == '진단검사'){
+								html += '<li class="nav-item inspect">';
+							}else {
+								html += '<li class="nav-item">';
+							}
+
 							html += '	<a href="'+list.menuUrl+'" class="nav-link leftMenu">';
 
-							var menuNm = list.menuNm;
 							if(menuNm == 'MyPage'){
 								html += '		<i class="nav-icon fas fa-tachometer-alt"></i>';
 								html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm+'</p>';
@@ -252,7 +261,6 @@
 								html += '		<i class="nav-icon fas fa-copy"></i>';
 								html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm;
 								html += '			<i class="fas fa-angle-left right"></i>';
-								html += '			<span class="badge badge-info right">5</span>';
 								html += '		</p>';
 								html += '	</a>';
 							}else if(menuNm == '게시판'){
@@ -285,6 +293,11 @@
 							html += '	<ul class="nav nav-treeview">';
 
 							$.each(data, function(j, secondList){
+								//사용자 전용메뉴
+								if(secondList.menuNo == '27' && JSON.parse(sessionStorage.getItem('userInfo')).userLev != "1") {
+									return;
+								}
+
 								if(secondList.uppMenuNo == list.menuNo){
 									html += '<li class="nav-item">';
 									html += '	<a href="'+secondList.menuUrl+'" class="nav-link leftMenuSub">';

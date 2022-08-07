@@ -3,16 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myFarm">
-	<select id="getDataYear" parameterType="kr.or.abnext.domain.MyFarm" resultType="kr.or.abnext.domain.MyFarm">
-		SELECT (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE SUBSTR(RQST_DT,1,7) = #{searchStr} AND PROC_STAT = 1) AS REQ_CNT
-		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE SUBSTR(RQST_DT,1,7) = #{searchStr} AND PROC_STAT = 2) AS REC_CNT
-		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE SUBSTR(RQST_DT,1,7) = #{searchStr} AND PROC_STAT = 3) AS PROC_CNT
-		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE SUBSTR(RQST_DT,1,7) = #{searchStr} AND PROC_STAT IN (4,5)) AS FIN_CNT
+	<select id="selectMonthlyData" parameterType="kr.or.abnext.domain.MyFarm" resultType="kr.or.abnext.domain.MyFarm">
+		SELECT (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE SUBSTR(RQST_DT,1,7) = #{searchStr} AND PROC_STAT = 1 AND INS_ID = #{insId}) AS REQ_CNT
+		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE SUBSTR(RQST_DT,1,7) = #{searchStr} AND PROC_STAT = 2 AND INS_ID = #{insId}) AS REC_CNT
+		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE SUBSTR(RQST_DT,1,7) = #{searchStr} AND PROC_STAT IN (3,4) AND INS_ID = #{insId}) AS PROC_CNT
+		     , (SELECT COUNT(*) AS CNT FROM TB_RCEPT WHERE SUBSTR(RQST_DT,1,7) = #{searchStr} AND PROC_STAT = 5 AND INS_ID = #{insId}) AS FIN_CNT
 		  FROM TB_RCEPT
 		 WHERE 1=1
-		<if test="insId != null and insId != ''">
 		   AND INS_ID = #{insId}
-		</if>
 		   AND SUBSTR(RQST_DT,1,7) = #{searchStr}
 		 GROUP BY SUBSTR(RQST_DT,1,7)
 	</select>

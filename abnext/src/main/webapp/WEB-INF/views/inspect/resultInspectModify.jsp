@@ -165,6 +165,10 @@
 											<th colspan="3" class="txtl">
 												<div class="form-group clearfix" style="margin-bottom:-1px;">
 													<div class="icheck-primary d-inline">
+														<input type="checkbox" id="chk00" class="chkh" value="ERR001-00">
+														<label for="chk00">무증상(검진)</label>
+													</div>
+													<div class="icheck-primary d-inline">
 														<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
 														<label for="chk11">깃털이상</label>
 													</div>

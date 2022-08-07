@@ -137,10 +137,6 @@
 											<th colspan="3" class="txtl">
 												<div class="form-group clearfix" style="margin-bottom:-1px;">
 													<div class="icheck-primary d-inline">
-														<input type="checkbox" id="chk00" class="chkh" value="ERR001-00">
-														<label for="chk00">무증상(검진)</label>
-													</div>
-													<div class="icheck-primary d-inline">
 														<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
 														<label for="chk11">깃털이상</label>
 													</div>
@@ -231,13 +227,9 @@
 							<div class="card card-primary">
 								<div class="card-header">
 									<h3 class="card-title">종합소견</h3>
-									<nav style="float:right">
-										<button class="btn btn-primary btn-flat sign"><i class="fas fa-pencil-alt"></i> 서명추가</button>
-									</nav>
 								</div>
 								<div class="card-body">
 									<textarea class="form-control" id="finalMemo" rows="4">${rceptInfo.finalMemo}</textarea>
-									<button type="button" class="btn btn-default btn-block save"><i class="fas fa-save"></i> 저장</button>
 								</div>
 							</div>
 						</div>

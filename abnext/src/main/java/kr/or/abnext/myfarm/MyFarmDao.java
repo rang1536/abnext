@@ -13,8 +13,8 @@ public class MyFarmDao {
 	@Autowired
 	private SqlSessionTemplate sql;
 
-	public MyFarm getDataYear(MyFarm bean) {
-		return sql.selectOne("myFarm.getDataYear", bean);
+	public MyFarm selectMonthlyData(MyFarm bean) {
+		return sql.selectOne("myFarm.selectMonthlyData", bean);
 	}
 
 }

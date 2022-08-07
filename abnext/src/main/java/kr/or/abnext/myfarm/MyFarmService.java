@@ -13,8 +13,8 @@ public class MyFarmService {
 	@Autowired
 	private MyFarmDao myFarmDao;
 
-	public MyFarm getDataYear(MyFarm bean){
-		return myFarmDao.getDataYear(bean);
+	public MyFarm selectMonthlyData(MyFarm bean){
+		return myFarmDao.selectMonthlyData(bean);
 	}
 
 }

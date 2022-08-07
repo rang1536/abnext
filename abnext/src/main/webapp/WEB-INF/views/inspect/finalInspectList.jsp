@@ -62,10 +62,10 @@
 						</div>
 						<!-- /.card -->
 					</div>
-					<!-- /.row -->
+					<!-- /.col-12 -->
 				</div>
-				 <!-- /.col -->
-			</div><!-- /.container-fluid -->
+				 <!-- /.row -->
+			</div><!-- /.invoice -->
 		</section>
 	<!-- /.content -->
 	</div>

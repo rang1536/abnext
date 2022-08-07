@@ -37,8 +37,9 @@
 	</select>
 
 	<select id="selectInspTypeList" resultType="kr.or.abnext.domain.TbCode">
-		SELECT *
-		  FROM TB_CODE
+		SELECT A.*
+		     , CONCAT(CONCAT(CONCAT(CONCAT(CODE_NM,' > '),(SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = A.UPP_CODE_ID)),' > '),(SELECT CODE_NM FROM TB_CODE T WHERE T.CODE_ID = (SELECT UPP_CODE_ID FROM TB_CODE WHERE CODE_ID = A.UPP_CODE_ID))) CODE_NM_GROUP
+		  FROM TB_CODE A
 		 WHERE CODE_ID LIKE 'B001%'
 		   AND CODE_LEVEL = '4'
 	</select>
@@ -90,7 +91,7 @@
 		     (
 		       #{rqstNo}      , #{sampleCode}   , #{sampleName}  , #{inspType}
 		     , #{inspFirstCd} , #{inspSecondCd} , #{inspThirdCd} , #{inspPrice}
-		     , (SELECT USER_ID FROM TB_USER WHERE USER_WORK_GB = #{inspSecondCd} AND ADMIN_YN = 'Y')    , #{workerNm}
+		     , #{workerNo}    , #{workerNm}
 		     , NOW()          , #{insId}
 		     )
 	</insert>
@@ -142,6 +143,38 @@
 		<foreach item="arr" collection="array" open="(" separator="," close=")">
         	#{arr}
   		</foreach>
+  		 ORDER BY INS_DT DESC
+	</select>
+
+	<select id="customerInspectList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
+		SELECT RQST_NO, HOSP_NO, HOSP_NM, USER_NO
+		     , USER_NM, ANIM_NO, ANIM_NM, FARM_NO
+		     , FARM_NM, DOC_NO, DOC_NM, ANIM_BUTLER
+		     , BUTLER_SIDO, BUTLER_SIGUNGU, BUTLER_SIGUNGU_CD
+		     , ANIM_BIRTH, ANIM_FIRST_CD, ANIM_SECOND_CD, ANIM_THIRD_CD
+		     , ANIM_SEX, RQST_DT, PROC_STAT
+			 , CASE WHEN PROC_STAT = '5' THEN '검사완료'
+			        WHEN PROC_STAT = '1' THEN '신청중'
+					WHEN PROC_STAT = '2' THEN '신청중'
+					WHEN PROC_STAT = '3' THEN '접수'
+			        ELSE '검사중'
+			   END AS PROC_STAT_NM
+		     , RQST_MEMO, PAY_GB, PRICE, PAY_STAT
+		     , PAYED_DT, RESULT, RESULT_WRITER, FINISH_DT
+		     , DIAG_UP_CD, DIAG_CD
+		     , (SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.RESULT_WRITER) AS RESULT_WRITER_NM
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.DIAG_CD) AS DIAG_CD_NM
+		     , CONVERT(FINAL_MEMO USING UTF8) AS FINAL_MEMO
+		     , PDL_NO
+		  FROM TB_RCEPT A
+		 WHERE INS_ID = #{insId}
+		<if test="searchStr != null and searchStr == '01'">
+		   AND PROC_STAT != '5'
+		</if>
+		<if test="searchStr != null and searchStr == '02'">
+			AND PROC_STAT = '5'
+		</if>
+		 ORDER BY INS_DT DESC
 	</select>
 
 	<select id="selectInspList" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbInspection">
@@ -339,6 +372,7 @@
   		<if test ="insId != null and insId != ''">
 		   AND INS_ID = #{insId}
   		</if>
+  		 ORDER BY INS_DT DESC
   		<if test="limitCnt != null and limitCnt != ''">
   		 LIMIT #{limitCnt}
   		</if>

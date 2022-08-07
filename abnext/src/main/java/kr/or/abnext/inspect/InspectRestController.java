@@ -88,6 +88,15 @@ public class InspectRestController {
 			ti.setInspThirdCd(tbRcept.getInspList().get(i).get("inspThirdCd").toString());
 			ti.setInspPrice(tbRcept.getInspList().get(i).get("inspPrice").toString());
 			ti.setInsId(tbRcept.getInsId());
+
+			//담당자 자동 지정
+			TbUser user = new TbUser();
+			user.setUserWorkGb(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
+			user.setAdminYn("Y");
+			List<TbUser> workerList = adminServ.getUserListServ(user);
+			ti.setWorkerNo(workerList.get(0).getUserId());
+			ti.setWorkerNm(workerList.get(0).getUserNm());
+
 			//검사 테이블 등록
 			inspectServ.insertInspection(ti);
 		}
@@ -372,6 +381,12 @@ public class InspectRestController {
 		return inspectServ.recptList(arr);
 	}
 
+	@RequestMapping(value = "allInspectList2")
+	public List<TbRcept> allInspectList(Locale locale, Model model) {
+		String [] arr = {"1","2","3","4","5"};
+		return inspectServ.recptList(arr);
+	}
+
 	@RequestMapping(value = "getFileList")
 	public List<TbFile> getFileList(TbFile file) {
 		return inspectServ.getFileList(file);
@@ -543,5 +558,11 @@ public class InspectRestController {
 	public List<TbBloodChem> getCbcList(TbBloodChem anti) {
 		return inspectServ.getCbcList(anti);
 	}
+
+	@RequestMapping(value = "selectCustomerInspectList")
+	public List<TbRcept> customerInspectList(TbRcept rcept) {
+		return inspectServ.customerInspectList(rcept);
+	}
+
 
 }
