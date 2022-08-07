@@ -29,6 +29,8 @@
 	<link rel="stylesheet" href="resources/dist/css/adminlte.css">
 	<!-- Toastr -->
 	<link rel="stylesheet" href="resources//plugins/toastr/toastr.min.css">
+	<!-- summernote -->
+	<link rel="stylesheet" href="resources/plugins/summernote/summernote-bs4.min.css">
 	<style>
 		.txtc {text-align:center;}
 
@@ -294,7 +296,8 @@
 <script src="resources/plugins/toastr/toastr.min.js"></script>
 <!-- ChartJS -->
 <script src="resources/plugins/chart.js/Chart.min.js"></script>
-
+<!-- Summernote -->
+<script src="resources/plugins/summernote/summernote-bs4.min.js"></script>
 <script>
 
 var inputType1Cnt = 1;
@@ -342,6 +345,11 @@ $(function () {
 	});
 
 	$(".chks , .chkh").prop("disabled", true);
+
+	$('#finalMemo').summernote({
+		height: 300,
+		lang: "ko-KR"
+	});
 
 });
 
@@ -1170,8 +1178,9 @@ function fnAnti(inspNo,k){
 
 $(".sign").click(function(){
 	var fm = $("#finalMemo").val();
-	var sn = "\n\n아비넥스트 CEO / 충북대학교 수의과대학 명예교수 모인필";
-	$("#finalMemo").val(fm+sn);
+	var sn = "<br/><br/><p>아비넥스트 CEO / 충북대학교 수의과대학 명예교수 모인필</p>";
+	$("#finalMemo").summernote('empty');
+	$("#finalMemo").summernote('code',fm+sn);
 })
 
 $(".save").click(function(){
