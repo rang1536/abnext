@@ -10,6 +10,7 @@ public class TbCode {
 	private int codeNo;
 	private String codeId;
 	private String codeNm;
+	private String codeNmGroup;
 	private String codeIdNm;
 	private String uppCodeId;
 	private String codeGb;
@@ -21,7 +22,7 @@ public class TbCode {
 	private int childCnt;
 	private String searchKey;
 	private String searchValue;
-	
+
 	public int getCodeNo() {
 		return codeNo;
 	}
@@ -40,7 +41,12 @@ public class TbCode {
 	public void setCodeNm(String codeNm) {
 		this.codeNm = codeNm;
 	}
-	
+	public String getCodeNmGroup() {
+		return codeNmGroup;
+	}
+	public void setCodeNmGroup(String codeNmGroup) {
+		this.codeNmGroup = codeNmGroup;
+	}
 	public String getCodeIdNm() {
 		return codeIdNm;
 	}
@@ -65,7 +71,7 @@ public class TbCode {
 	public void setCodeDtlMemo(String codeDtlMemo) {
 		this.codeDtlMemo = codeDtlMemo;
 	}
-	
+
 	public int getCodeLevel() {
 		return codeLevel;
 	}
@@ -90,14 +96,14 @@ public class TbCode {
 	public void setInsId(int insId) {
 		this.insId = insId;
 	}
-	
+
 	public int getChildCnt() {
 		return childCnt;
 	}
 	public void setChildCnt(int childCnt) {
 		this.childCnt = childCnt;
 	}
-	
+
 	public String getSearchKey() {
 		return searchKey;
 	}
@@ -112,10 +118,10 @@ public class TbCode {
 	}
 	@Override
 	public String toString() {
-		return "TbCode [codeNo=" + codeNo + ", codeId=" + codeId + ", codeNm=" + codeNm + ", codeIdNm=" + codeIdNm
-				+ ", uppCodeId=" + uppCodeId + ", codeGb=" + codeGb + ", codeDtlMemo=" + codeDtlMemo + ", codeLevel="
-				+ codeLevel + ", sortIdx=" + sortIdx + ", insDt=" + insDt + ", insId=" + insId + ", childCnt="
-				+ childCnt + ", searchKey=" + searchKey + ", searchValue=" + searchValue + "]";
+		return "TbCode [codeNo=" + codeNo + ", codeId=" + codeId + ", codeNm=" + codeNm + ", codeNmGroup=" + codeNmGroup
+				+ ", codeIdNm=" + codeIdNm + ", uppCodeId=" + uppCodeId + ", codeGb=" + codeGb + ", codeDtlMemo="
+				+ codeDtlMemo + ", codeLevel=" + codeLevel + ", sortIdx=" + sortIdx + ", insDt=" + insDt + ", insId="
+				+ insId + ", childCnt=" + childCnt + ", searchKey=" + searchKey + ", searchValue=" + searchValue + "]";
 	}
-	
+
 }

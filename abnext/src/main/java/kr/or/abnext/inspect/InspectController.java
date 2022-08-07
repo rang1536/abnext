@@ -79,15 +79,9 @@ public class InspectController {
 
 	@RequestMapping(value = "registerInspect")
 	public String registerInspect(Locale locale, Model model, @ModelAttribute("userInfo") TbUser userBean) {
-		logger.info("registerInspect Method is start {}.", locale);
-
-		logger.info(userBean.toString());
 		TbHospital hospBean = new TbHospital();
 		TbUser docBean = new TbUser();
-		if (!userBean.getHospNo().equals("")) {
-			hospBean.setHospNo(Integer.parseInt(userBean.getHospNo()));
-		}
-
+		hospBean.setHospNo(Integer.parseInt(userBean.getHospNo()));
 		docBean.setUserId(userBean.getUserId());
 
 		model.addAttribute("hospital", insServ.selectHospitalList(hospBean));
@@ -100,15 +94,16 @@ public class InspectController {
 	}
 
 	@RequestMapping(value = "registerInspectByAdmin")
-	public String registerInspectByAdmin(Locale locale, Model model) {
-		logger.info("registerInspect Method is start {}.", locale);
+	public String registerInspectByAdmin(Locale locale, Model model, @ModelAttribute("userInfo") TbUser userBean) {
+		TbHospital hospBean = new TbHospital();
+		TbUser docBean = new TbUser();
+		docBean.setUserId(userBean.getUserId());
 
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
+		model.addAttribute("hospital", insServ.selectHospitalList(hospBean));
+		model.addAttribute("doctor", insServ.selectDoctorList(docBean));
+		model.addAttribute("species", insServ.selectSpeciesList());
+		model.addAttribute("mediHist", insServ.selectMediHistList());
+		model.addAttribute("inspTypeList", insServ.selectInspTypeList());
 
 		return "inspect/registerInspect2";
 	}
@@ -265,6 +260,30 @@ public class InspectController {
 		model.addAttribute("inspList", inspList);
 
 		return "inspect/viewInspect";
+	}
+
+	@RequestMapping(value = "customerViewInspect")
+	public String customerViewInspect(Locale locale, Model model, TbRcept searchRcept) {
+		logger.info("customerViewInspect Method is start {}.", locale);
+
+		// 접수정보
+		TbRcept rcept = insServ.getRcept(searchRcept);
+
+		// 검사정보
+		TbInspection tbInspection = new TbInspection();
+		tbInspection.setRqstNo("" + rcept.getRqstNo());
+		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
+
+		model.addAttribute("rceptInfo", rcept);
+		model.addAttribute("inspList", inspList);
+
+		return "inspect/customerViewInspect";
+	}
+
+	@RequestMapping(value = "customerInspectList")
+	public String customerInspectList(Locale locale, Model model, TbRcept searchRcept) {
+		logger.info("customerInspectList Method is start {}.", locale);
+		return "inspect/customerInspectList";
 	}
 
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.abnext.domain.MyFarm;
+import kr.or.abnext.domain.TbRcept;
+import kr.or.abnext.payment.PaymentService;
 
 @RestController
 public class MyFarmRestController {
@@ -20,19 +22,27 @@ public class MyFarmRestController {
 	@Autowired
 	MyFarmService myFarmServ;
 
+	@Autowired
+	PaymentService payServ;
+
 	private static final Logger logger = LoggerFactory.getLogger(MyFarmRestController.class);
 
 	/*
-	 * 년별데이터
+	 * 고객 입력 데이터
 	 **/
-	@RequestMapping(value = "getDataYear", method = RequestMethod.POST)
-	public Map<String, Object> getDataYear(MyFarm searchBean) {
+	@RequestMapping(value = "selectCustomerList", method = RequestMethod.POST)
+	public List<TbRcept> selectCustomerList(TbRcept bean) {
+		return payServ.selectPaymentList(bean);
+	}
 
-		MyFarm bean = myFarmServ.getDataYear(searchBean);
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("myFarm", bean);
+	@RequestMapping(value = "selectMonthlyData", method = RequestMethod.POST)
+	public MyFarm selectMonthlyData(MyFarm bean) {
+		return myFarmServ.selectMonthlyData(bean);
+	}
 
-		return map;
+	@RequestMapping(value = "getMyPageData", method = RequestMethod.POST)
+	public MyFarm getMyPageData(MyFarm bean) {
+		return myFarmServ.selectMonthlyData(bean);
 	}
 
 }

@@ -31,6 +31,10 @@ public class InspectDao {
 		return sql.selectList("inspection.selectRceptList", arr);
 	}
 
+	public List<TbRcept> customerInspectList(TbRcept bean){
+		return sql.selectList("inspection.customerInspectList", bean);
+	}
+
 	public TbRcept getRcept(TbRcept bean) {
 		return sql.selectOne("inspection.getTbRcept", bean);
 	}

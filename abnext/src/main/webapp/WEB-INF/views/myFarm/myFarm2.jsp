@@ -19,9 +19,6 @@
 	<link rel="stylesheet" href="resources/plugins/daterangepicker/daterangepicker.css">
 	<!-- Bootstrap Color Picker -->
 	<link rel="stylesheet" href="resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-	<!-- Select2 -->
-	<link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
-	<link rel="stylesheet" href="resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- iCheck for checkboxes and radio inputs -->
@@ -52,7 +49,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>myFarm</h1>
+						<h1>myPage</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -99,7 +96,7 @@
 							<div class="icon">
 								<i class="ion ion-bag"></i>
 							</div>
-							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">&nbsp;<span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">&nbsp;<span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건</span></a>
 							<%--
 							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
@@ -118,7 +115,7 @@
 							<div class="icon">
 								<i class="ion ion-stats-bars"></i>
 							</div>
-							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건</span></a>
 							<%--
 							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
@@ -137,7 +134,7 @@
 							<div class="icon">
 								<i class="ion ion-person-add"></i>
 							</div>
-							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건</span></a>
 							<%--
 							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
@@ -156,7 +153,7 @@
 							<div class="icon">
 								<i class="ion ion-pie-graph"></i>
 							</div>
-							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건</span></a>
 							<%--
 							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
@@ -175,7 +172,7 @@
 							<div class="icon">
 								<i class="ion ion-pie-graph"></i>
 							</div>
-							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
+							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건</span></a>
 							<%--
 							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
 							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
@@ -211,8 +208,6 @@
 <script src="resources/dist/js/demo.js"></script>
 <!-- date-range-picker -->
 <script src="resources/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Select2 -->
-<script src="resources/plugins/select2/js/select2.full.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bootstrap color picker -->
@@ -227,51 +222,25 @@
 <!-- Customizing Js -->
 <script src="resources/js/common.js"></script>
 <script>
-
 	$(function () {
-		bsCustomFileInput.init();
-
-		//Initialize Select2 Elements
-		$('.select2').select2()
-
-		//Initialize Select2 Elements
-		$('.select2bs4').select2({
-			theme: 'bootstrap4'
-		})
-
 		//Date picker
 		$('#reservationdate').datetimepicker({
-			format: 'YYYY'
+			format: 'YYYY.MM',
+			defaultDate : new Date()
 		});
-
-		var now = new Date();
-		$("#searchYear").val(now.getFullYear());
-		var nowMonth = now.getMonth()+1;
-		var monthTxt = "";
-		switch(nowMonth) {
-		  case 1 : monthTxt = 'Jan'; break;
-		  case 2 : monthTxt = "Feb"; break;
-		  case 3 : monthTxt = "Mar"; break;
-		  case 4 : monthTxt = "Apr"; break;
-		  case 5 : monthTxt = "May"; break;
-		  case 6 : monthTxt = "Jun"; break;
-		  case 7 : monthTxt = "Jul"; break;
-		  case 8 : monthTxt = "Aug"; break;
-		  case 9 : monthTxt = "Sep"; break;
-		  case 10 : monthTxt = "Oct"; break;
-		  case 11 : monthTxt = "Nov"; break;
-		  case 12 : monthTxt = "Dec"; break;
-		}
-		$("."+monthTxt).addClass("active");
 	 });
 
 	$('#reservationdate').on('change.datetimepicker', function (e) {
+
+	});
+
+	function getData(){
 		var searchStr = $("#searchYear").val();
 		var data = {
 				searchStr : searchStr
 		}
 		$.ajax({
-			url : "getDataYear",
+			url : "getMyPageData",
 			data : data,
 			type : "POST",
 			dataType : "JSON",
@@ -282,118 +251,6 @@
 				 $("#ak01FinCnt").text(data.myFarm.finCnt);
 			}
 		});
-	});
-
-	function selCal(target){
-		$(".page-item").removeClass("active");
-		$(target).parent().addClass("active");
-
-		var month = '';
-		switch($(target).find(".page-month").text()) {
-		  case 'Jan' : month = "01"; break;
-		  case 'Feb' : month = "02"; break;
-		  case 'Mar' : month = "03"; break;
-		  case 'Apr' : month = "04"; break;
-		  case 'May' : month = "05"; break;
-		  case 'Jun' : month = "06"; break;
-		  case 'Jul' : month = "07"; break;
-		  case 'Aug' : month = "08"; break;
-		  case 'Sep' : month = "09"; break;
-		  case 'Oct' : month = "10"; break;
-		  case 'Nov' : month = "11"; break;
-		  case 'Dec' : month = "12"; break;
-		  default : "01"; break;
-		}
-		var searchStr = $(target).find(".page-year").text()+month;
-		var data = {
-				searchStr : searchStr
-		}
-		$.ajax({
-			url : "getDataMonth",
-			data : data,
-			type : "POST",
-			dataType : "JSON",
-			success : function(data){
-				console.log(data);
-
-				var tbodyHtml = '';
-				var rqstTot = 0;
-				var payedTot = 0;
-				var payingTot = 0;
-
-				for(var i=0; i<data.list.length; i++){
-					var item = data.list[i];
-					var payedPrice = 0;
-					var payingPrice = 0;
-					if(item.payStat == '02') {
-						payedPrice = item.price;
-						payedTot += Number(item.price);
-					}else {
-						payingPrice = item.price;
-						payingTot += Number(item.price);
-					}
-					rqstTot += Number(item.price);
-
-					tbodyHtml += '<tr>';
-					tbodyHtml += '	<td class="txtc">'+item.rqstDt+'</td>';
-					tbodyHtml += '	<td class="txtc">'+item.rqstNo+'</td>';
-					tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(item.price)+'</td>';
-					tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(payedPrice)+'</td>';
-					tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(payingPrice)+'</td>';
-					tbodyHtml += '</tr>';
-				}
-
-				$("#tbodyList").empty();
-				$("#tbodyList").append(tbodyHtml);
-				$("#tfootList").empty();
-
-				if(data.list.length > 0){
-					var tfootHtml = '<tr>';
-					tfootHtml += '	<td class="txtr" colspan="2">합계</td>';
-					tfootHtml += '	<td class="txtr">'+$.gfn_setComma(rqstTot)+'</td>';
-					tfootHtml += '	<td class="txtr">'+$.gfn_setComma(payedTot)+'</td>';
-					tfootHtml += '	<td class="txtr">'+$.gfn_setComma(payingTot)+'</td>';
-					tfootHtml += '</tr>';
-					$("#tfootList").html(tfootHtml);
-				}else {
-					var noData = '<tr><td class="txtc" colspan="5">데이터가 없습니다.</td></tr>';
-					$("#tfootList").html(noData);
-				}
-			}
-		});
-	}
-
-	function changeYear(type){
-		$(".page-item").removeClass("active");
-		if(type == 1){
-			$(".pagination-month").find(".page-year").each(function(){
-				$(this).text(parseInt($(this).text())-1);
-			});
-		}else {
-			$(".pagination-month").find(".page-year").each(function(){
-				$(this).text(parseInt($(this).text())+1);
-			});
-		}
-	}
-
-	function getList(str){
-		if(str == 'a1'){
-			if($("#ak01ReqCnt").text().trim() != 0){
-				location.href = 'requestInspect';
-			}
-		}else if(str == 'a2'){
-			if($("#ak01RecCnt").text().trim() != 0){
-				location.href = 'requestInspect';
-			}
-		}else if(str == 'a3'){
-			if($("#ak01ProcCnt").text().trim() != 0){
-				location.href = 'settingInspectList';
-			}
-		}else if(str == 'a4'){
-			if($("#ak01FinCnt").text().trim() != 0){
-				location.href = 'resultInspectList';
-			}
-		}
 	}
 
 </script>

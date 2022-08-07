@@ -406,7 +406,7 @@ $(function () {
 			animThirdCd : $("#animThirdCd").val(),
 			animSex : $("#animSex").val(),
 			butlerSigunguCd : $("#butlerSigunguCd").val(),
-			insId :localStorage.getItem("userId")
+			insId :JSON.parse(sessionStorage.getItem("userInfo")).userId
 		};
 
 		$.ajax({

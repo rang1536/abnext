@@ -36,7 +36,7 @@
 		.txtr{text-align:right;}
 	</style>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onselectstart='return false'>
 <div class="wrapper">
 	<jsp:include page="../layer/layout.jsp"></jsp:include>
 	<!-- Content Wrapper. Contains page content -->
@@ -77,17 +77,15 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*신청자(기관)</label>
-												<select class="form-control select2" id="hospNo">
-													<c:forEach var="item" items="${hospital }" varStatus="status">
-														<option value="${item.hospNo }" data-paygb="${item.payGb }" data-adr="${item.hospSigunguNm }">${item.hospNm }</option>
-													</c:forEach>
-												</select>
+												<input type="hidden" id="hospNo" value="${hospital[0].hospNo}">
+												<input type="hidden" id="payGb" value="${hospital[0].payGb}">
+												<input type="text" id="hospNm" class="form-control" readonly value="${hospital[0].hospNm}">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 												<label>*주소</label>
-												<input type="text" id="hospAdr" class="form-control" placeholder="서울 서대문구" readonly value="${hospital[0].hospSigunguNm }">
+												<input type="text" id="hospAdr" class="form-control" placeholder="서울 서대문구" readonly value="${hospital[0].hospAdr} ${hospital[0].hospDtlAdr}" title="${hospital[0].hospAdr} ${hospital[0].hospDtlAdr}">
 											</div>
 										</div>
 									</div>
@@ -345,6 +343,10 @@
 									<label>*임상증상 및 병력내용</label>
 									<div class="form-group clearfix">
 										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk00" class="chkh" value="ERR001-00">
+											<label for="chk00">무증상(검진)</label>
+										</div>
+										<div class="icheck-primary d-inline">
 											<input type="checkbox" id="chk11" class="chkh" value="ERR001-01">
 											<label for="chk11">깃털이상</label>
 										</div>
@@ -378,34 +380,36 @@
 						</div>
 
 						<div class="row">
-							<div class="form-group">
-								<label>*검사항목</label>
-								<div class="form-group clearfix">
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk21" class="chkw" value="B001-01-01-001">
-										<label for="chk21">PBFD</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk22" class="chkw" value="B001-01-01-002">
-										<label for="chk22">APV</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk23" class="chkw" value="B001-01-02-003">
-										<label for="chk23">PDD</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk24" class="chkw" value="B001-01-01-101">
-										<label for="chk24">chlamydia(앵무병)</label>
-									</div>
-									<div class="icheck-primary d-inline">
-										<input type="checkbox" id="chk25" class="chkw" value="B001-01-01-999">
-										<label for="chk25">성감별</label>
+							<div class="col-6">
+								<div class="form-group">
+									<label>*검사항목</label>
+									<div class="form-group clearfix">
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk21" class="chkw" value="B001-02-01-0001">
+											<label for="chk21">PBFD</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk22" class="chkw" value="B001-02-01-0002">
+											<label for="chk22">APV</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk23" class="chkw" value="B001-02-02-0003">
+											<label for="chk23">PDD</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk24" class="chkw" value="B001-02-01-0010">
+											<label for="chk24">chlamydia(앵무병)</label>
+										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk25" class="chkw" value="B001-02-16-0001">
+											<label for="chk25">성감별</label>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row" style="display:none">
 							<div class="col-md-10">
 								<div class="row">
 									<div class="col-sm-5">
@@ -442,7 +446,7 @@
 						</div>
 					</div>
 					<!-- /.card-header -->
-					<div class="card-body table-responsive">
+					<div class="card-body table-responsive" style="display:none">
 						<form>
 							<div class="row">
 								<table id="example2" class="table table-bordered text-nowrap">
@@ -761,7 +765,7 @@ $(".btn-save").on('click',function(){
 	var price = $("#sumPrice").text().replace(/,/gi,'').replace('원','');
 	var data = {
 			hospNo : $("#hospNo").val(),
-			hospNm : $("#hospNo option:selected").text(),
+			hospNm : $("#hospNm").val(),
 			userNo : $("#userNo").val(),
 			userNm : $("#userNm").val(),
 			animNo : '0',
@@ -780,7 +784,7 @@ $(".btn-save").on('click',function(){
 			procStat : '1',
 			procStatNm : '신청',
 			rqstMemo : $("#rqstMemo").val(),
-			payGb : $("#hospNo option:selected").data("paygb"),
+			payGb : $("#payGb").val(),
 			price : price,
 			payStat : '01',
 			insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
@@ -796,7 +800,7 @@ $(".btn-save").on('click',function(){
 		dataType : "JSON",
 		success : function(data){
 			alert("등록되었습니다.");
-			location.href = "requestInspect";
+			location.href = "customerInspectList";
 		}
 	});
 });
@@ -812,20 +816,10 @@ function validSave(){
 	$('#inspectTbody').find("tr").each(function(idx){
 		inspLen++;
 	});
-/*
-	var smplLen = 0;
-	$('.chks').each(function(idx){
-		if($(this).is(":checked")) smplLen++;
-	});
- */
+
 	if(inspLen == 0){
 		alert('하나이상의 검사정보를 입력해주세요.');
 		validFlag = false;
-		/*
-	}else if(smplLen == 0){
-		alert('하나이상의 시료정보를 입력해주세요.');
-		validFlag = false;
-		 */
 	}else if(chkLen == 0){
 		alert('사육형태를 체크해주세요.');
 		validFlag = false;
@@ -979,7 +973,7 @@ $(document).on('click','.chkc',function(){
 });
 
 $(".btn-list").click(function (){
-	location.href = 'requestInspect';
+	location.href = 'customerInspectList';
 })
 
 $(document).on('click','.chkw',function(){

@@ -37,6 +37,10 @@ public class InspectService {
 		return inspectDao.rceptList(arr);
 	}
 
+	public List<TbRcept> customerInspectList(TbRcept bean){
+		return inspectDao.customerInspectList(bean);
+	}
+
 	public TbUser getUser(TbUser bean) {
 		return inspectDao.getUser(bean);
 	}

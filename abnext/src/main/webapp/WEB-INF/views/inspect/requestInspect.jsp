@@ -164,7 +164,7 @@
 	});
 
 	$(".btn-primary").on("click",function(){
-		location.href = "registerInspect";
+		location.href = "registerInspectByAdmin";
 	});
 
 	function setComma(value, item){

@@ -29,7 +29,9 @@
 	<link rel="stylesheet" href="resources/plugins/dropzone/min/dropzone.min.css">
 	<!-- Tempusdominus Bootstrap 4 -->
 	<link rel="stylesheet" href="resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-
+	<!-- jsGrid -->
+	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid.min.css">
+	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid-theme.min.css">
 	<style>
 		.txtl{text-align:left;}
 		.txtc{text-align:center;}
@@ -49,7 +51,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>myFarm</h1>
+						<h1>myPage</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -164,7 +166,7 @@
 					<!-- ./col -->
 				</div>
 
-
+<%--
 				<div class="card">
 					<!-- /.card-header -->
 					<div class="card-body">
@@ -202,11 +204,21 @@
 					<!-- /.card-body -->
 				</div>
 				<!-- /.card -->
+				 --%>
+				 <div class="card">
+					<div class="card-body">
+						<div id="jsGrid1"></div>
+					</div>
+				</div>
 			</div><!-- /.container-fluid -->
 		</section>
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
+
+	<form id="viewFrm" method="POST">
+		<input type="hidden" name="pdlNo"/>
+	</form>
 
 	<jsp:include page="../layer/layout_footer.jsp"></jsp:include>
 
@@ -241,6 +253,9 @@
 <script src="resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- Customizing Js -->
 <script src="resources/js/common.js"></script>
+<!-- jsGrid -->
+<script src="resources/plugins/jsgrid/demos/db.js"></script>
+<script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
 <script>
 
 	$(function () {
@@ -252,126 +267,14 @@
 			defaultDate : new Date()
 		});
 
+		getGrid();
+
 	 });
 
 	$('#reservationdate').on('change.datetimepicker', function (e) {
-		var searchStr = $("#searchYear").val();
-		var data = {
-				searchStr : searchStr,
-				insId : sessionStorage.getItem("userId")
-		}
-		$.ajax({
-			url : "getDataYear",
-			data : data,
-			type : "POST",
-			dataType : "JSON",
-			success : function(data){
-				if(data.myFarm != null) {
-					$("#ak01ReqCnt").text(data.myFarm.reqCnt);
-					$("#ak01RecCnt").text(data.myFarm.recCnt);
-					$("#ak01ProcCnt").text(data.myFarm.procCnt);
-					$("#ak01FinCnt").text(data.myFarm.finCnt);
-				}else {
-					$("#ak01ReqCnt").text("0");
-					$("#ak01RecCnt").text("0");
-					$("#ak01ProcCnt").text("0");
-					$("#ak01FinCnt").text("0");
-				}
-			}
-		});
+		getGrid();
 	});
 
-	function selCal(target){
-		$(".page-item").removeClass("active");
-		$(target).parent().addClass("active");
-
-		var month = '';
-		switch($(target).find(".page-month").text()) {
-		  case 'Jan' : month = "01"; break;
-		  case 'Feb' : month = "02"; break;
-		  case 'Mar' : month = "03"; break;
-		  case 'Apr' : month = "04"; break;
-		  case 'May' : month = "05"; break;
-		  case 'Jun' : month = "06"; break;
-		  case 'Jul' : month = "07"; break;
-		  case 'Aug' : month = "08"; break;
-		  case 'Sep' : month = "09"; break;
-		  case 'Oct' : month = "10"; break;
-		  case 'Nov' : month = "11"; break;
-		  case 'Dec' : month = "12"; break;
-		  default : "01"; break;
-		}
-		var searchStr = $(target).find(".page-year").text()+month;
-		var data = {
-				searchStr : searchStr
-		}
-		$.ajax({
-			url : "getDataMonth",
-			data : data,
-			type : "POST",
-			dataType : "JSON",
-			success : function(data){
-				console.log(data);
-
-				var tbodyHtml = '';
-				var rqstTot = 0;
-				var payedTot = 0;
-				var payingTot = 0;
-
-				for(var i=0; i<data.list.length; i++){
-					var item = data.list[i];
-					var payedPrice = 0;
-					var payingPrice = 0;
-					if(item.payStat == '02') {
-						payedPrice = item.price;
-						payedTot += Number(item.price);
-					}else {
-						payingPrice = item.price;
-						payingTot += Number(item.price);
-					}
-					rqstTot += Number(item.price);
-
-					tbodyHtml += '<tr>';
-					tbodyHtml += '	<td class="txtc">'+item.rqstDt+'</td>';
-					tbodyHtml += '	<td class="txtc">'+item.rqstNo+'</td>';
-					tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(item.price)+'</td>';
-					tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(payedPrice)+'</td>';
-					tbodyHtml += '	<td class="txtr">'+$.gfn_setComma(payingPrice)+'</td>';
-					tbodyHtml += '</tr>';
-				}
-
-				$("#tbodyList").empty();
-				$("#tbodyList").append(tbodyHtml);
-				$("#tfootList").empty();
-
-				if(data.list.length > 0){
-					var tfootHtml = '<tr>';
-					tfootHtml += '	<td class="txtr" colspan="2">합계</td>';
-					tfootHtml += '	<td class="txtr">'+$.gfn_setComma(rqstTot)+'</td>';
-					tfootHtml += '	<td class="txtr">'+$.gfn_setComma(payedTot)+'</td>';
-					tfootHtml += '	<td class="txtr">'+$.gfn_setComma(payingTot)+'</td>';
-					tfootHtml += '</tr>';
-					$("#tfootList").html(tfootHtml);
-				}else {
-					var noData = '<tr><td class="txtc" colspan="5">데이터가 없습니다.</td></tr>';
-					$("#tfootList").html(noData);
-				}
-			}
-		});
-	}
-
-	function changeYear(type){
-		$(".page-item").removeClass("active");
-		if(type == 1){
-			$(".pagination-month").find(".page-year").each(function(){
-				$(this).text(parseInt($(this).text())-1);
-			});
-		}else {
-			$(".pagination-month").find(".page-year").each(function(){
-				$(this).text(parseInt($(this).text())+1);
-			});
-		}
-	}
 
 	function getList(str){
 		if(str == 'a1'){
@@ -393,6 +296,81 @@
 		}
 	}
 
+	function getGrid(){
+		var searchYear = $("#searchYear").val().substring(0,7).replace("-",".");
+		var data = {
+			insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+			limitCnt : 5,
+			searchStrtDt : searchYear+".01",
+			searchFnshDt : searchYear+".31"
+		};
+
+		$.ajax({
+			url : 'selectCustomerList',
+			dataType : 'json',
+			type : 'post',
+			data : data,
+			success:function(data){
+				var colList = ['pdlNo','rqstDt','procStatNm','animNm','animButler','docNm','gubun'];
+				var typeList = ['text','text','text','text','text','text','text'];
+				var widthList = ['120','100','100','150','180','150','120'];
+				var titleList = ['의뢰번호','신청일','상태','동물이름','보호자','담당수의사','검사구분'];
+				var alignList = ['center','center','center','center','center','center','center'];
+				var gridId = 'jsGrid1';
+				var fields = new Array();
+				var row = '';
+
+				for(var i=0; i<colList.length; i++){
+					row = {
+						"name"	: colList[i],
+						"type"	: typeList[i],
+						"width" : widthList[i],
+						"title"	: titleList[i],
+						"align"	: alignList[i],
+
+					}
+					fields.push(row);
+				}
+				$("#"+gridId).empty();
+				$("#"+gridId).jsGrid({
+			        height: "auto",
+			        width: "100%",
+			        sorting: true,
+			        paging: true,
+					data: data,
+			        fields: fields,
+			        rowClick: function(args){
+						var $target = $(args.event.target);
+						$("[name=pdlNo]").val($target.parent().find("td:eq(0)").text());
+						$("#viewFrm").attr("action","customerViewInspect");
+						$("#viewFrm").submit();
+			        }
+			    });
+			}
+		})
+
+		$("#ak01ReqCnt").text("0");
+		$("#ak01RecCnt").text("0");
+		$("#ak01ProcCnt").text("0");
+		$("#ak01FinCnt").text("0");
+
+		var data2 = {
+			insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+			searchStr : searchYear
+		}
+		$.ajax({
+			url : 'selectMonthlyData',
+			dataType : 'json',
+			type : 'post',
+			data : data2,
+			success:function(data){
+				$("#ak01ReqCnt").text(data.reqCnt);
+				$("#ak01RecCnt").text(data.recCnt);
+				$("#ak01ProcCnt").text(data.procCnt);
+				$("#ak01FinCnt").text(data.finCnt);
+			}
+		});
+	}
 </script>
 </body>
 </html>
