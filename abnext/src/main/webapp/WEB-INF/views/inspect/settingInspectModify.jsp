@@ -329,7 +329,7 @@
 												<td class="txtc">
 													<input type="hidden" id="workerNo_${status.index+1 }">
 													<input type="hidden" id="workerNm_${status.index+1 }">
-													<a href="javascript:void(0)" onclick="popOpenUser2('${item.inspFirstdCd }','${status.index+1 }')">
+													<a href="javascript:void(0)" onclick="popOpenUser2('${item.inspFirstCd }','${status.index+1 }')">
 														<c:if test="${item.workerNo == null || item.workerNo == ''}">
 															<span id="workerView_${status.index+1 }">담당자</span>
 														</c:if>
