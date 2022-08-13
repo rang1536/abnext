@@ -44,6 +44,25 @@
 			<div class="container-fluid">
 				<h1><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:25%;"></b></h1>
 
+				<!--
+				<div style="min-height:400px;"></div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<div class="input-group" style="text-align:center;">
+								<div style="width:40%;"></div>
+								<div class="btn-group">
+	           						<button type="button" class="searchBtn btn-lg btn-primary" style="max-width:200px;min-width:82px;"><i class="fa fa-search"></i> 로그인</button>
+	           						&nbsp;&nbsp;
+	           						<button type="button" class="excelBtn btn-lg btn-success" style="max-width:200px;min-width:82px;"><i class="fa fa-copy"></i> 회원가입</button>
+          						</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				 -->
+
 				<!-- <div class="row">
 					<div class="col-md-8" >
 

@@ -1,6 +1,8 @@
 package kr.or.abnext;
 
 import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
@@ -44,5 +46,20 @@ public class HomeController {
 
 		model.addAttribute("boardList", boardServ.getBoardListServ());
 		return "index";
+	}
+
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public String error(Model model) {
+		System.out.println("시작~!!");
+
+		return "layer/lock_screen";
+	}
+
+
+	@RequestMapping(value = "pdf", method = RequestMethod.GET)
+	public String pdf(Model model) {
+		System.out.println("시작~!!");
+
+		return "layer/pdf_print";
 	}
 }

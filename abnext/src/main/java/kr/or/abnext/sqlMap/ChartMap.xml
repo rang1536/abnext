@@ -69,6 +69,8 @@
 				SELECT '2022-05', 0, 0, 0, 0, 0, 0 FROM DUAL
 				 UNION
 				SELECT '2022-06', 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-07', 0, 0, 0, 0, 0, 0 FROM DUAL
 			    ) B
 	    GROUP BY RQST_DT
 	    ORDER BY RQST_DT
@@ -156,6 +158,8 @@
 				SELECT '2022-05', 0, 0, 0, 0, 0, 0, 0, 0 FROM DUAL
 				 UNION
 				SELECT '2022-06', 0, 0, 0, 0, 0, 0, 0, 0 FROM DUAL
+				 UNION
+				SELECT '2022-07', 0, 0, 0, 0, 0, 0, 0, 0 FROM DUAL
 			  ) B
 		ORDER BY B.RQST_DT
 	</select>
