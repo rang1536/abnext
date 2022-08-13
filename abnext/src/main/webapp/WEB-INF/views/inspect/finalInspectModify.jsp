@@ -38,7 +38,7 @@
 	</style>
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onselectstart='return false'>
 <div class="wrapper">
 
 	<jsp:include page="../layer/layout.jsp"></jsp:include>
@@ -71,6 +71,11 @@
 						<div class="card card-primary">
 							<div class="card-header">
 								<h3 class="card-title">신청정보</h3>
+								<div class="card-tools">
+									<button type="button" class="btn btn-tool" data-card-widget="collapse">
+										<i class="fas fa-minus"></i>
+									</button>
+								</div>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body table-responsive">
@@ -184,6 +189,11 @@
 						<div class="card card-primary">
 							<div class="card-header">
 								<h3 class="card-title">실험결과</h3>
+								<div class="card-tools">
+									<button type="button" class="btn btn-tool" data-card-widget="collapse">
+										<i class="fas fa-minus"></i>
+									</button>
+								</div>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body table-responsive">
@@ -227,7 +237,10 @@
 						<!-- /.card -->
 					</div>
 				</div>
-				<div style="z-index:9">
+
+ 				<div class="result"></div>
+
+ 				<div style="z-index:9">
 					<div class="row">
 						<div class="col-12">
 							<div class="card card-primary">
@@ -238,6 +251,21 @@
 									</nav>
 								</div>
 								<div class="card-body">
+									<div class="row">
+										<!--
+										<div class="col-6">
+											<label>진단상태</label>
+											<select class="form-control">
+												<option>1</option>
+											</select>
+										</div>
+										-->
+										<div class="col-6">
+											<label>최종진단명</label>
+											<select class="form-control" id="diagCd"></select>
+										</div>
+									</div>
+									<div style="height:5px;"></div>
 									<textarea class="form-control" id="finalMemo" rows="4">${rceptInfo.finalMemo}</textarea>
 									<button type="button" class="btn btn-default btn-block save"><i class="fas fa-save"></i> 저장</button>
 								</div>
@@ -245,7 +273,6 @@
 						</div>
 					</div>
 				</div>
- 				<div class="result"></div>
 			</div>
 			<!-- /.container-fluid -->
 		</section>
@@ -300,7 +327,6 @@
 <script src="resources/plugins/summernote/summernote-bs4.min.js"></script>
 <script>
 
-var inputType1Cnt = 1;
 var resultCnt = 1;
 
 $(function () {
@@ -347,25 +373,27 @@ $(function () {
 	$(".chks , .chkh").prop("disabled", true);
 
 	$('#finalMemo').summernote({
-		height: 300,
+		height: 150,
 		lang: "ko-KR"
 	});
+
+	$.gfn_getCode('D001',callBackFn,'diagCd');
 
 });
 
 window.onload = function(){
 	$("#inspList").find("tr").each(function(idx){
 		var k = idx+1;
-		var secVal = $(this).find("[id^=inspSecondCd]").val();
-		if(secVal == 'B001-01-01'){
+		var inspSecCd = $(this).find("[id^=inspSecondCd]").val();
+		if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-16'){
 			fnPcr($(this).find("[id^=inspNo]").val(),k);
-		}else if(secVal == 'B001-01-14'){
+		}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
 			fnAnti($(this).find("[id^=inspNo]").val(),k);
-		}else if(secVal == 'B001-03-18'){
+		}else if(inspSecCd == 'B001-03-18'){
 			fnSerum($(this).find("[id^=inspNo]").val(),k);
-		}else if(secVal == 'B001-04-23'){
+		}else if(inspSecCd == 'B001-04-23'){
 			fnBloodChem($(this).find("[id^=inspNo]").val(),k);
-		}else if(secVal == 'B001-04-24'){
+		}else if(inspSecCd == 'B001-04-24'){
 			fnCbc($(this).find("[id^=inspNo]").val(),k);
 		}else {
 			drawImg($(this).find("[id^=inspNo]").val(),k);
@@ -394,11 +422,21 @@ function drawImg(inspNo,k){
 		success : function(data){
 			var htmlData = '';
 			var inputType1 = '';
+			inputType1 += '<div class="card card-primary">';
+			inputType1 += '			<div class="card-header">';
+			inputType1 += '				<h3 class="card-title">검사결과</h3>';
+			inputType1 += '				<div class="card-tools">';
+			inputType1 += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
+			inputType1 += '						<i class="fas fa-minus"></i>';
+			inputType1 += '					</button>';
+			inputType1 += '				</div>';
+			inputType1 += '				</div>';
+			inputType1 += '			<div class="card-body">';
 			inputType1 += '<div class="row">';
 			inputType1 += '	<div class="col-md-6">';
-			inputType1 += '		<div class="card card-primary">';
+			inputType1 += '		<div class="card">';
 			inputType1 += '			<div class="card-header">';
-			inputType1 += '				<h3 class="card-title">검사메모</h3>';
+			inputType1 += '				<h3 class="card-title">검사정보</h3>';
 			inputType1 += '			</div>';
 			inputType1 += '			<div class="card-body">';
 			inputType1 += '				<table class="table">';
@@ -414,6 +452,10 @@ function drawImg(inspNo,k){
 			inputType1 += '						<tr>';
 			inputType1 += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
 			inputType1 += '							<td id="inspCd'+k+'"></td>';
+			inputType1 += '						</tr>';
+			inputType1 += '						<tr>';
+			inputType1 += '							<td style="width:40%;background-color:#F2F2F2">검사항목</td>';
+			inputType1 += '							<td id="inspCd2'+k+'"></td>';
 			inputType1 += '						</tr>';
 			inputType1 += '						<tr>';
 			inputType1 += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
@@ -433,17 +475,19 @@ function drawImg(inspNo,k){
 			inputType1 += '		</div>';
 			inputType1 += '	</div>';
 			inputType1 += '	<div class="col-md-6">';
-			inputType1 += '		<div class="card card-primary">';
+			inputType1 += '		<div class="card">';
 			inputType1 += '			<div class="card-header">';
 			inputType1 += '				<h3 class="card-title">검사사진</h3>';
 			inputType1 += '			</div>';
 			inputType1 += '			<div class="card-body">';
 			inputType1 += '				<div>';
-			inputType1 += '					<div class="filter-container row previewList'+inputType1Cnt+'"></div>';
+			inputType1 += '					<div class="filter-container row previewList'+k+'"></div>';
 			inputType1 += '				</div>';
 			inputType1 += '			</div>';
 			inputType1 += '		</div>';
 			inputType1 += '	</div>';
+			inputType1 += '</div>';
+			inputType1 += '</div>';
 			inputType1 += '</div>';
 			$(".result").append(inputType1);
 
@@ -477,8 +521,7 @@ function drawImg(inspNo,k){
 				htmlData += '</div>';
 
 			}
-			$(".previewList"+inputType1Cnt).append(htmlData);
-			inputType1Cnt++;
+			$(".previewList"+k).append(htmlData);
 
 			$.ajax({
 				url : 'getInspResult',
@@ -489,6 +532,7 @@ function drawImg(inspNo,k){
 					$("#inspNo"+k).text(data.inspNo);
 					$("#sample"+k).text(data.sampleName);
 					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#inspCd2"+k).text(data.inspThirdNm);
 					$("#worker"+k).text(data.workerNm);
 					$("#uptDt"+k).text(data.uptDt);
 					$("#inspResult"+k).text(data.inspResult);
@@ -506,11 +550,21 @@ function fnCbc(inspNo,k){
 		type : 'post',
 		success : function(data){
 			var html = "";
+			html += '<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사결과</h3>';
+			html += '				<div class="card-tools">';
+			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
+			html += '						<i class="fas fa-minus"></i>';
+			html += '					</button>';
+			html += '				</div>';
+			html += '				</div>';
+			html += '			<div class="card-body">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title">검사정보</h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -526,6 +580,10 @@ function fnCbc(inspNo,k){
 			html += '						<tr>';
 			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
 			html += '							<td id="inspCd'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사항목</td>';
+			html += '							<td id="inspCd2'+k+'"></td>';
 			html += '						</tr>';
 			html += '						<tr>';
 			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
@@ -545,7 +603,7 @@ function fnCbc(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
 			html += '				<h3 class="card-title">혈구검사</h3>';
 			html += '			</div>';
@@ -563,6 +621,7 @@ function fnCbc(inspNo,k){
 			html += '			</div>';
 			html += '		</div>';
 			html += '	</div>';
+			html += '</div>';
 			html += '</div>';
 			$(".result").append(html);
 
@@ -585,6 +644,7 @@ function fnCbc(inspNo,k){
 					$("#inspNo"+k).text(data.inspNo);
 					$("#sample"+k).text(data.sampleName);
 					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#inspCd2"+k).text(data.inspThirdNm);
 					$("#worker"+k).text(data.workerNm);
 					$("#uptDt"+k).text(data.uptDt);
 					$("#inspResult"+k).text(data.inspResult);
@@ -602,11 +662,21 @@ function fnBloodChem(inspNo,k){
 		type : 'post',
 		success : function(data){
 			var html = "";
+			html += '<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사결과</h3>';
+			html += '				<div class="card-tools">';
+			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
+			html += '						<i class="fas fa-minus"></i>';
+			html += '					</button>';
+			html += '				</div>';
+			html += '				</div>';
+			html += '			<div class="card-body">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title">검사정보</h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -622,6 +692,10 @@ function fnBloodChem(inspNo,k){
 			html += '						<tr>';
 			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
 			html += '							<td id="inspCd'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사항목</td>';
+			html += '							<td id="inspCd2'+k+'"></td>';
 			html += '						</tr>';
 			html += '						<tr>';
 			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
@@ -641,7 +715,7 @@ function fnBloodChem(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
 			html += '				<h3 class="card-title">혈액화학검사</h3>';
 			html += '			</div>';
@@ -659,6 +733,7 @@ function fnBloodChem(inspNo,k){
 			html += '			</div>';
 			html += '		</div>';
 			html += '	</div>';
+			html += '</div>';
 			html += '</div>';
 			$(".result").append(html);
 
@@ -681,6 +756,7 @@ function fnBloodChem(inspNo,k){
 					$("#inspNo"+k).text(data.inspNo);
 					$("#sample"+k).text(data.sampleName);
 					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#inspCd2"+k).text(data.inspThirdNm);
 					$("#worker"+k).text(data.workerNm);
 					$("#uptDt"+k).text(data.uptDt);
 					$("#inspResult"+k).text(data.inspResult);
@@ -699,11 +775,21 @@ function fnPcr(inspNo,k){
 		type : 'post',
 		success : function(data){
 			var html = '';
+			html += '<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사결과</h3>';
+			html += '				<div class="card-tools">';
+			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
+			html += '						<i class="fas fa-minus"></i>';
+			html += '					</button>';
+			html += '				</div>';
+			html += '				</div>';
+			html += '			<div class="card-body">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title">검사정보</h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -719,6 +805,10 @@ function fnPcr(inspNo,k){
 			html += '						<tr>';
 			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
 			html += '							<td id="inspCd'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사항목</td>';
+			html += '							<td id="inspCd2'+k+'"></td>';
 			html += '						</tr>';
 			html += '						<tr>';
 			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
@@ -740,12 +830,12 @@ function fnPcr(inspNo,k){
 			html += '				<h3 class="card-title">사진</h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
-			html += '				<div class="filter-container row previewList'+inputType1Cnt+'"></div>';
+			html += '				<div class="filter-container row previewList'+k+'"></div>';
 			html += '			</div>';
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
 			html += '				<h3 class="card-title">PCR</h3>';
 			html += '			</div>';
@@ -769,7 +859,7 @@ function fnPcr(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '</div>';
-
+			html += '</div>';
 			$(".result").append(html);
 
 			var subHtml = '';
@@ -802,9 +892,7 @@ function fnPcr(inspNo,k){
 						htmlData += '	</a>';
 						htmlData += '</div>';
 					}
-					$(".previewList"+inputType1Cnt).append(htmlData);
-
-					inputType1Cnt++;
+					$(".previewList"+k).append(htmlData);
 				}
 			});
 
@@ -817,6 +905,7 @@ function fnPcr(inspNo,k){
 					$("#inspNo"+k).text(data.inspNo);
 					$("#sample"+k).text(data.sampleName);
 					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#inspCd2"+k).text(data.inspThirdNm);
 					$("#worker"+k).text(data.workerNm);
 					$("#uptDt"+k).text(data.uptDt);
 					$("#inspResult"+k).text(data.inspResult);
@@ -835,9 +924,19 @@ function fnSerum(inspNo,k){
 		type : 'post',
 		success : function(data){
 			var html = '';
+			html += '<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사결과</h3>';
+			html += '				<div class="card-tools">';
+			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
+			html += '						<i class="fas fa-minus"></i>';
+			html += '					</button>';
+			html += '				</div>';
+			html += '				</div>';
+			html += '			<div class="card-body">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-12">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-body">';
 			html += '				<div class="chart">';
 			html += '					<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>';
@@ -846,9 +945,9 @@ function fnSerum(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title">검사정보</h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -864,6 +963,10 @@ function fnSerum(inspNo,k){
 			html += '						<tr>';
 			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
 			html += '							<td id="inspCd'+k+'"></td>';
+			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사항목</td>';
+			html += '							<td id="inspCd2'+k+'"></td>';
 			html += '						</tr>';
 			html += '						<tr>';
 			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
@@ -883,7 +986,7 @@ function fnSerum(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
 			html += '				<h3 class="card-title">혈청</h3>';
 			html += '			</div>';
@@ -903,6 +1006,7 @@ function fnSerum(inspNo,k){
 			html += '			</div>';
 			html += '		</div>';
 			html += '	</div>';
+			html += '</div>';
 			html += '</div>';
 			$(".result").append(html);
 
@@ -935,6 +1039,7 @@ function fnSerum(inspNo,k){
 					$("#inspNo"+k).text(data.inspNo);
 					$("#sample"+k).text(data.sampleName);
 					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#inspCd2"+k).text(data.inspThirdNm);
 					$("#worker"+k).text(data.workerNm);
 					$("#uptDt"+k).text(data.uptDt);
 					$("#inspResult"+k).text(data.inspResult);
@@ -1026,11 +1131,21 @@ function fnAnti(inspNo,k){
 		type : 'post',
 		success : function(data){
 			var html = '';
+			html += '<div class="card card-primary">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title">검사결과</h3>';
+			html += '				<div class="card-tools">';
+			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
+			html += '						<i class="fas fa-minus"></i>';
+			html += '					</button>';
+			html += '				</div>';
+			html += '				</div>';
+			html += '			<div class="card-body">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title">검사정보</h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -1047,6 +1162,11 @@ function fnAnti(inspNo,k){
 			html += '							<td style="width:40%;background-color:#F2F2F2">검사구분</td>';
 			html += '							<td id="inspCd'+k+'"></td>';
 			html += '						</tr>';
+			html += '						<tr>';
+			html += '							<td style="width:40%;background-color:#F2F2F2">검사항목</td>';
+			html += '							<td id="inspCd2'+k+'"></td>';
+			html += '						</tr>';
+
 			html += '						<tr>';
 			html += '							<td style="width:40%;background-color:#F2F2F2">담당자</td>';
 			html += '							<td id="worker'+k+'"></td>';
@@ -1067,12 +1187,12 @@ function fnAnti(inspNo,k){
 			html += '				<h3 class="card-title">사진</h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
-			html += '				<div class="filter-container row previewList'+inputType1Cnt+'"></div>';
+			html += '				<div class="filter-container row previewList'+k+'"></div>';
 			html += '			</div>';
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card">';
 			html += '			<div class="card-header">';
 			html += '				<h3 class="card-title">항생제 감수성 검사 기록지</h3>';
 			html += '			</div>';
@@ -1103,7 +1223,7 @@ function fnAnti(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '</div>';
-
+			html += '</div>';
 			$(".result").append(html);
 
 			var case1html = '<td>Ampicilin (10)</td><td>AM10</td><td>13</td><td>14-16</td><td>17</td>';
@@ -1151,8 +1271,7 @@ function fnAnti(inspNo,k){
 						htmlData += '	</a>';
 						htmlData += '</div>';
 					}
-					$(".previewList"+inputType1Cnt).append(htmlData);
-					inputType1Cnt++;
+					$(".previewList"+k).append(htmlData);
 				}
 			});
 
@@ -1165,6 +1284,7 @@ function fnAnti(inspNo,k){
 					$("#inspNo"+k).text(data.inspNo);
 					$("#sample"+k).text(data.sampleName);
 					$("#inspCd"+k).text(data.inspFirstNm+" > "+data.inspSecondNm);
+					$("#inspCd2"+k).text(data.inspThirdNm);
 					$("#worker"+k).text(data.workerNm);
 					$("#uptDt"+k).text(data.uptDt);
 					$("#inspResult"+k).text(data.inspResult);
@@ -1189,7 +1309,8 @@ $(".save").click(function(){
 	var data = {
 		rqstNo : rqstNo,
 		finalMemo : $("#finalMemo").val(),
-		uptId : JSON.parse(sessionStorage.getItem("userInfo")).userId
+		uptId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
+		diagCd : $("#diagCd").val()
 	}
 	$.ajax({
 		url : 'modifyFinal',
@@ -1201,6 +1322,17 @@ $(".save").click(function(){
 		}
 	});
 })
+
+function callBackFn(data,col){
+	var optHtml = '';
+	for(var i=0; i<data.length; i++){
+		optHtml += '<option value="'+data[i].codeId+'">'+data[i].codeNm+'</option>';
+	}
+
+	$("#"+col).html(optHtml);
+
+	$("#"+col).val("${rceptInfo.diagCd }");
+}
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>

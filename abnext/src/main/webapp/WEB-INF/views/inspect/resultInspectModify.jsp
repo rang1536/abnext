@@ -64,7 +64,7 @@
 		.tblPad{padding:0 3px 0 3px}
 	</style>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onselectstart='return false'>
 <div class="wrapper">
 
 	<jsp:include page="../layer/layout.jsp"></jsp:include>
@@ -322,7 +322,7 @@
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">검사메모</h3>
+								<h3 class="card-title">검사결과</h3>
 							</div>
 							<div class="card-body">
 								<table class="table">
@@ -334,7 +334,7 @@
 										</tr>
 										<tr>
 											<td class="txtc">
-												<button type="button" onclick="saveMemo(1)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사메모저장</button>
+												<button type="button" onclick="saveMemo(1)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사결과저장</button>
 											</td>
 										</tr>
 									</tbody>
@@ -375,7 +375,7 @@
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">검사메모</h3>
+								<h3 class="card-title">검사결과</h3>
 							</div>
 							<div class="card-body">
 								<table class="table">
@@ -582,7 +582,7 @@
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">검사메모</h3>
+								<h3 class="card-title">검사결과</h3>
 							</div>
 							<div class="card-body">
 								<table class="table">
@@ -672,7 +672,7 @@
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">검사메모</h3>
+								<h3 class="card-title">검사결과</h3>
 							</div>
 							<div class="card-body">
 								<table class="table">
@@ -848,7 +848,7 @@
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">검사메모</h3>
+								<h3 class="card-title">검사결과</h3>
 							</div>
 							<div class="card-body">
 								<table class="table">
@@ -899,7 +899,7 @@
 	 				<div class="col-md-6">
 						<div class="card card-primary">
 							<div class="card-header">
-								<h3 class="card-title">검사메모</h3>
+								<h3 class="card-title">검사결과</h3>
 							</div>
 							<div class="card-body">
 								<table class="table">
@@ -1252,15 +1252,16 @@ $("#inspList").find("tr").click(function(){
 		$("[name=inspNo]").val($(this).find("[id^=inspNo]").val());
 		$("#inspSickCd").val($(this).find("[id^=inspThirdCd]").val());
 
-		if($(this).find("[id^=inspSecondCd]").val() == 'B001-01-01'){
+		var inspSecCd = $(this).find("[id^=inspSecondCd]").val();
+		if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-16'){
 			fnPcr();
-		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-01-14'){
+		}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
 			fnAnti();
-		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-03-18'){
+		}else if(inspSecCd == 'B001-03-18'){
 			fnSerum();
-		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-04-23'){
+		}else if(inspSecCd == 'B001-04-23'){
 			fnBloodChem();
-		}else if($(this).find("[id^=inspSecondCd]").val() == 'B001-04-24'){
+		}else if(inspSecCd == 'B001-04-24'){
 			fnCbc();
 		}else {
 			fnElse();
@@ -1325,6 +1326,11 @@ $("#fileSave").click(function(){
 		fileCloseYn.push(chkYn);
 	});
 
+	if(filesArr.length == 0){
+		alert("사진을 추가하신 후 저장을 해주세요.");
+		return;
+	}
+
 	for (var i = 0; i < filesArr.length; i++) {
         if (!filesArr[i].is_delete) {
         	for (var j=0; j<fileNames.length; j++){
@@ -1368,6 +1374,11 @@ $("#fileSave2").click(function(){
 		fileNames.push($(this).find("[id^=file]").val());
 	});
 
+	if(filesArr.length == 0){
+		alert("사진을 추가하신 후 저장을 해주세요.");
+		return;
+	}
+
 	for (var i = 0; i < filesArr.length; i++) {
         if (!filesArr[i].is_delete) {
         	for (var j=0; j<fileNames.length; j++){
@@ -1407,6 +1418,11 @@ $("#fileSave3").click(function(){
 	$('.previewList3').find(".filter-item").each(function(){
 		fileNames.push($(this).find("[id^=file]").val());
 	});
+
+	if(filesArr.length == 0){
+		alert("사진을 추가하신 후 저장을 해주세요.");
+		return;
+	}
 
 	for (var i = 0; i < filesArr.length; i++) {
         if (!filesArr[i].is_delete) {
@@ -1527,7 +1543,7 @@ function fnAnti(){
 				var item = data[i];
 				htmlData += '<div id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
 				htmlData += '	</a>';
 				htmlData += '</div>';
 			}
@@ -1789,7 +1805,7 @@ function fnPcr(){
 				var item = data[i];
 				htmlData += '<div id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
 				htmlData += '	</a>';
 				htmlData += '</div>';
 			}
@@ -1824,7 +1840,7 @@ function fnElse(){
 				}
 				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+item.filePath+item.fileNewNm+'"/>';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
 				htmlData += '	</a>';
 				htmlData += '</div>';
 				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';

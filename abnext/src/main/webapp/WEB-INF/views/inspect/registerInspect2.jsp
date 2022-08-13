@@ -403,7 +403,7 @@
 											<label for="chk24">chlamydia(앵무병)</label>
 										</div>
 										<div class="icheck-primary d-inline">
-											<input type="checkbox" id="chk25" class="chkw" value="B001-02-01-999">
+											<input type="checkbox" id="chk25" class="chkw" value="B001-02-16-0001">
 											<label for="chk25">성감별</label>
 										</div>
 									</div>
