@@ -230,7 +230,7 @@
 							//상단
 							html2 += '<li class="nav-item d-none d-sm-inline-block">';
 							if(list.menuUrl == '#'){
-								if(list.menuNm == '게시판'){
+								if(list.menuNm == '공지사항'){
 									html2 += '	<a href="boardList" class="nav-link">'+list.menuNm+'</a>';
 								}else if(list.menuNm == '통계'){
 									html2 += '	<a href="basicChart" class="nav-link">'+list.menuNm+'</a>';
