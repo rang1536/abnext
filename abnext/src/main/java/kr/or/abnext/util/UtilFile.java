@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -40,10 +42,10 @@ public class UtilFile {
 	public List<TbFile> multiUploadFile(List<MultipartFile> fileList){
 		List<TbFile> uploadFileList = new ArrayList<TbFile>();
 		//호스팅
-		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
+		String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 
 		//로컬
-		String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
+		//String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
 
 		//회사 서버
 		/*String rootPath = "F:\\sh86\\resources\\files\\";*/
@@ -60,14 +62,14 @@ public class UtilFile {
 	//단일파일 업로드
 	public TbFile singleUploadFile(MultipartFile file){
 		//호스팅
-		/*String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
+		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 		/*String rootPath = "http:///sh86.kr/resources/files/"+classNum+"/";*/
 
 		//호스팅
-		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
+		String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 
 		//로컬
-		String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
+		//String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
 
 		return uploadFile(file, rootPath);
 
@@ -129,7 +131,13 @@ public class UtilFile {
 			String originalName = multipartFile.getOriginalFilename(); //원래 파일명
 	    	int index = originalName.lastIndexOf("."); //확장자 구분을 위한 (.)인덱스 찾기
 			String extension = "."+originalName.substring(index+1); //. 뒤의 확장자를 저장.일단안씀
-	        String fileName = originalName; //DB에 저장될 파일명
+
+			// 현재 날짜/시간
+			LocalDateTime now = LocalDateTime.now();
+			// 포맷팅
+			String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
+
+	        String fileName = formatedNow; //DB에 저장될 파일명
 	        fileName = fileName.replace("-", "");
 	        String savePath = rootPath + fileName;
 	        File destFile = new File(savePath); //최종파일을 업로드 패쓰에 업로드
