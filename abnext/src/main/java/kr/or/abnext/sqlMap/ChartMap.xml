@@ -644,7 +644,7 @@
 	    	AND A.ANIM_BUTLER = #{animButler}
 	    </if>
 	    <if test="docNo != null and docNo != '' ">
-	    	AND A.HOSP_FIRST_DOCTOR = #{docNo}
+	    	AND A.DOC_NO = #{docNo}
 	    </if>
 		${sql}
 

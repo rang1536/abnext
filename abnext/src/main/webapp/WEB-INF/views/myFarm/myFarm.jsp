@@ -64,7 +64,7 @@
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content" style="font-size:13px;">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12">
@@ -205,7 +205,7 @@
 				</div>
 				<!-- /.card -->
 				 --%>
-				 <div class="card">
+				 <div class="card card-primary card-outline">
 					<div class="card-body">
 						<div id="jsGrid1"></div>
 					</div>

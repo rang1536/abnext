@@ -94,8 +94,15 @@ public class InspectRestController {
 			user.setUserWorkGb(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
 			user.setAdminYn("Y");
 			List<TbUser> workerList = adminServ.getUserListServ(user);
-			ti.setWorkerNo(workerList.get(0).getUserId());
-			ti.setWorkerNm(workerList.get(0).getUserNm());
+
+			if(workerList.size() > 0) {
+				ti.setWorkerNo(workerList.get(0).getUserId());
+				ti.setWorkerNm(workerList.get(0).getUserNm());
+			}else {
+				ti.setWorkerNo("전진");
+				ti.setWorkerNm("전진");
+			}
+
 
 			//검사 테이블 등록
 			inspectServ.insertInspection(ti);

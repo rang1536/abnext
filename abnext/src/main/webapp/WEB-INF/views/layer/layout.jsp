@@ -294,9 +294,12 @@
 
 							$.each(data, function(j, secondList){
 								//사용자 전용메뉴
-								if(secondList.menuNo == '27' && JSON.parse(sessionStorage.getItem('userInfo')).userLev != "1") {
-									return;
+								if(JSON.parse(sessionStorage.getItem('userInfo')) != null){
+									if(secondList.menuNo == '27' && JSON.parse(sessionStorage.getItem('userInfo')).userLev != "1") {
+										return;
+									}
 								}
+
 
 								if(secondList.uppMenuNo == list.menuNo){
 									html += '<li class="nav-item">';
