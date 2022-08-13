@@ -64,7 +64,7 @@
 					<div class="col-md-12">
 			          <div class="card card-primary card-outline">
 			            <div class="card-header">
-			              <h3 class="card-title">게시글보기</h3>
+			              <h3 class="card-title">공지사항보기</h3>
 			            </div>
 
 			            <!-- /.card-header -->

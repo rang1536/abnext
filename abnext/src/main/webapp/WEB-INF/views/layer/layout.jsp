@@ -263,7 +263,7 @@
 								html += '			<i class="fas fa-angle-left right"></i>';
 								html += '		</p>';
 								html += '	</a>';
-							}else if(menuNm == '게시판'){
+							}else if(menuNm == '공지사항'){
 								html += '		<i class="nav-icon fas fa-book"></i>';
 								html += '		<p>'+list.menuNm;
 								html += '			<i class="fas fa-angle-left right"></i>';
