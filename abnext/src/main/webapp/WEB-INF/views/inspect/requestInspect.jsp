@@ -38,7 +38,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1> * 신청접수</h1>
+						<h1><b>신청접수</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -56,7 +56,11 @@
 				<!-- Table row -->
 				<div class="row">
 					<div class="col-12">
-						<div class="card">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
+							<div class="card-header">
+				              <h3 class="card-title"><b>신청접수목록</b></h3>
+				            </div>
 							<!-- /.card-header -->
 							<div class="card-body">
 								<div id="jsGrid1"></div>

@@ -46,7 +46,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>* 진단검사 설정</h1>
+						<h1><b>진단검사 설정</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ul class="breadcrumb float-sm-right">
@@ -64,10 +64,12 @@
 				<!-- general form elements disabled -->
 				<div class="row">
 					<div class="col-12">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">신청정보</h3>
-							</div>
+				              <h3 class="card-title"><b>신청정보</b></h3>
+				            </div>
+
 							<!-- /.card-header -->
 							<div class="card-body table-responsive">
 								<table class="table table-bordered text-nowrap">
@@ -157,10 +159,12 @@
 				</div>
 				<!-- /.card -->
  --%>
-				<div class="card card-primary">
+				<div class="card card-primary card-outline">
+					<!-- /.card-header -->
 					<div class="card-header">
-						<h3 class="card-title">검사정보 설정</h3>
-					</div>
+		              <h3 class="card-title"><b>검사정보 설정</b></h3>
+		            </div>
+
 					<!-- /.card-header -->
 					<div class="card-body">
 						<div class="row">
@@ -345,8 +349,8 @@
 									<tfoot>
 										<tr>
 											<td colspan="7" class="txtc">
-												<button type="button" id="list" style="width:121.2px" class="btn btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
-												<button type="button" id="sett" style="width:121.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 설정확인</button>
+												<button type="button" id="list" style="width:121.2px" class="btn btn-sm btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
+												<button type="button" id="sett" style="width:121.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 설정확인</button>
 											</td>
 										</tr>
 									</tfoot>

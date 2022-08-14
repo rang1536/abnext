@@ -46,7 +46,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>* 진단검사 신청서</h1>
+						<h1><b>진단검사 신청서</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -63,9 +63,9 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline" style="min-height:480px;">
 							<div class="card-header">
-								<h3 class="card-title">신청정보</h3>
+								<h3 class="card-title"><b>신청정보</b></h3>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
@@ -109,13 +109,17 @@
 									</div>
 								</form>
 							</div><!-- card body -->
+							<div class="card-footer" style="background-color:#fff;">
+								<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:20%;">
+							</div>
 						</div><!-- card-primary -->
 					</div><!-- col-md-6 -->
 					<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
 							<div class="card-header">
-								<h3 class="card-title">동물정보</h3>
+								<h3 class="card-title"><b>동물정보</b></h3>
 							</div>
+
 							<div class="card-body">
 								<form>
 									<div class="row">
@@ -298,10 +302,11 @@
 					</div>
 				</div>
  -->
-				<div class="card card-primary">
+				<div class="card card-primary card-outline">
 					<div class="card-header">
-						<h3 class="card-title">검사정보</h3>
+						<h3 class="card-title"><b>검사정보</b></h3>
 					</div>
+
 					<div class="card-body">
 						<div class="row">
 							<div class="col-6">

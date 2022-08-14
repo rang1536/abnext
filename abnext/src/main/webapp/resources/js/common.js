@@ -1,4 +1,5 @@
-var imgDomain = "http://avinext.cafe24.com/files/";
+//var imgDomain = "http://avinext.cafe24.com/files/";
+var imgDomain = "http://avinextlab.com/files/";
 
 
 /*****************************************************

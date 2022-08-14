@@ -46,12 +46,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>* 진단검사신청 현황</h1>
+						<h1><b>진단검사신청 현황</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">결과입력</li>
+							<li class="breadcrumb-item active">진단검사신청 현황</li>
 						</ol>
 					</div>
 				</div>
@@ -62,10 +62,12 @@
 		<section class="content" style="font-size:13px;">
 			<div class="container-fluid">
 				<!-- general form elements disabled -->
-				<div class="card card-primary">
+				<div class="card card-primary card-outline">
+					<!-- /.card-header -->
 					<div class="card-header">
-						<h3 class="card-title">신청정보</h3>
-					</div>
+		              <h3 class="card-title"><b>신청정보</b></h3>
+		            </div>
+
 					<div class="card-body">
 						<table class="table table-bordered">
 							<thead>
@@ -106,10 +108,12 @@
 				</div>
 				<!-- /.card -->
 
-				<div class="card card-success">
+				<div class="card card-primary card-outline">
+					<!-- /.card-header -->
 					<div class="card-header">
-						<h3 class="card-title">시료정보</h3>
-					</div>
+		              <h3 class="card-title"><b>시료정보</b></h3>
+		            </div>
+
 					<!-- /.card-header -->
 					<div class="card-body">
 						<form>
@@ -139,10 +143,12 @@
 				</div>
 				<!-- /.card -->
 
-				<div class="card card-info">
+				<div class="card card-primary card-outline">
+					<!-- /.card-header -->
 					<div class="card-header">
-						<h3 class="card-title">실험결과</h3>
-					</div>
+		              <h3 class="card-title"><b>실험결과</b></h3>
+		            </div>
+
 					<!-- /.card-header -->
 					<div class="card-body">
 						<form>
@@ -179,10 +185,12 @@
 				</div>
 				<!-- /.card -->
 
-				<div class="card card-danger">
+				<div class="card card-danger card-outline">
+					<!-- /.card-header -->
 					<div class="card-header">
-						<h3 class="card-title">진단결과</h3>
-					</div>
+		              <h3 class="card-title"><b>진단결과</b></h3>
+		            </div>
+
 					<div class="card-body">
 						<table class="table table-bordered">
 							<tbody>

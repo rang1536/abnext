@@ -141,7 +141,7 @@
 			dataType : 'json',
 			type : 'post',
 			success:function(data){
-				//console.log(JSON.stringify(data));
+				console.log(JSON.stringify(data));
 				setGrid(data);
 			}
 		})
@@ -160,14 +160,14 @@
 	            { name: "uppMenuNm", 	type: "text", 	width: 150, title:"상위메뉴", 	align: "center"},
 	            { name: "menuDtlMemo", 	type: "number", width: 200, title:"비고", 	align: "center"},
 	            { name: "menuUrl", 		type: "number", width: 120, title:"URL", 	align: "center"},
-	            { name: "menuLevChk", 	type: "checkbox", width: 120,title:"권한(관리자 전용)", 	align: "center"
+	            { name: "levOneChk", 	type: "checkbox", width: 120,title:"권한(일반회원)", 	align: "center"
 	            	, itemTemplate: function(value, item) {
 			              	return $("<input>").attr("type", "checkbox")
 		            		.attr("checked", value || item.Checked)
 		                .on("change", function() {
 		                	item.Checked = $(this).is(":checked");
 
-		                	var menuLev = $(this).is(":checked")?'2':'1';
+		                	var levOne = $(this).is(":checked")?'Y':'N';
 		                	var menuNo = $(this).parent().parent().find('td').html();
 		                	var menuNm = $(this).parent().parent().find('td:eq(1)').html();
 
@@ -175,13 +175,97 @@
 		                		url : 'modifyMenu',
 		                		dataType : 'json',
 		                		type :'post',
-		                		data : {'menuNo':menuNo, 'menuLev':menuLev},
+		                		data : {'menuNo':menuNo, 'levOne':levOne},
 		                		success:function(data){
 									if(data.result == 'succ'){
-										if(menuLev == '1'){
-											toastr.success(menuNm+' 메뉴를 일반사용자도 이용가능하도록 수정하였습니다.');
+										if(levOne == 'Y'){
+											toastr.success(menuNm+' 메뉴를 일반회원도 이용가능하도록 수정하였습니다.');
 										}else{
-											toastr.success(menuNm+' 메뉴를 관리자 전용메뉴로 수정하였습니다.');
+											toastr.danger(menuNm+' 메뉴를 일반회원이 사용할 수 없도록 수정하였습니다.');
+										}
+									}
+		                		}
+		                	})
+		                });
+          		}},
+          		{ name: "levTwoChk", 	type: "checkbox", width: 120,title:"권한(연구원)", 	align: "center"
+	            	, itemTemplate: function(value, item) {
+			              	return $("<input>").attr("type", "checkbox")
+		            		.attr("checked", value || item.Checked)
+		                .on("change", function() {
+		                	item.Checked = $(this).is(":checked");
+
+		                	var levTwo = $(this).is(":checked")?'Y':'N';
+		                	var menuNo = $(this).parent().parent().find('td').html();
+		                	var menuNm = $(this).parent().parent().find('td:eq(1)').html();
+
+		                	$.ajax({
+		                		url : 'modifyMenu',
+		                		dataType : 'json',
+		                		type :'post',
+		                		data : {'menuNo':menuNo, 'levTwo':levTwo},
+		                		success:function(data){
+									if(data.result == 'succ'){
+										if(levTwo == 'Y'){
+											toastr.success(menuNm+' 메뉴를 연구원도 이용가능하도록 수정하였습니다.');
+										}else{
+											toastr.danger(menuNm+' 메뉴를 연구원이 사용할 수 없도록 수정하였습니다.');
+										}
+									}
+		                		}
+		                	})
+		                });
+          		}},
+          		{ name: "levThreeChk", 	type: "checkbox", width: 120,title:"권한(접수원)", 	align: "center"
+	            	, itemTemplate: function(value, item) {
+			              	return $("<input>").attr("type", "checkbox")
+		            		.attr("checked", value || item.Checked)
+		                .on("change", function() {
+		                	item.Checked = $(this).is(":checked");
+
+		                	var levThree = $(this).is(":checked")?'Y':'N';
+		                	var menuNo = $(this).parent().parent().find('td').html();
+		                	var menuNm = $(this).parent().parent().find('td:eq(1)').html();
+
+		                	$.ajax({
+		                		url : 'modifyMenu',
+		                		dataType : 'json',
+		                		type :'post',
+		                		data : {'menuNo':menuNo, 'levThree':levThree},
+		                		success:function(data){
+									if(data.result == 'succ'){
+										if(levThree == 'Y'){
+											toastr.success(menuNm+' 메뉴를 접수원도 이용가능하도록 수정하였습니다.');
+										}else{
+											toastr.danger(menuNm+' 메뉴를 접수원이 사용할 수 없도록 수정하였습니다.');
+										}
+									}
+		                		}
+		                	})
+		                });
+          		}},
+          		{ name: "levFourChk", 	type: "checkbox", width: 120,title:"권한(관리자)", 	align: "center"
+	            	, itemTemplate: function(value, item) {
+			              	return $("<input>").attr("type", "checkbox")
+		            		.attr("checked", value || item.Checked)
+		                .on("change", function() {
+		                	item.Checked = $(this).is(":checked");
+
+		                	var levFour = $(this).is(":checked")?'Y':'N';
+		                	var menuNo = $(this).parent().parent().find('td').html();
+		                	var menuNm = $(this).parent().parent().find('td:eq(1)').html();
+
+		                	$.ajax({
+		                		url : 'modifyMenu',
+		                		dataType : 'json',
+		                		type :'post',
+		                		data : {'menuNo':menuNo, 'levFour':levFour},
+		                		success:function(data){
+									if(data.result == 'succ'){
+										if(levFour == 'Y'){
+											toastr.success(menuNm+' 메뉴를 관리자가 이용가능하도록 수정하였습니다.');
+										}else{
+											toastr.danger(menuNm+' 메뉴를 관리자가 사용할 수 없도록 수정하였습니다.');
 										}
 									}
 		                		}

@@ -63,7 +63,7 @@
 					<!-- Table row -->
 					<div class="row">
 						<div class="col-12">
-							<div class="card card-primary card-outline"">
+							<div class="card card-primary card-outline">
 								<!-- /.card-header -->
 								<div class="card-header">
 					              <h3 class="card-title"><b>공지사항</b></h3>

@@ -17,6 +17,67 @@ public class TbMenu {
 	private String menuUrl;
 	private boolean menuLevChk;
 	private String uppMenuNm;
+
+	//추가
+	public String levOne;
+	public String levTwo;
+	public String levThree;
+	public String levFour;
+
+	public boolean levOneChk;
+	public boolean levTwoChk;
+	public boolean levThreeChk;
+	public boolean levFourChk;
+
+
+	public boolean isLevOneChk() {
+		return levOneChk;
+	}
+	public void setLevOneChk(boolean levOneChk) {
+		this.levOneChk = levOneChk;
+	}
+	public boolean isLevTwoChk() {
+		return levTwoChk;
+	}
+	public void setLevTwoChk(boolean levTwoChk) {
+		this.levTwoChk = levTwoChk;
+	}
+	public boolean isLevThreeChk() {
+		return levThreeChk;
+	}
+	public void setLevThreeChk(boolean levThreeChk) {
+		this.levThreeChk = levThreeChk;
+	}
+	public boolean isLevFourChk() {
+		return levFourChk;
+	}
+	public void setLevFourChk(boolean levFourChk) {
+		this.levFourChk = levFourChk;
+	}
+	public String getLevOne() {
+		return levOne;
+	}
+	public void setLevOne(String levOne) {
+		this.levOne = levOne;
+	}
+	public String getLevTwo() {
+		return levTwo;
+	}
+	public void setLevTwo(String levTwo) {
+		this.levTwo = levTwo;
+	}
+	public String getLevThree() {
+		return levThree;
+	}
+	public void setLevThree(String levThree) {
+		this.levThree = levThree;
+	}
+	public String getLevFour() {
+		return levFour;
+	}
+	public void setLevFour(String levFour) {
+		this.levFour = levFour;
+	}
 	public int getMenuNo() {
 		return menuNo;
 	}
@@ -75,8 +136,9 @@ public class TbMenu {
 	public String toString() {
 		return "TbMenu [menuNo=" + menuNo + ", menuNm=" + menuNm + ", uppMenuNo=" + uppMenuNo + ", menuOrder="
 				+ menuOrder + ", menuLev=" + menuLev + ", menuDtlMemo=" + menuDtlMemo + ", menuUrl=" + menuUrl
-				+ ", menuLevChk=" + menuLevChk + ", uppMenuNm=" + uppMenuNm + "]";
+				+ ", menuLevChk=" + menuLevChk + ", uppMenuNm=" + uppMenuNm + ", levOne=" + levOne + ", levTwo="
+				+ levTwo + ", levThree=" + levThree + ", levFour=" + levFour + ", levOneChk=" + levOneChk
+				+ ", levTwoChk=" + levTwoChk + ", levThreeChk=" + levThreeChk + ", levFourChk=" + levFourChk + "]";
 	}
-
 
 }

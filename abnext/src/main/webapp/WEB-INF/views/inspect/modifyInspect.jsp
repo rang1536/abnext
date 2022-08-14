@@ -50,7 +50,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>* 진단검사 신청서</h1>
+						<h1><b>진단검사 신청서</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -66,9 +66,9 @@
 		<section class="content" style="font-size:13px;">
 			<div class="container-fluid">
 				<!-- general form elements disabled -->
-				<div class="card card-primary">
+				<div class="card card-primary card-outline">
 					<div class="card-header">
-						<h3 class="card-title">신청정보</h3>
+						<h3 class="card-title"><b>신청정보</b></h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
@@ -187,9 +187,11 @@
 
 				<div class="row">
 					<div class="col-12">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
 							<div class="card-header">
-								<h3 class="card-title">검사정보</h3>
+								<h3 class="card-title"><b>검사정보</b></h3>
+
+
 								<!--
 								<div class="card-tools">
 									<div class="input-group input-group-sm" style="width: 150px;">
@@ -315,8 +317,8 @@
 											</tr>
 											<tr>
 												<td colspan="7" align="center">
-													<button type="button" id="list" style="width:111.2px" class="btn btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
-													<button type="button" id="acpt" style="width:111.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 접수확인</button>
+													<button type="button" id="list" style="width:111.2px" class="btn btn-sm btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
+													<button type="button" id="acpt" style="width:111.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 접수확인</button>
 												</td>
 											</tr>
 										</tfoot>

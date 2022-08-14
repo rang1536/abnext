@@ -35,12 +35,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1> * 진단설정</h1>
+						<h1><b>진단설정</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">신청접수</li>
+							<li class="breadcrumb-item"><a href="index">Home</a></li>
+							<li class="breadcrumb-item active">진단설정</li>
 						</ol>
 					</div>
 				</div>
@@ -53,7 +53,11 @@
 				<!-- Table row -->
 				<div class="row">
 					<div class="col-12">
-						<div class="card">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
+							<div class="card-header">
+				              <h3 class="card-title"><b>진단설정</b></h3>
+				            </div>
 							<!-- /.card-header -->
 							<div class="card-body">
 								<div id="jsGrid1"></div>

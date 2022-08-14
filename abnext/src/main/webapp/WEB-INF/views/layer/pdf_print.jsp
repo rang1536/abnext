@@ -28,7 +28,7 @@
 
 
 </head>
-<body class="hold-transition sidebar-mini"  id="printDiv">
+<body class="hold-transition sidebar-mini" id="printDiv" >
 <div class="wrapper">
 	<jsp:include page="../layer/layout.jsp"></jsp:include>
 

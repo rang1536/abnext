@@ -53,7 +53,7 @@
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="loginPage" role="button">
+				<a class="nav-link" href="#" role="button" onclick="fn_login_out()">
 					<i class="fas fa-address-book"></i>
 				</a>
 			</li>
@@ -78,7 +78,7 @@
 		</a>
 
 		<!-- Sidebar -->
-		<div class="sidebar" style="font-size:14px;">
+		<div class="sidebar" style="font-size:13px;">
 			<!-- Sidebar user panel (optional) -->
 			<div class="user-panel mt-3 mb-3 d-flex" style="background-color:#002266;">
 
@@ -151,11 +151,10 @@
 				$('#logOutDiv').css('display', '');
 
 				if(userInfo.userLev == '4'){
-					setMenuList('2');
 					setBellMsg();
-				}else{
-					setMenuList('1');
 				}
+
+				setMenuList(userInfo.userLev);
 			}else{
 				$('#userBtnGroup').css('display', '');
 				//alert('로그인 후 사용하실수 있습니다 ');
@@ -201,11 +200,24 @@
 		});
 
 		function setMenuList(menuLev){
+			var levOne 	= 'N';
+			var levTwo 	= 'N';
+			var levThree= 'N';
+			var levFour = 'Y'
+			if(menuLev == '1') levOne 	= 'Y';
+			if(menuLev == '2') levTwo 	= 'Y';
+			if(menuLev == '3') levThree = 'Y';
+			if(menuLev == '4') levFour 	= 'Y';
+
 			$.ajax({
 				url :'getMenuList',
 				dataType :'json',
 				type :'post',
-				data : {'menuLev' : menuLev},
+				data : {'levOne' : levOne
+						, 'levTwo' : levTwo
+						, 'levThree' : levThree
+						, 'levFour' : levFour
+				},
 				success:function(data){
 
 					var html = '';
@@ -249,7 +261,8 @@
 								html += '	</a>';
 							}else if(menuNm == '진단검사'){
 								html += '		<i class="nav-icon fas fa-copy"></i>';
-								html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm;
+								//html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm;
+								html += '		<p>'+list.menuNm;
 								html += '			<i class="fas fa-angle-left right"></i>';
 								html += '		</p>';
 								html += '	</a>';
@@ -708,6 +721,25 @@
 			}
 		}
 
+		function fn_login_out(){
+			var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+
+			if(userInfo != null){
+				if(confirm(userInfo.userNm+' 님 로그아웃 하시겠습니까?')){
+					sessionStorage.clear();
+
+				}
+			}else{
+				toastr.info('로그인페이지로 이동합니다.');
+			}
+
+			location.href = 'loginPage';
+		}
+
+		function popPolicyOpen(){
+			console.log('h2')
+			$('#popPolicy').modal();
+		}
 	</script>
 
 </body>

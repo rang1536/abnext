@@ -76,7 +76,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>* 결과입력 대상</h1>
+						<h1><b>결과입력 대상</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -94,10 +94,12 @@
 				<!-- general form elements disabled -->
 				<div class="row">
 					<div class="col-12">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">신청정보</h3>
-							</div>
+				              <h3 class="card-title"><b>신청정보</b></h3>
+				            </div>
+
 							<!-- /.card-header -->
 							<div class="card-body table-responsive">
 								<table class="table table-bordered text-nowrap">
@@ -207,10 +209,12 @@
 
 				<div class="row">
 					<div class="col-12">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">실험결과</h3>
-							</div>
+				              <h3 class="card-title"><b>실험결과</b></h3>
+				            </div>
+
 							<!-- /.card-header -->
 							<div class="card-body table-responsive">
 								<table class="table table-bordered table-hover text-nowrap">
@@ -320,21 +324,23 @@
  --%>
 				<div class="row inputType1 iptPop" style="display:none">
 	 				<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">검사결과</h3>
-							</div>
+				              <h3 class="card-title"><b>검사결과</b></h3>
+				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
 										<tr>
 											<td>
-												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+												<textarea class="form-control" rows="6" id="inspResult" name="inspResult"></textarea>
 											</td>
 										</tr>
 										<tr>
 											<td class="txtc">
-												<button type="button" onclick="saveMemo(1)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사결과저장</button>
+												<button type="button" onclick="saveMemo(1)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사결과저장</button>
 											</td>
 										</tr>
 									</tbody>
@@ -345,10 +351,12 @@
 						<!-- /.card -->
 	 				</div>
 					<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">검사사진</h3>
-							</div>
+				              <h3 class="card-title"><b>검사사진</b></h3>
+				            </div>
+
 							<div class="card-body">
 								<div class="fileBox">
 									<label for="inspResultFile">결과사진추가</label>
@@ -363,7 +371,7 @@
 									</form>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="fileSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="fileSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -373,10 +381,12 @@
 	 			</div>
 				<div class="row inputType2 iptPop" style="display:none">
 	 				<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">검사결과</h3>
-							</div>
+				              <h3 class="card-title"><b>검사결과</b></h3>
+				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
@@ -396,8 +406,10 @@
 							<div style="height:10px;">
 
 							</div>
+						</div>
+						<div class="card card-primary card-outline">
 							<div class="card-header">
-								<h3 class="card-title">사진</h3>
+								<h3 class="card-title"><b>사진</b></h3>
 							</div>
 							<div class="card-body">
 								<div class="fileBox">
@@ -421,10 +433,12 @@
 						<!-- /.card -->
 	 				</div>
 					<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">항생제 감수성 검사 기록지</h3>
-							</div>
+				              <h3 class="card-title"><b>항생제 감수성 검사 기록지</b></h3>
+				            </div>
+
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered text-nowrap">
@@ -560,7 +574,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="antiSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="antiSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -571,7 +585,9 @@
 
 				<div class="row inputType3 iptPop" style="display:none">
 					<div class="col-md-12">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
+
 							<div class="card-body">
 								<div class="chart">
 									<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
@@ -580,21 +596,23 @@
 						</div>
 					</div>
 	 				<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">검사결과</h3>
-							</div>
+				              <h3 class="card-title"><b>검사결과</b></h3>
+				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
 										<tr>
 											<td>
-												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+												<textarea class="form-control" rows="3" id="inspResult" name="inspResult" style="min-height:316px;"></textarea>
 											</td>
 										</tr>
 										<tr>
 											<td class="txtc">
-												<button type="button" onclick="saveMemo(3)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+												<button type="button" onclick="saveMemo(3)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 											</td>
 										</tr>
 									</tbody>
@@ -605,7 +623,7 @@
 						<!-- /.card -->
 	 				</div>
 					<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered text-nowrap">
@@ -660,7 +678,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="serumSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="serumSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -670,21 +688,23 @@
 	 			</div><!-- /.inputType3 -->
 				<div class="row inputType4 iptPop" style="display:none">
 	 				<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">검사결과</h3>
-							</div>
+				              <h3 class="card-title"><b>검사결과</b></h3>
+				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
 										<tr>
 											<td>
-												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+												<textarea class="form-control" rows="5" id="inspResult" name="inspResult"></textarea>
 											</td>
 										</tr>
 										<tr>
 											<td class="txtc">
-												<button type="button" onclick="saveMemo(4)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+												<button type="button" onclick="saveMemo(4)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 											</td>
 										</tr>
 									</tbody>
@@ -695,8 +715,10 @@
 							<div style="height:10px;">
 
 							</div>
+						</div>
+						<div class="card card-primary card-outline">
 							<div class="card-header">
-								<h3 class="card-title">사진</h3>
+								<h3 class="card-title"><b>사진</b></h3>
 							</div>
 							<div class="card-body">
 								<div class="fileBox">
@@ -712,7 +734,7 @@
 									</form>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="fileSave3" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="fileSave3" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -720,7 +742,8 @@
 						<!-- /.card -->
 	 				</div>
 					<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered text-nowrap">
@@ -836,7 +859,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="pcrSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="pcrSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -846,21 +869,23 @@
 	 			</div><!-- /.inputType4 -->
 				<div class="row inputType5 iptPop" style="display:none">
 	 				<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">검사결과</h3>
-							</div>
+				              <h3 class="card-title"><b>검사결과</b></h3>
+				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
 										<tr>
 											<td>
-												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+												<textarea class="form-control" rows="17" id="inspResult" name="inspResult"></textarea>
 											</td>
 										</tr>
 										<tr>
 											<td class="txtc">
-												<button type="button" onclick="saveMemo(5)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+												<button type="button" onclick="saveMemo(5)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 											</td>
 										</tr>
 									</tbody>
@@ -871,7 +896,8 @@
 						<!-- /.card -->
 	 				</div>
 					<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered text-nowrap">
@@ -886,7 +912,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="bcSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="bcSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -897,21 +923,23 @@
 
 				<div class="row inputType6 iptPop" style="display:none">
 	 				<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">검사결과</h3>
-							</div>
+				              <h3 class="card-title"><b>검사결과</b></h3>
+				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
 										<tr>
 											<td>
-												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+												<textarea class="form-control" rows="19" id="inspResult" name="inspResult"></textarea>
 											</td>
 										</tr>
 										<tr>
 											<td class="txtc">
-												<button type="button" onclick="saveMemo(6)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+												<button type="button" onclick="saveMemo(6)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 											</td>
 										</tr>
 									</tbody>
@@ -922,7 +950,7 @@
 						<!-- /.card -->
 	 				</div>
 					<div class="col-md-6">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table table-bordered text-nowrap">
@@ -937,7 +965,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="cbcSave" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="cbcSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -1227,7 +1255,8 @@ function deleteServerFile(fileNo){
 function imgView(name){
 	//호스팅
 	//var path = '/home/hosting_users/avinext/tomcat/webapps/files/';
-	var path = '/abnext/resources/files/';
+	//var path = '/abnext/resources/files/';
+	var path = 'http://avinextlab.com/files/';
 	$(".image").attr("src",path+name);
 	$('#imgView').modal();
 }

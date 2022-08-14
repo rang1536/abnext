@@ -37,12 +37,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1> * 진단검사신청 현황</h1>
+						<h1><b>진단검사신청 현황</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">신청접수</li>
+							<li class="breadcrumb-item active">진단검사신청 현황</li>
 						</ol>
 					</div>
 				</div>
@@ -55,15 +55,19 @@
 				<!-- Table row -->
 				<div class="row">
 					<div class="col-12">
-						<div class="card">
+						<div class="card card-primary card-outline"">
 							<div class="card-header">
-								* 의뢰목록
+								<h3 class="card-title"><b>의뢰목록</b></h3>
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
 								<div>
 									<div class="form-group clearfix" style="float:right">
 										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chkAll" class="chkbox" checked>
+											<label for="chkAll">전체</label>
+										</div>
+										<div class="icheck-primary d-inline" style="margin-left:15px">
 											<input type="checkbox" id="chk1" class="chkbox">
 											<label for="chk1">점검중</label>
 										</div>
@@ -77,7 +81,7 @@
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
-								<button type="button" class="btn btn-primary btn-flat" style="float:right;">신규신청</button>
+								<button type="button" class="btn btn-sm btn-primary btn-flat" style="float:right;">신규신청</button>
 							</div>
 							<!-- /.card-footer -->
 						</div>

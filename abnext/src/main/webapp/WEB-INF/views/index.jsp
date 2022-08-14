@@ -44,6 +44,8 @@
 			<div class="container-fluid">
 				<h1><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:25%;"></b></h1>
 
+				<!--<div style="background-color:#fff;opacity:60%;min-height:300px;">윤재호윤재호</div>-->
+
 				<!--
 				<div style="min-height:400px;"></div>
 				<div class="row">
@@ -209,7 +211,23 @@
 		</section> <!-- End content -->
 	</div> <!-- End content-wrapper -->
 
-	<c:import url="./layer/layout_footer.jsp"></c:import>
+	<footer class="main-footer" style="font-size:13px;font-weight:bold;color:#000000;">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 1.0.1
+    </div>
+    <strong>Copyright &copy; 2017-2022 <a href="#">(주)아비넥스트</a>.</strong> All rights reserved.
+  	<br/>
+  	<div class="float-right d-none d-sm-block">
+      <b onclick="popPolicyOpen()">개인정보처리방침</b>
+    </div>
+  	<strong>
+  		<a href="#">대표</a>&nbsp;&nbsp;모인필&nbsp;&nbsp;|
+  		&nbsp;&nbsp;<a href="#">주소 </a>&nbsp;&nbsp; 충북 청주시 상당구 남일면 쌍암동길 30-7&nbsp;&nbsp;|
+  		&nbsp;&nbsp;<a href="#">TEL.</a> 042-292-9998
+  	</strong>
+  </footer>
+
+  <c:import url="./popup/pop_policy.jsp"></c:import>
 
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">

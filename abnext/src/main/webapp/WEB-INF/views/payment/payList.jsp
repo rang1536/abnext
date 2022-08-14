@@ -40,7 +40,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1> * 검사비 정산</h1>
+						<h1><b>검사비 정산</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -61,7 +61,7 @@
 						<div class="card-header">
 							<div class="row">
 								<div class="col-sm-2" style="padding-top:30px;min-width:150px;">
-									<h5>* 신청목록	</h5>
+									<h5><b>* 신청목록</b></h5>
 								</div>
 								<div class="col-sm-2">
 									<div class="form-group">
@@ -172,14 +172,11 @@
 					</div>
 					<!-- /.card -->
 
-					<div class="card card-primaryr card-outline">
+					<div class="card card-primary card-outline">
 						<div class="card-header">
-							<div class="row">
-								<div class="col-sm-2" style="padding-top:30px;min-width:150px;">
-									<h5>* 정산 내역	</h5>
-								</div>
-							</div>
-						</div>
+			              <h3 class="card-title"><b>정산 내역	</b></h3>
+			            </div>
+
 						<!-- /.card-header -->
 						<div class="card-body table-responsive">
 							<table class="table table-hover text-nowrap">

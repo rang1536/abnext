@@ -48,7 +48,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>* 결과입력 대상</h1>
+						<h1><b>결과입력 대상</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -66,10 +66,12 @@
 				<!-- general form elements disabled -->
 				<div class="row">
 					<div class="col-12">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">신청정보</h3>
-							</div>
+				              <h3 class="card-title"><b>신청정보</b></h3>
+				            </div>
+
 							<!-- /.card-header -->
 							<div class="card-body table-responsive">
 								<table class="table table-bordered text-nowrap">
@@ -175,10 +177,12 @@
 
 				<div class="row">
 					<div class="col-12">
-						<div class="card card-primary">
+						<div class="card card-primary card-outline">
+							<!-- /.card-header -->
 							<div class="card-header">
-								<h3 class="card-title">실험결과</h3>
-							</div>
+				              <h3 class="card-title"><b>실험결과</b></h3>
+				            </div>
+
 							<!-- /.card-header -->
 							<div class="card-body table-responsive">
 								<table class="table table-bordered table-hover text-nowrap">
@@ -224,10 +228,12 @@
 				<div style="z-index:9">
 					<div class="row">
 						<div class="col-12">
-							<div class="card card-primary">
+							<div class="card card-primary card-outline">
+								<!-- /.card-header -->
 								<div class="card-header">
-									<h3 class="card-title">종합소견</h3>
-								</div>
+					              <h3 class="card-title"><b>종합소견</b></h3>
+					            </div>
+
 								<div class="card-body">
 									<textarea class="form-control" id="finalMemo" rows="4">${rceptInfo.finalMemo}</textarea>
 								</div>
@@ -380,9 +386,9 @@ function drawImg(inspNo,k){
 			var inputType1 = '';
 			inputType1 += '<div class="row">';
 			inputType1 += '	<div class="col-md-6">';
-			inputType1 += '		<div class="card card-primary">';
+			inputType1 += '		<div class="card card-primary card-outline">';
 			inputType1 += '			<div class="card-header">';
-			inputType1 += '				<h3 class="card-title">검사메모</h3>';
+			inputType1 += '				<h3 class="card-title"><b>검사메모</b></h3>';
 			inputType1 += '			</div>';
 			inputType1 += '			<div class="card-body">';
 			inputType1 += '				<table class="table">';
@@ -417,9 +423,9 @@ function drawImg(inspNo,k){
 			inputType1 += '		</div>';
 			inputType1 += '	</div>';
 			inputType1 += '	<div class="col-md-6">';
-			inputType1 += '		<div class="card card-primary">';
+			inputType1 += '		<div class="card card-primary card-outline">';
 			inputType1 += '			<div class="card-header">';
-			inputType1 += '				<h3 class="card-title">검사사진</h3>';
+			inputType1 += '				<h3 class="card-title"><b>검사사진</b></h3>';
 			inputType1 += '			</div>';
 			inputType1 += '			<div class="card-body">';
 			inputType1 += '				<div>';
@@ -492,9 +498,9 @@ function fnCbc(inspNo,k){
 			var html = "";
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title"><b>검사메모</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -529,9 +535,9 @@ function fnCbc(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">혈구검사</h3>';
+			html += '				<h3 class="card-title"><b>혈구검사</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<div class="table-responsive">';
@@ -588,9 +594,9 @@ function fnBloodChem(inspNo,k){
 			var html = "";
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title"><b>검사메모</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -625,9 +631,9 @@ function fnBloodChem(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">혈액화학검사</h3>';
+			html += '				<h3 class="card-title"><b>혈액화학검사<b/></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<div class="table-responsive">';
@@ -685,9 +691,9 @@ function fnPcr(inspNo,k){
 			var html = '';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title"><b>검사메모</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -720,8 +726,10 @@ function fnPcr(inspNo,k){
 			html += '				</table>';
 			html += '			</div>';
 			html += '			<div style="height:10px;"></div>';
+			html += '		</div>';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">사진</h3>';
+			html += '				<h3 class="card-title"><b>사진</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<div class="filter-container row previewList'+inputType1Cnt+'"></div>';
@@ -729,9 +737,9 @@ function fnPcr(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">PCR</h3>';
+			html += '				<h3 class="card-title"><b>PCR</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<div class="table-responsive">';
@@ -821,7 +829,7 @@ function fnSerum(inspNo,k){
 			var html = '';
 			html += '<div class="row">';
 			html += '	<div class="col-md-12">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-body">';
 			html += '				<div class="chart">';
 			html += '					<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>';
@@ -830,9 +838,9 @@ function fnSerum(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title"><b>검사메모</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -867,9 +875,9 @@ function fnSerum(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">혈청</h3>';
+			html += '				<h3 class="card-title"><b>혈청</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<div class="table-responsive">';
@@ -1012,9 +1020,9 @@ function fnAnti(inspNo,k){
 			var html = '';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">검사메모</h3>';
+			html += '				<h3 class="card-title"><b>검사메모</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<table class="table">';
@@ -1047,6 +1055,8 @@ function fnAnti(inspNo,k){
 			html += '				</table>';
 			html += '			</div>';
 			html += '			<div style="height:10px;"></div>';
+			html += '		</div>';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
 			html += '				<h3 class="card-title">사진</h3>';
 			html += '			</div>';
@@ -1056,9 +1066,9 @@ function fnAnti(inspNo,k){
 			html += '		</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-primary">';
+			html += '		<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title">항생제 감수성 검사 기록지</h3>';
+			html += '				<h3 class="card-title"><b>항생제 감수성 검사 기록지</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<div class="table-responsive">';
