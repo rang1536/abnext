@@ -182,6 +182,7 @@
 				}else if(path.indexOf('result') > -1){
 					$(".leftMenuSub").eq(2).addClass("active");
 					$(".inspect").addClass("menu-is-opening menu-open");
+
 				}else if(path.indexOf('final') > -1){
 					$(".leftMenuSub").eq(3).addClass("active");
 					$(".inspect").addClass("menu-is-opening menu-open");
@@ -195,7 +196,7 @@
 					$(".leftMenu").eq(3).addClass("menu-is-opening menu-open");
 					$(".leftMenu").eq(3).addClass("active");
 				}
-			}, 200)
+			}, 500)
 
 		});
 
@@ -305,7 +306,11 @@
 
 
 								if(secondList.uppMenuNo == list.menuNo){
-									html += '<li class="nav-item">';
+									var cls = '';
+									if(secondList.uppMenuNo == '3'){
+										cls = 'inspect';
+									}
+									html += '<li class="nav-item '+cls+'">';
 									html += '	<a href="'+secondList.menuUrl+'" class="nav-link leftMenuSub">';
 									html += '		<i class="far fa-circle nav-icon"></i>';
 									html += '		<p>'+secondList.menuNm+'</p>';

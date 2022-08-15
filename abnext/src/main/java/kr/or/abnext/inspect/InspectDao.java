@@ -67,6 +67,10 @@ public class InspectDao {
 		return sql.selectOne("inspection.getPdlNo", pdlNo);
 	}
 
+	public String getAnimCode(TbAnimal bean) {
+		return sql.selectOne("inspection.getAnimCode", bean);
+	}
+
 	public int insertRcept(TbRcept bean) {
 		return sql.insert("inspection.insertRcept", bean);
 	}

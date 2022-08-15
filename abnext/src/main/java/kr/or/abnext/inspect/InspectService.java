@@ -279,4 +279,8 @@ public class InspectService {
 	public List<TbBloodChem> getCbcList(TbBloodChem bean){
 		return inspectDao.getCbcList(bean);
 	}
+
+	public String getAnimCode(TbAnimal bean) {
+		return inspectDao.getAnimCode(bean);
+	}
 }
