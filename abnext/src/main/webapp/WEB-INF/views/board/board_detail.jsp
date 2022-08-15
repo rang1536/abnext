@@ -58,7 +58,7 @@
 		</section>
 
 		<!-- Main content -->
-		 <section class="content" style="font-size:13px;font-weight:bold;" id="printCard">
+		 <section class="content" style="font-size:13px;font-weight:bold;">
  			<div class="container-fluid">
  				<div class="row">
 					<div class="col-md-12">
@@ -68,7 +68,7 @@
 			            </div>
 
 			            <!-- /.card-header -->
-			            <div class="card-body p-0">
+			            <div class="card-body p-0" id="printCard">
 			              <div class="mailbox-read-info">
 			                <h5>${board.subject }</h5><br/>
 			                <h6>작성자 - ${board.userNm }
@@ -101,13 +101,9 @@
 			            </div>
 			            <!-- /.card-body -->
 			            <div class="card-footer bg-white">
-
-			            </div>
-			            <!-- /.card-footer -->
-			            <div class="card-footer">
-			              <div class="float-right">
-			                <button type="button" onclick="fn_boardList();" class="btn btn-primary btn-sm"><i class="fas fa-reply"></i> 목록돌아가기</button>
-			              </div>
+							<div class="float-right">
+								<button type="button" onclick="fn_boardList();" class="btn btn-primary btn-sm"><i class="fas fa-reply"></i> 목록돌아가기</button>
+							</div>
 			            </div>
 			            <!-- /.card-footer -->
 

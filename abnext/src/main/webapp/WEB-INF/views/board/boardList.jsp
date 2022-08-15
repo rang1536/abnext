@@ -210,14 +210,19 @@
 	})
 
 	function fn_modifyBoard(boardNo){
-		if(userInfo.userLev == '4'){
-			$('#modifyBoardNo').val(boardNo);
+		if(userInfo != null && userInfo != ''){
+			if(userInfo.userLev == '4'){
+				$('#modifyBoardNo').val(boardNo);
 
-			$('#modifyBoardForm').prop('action', 'modifyBoard');
-			$('#modifyBoardForm').submit();
-		}else{ //상세보기화면을 만들어야 할듯?
+				$('#modifyBoardForm').prop('action', 'modifyBoard');
+				$('#modifyBoardForm').submit();
+			}else{ //상세보기화면을 만들어야 할듯?
+				location.href = 'boardDetail?boardNo='+boardNo;
+			}
+		}else{
 			location.href = 'boardDetail?boardNo='+boardNo;
 		}
+
 
 	}
 

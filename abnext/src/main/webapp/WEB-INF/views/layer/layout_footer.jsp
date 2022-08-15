@@ -16,9 +16,9 @@
       <b onclick="popPolicyOpen()">개인정보처리방침</b>
     </div>
   	<strong>
-  		|<a href="#">대표</a>|&nbsp;&nbsp;모인필&nbsp;&nbsp;|
-  		&nbsp;&nbsp;<a href="#">주소 </a>|&nbsp;&nbsp; 충북 청주시 상당구 남일면 쌍암동길 30-7&nbsp;&nbsp;|
-  		&nbsp;&nbsp;<a href="#">TEL</a>|&nbsp;&nbsp; 042-292-9998
+  		|<a href="#">대표</a>&nbsp;&nbsp;모인필&nbsp;&nbsp;|
+  		&nbsp;&nbsp;<a href="#">주소 </a>&nbsp;&nbsp; 충북 청주시 상당구 남일면 쌍암동길 30-7&nbsp;&nbsp;|
+  		&nbsp;&nbsp;<a href="#">TEL</a>&nbsp;&nbsp; 042-292-9998
   	</strong>
   </footer>
 
