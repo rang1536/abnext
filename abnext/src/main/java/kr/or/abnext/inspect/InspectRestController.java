@@ -175,10 +175,14 @@ public class InspectRestController {
 
 		//등록된 동물인지 확인 후 미등록이면 인서트
 		int cnt = inspectServ.duplAnimChk(tbAnimal);
-		logger.info("cnt:"+cnt);
 		String animNo = "";
 		if(cnt == 0) {
-			animNo = "XYZ"+tbRcept.getAnimBirth()+tbRcept.getButlerSigunguCd()+"001";
+			TbAnimal anim = new TbAnimal();
+			anim.setAnimNo("XYZ"+tbRcept.getAnimBirth()+tbRcept.getButlerSigunguCd());
+			animNo = inspectServ.getAnimCode(anim);
+			if(animNo == null) {
+				animNo = "XYZ"+tbRcept.getAnimBirth()+tbRcept.getButlerSigunguCd()+"001";
+			}
 			tbAnimal.setAnimNo(animNo);
 			tbAnimal.setAnimFirstCd(tbRcept.getAnimFirstCd());
 			tbAnimal.setAnimSecondCd(tbRcept.getAnimSecondCd());

@@ -119,11 +119,11 @@
 			type : 'post',
 			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
 			success:function(data){
-				var colList = ['pdlNo','rqstDt','procStatNm','animNm','hospNm','docNm','resultWriter','gubun'];
-				var typeList = ['text','text','text','text','text','text','text','text'];
-				var widthList = ['120','100','100','150','180','150','120','120'];
-				var titleList = ['의뢰번호','신청일','상태','동물이름','신청자(기관)','담당수의사','겸과입력자','검사구분'];
-				var alignList = ['center','center','center','center','center','center','center','center'];
+				var colList = ['pdlNo','rqstDt','procStatNm','animNm','hospNm','docNm','diagCdNm'];
+				var typeList = ['text','text','text','text','text','text','text'];
+				var widthList = ['100','100','90','120','180','150','180'];
+				var titleList = ['의뢰번호','신청일','상태','동물이름','신청자(기관)','담당수의사','검사구분'];
+				var alignList = ['center','center','center','center','center','center','center'];
 				var gridId = 'jsGrid1';
 				var fields = new Array();
 				var row = '';

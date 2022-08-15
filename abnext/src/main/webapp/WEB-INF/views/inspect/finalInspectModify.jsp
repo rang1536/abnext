@@ -38,7 +38,7 @@
 	</style>
 
 </head>
-<body class="hold-transition sidebar-mini" onselectstart='return false'>
+<body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
 	<jsp:include page="../layer/layout.jsp"></jsp:include>
@@ -260,27 +260,30 @@
 
 								<div class="card-body">
 									<div class="row">
-										<!--
-										<div class="col-6">
-											<label>진단상태</label>
-											<select class="form-control">
-												<option>1</option>
-											</select>
-										</div>
-										-->
 										<div class="col-6">
 											<label>최종진단명</label>
 											<select class="form-control" id="diagCd"></select>
 										</div>
+										<div class="col-6">
+								            <nav style="float:right">
+		-										<button class="btn btn-primary btn-flat sign"><i class="fas fa-pencil-alt"></i> 서명추가</button>
+		-									</nav>
+										</div>
 									</div>
 									<div style="height:5px;"></div>
-									<textarea class="form-control" id="finalMemo" rows="4">${rceptInfo.finalMemo}</textarea>
+									<textarea class="form-control" id="finalMemo">${rceptInfo.finalMemo}</textarea>
 									<button type="button" class="btn btn-default btn-block save"><i class="fas fa-save"></i> 저장</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-12" style="text-align:center">
+						<button type="button" id="list" style="width:161.2px;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-list"></i> 목록</button>
+					</div>
+				</div>
+
 			</div>
 			<!-- /.container-fluid -->
 		</section>
@@ -1345,6 +1348,10 @@ function callBackFn(data,col){
 
 	$("#"+col).val("${rceptInfo.diagCd }");
 }
+
+$(document).on('click','#list',function(){
+	location.href='finalInspectList';
+})
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>

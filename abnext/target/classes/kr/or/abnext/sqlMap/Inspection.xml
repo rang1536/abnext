@@ -259,6 +259,7 @@
 		   AND ANIM_BIRTH = #{animBirth}
 		   AND USER_NM = #{userNm}
 		   AND SIGUNGU_CD = #{sigunguCd}
+		 LIMIT 1
 	</select>
 
 	<select id="duplAnimChk" parameterType="kr.or.abnext.domain.TbAnimal" resultType="int">
@@ -564,5 +565,11 @@
 		  FROM TB_CBC A
 		 WHERE INSP_NO = #{inspNo}
 		 ORDER BY INS_DT
+	</select>
+
+	<select id="getAnimCode" parameterType="kr.or.abnext.domain.TbAnimal" resultType="String">
+		SELECT CONCAT('XYZ',CAST(MAX(SUBSTR(ANIM_NO,4)) AS SIGNED)+1)
+		  FROM TB_ANIMAL
+		 WHERE ANIM_NO LIKE CONCAT(#{animNo},'%')
 	</select>
 </mapper>

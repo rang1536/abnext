@@ -973,7 +973,11 @@
 						<!-- /.card -->
 	 				</div>
 	 			</div><!-- /.inputType6 -->
-
+				<div class="row">
+					<div class="col-12" style="text-align:center">
+						<button type="button" id="list" style="width:161.2px;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-list"></i> 목록</button>
+					</div>
+				</div>
 	 			<form id="inspOpinion">
 	 				<input type="hidden" id="inspSickCd" name="inspSickCd"/>
 	 			</form>
@@ -2068,6 +2072,10 @@ function callBackCbc(data){
 		$("#target").focus();
 	})
 }
+
+$(document).on('click','#list',function(){
+	location.href='resultInspectList';
+})
 
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
