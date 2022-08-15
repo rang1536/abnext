@@ -785,6 +785,7 @@ function fnPcr(inspNo,k){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
+			console.log(data);
 			var html = '';
 			html += '<div class="card card-primary card-outline">';
 			html += '			<div class="card-header">';
@@ -864,7 +865,7 @@ function fnPcr(inspNo,k){
 			html += '								<td style="background-color:#F2F2F2;width:25%;">비고</td>';
 			html += '							</tr>';
 			html += '						</thead>';
-			html += '						<tbody id="pcr">';
+			html += '						<tbody id="pcr'+k+'">';
 			html += '						</tbody>';
 			html += '					</table>';
 			html += '				</div>';
@@ -887,7 +888,7 @@ function fnPcr(inspNo,k){
 				subHtml += '	<td>'+item.rmk+'</td>';
 				subHtml += '</tr>';
 			}
-			$("#pcr").html(subHtml);
+			$("#pcr"+k).html(subHtml);
 
 			$.ajax({
 				url : 'getFileList',

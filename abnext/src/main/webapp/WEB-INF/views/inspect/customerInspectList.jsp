@@ -135,6 +135,14 @@
 <!-- Page specific script -->
 <script>
 	$(function () {
+		if(sessionStorage.getItem('userInfo') == null){
+			if(confirm("로그인이 필요한 페이지입니다.\n로그인 하시겠습니까?")){
+				location.href = "loginPage";
+			}else {
+				history.back();
+			}
+		}
+
 		getList();
 	});
 
