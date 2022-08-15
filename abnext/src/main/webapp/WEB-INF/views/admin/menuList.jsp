@@ -141,7 +141,7 @@
 			dataType : 'json',
 			type : 'post',
 			success:function(data){
-				console.log(JSON.stringify(data));
+
 				setGrid(data);
 			}
 		})
@@ -275,19 +275,6 @@
 
 	        ]
 	    });
-	}
-
-
-	function excelDown(){
-		$("#jsGrid1").table2excel({
-			exclude : ".excludeThisClass",
-			name : "기본통계",
-			filename : "기본통계",
-			fileext : ".xlsx",
-			exclude_img : true,
-			exclude_links : true,
-			exclude_inputs : true        
-		});    
 	}
 
 
