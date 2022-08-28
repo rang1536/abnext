@@ -62,4 +62,13 @@ public class HomeController {
 
 		return "layer/pdf_print";
 	}
+
+	@RequestMapping(value = "introCompany", method = RequestMethod.GET)
+	public String introCompany(Model model) {
+		System.out.println("시작~!!");
+
+		return "admin/intro_company";
+	}
+
+
 }

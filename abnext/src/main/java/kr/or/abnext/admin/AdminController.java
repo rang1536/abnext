@@ -130,4 +130,35 @@ public class AdminController {
 
 		return "admin/modify_user";
 	}
+
+	@RequestMapping(value = "modifyUserForUser", method = RequestMethod.GET)
+	public String modifyUserForUser(@RequestParam(value="modifyUserNo")String userNo
+			, Model model) {
+		System.out.println("시작~!!");
+		TbUser tbUser = new TbUser();
+		tbUser.setUserNo(Integer.parseInt(userNo));
+
+		tbUser = adminServ.getUserInfoServ(tbUser);
+
+		TbHospital tbHospital = new TbHospital();
+		TbFarm tbFarm = new TbFarm();
+		if(tbUser.getHospNo() != null && !tbUser.getHospNo().equals("")) {
+			tbHospital.setHospNo(Integer.parseInt(tbUser.getHospNo()));
+
+			tbHospital = adminServ.getHospListServ(tbHospital, "");
+
+			model.addAttribute("hosp", tbHospital); //기관병원 정보
+		}
+
+		if(tbUser.getFarmNo() != null && !tbUser.getFarmNo().equals("")) {
+			tbFarm.setFarmNo(Integer.parseInt(tbUser.getFarmNo()));
+
+			tbFarm = adminServ.getFarmListServ(tbFarm, "");
+
+			model.addAttribute("farm", tbFarm);
+		}
+
+		model.addAttribute("user", tbUser); //회원정보
+		return "admin/modify_user_forUser";
+	}
 }

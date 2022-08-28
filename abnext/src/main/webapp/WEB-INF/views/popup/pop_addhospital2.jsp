@@ -17,7 +17,7 @@
               <!-- /.card-header 본문-->
               <div class="card-body" style="font-size:13px;">
 				<!-- 병원입력폼  -->
-                <form onsubmit="return false" id="hospInfoForm" encType="multipart/form-data">
+                <form onsubmit="return false" id="addHospInfoForm" encType="multipart/form-data">
 	                <div class="hospitalDiv">
 	                	<div class="row">
 			                <div class="col-sm-6">
@@ -27,7 +27,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-building"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="hospNm" name="hospNm">
+				                    <input type="text" class="form-control" id="addHospNm" name="addHospNm">
 				                  </div>
 				                  <!-- /.input group -->
 				                </div>
@@ -49,7 +49,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-calculator"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="hospHp" name="hospHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+				                    <input type="text" class="form-control" id="addHospHp" name="addHospHp" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
 				                  </div>
 				                  <!-- /.input group -->
 				                </div>
@@ -63,7 +63,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="hospTel" name="hospTel" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+				                    <input type="text" class="form-control" id="addHospTel" name="addHospTel" data-inputmask='"mask": "(999) 999-9999"' data-mask>
 				                  </div>
 				                  <!-- /.input group -->
 				                </div>
@@ -81,7 +81,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="hospFax" name="hospFax" />
+				                    <input type="text" class="form-control" id="addHospFax" name="addHospFax" />
 				                  </div>
 				                  <!-- /.input group -->
 				                </div>
@@ -95,7 +95,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="hospEmail" name="hospEmail" />
+				                    <input type="text" class="form-control" id="addHospEmail" name="addHospEmail" />
 				                  </div>
 				                  <!-- /.input group -->
 				                </div>
@@ -112,7 +112,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-file"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="hospRn" name="hospRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
+				                    <input type="text" class="form-control" id="addHospRn" name="addHospRn" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask>
 				                  </div>
 				                  <!-- /.input group -->
 				                </div>
@@ -124,8 +124,8 @@
 
 				                  <div class="input-group">
 				                    <div class="custom-file">
-				                      <input type="file" class="custom-file-input" name="hospRnFile" id="hospRnFile">
-				                      <label class="custom-file-label" for="hospRnFile">사업자등록증 파일을 등록해주세요</label>
+				                      <input type="file" class="custom-file-input" name="addHospRnFile" id="addHospRnFile">
+				                      <label class="custom-file-label" for="addHospRnFile">사업자등록증 파일을 등록해주세요</label>
 				                    </div>
 				                  </div>
 				                </div>
@@ -133,17 +133,17 @@
 			                </div>
 			            </div>
 
-		                <label for="hospAdr">주소 *<code>&nbsp;주소검색을 이용해주세요.</code></label>
+		                <label for="addHospAdr">주소 *<code>&nbsp;주소검색을 이용해주세요.</code></label>
 		                <!-- <div class="input-group mb-3"> -->
 		                <div class="row">
 		                	<div class="input-group col-sm-4">
-			                  <input type="text" class="form-control hospInput" id="hospZip" name="hospZip" >
+			                  <input type="text" class="form-control" id="addHospZip" name="addHospZip" >
 			                  <span class="input-group-append">
-			                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('hospital')">주소검색</button><!--  -->
+			                    <button type="button" class="btn btn-success btn-flat" onclick="fn_searchAdr('addHospital')">주소검색</button><!--  -->
 			                  </span>
-			                  <input type="hidden" id="hospSidoNm" name="hospSidoNm"/>
-			                  <input type="hidden" id="hospSigunguNm" name="hospSigunguNm"/>
-			                  <input type="hidden" id="hospSigunguCd" name="hospSigunguCd"/>
+			                  <input type="hidden" id="addHospSidoNm" name="addHospSidoNm"/>
+			                  <input type="hidden" id="addHospSigunguNm" name="addHospSigunguNm"/>
+			                  <input type="hidden" id="addHospSigunguCd" name="addHospSigunguCd"/>
 			                </div>
 			            </div><br/>
 			            <div class="row">
@@ -151,7 +151,7 @@
 			                  <span class="input-group-prepend">
 			                    <button type="button" class="btn btn-default btn-flat" >기본주소</button>
 			                  </span>
-			                  <input type="text" class="form-control hospInput" id="hospAdr" name="hospAdr">
+			                  <input type="text" class="form-control" id="addHospAdr" name="addHospAdr">
 			                </div>
 			            </div><br/>
 			            <div class="row">
@@ -159,7 +159,7 @@
 			            	  <div class="input-group-prepend">
 			                    <button type="button" class="btn btn-default">상세주소</button>
 			                  </div>
-			                  <input type="text" class="form-control hospInput" name="hospDtlAdr" id="hospDtlAdr">
+			                  <input type="text" class="form-control" name="addHospDtlAdr" id="addHospDtlAdr">
 			            	</div>
 		                </div> <!-- END input-group mb-3 -->
 
@@ -173,7 +173,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-plus"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="hospMemo" name="hospMemo"  placeholder="참고사항 자유롭게 기재..">
+				                    <input type="text" class="form-control" id="addHospMemo" name="addHospMemo"  placeholder="참고사항 자유롭게 기재..">
 				                  </div>
 				                  <!-- /.input group -->
 				                </div>
@@ -189,7 +189,7 @@
 				                  <label>정산구분* </label>
 
 								  <div class="input-group">
-					                  <select class="form-control" name="payGb" id="payGb" style="width:100%;">
+					                  <select class="form-control" name="addPayGb" id="addPayGb" style="width:100%;">
 				                    	<option selected="selected" value="즉시납부">즉시납부</option>
 				                    	<option value="월간정산">월간정산</option>
 				                      </select>
@@ -203,7 +203,7 @@
 
 				                  <div class="input-group">
 				                    <div class="input-group">
-										<select class="form-control" name="payDate" id="payDate" style="width:100%;" disabled>
+										<select class="form-control" name="addPayDate" id="addPayDate" style="width:100%;" disabled>
 											<option selected="selected" value="1">1</option>
 											<option value="5">5</option>
 											<option value="15">15</option>
@@ -224,7 +224,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-address-card"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="payManagerNm" name="payManagerNm" />
+				                    <input type="text" class="form-control" id="addPayManagerNm" name="addPayManagerNm" />
 				                  </div>
 				                </div>
 				                <!-- /.form group -->
@@ -237,7 +237,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-phone"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="payManagerHp" name="payManagerHp" />
+				                    <input type="text" class="form-control" id="addPayManagerHp" name="addPayManagerHp" />
 				                  </div>
 				                  <!-- /.input group -->
 				                </div>
@@ -254,7 +254,7 @@
 				                    <div class="input-group-prepend">
 				                      <span class="input-group-text"><i class="fas fa-plus"></i></span>
 				                    </div>
-				                    <input type="text" class="form-control hospInput" id="payMemo" name="payMemo" placeholder="정산관련 참고사항..">
+				                    <input type="text" class="form-control" id="addPayMemo" name="addPayMemo" placeholder="정산관련 참고사항..">
 				                  </div>
 				                  <!-- /.input group -->
 				                </div>
@@ -272,8 +272,8 @@
         <!-- /.row -->
        </div>
        <div class="modal-footer justify-content-between">
-         <button type="button" class="btn btn-default" data-dismiss="modal" id="modalCloseBtn">닫기</button>
-         <button type="button" class="btn btn-primary" onclick="fn_addHospital();">등록</button>
+         <button type="button" class="btn btn-default" data-dismiss="modal" id="addHospModalCloseBtn">닫기</button>
+         <button type="button" class="btn btn-primary" onclick="fn_addHospital2();">등록</button>
        </div>
      </div>
      <!-- /.modal-content -->
