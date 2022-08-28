@@ -8,6 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.abnext.domain.AddFarm;
+import kr.or.abnext.domain.AddHospital;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbFile;
@@ -228,6 +230,29 @@ public class AdminService {
 		return map;
 	}
 
+	public Map<String, Object> addHospServ(AddHospital addHospital) {
+		Map<String, Object> map = getResultMap(adminDao.addHosp(addHospital));
+
+		if(map.get("result").equals("succ")) {
+			UtilFile utilFile = new UtilFile();
+
+			if(addHospital.getAddHospRnFile() != null) {
+				TbFile tbFile = utilFile.singleUploadFile(addHospital.getAddHospRnFile());
+
+				if(tbFile != null) {
+					tbFile.setHospNo(addHospital.getAddHospNo());
+					tbFile.setFileGb("F001-01"); //사업자등록증
+					tbFile.setFileMemo("사업자등록증");
+
+					map = getResultMap(adminDao.addFile(tbFile));
+				}
+			}
+
+		}
+
+		return map;
+	}
+
 
 	/**
 	 * @function : delHospServ
@@ -267,6 +292,30 @@ public class AdminService {
 
 				if(tbFile != null) {
 					tbFile.setHospNo(tbFarm.getFarmNo());
+					tbFile.setFileGb("F001-01"); //사업자등록증
+					tbFile.setFileMemo("사업자등록증");
+
+					map = getResultMap(adminDao.addFile(tbFile));
+				}
+			}
+
+		}
+
+		return map;
+	}
+
+
+	public Map<String, Object> addFarmServ(AddFarm addFarm) {
+		Map<String, Object> map = getResultMap(adminDao.addFarm(addFarm));
+
+		if(map.get("result").equals("succ")) {
+			UtilFile utilFile = new UtilFile();
+
+			if(addFarm.getAddFarmRnFile() != null) {
+				TbFile tbFile = utilFile.singleUploadFile(addFarm.getAddFarmRnFile());
+
+				if(tbFile != null) {
+					tbFile.setHospNo(addFarm.getAddFarmNo());
 					tbFile.setFileGb("F001-01"); //사업자등록증
 					tbFile.setFileMemo("사업자등록증");
 

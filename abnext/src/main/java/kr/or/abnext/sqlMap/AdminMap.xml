@@ -263,6 +263,60 @@
 		)
 	</insert>
 
+	<insert id="addHosp2" parameterType="kr.or.abnext.domain.TbHospital" useGeneratedKeys="true" keyProperty="hospNo">
+		INSERT INTO TB_HOSPITAL(
+			HOSP_NM
+			,HOSP_TEL
+			,HOSP_HP
+			,HOSP_EMAIL
+			,HOSP_FAX
+			,HOSP_ADR
+			,HOSP_DTL_ADR
+			,HOSP_ZIP
+			,HOSP_CEO
+			,HOSP_RN
+			,HOSP_SIDO_NM
+			,HOSP_SIGUNGU_NM
+			,HOSP_ACCOUNT_NO
+			,HOSP_BANK_NM
+			,HOSP_MEMO
+			,PAY_GB
+			,PAY_DATE
+			,PAY_MANAGER_NM
+			,PAY_MANAGER_HP
+			,PAY_MEMO
+			,INS_DT
+			,INS_ID
+			,UPT_DT
+			,UPT_ID
+		) VALUES(
+			#{addHospNm}
+			,#{addHospTel}
+			,#{addHospHp}
+			,#{addHospEmail}
+			,#{addHospFax}
+			,#{addHospAdr}
+			,#{addHospDtlAdr}
+			,#{addHospZip}
+			,#{addHospCeo}
+			,#{addHospRn}
+			,#{addHospSidoNm}
+			,#{addHospSigunguNm}
+			,#{addHospAccountNo}
+			,#{addHospBankNm}
+			,#{addHospMemo}
+			,#{addPayGb}
+			,#{addPayDate}
+			,#{addPayManagerNm}
+			,#{addPayManagerHp}
+			,#{addPayMemo}
+			,NOW()
+			,#{insId}
+			,NOW()
+			,#{insId}
+		)
+	</insert>
+
 	<!-- 병원수정 -->
 	<update id="modifyHospital" parameterType="kr.or.abnext.domain.TbHospital">
 		UPDATE TB_HOSPITAL
@@ -357,6 +411,60 @@
 			,#{payManagerNm}
 			,#{payManagerHp}
 			,#{payMemo}
+			,NOW()
+			,#{insId}
+			,NOW()
+			,#{insId}
+		)
+	</insert>
+
+	<insert id="addFarm2" parameterType="kr.or.abnext.domain.TbFarm" useGeneratedKeys="true" keyProperty="farmNo">
+		INSERT INTO TB_FARM(
+			FARM_NM
+			,FARM_CEO
+			,FARM_TEL
+			,FARM_HP
+			,FARM_FAX
+			,FARM_ADR
+			,FARM_DTL_ADR
+			,FARM_ZIP
+			,FARM_EMAIL
+			,FARM_RN
+			,FARM_SIDO_NM
+			,FARM_SIGUNGU_NM
+			,FARM_BANK_NM
+			,FARM_ACCOUNT_NO
+			,FARM_MEMO
+			,PAY_GB
+			,PAY_DATE
+			,PAY_MANAGER_NM
+			,PAY_MANAGER_HP
+			,PAY_MEMO
+			,INS_DT
+			,INS_ID
+			,UPT_DT
+			,UPT_ID
+		) VALUES(
+			#{addFarmNm}
+			,#{addFarmCeo}
+			,#{addFarmTel}
+			,#{addFarmHp}
+			,#{addFarmFax}
+			,#{addFarmAdr}
+			,#{addFarmDtlAdr}
+			,#{addFarmZip}
+			,#{addFarmEmail}
+			,#{addFarmRn}
+			,#{addFarmSidoNm}
+			,#{addFarmSigunguNm}
+			,#{addFarmBankNm}
+			,#{addFarmAccountNo}
+			,#{addFarmMemo}
+			,#{addPayGb}
+			,#{addPayDate}
+			,#{addPayManagerNm}
+			,#{addPayManagerHp}
+			,#{addPayMemo}
 			,NOW()
 			,#{insId}
 			,NOW()
@@ -575,7 +683,7 @@
 		 <if test='levFour != null and levFour.equals("Y")'>
 		 	AND LEV_FOUR = #{levFour}
 		 </if>
-		 ORDER BY MENU_NO
+		 ORDER BY MENU_ORDER, MENU_NO
 
 	</select>
 

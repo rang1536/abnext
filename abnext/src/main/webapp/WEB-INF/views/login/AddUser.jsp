@@ -397,7 +397,11 @@
 								                                    </button>
 								                                </div>
 								                            </div>
+								                            * 병원(기관) 등록이 안되어 있다면? &nbsp;&nbsp;&nbsp;
+								                            <button class="btn btn-sm bg-maroon" onclick="fn_addHosp();">기관등록</button>
+
 								                        </div>
+
 							                        </div>
 								                </div>
 							                </form>
@@ -740,6 +744,8 @@
 	</aside> <!-- /.control-sidebar -->
 
 	<c:import url="../popup/pop_searchCompany.jsp"></c:import>
+	<c:import url="../popup/pop_addfarm2.jsp"></c:import>
+	<c:import url="../popup/pop_addhospital2.jsp"></c:import>
 </div> <!-- ./wrapper -->
 
 <!-- jQuery -->
@@ -764,6 +770,7 @@
 <script src="resources/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="resources/plugins/toastr/toastr.min.js"></script>
+<script src="resources/js/common.js"></script>
 
 <script>
 	var Toast = '';
@@ -855,6 +862,7 @@
 
 							$('#hospNo').val(list.hospNo);
 
+							$('.hospitalDiv').css('display', '');
 						}else if(hospList.length == 0){
 							toastr.error('등록된 기관(병원)이 없습니다.');
 							$('#popCompany').modal();
@@ -895,6 +903,7 @@
 							toastr.success(list.farmNm+' 이 검색되었습니다');
 							$('#farmNo').val(list.farmNo);
 
+							$('.farmDiv').css('display', '');
 						}else if(farmList.length == 0){
 							toastr.error('등록된 농장이 없습니다.');
 							$('#popCompany').modal();
@@ -931,7 +940,7 @@
 	* 기관,병원 세팅
 	======================*/
 	function fn_setHospDataToForm(hospNo){
-		console.log(hospNo)
+		//console.log(hospNo)
 		$.ajax({
 			url : 'getHospInfo',
 			dataType : 'json',
@@ -1004,7 +1013,7 @@
 	* 기관,병원 소속선택 폼 이벤트
 	======================*/
 	function fn_searchKeyChg(searchKey){
-		console.log('기관병원 클릭');
+		/*console.log('기관병원 클릭');
 		if(searchKey == 'hospital'){
 			$('.hospitalDiv').css('display', '');
 			$('.farmDiv').css('display', 'none');
@@ -1014,7 +1023,7 @@
 		}else{
 			$('.hospitalDiv').css('display', '');
 			$('.farmDiv').css('display', 'none');
-		}
+		}*/
 	}
 
 
@@ -1156,7 +1165,7 @@
 			}
 
 			//회원구분에 따라 회사정보입력이 필수.
-			var userLev = $('#userLev option:selected').val();
+			//var userLev = $('#userLev option:selected').val();
 			//console.log('userLev : '+userLev);
 
 			/*
@@ -1182,6 +1191,16 @@
 				}
 			}
 			*/
+
+			var farmNo = $('#farmNo').val();
+			var hospNo = $('#hospNo').val();
+
+			if(farmNo == null || farmNo == ''){
+				if(hospNo == null || hospNo == ''){
+					alert('소속(기관)은 필수입력 항목입니다.');
+					$('#companyNm').foucs();
+				}
+			}
 
 			var params = $('#userInfoForm').serialize();
 			//console.log('params : '+params);
@@ -1219,6 +1238,24 @@
 
 	function fn_mainPage(){
 		location.href="index";
+	}
+
+
+	function fn_addHosp(){
+		var searchKey = 'hospital';
+
+		$('input[name=searchKey]').each(function(){
+			if($(this).is(':checked')){
+				searchKey = $(this).val();
+			}
+		})
+
+		if(searchKey == 'hospital'){
+			$('#popAddHosp').modal();
+		}else{
+			$('#popAddFarm').modal();
+		}
+
 	}
 
 </script>

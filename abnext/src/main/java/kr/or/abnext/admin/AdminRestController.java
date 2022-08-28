@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.abnext.domain.AddFarm;
+import kr.or.abnext.domain.AddHospital;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbFile;
@@ -144,6 +146,15 @@ public class AdminRestController {
 		return map;
 	}
 
+
+	@RequestMapping(value = "addHospCtrl2", method = RequestMethod.POST)
+	public Map<String, Object> addHospCtrl2(AddHospital addHospital) {
+			//, @RequestParam("hospRnFile") MultipartFile file
+		System.out.println("병원등록 시작~!!");
+
+		Map<String, Object> map = adminServ.addHospServ(addHospital);
+		return map;
+	}
 	/**
 	 * 기관삭제
 	 * */
@@ -166,6 +177,13 @@ public class AdminRestController {
 	public Map<String, Object> addFarmCtrl(TbFarm tbFarm) {
 		System.out.println("농장등록 시작~!!");
 		Map<String, Object> map = adminServ.addFarmServ(tbFarm);
+		return map;
+	}
+
+	@RequestMapping(value = "addFarmCtrl2", method = RequestMethod.POST)
+	public Map<String, Object> addFarmCtrl2(AddFarm addFarm) {
+		System.out.println("농장등록 시작~!!");
+		Map<String, Object> map = adminServ.addFarmServ(addFarm);
 		return map;
 	}
 

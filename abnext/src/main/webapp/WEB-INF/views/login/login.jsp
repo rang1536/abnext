@@ -37,7 +37,7 @@
 	        </div>
 	      </div>
 	      <div class="input-group mb-3">
-	        <input type="password" class="form-control" placeholder="비밀번호" id="userPass" name="userPass">
+	        <input type="password" class="form-control" placeholder="비밀번호" id="userPass" name="userPass" onkeypress="fn_enterKey()">
 	        <div class="input-group-append">
 	          <div class="input-group-text">
 	            <span class="fas fa-lock"></span>
@@ -168,10 +168,9 @@
 	* 앤터키 Event
 	* onkeyup = "fn_enterKey(pgmId)"
 	==================================*/
-	function fn_enterKey(pgmId){
+	function fn_enterKey(){
 		if(window.event.keyCode == 13){
 			fn_login();
-
 		}
 	}
 </script>

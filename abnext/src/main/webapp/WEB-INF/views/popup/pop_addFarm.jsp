@@ -12,11 +12,8 @@
        <div class="modal-body">
          <div class="row">
           <div class="col-12">
-            <div class="card">
-              <div class="card-header" style="background-color:red;">
-                <h3 class="card-title"></h3>
+            <div class="card card-primary card-outline">
 
-              </div>
               <!-- /.card-header 본문-->
               <div class="card-body" style="font-size:13px;">
 				<!-- 병원입력폼  -->

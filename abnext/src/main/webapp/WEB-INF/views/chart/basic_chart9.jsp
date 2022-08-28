@@ -141,6 +141,8 @@
 <script src="resources/plugins/jsgrid/demos/db.js"></script>
 <script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
 
+<script src="resources/js/common.js"></script>
+
 <script>
 
 	//BS-Stepper Init

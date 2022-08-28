@@ -46,15 +46,27 @@
 			<li class="nav-item dropdown" id="bellLi">
 
 			</li>
-			<li class="nav-item">
+			<!-- <li class="nav-item">
 				<a class="nav-link" data-widget="fullscreen" href="#" role="button">
 					<i class="fas fa-expand-arrows-alt"></i>
+				</a>
+			</li> -->
+
+			<!-- <li class="nav-item">
+				<a class="nav-link" href="#" role="button" onclick="fn_login_out()">
+					<i class="fas fa-address-book"></i>
+				</a>
+			</li> -->
+
+			<li class="nav-item addUserNav">
+				<a class="nav-link" href="#" role="button" onclick="fn_addUserPage()">
+					<b>회원가입</b>
 				</a>
 			</li>
 
 			<li class="nav-item">
 				<a class="nav-link" href="#" role="button" onclick="fn_login_out()">
-					<i class="fas fa-address-book"></i>
+					<b id="loginOutB"></b>
 				</a>
 			</li>
 
@@ -126,9 +138,12 @@
 		$(function () {
 			//userInfoIntro
 			var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+			$('#loginOutB').text('');
 
 			if(userInfo != null){
 				var html = '';
+
+				html += '<b onclick="fn_modifyUser('+userInfo.userNo+')">';
 				html += userInfo.userNm+' 님';
 				if(userInfo.hospNm != null && userInfo.hospNm != ''){
 					html += '<b style="color:#A6A6A6;font-size:13px;">&nbsp;&nbsp;';
@@ -143,6 +158,7 @@
 					html += ' ]';
 					html += '</b>'
 				}
+				html += '</b>';
 
 				$('.userInfoIntro').empty();
 				$('.userInfoIntro').html(html);
@@ -154,12 +170,18 @@
 					setBellMsg();
 				}
 
+				$('#loginOutB').text('Logout');
+				$('.addUserNav').css('display', 'none');
 				setMenuList(userInfo.userLev);
+
 			}else{
 				$('#userBtnGroup').css('display', '');
 				//alert('로그인 후 사용하실수 있습니다 ');
 				//location.href = 'loginPage';
 				setMenuList('1');
+
+				$('#loginOutB').text('Login');
+				$('.addUserNav').css('display', '');
 			}
 
 			var path = $(location).attr('pathname');
@@ -260,6 +282,11 @@
 								html += '		<i class="nav-icon fas fa-tachometer-alt"></i>';
 								html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm+'</p>';
 								html += '	</a>';
+							}else if(menuNm == '회사소개'){
+								html += '		<i class="nav-icon fas fa-building"></i>';
+								html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm;
+								html += '		</p>';
+								html += '	</a>';
 							}else if(menuNm == '진단검사'){
 								html += '		<i class="nav-icon fas fa-copy"></i>';
 								//html += '		<p onclick="movePageChk(\''+list.menuUrl+'\',\''+list.menuNm+'\')">'+list.menuNm;
@@ -271,7 +298,7 @@
 								html += '		<i class="nav-icon fas fa-book"></i>';
 								html += '		<p>'+list.menuNm;
 								html += '			<i class="fas fa-angle-left right"></i>';
-								html += '			<span class="badge badge-info right">1</span>';
+								//html += '			<span class="badge badge-info right">1</span>';
 								html += '		</p>';
 								html += '	</a>';
 							}else if(menuNm == '수납관리'){
@@ -282,14 +309,14 @@
 								html += '		<i class="nav-icon fas fa-chart-pie"></i>';
 								html += '		<p>'+list.menuNm;
 								html += '			<i class="fas fa-angle-left right"></i>';
-								html += '			<span class="badge badge-info right">8</span>';
+								//html += '			<span class="badge badge-info right">8</span>';
 								html += '		</p>';
 								html += '	</a>';
 							}else if(menuNm == '설정및관리'){
 								html += '		<i class="nav-icon fas fa-th"></i>';
 								html += '		<p>'+list.menuNm;
 								html += '			<i class="fas fa-angle-left right"></i>';
-								html += '			<span class="badge badge-info right">5</span>';
+								//html += '			<span class="badge badge-info right">5</span>';
 								html += '		</p>';
 								html += '	</a>';
 							}
@@ -364,21 +391,21 @@
 
 					html = '<a class="nav-link" data-toggle="dropdown" href="#">';
 					html += '	<i class="far fa-bell"></i>';
-					html += '	<span class="badge badge-warning navbar-badge">2</span>';
+					html += '	<span class="badge badge-warning navbar-badge">1</span>';
 					html += '</a>';
 					html += '<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="font-size:12px;">';
-					html += '	<span class="dropdown-item dropdown-header">2개의 알림이 있습니다</span>';
+					html += '	<span class="dropdown-item dropdown-header">1개의 알림이 있습니다</span>';
 					html += '	<div class="dropdown-divider"></div>';
 					html += '	<a href="userList" class="dropdown-item">';
 					html += '		<i class="fas fa-envelope mr-2"></i> '+list.length+'명의 승인대기회원';
 					html += '		<span class="float-right text-muted text-sm">lastest</span>';
 					html += '	</a>';
-					html += '	<div class="dropdown-divider"></div>'
+					/*html += '	<div class="dropdown-divider"></div>'
 					html += '	<a href="#" class="dropdown-item">'
 					html += '		<i class="fas fa-file mr-2"></i> 3 건의 진단신청 있음'
 					html += '		<span class="float-right text-muted text-sm">lastest</span>'
 					html += '	</a>'
-					html += '	<div class="dropdown-divider"></div>'
+					html += '	<div class="dropdown-divider"></div>'*/
 					html += '</div>';
 
 					$('#bellLi').empty();
@@ -442,6 +469,23 @@
 						$('#butlerSigungu').val(data.sigungu);
 						$('#butlerSigunguCd').val(data.sigunguCode);
 
+					}else if(type == 'addFarm'){
+						$("#addFarmAdr").val(data.roadAddress);
+						$("#addFarmZip").val(data.zonecode);
+						$('#addFarmSidoNm').val(data.sido);
+						$('#addFarmSigunguNm').val(data.sigungu);
+						$('#addFarmSigunguCd').val(data.sigunguCode);
+
+						$('#addFarmDtlAdr').focus();
+					}
+					else if(type == 'addHospital'){
+						$("#addHospAdr").val(data.roadAddress);
+						$("#addHospZip").val(data.zonecode);
+						$('#addHospSidoNm').val(data.sido);
+						$('#addHospSigunguNm').val(data.sigungu);
+						$('#addHospSigunguCd').val(data.sigunguCode);
+
+						$('#addHospDtlAdr').focus();
 					}
 				}
 			}).open();
@@ -532,6 +576,86 @@
 			}
 		})
 
+		/*회원등록 에서 기관등록 팝업(병원)*/
+		function fn_addHospital2(){
+			var addHospNm = $('#addHospNm').val();
+			var addHospHp = $('#addHospHp').val();
+			var addHospAdr = $('#addHospAdr').val();
+			var payManagerNm = $('#addPayManagerNm').val();
+			var payManagerHp = $('#addPayManagerHp').val();
+			var addHospEmail = $('#addHospEmail').val();
+
+			if(addHospNm == null || addHospNm == ''){
+				alert('기관(병원)명은 필수입력입니다.');
+				return;
+			}
+
+			if(addHospHp == null || addHospHp == ''){
+				alert('핸드폰번호는 필수입력입니다.');
+				return;
+			}else{
+				if(!gfn_validation_hp(addHospHp)){
+					alert('올바른 휴대폰번호를 입력해주세요');
+					return;
+				}
+			}
+
+			if(addHospAdr == null || addHospAdr == ''){
+				alert('주소는 필수입력입니다.');
+				return;
+			}
+
+			if(addHospEmail != null && addHospEmail != ''){
+				if(!gfn_validation_email(addHospEmail)){
+					alert('올바른 이메일주소를 입력해주세요');
+					return;
+				}
+			}
+
+			if(payManagerNm == null || payManagerNm == ''){
+				alert('정산담당자를 입력하세요');
+				return;
+			}
+
+			if(payManagerHp == null || payManagerHp == ''){
+				alert('정산담당자 연락처를 입력하세요');
+				return;
+			}
+
+			//$('#addHospInfoForm').serialize();
+			var params = new FormData($('#addHospInfoForm')[0]);
+
+			toastr.info('등록중입니다');
+
+			$.ajax({
+				url : 'addHospCtrl2',
+				data : params,
+				dataType : 'json',
+				type : 'post',
+				processData : false,
+				contentType : false,
+				success : function(data){
+					if(data.result == 'succ'){
+						toastr.success('기관(병원)등록이 완료되었습니다.');
+						$('#addHospModalCloseBtn').click();
+
+						//window.location.reload(true);
+					}else{
+						toastr.error('기관(병원)등록에 실패하였습니다.');
+					}
+				}
+			})
+		}
+
+		$(document).on('change', '#addPayGb', function(){
+			if($(this).val() == '월간정산'){
+				$('#addPayDate').prop('disabled', false);
+			}else{
+				$('#addPayDate').prop('disabled', true);
+			}
+		})
+
+
 		/*====================================
 		* 농장등록 (팝업)
 		* 팝업 : pop_addFarm
@@ -581,6 +705,58 @@
 						$('#modalCloseBtn').click();
 
 						window.location.reload(true);
+					}else{
+						toastr.error('농장등록에 실패하였습니다.');
+					}
+				}
+			})
+
+		}
+
+		function fn_addFarm2(){
+			var addFarmNm = $('#addFarmNm').val();
+			var addFarmHp = $('#addFarmHp').val();
+			var addFarmAdr = $('#addFarmAdr').val();
+
+			if(addFarmNm == null || addFarmNm == ''){
+				alert('농장명은 필수입력입니다.');
+				return;
+			}
+
+			if(addFarmHp == null || addFarmHp == ''){
+				alert('핸드폰번호는 필수입력입니다.');
+				return;
+			}else{
+				if(!gfn_validation_hp(addFarmHp)){
+					alert('올바른 휴대폰번호를 입력해주세요');
+					return;
+				}
+			}
+
+
+			if(addFarmAdr == null || addFarmAdr == ''){
+				alert('주소는 필수입력입니다.');
+				return;
+			}
+
+			//$('#addFarmInfoForm').serialize();
+			var params = new FormData($('#addFarmInfoForm')[0]);
+
+			toastr.info('등록중입니다');
+
+			$.ajax({
+				url : 'addFarmCtrl2',
+				data : params,
+				dataType : 'json',
+				type : 'post',
+				processData : false,
+				contentType : false,
+				success : function(data){
+					if(data.result == 'succ'){
+						toastr.success('농장등록이 완료되었습니다.');
+						$('#addFarmModalCloseBtn').click();
+
+						//window.location.reload(true);
 					}else{
 						toastr.error('농장등록에 실패하였습니다.');
 					}
@@ -745,6 +921,14 @@
 			console.log('h2')
 			$('#popPolicy').modal();
 		}
+
+
+		function fn_modifyUser(userNo){
+			//console.log('userNo : '+userNo);
+			location.href = "modifyUserForUser?modifyUserNo="+userNo;
+		}
+
+
 	</script>
 
 </body>

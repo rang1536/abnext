@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.abnext.domain.AddFarm;
+import kr.or.abnext.domain.AddHospital;
 import kr.or.abnext.domain.TbCode;
 import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbFile;
@@ -83,6 +85,9 @@ public class AdminDao {
 		return sql.insert("admin.addHosp", tbHospital);
 	}
 
+	public int addHosp(AddHospital addHospital) {
+		return sql.insert("admin.addHosp2", addHospital);
+	}
 
 	/**
 	 * @function : delHosp
@@ -101,6 +106,10 @@ public class AdminDao {
 	 **/
 	public int addFarm(TbFarm tbFarm) {
 		return sql.insert("admin.addFarm", tbFarm);
+	}
+
+	public int addFarm(AddFarm addFarm) {
+		return sql.insert("admin.addFarm2", addFarm);
 	}
 
 	/**
