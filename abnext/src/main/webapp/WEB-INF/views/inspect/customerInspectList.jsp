@@ -69,11 +69,11 @@
 										</div>
 										<div class="icheck-primary d-inline" style="margin-left:15px">
 											<input type="checkbox" id="chk1" class="chkbox">
-											<label for="chk1">점검중</label>
+											<label for="chk1">검사중</label>
 										</div>
 										<div class="icheck-primary d-inline" style="margin-left:15px">
 											<input type="checkbox" id="chk2" class="chkbox">
-											<label for="chk2">점검완료</label>
+											<label for="chk2">검사완료</label>
 										</div>
 									</div>
 								</div>

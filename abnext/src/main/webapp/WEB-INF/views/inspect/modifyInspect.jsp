@@ -317,7 +317,7 @@
 											</tr>
 											<tr>
 												<td colspan="7" align="center">
-													<button type="button" id="list" style="width:111.2px" class="btn btn-sm btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
+													<button type="button" id="cancel" style="width:111.2px" class="btn btn-sm btn-danger btn-flat"><i class="fas fa-minus-circle"></i> 접수취소</button>
 													<button type="button" id="acpt" style="width:111.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 접수확인</button>
 												</td>
 											</tr>
@@ -394,6 +394,25 @@ $(function () {
 
 	$("#list").on("click",function(){
 		location.href = "requestInspect";
+	});
+
+	$("#cancel").on("click",function(){
+		var data = {
+				rqstNo : $("#rqstNo").val(),
+				procStat : "A001-09",
+				uptId :JSON.parse(sessionStorage.getItem("userInfo")).userId
+			};
+
+			$.ajax({
+				url : "cancelRcept",
+				data : data,
+				type : "POST",
+				dataType : "JSON",
+				success : function(data){
+					alert("취소하였습니다.");
+					location.href="requestInspect";
+				}
+			});
 	});
 
 	$(".chkh").each(function(){

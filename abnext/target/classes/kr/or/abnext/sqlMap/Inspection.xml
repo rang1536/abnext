@@ -130,13 +130,15 @@
 		     , FARM_NM, DOC_NO, DOC_NM, ANIM_BUTLER
 		     , BUTLER_SIDO, BUTLER_SIGUNGU, BUTLER_SIGUNGU_CD
 		     , ANIM_BIRTH, ANIM_FIRST_CD, ANIM_SECOND_CD, ANIM_THIRD_CD
-		     , ANIM_SEX, RQST_DT, PROC_STAT, PROC_STAT_NM
+		     , ANIM_SEX, RQST_DT, PROC_STAT
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.PROC_STAT) AS PROC_STAT_NM
 		     , RQST_MEMO, PAY_GB, PRICE, PAY_STAT
 		     , PAYED_DT, RESULT, RESULT_WRITER, FINISH_DT
 		     , DIAG_UP_CD, DIAG_CD
 		     , (SELECT USER_NM FROM TB_USER B WHERE B.USER_ID = A.RESULT_WRITER) AS RESULT_WRITER_NM
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.DIAG_CD) AS DIAG_CD_NM
 		     , CONVERT(FINAL_MEMO USING UTF8) AS FINAL_MEMO
+		     , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = (SELECT INSP_SECOND_CD FROM TB_INSPECTION B WHERE A.RQST_NO = B.RQST_NO LIMIT 1)) AS INSP_TYPE
 		     , PDL_NO
 		  FROM TB_RCEPT A
 		 WHERE PROC_STAT IN
@@ -224,7 +226,8 @@
 		     , FARM_NM, DOC_NO, DOC_NM, ANIM_BUTLER
 		     , BUTLER_SIDO, BUTLER_SIGUNGU, BUTLER_SIGUNGU_CD
 		     , ANIM_BIRTH, ANIM_FIRST_CD, ANIM_SECOND_CD, ANIM_THIRD_CD
-		     , ANIM_SEX, RQST_DT, PROC_STAT, PROC_STAT_NM
+		     , ANIM_SEX, RQST_DT, PROC_STAT
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.PROC_STAT) AS PROC_STAT_NM
 		     , RQST_MEMO, PAY_GB, PRICE, PAY_STAT
 		     , PAYED_DT, RESULT, RESULT_WRITER, FINISH_DT
 		     , DIAG_UP_CD, DIAG_CD
@@ -294,7 +297,6 @@
 	<update id="updateInspectStatus" parameterType="kr.or.abnext.domain.TbRcept">
 		UPDATE TB_RCEPT
 		   SET PROC_STAT = #{procStat}
-		     , PROC_STAT_NM = #{procStatNm}
 		     , UPT_ID = #{uptId}
 		     , UPT_DT = NOW()
 		<if test="animNo != null and animNo != ''">
@@ -382,7 +384,7 @@
 	<select id="selectInspect" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbInspection">
 		SELECT COUNT(*) AS SUM_CNT
 		     , SUM(INSP_PRICE) AS INSP_PRICE
-		     , (SELECT MAX(PAY_STAT) FROM TB_RCEPT B WHERE RQST_NO = B.RQST_NO AND RQST_NO = #{rqstNo}) AS PAY_STAT
+		     , (SELECT MAX(PAY_STAT) FROM TB_RCEPT B WHERE RQST_NO = B.RQST_NO AND PDL_NO = #{rqstNo}) AS PAY_STAT
 		  FROM TB_INSPECTION
 		 WHERE RQST_NO = (SELECT RQST_NO FROM TB_RCEPT WHERE PDL_NO = #{rqstNo})
 	</select>
@@ -443,15 +445,16 @@
 	<insert id="insertAntibiotic" parameterType="kr.or.abnext.domain.TbAntibiotic">
 		INSERT
 		  INTO TB_ANTIBIOTIC (
-		       INSP_NO , ANTI_NO
+		       INSP_NO , ANTI_NO , CAPACITY
 		     , RES1    , RES2    , ANTI_MEMO
 		     , INS_DT  , INS_ID )
 		VALUES (
-		       #{inspNo} , #{antiNo}
+		       #{inspNo} , #{antiNo} , #{capacity}
 		     , #{res1}   , #{res2}   , #{antiMemo}
 		     , NOW()     , #{insId} )
 		    ON DUPLICATE KEY
-		UPDATE RES1 = #{res1}
+		UPDATE CAPACITY = #{capacity}
+		     , RES1 = #{res1}
 		     , RES2 = #{res2}
 		     , ANTI_MEMO = #{antiMemo}
 		     , UPT_DT = NOW()

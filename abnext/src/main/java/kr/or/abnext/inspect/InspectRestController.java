@@ -200,11 +200,18 @@ public class InspectRestController {
 		rcpt.setRqstNo(tbRcept.getRqstNo());
 		rcpt.setAnimNo(animNo);
 		rcpt.setUptId(tbRcept.getInsId());
-		rcpt.setProcStat("2");
-		rcpt.setProcStatNm("접수");
-
+		rcpt.setProcStat("A001-02");
 		inspectServ.updateInspectStatus(rcpt);
 
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("result", "ok");
+
+		return map;
+	}
+
+	@RequestMapping(value = "cancelRcept", method = RequestMethod.POST)
+	public Map<String, Object> cancelRcept(TbRcept tbRcept) {
+		inspectServ.updateInspectStatus(tbRcept);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");
 
@@ -254,9 +261,7 @@ public class InspectRestController {
 		TbRcept rcpt = new TbRcept();
 		rcpt.setRqstNo(tbRcept.getRqstNo());
 		rcpt.setUptId(tbRcept.getUptId());
-		rcpt.setProcStat("3");
-		rcpt.setProcStatNm("진단설정");
-
+		rcpt.setProcStat("A001-03");
 		inspectServ.updateInspectStatus(rcpt);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");
@@ -279,8 +284,7 @@ public class InspectRestController {
 		TbRcept rcpt = new TbRcept();
 		rcpt.setInspNo(tbOpin.getInspNo());
 		rcpt.setUptId(tbOpin.getInsId());
-		rcpt.setProcStat("4");
-		rcpt.setProcStatNm("결과입력");
+		rcpt.setProcStat("A001-04");
 		inspectServ.updateResult(rcpt);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");
@@ -333,9 +337,7 @@ public class InspectRestController {
 
 	@RequestMapping(value = "modifyFinal", method = RequestMethod.POST)
 	public Map<String, Object> modifyFinal(TbRcept tbRcept) {
-		tbRcept.setProcStat("5");
-		tbRcept.setProcStatNm("최종판정");
-
+		tbRcept.setProcStat("A001-05");
 		inspectServ.updateInspectStatus(tbRcept);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");
@@ -370,31 +372,31 @@ public class InspectRestController {
 
 	@RequestMapping(value = "requestInspectList")
 	public List<TbRcept> requestInspect() {
-		String [] arr = {"1" , "2"};
+		String [] arr = {"A001-01" , "A001-02"};
 		return inspectServ.recptList(arr);
 	}
 
 	@RequestMapping(value = "settingInspectList2")
 	public List<TbRcept> settingInspectList(Locale locale, Model model) {
-		String [] arr = {"2"};
+		String [] arr = {"A001-02","A001-03"};
 		return inspectServ.recptList(arr);
 	}
 
 	@RequestMapping(value = "resultInspectList2")
 	public List<TbRcept> resultInspectList2(Locale locale, Model model) {
-		String[] arr = { "3", "4" };
+		String[] arr = { "A001-03", "A001-04" };
 		return inspectServ.recptList(arr);
 	}
 
 	@RequestMapping(value = "finalInspectList2")
 	public List<TbRcept> finalInspectList(Locale locale, Model model) {
-		String [] arr = {"4","5"};
+		String [] arr = {"A001-04","A001-05"};
 		return inspectServ.recptList(arr);
 	}
 
 	@RequestMapping(value = "allInspectList2")
 	public List<TbRcept> allInspectList(Locale locale, Model model) {
-		String [] arr = {"1","2","3","4","5"};
+		String [] arr = {"A001-01","A001-02","A001-03","A001-04","A001-05"};
 		return inspectServ.recptList(arr);
 	}
 
@@ -419,6 +421,7 @@ public class InspectRestController {
 			TbAntibiotic anti = new TbAntibiotic();
 			anti.setAntiNo(tbResult.getAntiList().get(i).get("antiNo").toString());
 			anti.setInspNo(tbResult.getInspNo());
+			anti.setCapacity(tbResult.getAntiList().get(i).get("capacity").toString());
 			anti.setRes1(tbResult.getAntiList().get(i).get("res1").toString());
 			anti.setRes2(tbResult.getAntiList().get(i).get("res2").toString());
 			anti.setAntiMemo(tbResult.getAntiList().get(i).get("antiMemo").toString());

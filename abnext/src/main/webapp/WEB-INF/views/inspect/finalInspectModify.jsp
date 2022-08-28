@@ -50,12 +50,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>결과입력 대상</b></h1>
+						<h1><b>최종진단</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">결과입력</li>
+							<li class="breadcrumb-item active">최종진단</li>
 						</ol>
 					</div>
 				</div>
@@ -397,17 +397,17 @@ window.onload = function(){
 		var k = idx+1;
 		var inspSecCd = $(this).find("[id^=inspSecondCd]").val();
 		if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-16'){
-			fnPcr($(this).find("[id^=inspNo]").val(),k);
+			fnPcr($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
 		}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
-			fnAnti($(this).find("[id^=inspNo]").val(),k);
+			fnAnti($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
 		}else if(inspSecCd == 'B001-03-18'){
-			fnSerum($(this).find("[id^=inspNo]").val(),k);
+			fnSerum($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
 		}else if(inspSecCd == 'B001-04-23'){
-			fnBloodChem($(this).find("[id^=inspNo]").val(),k);
+			fnBloodChem($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
 		}else if(inspSecCd == 'B001-04-24'){
-			fnCbc($(this).find("[id^=inspNo]").val(),k);
+			fnCbc($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
 		}else {
-			drawImg($(this).find("[id^=inspNo]").val(),k);
+			drawImg($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
 		}
 	});
 }
@@ -424,7 +424,7 @@ function imgView(name){
 /*****************************************************************
  *                  검 사 클 릭 이 벤 트                                                                           *
  *****************************************************************/
-function drawImg(inspNo,k){
+function drawImg(inspNo,k,title){
 	$.ajax({
 		url : 'getFileList',
 		data : {inspNo : inspNo, fileGb : 'F001-05'},
@@ -433,16 +433,16 @@ function drawImg(inspNo,k){
 		success : function(data){
 			var htmlData = '';
 			var inputType1 = '';
-			inputType1 += '<div class="card card-primary card-outline">';
+			inputType1 += '<div class="card card-primary card-outline collapsed-card">';
 			inputType1 += '			<div class="card-header">';
-			inputType1 += '				<h3 class="card-title"><b>검사결과</b></h3>';
+			inputType1 += '				<h3 class="card-title"><b>검사결과  ['+title+']</b></h3>';
 			inputType1 += '				<div class="card-tools">';
 			inputType1 += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
-			inputType1 += '						<i class="fas fa-minus"></i>';
+			inputType1 += '						<i class="fas fa-plus"></i>';
 			inputType1 += '					</button>';
 			inputType1 += '				</div>';
 			inputType1 += '				</div>';
-			inputType1 += '			<div class="card-body">';
+			inputType1 += '			<div class="card-body" style="display:none">';
 			inputType1 += '<div class="row">';
 			inputType1 += '	<div class="col-md-6">';
 			inputType1 += '		<div class="card card-danger card-outline">';
@@ -553,7 +553,7 @@ function drawImg(inspNo,k){
 	});
 }
 
-function fnCbc(inspNo,k){
+function fnCbc(inspNo,k,title){
 	$.ajax({
 		url : 'getCbcList',
 		data : {inspNo : inspNo},
@@ -561,16 +561,16 @@ function fnCbc(inspNo,k){
 		type : 'post',
 		success : function(data){
 			var html = "";
-			html += '<div class="card card-primary card-outline">';
+			html += '<div class="card card-primary card-outline collapsed-card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title"><b>검사결과</b></h3>';
+			html += '				<h3 class="card-title"><b>검사결과  ['+title+']</b></h3>';
 			html += '				<div class="card-tools">';
 			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
-			html += '						<i class="fas fa-minus"></i>';
+			html += '						<i class="fas fa-plus"></i>';
 			html += '					</button>';
 			html += '				</div>';
 			html += '				</div>';
-			html += '			<div class="card-body">';
+			html += '			<div class="card-body" style="display:none">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
 			html += '		<div class="card card-danger card-outline">';
@@ -665,7 +665,7 @@ function fnCbc(inspNo,k){
 	});
 }
 
-function fnBloodChem(inspNo,k){
+function fnBloodChem(inspNo,k,title){
 	$.ajax({
 		url : 'getBcList',
 		data : {inspNo : inspNo},
@@ -673,16 +673,16 @@ function fnBloodChem(inspNo,k){
 		type : 'post',
 		success : function(data){
 			var html = "";
-			html += '<div class="card card-primary card-outline">';
+			html += '<div class="card card-primary card-outline collapsed-card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title"><b>검사결과</b></h3>';
+			html += '				<h3 class="card-title"><b>검사결과 ['+title+']</b></h3>';
 			html += '				<div class="card-tools">';
 			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
-			html += '						<i class="fas fa-minus"></i>';
+			html += '						<i class="fas fa-plus"></i>';
 			html += '					</button>';
 			html += '				</div>';
 			html += '				</div>';
-			html += '			<div class="card-body">';
+			html += '			<div class="card-body" style="display:none">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
 			html += '		<div class="card card-danger card-outline">';
@@ -778,7 +778,7 @@ function fnBloodChem(inspNo,k){
 	});
 }
 
-function fnPcr(inspNo,k){
+function fnPcr(inspNo,k,title){
 	$.ajax({
 		url : 'getPcrList',
 		data : {inspNo : inspNo},
@@ -787,16 +787,16 @@ function fnPcr(inspNo,k){
 		success : function(data){
 			console.log(data);
 			var html = '';
-			html += '<div class="card card-primary card-outline">';
+			html += '<div class="card card-primary card-outline collapsed-card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title"><b>검사결과</b></h3>';
+			html += '				<h3 class="card-title"><b>검사결과 ['+title+']</b></h3>';
 			html += '				<div class="card-tools">';
 			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
-			html += '						<i class="fas fa-minus"></i>';
+			html += '						<i class="fas fa-plus"></i>';
 			html += '					</button>';
 			html += '				</div>';
 			html += '				</div>';
-			html += '			<div class="card-body">';
+			html += '			<div class="card-body" style="display:none">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
 			html += '		<div class="card card-danger card-outline">';
@@ -930,7 +930,7 @@ function fnPcr(inspNo,k){
 
 }
 
-function fnSerum(inspNo,k){
+function fnSerum(inspNo,k,title){
 	$.ajax({
 		url : 'getSerumList',
 		data : {inspNo : inspNo},
@@ -938,16 +938,16 @@ function fnSerum(inspNo,k){
 		type : 'post',
 		success : function(data){
 			var html = '';
-			html += '<div class="card card-primary card-outline">';
+			html += '<div class="card card-primary card-outline collapsed-card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title"><b>검사결과</b></h3>';
+			html += '				<h3 class="card-title"><b>검사결과 ['+title+']</b></h3>';
 			html += '				<div class="card-tools">';
 			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
-			html += '						<i class="fas fa-minus"></i>';
+			html += '						<i class="fas fa-plus"></i>';
 			html += '					</button>';
 			html += '				</div>';
 			html += '				</div>';
-			html += '			<div class="card-body">';
+			html += '			<div class="card-body" style="display:none">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-12">';
 			html += '		<div class="card card-primary card-outline">';
@@ -1137,7 +1137,7 @@ function setChartData(data){
     })
 }
 
-function fnAnti(inspNo,k){
+function fnAnti(inspNo,k,title){
 	$.ajax({
 		url : 'getAntiList',
 		data : {inspNo : inspNo},
@@ -1145,16 +1145,16 @@ function fnAnti(inspNo,k){
 		type : 'post',
 		success : function(data){
 			var html = '';
-			html += '<div class="card card-primary card-outline">';
+			html += '<div class="card card-primary card-outline collapsed-card">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title"><b>검사결과</b></h3>';
+			html += '				<h3 class="card-title"><b>검사결과 ['+title+']</b></h3>';
 			html += '				<div class="card-tools">';
 			html += '					<button type="button" class="btn btn-tool" data-card-widget="collapse">';
-			html += '						<i class="fas fa-minus"></i>';
+			html += '						<i class="fas fa-plus"></i>';
 			html += '					</button>';
 			html += '				</div>';
 			html += '				</div>';
-			html += '			<div class="card-body">';
+			html += '			<div class="card-body" style="display:none">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-6">';
 			html += '		<div class="card card-danger card-outline">';

@@ -239,14 +239,15 @@ public class InspectController {
 		// 접수정보
 		TbRcept rcept = insServ.getRcept(searchRcept);
 
+		logger.info(rcept.toString());
 		// 시료정보
 		TbSample tbSample = new TbSample();
-		tbSample.setRqstNo("" + searchRcept.getRqstNo());
+		tbSample.setRqstNo("" + rcept.getRqstNo());
 		List<TbSample> smplList = insServ.selectSampleList(tbSample);
 
 		// 검사정보
 		TbInspection tbInspection = new TbInspection();
-		tbInspection.setRqstNo("" + searchRcept.getRqstNo());
+		tbInspection.setRqstNo("" + rcept.getRqstNo());
 		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
 
 		// 시료상태

@@ -35,7 +35,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>결과입력 대상</b></h1>
+						<h1><b>결과입력</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -56,7 +56,7 @@
 						<div class="card card-primary card-outline">
 							<!-- /.card-header -->
 							<div class="card-header">
-				              <h3 class="card-title"><b>결과입력 대상</b></h3>
+				              <h3 class="card-title"><b>결과입력 대상목록</b></h3>
 				            </div>
 							<!-- /.card-header -->
 							<div class="card-body">
@@ -149,7 +149,7 @@
 			type : 'post',
 			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
 			success:function(data){
-				var colList = ['pdlNo','rqstDt','procStatNm','animNm','animNo','hospNm','docNm','gubun'];
+				var colList = ['pdlNo','rqstDt','procStatNm','animNm','animNo','hospNm','docNm','inspType'];
 				var typeList = ['text','text','text','text','text','text','text','text'];
 				var widthList = ['120','100','100','150','180','150','120','120'];
 				var titleList = ['의뢰번호','신청일','상태','동물이름','동물번호','신청자(기관)','담당수의사','검사구분'];

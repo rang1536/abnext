@@ -329,10 +329,20 @@
 							<div class="card-header">
 				              <h3 class="card-title"><b>결과메모</b></h3>
 				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
-										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="6" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(1)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 검사결과저장</button>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -361,7 +371,7 @@
 									</form>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="fileSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="fileSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -376,14 +386,26 @@
 							<div class="card-header">
 				              <h3 class="card-title"><b>결과메모</b></h3>
 				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
-										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(2)" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
-							<div style="height:10px;"></div>
+							<div style="height:10px;">
+
+							</div>
 						</div>
 						<div class="card card-primary card-outline">
 							<div class="card-header">
@@ -403,7 +425,7 @@
 									</form>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="fileSave2" style="width:161.2px;display:none" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="fileSave2" style="width:161.2px" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -423,25 +445,24 @@
 										<thead>
 											<tr>
 												<td rowspan="2">번호</td>
-												<td rowspan="2">항생제</td>
-												<td rowspan="2" style="width:50px;">용량<br/>(㎍)</td>
+												<td rowspan="2">항생제(㎍)</td>
 												<td rowspan="2">약자</td>
-												<td colspan="3">기준직경 (mm)</td>
-												<td rowspan="2" style="width:50px;">결과<br/>직경<br/>(mm)</td>
-												<td rowspan="2">판독</td>
+												<td colspan="3">zone diameter (mm)</td>
+												<td colspan="2">검사결과</td>
 												<td rowspan="2" class="w200">비고</td>
 											</tr>
 											<tr>
 												<td>R<br/>≤</td>
 												<td>I</td>
 												<td>S<br/>≥</td>
+												<td class="w60">(mm)</td>
+												<td class="w60">R.I.S.</td>
 											</tr>
 										</thead>
 										<tbody id="antibiotic">
 											<tr>
 												<td>1</td>
-												<td>Ampicilin</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_1"></td>
+												<td>Ampicilin (10)</td>
 												<td>AM10</td>
 												<td>13</td>
 												<td>14-16</td>
@@ -452,8 +473,7 @@
 											</tr>
 											<tr>
 												<td>2</td>
-												<td>Ceftiofur</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_2"></td>
+												<td>Ceftiofur(30)</td>
 												<td>FUR30</td>
 												<td>17</td>
 												<td>18-20</td>
@@ -464,8 +484,7 @@
 											</tr>
 											<tr>
 												<td>3</td>
-												<td>Enrofloxacin</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_3"></td>
+												<td>Enrofloxacin(5)</td>
 												<td>ENR5</td>
 												<td>12</td>
 												<td>13-15</td>
@@ -476,8 +495,7 @@
 											</tr>
 											<tr>
 												<td>4</td>
-												<td>Colistin</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_4"></td>
+												<td>Colistin(10)</td>
 												<td>CT10</td>
 												<td>8</td>
 												<td>9-10</td>
@@ -488,8 +506,7 @@
 											</tr>
 											<tr>
 												<td>5</td>
-												<td>Gentamycin</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_5"></td>
+												<td>Gentamycin(10)</td>
 												<td>GM10</td>
 												<td>12</td>
 												<td>13-14</td>
@@ -501,7 +518,6 @@
 											<tr>
 												<td>6</td>
 												<td>Oxytetracycin</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_6"></td>
 												<td>T30</td>
 												<td>14</td>
 												<td>15-18</td>
@@ -513,7 +529,6 @@
 											<tr>
 												<td>7</td>
 												<td>Trimethoprim +<br/>Sulfamethoxazole<br/>(1.25+23.75)</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_7"></td>
 												<td>SXT25</td>
 												<td>10</td>
 												<td>11-15</td>
@@ -524,8 +539,7 @@
 											</tr>
 											<tr>
 												<td>8</td>
-												<td>Tilmicosin</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_8"></td>
+												<td>Tilmicosin(15)</td>
 												<td>TIL15</td>
 												<td>10</td>
 												<td>11</td>
@@ -537,7 +551,6 @@
 											<tr>
 												<td>9</td>
 												<td>Tylosin</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_9"></td>
 												<td>TY30</td>
 												<td>10</td>
 												<td>11-19</td>
@@ -549,7 +562,6 @@
 											<tr>
 												<td>10</td>
 												<td>Florfenicol</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_10"></td>
 												<td>FFC30</td>
 												<td>14</td>
 												<td>15-18</td>
@@ -562,7 +574,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="antiSave" style="width:161.2px;display:none;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="antiSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -589,10 +601,20 @@
 							<div class="card-header">
 				              <h3 class="card-title"><b>결과메모</b></h3>
 				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
-										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="3" id="inspResult" name="inspResult" style="min-height:316px;"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(3)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -656,7 +678,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="serumSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="serumSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -671,16 +693,28 @@
 							<div class="card-header">
 				              <h3 class="card-title"><b>결과메모</b></h3>
 				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
-										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="5" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(4)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
 							<!-- /.card-body -->
 
-							<div style="height:10px;"></div>
+							<div style="height:10px;">
+
+							</div>
 						</div>
 						<div class="card card-primary card-outline">
 							<div class="card-header">
@@ -700,7 +734,7 @@
 									</form>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="fileSave3" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="fileSave3" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -825,7 +859,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="pcrSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="pcrSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -840,10 +874,20 @@
 							<div class="card-header">
 				              <h3 class="card-title"><b>결과메모</b></h3>
 				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
-										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="17" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(5)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -868,7 +912,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="bcSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="bcSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -884,10 +928,20 @@
 							<div class="card-header">
 				              <h3 class="card-title"><b>결과메모</b></h3>
 				            </div>
+
 							<div class="card-body">
 								<table class="table">
 									<tbody>
-										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
+										<tr>
+											<td>
+												<textarea class="form-control" rows="19" id="inspResult" name="inspResult"></textarea>
+											</td>
+										</tr>
+										<tr>
+											<td class="txtc">
+												<button type="button" onclick="saveMemo(6)" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -904,11 +958,14 @@
 											<col style="width:50%"/>
 											<col style="width:50%"/>
 										</colgroup>
-										<tbody id="cbc"></tbody>
+
+										<tbody id="cbc">
+
+										</tbody>
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="cbcSave" style="width:161.2px;display:none;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="cbcSave" style="width:161.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -918,10 +975,9 @@
 	 			</div><!-- /.inputType6 -->
 				<div class="row">
 					<div class="col-12" style="text-align:center">
-						<button type="button" id="save" style="width:161.2px;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-save"></i> &nbsp; 저장</button>
+						<button type="button" id="list" style="width:161.2px;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-list"></i> 목록</button>
 					</div>
 				</div>
-				<div style="height:10px;"></div>
 	 			<form id="inspOpinion">
 	 				<input type="hidden" id="inspSickCd" name="inspSickCd"/>
 	 			</form>
@@ -1269,7 +1325,7 @@ function saveMemo(type){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			//alert("저장하였습니다.");
+			alert("저장하였습니다.");
 		}
 	});
 
@@ -1303,6 +1359,11 @@ $("#fileSave").click(function(){
 		fileCloseYn.push(chkYn);
 	});
 
+	if(filesArr.length == 0){
+		alert("사진을 추가하신 후 저장을 해주세요.");
+		return;
+	}
+
 	for (var i = 0; i < filesArr.length; i++) {
         if (!filesArr[i].is_delete) {
         	for (var j=0; j<fileNames.length; j++){
@@ -1329,10 +1390,7 @@ $("#fileSave").click(function(){
 		contentType : false,
 		success : function(data){
 			if(data.result == 'succ'){
-				setTimeout(function(){
-					alert("저장하였습니다.");
-					location.href = "resultInspectList";
-				}, 500);
+				alert("사진등록하였습니다.");
 			}
 		}
 	});
@@ -1349,6 +1407,11 @@ $("#fileSave2").click(function(){
 		fileNames.push($(this).find("[id^=file]").val());
 	});
 
+	if(filesArr.length == 0){
+		alert("사진을 추가하신 후 저장을 해주세요.");
+		return;
+	}
+
 	for (var i = 0; i < filesArr.length; i++) {
         if (!filesArr[i].is_delete) {
         	for (var j=0; j<fileNames.length; j++){
@@ -1372,7 +1435,7 @@ $("#fileSave2").click(function(){
 		contentType : false,
 		success : function(data){
 			if(data.result == 'succ'){
-				//alert("사진등록하였습니다.");
+				alert("사진등록하였습니다.");
 			}
 		}
 	});
@@ -1389,6 +1452,11 @@ $("#fileSave3").click(function(){
 		fileNames.push($(this).find("[id^=file]").val());
 	});
 
+	if(filesArr.length == 0){
+		alert("사진을 추가하신 후 저장을 해주세요.");
+		return;
+	}
+
 	for (var i = 0; i < filesArr.length; i++) {
         if (!filesArr[i].is_delete) {
         	for (var j=0; j<fileNames.length; j++){
@@ -1412,7 +1480,7 @@ $("#fileSave3").click(function(){
 		contentType : false,
 		success : function(data){
 			if(data.result == 'succ'){
-				//alert("사진등록하였습니다.");
+				alert("사진등록하였습니다.");
 			}
 		}
 	});
@@ -1421,7 +1489,7 @@ $("#fileSave3").click(function(){
 /*****************************************************************
  *                        항 생 제                                                                             *
  *****************************************************************/
-$("#antibiotic").find("tr").find("td:eq(2),td:eq(7),td:eq(9)").click(function(idx){
+$("#antibiotic").find("tr").find("td:eq(6),td:eq(7),td:eq(8)").click(function(){
 	var txt = $(this).text();
 	var selId = $(this).attr("id");
 	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
@@ -1432,46 +1500,19 @@ $("#antibiotic").find("tr").find("td:eq(2),td:eq(7),td:eq(9)").click(function(id
 function makeTd(target){
 	var val = $("#"+target).find("[id=target]").val();
 	$("#"+target).text(val);
-
-	var splitStr = target.split("_");
-	if(splitStr[0] == 'res1'){
-		var idx = Number(splitStr[1])-1;
-		var r = Number($("#antibiotic").find("tr:eq("+idx+")").find("td:eq(4)").text().trim());
-		var s = Number($("#antibiotic").find("tr:eq("+idx+")").find("td:eq(6)").text().trim());
-
-		if(val != ''){
-			if(val < r){
-				alert("최소 수치는 "+r+"입니다.");
-				$("#"+target).text("");
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("");
-			}else if(val == r){
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("R");
-			}else if(val > r && val < s){
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("I");
-			}else if(val == s){
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("S");
-			}else {
-				alert("최대 수치는 "+s+"입니다.");
-				$("#"+target).text("");
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("");
-			}
-		}
-	}
 }
 
 $("#antiSave").click(function(){
 
 	var antiList = [];
 	$("#antibiotic").find("tr").each(function(idx){
-		var cap = $(this).find("td:eq(2)").text();
-		var res1 = $(this).find("td:eq(7)").text();
-		var res2 = $(this).find("td:eq(8)").text();
-		var antiMemo = $(this).find("td:eq(9)").text();
+		var res1 = $(this).find("td:eq(6)").text();
+		var res2 = $(this).find("td:eq(7)").text();
+		var antiMemo = $(this).find("td:eq(8)").text();
 		var antiNo = idx+1;
 
 		var anti = {
 			antiNo : antiNo,
-			capacity : cap,
 			res1 : res1,
 			res2 : res2,
 			antiMemo : antiMemo,
@@ -1493,10 +1534,7 @@ $("#antiSave").click(function(){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			setTimeout(function(){
-				alert("저장하였습니다.");
-				location.href = "resultInspectList";
-			}, 500);
+			alert("등록되었습니다.");
 		}
 	});
 
@@ -1516,7 +1554,6 @@ function fnAnti(){
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				var no = item.antiNo;
-				$("#cap_"+no).text(item.capacity);
 				$("#res1_"+no).text(item.res1);
 				$("#res2_"+no).text(item.res2);
 				$("#resMemo_"+no).text(item.antiMemo);
@@ -1588,10 +1625,7 @@ $("#serumSave").click(function(){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			setTimeout(function(){
-				alert("저장하였습니다.");
-				location.href = "resultInspectList";
-			}, 500);
+			alert("등록되었습니다.");
 		}
 	});
 
@@ -1761,10 +1795,7 @@ $("#pcrSave").click(function(){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			setTimeout(function(){
-				alert("저장하였습니다.");
-				location.href = "resultInspectList";
-			}, 500);
+			alert("등록되었습니다.");
 		}
 	});
 
@@ -1931,10 +1962,7 @@ $("#bcSave").click(function(){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			setTimeout(function(){
-				alert("저장하였습니다.");
-				location.href = "resultInspectList";
-			}, 500);
+			alert("등록되었습니다.");
 		}
 	});
 
@@ -1995,10 +2023,7 @@ function callBackBloodChem(data){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			setTimeout(function(){
-				alert("저장하였습니다.");
-				location.href = "resultInspectList";
-			}, 500);
+			alert("등록되었습니다.");
 		}
 	});
 
@@ -2051,52 +2076,6 @@ function callBackCbc(data){
 $(document).on('click','#list',function(){
 	location.href='resultInspectList';
 })
-
-$(document).on('click','#save',function(){
-	var inspNo = "";
-	var inspSecCd = "";
-	$("#inspList").find("tr").each(function(){
-		var chkInspNo = $(this).find("[id^=inspNo]").val();
-		var chkInspSecCd = $(this).find("[id^=inspSecondCd]").val();
-		if($(this).find("input:checkbox").is(":checked")){
-			inspNo = chkInspNo;
-			inspSecCd = chkInspSecCd;
-			return;
-		}
-	});
-
-	/**************************************************************************************************/
-	/* 1 부검 외 기타                                                                                                                                                                                                 */
-	/* 2 항생제                                                                                                                                                                                                         */
-	/* 3 혈청                                                                                                                                                                                                            */
-	/* 4 PCR                                                                                          */
-	/* 5 BC                                                                                           */
-	/* 6 CBC                                                                                          */
-	/**************************************************************************************************/
-	if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-16'){
-		saveMemo(4);
-		$("#fileSave3").trigger("click");
-		$("#pcrSave").trigger("click");
-	}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
-		saveMemo(2);
-		$("#fileSave2").trigger("click");
-		$("#antiSave").trigger("click");
-	}else if(inspSecCd == 'B001-03-18'){
-		saveMemo(3);
-		$("#serumSave").trigger("click");
-	}else if(inspSecCd == 'B001-04-23'){
-		saveMemo(5);
-		$("#bcSave").trigger("click");
-	}else if(inspSecCd == 'B001-04-24'){
-		saveMemo(6);
-		$("#cbcSave").trigger("click");
-	}else {
-		saveMemo(1);
-		$("#fileSave").trigger("click");
-	}
-
-})
-
 
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>

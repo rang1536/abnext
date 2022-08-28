@@ -192,7 +192,14 @@
 
 	function movePage(idx){
 		//1:반려조류 2:가금류 3:돼지
-		if(idx == 1) location.href = "requestInspect";
+		var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+		if(idx == 1) {
+			if(userInfo.userLev == '1'){
+				location.href = "customerInspectList";
+			}else {
+				location.href = "requestInspect";
+			}
+		}
 		//if(idx == 2) location.href = "requestInspect";
 		//if(idx == 3) location.href = "requestInspect";
 	}

@@ -111,6 +111,9 @@
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive">
+						<div style="float:right;"><button type="button" class="excelBtn btn-success btn-flat" onclick="excelDown();" style="max-width:100px;min-width:82px;"><i class="fa fa-copy"></i> EXCEL</button>
+						</div>
+
 						<div id="jsGrid1"></div>
 						<%--
 							<table id="example2" class="table table-bordered table-hover text-nowrap">
@@ -320,7 +323,6 @@
 				searchStr : $('#searchStr').val()
 		}
 
-		console.log(sdata);
 	 	$.ajax({
 			url : 'selectPaymentList',
 			dataType : 'json',
@@ -378,6 +380,7 @@
 
 				$("#jsGrid1").jsGrid({
 					height: "auto",
+					pageSize : 10,
 					width: "100%",
 					sorting: true,
 					paging: true,
@@ -414,6 +417,18 @@
 
 	function setComma(value,y){
 		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+
+	function excelDown(){
+		$("#jsGrid1").table2excel({
+			exclude : ".excludeThisClass",
+			name : "검사비정산",
+			filename : "검사비정산",
+			fileext : ".xlsx",
+			exclude_img : true,
+			exclude_links : true,
+			exclude_inputs : true        
+		});
 	}
 </script>
 </body>

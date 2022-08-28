@@ -35,12 +35,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>전체목록</b></h1>
+						<h1><b>진단검사현황</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">전체목록</li>
+							<li class="breadcrumb-item active">진단검사현황</li>
 						</ol>
 					</div>
 				</div>
@@ -119,11 +119,11 @@
 			type : 'post',
 			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
 			success:function(data){
-				var colList = ['pdlNo','rqstDt','procStatNm','animNm','hospNm','docNm','resultWriter','gubun'];
+				var colList = ['pdlNo','rqstDt','procStatNm','animNm','hospNm','docNm','inspType'];
 				var typeList = ['text','text','text','text','text','text','text','text'];
 				var widthList = ['120','100','100','150','180','150','120','120'];
-				var titleList = ['의뢰번호','신청일','상태','동물이름','신청자(기관)','담당수의사','겸과입력자','검사구분'];
-				var alignList = ['center','center','center','center','center','center','center','center'];
+				var titleList = ['의뢰번호','신청일','상태','동물이름','신청자(기관)','담당수의사','검사구분'];
+				var alignList = ['center','center','center','center','center','center','center'];
 				var gridId = 'jsGrid1';
 				var fields = new Array();
 				var row = '';

@@ -63,6 +63,9 @@ public class TbRcept {
 	private String insId;
 	private String uptDt;
 	private String uptId;
+
+	private String inspType;
+
 	// 검색
 	private String searchStrtDt;
 	private String searchFnshDt;
@@ -477,6 +480,14 @@ public class TbRcept {
 		this.uptId = uptId;
 	}
 
+	public String getInspType() {
+		return inspType;
+	}
+
+	public void setInspType(String inspType) {
+		this.inspType = inspType;
+	}
+
 	public String getSearchStrtDt() {
 		return searchStrtDt;
 	}
@@ -557,9 +568,10 @@ public class TbRcept {
 				+ ", diagUpCdNm=" + diagUpCdNm + ", diagCd=" + diagCd + ", diagCdNm=" + diagCdNm + ", finalMemo="
 				+ finalMemo + ", inspList=" + inspList + ", smplList=" + smplList + ", histList=" + histList
 				+ ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt + ", insId=" + insId + ", uptDt="
-				+ uptDt + ", uptId=" + uptId + ", searchStrtDt=" + searchStrtDt + ", searchFnshDt=" + searchFnshDt
-				+ ", searchStr=" + searchStr + ", payedPrice=" + payedPrice + ", limitCnt=" + limitCnt + ", sumCnt="
-				+ sumCnt + ", fileList=" + fileList + "]";
+				+ uptDt + ", uptId=" + uptId + ", inspType=" + inspType + ", searchStrtDt=" + searchStrtDt
+				+ ", searchFnshDt=" + searchFnshDt + ", searchStr=" + searchStr + ", payedPrice=" + payedPrice
+				+ ", limitCnt=" + limitCnt + ", sumCnt=" + sumCnt + ", inspNo=" + inspNo + ", fileList=" + fileList
+				+ "]";
 	}
 
 }

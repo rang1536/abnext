@@ -35,12 +35,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>최종판정 대상</b> </h1>
+						<h1><b>최종진단</b> </h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="index">Home</a></li>
-							<li class="breadcrumb-item active">최종판정 대상</li>
+							<li class="breadcrumb-item active">최종진단</li>
 						</ol>
 					</div>
 				</div>
@@ -55,7 +55,7 @@
 					<div class="col-12">
 						<div class="card card-primary card-outline">
 							<div class="card-header">
-				              <h3 class="card-title"><b>최종판정 대상</b></h3>
+				              <h3 class="card-title"><b>최종진단 목록</b></h3>
 				            </div>
 							<!-- /.card-header -->
 							<div class="card-body">
@@ -119,7 +119,7 @@
 			type : 'post',
 			data : {'stDt':$('#stDt').val(), 'endDt':$('#endDt').val()},
 			success:function(data){
-				var colList = ['pdlNo','rqstDt','procStatNm','animNm','hospNm','docNm','diagCdNm'];
+				var colList = ['pdlNo','rqstDt','procStatNm','animNm','hospNm','docNm','inspType'];
 				var typeList = ['text','text','text','text','text','text','text'];
 				var widthList = ['100','100','90','120','180','150','180'];
 				var titleList = ['의뢰번호','신청일','상태','동물이름','신청자(기관)','담당수의사','검사구분'];
