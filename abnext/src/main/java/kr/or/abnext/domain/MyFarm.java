@@ -24,6 +24,12 @@ public class MyFarm {
 	// 조회조건
 	private String searchStr;
 
+	//리스트형
+	private String inspSecondNm;
+	private String procStatNm;
+	private String userNo;
+	private String userLev;
+
 	public String getReqCnt() {
 		return reqCnt;
 	}
@@ -104,11 +110,44 @@ public class MyFarm {
 		this.searchStr = searchStr;
 	}
 
+	public String getInspSecondNm() {
+		return inspSecondNm;
+	}
+
+	public void setInspSecondNm(String inspSecondNm) {
+		this.inspSecondNm = inspSecondNm;
+	}
+
+	public String getProcStatNm() {
+		return procStatNm;
+	}
+
+	public void setProcStatNm(String procStatNm) {
+		this.procStatNm = procStatNm;
+	}
+
+	public String getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(String userNo) {
+		this.userNo = userNo;
+	}
+
+	public String getUserLev() {
+		return userLev;
+	}
+
+	public void setUserLev(String userLev) {
+		this.userLev = userLev;
+	}
+
 	@Override
 	public String toString() {
 		return "MyFarm [reqCnt=" + reqCnt + ", recCnt=" + recCnt + ", procCnt=" + procCnt + ", finCnt=" + finCnt
 				+ ", rqstDt=" + rqstDt + ", rqstNo=" + rqstNo + ", price=" + price + ", payStat=" + payStat + ", insId="
-				+ insId + ", searchStr=" + searchStr + "]";
+				+ insId + ", searchStr=" + searchStr + ", inspSecondNm=" + inspSecondNm + ", procStatNm=" + procStatNm
+				+ ", userNo=" + userNo + ", userLev=" + userLev + "]";
 	}
 
 

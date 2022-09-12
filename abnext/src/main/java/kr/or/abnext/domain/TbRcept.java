@@ -38,6 +38,7 @@ public class TbRcept {
 	private String AnimThirdNm;
 	private String animSex;
 	private String animSexNm;
+	private String inspection;
 	private String rqstDt;
 	private String procStat;
 	private String procStatNm;
@@ -278,6 +279,14 @@ public class TbRcept {
 
 	public void setAnimSexNm(String animSexNm) {
 		this.animSexNm = animSexNm;
+	}
+
+	public String getInspection() {
+		return inspection;
+	}
+
+	public void setInspection(String inspection) {
+		this.inspection = inspection;
 	}
 
 	public String getRqstDt() {
@@ -561,14 +570,14 @@ public class TbRcept {
 				+ ", butlerSigunguCd=" + butlerSigunguCd + ", animBirth=" + animBirth + ", animFirstCd=" + animFirstCd
 				+ ", animSecondCd=" + animSecondCd + ", AnimThirdCd=" + AnimThirdCd + ", animFirstNm=" + animFirstNm
 				+ ", animSecondNm=" + animSecondNm + ", AnimThirdNm=" + AnimThirdNm + ", animSex=" + animSex
-				+ ", animSexNm=" + animSexNm + ", rqstDt=" + rqstDt + ", procStat=" + procStat + ", procStatNm="
-				+ procStatNm + ", rqstMemo=" + rqstMemo + ", payGb=" + payGb + ", price=" + price + ", payStat="
-				+ payStat + ", payedDt=" + payedDt + ", result=" + result + ", resultWriter=" + resultWriter
-				+ ", resultWriterNm=" + resultWriterNm + ", finishDt=" + finishDt + ", diagUpCd=" + diagUpCd
-				+ ", diagUpCdNm=" + diagUpCdNm + ", diagCd=" + diagCd + ", diagCdNm=" + diagCdNm + ", finalMemo="
-				+ finalMemo + ", inspList=" + inspList + ", smplList=" + smplList + ", histList=" + histList
-				+ ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt + ", insId=" + insId + ", uptDt="
-				+ uptDt + ", uptId=" + uptId + ", inspType=" + inspType + ", searchStrtDt=" + searchStrtDt
+				+ ", animSexNm=" + animSexNm + ", inspection=" + inspection + ", rqstDt=" + rqstDt + ", procStat="
+				+ procStat + ", procStatNm=" + procStatNm + ", rqstMemo=" + rqstMemo + ", payGb=" + payGb + ", price="
+				+ price + ", payStat=" + payStat + ", payedDt=" + payedDt + ", result=" + result + ", resultWriter="
+				+ resultWriter + ", resultWriterNm=" + resultWriterNm + ", finishDt=" + finishDt + ", diagUpCd="
+				+ diagUpCd + ", diagUpCdNm=" + diagUpCdNm + ", diagCd=" + diagCd + ", diagCdNm=" + diagCdNm
+				+ ", finalMemo=" + finalMemo + ", inspList=" + inspList + ", smplList=" + smplList + ", histList="
+				+ histList + ", sampleArr=" + Arrays.toString(sampleArr) + ", insDt=" + insDt + ", insId=" + insId
+				+ ", uptDt=" + uptDt + ", uptId=" + uptId + ", inspType=" + inspType + ", searchStrtDt=" + searchStrtDt
 				+ ", searchFnshDt=" + searchFnshDt + ", searchStr=" + searchStr + ", payedPrice=" + payedPrice
 				+ ", limitCnt=" + limitCnt + ", sumCnt=" + sumCnt + ", inspNo=" + inspNo + ", fileList=" + fileList
 				+ "]";

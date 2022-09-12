@@ -17,4 +17,12 @@ public class MyFarmService {
 		return myFarmDao.selectMonthlyData(bean);
 	}
 
+	public List<MyFarm> selectMonthlyDataAdm(MyFarm bean){
+		return myFarmDao.selectMonthlyDataAdm(bean);
+	}
+
+	public List<MyFarm> selectMonthlyDataWorker(MyFarm bean){
+		return myFarmDao.selectMonthlyDataWorker(bean);
+	}
+
 }

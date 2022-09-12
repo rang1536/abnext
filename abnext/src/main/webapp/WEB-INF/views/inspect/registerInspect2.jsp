@@ -416,11 +416,20 @@
 											<input type="checkbox" id="chk25" class="chkw" value="B001-02-16-0001">
 											<label for="chk25">성감별</label>
 										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk26" class="chkz" value="ETC">
+											<label for="chk26">기타</label>
+										</div>
 									</div>
 								</div>
 							</div>
+							<div class="col-6">
+								<label>&nbsp;</label>
+								<input type="text" class="form-control" id="chk27" placeholder="* 기타 검사비는 접수시 안내해 드림니다 " style="display:none">
+							</div>
 						</div>
-
+						<div style="height:10px;"></div>
+<%--
 						<div class="row">
 							<div class="col-md-10">
 								<div class="row">
@@ -457,6 +466,7 @@
 							</div>
 						</div>
 					</div>
+					 --%>
 					<!-- /.card-header -->
 					<div class="card-body table-responsive">
 						<form>
@@ -584,6 +594,17 @@ $(function () {
 			$("#chk17").val("");
 		}
 	});
+
+	$("#chk26").click(function(){
+		if($(this).is(":checked")){
+			$("#chk27").show();
+			$("#chk27").focus();
+		}else {
+			$("#chk27").hide();
+			$("#chk27").val("");
+		}
+	});
+
 
 });
 
@@ -793,6 +814,7 @@ $(".btn-save").on('click',function(){
 			animSecondCd : $("#animSecondCd").val(),
 			animThirdCd : $("#animThirdCd").val(),
 			animSex : $("#animSex").val(),
+			inspection : $("#chk27").val(),
 			procStat : 'A001-01',
 			procStatNm : '',
 			rqstMemo : $("#rqstMemo").val(),
@@ -835,8 +857,8 @@ function validSave(){
 	});
  */
 	if(inspLen == 0){
-		alert('하나이상의 검사정보를 입력해주세요.');
-		validFlag = false;
+		//alert('하나이상의 검사정보를 입력해주세요.');
+		//validFlag = false;
 		/*
 	}else if(smplLen == 0){
 		alert('하나이상의 시료정보를 입력해주세요.');

@@ -17,4 +17,11 @@ public class MyFarmDao {
 		return sql.selectOne("myFarm.selectMonthlyData", bean);
 	}
 
+	public List<MyFarm> selectMonthlyDataAdm(MyFarm bean) {
+		return sql.selectList("myFarm.selectMonthlyDataAdm", bean);
+	}
+
+	public List<MyFarm> selectMonthlyDataWorker(MyFarm bean) {
+		return sql.selectList("myFarm.selectMonthlyDataWorker", bean);
+	}
 }

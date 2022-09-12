@@ -29,6 +29,9 @@
 	<link rel="stylesheet" href="resources/plugins/dropzone/min/dropzone.min.css">
 	<!-- Tempusdominus Bootstrap 4 -->
 	<link rel="stylesheet" href="resources/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+	<!-- jsGrid -->
+	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid.min.css">
+	<link rel="stylesheet" href="resources/plugins/jsgrid/jsgrid-theme.min.css">
 
 	<style>
 		.txtl{text-align:left;}
@@ -80,107 +83,12 @@
 									</div>
 								</div>
 							</div>
+							<div class="card-body">
+								<div id="jsGrid1"></div>
+							</div>
 							<!-- /.card-header -->
 						</div>
 					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-lg-2 col-6">
-						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#002266;opacity:0.7">
-							<div class="inner">
-								<h3>유전자검사</h3>
-								<p>PCR</p>
-							</div>
-							<div class="icon">
-								<i class="ion ion-bag"></i>
-							</div>
-							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">&nbsp;<span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건</span></a>
-							<%--
-							<a href="javascript:void(0)" onclick="getList('a1')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ReqCnt">${ak01Yeardata.reqCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							 --%>
-						</div>
-					</div>
-					<!-- ./col -->
-					<div class="col-lg-2 col-6">
-						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#0080FF;">
-							<div class="inner">
-								<h3>현미경적검사</h3>
-								<p>MICROSCOPIC</p>
-							</div>
-							<div class="icon">
-								<i class="ion ion-stats-bars"></i>
-							</div>
-							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건</span></a>
-							<%--
-							<a href="javascript:void(0)" onclick="getList('a2')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01RecCnt">${ak01Yeardata.recCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							 --%>
-						</div>
-					</div>
-					<!-- ./col -->
-					<div class="col-lg-2 col-6">
-						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#0067a3;">
-							<div class="inner">
-								<h3>조직검사</h3>
-								<p>Biopsy</p>
-							</div>
-							<div class="icon">
-								<i class="ion ion-person-add"></i>
-							</div>
-							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건</span></a>
-							<%--
-							<a href="javascript:void(0)" onclick="getList('a3')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01ProcCnt">${ak01Yeardata.procCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							 --%>
-						</div>
-					</div>
-					<!-- ./col -->
-					<div class="col-lg-2 col-6">
-						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#464964;">
-							<div class="inner">
-								<h3>부검검사</h3>
-								<p>Autopsy</p>
-							</div>
-							<div class="icon">
-								<i class="ion ion-pie-graph"></i>
-							</div>
-							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건</span></a>
-							<%--
-							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							 --%>
-						</div>
-					</div>
-					<!-- ./col -->
-					<div class="col-lg-2 col-6">
-						<!-- small box -->
-						<div class="small-box" style="color:white;background-color:#000080;">
-							<div class="inner">
-								<h3>배양검사</h3>
-								<p>Germiculture</p>
-							</div>
-							<div class="icon">
-								<i class="ion ion-pie-graph"></i>
-							</div>
-							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">&nbsp; <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건</span></a>
-							<%--
-							<a href="javascript:void(0)" onclick="getList('a4')" class="small-box-footer">반려조류 <span style="float:right;margin-right:1rem;"><span id="ak01FinCnt">${ak01Yeardata.finCnt }</span> 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">가금류 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							<a href="javascript:void(0)" onclick="" class="small-box-footer">돼지 <span style="float:right;margin-right:1rem;">0 건<i class="fas fa-arrow-circle-right" style="margin-left:5px;"></i></span></a>
-							 --%>
-						</div>
-					</div>
-					<!-- ./col -->
 				</div>
 			</div><!-- /.container-fluid -->
 		</section>
@@ -221,38 +129,79 @@
 <script src="resources/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- Customizing Js -->
 <script src="resources/js/common.js"></script>
+<!-- jsGrid -->
+<script src="resources/plugins/jsgrid/demos/db.js"></script>
+<script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
+
+
 <script>
 	$(function () {
 		//Date picker
 		$('#reservationdate').datetimepicker({
-			format: 'YYYY.MM',
-			defaultDate : new Date()
+			defaultDate : new Date(),
+			format: 'YYYY.MM'
 		});
 	 });
 
 	$('#reservationdate').on('change.datetimepicker', function (e) {
-
+		getData();
 	});
 
 	function getData(){
-		var searchStr = $("#searchYear").val();
 		var data = {
-				searchStr : searchStr
-		}
+			'searchStr' : $('#searchYear').val().substring(0,7).replace(/-/gi,'.'),
+			'userLev' : JSON.parse(sessionStorage.getItem('userInfo')).userLev,
+			'userNo' : JSON.parse(sessionStorage.getItem('userInfo')).userNo,
+		};
+
 		$.ajax({
-			url : "getMyPageData",
+			url : 'selectMonthlyDataAdm',
+			dataType : 'json',
+			type : 'post',
 			data : data,
-			type : "POST",
-			dataType : "JSON",
-			success : function(data){
-				 $("#ak01ReqCnt").text(data.myFarm.reqCnt);
-				 $("#ak01RecCnt").text(data.myFarm.recCnt);
-				 $("#ak01ProcCnt").text(data.myFarm.procCnt);
-				 $("#ak01FinCnt").text(data.myFarm.finCnt);
+			success:function(data){
+				var colList = ['inspSecondNm','reqCnt','procCnt','finCnt'];
+				var typeList = ['text','text','text','text'];
+				var widthList = ['120','100','80','150'];
+				var titleList = ['업무','신청','검사중','완료'];
+				var alignList = ['center','center','center','center'];
+				var gridId = 'jsGrid1';
+				var fields = new Array();
+				var row = '';
+
+				for(var i=0; i<colList.length; i++){
+					row = {
+						"name"	: colList[i],
+						"type"	: typeList[i],
+						"width" : widthList[i],
+						"title"	: titleList[i],
+						"itemTemplate" : setComma,
+						"align"	: alignList[i]
+					}
+					fields.push(row);
+				}
+
+				$("#"+gridId).jsGrid({
+			        height: "auto",
+			        width: "100%",
+			        sorting: true,
+			        paging: true,
+					data: data,
+					pageSize : 30,
+			        fields: fields
+			    });
 			}
-		});
+		})
 	}
 
+	function setComma(value, item){
+		const regExp = /^[0-9]+$/;
+		if(regExp.test(value)){
+			return $.gfn_setComma(value);
+		}else {
+			return value;
+		}
+	}
 </script>
 </body>
 </html>

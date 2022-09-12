@@ -287,6 +287,12 @@
 									</div>
 								</div>
 								<div class="col-12">
+									<label>*검사항목</label>
+									<c:if test="${rceptInfo.inspection != null }">
+										<div class="col-6"><input type="text" style="margin-left:-7px;" class="form-control txtc" value="${rceptInfo.inspection}" disabled/></div>
+										<div style="height:6px;"></div>
+									</c:if>
+
 									<table class="table table-hover table-bordered">
 										<thead>
 											<tr>

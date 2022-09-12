@@ -409,8 +409,16 @@
 											<input type="checkbox" id="chk25" class="chkw" value="B001-02-16-0001">
 											<label for="chk25">성감별</label>
 										</div>
+										<div class="icheck-primary d-inline">
+											<input type="checkbox" id="chk26" class="chkw" value="ETC">
+											<label for="chk26">기타</label>
+										</div>
 									</div>
 								</div>
+							</div>
+							<div class="col-6">
+								<label>&nbsp;</label>
+								<input type="text" class="form-control" id="chk27" style="display:none">
 							</div>
 						</div>
 
@@ -575,6 +583,16 @@ $(function () {
 		}else {
 			$("#chk17").hide();
 			$("#chk17").val("");
+		}
+	});
+
+	$("#chk26").click(function(){
+		if($(this).is(":checked")){
+			$("#chk27").show();
+			$("#chk27").focus();
+		}else {
+			$("#chk27").hide();
+			$("#chk27").val("");
 		}
 	});
 
@@ -786,6 +804,7 @@ $(".btn-save").on('click',function(){
 			animSecondCd : $("#animSecondCd").val(),
 			animThirdCd : $("#animThirdCd").val(),
 			animSex : $("#animSex").val(),
+			inspection : $("#chk27").val(),
 			procStat : 'A001-01',
 			procStatNm : '',
 			rqstMemo : $("#rqstMemo").val(),

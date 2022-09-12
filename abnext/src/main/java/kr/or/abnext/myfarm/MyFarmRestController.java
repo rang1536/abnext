@@ -45,4 +45,14 @@ public class MyFarmRestController {
 		return myFarmServ.selectMonthlyData(bean);
 	}
 
+	@RequestMapping(value = "selectMonthlyDataAdm", method = RequestMethod.POST)
+	public List<MyFarm> selectMonthlyDataAdm(MyFarm bean) {
+		if(bean.getUserLev().equals("4")) {
+			return myFarmServ.selectMonthlyDataAdm(bean);
+		}else {
+			return myFarmServ.selectMonthlyDataWorker(bean);
+		}
+
+	}
+
 }

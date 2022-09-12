@@ -244,6 +244,13 @@
 						</div>
 						<form>
 							<div class="row">
+								<div class="col-12">
+									<label>* 세부설정</label>
+									<c:if test="${rceptInfo.inspection != null }">
+										<div class="col-6"><input type="text" style="margin-left:-7px;" class="form-control txtc" value="${rceptInfo.inspection}" disabled/></div>
+										<div style="height:6px;"></div>
+									</c:if>
+								</div>
 								<div class="col-md-10">
 									<div class="row">
 										<div class="col-sm-4">
@@ -662,7 +669,7 @@ $("#addBtn").on("click",function(){
 	html += '					<span id="workerView_'+idx+'">담당자</span>';
 	html += '			</a>';
 	html += '		</td>';
-	html += '		<td class="txtc">0</td>';
+	html += '		<td class="txtc" id="payment_'+idx+'" onclick="makeBox(this)">0</td>';
 	html += '	</tr>';
 	$("#inspList").append(html);
 
@@ -720,6 +727,51 @@ function fn_setUserDataToForm2(userNo,userNm,objId){
 }
 
 
+$("#inspList").find("tr").find("td:eq(6)").click(function(){
+	var txt = $(this).text();
+	var selId = $(this).attr("id");
+	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
+	$(this).html(html);
+	$("#target").focus();
+});
+
+function makeBox(target){
+	var txt = $(this).text();
+	var selId = $(this).attr("id");
+	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
+	$(this).html(html);
+	$("#target").focus();
+}
+
+function makeTd(target){
+	var val = $("#"+target).find("[id=target]").val();
+	$("#"+target).text(val);
+
+	var splitStr = target.split("_");
+	if(splitStr[0] == 'res1'){
+		var idx = Number(splitStr[1])-1;
+		var r = Number($("#antibiotic").find("tr:eq("+idx+")").find("td:eq(4)").text().trim());
+		var s = Number($("#antibiotic").find("tr:eq("+idx+")").find("td:eq(6)").text().trim());
+
+		if(val != ''){
+			if(val < r){
+				alert("최소 수치는 "+r+"입니다.");
+				$("#"+target).text("");
+				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("");
+			}else if(val == r){
+				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("R");
+			}else if(val > r && val < s){
+				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("I");
+			}else if(val == s){
+				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("S");
+			}else {
+				alert("최대 수치는 "+s+"입니다.");
+				$("#"+target).text("");
+				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("");
+			}
+		}
+	}
+}
 </script>
 </body>
 </html>
