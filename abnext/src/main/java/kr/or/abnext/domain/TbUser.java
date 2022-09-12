@@ -1,5 +1,6 @@
 package kr.or.abnext.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -49,7 +50,22 @@ public class TbUser {
 	private String adminLev;
 	private List<TbCode> adminLevList;
 
+	private String damdangList;
+	private String damdangYn;
 
+
+	public String getDamdangList() {
+		return damdangList;
+	}
+	public void setDamdangList(String damdangList) {
+		this.damdangList = damdangList;
+	}
+	public String getDamdangYn() {
+		return damdangYn;
+	}
+	public void setDamdangYn(String damdangYn) {
+		this.damdangYn = damdangYn;
+	}
 	public List<TbCode> getAdminLevList() {
 		return adminLevList;
 	}
@@ -272,7 +288,8 @@ public class TbUser {
 				+ ", farmNm=" + farmNm + ", sidoNm=" + sidoNm + ", sigunguNm=" + sigunguNm + ", sidoCd=" + sidoCd
 				+ ", sigunguCd=" + sigunguCd + ", userStat=" + userStat + ", adminYn=" + adminYn + ", userStatList="
 				+ userStatList + ", userWorkGb=" + userWorkGb + ", userWorkGbNm=" + userWorkGbNm + ", adminLev="
-				+ adminLev + ", adminLevList=" + adminLevList + "]";
+				+ adminLev + ", adminLevList=" + adminLevList + ", damdangList=" + damdangList + ", damdangYn="
+				+ damdangYn + "]";
 	}
 
 

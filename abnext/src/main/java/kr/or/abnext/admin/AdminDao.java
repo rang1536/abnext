@@ -16,6 +16,7 @@ import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbMenu;
 import kr.or.abnext.domain.TbUser;
+import kr.or.abnext.domain.TbUserDamdang;
 
 @Repository
 public class AdminDao {
@@ -292,6 +293,15 @@ public class AdminDao {
 		return sql.selectList("admin.getCodeList", param);
 	}
 
+	public List<TbCode> getCodeList2(TbUserDamdang userDamdang){
+		return sql.selectList("admin.getCodeList2", userDamdang);
+	}
+
+	//removeDamdang
+	public int removeDamdang(TbUser tbUser){
+		return sql.delete("admin.removeDamdang", tbUser);
+	}
+
 
 	/**
 	 * @function : removeFile
@@ -322,5 +332,10 @@ public class AdminDao {
 	//modifyMenu
 	public int modifyMenu(TbMenu tbMenu) {
 		return sql.update("admin.modifyMenu", tbMenu);
+	}
+
+	//insertDamdang
+	public int insertDamdang(TbUserDamdang userDamdang) {
+		return sql.insert("admin.insertDamdang", userDamdang);
 	}
 }

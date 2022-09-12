@@ -23,6 +23,23 @@ public class TbCode {
 	private String searchKey;
 	private String searchValue;
 
+	//추가
+	private String uppCodeNm;
+	private String damdangYn;
+
+
+	public String getDamdangYn() {
+		return damdangYn;
+	}
+	public void setDamdangYn(String damdangYn) {
+		this.damdangYn = damdangYn;
+	}
+	public String getUppCodeNm() {
+		return uppCodeNm;
+	}
+	public void setUppCodeNm(String uppCodeNm) {
+		this.uppCodeNm = uppCodeNm;
+	}
 	public int getCodeNo() {
 		return codeNo;
 	}
@@ -121,7 +138,9 @@ public class TbCode {
 		return "TbCode [codeNo=" + codeNo + ", codeId=" + codeId + ", codeNm=" + codeNm + ", codeNmGroup=" + codeNmGroup
 				+ ", codeIdNm=" + codeIdNm + ", uppCodeId=" + uppCodeId + ", codeGb=" + codeGb + ", codeDtlMemo="
 				+ codeDtlMemo + ", codeLevel=" + codeLevel + ", sortIdx=" + sortIdx + ", insDt=" + insDt + ", insId="
-				+ insId + ", childCnt=" + childCnt + ", searchKey=" + searchKey + ", searchValue=" + searchValue + "]";
+				+ insId + ", childCnt=" + childCnt + ", searchKey=" + searchKey + ", searchValue=" + searchValue
+				+ ", uppCodeNm=" + uppCodeNm + ", damdangYn=" + damdangYn + "]";
 	}
+
 
 }

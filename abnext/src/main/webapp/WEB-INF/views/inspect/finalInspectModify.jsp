@@ -244,7 +244,7 @@
 
  				<div class="result"></div>
 
- 				<div style="z-index:9">
+ 				<div style="z-index:9;">
 					<div class="row">
 						<div class="col-12">
 							<div class="card card-primary card-outline">
@@ -266,8 +266,8 @@
 										</div>
 										<div class="col-6">
 								            <nav style="float:right">
-		-										<button class="btn btn-primary btn-flat sign"><i class="fas fa-pencil-alt"></i> 서명추가</button>
-		-									</nav>
+												<button class="btn btn-primary btn-flat sign"><i class="fas fa-pencil-alt"></i> 서명추가</button>
+											</nav>
 										</div>
 									</div>
 									<div style="height:5px;"></div>

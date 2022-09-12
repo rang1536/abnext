@@ -16,6 +16,7 @@ import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbMenu;
 import kr.or.abnext.domain.TbUser;
+import kr.or.abnext.domain.TbUserDamdang;
 import kr.or.abnext.util.UtilFile;
 
 @Service
@@ -451,9 +452,11 @@ public class AdminService {
 
 		List<TbCode> codeList = adminDao.getCodeList(param);
 
-		param = new HashMap<String, Object>();
-		param.put("codeId", "B001");
-		List<TbCode> adminLevCodeList = adminDao.getCodeList(param);
+		TbUserDamdang userDamdang = new TbUserDamdang();
+		userDamdang.setCodeId("B001");
+		userDamdang.setUserNo(tbUser.getUserNo());
+
+		List<TbCode> adminLevCodeList = adminDao.getCodeList2(userDamdang);
 
 		if(codeList != null) {
 			tbUser.setUserStatList(codeList);
@@ -479,7 +482,32 @@ public class AdminService {
 	 **/
 	public Map<String, Object> resetPasswordServ(TbUser tbUser) {
 
-		return getResultMap(adminDao.modifyUser(tbUser));
+		if(tbUser.getUserLev() != null) { //유저권한 등 수정
+			if(tbUser.getUserLev().equals("2") && tbUser.getDamdangList() != null) {
+				String[] damdang = tbUser.getDamdangList().split(",");
+				int result = 0;
+
+				adminDao.removeDamdang(tbUser);
+				for(int i=0; i<damdang.length; i++) {
+					TbUserDamdang userDamdang = new TbUserDamdang();
+					userDamdang.setUserNo(tbUser.getUserNo());
+					userDamdang.setCodeNm(damdang[i]);
+					userDamdang.setDamdangYn(tbUser.getDamdangYn());
+
+					System.out.println(userDamdang);
+					result += adminDao.insertDamdang(userDamdang);
+				}
+
+				return getResultMap(adminDao.modifyUser(tbUser));
+
+			}else {
+				return getResultMap(adminDao.modifyUser(tbUser));
+			}
+
+		}else { //비번초기화
+			return getResultMap(adminDao.modifyUser(tbUser));
+		}
+
 	}
 
 

@@ -116,7 +116,7 @@
 		   	   		, SIDO_NM	= #{sidoNm}
 		   	   </if>
 		   	   <if test="adminYn != null and adminYn != ''">
-		   	   		, ADMIN_YN	= #{adminYn}
+		   	   		, ADMIN_YN	= #{damdangYn}
 		   	   </if>
 		   	   <if test="hospNo != null and hospNo != ''">
 		   	   		, HOSP_NO	= #{hospNo}
@@ -137,6 +137,37 @@
 		   	   </if>
 	     WHERE USER_NO = #{userNo}
 	</update>
+
+	<!-- 유저별 담당삭제 -->
+	<delete id="removeDamdang" parameterType="kr.or.abnext.domain.TbUser">
+		DELETE FROM TB_USER_DAMDANG
+		 WHERE USER_NO = #{userNo}
+
+	</delete>
+
+	<!-- 유저별 담당입력 -->
+	<insert id="insertDamdang" parameterType="kr.or.abnext.domain.TbUserDamdang">
+		INSERT INTO TB_USER_DAMDANG(
+			USER_NO, CODE_ID, CODE_NM, DAMDANG_YN, UPP_CODE_NM
+		)
+		SELECT A.USER_NO
+			   , B.CODE_ID
+			   , B.CODE_NM
+			   , A.DAMDANG_YN
+			   , (SELECT CODE_NM
+			   		FROM TB_CODE
+			   	   WHERE CODE_ID = B.UPP_CODE_ID
+			   ) AS UPP_CODE_NM
+		  FROM (
+				SELECT #{userNo} as USER_NO
+					   , #{codeNm} as CODE_NM
+					   , #{damdangYn} as DAMDANG_YN
+				  FROM DUAL
+				) A
+	      LEFT OUTER JOIN (SELECT * FROM TB_CODE WHERE LENGTH(CODE_ID) = 10) B
+	        ON (A.CODE_NM = B.CODE_NM)
+	</insert>
+
 
 	<!-- 병원검색 -->
 	<select id="searchHospital" parameterType="kr.or.abnext.domain.TbHospital" resultType="kr.or.abnext.domain.TbHospital">
@@ -609,14 +640,21 @@
 		 WHERE USER_NO = #{userNo}
 	</select>
 
-	<!-- 코드조회 -->
+	<!-- 코드조회
+	2022.09.12. 코드조회 중분류 조회로 수정
+	AND UPP_CODE_ID = #{codeId}
+	-->
 	<select id="getCodeList" parameterType="Map" resultType="kr.or.abnext.domain.TbCode">
 		SELECT *
-		  FROM TB_CODE
+			   , (SELECT SUBSTR(CODE_NM, 1, 2)
+			   		FROM TB_CODE
+			   	   WHERE CODE_ID = A.UPP_CODE_ID
+			   ) AS UPP_CODE_NM
+		  FROM TB_CODE A
 		 WHERE 1=1
 		<if test="codeId != null and codeId != ''">
 			<if test="codeId == 'B001'">
-				AND UPP_CODE_ID = #{codeId}
+				AND CODE_ID LIKE CONCAT(#{codeId}, '%')
 			</if>
 			<if test="codeId != 'B001'">
 				AND CODE_ID LIKE CONCAT('%',#{codeId},'%')
@@ -625,6 +663,24 @@
 		</if>
 		<if test="codeNm != null and codeNm != ''">
 			AND CODE_NM LIKE CONCAT('%',#{codeNm},'%')
+		</if>
+	</select>
+
+	<select id="getCodeList2" parameterType="kr.or.abnext.domain.TbUserDamdang" resultType="kr.or.abnext.domain.TbCode">
+		SELECT DISTINCT CODE_NM
+			   , IFNULL((SELECT 'Y'
+					FROM TB_USER_DAMDANG B
+				   WHERE CODE_ID = A.CODE_ID
+				     AND DAMDANG_YN = 'Y'
+				     AND USER_NO = #{userNo}
+			   ), 'N') as DAMDANG_YN
+		  FROM TB_CODE A
+		 WHERE 1=1
+		<if test="codeId != null and codeId != ''">
+			<if test="codeId == 'B001'">
+				AND CODE_ID LIKE CONCAT(#{codeId}, '%')
+				AND LENGTH(CODE_ID) = 10
+			</if>
 		</if>
 	</select>
 

@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="resources/plugins/bs-stepper/css/bs-stepper.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="resources/plugins/select2/css/select2.min.css">
-
+  <link rel="stylesheet" href="resources/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="resources/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
@@ -436,18 +436,28 @@
 
 			                <div class="col-sm-4 adminLevDiv" style="display:none;">
 				                <div class="form-group">
-				                  <label>업무구분</label>
+				                  <%-- <label>업무구분</label>
 				                  <select class="custom-select" name="userWorkGb" id="userWorkGb"> <!-- name="adminLev" -->
 				                  	  <option value="">업무선택</option>
 							     	  <c:forEach var="code" items="${user.adminLevList }" varStatus="status">
 							     	  	<option <c:if test="${code.codeId eq user.userWorkGb }">selected</c:if> value="${code.codeId }">${code.codeNm }</option>
 							     	  </c:forEach>
-								  </select>
-								  <br/><br/>
+								  </select> --%>
+								  <label>업무구분</label>
+								  <div class="form-group">
+									  <select class="select2bs4" multiple="multiple" data-placeholder="시료선택" style="width: 100%;" name="damdangList" id="damdangList">
+										  <option value="">업무선택</option>
+										  <c:forEach var="code" items="${user.adminLevList }" varStatus="status">
+										  	  <option <c:if test="${code.damdangYn eq 'Y' }">selected</c:if> value="${code.codeNm }">${code.codeNm }</option>
+										  </c:forEach>
+									  </select>
+								  </div>
+
+								  <br/>
 				                  <!-- /.input group -->
 				                  <div class="icheck-primary d-inline" style="padding-top:5px;font-size:14px;">
-									  <input type="checkbox" id="adminYn" name="adminYn" class="chkc" <c:if test="${user.adminYn eq 'Y'}">checked</c:if> />
-									  <label for="adminYn">업무책임자</label>
+									  <input type="checkbox" id="damdangYn" name="damdangYn" class="chkc" <c:if test="${user.adminYn eq 'Y' }">checked</c:if> />
+									  <label for="damdangYn">업무담당자</label>
 								  </div>
 				                </div>
 				                <!-- /.form group -->
@@ -522,8 +532,13 @@
 <script>
 
 	$(function () {
-		$('.select2').select2();
 		bsCustomFileInput.init();
+		$('.select2').select2();
+
+		//Initialize Select2 Elements
+		$('.select2bs4').select2({
+			theme: 'bootstrap4'
+		})
 
 		$('#example2').DataTable({
 			"paging": true,
@@ -536,7 +551,6 @@
 
 		var userLev = '${user.userLev}';
 
-		console.log(userLev, '${user.adminYn}');
 		if(userLev == '2'){
 			$('.adminLevDiv').css('display', '');
 		}
@@ -645,17 +659,16 @@
 	* 회원상태 및 권한변경.
 	====================================*/
 	function fn_modifyUserStat(){
-
 		if(confirm('해당회원의 승인상태 및 권한을 변경하시겠습니까?')){
 			$.ajax({
 				url : 'resetPassword',
 				type : 'post',
 				dataType : 'json',
-				data : {'userNo':$('#userNo').val()
-					, 'userStat':$('#userStat').val()
-					, 'userLev' :$('#userLev').val()
-					, 'userWorkGb':$('#userWorkGb').val()
-					, 'adminYn'	: $('#adminYn').is(':checked') ? 'Y' : 'N' },
+				data : {'userNo'	:$('#userNo').val()
+						, 'userStat':$('#userStat').val()
+						, 'userLev' :$('#userLev').val()
+						, 'damdangList'	:$('#damdangList').val().toString()
+						, 'damdangYn'	: $('#damdangYn').is(':checked') ? 'Y' : 'N' },
 				success : function(data){
 					if(data.result == 'succ'){
 						toastr.info('회원상태 및 권한이 변경되었습니다.');
