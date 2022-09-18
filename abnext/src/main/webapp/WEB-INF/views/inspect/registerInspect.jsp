@@ -830,6 +830,8 @@ $(".btn-save").on('click',function(){
 });
 
 function validSave(){
+	var validFlag = true;
+
 	var chkLen = 0;
 	$(".chkc").each(function(){
 		if($(this).is(":checked"))
@@ -842,13 +844,13 @@ function validSave(){
 	});
 
 	if(inspLen == 0){
-		alert('하나이상의 검사정보를 입력해주세요.');
-		validFlag = false;
+		//alert('하나이상의 검사정보를 입력해주세요.');
+		//validFlag = false;
 	}else if(chkLen == 0){
 		alert('사육형태를 체크해주세요.');
 		validFlag = false;
 	}else {
-		var validFlag = true;
+		//var validFlag = true;
 		var validItem = ['docNo', 'animFirstCd', 'animSecondCd', 'animThirdCd', 'animNm', 'animBirth'
 									,'animSex', 'animButler', 'butlerSido', 'butlerSigungu'
 			];

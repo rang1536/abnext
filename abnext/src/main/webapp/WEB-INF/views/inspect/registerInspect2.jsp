@@ -746,6 +746,7 @@ function calcPrice(){
 }
 
 $(".btn-save").on('click',function(){
+	console.log('h2')
 	//필수값 체크
 	if(!validSave()){
 		return;
@@ -840,6 +841,7 @@ $(".btn-save").on('click',function(){
 });
 
 function validSave(){
+	var validFlag = true;
 	var chkLen = 0;
 	$(".chkc").each(function(){
 		if($(this).is(":checked"))
@@ -868,7 +870,7 @@ function validSave(){
 		alert('사육형태를 체크해주세요.');
 		validFlag = false;
 	}else {
-		var validFlag = true;
+		//var validFlag = true;
 		var validItem = ['docNo', 'animFirstCd', 'animSecondCd', 'animThirdCd', 'animNm', 'animBirth'
 									,'animSex', 'animButler', 'butlerSido', 'butlerSigungu'
 			];
@@ -884,7 +886,7 @@ function validSave(){
 			}
 		}
 	}
-
+	console.log(validFlag)
 	return validFlag;
 }
 

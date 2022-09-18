@@ -78,35 +78,39 @@ public class InspectRestController {
 
 		//접수 테이블 등록
 		int k = inspectServ.insertRcept(tbRcept);
-		int l = tbRcept.getInspList().size();
+		//int l = tbRcept.getInspList().size();
 
-		for(int i=0; i<tbRcept.getInspList().size(); i++) {
-			TbInspection ti = new TbInspection();
-			ti.setRqstNo(rqstNo);
-			ti.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
-			ti.setInspSecondCd(tbRcept.getInspList().get(i).get("inspSecondCd").toString());
-			ti.setInspThirdCd(tbRcept.getInspList().get(i).get("inspThirdCd").toString());
-			ti.setInspPrice(tbRcept.getInspList().get(i).get("inspPrice").toString());
-			ti.setInsId(tbRcept.getInsId());
+		if(tbRcept.getInspList() != null) {
+			for(int i=0; i<tbRcept.getInspList().size(); i++) {
+				TbInspection ti = new TbInspection();
+				ti.setRqstNo(rqstNo);
+				ti.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
+				ti.setInspSecondCd(tbRcept.getInspList().get(i).get("inspSecondCd").toString());
+				ti.setInspThirdCd(tbRcept.getInspList().get(i).get("inspThirdCd").toString());
+				ti.setInspPrice(tbRcept.getInspList().get(i).get("inspPrice").toString());
+				ti.setInsId(tbRcept.getInsId());
 
-			//담당자 자동 지정
-			TbUser user = new TbUser();
-			user.setUserWorkGb(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
-			user.setAdminYn("Y");
-			List<TbUser> workerList = adminServ.getUserListServ(user);
+				//담당자 자동 지정
+				TbUser user = new TbUser();
+				//user.setUserWorkGb(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
+				user.setUserWorkGb(tbRcept.getInspList().get(i).get("inspThirdCd").toString());
+				user.setAdminYn("Y");
+				List<TbUser> workerList = adminServ.getUserListServ(user);
 
-			if(workerList.size() > 0) {
-				ti.setWorkerNo(workerList.get(0).getUserId());
-				ti.setWorkerNm(workerList.get(0).getUserNm());
-			}else {
-				ti.setWorkerNo("전진");
-				ti.setWorkerNm("전진");
+				if(workerList.size() > 0) {
+					ti.setWorkerNo(workerList.get(0).getUserId());
+					ti.setWorkerNm(workerList.get(0).getUserNm());
+				}else {
+					ti.setWorkerNo("전진");
+					ti.setWorkerNm("전진");
+				}
+
+
+				//검사 테이블 등록
+				inspectServ.insertInspection(ti);
 			}
-
-
-			//검사 테이블 등록
-			inspectServ.insertInspection(ti);
 		}
+
 
 		for(int i=0; i<tbRcept.getSmplList().size(); i++) {
 			TbSample ts = new TbSample();
@@ -130,7 +134,7 @@ public class InspectRestController {
 
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(k > 0 && l > 0) {
+		if(k > 0) {
 			map.put("result", "success");
 		}else {
 			map.put("result", "fail");
