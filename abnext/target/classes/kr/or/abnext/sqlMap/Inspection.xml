@@ -505,17 +505,20 @@
 	<insert id="insertPcr" parameterType="kr.or.abnext.domain.TbPcr">
 		INSERT
 		  INTO TB_PCR (
-		       INSP_NO , SMPL_NAME , CAPACITY
-		     , RESULT  , RMK
-		     , INS_DT  , INS_ID )
+		       INSP_NO  , SMPL_NAME
+		     , POSITIVE , NEGATIVE
+		     , RESULT   , MEMO
+		     , INS_DT   , INS_ID )
 		VALUES (
-		       #{inspNo} , #{smplName} , #{capacity}
-		     , #{result} , #{rmk}
-		     , NOW()     , #{insId} )
+		       #{inspNo}   , #{smplName}
+		     , #{positive} , #{negative}
+		     , #{result}   , #{memo}
+		     , NOW()       , #{insId} )
 		    ON DUPLICATE KEY
 		UPDATE RESULT = #{result}
-		     , CAPACITY = #{capacity}
-		     , RMK = #{rmk}
+		     , POSITIVE = #{positive}
+		     , NEGATIVE = #{negative}
+		     , MEMO = #{memo}
 		     , UPT_DT = NOW()
 		     , UPT_ID = #{insId}
 	</insert>

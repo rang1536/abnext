@@ -9,16 +9,16 @@ package kr.or.abnext.domain;
 public class TbPcr {
 	private String smplName;
 	private String inspNo;
-	private String capacity;
+	private String positive;
+	private String negative;
 	private String result;
-	private String rmk;
+	private String memo;
 	private String inspResult;
 
 	private String insDt;
 	private String insId;
 	private String uptDt;
 	private String uptId;
-
 	public String getSmplName() {
 		return smplName;
 	}
@@ -31,11 +31,17 @@ public class TbPcr {
 	public void setInspNo(String inspNo) {
 		this.inspNo = inspNo;
 	}
-	public String getCapacity() {
-		return capacity;
+	public String getPositive() {
+		return positive;
 	}
-	public void setCapacity(String capacity) {
-		this.capacity = capacity;
+	public void setPositive(String positive) {
+		this.positive = positive;
+	}
+	public String getNegative() {
+		return negative;
+	}
+	public void setNegative(String negative) {
+		this.negative = negative;
 	}
 	public String getResult() {
 		return result;
@@ -43,11 +49,11 @@ public class TbPcr {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public String getRmk() {
-		return rmk;
+	public String getMemo() {
+		return memo;
 	}
-	public void setRmk(String rmk) {
-		this.rmk = rmk;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 	public String getInspResult() {
 		return inspResult;
@@ -81,9 +87,9 @@ public class TbPcr {
 	}
 	@Override
 	public String toString() {
-		return "TbPcr [smplName=" + smplName + ", inspNo=" + inspNo + ", capacity=" + capacity + ", result=" + result
-				+ ", rmk=" + rmk + ", inspResult=" + inspResult + ", insDt=" + insDt + ", insId=" + insId + ", uptDt="
-				+ uptDt + ", uptId=" + uptId + "]";
+		return "TbPcr [smplName=" + smplName + ", inspNo=" + inspNo + ", positive=" + positive + ", negative="
+				+ negative + ", result=" + result + ", memo=" + memo + ", inspResult=" + inspResult + ", insDt=" + insDt
+				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
 
 }

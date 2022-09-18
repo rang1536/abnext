@@ -1157,11 +1157,33 @@ function addFileSet3(obj){
 
 		// 목록 추가
 		var htmlData = '';
-		htmlData += '<div class="filter-item" id="previewImg'+fileNo+'">';
+		htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+fileNo+'">';
 		htmlData += '	<a id="imgLoad'+fileNo+'">';
 		htmlData += '		<img id="imgPreview'+fileNo+'" class="img-fluid mb-2" style="width:140px;height:140px"/>';
 		htmlData += '	</a>';
-        htmlData += '	<input type="hidden" id="file'+fileNo+'" value="'+file.name+'">';
+		htmlData += '</div>';
+		htmlData += '<div class="col-sm-9" id="preview'+fileNo+'">';
+		htmlData += '	<div class="row">';
+		htmlData += '		<div class="col-8">';
+		htmlData += '			<input type="text" class="form-control" id="title'+fileNo+'" placeholder="장기">';
+		htmlData += '		</div>';
+		htmlData += '		<div class="col-4" style="padding-top:-9px">';
+		htmlData += '			<label for="chk1"></label>';
+		htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
+		htmlData += '				<div class="icheck-primary d-inline">';
+		htmlData += '					<input type="checkbox" id="chk'+fileNo+'">';
+		htmlData += '					<label for="chk'+fileNo+'">비공개</label>';
+		htmlData += '				</div>';
+		htmlData += '				<a class="delete" onclick="deleteFile('+fileNo+');"><i class="far fa-minus-square"></i></a>';
+        htmlData += '				<input type="hidden" id="file'+fileNo+'" value="'+file.name+'">';
+		htmlData += '			</div>';
+		htmlData += '		</div>';
+		htmlData += '	</div>';
+		htmlData += '	<div class="row">';
+		htmlData += '		<div class="col-12">';
+		htmlData += '			<textarea class="form-control" rows="3" id="content'+fileNo+'" placeholder="메모"></textarea>';
+		htmlData += '		</div>';
+		htmlData += '	</div>';
 		htmlData += '</div>';
 
 		$(".previewList3").append(htmlData);
@@ -1375,6 +1397,11 @@ $("#fileSave2").click(function(){
 	var formData = new FormData($('#fileForm2')[0]);
 
 	var fileNames = new Array();
+	var fileTitles = new Array();
+	var fileContents = new Array();
+	var fileCloseYn = new Array();
+	var chkYn;
+
 	$('.previewList2').find(".filtr-item").each(function(){
 		fileNames.push($(this).find("[id^=file]").val());
 	});
@@ -1413,28 +1440,47 @@ $("#fileSave3").click(function(){
 
 	var fileList = new Array();
 	var formData = new FormData($('#fileForm3')[0]);
-
 	var fileNames = new Array();
-	$('.previewList3').find(".filter-item").each(function(){
+	var fileTitles = new Array();
+	var fileContents = new Array();
+	var fileCloseYn = new Array();
+	var chkYn;
+
+	//$('.previewList3').find(".filter-item").each(function(){
+	$('.previewList3').each(function(){
 		fileNames.push($(this).find("[id^=file]").val());
+		console.log($(this).find("[id^=file]").val());
+		fileTitles.push($(this).find("[id^=title]").val());
+		fileContents.push($(this).find("[id^=content]").val());
+		if($(this).find("input:checkbox[id^=chk]").is(":checked")){
+			chkYn = 'Y';
+		}else {
+			chkYn = 'N';
+		}
+		fileCloseYn.push(chkYn);
 	});
 
 	for (var i = 0; i < filesArr.length; i++) {
         if (!filesArr[i].is_delete) {
         	for (var j=0; j<fileNames.length; j++){
 				if(filesArr[i].name == fileNames[j].trim()){
-        			formData.append('fileList',filesArr[i]);
+					formData.append('fileList',filesArr[i]);
+        			formData.append('titleList',fileTitles[i]);
+        			formData.append('contentList',fileContents[i]);
+        			formData.append('closeYnList',fileCloseYn[i]);
         		}
         	}
         }
 	}
+
+	console.log(formData);
 
 	//로그인유저정보
 	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
 	formData.append('uptId', userInfo.userId);
 
 	$.ajax({
-		url : 'inspFileUpload2',
+		url : 'inspFileUpload',
 		data : formData,
 		dataType : 'json',
 		type : 'post',
@@ -1814,7 +1860,7 @@ $("#pcrSave").click(function(){
 		success : function(data){
 			setTimeout(function(){
 				alert("저장하였습니다.");
-				location.href = "resultInspectList";
+				//location.href = "resultInspectList";
 			}, 500);
 		}
 	});
@@ -1832,14 +1878,21 @@ function fnPcr(){
 		type : 'post',
 		success : function(data){
 			$("[name=inspResult]").val(data[0].inspResult);
+			$("#pcr").empty();
+			var html = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				var no = i+1;
-				$("#sample_"+no).text(item.smplName);
-				$("#capacity_"+no).text(item.capacity);
-				$("#result_"+no).text(item.result);
-				$("#rmk_"+no).text(item.rmk);
+				html += '<tr>';
+				html += '	<td id="smplName_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.smplName+'</td>';
+				html += '	<td id="positive_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.positive+'</td>';
+				html += '	<td id="negative_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.negative+'</td>';
+				html += '	<td id="result_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.result+'</td>';
+				html += '	<td id="memo_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.memo+'</td>';
+				html += '</tr>';
 			}
+
+			$("#pcr").html(html);
 		}
 	});
 
@@ -1856,12 +1909,50 @@ function fnPcr(){
 
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
+				var len = i+1;
+				var checked = '';
+				if(item.closeYn == 'Y'){
+					checked = 'checked';
+				}
+				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
+				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+				htmlData += '	</a>';
+				htmlData += '</div>';
+				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-8">';
+				htmlData += '			<input type="text" class="form-control" id="title'+item.fileNo+'" placeholder="장기" value="'+item.title+'" disabled>';
+				htmlData += '		</div>';
+				htmlData += '		<div class="col-4" style="padding-top:-9px">';
+				htmlData += '			<label for="chk1"></label>';
+				htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
+				htmlData += '				<div class="icheck-primary d-inline">';
+				htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+' disabled>';
+				htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
+				htmlData += '				</div>';
+				htmlData += '				<a class="delete" onclick="deleteServerFile('+item.fileNo+');"><i class="far fa-minus-square"></i></a>';
+		        htmlData += '				<input type="hidden" id="file'+item.fileNo+'" value="'+item.fileNewNm+'">';
+				htmlData += '			</div>';
+				htmlData += '		</div>';
+				htmlData += '	</div>';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-12">';
+				htmlData += '			<textarea class="form-control" rows="3" id="content'+item.fileNo+'" placeholder="메모" disabled>'+item.content+'</textarea>';
+				htmlData += '		</div>';
+				htmlData += '	</div>';
+				htmlData += '</div>';
+			}
+			/*
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
 				htmlData += '<div id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
 				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
 				htmlData += '	</a>';
 				htmlData += '</div>';
 			}
+			 */
 			$(".previewList3").append(htmlData);
 		}
 	});
@@ -1992,7 +2083,6 @@ $("#bcSave").click(function(){
 })
 
 function callBackBloodChem(data){
-	console.log(data);
 	var html = '';
 	$("#bloodChem").empty();
 	for(var i=0; i<data.length; i++){
