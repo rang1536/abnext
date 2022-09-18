@@ -11,7 +11,12 @@ public class TbAntibiotic {
 	private String inspNo;
 	private String inspResult;
 
+	private String antiName;
 	private String capacity;
+	private String nickName;
+	private String mini;
+	private String scope;
+	private String maxi;
 	private String res1;
 	private String res2;
 	private String antiMemo;
@@ -20,7 +25,6 @@ public class TbAntibiotic {
 	private String insId;
 	private String uptDt;
 	private String uptId;
-
 	public String getAntiNo() {
 		return antiNo;
 	}
@@ -39,11 +43,41 @@ public class TbAntibiotic {
 	public void setInspResult(String inspResult) {
 		this.inspResult = inspResult;
 	}
+	public String getAntiName() {
+		return antiName;
+	}
+	public void setAntiName(String antiName) {
+		this.antiName = antiName;
+	}
 	public String getCapacity() {
 		return capacity;
 	}
 	public void setCapacity(String capacity) {
 		this.capacity = capacity;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getMini() {
+		return mini;
+	}
+	public void setMini(String mini) {
+		this.mini = mini;
+	}
+	public String getScope() {
+		return scope;
+	}
+	public void setScope(String scope) {
+		this.scope = scope;
+	}
+	public String getMaxi() {
+		return maxi;
+	}
+	public void setMaxi(String maxi) {
+		this.maxi = maxi;
 	}
 	public String getRes1() {
 		return res1;
@@ -89,8 +123,9 @@ public class TbAntibiotic {
 	}
 	@Override
 	public String toString() {
-		return "TbAntibiotic [antiNo=" + antiNo + ", inspNo=" + inspNo + ", inspResult=" + inspResult + ", capacity="
-				+ capacity + ", res1=" + res1 + ", res2=" + res2 + ", antiMemo=" + antiMemo + ", insDt=" + insDt
+		return "TbAntibiotic [antiNo=" + antiNo + ", inspNo=" + inspNo + ", inspResult=" + inspResult + ", antiName="
+				+ antiName + ", capacity=" + capacity + ", nickName=" + nickName + ", mini=" + mini + ", scope=" + scope
+				+ ", maxi=" + maxi + ", res1=" + res1 + ", res2=" + res2 + ", antiMemo=" + antiMemo + ", insDt=" + insDt
 				+ ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + "]";
 	}
 
