@@ -488,6 +488,9 @@ public class InspectRestController {
 	public Map<String, Object> insertPcr(TbResult tbResult) {
 		logger.info(tbResult.toString());
 
+		//pcr 테이블 초기화
+		inspectServ.deletePcr(tbResult.getInspNo());
+
 		int resCnt = 0;
 		for(int i=0; i<tbResult.getPcrList().size(); i++) {
 			TbPcr pcr = new TbPcr();

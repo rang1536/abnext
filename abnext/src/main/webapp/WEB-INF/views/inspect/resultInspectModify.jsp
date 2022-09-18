@@ -679,9 +679,163 @@
 								</table>
 							</div>
 							<!-- /.card-body -->
+							<div class="card card-primary card-outline">
+								<div class="card-header">
+									<div class="row">
+										<div class="col-2">
+											<h3 class="card-title" style="padding-top:8px;"> * 시료수</h3>
+										</div>
+										<div class="col-3">
+											<input type="number" class="form-control" id="siryoCnt"/>
+										</div>
+										<div class="col-7">
+											<button type="button" id="btnPcrSubmit" class="btn btn-sm btn-primary btn-flat" style="padding-top:8px;width:80px"> 적용</button>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered text-nowrap">
+											<thead>
+												<tr>
+													<td style="background-color:#F2F2F2;width:20%;">시료명</td>
+													<td style="background-color:#F2F2F2;width:15%;">Positive</td>
+													<td style="background-color:#F2F2F2;width:15%;">Negative</td>
+													<td style="background-color:#F2F2F2;width:20%;">최종결과</td>
+													<td style="background-color:#F2F2F2;width:*">메모</td>
+												</tr>
+											</thead>
+											<tbody id="pcr">
+											</tbody>
+										</table>
+									</div>
+									<!--
+									<div class="table-responsive">
+										<table class="table table-bordered text-nowrap">
+											<thead>
+												<tr>
+													<td style="background-color:#F2F2F2;width:10%;">No.</td>
+													<td style="background-color:#F2F2F2;width:*;">시료</td>
+													<td style="background-color:#F2F2F2;width:10%;">시료량</td>
+													<td style="background-color:#F2F2F2;width:10%;">결과</td>
+													<td style="background-color:#F2F2F2;width:25%;">비고</td>
+												</tr>
+											</thead>
+											<tbody id="pcr">
+												<tr>
+													<td>1</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_1"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_1"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_1"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_1"></td>
+												</tr>
+												<tr>
+													<td>2</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_2"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_2"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_2"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_2"></td>
+												</tr>
+												<tr>
+													<td>3</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_3"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_3"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_3"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_3"></td>
+												</tr>
+												<tr>
+													<td>4</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_4"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_4"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_4"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_4"></td>
+												</tr>
+												<tr>
+													<td>5</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_5"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_5"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_5"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_5"></td>
+												</tr>
+												<tr>
+													<td>6</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_6"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_6"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_6"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_6"></td>
+												</tr>
+												<tr>
+													<td>7</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_7"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_7"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_7"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_7"></td>
+												</tr>
+												<tr>
+													<td>8</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_8"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_8"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_8"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_8"></td>
+												</tr>
+												<tr>
+													<td>9</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_9"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_9"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_9"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_9"></td>
+												</tr>
+												<tr>
+													<td>10</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_10"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_10"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_10"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_10"></td>
+												</tr>
+												<tr>
+													<td>11</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_11"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_11"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_11"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_11"></td>
+												</tr>
+												<tr>
+													<td>12</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_12"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_12"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_12"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_12"></td>
+												</tr>
+												<tr>
+													<td>13</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_13"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_13"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_13"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_13"></td>
+												</tr>
+												<tr>
+													<td>14</td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_14"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_14"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_14"></td>
+													<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_14"></td>
+												</tr>
+											</tbody>
+										</table>
 
+									</div>
+									 -->
+									<div style="text-align:center">
+										<button type="button" id="pcrSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									</div>
+								</div>
+								<!-- /.card-body -->
+							</div>
+							<!-- /.card -->
 							<div style="height:10px;"></div>
 						</div>
+	 				</div>
+					<div class="col-md-6">
 						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<h3 class="card-title"><b>사진</b></h3>
@@ -706,161 +860,7 @@
 							<!-- /.card-body -->
 						</div>
 						<!-- /.card -->
-	 				</div>
-					<div class="col-md-6">
-						<div class="card card-primary card-outline">
-							<div class="card-header">
-								<div class="row">
-									<div class="col-2">
-										<h3 class="card-title" style="padding-top:8px;"> * 시료수</h3>
-									</div>
-									<div class="col-3">
-										<input type="number" class="form-control" id="siryoCnt"/>
-									</div>
-									<div class="col-7">
-										<button type="button" id="btnPcrSubmit" class="btn btn-sm btn-primary btn-flat" style="padding-top:8px;width:80px"> 적용</button>
-									</div>
-								</div>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-bordered text-nowrap">
-										<thead>
-											<tr>
-												<td style="background-color:#F2F2F2;width:20%;">시료명</td>
-												<td style="background-color:#F2F2F2;width:15%;">Positive</td>
-												<td style="background-color:#F2F2F2;width:15%;">Negative</td>
-												<td style="background-color:#F2F2F2;width:20%;">최종결과</td>
-												<td style="background-color:#F2F2F2;width:*">메모</td>
-											</tr>
-										</thead>
-										<tbody id="pcr">
-										</tbody>
-									</table>
-								</div>
-								<!--
-								<div class="table-responsive">
-									<table class="table table-bordered text-nowrap">
-										<thead>
-											<tr>
-												<td style="background-color:#F2F2F2;width:10%;">No.</td>
-												<td style="background-color:#F2F2F2;width:*;">시료</td>
-												<td style="background-color:#F2F2F2;width:10%;">시료량</td>
-												<td style="background-color:#F2F2F2;width:10%;">결과</td>
-												<td style="background-color:#F2F2F2;width:25%;">비고</td>
-											</tr>
-										</thead>
-										<tbody id="pcr">
-											<tr>
-												<td>1</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_1"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_1"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_1"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_1"></td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_2"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_2"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_2"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_2"></td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_3"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_3"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_3"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_3"></td>
-											</tr>
-											<tr>
-												<td>4</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_4"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_4"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_4"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_4"></td>
-											</tr>
-											<tr>
-												<td>5</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_5"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_5"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_5"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_5"></td>
-											</tr>
-											<tr>
-												<td>6</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_6"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_6"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_6"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_6"></td>
-											</tr>
-											<tr>
-												<td>7</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_7"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_7"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_7"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_7"></td>
-											</tr>
-											<tr>
-												<td>8</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_8"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_8"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_8"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_8"></td>
-											</tr>
-											<tr>
-												<td>9</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_9"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_9"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_9"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_9"></td>
-											</tr>
-											<tr>
-												<td>10</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_10"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_10"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_10"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_10"></td>
-											</tr>
-											<tr>
-												<td>11</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_11"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_11"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_11"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_11"></td>
-											</tr>
-											<tr>
-												<td>12</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_12"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_12"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_12"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_12"></td>
-											</tr>
-											<tr>
-												<td>13</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_13"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_13"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_13"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_13"></td>
-											</tr>
-											<tr>
-												<td>14</td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="sample_14"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="capacity_14"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="result_14"></td>
-												<td style="height:34px; padding: 1px 3px 1px 3px;" id="rmk_14"></td>
-											</tr>
-										</tbody>
-									</table>
 
-								</div>
-								 -->
-								<div style="text-align:center">
-									<button type="button" id="pcrSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
-								</div>
-							</div>
-							<!-- /.card-body -->
-						</div>
-						<!-- /.card -->
 	 				</div>
 	 			</div><!-- /.inputType4 -->
 				<div class="row inputType5 iptPop" style="display:none">
@@ -1162,7 +1162,7 @@ function addFileSet3(obj){
 		htmlData += '		<img id="imgPreview'+fileNo+'" class="img-fluid mb-2" style="width:140px;height:140px"/>';
 		htmlData += '	</a>';
 		htmlData += '</div>';
-		htmlData += '<div class="col-sm-9" id="preview'+fileNo+'">';
+		htmlData += '<div class="col-sm-9 preview_3" id="preview'+fileNo+'">';
 		htmlData += '	<div class="row">';
 		htmlData += '		<div class="col-8">';
 		htmlData += '			<input type="text" class="form-control" id="title'+fileNo+'" placeholder="장기">';
@@ -1341,8 +1341,6 @@ $("#fileSave").click(function(){
 	var fileCloseYn = new Array();
 	var chkYn;
 
-	var fileInfoList = {};
-
 	$('.preview').each(function(){
 		fileNames.push($(this).find("[id^=file]").val());
 		fileTitles.push($(this).find("[id^=title]").val());
@@ -1447,7 +1445,8 @@ $("#fileSave3").click(function(){
 	var chkYn;
 
 	//$('.previewList3').find(".filter-item").each(function(){
-	$('.previewList3').each(function(){
+	$('.previewList3').find(".preview_3").each(function(){
+		console.log("1");
 		fileNames.push($(this).find("[id^=file]").val());
 		console.log($(this).find("[id^=file]").val());
 		fileTitles.push($(this).find("[id^=title]").val());
@@ -1860,7 +1859,7 @@ $("#pcrSave").click(function(){
 		success : function(data){
 			setTimeout(function(){
 				alert("저장하였습니다.");
-				//location.href = "resultInspectList";
+				location.href = "resultInspectList";
 			}, 500);
 		}
 	});

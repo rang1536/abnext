@@ -523,6 +523,11 @@
 		     , UPT_ID = #{insId}
 	</insert>
 
+	<insert id="deletePcr" parameterType="String">
+		DELETE
+		  FROM TB_PCR
+		 WHERE INSP_NO = #{inspNo}
+	</insert>
 
 	<select id="getPcrList" parameterType="kr.or.abnext.domain.TbPcr" resultType="kr.or.abnext.domain.TbPcr">
 		SELECT A.*

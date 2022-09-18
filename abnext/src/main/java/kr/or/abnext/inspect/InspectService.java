@@ -260,6 +260,10 @@ public class InspectService {
 		return inspectDao.insertPcr(bean);
 	}
 
+	public int deletePcr(String inspNo) {
+		return inspectDao.deletePcr(inspNo);
+	}
+
 	public List<TbPcr> getPcrList(TbPcr bean){
 		return inspectDao.getPcrList(bean);
 	}

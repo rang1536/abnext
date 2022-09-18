@@ -183,6 +183,10 @@ public class InspectDao {
 		return sql.insert("inspection.insertPcr", bean);
 	}
 
+	public int deletePcr(String inspNo) {
+		return sql.delete("inspection.deletePcr", inspNo);
+	}
+
 	public List<TbPcr> getPcrList(TbPcr bean){
 		return sql.selectList("inspection.getPcrList", bean);
 	}
