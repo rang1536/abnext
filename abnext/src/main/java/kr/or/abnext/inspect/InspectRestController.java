@@ -246,12 +246,16 @@ public class InspectRestController {
 				bean.setInspThirdCd(tbRcept.getInspList().get(i).get("inspThirdCd").toString());
 				bean.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
 				bean.setUptId(tbRcept.getUptId());
+				bean.setInspPrice(tbRcept.getInspList().get(i).get("inspPrice").toString());
+
 				//시료 테이블 수정
 				if(tbRcept.getInspList().get(i).get("inspNo") != null && !tbRcept.getInspList().get(i).get("inspNo").equals("")) {
 					inspectServ.updateInspect(bean);
 				}else {
 					bean.setRqstNo(""+tbRcept.getRqstNo());
 					bean.setInsId(tbRcept.getUptId());
+
+					System.out.println(">>> TBRCEPT : "+bean.toString());
 					inspectServ.insertInspection(bean);
 				}
 			}

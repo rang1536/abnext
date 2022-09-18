@@ -355,6 +355,9 @@
 		<if test="inspResult != null and inspResult != ''">
 		     , INSP_RESULT = #{inspResult}
 		</if>
+		<if test="inspPrice != null and inspPrice != ''">
+		     , INSP_PRICE = #{inspPrice}
+		</if>
 		 WHERE INSP_NO = #{inspNo}
 	</update>
 

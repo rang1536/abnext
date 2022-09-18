@@ -245,7 +245,7 @@
 						<form>
 							<div class="row">
 								<div class="col-12">
-									<label>* 세부설정</label>
+									<label>* 검사항목</label>
 									<c:if test="${rceptInfo.inspection != null }">
 										<div class="col-6"><input type="text" style="margin-left:-7px;" class="form-control txtc" value="${rceptInfo.inspection}" disabled/></div>
 										<div style="height:6px;"></div>
@@ -492,8 +492,10 @@ $("#sett").on("click",function (){
 			sampleCode : $(this).find("[id^=sampleCode]").val(),
 			sampleName : $(this).find("[id^=sampleName]").val(),
 			inspThirdCd : $(this).find("[id^=inspThirdCd]").val(),
-			inspFirstCd : $(this).find("[id^=inspFirstCd]").val()
+			inspFirstCd : $(this).find("[id^=inspFirstCd]").val(),
+			inspPrice	: $(this).find('td:eq(6)').text().replace(/,/gi,'')
 		}
+
 		inspData.push(sData);
 	});
 
@@ -655,22 +657,22 @@ $("#addBtn").on("click",function(){
 	html += '		<input type="hidden" id="workerNm_'+idx+'" value="'+workerNm+'"/>';
 	html += '		<div class="form-group clearfix" style="margin-left:9px">';
 	html += '			<div class="icheck-primary d-inline">';
-	html += '					<input type="checkbox" id="chk_'+idx+'">';
-	html += '					<label for="chk_'+idx+'">&nbsp;</label>';
-	html += '				</div>';
+	html += '				<input type="checkbox" id="chk_'+idx+'">';
+	html += '				<label for="chk_'+idx+'">&nbsp;</label>';
 	html += '			</div>';
-	html += '		</td>';
-	html += '		<td class="txtc">'+idx+'</td>';
-	html += '		<td class="txtc">'+inspFirstCdNm+'</td>';
-	html += '		<td class="txtc">'+inspThirdCdNm+'</td>';
-	html += '		<td class="txtc">'+sampleName+'</td>';
-	html += '		<td class="txtc">';
-	html += '			<a href="javascript:void(0)" onclick="popOpenUser2(\''+inspFirstCd+'\',\''+idx+'\')">';
-	html += '					<span id="workerView_'+idx+'">담당자</span>';
-	html += '			</a>';
-	html += '		</td>';
-	html += '		<td class="txtc" id="payment_'+idx+'" onclick="makeBox(this)">0</td>';
-	html += '	</tr>';
+	html += '		</div>';
+	html += '	</td>';
+	html += '	<td class="txtc">'+idx+'</td>';
+	html += '	<td class="txtc">'+inspFirstCdNm+'</td>';
+	html += '	<td class="txtc">'+inspThirdCdNm+'</td>';
+	html += '	<td class="txtc">'+sampleName+'</td>';
+	html += '	<td class="txtc">';
+	html += '		<a href="javascript:void(0)" onclick="popOpenUser2(\''+inspFirstCd+'\',\''+idx+'\')">';
+	html += '			<span id="workerView_'+idx+'">담당자</span>';
+	html += '		</a>';
+	html += '	</td>';
+	html += '	<td class="txtc" id="payment_'+idx+'" onclick="makeBox(this.id)">0</td>';
+	html += '</tr>';
 	$("#inspList").append(html);
 
 	$("#inspList").find("tr").click(function(){
@@ -736,10 +738,12 @@ $("#inspList").find("tr").find("td:eq(6)").click(function(){
 });
 
 function makeBox(target){
-	var txt = $(this).text();
-	var selId = $(this).attr("id");
+	var txt = $('#'+target).text();
+	var selId = target;
 	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
-	$(this).html(html);
+
+	$('#'+target).empty();
+	$('#'+target).html(html);
 	$("#target").focus();
 }
 
