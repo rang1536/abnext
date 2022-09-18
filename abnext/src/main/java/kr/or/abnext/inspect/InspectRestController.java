@@ -277,6 +277,29 @@ public class InspectRestController {
 		return map;
 	}
 
+	@RequestMapping(value = "modifyResult", method = RequestMethod.POST)
+	public Map<String, Object> modifyResult(TbInspOpinion tbOpin) {
+		// 검사결과소견 등록
+		inspectServ.insertOpinion(tbOpin);
+
+		// 진단테이블 결과 업데이트
+		TbInspection tbInsp = new TbInspection();
+		tbInsp.setInspNo(tbOpin.getInspNo());
+		tbInsp.setInspResult(tbOpin.getOpinComment());
+		inspectServ.updateInspect(tbInsp);
+
+		// 접수테이블 결과등록으로 변경
+		TbRcept rcpt = new TbRcept();
+		rcpt.setInspNo(tbOpin.getInspNo());
+		rcpt.setUptId(tbOpin.getInsId());
+		rcpt.setProcStat("A001-04");
+		inspectServ.updateResult(rcpt);
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("result", "ok");
+
+		return map;
+	}
+
 	//결과사진업로드
 	@RequestMapping(value = "inspFileUpload", method = RequestMethod.POST)
 	public Map<String, Object> inspFileUpload(TbRcept tbRcept, String inspNo
@@ -469,14 +492,18 @@ public class InspectRestController {
 	public Map<String, Object> insertPcr(TbResult tbResult) {
 		logger.info(tbResult.toString());
 
+		//pcr 테이블 초기화
+		inspectServ.deletePcr(tbResult.getInspNo());
+
 		int resCnt = 0;
 		for(int i=0; i<tbResult.getPcrList().size(); i++) {
 			TbPcr pcr = new TbPcr();
 			pcr.setSmplName(tbResult.getPcrList().get(i).get("smplName").toString());
 			pcr.setInspNo(tbResult.getInspNo());
-			pcr.setCapacity(tbResult.getPcrList().get(i).get("capacity").toString());
+			pcr.setPositive(tbResult.getPcrList().get(i).get("positive").toString());
+			pcr.setNegative(tbResult.getPcrList().get(i).get("negative").toString());
 			pcr.setResult(tbResult.getPcrList().get(i).get("result").toString());
-			pcr.setRmk(tbResult.getPcrList().get(i).get("rmk").toString());
+			pcr.setMemo(tbResult.getPcrList().get(i).get("memo").toString());
 
 			pcr.setInsId(tbResult.getInsId());
 			//검사 테이블 등록
