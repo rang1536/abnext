@@ -62,6 +62,8 @@
 		.w200 {width:200px}
 
 		.tblPad{padding:0 3px 0 3px}
+
+		.gridInput{padding: 0 3px 0 3px;}
 	</style>
 </head>
 <body class="hold-transition sidebar-mini" onselectstart='return false'>
@@ -385,7 +387,8 @@
 							</div>
 							<div style="height:10px;"></div>
 						</div>
-						<div class="card card-primary card-outline">
+
+<%-- 						<div class="card card-primary card-outline">
 							<div class="card-header">
 								<h3 class="card-title"><b>사진</b></h3>
 							</div>
@@ -406,15 +409,16 @@
 									<button type="button" id="fileSave2" style="width:161.2px;display:none" class="btn btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
 							</div>
+
 							<!-- /.card-body -->
-						</div>
+						</div> --%>
 						<!-- /.card -->
 	 				</div>
 					<div class="col-md-6">
 						<div class="card card-primary card-outline">
 							<!-- /.card-header -->
 							<div class="card-header">
-				              <h3 class="card-title"><b>항생제 감수성 검사 기록지</b></h3>
+				              <h3 class="card-title"><b>항생제 감수성 검사 결과 기록지</b></h3>
 				            </div>
 
 							<div class="card-body">
@@ -423,137 +427,138 @@
 										<thead>
 											<tr>
 												<td rowspan="2">번호</td>
-												<td rowspan="2">항생제</td>
-												<td rowspan="2" style="width:50px;">용량<br/>(㎍)</td>
-												<td rowspan="2">약자</td>
+												<td rowspan="2" style="width:120px;">항생제</td>
+												<td rowspan="2" style="width:55px;">용량<br/>(㎍)</td>
+												<td rowspan="2" style="width:70px;">약자</td>
 												<td colspan="3">기준직경 (mm)</td>
 												<td rowspan="2" style="width:50px;">결과<br/>직경<br/>(mm)</td>
 												<td rowspan="2">판독</td>
-												<td rowspan="2" class="w200">비고</td>
+												<td rowspan="2" style="width:*;">비고</td>
 											</tr>
 											<tr>
-												<td>R<br/>≤</td>
-												<td>I</td>
-												<td>S<br/>≥</td>
+												<td style="width:50px;">R<br/>≤</td>
+												<td style="width:50px;">I</td>
+												<td style="width:50px;">S<br/>≥</td>
 											</tr>
 										</thead>
 										<tbody id="antibiotic">
 											<tr>
 												<td>1</td>
-												<td>Ampicilin</td>
+												<td style="padding: 0 3px 0 3px;" id="antiName_1">Ampicilin</td>
 												<td style="padding: 0 3px 0 3px;" id="cap_1"></td>
-												<td>AM10</td>
-												<td>13</td>
-												<td>14-16</td>
-												<td>17</td>
+												<td style="padding: 0 3px 0 3px;" id="nick_1">AM10</td>
+												<td style="padding: 0 3px 0 3px;" id="r_1">13</td>
+												<td style="padding: 0 3px 0 3px;" id="i_1">14-16</td>
+												<td style="padding: 0 3px 0 3px;" id="s_1">17</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_1"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_1"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_1"></td>
 											</tr>
 											<tr>
 												<td>2</td>
-												<td>Ceftiofur</td>
-												<td style="padding: 0 3px 0 3px;" id="cap_2"></td>
-												<td>FUR30</td>
-												<td>17</td>
-												<td>18-20</td>
-												<td>21</td>
+												<td style="padding: 0 3px 0 3px;" id="antiName_2">Ceftiofur</td>
+												<td style="padding: 0 3px 0 3px;" style="padding: 0 3px 0 3px;" id="cap_2"></td>
+												<td style="padding: 0 3px 0 3px;" id="nick_2">FUR30</td>
+												<td style="padding: 0 3px 0 3px;" id="r_2">17</td>
+												<td style="padding: 0 3px 0 3px;" id="i_2">18-20</td>
+												<td style="padding: 0 3px 0 3px;" id="s_2">21</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_2"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_2"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_2"></td>
 											</tr>
 											<tr>
 												<td>3</td>
-												<td>Enrofloxacin</td>
+												<td style="padding: 0 3px 0 3px;" id="antiName_3">Enrofloxacin</td>
 												<td style="padding: 0 3px 0 3px;" id="cap_3"></td>
-												<td>ENR5</td>
-												<td>12</td>
-												<td>13-15</td>
-												<td>16</td>
+												<td style="padding: 0 3px 0 3px;" id="nick_3">ENR5</td>
+												<td style="padding: 0 3px 0 3px;" id="r_3">12</td>
+												<td style="padding: 0 3px 0 3px;" id="i_3">13-15</td>
+												<td style="padding: 0 3px 0 3px;" id="s_3">16</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_3"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_3"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_3"></td>
 											</tr>
 											<tr>
 												<td>4</td>
-												<td>Colistin</td>
+												<td style="padding: 0 3px 0 3px;" id="antiName_4">Colistin</td>
 												<td style="padding: 0 3px 0 3px;" id="cap_4"></td>
-												<td>CT10</td>
-												<td>8</td>
-												<td>9-10</td>
-												<td>11</td>
+												<td style="padding: 0 3px 0 3px;" id="nick_4">CT10</td>
+												<td style="padding: 0 3px 0 3px;" id="r_4">8</td>
+												<td style="padding: 0 3px 0 3px;" id="i_4">9-10</td>
+												<td style="padding: 0 3px 0 3px;" id="s_4">11</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_4"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_4"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_4"></td>
 											</tr>
 											<tr>
 												<td>5</td>
-												<td>Gentamycin</td>
+												<td style="padding: 0 3px 0 3px;" id="antiName_5">Gentamycin</td>
 												<td style="padding: 0 3px 0 3px;" id="cap_5"></td>
-												<td>GM10</td>
-												<td>12</td>
-												<td>13-14</td>
-												<td>15</td>
+												<td style="padding: 0 3px 0 3px;" id="nick_5">GM10</td>
+												<td style="padding: 0 3px 0 3px;" id="r_5">12</td>
+												<td style="padding: 0 3px 0 3px;" id="i_5">13-14</td>
+												<td style="padding: 0 3px 0 3px;" id="s_5">15</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_5"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_5"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_5"></td>
 											</tr>
 											<tr>
 												<td>6</td>
-												<td>Oxytetracycin</td>
+												<td style="padding: 0 3px 0 3px;" id="antiName_6">Oxytetracycin</td>
 												<td style="padding: 0 3px 0 3px;" id="cap_6"></td>
-												<td>T30</td>
-												<td>14</td>
-												<td>15-18</td>
-												<td>19</td>
+												<td style="padding: 0 3px 0 3px;" id="nick_6">T30</td>
+												<td style="padding: 0 3px 0 3px;" id="r_6">14</td>
+												<td style="padding: 0 3px 0 3px;" id="i_6">15-18</td>
+												<td style="padding: 0 3px 0 3px;" id="s_6">19</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_6"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_6"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_6"></td>
 											</tr>
 											<tr>
 												<td>7</td>
-												<td>Trimethoprim +<br/>Sulfamethoxazole<br/>(1.25+23.75)</td>
+												<!-- <td style="padding: 0 3px 0 3px;" id="antiName_7">Trimethoprim +<br/>Sulfamethoxazole<br/>(1.25+23.75)</td> -->
+												<td style="padding: 0 3px 0 3px;" id="antiName_7">Trimethoprim</td>
 												<td style="padding: 0 3px 0 3px;" id="cap_7"></td>
-												<td>SXT25</td>
-												<td>10</td>
-												<td>11-15</td>
-												<td>16</td>
+												<td style="padding: 0 3px 0 3px;" id="nick_7">SXT25</td>
+												<td style="padding: 0 3px 0 3px;" id="r_7">10</td>
+												<td style="padding: 0 3px 0 3px;" id="i_7">11-15</td>
+												<td style="padding: 0 3px 0 3px;" id="s_7">16</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_7"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_7"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_7"></td>
 											</tr>
 											<tr>
 												<td>8</td>
-												<td>Tilmicosin</td>
+												<td style="padding: 0 3px 0 3px;" id="antiName_8">Tilmicosin</td>
 												<td style="padding: 0 3px 0 3px;" id="cap_8"></td>
-												<td>TIL15</td>
-												<td>10</td>
-												<td>11</td>
-												<td>12</td>
+												<td style="padding: 0 3px 0 3px;" id="nick_8">TIL15</td>
+												<td style="padding: 0 3px 0 3px;" id="r_8">10</td>
+												<td style="padding: 0 3px 0 3px;" id="i_8">11</td>
+												<td style="padding: 0 3px 0 3px;" id="s_8">12</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_8"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_8"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_8"></td>
 											</tr>
 											<tr>
 												<td>9</td>
-												<td>Tylosin</td>
+												<td style="padding: 0 3px 0 3px;" id="antiName_9">Tylosin</td>
 												<td style="padding: 0 3px 0 3px;" id="cap_9"></td>
-												<td>TY30</td>
-												<td>10</td>
-												<td>11-19</td>
-												<td>20</td>
+												<td style="padding: 0 3px 0 3px;" id="nick_9">TY30</td>
+												<td style="padding: 0 3px 0 3px;" id="r_9">10</td>
+												<td style="padding: 0 3px 0 3px;" id="i_9">11-19</td>
+												<td style="padding: 0 3px 0 3px;" id="s_9">20</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_9"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_9"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_9"></td>
 											</tr>
 											<tr>
 												<td>10</td>
-												<td>Florfenicol</td>
+												<td style="padding: 0 3px 0 3px;" id="antiName_10">Florfenicol</td>
 												<td style="padding: 0 3px 0 3px;" id="cap_10"></td>
-												<td>FFC30</td>
-												<td>14</td>
-												<td>15-18</td>
-												<td>19</td>
+												<td style="padding: 0 3px 0 3px;" id="nick_10">FFC30</td>
+												<td style="padding: 0 3px 0 3px;" id="r_10">14</td>
+												<td style="padding: 0 3px 0 3px;" id="i_10">15-18</td>
+												<td style="padding: 0 3px 0 3px;" id="s_10">19</td>
 												<td style="padding: 0 3px 0 3px;" id="res1_10"></td>
 												<td style="padding: 0 3px 0 3px;" id="res2_10"></td>
 												<td style="padding: 0 3px 0 3px;" id="resMemo_10"></td>
@@ -699,8 +704,8 @@
 											<thead>
 												<tr>
 													<td style="background-color:#F2F2F2;width:20%;">시료명</td>
-													<td style="background-color:#F2F2F2;width:15%;">Positive</td>
-													<td style="background-color:#F2F2F2;width:15%;">Negative</td>
+													<td style="background-color:#F2F2F2;width:15%;" id="th1"></td>
+													<td style="background-color:#F2F2F2;width:15%;" id="th2"></td>
 													<td style="background-color:#F2F2F2;width:20%;">최종결과</td>
 													<td style="background-color:#F2F2F2;width:*">메모</td>
 												</tr>
@@ -888,10 +893,28 @@
 								<div class="table-responsive">
 									<table class="table table-bordered text-nowrap">
 										<colgroup>
-											<col style="width:50%"/>
-											<col style="width:50%"/>
+											<col style="width:20%"/>
+											<col style="width:15%"/>
+											<col style="width:15%"/>
+											<col style="width:15%"/>
+											<col style="width:15%"/>
+											<col style="width:*"/>
 										</colgroup>
-
+										<thead>
+											<tr>
+												<td rowspan="2">항목명</td>
+												<td colspan="2">결과</td>
+												<td colspan="2">참조값</td>
+												<td>비고</td>
+											</tr>
+											<tr>
+												<td>값</td>
+												<td>단위</td>
+												<td>최저</td>
+												<td>최대</td>
+												<td></td>
+											</tr>
+										</thead>
 										<tbody id="bloodChem">
 
 										</tbody>
@@ -1282,8 +1305,15 @@ $("#inspList").find("tr").click(function(){
 		$("#inspSickCd").val($(this).find("[id^=inspThirdCd]").val());
 
 		var inspSecCd = $(this).find("[id^=inspSecondCd]").val();
-		if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-16'){
+		if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-02-02' || inspSecCd == 'B001-02-16'){
 			fnPcr();
+			if(inspSecCd == 'B001-02-16'){
+				$("#th1").text("암컷");
+				$("#th2").text("수컷");
+			}else {
+				$("#th1").text("POSITIVE");
+				$("#th2").text("NEGATIVE");
+			}
 		}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
 			fnAnti();
 		}else if(inspSecCd == 'B001-03-18'){
@@ -1496,7 +1526,7 @@ $("#fileSave3").click(function(){
 /*****************************************************************
  *                        항 생 제                                                                             *
  *****************************************************************/
-$("#antibiotic").find("tr").find("td:eq(2),td:eq(7),td:eq(9)").click(function(idx){
+$("#antibiotic").find("tr").find("td:eq(1),td:eq(2),td:eq(3),td:eq(4),td:eq(5),td:eq(6),td:eq(7),td:eq(9)").click(function(idx){
 	var txt = $(this).text();
 	var selId = $(this).attr("id");
 	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
@@ -1538,15 +1568,25 @@ $("#antiSave").click(function(){
 
 	var antiList = [];
 	$("#antibiotic").find("tr").each(function(idx){
+		var antiNo = $(this).find("td:eq(0)").text();
+		var antiName = $(this).find("td:eq(1)").text();
 		var cap = $(this).find("td:eq(2)").text();
+		var nick = $(this).find("td:eq(3)").text();
+		var mini = $(this).find("td:eq(4)").text();
+		var scop = $(this).find("td:eq(5)").text();
+		var maxi = $(this).find("td:eq(6)").text();
 		var res1 = $(this).find("td:eq(7)").text();
 		var res2 = $(this).find("td:eq(8)").text();
 		var antiMemo = $(this).find("td:eq(9)").text();
-		var antiNo = idx+1;
 
 		var anti = {
 			antiNo : antiNo,
+			antiName : antiName,
 			capacity : cap,
+			nickName : nick,
+			mini : mini,
+			scope : scop,
+			maxi : maxi,
 			res1 : res1,
 			res2 : res2,
 			antiMemo : antiMemo,
@@ -1591,7 +1631,12 @@ function fnAnti(){
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				var no = item.antiNo;
+				$("#antiName_"+no).text(item.antiName);
 				$("#cap_"+no).text(item.capacity);
+				$("#nick_"+no).text(item.nickName);
+				$("#r_"+no).text(item.mini);
+				$("#i_"+no).text(item.scope);
+				$("#s_"+no).text(item.maxi);
 				$("#res1_"+no).text(item.res1);
 				$("#res2_"+no).text(item.res2);
 				$("#resMemo_"+no).text(item.antiMemo);
@@ -2088,6 +2133,10 @@ function callBackBloodChem(data){
 		html += '<tr>';
 		html += '	<td id="bcnm_'+(i+1)+'">'+data[i].codeNm+'</td>';
 		html += '	<td style="height:34px; padding: 1px 3px 1px 3px;" id="bcvl_'+(i+1)+'"></td>';
+		html += '	<td></td>';
+		html += '	<td></td>';
+		html += '	<td></td>';
+		html += '	<td></td>';
 		html += '</tr>';
 	}
 	$("#bloodChem").html(html);
@@ -2219,7 +2268,7 @@ $(document).on('click','#save',function(){
 		$("#pcrSave").trigger("click");
 	}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
 		saveMemo(2);
-		$("#fileSave2").trigger("click");
+		//$("#fileSave2").trigger("click");
 		$("#antiSave").trigger("click");
 	}else if(inspSecCd == 'B001-03-18'){
 		saveMemo(3);

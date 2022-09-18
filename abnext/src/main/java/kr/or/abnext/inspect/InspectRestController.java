@@ -429,7 +429,13 @@ public class InspectRestController {
 			TbAntibiotic anti = new TbAntibiotic();
 			anti.setAntiNo(tbResult.getAntiList().get(i).get("antiNo").toString());
 			anti.setInspNo(tbResult.getInspNo());
+
+			anti.setAntiName(tbResult.getAntiList().get(i).get("antiName").toString());
 			anti.setCapacity(tbResult.getAntiList().get(i).get("capacity").toString());
+			anti.setNickName(tbResult.getAntiList().get(i).get("nickName").toString());
+			anti.setMini(tbResult.getAntiList().get(i).get("mini").toString());
+			anti.setScope(tbResult.getAntiList().get(i).get("scope").toString());
+			anti.setMaxi(tbResult.getAntiList().get(i).get("maxi").toString());
 			anti.setRes1(tbResult.getAntiList().get(i).get("res1").toString());
 			anti.setRes2(tbResult.getAntiList().get(i).get("res2").toString());
 			anti.setAntiMemo(tbResult.getAntiList().get(i).get("antiMemo").toString());

@@ -448,15 +448,24 @@
 	<insert id="insertAntibiotic" parameterType="kr.or.abnext.domain.TbAntibiotic">
 		INSERT
 		  INTO TB_ANTIBIOTIC (
-		       INSP_NO , ANTI_NO , CAPACITY
-		     , RES1    , RES2    , ANTI_MEMO
-		     , INS_DT  , INS_ID )
+		       INSP_NO     , ANTI_NO     , ANTI_NAME
+		     , CAPACITY    , NICK_NAME
+		     , MINI        , SCOPE       , MAXI
+		     , RES1        , RES2        , ANTI_MEMO
+		     , INS_DT      , INS_ID )
 		VALUES (
-		       #{inspNo} , #{antiNo} , #{capacity}
-		     , #{res1}   , #{res2}   , #{antiMemo}
-		     , NOW()     , #{insId} )
+		       #{inspNo}   , #{antiNo}   , #{antiName}
+		     , #{capacity} , #{nickName}
+		     , #{mini}     , #{scope}    , #{maxi}
+		     , #{res1}     , #{res2}     , #{antiMemo}
+		     , NOW()       , #{insId} )
 		    ON DUPLICATE KEY
-		UPDATE CAPACITY = #{capacity}
+		UPDATE ANTI_NAME = #{antiName}
+		     , CAPACITY = #{capacity}
+		     , NICK_NAME = #{nickName}
+		     , MINI = #{mini}
+		     , SCOPE = #{scope}
+		     , MAXI = #{maxi}
 		     , RES1 = #{res1}
 		     , RES2 = #{res2}
 		     , ANTI_MEMO = #{antiMemo}
