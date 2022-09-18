@@ -709,8 +709,36 @@
 	 				</div>
 					<div class="col-md-6">
 						<div class="card card-primary card-outline">
-
+							<div class="card-header">
+								<div class="row">
+									<div class="col-2">
+										<h3 class="card-title" style="padding-top:8px;"> * 시료수</h3>
+									</div>
+									<div class="col-3">
+										<input type="number" class="form-control" id="siryoCnt"/>
+									</div>
+									<div class="col-7">
+										<button type="button" id="btnPcrSubmit" class="btn btn-sm btn-primary btn-flat" style="padding-top:8px;width:80px"> 적용</button>
+									</div>
+								</div>
+							</div>
 							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered text-nowrap">
+										<thead>
+											<tr>
+												<td style="background-color:#F2F2F2;width:20%;">시료명</td>
+												<td style="background-color:#F2F2F2;width:15%;">Positive</td>
+												<td style="background-color:#F2F2F2;width:15%;">Negative</td>
+												<td style="background-color:#F2F2F2;width:20%;">최종결과</td>
+												<td style="background-color:#F2F2F2;width:*">메모</td>
+											</tr>
+										</thead>
+										<tbody id="pcr">
+										</tbody>
+									</table>
+								</div>
+								<!--
 								<div class="table-responsive">
 									<table class="table table-bordered text-nowrap">
 										<thead>
@@ -823,7 +851,9 @@
 											</tr>
 										</tbody>
 									</table>
+
 								</div>
+								 -->
 								<div style="text-align:center">
 									<button type="button" id="pcrSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
 								</div>
@@ -1725,23 +1755,44 @@ $("#pcr").find("tr").find("td:eq(1),td:eq(2),td:eq(3),td:eq(4)").click(function(
 	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
 	$(this).html(html);
 	$("#target").focus();
-})
+});
+
+$("#btnPcrSubmit").click(function(){
+	var cnt = $("#siryoCnt").val();
+	$("#pcr").empty();
+
+	var html = '';
+
+	for(var i=0; i<cnt; i++){
+		html += '<tr>';
+		html += '	<td id="smplName_'+(i+1)+'" style="height:39px;" onclick="makeBox(this.id)"></td>';
+		html += '	<td id="positive_'+(i+1)+'" onclick="makeBox(this.id)"></td>';
+		html += '	<td id="negative_'+(i+1)+'" onclick="makeBox(this.id)"></td>';
+		html += '	<td id="result_'+(i+1)+'" onclick="makeBox(this.id)"></td>';
+		html += '	<td id="memo_'+(i+1)+'" onclick="makeBox(this.id)"></td>';
+		html += '</tr>';
+	}
+
+	$("#pcr").html(html);
+
+});
 
 $("#pcrSave").click(function(){
 
 	var pcrList = [];
 	$("#pcr").find("tr").each(function(idx){
-		var smplName = $(this).find("td:eq(1)").text();
-		var capacity = $(this).find("td:eq(2)").text();
+		var smplName = $(this).find("td:eq(0)").text();
+		var positive = $(this).find("td:eq(1)").text();
+		var negative = $(this).find("td:eq(2)").text();
 		var result = $(this).find("td:eq(3)").text();
-		var rmk = $(this).find("td:eq(4)").text();
-
+		var memo = $(this).find("td:eq(4)").text();
 
 		var pcr = {
 			smplName : smplName,
-			capacity : capacity,
+			positive : positive,
+			negative : negative,
 			result : result,
-			rmk : rmk,
+			memo : memo,
 			insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
 		}
 		if(smplName != '') {
@@ -2097,7 +2148,15 @@ $(document).on('click','#save',function(){
 
 })
 
+function makeBox(target){
+	var txt = $('#'+target).text();
+	var selId = target;
+	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
 
+	$('#'+target).empty();
+	$('#'+target).html(html);
+	$("#target").focus();
+}
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>
