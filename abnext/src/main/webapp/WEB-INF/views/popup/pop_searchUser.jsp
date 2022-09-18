@@ -18,7 +18,7 @@
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 300px;">
-                  	<input type="text" id="popSearchUserNm" name="popSearchUserWorkGb" class="form-control float-right" placeholder="검사방법">
+                  	<input type="text" id="popSearchUserWorkGb" name="popSearchUserWorkGb" class="form-control float-right" placeholder="담당업무">
                     <input type="text" id="popSearchUserNm" name="popSearchUserNm" class="form-control float-right" placeholder="이름을 입력하세요">
 
                     <div class="input-group-append">
@@ -38,11 +38,9 @@
                   <thead>
                     <tr>
                       <th>구분</th>
-                      <th>업무구분</th>
                       <th>이름</th>
-                      <th>휴대폰</th>
-                      <th>지역</th>
                       <th>소속</th>
+                      <th>담당업무</th>
                     </tr>
                   </thead>
                   <tbody id="userTbody">

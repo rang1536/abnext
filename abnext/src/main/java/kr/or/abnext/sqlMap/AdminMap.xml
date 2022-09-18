@@ -192,9 +192,9 @@
 			   , (SELECT FARM_NM
 			   		FROM TB_FARM
 			   	   WHERE FARM_NO = A.FARM_NO) AS FARM_NM
-			   , (SELECT CODE_NM
-			        FROM TB_CODE
-			       WHERE CODE_ID = A.USER_WORK_GB) AS USER_WORK_GB_NM
+			   , (SELECT GROUP_CONCAT(DISTINCT CODE_NM SEPARATOR ' | ')
+			        FROM TB_USER_DAMDANG B
+			       WHERE A.USER_NO = B.USER_NO) AS USER_WORK_GB_NM
 		  FROM TB_USER A
 		 WHERE 1=1
 		 <if test="userNo != null and userNo != ''">
@@ -203,11 +203,8 @@
 		 <if test="userNm != null and userNm != ''">
 		 	AND USER_NM LIKE CONCAT('%', #{userNm}, '%')
 		 </if>
-		 <if test="userWorkGb != null and userWorkGb != ''">
-		    AND USER_WORK_GB = #{userWorkGb}
-		 </if>
-		 <if test="adminYn != null and adminYn != ''">
-		    AND ADMIN_YN = #{adminYn}
+		 <if test="userLev != null and userLev != ''">
+		 	AND USER_LEV LIKE CONCAT('%', #{userLev}, '%')
 		 </if>
 		 <if test="userStat != null and userStat != ''">
 		 	AND USER_STAT = #{userStat}
