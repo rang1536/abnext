@@ -785,7 +785,17 @@ function fnPcr(inspNo,k,title){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			console.log(data);
+			var th1 = '';
+			var th2 = '';
+
+			if(title == 'PCR') {
+				th1 = 'POSITIVE';
+				th2 = 'NEGATIVE';
+			}else {
+				th1 = '암컷';
+				th2 = '수컷';
+			}
+
 			var html = '';
 			html += '<div class="card card-primary card-outline collapsed-card">';
 			html += '			<div class="card-header">';
@@ -841,16 +851,6 @@ function fnPcr(inspNo,k,title){
 			html += '		</div>';
 			html += '		<div class="card card-warning card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title"><b>사진</b></h3>';
-			html += '			</div>';
-			html += '			<div class="card-body">';
-			html += '				<div class="filter-container row previewList'+k+'"></div>';
-			html += '			</div>';
-			html += '		</div>';
-			html += '	</div>';
-			html += '	<div class="col-md-6">';
-			html += '		<div class="card card-danger card-outline">';
-			html += '			<div class="card-header">';
 			html += '				<h3 class="card-title"><b>PCR</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
@@ -859,16 +859,27 @@ function fnPcr(inspNo,k,title){
 			html += '						<thead>';
 			html += '							<tr>';
 			html += '								<td style="background-color:#F2F2F2;width:10%;">No.</td>';
-			html += '								<td style="background-color:#F2F2F2;width:*;">시료</td>';
-			html += '								<td style="background-color:#F2F2F2;width:10%;">시료량</td>';
-			html += '								<td style="background-color:#F2F2F2;width:10%;">결과</td>';
-			html += '								<td style="background-color:#F2F2F2;width:25%;">비고</td>';
+			html += '								<td style="background-color:#F2F2F2;width:*;">시료명</td>';
+			html += '								<td style="background-color:#F2F2F2;width:10%;">'+th1+'</td>';
+			html += '								<td style="background-color:#F2F2F2;width:10%;">'+th2+'</td>';
+			html += '								<td style="background-color:#F2F2F2;width:25%;">결과</td>';
+			html += '								<td style="background-color:#F2F2F2;width:25%;">메모</td>';
 			html += '							</tr>';
 			html += '						</thead>';
 			html += '						<tbody id="pcr'+k+'">';
 			html += '						</tbody>';
 			html += '					</table>';
 			html += '				</div>';
+			html += '			</div>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '	<div class="col-md-6">';
+			html += '		<div class="card card-danger card-outline">';
+			html += '			<div class="card-header">';
+			html += '				<h3 class="card-title"><b>사진</b></h3>';
+			html += '			</div>';
+			html += '			<div class="card-body">';
+			html += '				<div class="filter-container row previewList'+k+'"></div>';
 			html += '			</div>';
 			html += '		</div>';
 			html += '	</div>';
@@ -880,12 +891,14 @@ function fnPcr(inspNo,k,title){
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				var no = i+1;
+
 				subHtml += '<tr>';
 				subHtml += '	<td>'+no+'</td>';
 				subHtml += '	<td>'+item.smplName+'</td>';
-				subHtml += '	<td>'+item.capacity+'</td>';
+				subHtml += '	<td>'+item.positive+'</td>';
+				subHtml += '	<td>'+item.negative+'</td>';
 				subHtml += '	<td>'+item.result+'</td>';
-				subHtml += '	<td>'+item.rmk+'</td>';
+				subHtml += '	<td>'+item.memo+'</td>';
 				subHtml += '</tr>';
 			}
 			$("#pcr"+k).html(subHtml);
@@ -897,7 +910,38 @@ function fnPcr(inspNo,k,title){
 				type : 'post',
 				success : function(data){
 					var htmlData = '';
+					for(var i=0; i<data.length; i++){
+						var item = data[i];
+						var checked = '';
+						if(item.closeYn == 'Y'){
+							checked = 'checked';
+						}
+						htmlData += '<div class="filtr-item col-sm-4" id="previewImg'+item.fileNo+'">';
+						htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+						htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+						htmlData += '	</a>';
+						htmlData += '</div>';
+						htmlData += '<div class="col-sm-8" id="preview'+item.fileNo+'">';
+						htmlData += '	<div class="row">';
+						htmlData += '		<div class="col-8">'+item.title+'</div>';
+						htmlData += '		<div class="col-4">';
+						htmlData += '			<label for="chk1"></label>';
+						htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
+						htmlData += '				<div class="icheck-primary d-inline">';
+						htmlData += '					<input type="checkbox" disabled id="chk'+item.fileNo+'" '+checked+'>';
+						htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
+						htmlData += '				</div>';
+						htmlData += '			</div>';
+						htmlData += '		</div>';
+						htmlData += '	</div>';
+						htmlData += '	<div class="row">';
+						htmlData += '		<div class="col-12">'+item.content+'</div>';
+						htmlData += '	</div>';
+						htmlData += '</div>';
 
+					}
+					$(".previewList"+k).append(htmlData);
+					/*
 					for(var i=0; i<data.length; i++){
 						var item = data[i];
 						htmlData += '<div id="previewImg'+item.fileNo+'">';
@@ -906,7 +950,8 @@ function fnPcr(inspNo,k,title){
 						htmlData += '	</a>';
 						htmlData += '</div>';
 					}
-					$(".previewList"+k).append(htmlData);
+					 */
+					//$(".previewList"+k).append(htmlData);
 				}
 			});
 
@@ -1198,6 +1243,7 @@ function fnAnti(inspNo,k,title){
 			html += '			</div>';
 			html += '			<div style="height:10px;"></div>';
 			html += '		</div>';
+			/*
 			html += '		<div class="card card-warning card-outline">';
 			html += '			<div class="card-header">';
 			html += '				<h3 class="card-title"><b>사진</b></h3>';
@@ -1206,11 +1252,12 @@ function fnAnti(inspNo,k,title){
 			html += '				<div class="filter-container row previewList'+k+'"></div>';
 			html += '			</div>';
 			html += '		</div>';
+			 */
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
 			html += '		<div class="card card-danger card-outline">';
 			html += '			<div class="card-header">';
-			html += '				<h3 class="card-title"><b>항생제 감수성 검사 기록지</b></h3>';
+			html += '				<h3 class="card-title"><b>항생제 감수성 검사 결과 기록지</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
 			html += '				<div class="table-responsive">';
@@ -1218,18 +1265,18 @@ function fnAnti(inspNo,k,title){
 			html += '						<thead>';
 			html += '							<tr>';
 			html += '								<td rowspan="2">번호</td>';
-			html += '								<td rowspan="2">항생제(㎍)</td>';
+			html += '								<td rowspan="2">항생제</td>';
+			html += '								<td rowspan="2">용량</td>';
 			html += '								<td rowspan="2">약자</td>';
-			html += '								<td colspan="3">zone diameter (mm)</td>';
-			html += '								<td colspan="2">검사결과</td>';
-			html += '								<td rowspan="2" class="w200">비고</td>';
+			html += '								<td rowspan="2">기준직경(mm)</td>';
+			html += '								<td colspan="3">결과<br/>직경<br/>(mm)</td>';
+			html += '								<td rowspan="2">판독</td>';
+			html += '								<td rowspan="2">비고</td>';
 			html += '							</tr>';
 			html += '							<tr>';
 			html += '								<td>R<br/>≤</td>';
 			html += '								<td>I</td>';
 			html += '								<td>S<br/>≥</td>';
-			html += '								<td class="w60">(mm)</td>';
-			html += '								<td class="w60">R.I.S.</td>';
 			html += '							</tr>';
 			html += '						</thead>';
 			html += '						<tbody id="antibiotic"></tbody>';
@@ -1242,33 +1289,21 @@ function fnAnti(inspNo,k,title){
 			html += '</div>';
 			$(".result").append(html);
 
-			var case1html = '<td>Ampicilin (10)</td><td>AM10</td><td>13</td><td>14-16</td><td>17</td>';
-			var case2html = '<td>Ceftiofur(30)</td><td>FUR30</td><td>17</td><td>18-20</td><td>21</td>';
-			var case3html = '<td>Enrofloxacin(5)</td><td>ENR5</td><td>12</td><td>13-15</td><td>16</td>';
-			var case4html = '<td>Colistin(10)</td><td>CT10</td><td>8</td><td>9-10</td><td>11</td>';
-			var case5html = '<td>Gentamycin(10)</td><td>GM10</td><td>12</td><td>13-14</td><td>15</td>';
-			var case6html = '<td>Oxytetracycin</td><td>T30</td><td>14</td><td>15-18</td><td>19</td>';
-			var case7html = '<td>Trimethoprim +<br/>Sulfamethoxazole<br/>(1.25+23.75)</td><td>SXT25</td><td>10</td><td>11-15</td><td>16</td>';
-			var case8html = '<td>Tilmicosin(15)</td><td>TIL15</td><td>10</td><td>11</td><td>12</td>';
-			var case9html = '<td>Tylosin</td><td>TY30</td><td>10</td><td>11-19</td><td>20</td>';
-			var case10html = '<td>Florfenicol</td><td>FFC30</td><td>14</td><td>15-18</td><td>19</td>';
-
 			var subHtml = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
-				var no = item.antiNo;
-				switch(i) {
-					case 0 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case1html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-					case 1 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case2html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-					case 2 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case3html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-					case 3 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case4html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-					case 4 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case5html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-					case 5 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case6html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-					case 6 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case7html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-					case 7 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case8html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-					case 8 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case9html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-					case 9 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case10html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
-				}
+				subHtml += '<tr>';
+				subHtml += '<td>'+item.antiNo+'</td>';
+				subHtml += '<td>'+item.antiName+'</td>';
+				subHtml += '<td>'+item.capacity+'</td>';
+				subHtml += '<td>'+item.nickName+'</td>';
+				subHtml += '<td>'+item.mini+'</td>';
+				subHtml += '<td>'+item.scope+'</td>';
+				subHtml += '<td>'+item.maxi+'</td>';
+				subHtml += '<td>'+item.res1+'</td>';
+				subHtml += '<td>'+item.res2+'</td>';
+				subHtml += '<td>'+item.antiMemo+'</td>';
+				subHtml += '</tr>';
 			}
 			$("#antibiotic").html(subHtml);
 

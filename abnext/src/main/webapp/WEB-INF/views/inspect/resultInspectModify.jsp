@@ -2273,7 +2273,7 @@ $(document).on('click','#save',function(){
 	}else if(inspSecCd == 'B001-03-18'){
 		saveMemo(3);
 		$("#serumSave").trigger("click");
-	}else if(inspSecCd == 'B001-04-23'){
+	}else if(inspSecCd == 'B001-04-23'){hinahi
 		saveMemo(5);
 		$("#bcSave").trigger("click");
 	}else if(inspSecCd == 'B001-04-24'){
