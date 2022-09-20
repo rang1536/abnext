@@ -84,14 +84,14 @@
 		     (
 		       RQST_NO       , SAMPLE_CODE    , SAMPLE_NAME   , INSP_TYPE
 		     , INSP_FIRST_CD , INSP_SECOND_CD , INSP_THIRD_CD , INSP_PRICE
-		     , WORKER_NO     , WORKER_NM
+		     , WORKER_NO     , WORKER_NM	  , PRICE_COMMENT
 		     , INS_DT        , INS_ID
 		     )
 		VALUES
 		     (
 		       #{rqstNo}      , #{sampleCode}   , #{sampleName}  , #{inspType}
 		     , #{inspFirstCd} , #{inspSecondCd} , #{inspThirdCd} , #{inspPrice}
-		     , #{workerNo}    , #{workerNm}
+		     , #{workerNo}    , #{workerNm}		, #{priceComment}
 		     , NOW()          , #{insId}
 		     )
 	</insert>
@@ -316,6 +316,9 @@
 		<if test="diagCd != null and diagCd != ''">
 		     , DIAG_CD = #{diagCd}
 		</if>
+		<if test="price != null and price != ''">
+		     , PRICE = #{price}
+		</if>
 		 WHERE RQST_NO = #{rqstNo}
 	</update>
 
@@ -358,13 +361,19 @@
 		<if test="inspPrice != null and inspPrice != ''">
 		     , INSP_PRICE = #{inspPrice}
 		</if>
+		<if test="priceComment != null and priceComment != ''">
+		     , PRICE_COMMENT = #{priceComment}
+		</if>
 		 WHERE INSP_NO = #{inspNo}
 	</update>
 
 	<select id="selectPaymentList" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbRcept">
 		SELECT A.*
 		     , CASE WHEN PAY_STAT = '01' THEN 0 ELSE PRICE END PAYED_PRICE
+		     , B.PRICE_COMMENT
 		  FROM TB_RCEPT A
+		  LEFT OUTER JOIN TB_INSPECTION B
+		    ON (A.RQST_NO = B.RQST_NO)
 		 WHERE 1=1
   		<if test ="searchStrtDt != null and searchStrtDt != ''">
   		   AND RQST_DT BETWEEN #{searchStrtDt} AND #{searchFnshDt}

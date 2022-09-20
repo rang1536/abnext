@@ -237,6 +237,8 @@ public class InspectRestController {
 			}
 		}
 		*/
+
+		int totalPrice = 0;
 		if(tbRcept.getInspList().size() > 0) {
 			for(int i=0; i<tbRcept.getInspList().size(); i++) {
 				TbInspection bean = new TbInspection();
@@ -251,7 +253,9 @@ public class InspectRestController {
 				bean.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
 				bean.setUptId(tbRcept.getUptId());
 				bean.setInspPrice(tbRcept.getInspList().get(i).get("inspPrice").toString());
+				bean.setPriceComment(tbRcept.getInspList().get(i).get("priceComment").toString());
 
+				totalPrice += Integer.parseInt(tbRcept.getInspList().get(i).get("inspPrice").toString());
 				//시료 테이블 수정
 				if(tbRcept.getInspList().get(i).get("inspNo") != null && !tbRcept.getInspList().get(i).get("inspNo").equals("")) {
 					inspectServ.updateInspect(bean);
@@ -270,6 +274,8 @@ public class InspectRestController {
 		rcpt.setRqstNo(tbRcept.getRqstNo());
 		rcpt.setUptId(tbRcept.getUptId());
 		rcpt.setProcStat("A001-03");
+		rcpt.setPrice(String.valueOf(totalPrice));
+
 		inspectServ.updateInspectStatus(rcpt);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");

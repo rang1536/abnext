@@ -329,17 +329,17 @@
 			type : 'post',
 			data : sdata,
 			success:function(data){
-				var colList = ['pdlNo','hospNm','rqstDt','finishDt','payGb','price','payedPrice','payStat'];
-				var typeList = ['text','text','text','text','text','text','text','checkbox'];
-				var widthList = ['120','150','100','100','130','120','120','60'];
-				var titleList = ['접수번호','신청기관명','신청일','검사완료일','납입방법','검사비','입금액','납부'];
-				var alignList = ['center','center','center','center','center','center','center','center'];
+				var colList = ['pdlNo','hospNm','rqstDt','finishDt','payGb','price','payedPrice','payStat', 'priceComment'];
+				var typeList = ['text','text','text','text','text','text','text','checkbox','text'];
+				var widthList = ['120','150','100','100','130','120','120','60','300'];
+				var titleList = ['접수번호','신청기관명','신청일','검사완료일','납입방법','검사비','입금액','납부', '검사비변경사유'];
+				var alignList = ['center','center','center','center','center','center','center','center', 'left'];
 				var gridId = 'jsGrid1';
 				var fields = new Array();
 				var row = '';
 
 				for(var i=0; i<colList.length; i++){
-					if(i == colList.length-1){
+					if(i == colList.length-2){
 						row = {
 								"name"	: colList[i],
 								"type"	: typeList[i],

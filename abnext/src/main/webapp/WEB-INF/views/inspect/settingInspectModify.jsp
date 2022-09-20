@@ -329,7 +329,7 @@
 									<tbody id="inspList">
 										<c:forEach var="item" items="${inspList }" varStatus="status">
 											<tr>
-												<td>
+												<td rowspan="2">
 													<input type="hidden" id="inspFirstCd_${status.index+1 }" value="${item.inspFirstCd }"/>
 													<input type="hidden" id="inspSecondCd_${status.index+1 }" value="${item.inspSecondCd }"/>
 													<input type="hidden" id="inspThirdCd_${status.index+1 }" value="${item.inspThirdCd }"/>
@@ -365,6 +365,11 @@
 													</a>
 												</td>
 												<td class="txtc"><fmt:formatNumber value="${item.inspPrice }" pattern="#,###"/></td>
+											</tr>
+											<tr>
+												<td colspan="7">
+													<input type="text" class="priceComment" style="width:98%;"value="${item.priceComment }" placeholder="비용변경시 사유를 입력해주세요" />
+												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -499,19 +504,23 @@ $(function () {
 
 $("#sett").on("click",function (){
 	var inspData = [];
-	$("#inspList").find("tr").each(function(){
-		var sData = {
-			inspNo : $(this).find("[id^=inspNo]").val(),
-			workerNo : $(this).find("[id^=workerNo]").val(),
-			workerNm : $(this).find("[id^=workerNm]").val(),
-			sampleCode : $(this).find("[id^=sampleCode]").val(),
-			sampleName : $(this).find("[id^=sampleName]").val(),
-			inspThirdCd : $(this).find("[id^=inspThirdCd]").val(),
-			inspFirstCd : $(this).find("[id^=inspFirstCd]").val(),
-			inspPrice	: $(this).find('td:eq(6)').text().replace(/,/gi,'')
+	var sData;
+	$("#inspList").find("tr").each(function(i){
+		if((i+1)%2 != 0){
+			sData = {
+				inspNo : $(this).find("[id^=inspNo]").val(),
+				workerNo : $(this).find("[id^=workerNo]").val(),
+				workerNm : $(this).find("[id^=workerNm]").val(),
+				sampleCode : $(this).find("[id^=sampleCode]").val(),
+				sampleName : $(this).find("[id^=sampleName]").val(),
+				inspThirdCd : $(this).find("[id^=inspThirdCd]").val(),
+				inspFirstCd : $(this).find("[id^=inspFirstCd]").val(),
+				inspPrice	: $(this).find('td:eq(7)').text().replace(/,/gi,''),
+			}
+		}else{
+			sData.priceComment = $(this).find('.priceComment').val();
+			inspData.push(sData);
 		}
-
-		inspData.push(sData);
 	});
 
 	var smplData = [];
@@ -670,7 +679,7 @@ $("#addBtn").on("click",function(){
 
 	var html = '';
 	html += '<tr>';
-	html += '	<td>';
+	html += '	<td rowspan="2">';
 	html += '		<input type="hidden" id="inspNo_'+idx+'" value="${item.inspNo}"/>';
 	html += '		<input type="hidden" id="inspFirstCd_'+idx+'" value="'+inspFirstCd+'"/>';
 	html += '		<input type="hidden" id="inspSecondCd_'+idx+'" value="'+inspFirstCd+'"/>';
@@ -697,6 +706,11 @@ $("#addBtn").on("click",function(){
 	html += '		</a>';
 	html += '	</td>';
 	html += '	<td class="txtc" id="payment_'+idx+'" onclick="makeBox(this.id)">'+$("#inspPrice").val()+'</td>';
+	html += '</tr>';
+	html += '<tr>';
+	html += '	<td colspan="7">';
+	html += '		<input type="text" class="priceComment" style="width:98%" placeholder="비용변경시 사유를 입력하세요" value=""/>';
+	html += '	</td>';
 	html += '</tr>';
 	$("#inspList").append(html);
 
@@ -760,7 +774,6 @@ function fn_setUserDataToForm2(userNo,userNm,objId){
 }
 
 
-
 function makeBox(target){
 	var txt = $('#'+target).text();
 	var selId = target;
@@ -768,6 +781,7 @@ function makeBox(target){
 
 	$('#'+target).empty();
 	$('#'+target).html(html);
+
 	$("#target").focus();
 }
 

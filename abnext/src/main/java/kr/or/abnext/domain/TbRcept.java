@@ -81,6 +81,18 @@ public class TbRcept {
 
 	private List<MultipartFile> fileList;
 
+	//검사비변경사유
+	private String priceComment;
+
+
+	public String getPriceComment() {
+		return priceComment;
+	}
+
+	public void setPriceComment(String priceComment) {
+		this.priceComment = priceComment;
+	}
+
 	public int getRqstNo() {
 		return rqstNo;
 	}
@@ -580,7 +592,8 @@ public class TbRcept {
 				+ ", uptDt=" + uptDt + ", uptId=" + uptId + ", inspType=" + inspType + ", searchStrtDt=" + searchStrtDt
 				+ ", searchFnshDt=" + searchFnshDt + ", searchStr=" + searchStr + ", payedPrice=" + payedPrice
 				+ ", limitCnt=" + limitCnt + ", sumCnt=" + sumCnt + ", inspNo=" + inspNo + ", fileList=" + fileList
-				+ "]";
+				+ ", priceComment=" + priceComment + "]";
 	}
+
 
 }
