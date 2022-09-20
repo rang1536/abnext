@@ -253,15 +253,25 @@
 								</div>
 								<div class="col-md-10">
 									<div class="row">
-										<div class="col-sm-4">
+										<div class="col-sm-3">
 											<div class="form-group">
 												<label>검사구분</label>
 												<select class="form-control" id="inspFirstCd"></select>
 											</div>
 										</div>
-										<div class="col-sm-4">
+										<div class="col-sm-3">
 											<div class="form-group">
 												<label>검사방법</label>
+												<select class="form-control select2" id="inspSecondCd">
+													<c:forEach var="item" items="${inspTypeList }" varStatus="status">
+														<option value="${item.codeId }" data-price="${item.codeDtlMemo }">${item.codeNm }</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<label>세부항목</label>
 												<select class="form-control select2" id="inspThirdCd">
 													<c:forEach var="item" items="${inspTypeList }" varStatus="status">
 														<option value="${item.codeId }" data-price="${item.codeDtlMemo }">${item.codeNm }</option>
@@ -269,7 +279,7 @@
 												</select>
 											</div>
 										</div>
-										<div class="col-sm-4">
+										<div class="col-sm-3">
 											<div class="form-group">
 												<label>시료선택</label>
 												<div class="form-group">
@@ -281,6 +291,8 @@
 												</div>
 											</div>
 										</div>
+
+										<input type="hidden" id="inspPrice" value="0"/>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -306,10 +318,11 @@
 										<tr>
 											<td class="txtc" style="width:3%;background-color:#F2F2F2"></td>
 											<td class="txtc" style="width:5%;background-color:#F2F2F2">No</td>
-											<td class="txtc" style="width:18%;background-color:#F2F2F2">검사구분</td>
-											<td class="txtc" style="width:22%;background-color:#F2F2F2">검사방법</td>
-											<td class="txtc" style="width:20%;background-color:#F2F2F2">시료</td>
-											<td class="txtc" style="width:17%;background-color:#F2F2F2">담당자</td>
+											<td class="txtc" style="width:15%;background-color:#F2F2F2">검사구분</td>
+											<td class="txtc" style="width:15%;background-color:#F2F2F2">검사방법</td>
+											<td class="txtc" style="width:20%;background-color:#F2F2F2">세부항목</td>
+											<td class="txtc" style="width:16%;background-color:#F2F2F2">시료</td>
+											<td class="txtc" style="width:10%;background-color:#F2F2F2">담당자</td>
 											<td class="txtc" style="width:*;background-color:#F2F2F2">비용</td>
 										</tr>
 									</thead>
@@ -318,6 +331,7 @@
 											<tr>
 												<td>
 													<input type="hidden" id="inspFirstCd_${status.index+1 }" value="${item.inspFirstCd }"/>
+													<input type="hidden" id="inspSecondCd_${status.index+1 }" value="${item.inspSecondCd }"/>
 													<input type="hidden" id="inspThirdCd_${status.index+1 }" value="${item.inspThirdCd }"/>
 													<input type="hidden" id="sampleCode_${status.index+1 }" value="${item.sampleCode }"/>
 													<input type="hidden" id="sampleName_${status.index+1 }" value="${item.sampleName }"/>
@@ -335,6 +349,7 @@
 													<input type="hidden" id="inspNo_${status.index+1 }" value="${item.inspNo}"/>
 												</td>
 												<td class="txtc">${item.inspFirstNm }</td>
+												<td class="txtc">${item.inspSecondNm }</td>
 												<td class="txtc">${item.inspThirdNm }</td>
 												<td class="txtc">${item.sampleName }</td>
 												<td class="txtc">
@@ -355,7 +370,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="7" class="txtc">
+											<td colspan="8" class="txtc">
 												<button type="button" id="list" style="width:121.2px" class="btn btn-sm btn-success btn-flat"><i class="fas fa-list"></i> 목록</button>
 												<button type="button" id="sett" style="width:121.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 설정확인</button>
 											</td>
@@ -542,7 +557,7 @@ function callBackFn(data,col){
 	if(col == 'inspFirstCd'){
 		$.gfn_getCode(data[0].codeId,callBackFn,'inspSecondCd');
 	}else if(col == 'inspSecondCd'){
-		//$.gfn_getCode(data[0].codeId,callBackFn,'inspThirdCd');
+		$.gfn_getCode(data[0].codeId,callBackFn,'inspThirdCd');
 		$("#inspPrice").val(data[0].codeDtlMemo);
 	}
 }
@@ -552,8 +567,12 @@ $("#inspFirstCd").on('change',function(){
 });
 
 $("#inspSecondCd").on('change',function(){
+	$.gfn_getCode($(this).val(),callBackFn,'inspThirdCd');
 	$.gfn_getCodeDtl($(this).val(),callBackFnGetPrice);
 });
+
+
+
 
 function callBackFnGetPrice(data){
 	$("#inspPrice").val(data.codeDtlMemo);
@@ -613,6 +632,10 @@ $("#addBtn").on("click",function(){
 
 	var inspFirstCd = $("#inspFirstCd").val();
 	var inspFirstCdNm = $("#inspFirstCd option:selected").text();
+
+	var inspSecondCd = $("#inspSecondCd").val();
+	var inspSecondCdNm = $("#inspSecondCd option:selected").text();
+
 	var inspThirdCd = $("#inspThirdCd").val();
 	var inspThirdCdNm = $("#inspThirdCd option:selected").text();
 	var sampleCode = $("#sampleCode").val();
@@ -650,6 +673,7 @@ $("#addBtn").on("click",function(){
 	html += '	<td>';
 	html += '		<input type="hidden" id="inspNo_'+idx+'" value="${item.inspNo}"/>';
 	html += '		<input type="hidden" id="inspFirstCd_'+idx+'" value="'+inspFirstCd+'"/>';
+	html += '		<input type="hidden" id="inspSecondCd_'+idx+'" value="'+inspFirstCd+'"/>';
 	html += '		<input type="hidden" id="inspThirdCd_'+idx+'" value="'+inspThirdCd+'"/>';
 	html += '		<input type="hidden" id="sampleCode_'+idx+'" value="'+sampleCode+'"/>';
 	html += '		<input type="hidden" id="sampleName_'+idx+'" value="'+sampleName+'"/>';
@@ -664,14 +688,15 @@ $("#addBtn").on("click",function(){
 	html += '	</td>';
 	html += '	<td class="txtc">'+idx+'</td>';
 	html += '	<td class="txtc">'+inspFirstCdNm+'</td>';
+	html += '	<td class="txtc">'+inspSecondCdNm+'</td>';
 	html += '	<td class="txtc">'+inspThirdCdNm+'</td>';
 	html += '	<td class="txtc">'+sampleName+'</td>';
 	html += '	<td class="txtc">';
-	html += '		<a href="javascript:void(0)" onclick="popOpenUser2(\''+inspFirstCd+'\',\''+idx+'\')">';
+	html += '		<a href="javascript:void(0)" onclick="popOpenUser2(\''+inspThirdCd+'\',\''+idx+'\')">';
 	html += '			<span id="workerView_'+idx+'">담당자</span>';
 	html += '		</a>';
 	html += '	</td>';
-	html += '	<td class="txtc" id="payment_'+idx+'" onclick="makeBox(this.id)">0</td>';
+	html += '	<td class="txtc" id="payment_'+idx+'" onclick="makeBox(this.id)">'+$("#inspPrice").val()+'</td>';
 	html += '</tr>';
 	$("#inspList").append(html);
 
@@ -690,7 +715,7 @@ function popOpenUser2(workGb,objId){
 function popSearchUser2(workGb,objId){
 	$.ajax({
 		url : 'searchUserCtrl',
-		data : {'userWorkGb':workGb},
+		data : {'userLev':'2'},
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
@@ -701,17 +726,21 @@ function popSearchUser2(workGb,objId){
 				html += '<tr ondblclick="fn_setUserDataToForm2(\''+list.userNo+'\', \''+list.userNm+'\', \''+objId+'\');">';
 				html += '	<td>'
 				if(list.userLev == '1') html += '일반회원';
-				else if(list.userLev == '2') html += '수의사';
-				else if(list.userLev == '3') html += '기관(병원)';
-				else if(list.userLev == '4') html += '농장';
-				else if(list.userLev == '5') html += '관리자';
+				else if(list.userLev == '2') html += '연구원';
+				else if(list.userLev == '3') html += '접수원';
+				else if(list.userLev == '4') html += '관리자';
+
 				html += '	</td>';
 
-				html += '	<td>'+fn_ifNull(list.userWorkGbNm)+'</td>';
+				/*html += '	<td>'+fn_ifNull(list.userWorkGbNm)+'</td>';
 				html += '	<td>'+fn_ifNull(list.userNm)+'</td>';
 				html += '	<td>'+fn_ifNull(list.userHp)+'</td>';
 				html += '	<td>'+fn_ifNull(list.sigunguNm)+'</td>';
+				html += '	<td>'+fn_ifNull(list.hospNm)+fn_ifNull(list.farmNm)+'</td>';*/
+
+				html += '	<td>'+fn_ifNull(list.userNm)+'</td>';
 				html += '	<td>'+fn_ifNull(list.hospNm)+fn_ifNull(list.farmNm)+'</td>';
+				html += '	<td>'+fn_ifNull(list.userWorkGbNm)+'</td>';
 				html += '</tr>';
 			})
 
@@ -721,6 +750,8 @@ function popSearchUser2(workGb,objId){
 	})
 }
 
+
+
 function fn_setUserDataToForm2(userNo,userNm,objId){
 	$("#workerNo_"+objId).val(userNo);
 	$("#workerNm_"+objId).val(userNm);
@@ -729,13 +760,6 @@ function fn_setUserDataToForm2(userNo,userNm,objId){
 }
 
 
-$("#inspList").find("tr").find("td:eq(6)").click(function(){
-	var txt = $(this).text();
-	var selId = $(this).attr("id");
-	var html = '<input type="text" value="'+txt+'" id="target" onfocusout="makeTd(\''+selId+'\')" style="width:100%">';
-	$(this).html(html);
-	$("#target").focus();
-});
 
 function makeBox(target){
 	var txt = $('#'+target).text();
@@ -751,30 +775,7 @@ function makeTd(target){
 	var val = $("#"+target).find("[id=target]").val();
 	$("#"+target).text(val);
 
-	var splitStr = target.split("_");
-	if(splitStr[0] == 'res1'){
-		var idx = Number(splitStr[1])-1;
-		var r = Number($("#antibiotic").find("tr:eq("+idx+")").find("td:eq(4)").text().trim());
-		var s = Number($("#antibiotic").find("tr:eq("+idx+")").find("td:eq(6)").text().trim());
 
-		if(val != ''){
-			if(val < r){
-				alert("최소 수치는 "+r+"입니다.");
-				$("#"+target).text("");
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("");
-			}else if(val == r){
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("R");
-			}else if(val > r && val < s){
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("I");
-			}else if(val == s){
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("S");
-			}else {
-				alert("최대 수치는 "+s+"입니다.");
-				$("#"+target).text("");
-				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("");
-			}
-		}
-	}
 }
 </script>
 </body>

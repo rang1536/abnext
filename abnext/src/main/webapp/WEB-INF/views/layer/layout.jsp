@@ -871,10 +871,10 @@
 						html += '<tr onclick="fn_setUserDataToForm('+list.userNo+', '+list.userNm+');">';
 						html += '	<td>'
 						if(list.userLev == '1') html += '일반회원';
-						else if(list.userLev == '2') html += '수의사';
-						else if(list.userLev == '3') html += '기관(병원)';
-						else if(list.userLev == '4') html += '농장';
-						else if(list.userLev == '5') html += '관리자';
+						else if(list.userLev == '2') html += '연구원';
+						else if(list.userLev == '3') html += '접수원';
+						else if(list.userLev == '4') html += '관리자';
+
 						html += '	</td>';
 
 						html += '	<td>'+fn_ifNull(list.userWorkGbNm)+'</td>';

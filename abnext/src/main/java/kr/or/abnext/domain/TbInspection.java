@@ -35,7 +35,15 @@ public class TbInspection {
 
 	private List<TbFile> inspFileList;
 
+	private String priceComment;
 
+
+	public String getPriceComment() {
+		return priceComment;
+	}
+	public void setPriceComment(String priceComment) {
+		this.priceComment = priceComment;
+	}
 	public List<TbFile> getInspFileList() {
 		return inspFileList;
 	}
@@ -182,7 +190,8 @@ public class TbInspection {
 				+ ", inspThirdCd=" + inspThirdCd + ", inspThirdNm=" + inspThirdNm + ", inspType=" + inspType
 				+ ", inspTypeNm=" + inspTypeNm + ", inspPrice=" + inspPrice + ", inspResult=" + inspResult + ", insDt="
 				+ insDt + ", insId=" + insId + ", uptDt=" + uptDt + ", uptId=" + uptId + ", sumCnt=" + sumCnt
-				+ ", payStat=" + payStat + ", inspFileList=" + inspFileList + "]";
+				+ ", payStat=" + payStat + ", inspFileList=" + inspFileList + ", priceComment=" + priceComment + "]";
 	}
+
 
 }
