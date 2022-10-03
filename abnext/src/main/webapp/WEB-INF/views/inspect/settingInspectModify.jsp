@@ -364,7 +364,7 @@
 														</c:if>
 													</a>
 												</td>
-												<td class="txtc"><fmt:formatNumber value="${item.inspPrice }" pattern="#,###"/></td>
+												<td class="txtc"  id="payment_${status.index+1 }" onclick="makeBox(this.id)"><fmt:formatNumber value="${item.inspPrice }" pattern="#,###"/></td>
 											</tr>
 											<tr>
 												<td colspan="7">
