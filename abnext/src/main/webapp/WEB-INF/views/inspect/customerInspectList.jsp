@@ -81,6 +81,7 @@
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
+								<button type="button" class="excelBtn btn-sm btn-success btn-flat" onclick="excelDown();" style="max-width:100px;min-width:82px;"><i class="fa fa-copy"></i> EXCEL</button>
 								<button type="button" class="btn btn-sm btn-primary btn-flat" style="float:right;">신규신청</button>
 							</div>
 							<!-- /.card-footer -->
@@ -132,6 +133,8 @@
 <!-- jsGrid -->
 <script src="resources/plugins/jsgrid/demos/db.js"></script>
 <script src="resources/plugins/jsgrid/jsgrid.min.js"></script>
+<!-- Customizing Js -->
+<script src="resources/js/common.js"></script>
 <!-- Page specific script -->
 <script>
 	$(function () {
@@ -237,6 +240,18 @@
 				});
 			}
 		})
+	}
+
+	function excelDown(){
+		$("#jsGrid1").table2excel({
+			exclude : ".excludeThisClass",
+			name : "의뢰목록",
+			filename : "의뢰목록",
+			fileext : ".xlsx",
+			exclude_img : true,
+			exclude_links : true,
+			exclude_inputs : true        
+		});    
 	}
 </script>
 </body>

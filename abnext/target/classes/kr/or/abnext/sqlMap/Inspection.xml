@@ -155,10 +155,9 @@
 		     , BUTLER_SIDO, BUTLER_SIGUNGU, BUTLER_SIGUNGU_CD
 		     , ANIM_BIRTH, ANIM_FIRST_CD, ANIM_SECOND_CD, ANIM_THIRD_CD
 		     , ANIM_SEX, RQST_DT, PROC_STAT
-			 , CASE WHEN PROC_STAT = '5' THEN '검사완료'
-			        WHEN PROC_STAT = '1' THEN '신청중'
-					WHEN PROC_STAT = '2' THEN '신청중'
-					WHEN PROC_STAT = '3' THEN '접수'
+			 , CASE WHEN PROC_STAT = 'A001-05' THEN '검사완료'
+			        WHEN PROC_STAT = 'A001-01' THEN '신청중'
+					WHEN PROC_STAT = 'A001-02' THEN '접수완료'
 			        ELSE '검사중'
 			   END AS PROC_STAT_NM
 		     , RQST_MEMO, PAY_GB, PRICE, PAY_STAT
@@ -209,7 +208,7 @@
 
 	<select id="selectSampleList" parameterType="kr.or.abnext.domain.TbSample" resultType="kr.or.abnext.domain.TbSample">
 		SELECT A.*
-		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.SAMPLE_CODE) AS SAMPLE_NAME
+		     , IFNULL((SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.SAMPLE_CODE),SAMPLE_MEMO) AS SAMPLE_NAME
 		  FROM TB_SAMPLE A
 		 WHERE RQST_NO = #{rqstNo}
 	</select>

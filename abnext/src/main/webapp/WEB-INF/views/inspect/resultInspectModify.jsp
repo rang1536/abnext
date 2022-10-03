@@ -363,7 +363,7 @@
 									</form>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="fileSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="fileSave" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i> 단위결과저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -567,7 +567,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="antiSave" style="width:161.2px;display:none;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="antiSave" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i>단위결과저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -661,7 +661,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="serumSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="serumSave" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i>단위결과저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -831,7 +831,7 @@
 									</div>
 									 -->
 									<div style="text-align:center">
-										<button type="button" id="pcrSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+										<button type="button" id="pcrSave" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i>단위결과저장</button>
 									</div>
 								</div>
 								<!-- /.card-body -->
@@ -859,7 +859,7 @@
 									</form>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="fileSave3" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="fileSave3" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i>단위결과저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -921,7 +921,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="bcSave" style="width:161.2px;display:none" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="bcSave" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i>단위결과저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -961,7 +961,7 @@
 									</table>
 								</div>
 								<div style="text-align:center">
-									<button type="button" id="cbcSave" style="width:161.2px;display:none;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-pencil-alt"></i> 저장</button>
+									<button type="button" id="cbcSave" style="width:161.2px;;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i>단위결과저장</button>
 								</div>
 							</div>
 							<!-- /.card-body -->
@@ -971,7 +971,7 @@
 	 			</div><!-- /.inputType6 -->
 				<div class="row">
 					<div class="col-12" style="text-align:center">
-						<button type="button" id="save" style="width:161.2px;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-save"></i> &nbsp; 저장</button>
+						<button type="button" id="save" style="width:161.2px;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-save"></i> &nbsp; 결과저장</button>
 					</div>
 				</div>
 				<div style="height:10px;"></div>
@@ -1028,7 +1028,8 @@
 <script src="resources/plugins/toastr/toastr.min.js"></script>
 <!-- ChartJS -->
 <script src="resources/plugins/chart.js/Chart.min.js"></script>
-
+<!-- Toastr -->
+<script src="resources/plugins/toastr/toastr.min.js"></script>
 <script>
 var chartObj;
 $(function () {
@@ -1351,7 +1352,7 @@ function saveMemo(type){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			//alert("저장하였습니다.");
+			toastr.info('저장하였습니다');
 		}
 	});
 
@@ -1410,7 +1411,7 @@ $("#fileSave").click(function(){
 		success : function(data){
 			if(data.result == 'succ'){
 				setTimeout(function(){
-					alert("저장하였습니다.");
+					toastr.info('저장하였습니다');
 					location.href = "resultInspectList";
 				}, 500);
 			}
@@ -1465,7 +1466,6 @@ $("#fileSave2").click(function(){
 
 
 $("#fileSave3").click(function(){
-
 	var fileList = new Array();
 	var formData = new FormData($('#fileForm3')[0]);
 	var fileNames = new Array();
@@ -1502,25 +1502,25 @@ $("#fileSave3").click(function(){
         }
 	}
 
-	console.log(formData);
+	if(filesArr.length > 0){
+		//로그인유저정보
+		var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+		formData.append('uptId', userInfo.userId);
 
-	//로그인유저정보
-	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
-	formData.append('uptId', userInfo.userId);
-
-	$.ajax({
-		url : 'inspFileUpload',
-		data : formData,
-		dataType : 'json',
-		type : 'post',
-		processData : false,
-		contentType : false,
-		success : function(data){
-			if(data.result == 'succ'){
-				//alert("사진등록하였습니다.");
+		$.ajax({
+			url : 'inspFileUpload',
+			data : formData,
+			dataType : 'json',
+			type : 'post',
+			processData : false,
+			contentType : false,
+			success : function(data){
+				if(data.result == 'succ'){
+					//alert("사진등록하였습니다.");
+				}
 			}
-		}
-	});
+		});
+	}
 });
 
 /*****************************************************************
@@ -1609,7 +1609,7 @@ $("#antiSave").click(function(){
 		dataType : "JSON",
 		success : function(data){
 			setTimeout(function(){
-				alert("저장하였습니다.");
+				toastr.info('저장하였습니다');
 				location.href = "resultInspectList";
 			}, 500);
 		}
@@ -1627,7 +1627,11 @@ function fnAnti(){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			$("[name=inspResult]").val(data[0].inspResult);
+			if(data.length == 0){
+				$("[name=inspResult]").val("");
+			}else {
+				$("[name=inspResult]").val(data[0].inspResult);
+			}
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				var no = item.antiNo;
@@ -1709,7 +1713,7 @@ $("#serumSave").click(function(){
 		dataType : "JSON",
 		success : function(data){
 			setTimeout(function(){
-				alert("저장하였습니다.");
+				toastr.info('저장하였습니다');
 				location.href = "resultInspectList";
 			}, 500);
 		}
@@ -1801,7 +1805,11 @@ function fnSerum(){
 		type : 'post',
 		success : function(data){
 			if(data != ''){
-				$("[name=inspResult]").val(data[0].inspResult);
+				if(data.length == 0){
+					$("[name=inspResult]").val("");
+				}else {
+					$("[name=inspResult]").val(data[0].inspResult);
+				}
 				for(var i=0; i<data.length; i++){
 					var item = data[i];
 					var no = i+1;
@@ -1896,19 +1904,20 @@ $("#pcrSave").click(function(){
 		pcrList : pcrList
 	}
 
-	$.ajax({
-		url : "insertPcr",
-		data : data,
-		type : "POST",
-		dataType : "JSON",
-		success : function(data){
-			setTimeout(function(){
-				alert("저장하였습니다.");
-				location.href = "resultInspectList";
-			}, 500);
-		}
-	});
-
+	if(pcrList.length > 0){
+		$.ajax({
+			url : "insertPcr",
+			data : data,
+			type : "POST",
+			dataType : "JSON",
+			success : function(data){
+				setTimeout(function(){
+					toastr.info('저장하였습니다');
+					location.href = "resultInspectList";
+				}, 500);
+			}
+		});
+	}
 })
 
 function fnPcr(){
@@ -1921,8 +1930,13 @@ function fnPcr(){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			$("[name=inspResult]").val(data[0].inspResult);
 			$("#pcr").empty();
+			if(data.length == 0){
+				$("[name=inspResult]").val("");
+			}else {
+				$("[name=inspResult]").val(data[0].inspResult);
+			}
+
 			var html = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
@@ -2017,7 +2031,11 @@ function fnElse(){
 		success : function(data){
 			var htmlData = '';
 			$(".previewList").empty();
-			$("[name=inspResult]").val(data[0].inspResult);
+			if(data.length == 0){
+				$("[name=inspResult]").val("");
+			}else {
+				$("[name=inspResult]").val(data[0].inspResult);
+			}
 
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
@@ -2075,7 +2093,11 @@ function fnBloodChem(){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			$("[name=inspResult]").val(data[0].inspResult);
+			if(data.length == 0){
+				$("[name=inspResult]").val("");
+			}else {
+				$("[name=inspResult]").val(data[0].inspResult);
+			}
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				$("#bloodChem").find("tr").each(function(){
@@ -2118,7 +2140,7 @@ $("#bcSave").click(function(){
 		dataType : "JSON",
 		success : function(data){
 			setTimeout(function(){
-				alert("저장하였습니다.");
+				toastr.info('저장하였습니다');
 				location.href = "resultInspectList";
 			}, 500);
 		}
@@ -2185,7 +2207,7 @@ function callBackBloodChem(data){
 		dataType : "JSON",
 		success : function(data){
 			setTimeout(function(){
-				alert("저장하였습니다.");
+				toastr.info('저장하였습니다');
 				location.href = "resultInspectList";
 			}, 500);
 		}
@@ -2203,7 +2225,11 @@ function fnCbc(){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			$("[name=inspResult]").val(data[0].inspResult);
+			if(data.length == 0){
+				$("[name=inspResult]").val("");
+			}else {
+				$("[name=inspResult]").val(data[0].inspResult);
+			}
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				$("#cbc").find("tr").each(function(){
@@ -2262,7 +2288,7 @@ $(document).on('click','#save',function(){
 	/* 5 BC                                                                                           */
 	/* 6 CBC                                                                                          */
 	/**************************************************************************************************/
-	if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-16'){
+	if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-02-02' || inspSecCd == 'B001-02-16'){
 		saveMemo(4);
 		$("#fileSave3").trigger("click");
 		$("#pcrSave").trigger("click");
@@ -2273,7 +2299,7 @@ $(document).on('click','#save',function(){
 	}else if(inspSecCd == 'B001-03-18'){
 		saveMemo(3);
 		$("#serumSave").trigger("click");
-	}else if(inspSecCd == 'B001-04-23'){hinahi
+	}else if(inspSecCd == 'B001-04-23'){
 		saveMemo(5);
 		$("#bcSave").trigger("click");
 	}else if(inspSecCd == 'B001-04-24'){

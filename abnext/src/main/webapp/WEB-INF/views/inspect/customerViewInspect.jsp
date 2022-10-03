@@ -48,7 +48,7 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1><b>결과입력 대상</b></h1>
+						<h1><b>진단검사 결과</b></h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
@@ -167,6 +167,13 @@
 											</th>
 										</tr>
 									</tbody>
+									<c:if test="${rceptInfo.procStat == 'A001-05' }">
+										<tfoot>
+											<tr>
+												<td colspan="4"><button type="button" class="btn btn-block btn-flat" style="background-color:#002266; color:#fff" id="modBtn">검사결과서</button></td>
+											</tr>
+										</tfoot>
+									</c:if>
 								</table>
 							</div>
 							<!-- /.card-body -->
@@ -174,7 +181,7 @@
 					<!-- /.card -->
 					</div>
 				</div>
-
+<%--
 				<div class="row">
 					<div class="col-12">
 						<div class="card card-primary card-outline">
@@ -210,11 +217,11 @@
 												<td class="txtc">${item.inspSecondNm }</td>
 												<td class="txtc">${item.inspThirdNm }</td>
 												<td class="txtc">${item.sampleName }</td>
-												<%--
+
 												<td class="txtc">
 													<input type="text" id="inspResult_${status.index+1 }" class="form-control" placeholder="실험결과" value="${item.inspResult}">
 												</td>
-												 --%>
+
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -242,6 +249,7 @@
 					</div>
 				</div>
  				<div class="result"></div>
+ 				 --%>
 			</div>
 			<!-- /.container-fluid -->
 		</section>
@@ -1170,30 +1178,6 @@ function fnAnti(inspNo,k){
 
 }
 
-$(".sign").click(function(){
-	var fm = $("#finalMemo").val();
-	var sn = "\n\n아비넥스트 CEO / 충북대학교 수의과대학 명예교수 모인필";
-	$("#finalMemo").val(fm+sn);
-})
-
-$(".save").click(function(){
-	var rqstNo = "${rceptInfo.rqstNo }";
-
-	var data = {
-		rqstNo : rqstNo,
-		finalMemo : $("#finalMemo").val(),
-		uptId : JSON.parse(sessionStorage.getItem("userInfo")).userId
-	}
-	$.ajax({
-		url : 'modifyFinal',
-		data : data,
-		dataType : 'json',
-		type : 'post',
-		success : function(data){
-			alert("저장하였습니다.");
-		}
-	});
-})
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>
