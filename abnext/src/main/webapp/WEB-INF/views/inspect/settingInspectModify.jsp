@@ -601,9 +601,9 @@ $("#inspList").find("tr").click(function(){
 	}else {
 		$("#inspList").find("tr").find("[id^=chk]").prop("checked",false);
 		$(this).find("[id^=chk]").prop("checked",true);
-		$("#inspFirstCd").val($("#inspList").find("tr").eq(k).find("[id^=inspFirstCd]").val()).prop("selected", true);
-		$("#inspSecondCd").val($("#inspList").find("tr").eq(k).find("[id^=inspSecondCd]").val()).prop("selected", true);
-		//$("#inspThirdCd").val($("#inspList").find("tr").eq(k).find("[id^=inspThirdCd]").val()).prop("selected", true);;
+		//$("#inspFirstCd").val($("#inspList").find("tr").eq(k).find("[id^=inspFirstCd]").val()).prop("selected", true);
+		//$("#inspSecondCd").val($("#inspList").find("tr").eq(k).find("[id^=inspSecondCd]").val());
+		//$("#inspThirdCd").val($("#inspList").find("tr").eq(k).find("[id^=inspThirdCd]").val());
 
 
 
@@ -654,7 +654,9 @@ $("#modBtn").on("click",function(){
 $("#addBtn").on("click",function(){
 	var idx = 1;
 	$("#inspList").find("tr").each(function(){
-		idx++;
+		if($(this).index()%2 == 0){
+			idx++;
+		}
 	});
 
 	var inspFirstCd = $("#inspFirstCd").val();
