@@ -823,7 +823,7 @@ function saveData(){
 	var price = $("#sumPrice").text().replace(/,/gi,'').replace('원','');
 	var data = {
 			hospNo : $("#hospNo").val(),
-			hospNm : $("#hospNm").val(),
+			hospNm : $("#hospNo option:selected").text(),
 			userNo : $("#userNo").val(),
 			userNm : $("#userNm").val(),
 			animNo : '0',
@@ -859,7 +859,7 @@ function saveData(){
 		dataType : "JSON",
 		success : function(data){
 			alert("등록되었습니다.");
-			location.href = "customerInspectList";
+			location.href = "requestInspect";
 		}
 	});
 }
