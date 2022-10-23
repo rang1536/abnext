@@ -139,6 +139,10 @@ public class InspectDao {
 		return sql.insert("inspection.updateInspectStatus", bean);
 	}
 
+	public int dupChkInspect(TbRcept bean) {
+		return sql.selectOne("inspection.dupChkInspect", bean);
+	}
+
 	public int insertOpinion(TbInspOpinion bean) {
 		return sql.insert("inspection.insertOpinion", bean);
 	}

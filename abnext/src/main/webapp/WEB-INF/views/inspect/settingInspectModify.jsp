@@ -515,6 +515,7 @@ $("#sett").on("click",function (){
 				sampleName : $(this).find("[id^=sampleName]").val(),
 				inspThirdCd : $(this).find("[id^=inspThirdCd]").val(),
 				inspFirstCd : $(this).find("[id^=inspFirstCd]").val(),
+				inspSecondCd : $(this).find("[id^=inspSecondCd]").val(),
 				inspPrice	: $(this).find('td:eq(7)').text().replace(/,/gi,''),
 			}
 		}else{
@@ -603,9 +604,10 @@ $("#modBtn").on("click",function(){
 		if($(this).find("[id^=chk]").is(":checked")){
 			$(this).find("[id^=inspFirstCd]").val($("#inspFirstCd").val());
 			$(this).find("td:eq(2)").text($("#inspFirstCd option:selected").text());
+			$(this).find("[id^=inspSecondCd]").val($("#inspSecondCd").val());
+			$(this).find("td:eq(3)").text($("#inspSecondCd option:selected").text());
 			$(this).find("[id^=inspThirdCd]").val($("#inspThirdCd").val());
-			$(this).find("[id^=inspThirdCd]").val($("#inspThirdCd").val());
-			$(this).find("td:eq(3)").text($("#inspThirdCd option:selected").text());
+			$(this).find("td:eq(4)").text($("#inspThirdCd option:selected").text());
 			var str = JSON.stringify($("#sampleCode").val());
 			str = str.replace('[','').replace(']','').replace(/\"/gi,'');
 			var strArr = str.split(',');
@@ -625,7 +627,7 @@ $("#modBtn").on("click",function(){
 					}
 				}
 			}
-			$(this).find("td:eq(4)").text(sampleNm);
+			$(this).find("td:eq(5)").text(sampleNm);
 			$(this).find("[id^=sampleCode]").val(str);
 			$(this).find("[id^=sampleName]").val(sampleNm);
 		}
@@ -705,7 +707,8 @@ $("#addBtn").on("click",function(){
 	html += '			<span id="workerView_'+idx+'">담당자</span>';
 	html += '		</a>';
 	html += '	</td>';
-	html += '	<td class="txtc" id="payment_'+idx+'" onclick="makeBox(this.id)">'+$("#inspPrice").val()+'</td>';
+	//html += '	<td class="txtc" id="payment_'+idx+'" onclick="makeBox(this.id)">'+$("#inspPrice").val()+'</td>';
+	html += '	<td class="txtc" id="payment_'+idx+'" onclick="makeBox(this.id)">40,000</td>';
 	html += '</tr>';
 	html += '<tr>';
 	html += '	<td colspan="7">';

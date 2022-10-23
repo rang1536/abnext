@@ -251,6 +251,7 @@ public class InspectRestController {
 				bean.setSampleName(tbRcept.getInspList().get(i).get("sampleName").toString());
 				bean.setInspThirdCd(tbRcept.getInspList().get(i).get("inspThirdCd").toString());
 				bean.setInspFirstCd(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
+				bean.setInspSecondCd(tbRcept.getInspList().get(i).get("inspSecondCd").toString());
 				bean.setUptId(tbRcept.getUptId());
 				bean.setInspPrice(tbRcept.getInspList().get(i).get("inspPrice").toString());
 				bean.setPriceComment(tbRcept.getInspList().get(i).get("priceComment").toString());
@@ -602,5 +603,18 @@ public class InspectRestController {
 		return inspectServ.customerInspectList(rcept);
 	}
 
+	@RequestMapping(value = "dupChkRcept", method = RequestMethod.POST)
+	public Map<String, Object> dupChkInspect(TbRcept tbRcept) {
+		int k = inspectServ.dupChkInspect(tbRcept);
+		System.out.println("중복체크 카운트 : "+k);
+		Map<String, Object> map = new HashMap<String,Object>();
+		if(k == 0) {
+			map.put("result", "succ");
+		}else {
+			map.put("result", "fail");
+		}
 
+
+		return map;
+	}
 }

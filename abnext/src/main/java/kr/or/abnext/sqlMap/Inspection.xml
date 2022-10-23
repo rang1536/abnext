@@ -339,6 +339,9 @@
 		<if test="inspFirstCd != null and inspFirstCd != ''">
 		     , INSP_FIRST_CD = #{inspFirstCd}
 		</if>
+		<if test="inspSecondCd != null and inspSecondCd != ''">
+		     , INSP_SECOND_CD = #{inspSecondCd}
+		</if>
 		<if test="inspThirdCd != null and inspThirdCd != ''">
 		     , INSP_THIRD_CD = #{inspThirdCd}
 		</if>
@@ -602,5 +605,13 @@
 		SELECT CONCAT('XYZ',CAST(MAX(SUBSTR(ANIM_NO,4)) AS SIGNED)+1)
 		  FROM TB_ANIMAL
 		 WHERE ANIM_NO LIKE CONCAT(#{animNo},'%')
+	</select>
+
+	<select id="dupChkInspect" parameterType="kr.or.abnext.domain.TbRcept" resultType="int">
+		SELECT COUNT(*)
+		  FROM TB_RCEPT
+		 WHERE HOSP_NO = #{hospNo}
+		   AND ANIM_NM = #{animNm}
+		   AND RQST_DT = DATE_FORMAT(NOW(),'%Y.%m.%d')
 	</select>
 </mapper>

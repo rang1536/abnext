@@ -1410,10 +1410,7 @@ $("#fileSave").click(function(){
 		contentType : false,
 		success : function(data){
 			if(data.result == 'succ'){
-				setTimeout(function(){
-					toastr.info('저장하였습니다');
-					location.href = "resultInspectList";
-				}, 500);
+				toastr.info('저장하였습니다');
 			}
 		}
 	});
@@ -1516,7 +1513,7 @@ $("#fileSave3").click(function(){
 			contentType : false,
 			success : function(data){
 				if(data.result == 'succ'){
-					//alert("사진등록하였습니다.");
+					toastr.info('저장하였습니다');
 				}
 			}
 		});
@@ -1608,10 +1605,7 @@ $("#antiSave").click(function(){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			setTimeout(function(){
-				toastr.info('저장하였습니다');
-				location.href = "resultInspectList";
-			}, 500);
+			location.href = "resultInspectList";
 		}
 	});
 
@@ -1712,10 +1706,7 @@ $("#serumSave").click(function(){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			setTimeout(function(){
-				toastr.info('저장하였습니다');
-				location.href = "resultInspectList";
-			}, 500);
+			toastr.info('저장하였습니다');
 		}
 	});
 
@@ -1911,10 +1902,7 @@ $("#pcrSave").click(function(){
 			type : "POST",
 			dataType : "JSON",
 			success : function(data){
-				setTimeout(function(){
-					toastr.info('저장하였습니다');
-					location.href = "resultInspectList";
-				}, 500);
+				toastr.info('저장하였습니다');
 			}
 		});
 	}
@@ -2139,10 +2127,7 @@ $("#bcSave").click(function(){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			setTimeout(function(){
-				toastr.info('저장하였습니다');
-				location.href = "resultInspectList";
-			}, 500);
+			toastr.info('저장하였습니다');
 		}
 	});
 
@@ -2206,10 +2191,7 @@ function callBackBloodChem(data){
 		type : "POST",
 		dataType : "JSON",
 		success : function(data){
-			setTimeout(function(){
-				toastr.info('저장하였습니다');
-				location.href = "resultInspectList";
-			}, 500);
+			toastr.info('저장하였습니다');
 		}
 	});
 
@@ -2309,6 +2291,10 @@ $(document).on('click','#save',function(){
 		saveMemo(1);
 		$("#fileSave").trigger("click");
 	}
+
+	setTimeout(function(){
+		location.href = "resultInspectList";
+	}, 2000);
 
 })
 
