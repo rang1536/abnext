@@ -736,6 +736,32 @@ function calcPrice(){
 }
 
 $(".btn-save").on('click',function(){
+	var data = {
+		hospNo : $("#hospNo").val(),
+		animNm : $("#animNm").val()
+	}
+
+	$.ajax({
+		url : "dupChkRcept",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			console.log(data);
+			if(data.result == 'succ'){
+				saveData();
+			}else {
+				var msg = "중복된 데이터가 존재합니다.\등록하시겠습니까?";
+				if(confirm(msg)){
+					saveData();
+				}
+			}
+		}
+	});
+
+});
+
+function saveData(){
 	//필수값 체크
 	if(!validSave()){
 		return;
@@ -827,7 +853,7 @@ $(".btn-save").on('click',function(){
 			location.href = "customerInspectList";
 		}
 	});
-});
+}
 
 function validSave(){
 	var validFlag = true;

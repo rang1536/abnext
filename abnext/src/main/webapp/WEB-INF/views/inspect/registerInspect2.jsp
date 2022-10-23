@@ -610,7 +610,7 @@ $(function () {
 
 $(document).ready(function(){
 	//시료정보
-	$.gfn_getCode('A002',callBackFn,'sampleCode');
+	//$.gfn_getCode('A002',callBackFn,'sampleCode');
 
 	//의사목록
 	docList();
@@ -746,7 +746,31 @@ function calcPrice(){
 }
 
 $(".btn-save").on('click',function(){
-	console.log('h2')
+	var data = {
+		hospNo : $("#hospNo").val(),
+		animNm : $("#animNm").val()
+	}
+
+	$.ajax({
+		url : "dupChkRcept",
+		data : data,
+		type : "POST",
+		dataType : "JSON",
+		success : function(data){
+			if(data.result == 'succ'){
+				saveData();
+			}else {
+				var msg = "중복된 데이터가 존재합니다.\등록하시겠습니까?";
+				if(confirm(msg)){
+					saveData();
+				}
+			}
+		}
+	});
+
+});
+
+function saveData(){
 	//필수값 체크
 	if(!validSave()){
 		return;
@@ -799,7 +823,7 @@ $(".btn-save").on('click',function(){
 	var price = $("#sumPrice").text().replace(/,/gi,'').replace('원','');
 	var data = {
 			hospNo : $("#hospNo").val(),
-			hospNm : $("#hospNo option:selected").text(),
+			hospNm : $("#hospNm").val(),
 			userNo : $("#userNo").val(),
 			userNm : $("#userNm").val(),
 			animNo : '0',
@@ -819,7 +843,7 @@ $(".btn-save").on('click',function(){
 			procStat : 'A001-01',
 			procStatNm : '',
 			rqstMemo : $("#rqstMemo").val(),
-			payGb : $("#hospNo option:selected").data("paygb"),
+			payGb : $("#payGb").val(),
 			price : price,
 			payStat : '01',
 			insId : JSON.parse(sessionStorage.getItem("userInfo")).userId,
@@ -835,10 +859,10 @@ $(".btn-save").on('click',function(){
 		dataType : "JSON",
 		success : function(data){
 			alert("등록되었습니다.");
-			location.href = "requestInspect";
+			location.href = "customerInspectList";
 		}
 	});
-});
+}
 
 function validSave(){
 	var validFlag = true;
@@ -933,8 +957,6 @@ $(document).on('change','#docNo',function(){
 })
 
 window.onload = function(){
-	animControl();
-	inspControl();
 	$("#inspThirdCd").prepend('<option value="">선택</option>');
 	$("#inspThirdCd").val("");
 }

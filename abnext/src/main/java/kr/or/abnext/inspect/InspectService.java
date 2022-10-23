@@ -144,6 +144,10 @@ public class InspectService {
 		return inspectDao.updateInspectStatus(bean);
 	}
 
+	public int dupChkInspect(TbRcept bean) {
+		return inspectDao.dupChkInspect(bean);
+	}
+
 	public int updateSampleStatus(TbSample bean) {
 		return inspectDao.updateSampleStatus(bean);
 	}
