@@ -197,7 +197,7 @@
 				var typeList = ['text','text','text','text','text','text','text','text'];
 				var widthList = ['120','100','100','150','180','150','120','120'];
 				var titleList = ['의뢰번호','신청일','상태','동물이름','보호자','담당수의사','검사구분','비용'];
-				var alignList = ['center','center','center','center','center','center','center','center'];
+				var alignList = ['center','center','center','center','center','center','center','right'];
 				var gridId = 'jsGrid1';
 				var fields = new Array();
 				var row = '';
@@ -212,10 +212,11 @@
 						"itemTemplate" :
 							function(value, item) {
 								var flag = false;
+								console.log(item);
 								if(value == '01') {
-									return "미납";
+									return '<p style="color:red;font-weight:bold;">'+$.gfn_setComma(item.price)+"(미납) </p>";
 								}else if(value == '02') {
-									return "수납";
+									return '<p style="color:green;font-weight:bold;">'+$.gfn_setComma(item.price)+"(수납) </p>";
 								}else {
 									return value;
 								}

@@ -49,7 +49,7 @@
 									<div class="col-sm-4">
 										<a href="#" onclick="movePage(1)">
 											<div class="position-relative">
-												<img src="resources/dist/img/photo1.png" alt="Photo 1" class="img-fluid" >
+												<img src="resources/dist/img/mainBird.jpg" alt="Photo 1" class="img-fluid" >
 												<div class="ribbon-wrapper ribbon-lg">
 													<div class="ribbon bg-success text-lg">
 														반려조류
@@ -61,7 +61,7 @@
 									<div class="col-sm-4">
 										<a href="#" onclick="movePage(2)">
 											<div class="position-relative">
-												<img src="resources/dist/img/photo2.png" alt="Photo 1" class="img-fluid">
+												<img src="resources/dist/img/mainPig.jpg" alt="Photo 1" class="img-fluid">
 												<div class="ribbon-wrapper ribbon-lg">
 													<div class="ribbon bg-warning text-lg">
 														가금류
@@ -73,7 +73,7 @@
 									<div class="col-sm-4">
 										<a href="#" onclick="movePage(3)">
 											<div class="position-relative">
-												<img src="resources/dist/img/photo3.jpg" alt="Photo 1" class="img-fluid">
+												<img src="resources/dist/img/mainChiken.jpg" alt="Photo 1" class="img-fluid">
 												<div class="ribbon-wrapper ribbon-lg">
 													<div class="ribbon bg-danger text-lg">
 														돼지

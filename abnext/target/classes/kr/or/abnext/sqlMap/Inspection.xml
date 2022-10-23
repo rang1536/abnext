@@ -156,8 +156,7 @@
 		     , ANIM_BIRTH, ANIM_FIRST_CD, ANIM_SECOND_CD, ANIM_THIRD_CD
 		     , ANIM_SEX, RQST_DT, PROC_STAT
 			 , CASE WHEN PROC_STAT = 'A001-05' THEN '검사완료'
-			        WHEN PROC_STAT = 'A001-01' THEN '신청중'
-					WHEN PROC_STAT = 'A001-02' THEN '접수완료'
+			        WHEN PROC_STAT = 'A001-02' THEN '접수완료'
 			        ELSE '검사중'
 			   END AS PROC_STAT_NM
 		     , RQST_MEMO, PAY_GB, PRICE, PAY_STAT
@@ -170,10 +169,10 @@
 		  FROM TB_RCEPT A
 		 WHERE INS_ID = #{insId}
 		<if test="searchStr != null and searchStr == '01'">
-		   AND PROC_STAT != '5'
+		   AND PROC_STAT != 'A001-05'
 		</if>
 		<if test="searchStr != null and searchStr == '02'">
-			AND PROC_STAT = '5'
+			AND PROC_STAT = 'A001-05'
 		</if>
 		 ORDER BY INS_DT DESC
 	</select>
