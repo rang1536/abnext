@@ -957,6 +957,7 @@ $(document).on('change','#docNo',function(){
 })
 
 window.onload = function(){
+	animControl();
 	$("#inspThirdCd").prepend('<option value="">선택</option>');
 	$("#inspThirdCd").val("");
 }
