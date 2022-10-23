@@ -388,6 +388,9 @@
   		<if test ="insId != null and insId != ''">
 		   AND INS_ID = #{insId}
   		</if>
+  		<if test ="hospNo != null and hospNo != ''">
+		   AND HOSP_NO = #{hospNo}
+  		</if>
   		 ORDER BY INS_DT DESC
   		<if test="limitCnt != null and limitCnt != ''">
   		 LIMIT #{limitCnt}

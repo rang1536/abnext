@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.abnext.admin.AdminService;
 import kr.or.abnext.domain.TbRcept;
@@ -53,6 +54,30 @@ public class PaymentController {
 		model.addAttribute("strt", strt);
 		model.addAttribute("fnsh", fnsh);
 		return "payment/payList";
+	}
+
+	@RequestMapping(value = "payListCustomer", method = RequestMethod.GET)
+	public String payListCustomer(Locale locale, Model model, String page
+			,@RequestParam(value="hospNo") String hospNo) {
+		logger.info("payList Method is start {}.", locale);
+
+
+		Calendar cal = Calendar.getInstance();
+		System.out.println();
+
+		TbRcept bean = new TbRcept();
+		Date now = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy.MM", Locale.KOREA);
+		String strt = df.format(now)+".01";
+		String fnsh = df.format(now)+"."+cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		bean.setSearchStrtDt(strt);
+		bean.setSearchFnshDt(fnsh);
+		bean.setHospNo(hospNo);
+		List<TbRcept> list = payServ.selectPaymentList(bean);
+		model.addAttribute("rceptList", list);
+		model.addAttribute("strt", strt);
+		model.addAttribute("fnsh", fnsh);
+		return "payment/payListCustomer";
 	}
 
 }

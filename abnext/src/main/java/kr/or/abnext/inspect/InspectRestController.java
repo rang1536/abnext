@@ -600,7 +600,6 @@ public class InspectRestController {
 
 	@RequestMapping(value = "selectCustomerInspectList")
 	public List<TbRcept> customerInspectList(TbRcept rcept) {
-		System.out.println(">>>>>>>>>>>>>>> TB_RCEPT : "+rcept);
 		return inspectServ.customerInspectList(rcept);
 	}
 

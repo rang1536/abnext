@@ -372,6 +372,20 @@
 				}else{
 					location.href = menuUrl;
 				}
+			}else if(menuNm == '수납관리'){ //2022.10.23. 고객용 수납관리 메뉴 추가
+				if(userInfo == null){
+					if(confirm('로그인후 사용가능한 메뉴입니다. \n로그인페이지로 이동하시겠습니까?')){
+						fn_loginPage();
+					}
+				}else{
+					if(userInfo.userLev != '4'){
+						location.href = menuUrl+'Customer?hospNo='+userInfo.hospNo;
+					}else{
+						location.href = menuUrl;
+					}
+
+				}
+
 			}else{
 				console.log(menuNm);
 				location.href = menuUrl;

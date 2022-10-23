@@ -15,6 +15,7 @@ public class PaymentDao {
 	private SqlSessionTemplate sql;
 
 	public List<TbRcept> selectPaymentList(TbRcept bean){
+		System.out.println(">>>>>>>> 비용 : "+bean);
 		return sql.selectList("inspection.selectPaymentList", bean);
 	}
 
