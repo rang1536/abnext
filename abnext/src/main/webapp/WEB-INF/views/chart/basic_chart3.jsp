@@ -196,6 +196,10 @@
 		getData();
     });
 
+	$(document).on('click', '.searchBtn', function(){
+		getData();
+	})
+
 	function getData(){
 		$.ajax({
 			url : 'basicChartList3',

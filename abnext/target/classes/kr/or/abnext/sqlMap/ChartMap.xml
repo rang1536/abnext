@@ -29,6 +29,7 @@
 	    <if test="endDt != null and endDt != '' ">
 	    	AND RQST_DT <![CDATA[<=]]> replace(replace(#{endDt},'-',''),'-','')
 	    </if>
+	    ORDER BY RQST_DT DESC
 	</select>
 
 	<!-- 가검물통계 -->
@@ -232,7 +233,7 @@
 						) A
 				  GROUP BY A.RQST_DT
 			  ) B
-		ORDER BY B.RQST_DT
+		ORDER BY B.RQST_DT DESC
 	</select>
 
 
@@ -488,6 +489,7 @@
 	    	  	   AND INSP_SECOND_CD = 'B001-04-23'
 	    	  )
 	    */
+	    ORDER BY RQST_DT DESC
 	</select>
 
 	<!-- 지역별 혈청검사(혈구검사)
@@ -530,6 +532,7 @@
 	    	  	   AND INSP_SECOND_CD = 'B001-04-24'
 	    	  )
 	    */
+	    ORDER BY RQST_DT DESC
 	</select>
 
 
