@@ -600,7 +600,7 @@ $(function () {
 
 $(document).ready(function(){
 	//시료정보
-	$.gfn_getCode('A002',callBackFn,'sampleCode');
+	//$.gfn_getCode('A002',callBackFn,'sampleCode');
 
 	//의사목록
 	docList();
@@ -940,7 +940,6 @@ $(document).on('change','#docNo',function(){
 
 window.onload = function(){
 	animControl();
-	inspControl();
 	$("#inspThirdCd").prepend('<option value="">선택</option>');
 	$("#inspThirdCd").val("");
 }
