@@ -10,6 +10,7 @@ public class TbBloodChem {
 	private String inspNo;
 	private String itemName;
 	private String val;
+	private String rmk;
 	private String inspResult;
 
 	private String insDt;
@@ -34,6 +35,12 @@ public class TbBloodChem {
 	}
 	public void setVal(String val) {
 		this.val = val;
+	}
+	public String getRmk() {
+		return rmk;
+	}
+	public void setRmk(String rmk) {
+		this.rmk = rmk;
 	}
 	public String getInspResult() {
 		return inspResult;

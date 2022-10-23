@@ -1558,6 +1558,19 @@ function makeTd(target){
 				$("#antibiotic").find("tr:eq("+idx+")").find("td:eq(8)").text("");
 			}
 		}
+	}else {
+		if(splitStr[0] == 'bcvl'){
+			var idx = Number(splitStr[1])-1;
+			var r = Number($("#bloodChem").find("tr:eq("+idx+")").find("td:eq(3)").text().trim());
+			var s = Number($("#bloodChem").find("tr:eq("+idx+")").find("td:eq(4)").text().trim());
+			if(r > 0 && s > 0 && val > 0){
+				if(val < r){
+					$("#bigo"+Number(splitStr[1])).text("▼");
+				}else if(val > s){
+					$("#bigo"+Number(splitStr[1])).text("▲");
+				}
+			}
+		}
 	}
 }
 
@@ -2091,6 +2104,7 @@ function fnBloodChem(){
 				$("#bloodChem").find("tr").each(function(){
 					if($(this).find("td:eq(0)").text() == item.itemName){
 						$(this).find("td:eq(1)").text(item.val);
+						$(this).find("td:eq(5)").text(item.rmk);
 					}
 				})
 			}
@@ -2104,11 +2118,12 @@ $("#bcSave").click(function(){
 	$("#bloodChem").find("tr").each(function(idx){
 		var itemName = $(this).find("td:eq(0)").text();
 		var val = $(this).find("td:eq(1)").text();
-
+		var rmk = $(this).find("td:eq(5)").text();
 		if(val != ''){
 			var bloodChem = {
 				itemName : itemName,
 				val : val,
+				rmk : rmk,
 				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
 			}
 			bcList.push(bloodChem);
@@ -2136,14 +2151,32 @@ $("#bcSave").click(function(){
 function callBackBloodChem(data){
 	var html = '';
 	$("#bloodChem").empty();
+	var td2 = ''; var td3 = ''; var td4 = '';
 	for(var i=0; i<data.length; i++){
+		var item = data[i].codeNm;
+		switch(item) {
+			case 'TP' : td2 = 'g/dL'; td3 = '5.4'; td4 = '8.2'; break;
+			case 'Alb' : td2 = 'g/dL'; td3 = '2.2'; td4 = '4.4'; break;
+			case 'Glob' : td2 = 'g/dL'; td3 = '1.5'; td4 = '5.7'; break;
+			case 'A/G ratio' : td2 = ''; td3 = ''; td4 = ''; break;
+			case 'GLU' : td2 = 'mg/dL'; td3 = '70'; td4 = '150'; break;
+			case 'AST' : td2 = ''; td3 = ''; td4 = ''; break;
+			case 'CK' : td2 = ''; td3 = ''; td4 = ''; break;
+			case 'CA' : td2 = 'mg/dL'; td3 = '8.0'; td4 = '11.8'; break;
+			case 'PHOS' : td2 = 'mg/dL'; td3 = '3.4'; td4 = '8.5'; break;
+			case 'Na' : td2 = 'mmol/L'; td3 = '142'; td4 = '164'; break;
+			case 'K' : td2 = 'mmol/L'; td3 = '3.7'; td4 = '5.8'; break;
+			case 'Na/K ratio' : td2 = ''; td3 = ''; td4 = ''; break;
+			default : td2 = ''; td3 = ''; td4 = ''; break;
+		}
+
 		html += '<tr>';
 		html += '	<td id="bcnm_'+(i+1)+'">'+data[i].codeNm+'</td>';
 		html += '	<td style="height:34px; padding: 1px 3px 1px 3px;" id="bcvl_'+(i+1)+'"></td>';
-		html += '	<td></td>';
-		html += '	<td></td>';
-		html += '	<td></td>';
-		html += '	<td></td>';
+		html += '	<td>'+td2+'</td>';
+		html += '	<td>'+td3+'</td>';
+		html += '	<td>'+td4+'</td>';
+		html += '	<td id="bigo'+(i+1)+'"></td>';
 		html += '</tr>';
 	}
 	$("#bloodChem").html(html);

@@ -548,6 +548,7 @@ public class InspectRestController {
 			bc.setInspNo(tbResult.getInspNo());
 			bc.setItemName(tbResult.getBcList().get(i).get("itemName").toString());
 			bc.setVal(tbResult.getBcList().get(i).get("val").toString());
+			bc.setRmk(tbResult.getBcList().get(i).get("rmk").toString());
 			bc.setInsId(tbResult.getInsId());
 			//검사 테이블 등록
 			resCnt += inspectServ.insertBloodChem(bc);

@@ -702,7 +702,7 @@ $("#addBtn").on("click",function(){
 	html += '	<td rowspan="2">';
 	html += '		<input type="hidden" id="inspNo_'+idx+'" value="${item.inspNo}"/>';
 	html += '		<input type="hidden" id="inspFirstCd_'+idx+'" value="'+inspFirstCd+'"/>';
-	html += '		<input type="hidden" id="inspSecondCd_'+idx+'" value="'+inspFirstCd+'"/>';
+	html += '		<input type="hidden" id="inspSecondCd_'+idx+'" value="'+inspSecondCd+'"/>';
 	html += '		<input type="hidden" id="inspThirdCd_'+idx+'" value="'+inspThirdCd+'"/>';
 	html += '		<input type="hidden" id="sampleCode_'+idx+'" value="'+sampleCode+'"/>';
 	html += '		<input type="hidden" id="sampleName_'+idx+'" value="'+sampleName+'"/>';
