@@ -814,7 +814,7 @@ function saveData(){
 	var price = $("#sumPrice").text().replace(/,/gi,'').replace('원','');
 	var data = {
 			hospNo : $("#hospNo").val(),
-			hospNm : $("#hospNm").val(),
+			hospNm : $("#hospNo option:selected").text(),
 			userNo : $("#userNo").val(),
 			userNm : $("#userNm").val(),
 			animNo : '0',

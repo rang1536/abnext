@@ -589,13 +589,29 @@ function callBackFnGetPrice(data){
 }
 
 $("#inspList").find("tr").click(function(){
-	if($(this).find("[id^=chk]").is(":checked")){
+	var k = $(this).index();
+	if(k % 2 == 1){
+		k = $(this).index()-1;
+	}
+
+	console.log($("#inspList").find("tr").eq(k).find("[id^=inspThirdCd]").val());
+
+	if($("#inspList").find("tr").eq(k).find("[id^=chk]").is(":checked")){
 		$(this).find("[id^=chk]").prop("checked",false);
 	}else {
 		$("#inspList").find("tr").find("[id^=chk]").prop("checked",false);
 		$(this).find("[id^=chk]").prop("checked",true);
-		$("#inspThirdCd").val($(this).find("[id^=inspThirdCd]").val()).trigger('change');
-		$("#inspFirstCd").val($(this).find("[id^=inspFirstCd]").val());
+		//$("#inspFirstCd").val($("#inspList").find("tr").eq(k).find("[id^=inspFirstCd]").val()).prop("selected", true);
+		//$("#inspSecondCd").val($("#inspList").find("tr").eq(k).find("[id^=inspSecondCd]").val());
+		//$("#inspThirdCd").val($("#inspList").find("tr").eq(k).find("[id^=inspThirdCd]").val());
+
+
+
+		//$("#inspList").find("tr").find("[id^=chk]").prop("checked",false);
+		//$(this).find("[id^=chk]").prop("checked",true);
+		//$("#inspThirdCd").val($(this).find("[id^=inspThirdCd]").val()).trigger('change');
+		//$("#inspFirstCd").val($(this).find("[id^=inspFirstCd]").val());
+		//$("#inspSecondCd").val($(this).find("[id^=inspSecondCd]").val());
 	}
 });
 
@@ -638,7 +654,9 @@ $("#modBtn").on("click",function(){
 $("#addBtn").on("click",function(){
 	var idx = 1;
 	$("#inspList").find("tr").each(function(){
-		idx++;
+		if($(this).index()%2 == 0){
+			idx++;
+		}
 	});
 
 	var inspFirstCd = $("#inspFirstCd").val();
@@ -684,7 +702,7 @@ $("#addBtn").on("click",function(){
 	html += '	<td rowspan="2">';
 	html += '		<input type="hidden" id="inspNo_'+idx+'" value="${item.inspNo}"/>';
 	html += '		<input type="hidden" id="inspFirstCd_'+idx+'" value="'+inspFirstCd+'"/>';
-	html += '		<input type="hidden" id="inspSecondCd_'+idx+'" value="'+inspFirstCd+'"/>';
+	html += '		<input type="hidden" id="inspSecondCd_'+idx+'" value="'+inspSecondCd+'"/>';
 	html += '		<input type="hidden" id="inspThirdCd_'+idx+'" value="'+inspThirdCd+'"/>';
 	html += '		<input type="hidden" id="sampleCode_'+idx+'" value="'+sampleCode+'"/>';
 	html += '		<input type="hidden" id="sampleName_'+idx+'" value="'+sampleName+'"/>';

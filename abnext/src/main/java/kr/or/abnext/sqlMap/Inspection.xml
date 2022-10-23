@@ -563,12 +563,13 @@
 		INSERT
 		  INTO TB_BLOOD_CHEM (
 		       INSP_NO , ITEM_NAME , VAL
-		     , INS_DT  , INS_ID )
+		     , RMK     , INS_DT    , INS_ID )
 		VALUES (
 		       #{inspNo} , #{itemName} , #{val}
-		     , NOW()     , #{insId} )
+		     , #{rmk}    , NOW()       , #{insId} )
 		    ON DUPLICATE KEY
 		UPDATE VAL = #{val}
+		     , RMK = #{rmk}
 		     , UPT_DT = NOW()
 		     , UPT_ID = #{insId}
 	</insert>
