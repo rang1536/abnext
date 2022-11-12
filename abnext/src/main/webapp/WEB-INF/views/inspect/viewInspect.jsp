@@ -746,9 +746,28 @@ function fnBloodChem(inspNo,k,title){
 			html += '				<div class="table-responsive">';
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<colgroup>';
-			html += '							<col style="width:50%"/>';
-			html += '							<col style="width:50%"/>';
+			html += '							<col></col>';
+			html += '							<col></col>';
+			html += '							<col></col>';
+			html += '							<col></col>';
+			html += '							<col></col>';
+			html += '							<col></col>';
 			html += '						</colgroup>';
+			html += '						<thead>';
+			html += '							<tr>';
+			html += '								<td rowspan="2">항목명</td>';
+			html += '								<td colspan="2">결과</td>';
+			html += '								<td colspan="2">참조값</td>';
+			html += '								<td>비고</td>';
+			html += '							</tr>';
+			html += '							<tr>';
+			html += '								<td>값</td>';
+			html += '								<td>단위</td>';
+			html += '								<td>최저</td>';
+			html += '								<td>최대</td>';
+			html += '								<td></td>';
+			html += '							</tr>';
+			html += '						</thead>';
 			html += '						<tbody id="bloodChem">';
 			html += '						</tbody>';
 			html += '					</table>';
@@ -763,9 +782,31 @@ function fnBloodChem(inspNo,k,title){
 			var subHtml = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
+				console.log(item);
 				subHtml += '<tr>';
-				subHtml += '<td>'+item.itemName+'</td>';
-				subHtml += '<td>'+item.val+'</td>';
+				switch(item.itemName) {
+					case 'TP' : td2 = 'g/dL'; td3 = '5.4'; td4 = '8.2'; break;
+					case 'Alb' : td2 = 'g/dL'; td3 = '2.2'; td4 = '4.4'; break;
+					case 'Glob' : td2 = 'g/dL'; td3 = '1.5'; td4 = '5.7'; break;
+					case 'A/G ratio' : td2 = ''; td3 = ''; td4 = ''; break;
+					case 'GLU' : td2 = 'mg/dL'; td3 = '70'; td4 = '150'; break;
+					case 'AST' : td2 = ''; td3 = ''; td4 = ''; break;
+					case 'CK' : td2 = ''; td3 = ''; td4 = ''; break;
+					case 'CA' : td2 = 'mg/dL'; td3 = '8.0'; td4 = '11.8'; break;
+					case 'PHOS' : td2 = 'mg/dL'; td3 = '3.4'; td4 = '8.5'; break;
+					case 'Na' : td2 = 'mmol/L'; td3 = '142'; td4 = '164'; break;
+					case 'K' : td2 = 'mmol/L'; td3 = '3.7'; td4 = '5.8'; break;
+					case 'Na/K ratio' : td2 = ''; td3 = ''; td4 = ''; break;
+					default : td2 = ''; td3 = ''; td4 = ''; break;
+				}
+
+				subHtml += '	<td>'+item.itemName+'</td>';
+				subHtml += '	<td style="height:34px; padding: 1px 3px 1px 3px;" id="bcvl_'+(i+1)+'">'+item.val+'</td>';
+				subHtml += '	<td>'+td2+'</td>';
+				subHtml += '	<td>'+td3+'</td>';
+				subHtml += '	<td>'+td4+'</td>';
+				subHtml += '	<td>'+item.rmk+'</td>';
+
 				subHtml += '</tr>';
 			}
 			$("#bloodChem").html(subHtml);
@@ -872,7 +913,7 @@ function fnPcr(inspNo,k,title){
 			html += '							<tr>';
 			html += '								<td style="background-color:#F2F2F2;width:10%;">No.</td>';
 			html += '								<td style="background-color:#F2F2F2;width:*;">시료</td>';
-			html += '								<td style="background-color:#F2F2F2;width:10%;">시료량</td>';
+			/* html += '								<td style="background-color:#F2F2F2;width:10%;">시료량</td>'; */
 			html += '								<td style="background-color:#F2F2F2;width:10%;">결과</td>';
 			html += '								<td style="background-color:#F2F2F2;width:25%;">비고</td>';
 			html += '							</tr>';
@@ -895,9 +936,9 @@ function fnPcr(inspNo,k,title){
 				subHtml += '<tr>';
 				subHtml += '	<td>'+no+'</td>';
 				subHtml += '	<td>'+item.smplName+'</td>';
-				subHtml += '	<td>'+item.capacity+'</td>';
+				/* subHtml += '	<td>'+item.capacity+'</td>'; */
 				subHtml += '	<td>'+item.result+'</td>';
-				subHtml += '	<td>'+item.rmk+'</td>';
+				subHtml += '	<td>'+item.memo+'</td>';
 				subHtml += '</tr>';
 			}
 			$("#pcr"+k).html(subHtml);

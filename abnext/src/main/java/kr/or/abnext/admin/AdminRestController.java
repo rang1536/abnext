@@ -61,6 +61,7 @@ public class AdminRestController {
 	/*
 	 * 코드등록
 	 **/
+	/*
 	@RequestMapping(value = "insertCode", method = RequestMethod.POST)
 	public Map<String, Object> insertCode(TbCode tbCode) {
 		System.out.println("코드조회 시작~!!");
@@ -68,6 +69,8 @@ public class AdminRestController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		int dupCnt = adminServ.dupChk(tbCode);
+		System.out.println("dupCnt : "+dupCnt+"|tbCode.getCodeNo() : "+tbCode.getCodeNo());
+
 		if(dupCnt > 0 && tbCode.getCodeNo() == 999999999) {
 			map.put("result", "dup");
 			return map;
@@ -92,6 +95,31 @@ public class AdminRestController {
 				map.put("result", "fail");
 			}
 		}
+		return map;
+	}
+*/
+	/*
+	 * 코드등록
+	 **/
+	@RequestMapping(value = "insertCode", method = RequestMethod.POST)
+	public Map<String, Object> insertCode(TbCode tbCode) {
+		System.out.println("코드조회 시작~!!");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int dupCnt = adminServ.dupChk(tbCode);
+		System.out.println("dupCnt : "+dupCnt+"|tbCode.getCodeNo() : "+tbCode.getCodeNo());
+
+		if(dupCnt > 0) {
+			adminServ.deleteCodeById(tbCode);
+			adminServ.deleteCode(tbCode);
+		}
+
+		int codeLevel = adminServ.getCodeLevel(tbCode);
+		tbCode.setCodeLevel(codeLevel+1);
+
+		adminServ.insertCode(tbCode);
+
 		return map;
 	}
 

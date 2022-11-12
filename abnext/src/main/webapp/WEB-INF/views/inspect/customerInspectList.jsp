@@ -61,7 +61,7 @@
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<div>
+								<div style="display:none">
 									<div class="form-group clearfix" style="float:right">
 										<div class="icheck-primary d-inline">
 											<input type="checkbox" id="chkAll" class="chkbox" checked>

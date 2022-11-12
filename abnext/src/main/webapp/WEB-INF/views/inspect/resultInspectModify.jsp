@@ -1411,11 +1411,65 @@ $("#fileSave").click(function(){
 		success : function(data){
 			if(data.result == 'succ'){
 				toastr.info('저장하였습니다');
+				location.reload();
 			}
 		}
 	});
 });
 
+function fileSave(){
+	var fileList = new Array();
+	var formData = new FormData($('#fileForm')[0]);
+
+	var fileNames = new Array();
+	var fileTitles = new Array();
+	var fileContents = new Array();
+	var fileCloseYn = new Array();
+	var chkYn;
+
+	$('.preview').each(function(){
+		fileNames.push($(this).find("[id^=file]").val());
+		fileTitles.push($(this).find("[id^=title]").val());
+		fileContents.push($(this).find("[id^=content]").val());
+		if($(this).find("input:checkbox[id^=chk]").is(":checked")){
+			chkYn = 'Y';
+		}else {
+			chkYn = 'N';
+		}
+		fileCloseYn.push(chkYn);
+	});
+
+	for (var i = 0; i < filesArr.length; i++) {
+        if (!filesArr[i].is_delete) {
+        	for (var j=0; j<fileNames.length; j++){
+        		if(filesArr[i].name == fileNames[j].trim()){
+        			formData.append('fileList',filesArr[i]);
+        			formData.append('titleList',fileTitles[i]);
+        			formData.append('contentList',fileContents[i]);
+        			formData.append('closeYnList',fileCloseYn[i]);
+        		}
+        	}
+        }
+	}
+
+	//로그인유저정보
+	var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+	formData.append('uptId', userInfo.userId);
+
+	$.ajax({
+		url : 'inspFileUpload',
+		data : formData,
+		dataType : 'json',
+		type : 'post',
+		processData : false,
+		contentType : false,
+		success : function(data){
+			if(data.result == 'succ'){
+				toastr.info('저장하였습니다');
+			}
+		}
+	});
+}
 
 $("#fileSave2").click(function(){
 
@@ -1473,9 +1527,64 @@ $("#fileSave3").click(function(){
 
 	//$('.previewList3').find(".filter-item").each(function(){
 	$('.previewList3').find(".preview_3").each(function(){
-		console.log("1");
 		fileNames.push($(this).find("[id^=file]").val());
-		console.log($(this).find("[id^=file]").val());
+		fileTitles.push($(this).find("[id^=title]").val());
+		fileContents.push($(this).find("[id^=content]").val());
+		if($(this).find("input:checkbox[id^=chk]").is(":checked")){
+			chkYn = 'Y';
+		}else {
+			chkYn = 'N';
+		}
+		fileCloseYn.push(chkYn);
+	});
+
+	for (var i = 0; i < filesArr.length; i++) {
+        if (!filesArr[i].is_delete) {
+        	for (var j=0; j<fileNames.length; j++){
+				if(filesArr[i].name == fileNames[j].trim()){
+					formData.append('fileList',filesArr[i]);
+        			formData.append('titleList',fileTitles[i]);
+        			formData.append('contentList',fileContents[i]);
+        			formData.append('closeYnList',fileCloseYn[i]);
+        		}
+        	}
+        }
+	}
+
+	if(filesArr.length > 0){
+		//로그인유저정보
+		var userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+		formData.append('uptId', userInfo.userId);
+
+		$.ajax({
+			url : 'inspFileUpload',
+			data : formData,
+			dataType : 'json',
+			type : 'post',
+			processData : false,
+			contentType : false,
+			success : function(data){
+				if(data.result == 'succ'){
+					toastr.info('저장하였습니다');
+					location.reload();
+				}
+			}
+		});
+	}
+});
+
+function fileSave3(){
+	var fileList = new Array();
+	var formData = new FormData($('#fileForm3')[0]);
+	var fileNames = new Array();
+	var fileTitles = new Array();
+	var fileContents = new Array();
+	var fileCloseYn = new Array();
+	var chkYn;
+
+	//$('.previewList3').find(".filter-item").each(function(){
+	$('.previewList3').find(".preview_3").each(function(){
+		fileNames.push($(this).find("[id^=file]").val());
 		fileTitles.push($(this).find("[id^=title]").val());
 		fileContents.push($(this).find("[id^=content]").val());
 		if($(this).find("input:checkbox[id^=chk]").is(":checked")){
@@ -1518,7 +1627,7 @@ $("#fileSave3").click(function(){
 			}
 		});
 	}
-});
+}
 
 /*****************************************************************
  *                        항 생 제                                                                             *
@@ -2305,7 +2414,7 @@ $(document).on('click','#save',function(){
 	/**************************************************************************************************/
 	if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-02-02' || inspSecCd == 'B001-02-16'){
 		saveMemo(4);
-		$("#fileSave3").trigger("click");
+		fileSave3();
 		$("#pcrSave").trigger("click");
 	}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
 		saveMemo(2);
@@ -2322,7 +2431,7 @@ $(document).on('click','#save',function(){
 		$("#cbcSave").trigger("click");
 	}else {
 		saveMemo(1);
-		$("#fileSave").trigger("click");
+		fileSave();
 	}
 
 	setTimeout(function(){

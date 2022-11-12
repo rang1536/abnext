@@ -896,10 +896,10 @@ function validSave(){
 	}else {
 		//var validFlag = true;
 		var validItem = ['docNo', 'animFirstCd', 'animSecondCd', 'animThirdCd', 'animNm', 'animBirth'
-									,'animSex', 'animButler', 'butlerSido', 'butlerSigungu'
+									,'animSex', 'animButler', 'butlerSido'
 			];
 		var validItemNm = ['담당수의사', '동물 종 첫번째', '동물 종 두번째', '동물 종 세번째', '동물이름', '동물생년월일'
-									,'동물성별', '보호자이름', '보호자주소(시도)', '보호자주소(시군구)'
+									,'동물성별', '보호자이름', '보호자주소(시도)'
 			];
 		for(var i=0; i<validItem.length; i++){
 			if($("#"+validItem[i]).val() == '' || $("#"+validItem[i]).val() == null){

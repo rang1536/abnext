@@ -458,24 +458,41 @@
 		var msg = "등록하시겠습니까?";
 		if(confirm(msg)){
 			$.ajax({
-				url : "insertCode",
+				url : "getCode",
 				data : data,
 				type : "POST",
 				dataType : "JSON",
 				success : function(data){
-					if(data.result == 'dup'){
-						alert("중복된 코드가 존재합니다.");
-					}else {
-						alert("정상적으로 등록하였습니다.");
-						pageReload();
+					msg = "중복된 데이터가 존재합니다.\n기존 데이터에 덮어 쓰시겠습니까?";
+					if(confirm(msg)){
+						insertCode();
 					}
 				},
 				error : function(err){
-					console.log(err);
-					alert("알 수 없는 이유로 등록에 실패하였습니다.");
+					insertCode();
 				}
 			});
 		}
+	}
+
+	function insertCode(){
+
+		var data = $("#codeFrm").serialize();
+
+		$.ajax({
+			url : "insertCode",
+			data : data,
+			type : "POST",
+			dataType : "JSON",
+			success : function(data){
+				alert("정상적으로 등록하였습니다.");
+				pageReload();
+			},
+			error : function(err){
+				console.log(err);
+				alert("알 수 없는 이유로 등록에 실패하였습니다.");
+			}
+		});
 	}
 
 	function pageReload(){
