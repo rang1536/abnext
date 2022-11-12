@@ -38,6 +38,7 @@ import kr.or.abnext.domain.TbSample;
 import kr.or.abnext.domain.TbSerum;
 import kr.or.abnext.domain.TbUser;
 import kr.or.abnext.util.UtilFile;
+import kr.or.abnext.util.UtilSms;
 
 @RestController
 public class InspectRestController {
@@ -210,6 +211,31 @@ public class InspectRestController {
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");
 
+		//2022.11.12. 윤재호. 접수완료 시 문자발송
+		String subject = "[AviNext - 접수완료알림]";
+		String msg = "";
+		String receivePhone;
+
+		TbUser userForSms = new TbUser();
+		userForSms = adminServ.getUserInfoServ(tbRcept);
+		tbRcept = inspectServ.getRcept(tbRcept);
+
+		msg += "[ 접수 완료 알림 ] \r\n";
+		msg += tbRcept.getRqstDt()+"일에 신청하신 『"+tbRcept.getAnimNm()+"』의 시료가 도착하여 접수가 완료되었습니다.\r\n";
+		msg += "검사가 시작됩니다. \r\n";
+		msg += "(주)아비넥스트";
+
+		receivePhone = userForSms.getUserHp();
+		if(receivePhone.length() == 11) {
+			receivePhone = receivePhone.substring(0, 3)+"-"+receivePhone.substring(3, 7)+"-"+receivePhone.substring(7);
+		}
+
+		//System.out.println("제목 : "+msg);
+		//System.out.println("메세지 : "+msg);
+		//System.out.println("수신번호 : "+receivePhone);
+		UtilSms utilSms = new UtilSms();
+		//utilSms.sendSMSAsync(subject, msg, receivePhone);
+
 		return map;
 	}
 
@@ -356,6 +382,31 @@ public class InspectRestController {
 		inspectServ.updateInspectStatus(tbRcept);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("result", "ok");
+
+		//윤재호. 최종진단시 문자발송
+		String subject = "[AviNext - 검사완료알림]";
+		String msg = "";
+		String receivePhone;
+
+		TbUser userForSms = new TbUser();
+		userForSms = adminServ.getUserInfoServ(tbRcept);
+		tbRcept = inspectServ.getRcept(tbRcept);
+
+		msg += "[ 검사완료 알림 ] \r\n";
+		msg += tbRcept.getRqstDt()+"일에 신청하신 『"+tbRcept.getAnimNm()+"』의 검사가 완료되었습니다.\r\n";
+		msg += "검사결과는 홈페이지 진단검사 > 진단검사신청현황 에서 확인이 가능합니다. \r\n \r\n";
+		msg += "http://avinextlab.com/loginPage";
+
+		receivePhone = userForSms.getUserHp();
+		if(receivePhone.length() == 11) {
+			receivePhone = receivePhone.substring(0, 3)+"-"+receivePhone.substring(3, 7)+"-"+receivePhone.substring(7);
+		}
+
+		//System.out.println("제목 : "+msg);
+		//System.out.println("메세지 : "+msg);
+		//System.out.println("수신번호 : "+receivePhone);
+		UtilSms utilSms = new UtilSms();
+		//utilSms.sendSMSAsync(subject, msg, receivePhone);
 
 		return map;
 	}

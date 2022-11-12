@@ -12,8 +12,8 @@ public class UtilSms {
 	private final static String userAgent = "Mozilla/5.0";
 	private final static String charset = "UTF-8";
 	private final static boolean isTest = true;
-	
-    
+
+
     /**==============================================================
       Description        :  사용 함수 선언
     ==============================================================**/
@@ -63,13 +63,13 @@ public class UtilSms {
         String result = new String(strByte);
         return result ;
     }
-    
+
     /**==============================================================
       Description        : 캐릭터셋 정의
       EUC-KR: @ page contentType="text/html;charset=EUC-KR
       UTF-8: @ page contentType="text/html;charset=UTF-8
     ==============================================================**/
-   
+
     /**==============================================================
       Description        :  사용자 샘플코드
     ==============================================================**/
@@ -79,7 +79,7 @@ public class UtilSms {
 		String lastPhoneNum= receivePhone.substring(7,11);
 		String rphone = firstPhoneNum + "-" + secondPhoneNum + "-" + lastPhoneNum;
 		String check="";
-		
+
 		try{
 			URL obj = new URL(apiUrl);
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -87,19 +87,19 @@ public class UtilSms {
 			con.setRequestProperty("Accept-Charset", charset);
 			con.setRequestMethod("POST");
 			con.setRequestProperty("User-Agent", userAgent);
-			
-			String postParams = 
-					"user_id="+base64Encode("hn3sms") //호스팅id
-					+"&passwd="+base64Encode("52df87a803cf6b2e27200901fb6a6e10") //보안키
+
+			String postParams =
+					"user_id="+base64Encode("avinextlab") //호스팅id
+					+"&passwd="+base64Encode("52df87a803cf6b2e27200901fb6a6e10") //보안키 : 받아야함
 					+"&msg="+base64Encode(msg) // 메세지
 					+"&rphone="+base64Encode(rphone) //수신번호
-					+"&sphone1="+base64Encode("010") //발신번호
-					+"&sphone2="+base64Encode("3651") 
+					+"&sphone1="+base64Encode("010") //발신번호 : 등록 뭐로 할지 확인필요
+					+"&sphone2="+base64Encode("3651")
 					+"&sphone3="+base64Encode("6543")
-					+"&mode="+base64Encode("1") 
-					+"&smsType="+base64Encode("L")
-					+"&subject="+base64Encode(subject); // SMS/LMS여부
-			
+					+"&mode="+base64Encode("1")
+					+"&smsType="+base64Encode("L") // SMS/LMS여부
+					+"&subject="+base64Encode(subject);
+
 			// For POST only - START
 			con.setDoOutput(true);
 			OutputStream os = con.getOutputStream();
@@ -107,7 +107,7 @@ public class UtilSms {
 			os.flush();
 			os.close();
 			// For POST only - END
-			
+
 			int responseCode = con.getResponseCode();
 			//System.out.println("POST Response Code : "+responseCode);
 
@@ -115,19 +115,19 @@ public class UtilSms {
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 				String inputLine;
 				StringBuffer buf = new StringBuffer();
-				
+
 				while((inputLine = in.readLine()) != null){
 					buf.append(inputLine);
 				}
 				in.close();
-				
+
 				System.out.println("SMS Content : "+buf.toString());
 				check = "succ";
 			}else{
 				System.out.println("fail!!");
 				check = "fail";
 			}
-			
+
 		}catch(IOException ex){
 			System.out.println("error : "+ex.getMessage());
 		}

@@ -15,6 +15,7 @@ import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbMenu;
+import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbUser;
 import kr.or.abnext.domain.TbUserDamdang;
 import kr.or.abnext.util.UtilFile;
@@ -468,6 +469,13 @@ public class AdminService {
 
 		return tbUser;
 	}
+
+	/* 접수자로 회원정보 조회*/
+	public TbUser getUserInfoServ(TbRcept tbRcept) {
+		TbUser tbUser = adminDao.getUserInfoByRcept(tbRcept);
+		return tbUser;
+	}
+
 
 	public List<TbCode> getCodeListServ(Map<String, Object> param){
 		return adminDao.getCodeList(param);

@@ -1174,10 +1174,11 @@ function fnAnti(inspNo,k){
 			});
 		}
 	});
-
-
 }
 
+$(document).on('click', '#modBtn', function(){
+
+})
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>

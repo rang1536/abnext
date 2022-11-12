@@ -15,6 +15,7 @@ import kr.or.abnext.domain.TbFarm;
 import kr.or.abnext.domain.TbFile;
 import kr.or.abnext.domain.TbHospital;
 import kr.or.abnext.domain.TbMenu;
+import kr.or.abnext.domain.TbRcept;
 import kr.or.abnext.domain.TbUser;
 import kr.or.abnext.domain.TbUserDamdang;
 
@@ -280,6 +281,12 @@ public class AdminDao {
 	 **/
 	public TbUser getUserInfo(TbUser tbUser) {
 		return sql.selectOne("admin.getUserInfo", tbUser);
+	}
+
+
+	//getUserInfoByRcept
+	public TbUser getUserInfoByRcept(TbRcept tbRcept) {
+		return sql.selectOne("admin.getUserInfoByRcept", tbRcept);
 	}
 
 

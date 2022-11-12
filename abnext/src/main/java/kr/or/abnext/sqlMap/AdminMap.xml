@@ -637,6 +637,19 @@
 		 WHERE USER_NO = #{userNo}
 	</select>
 
+
+	<select id="getUserInfoByRcept" parameterType="kr.or.abnext.domain.TbRcept" resultType="kr.or.abnext.domain.TbUser">
+		SELECT *
+		  FROM TB_USER
+		 WHERE USER_NO = (SELECT USER_NO
+		 				    FROM TB_RCEPT
+		 				   WHERE RQST_NO = #{rqstNo}#
+		 				 )
+	</select>
+
+
+
+
 	<!-- 코드조회
 	2022.09.12. 코드조회 중분류 조회로 수정
 	AND UPP_CODE_ID = #{codeId}
