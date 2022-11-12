@@ -60,6 +60,10 @@ public class AdminService {
 		return adminDao.deleteCode(tbCode);
 	}
 
+	public int deleteCodeById(TbCode tbCode){
+		return adminDao.deleteCodeById(tbCode);
+	}
+
 	/**
 	 * @function : getResultMap
 	 * @Description : 결과값 succ / fail 반환 공통함수

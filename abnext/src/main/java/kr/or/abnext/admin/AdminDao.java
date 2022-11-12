@@ -66,6 +66,10 @@ public class AdminDao {
 		return sql.delete("code.deleteCode", tbCode);
 	}
 
+	public int deleteCodeById(TbCode tbCode){
+		return sql.delete("code.deleteCodeById", tbCode);
+	}
+
 
 	/**
 	 * @function : addUser

@@ -21,7 +21,7 @@
 		   AND (CODE_ID LIKE CONCAT(CONCAT('%',#{searchValue}),'%') OR CODE_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%') OR UPP_CODE_ID LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
 			</if>
 		</where>
-		 ORDER BY CODE_LEVEL,UPP_CODE_ID
+		 ORDER BY CODE_LEVEL,UPP_CODE_ID,SORT_IDX
 	</select>
 
 	<select id="getCodeLevel" resultType="kr.or.abnext.domain.TbCode">
@@ -64,20 +64,25 @@
 	</insert>
 
 	<update id="updateCode" parameterType="kr.or.abnext.domain.TbCode">
-		UPDATE TB_CODE
-		   SET CODE_ID = #{codeId}
-		     , CODE_NM = #{codeNm}
-		     , UPP_CODE_ID = #{uppCodeId}
-		     , CODE_GB = #{codeGb}
-		     , SORT_IDX = #{sortIdx}
-		     , CODE_DTL_MEMO = #{codeDtlMemo}
-		 WHERE CODE_NO = #{codeNo}
+			UPDATE TB_CODE
+			   SET CODE_NM = #{codeNm}
+			     , UPP_CODE_ID = #{uppCodeId}
+			     , CODE_GB = #{codeGb}
+			     , SORT_IDX = #{sortIdx}
+			     , CODE_DTL_MEMO = #{codeDtlMemo}
+			 WHERE CODE_ID = #{codeId};
 	</update>
 
 	<delete id="deleteCode" parameterType="kr.or.abnext.domain.TbCode">
 		DELETE
 		  FROM TB_CODE
 		 WHERE CODE_NO =  #{codeNo}
+	</delete>
+
+	<delete id="deleteCodeById" parameterType="kr.or.abnext.domain.TbCode">
+		DELETE
+		  FROM TB_CODE
+		 WHERE CODE_ID =  #{codeId}
 	</delete>
 
 	<select id="selectCodeList" resultType="kr.or.abnext.domain.TbCode">

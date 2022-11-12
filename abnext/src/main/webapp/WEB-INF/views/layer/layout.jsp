@@ -453,7 +453,7 @@
 		function fn_searchAdr(type){
 			new daum.Postcode({
 				oncomplete: function(data){
-					console.log(data.sido);
+					console.log(data);
 					if(type == 'user'){
 						$("#userAdr").val(data.roadAddress);
 						$("#userZip").val(data.zonecode);
