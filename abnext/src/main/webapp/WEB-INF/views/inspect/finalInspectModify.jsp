@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%
+
+pageContext.setAttribute("CR", "\r");
+
+pageContext.setAttribute("LF", "\n");
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1473,7 +1482,8 @@ $("#pdf").click(function(){
 	html +=	'					<c:forEach var="item" items="${inspList }" varStatus="status">';
 	html +=	'						<tr>';
 	html +=	'							<td style="width:70%;background-color:#F2F2F2" class="txtl">${item.inspThirdNm }</td>';
-	html +=	'							<td style="width:30%;background-color:#F2F2F2" class="txtc">${item.inspResult }</td>';
+	html +=	'							<c:set var="inspRes" value="${fn:replace(fn:replace(item.inspResult, LF, \''), CR, \'')}" />';
+	html +=	'							<td style="width:30%;background-color:#F2F2F2" class="txtc">${inspRes}</td>';
 	html +=	'						</tr>';
 	html +=	'						<c:set var="len" value="${status.index}"/>';
 	html +=	'					</c:forEach>';
@@ -1532,74 +1542,84 @@ $("#pdf").click(function(){
 	var shtml = makePdf(1,html);
 	$("#printDiv").append(shtml);
 
-	<c:forEach var="item" items="${inspList }" varStatus="status">
-		if('${item.inspSecondCd}' == 'B001-01-01' || '${item.inspSecondCd}' == 'B001-01-02' || '${item.inspSecondCd}' == 'B001-02-01' || '${item.inspSecondCd}' == 'B001-01-02' || '${item.inspSecondCd}' == 'B001-02-16'){
-			fnPcrPdf('${status.index+2 }','${item.inspNo}');
+	'<c:forEach var="item" items="${inspList }" varStatus="status">';
+		if('${item.inspSecondCd}' == 'B001-01-01' || '${item.inspSecondCd}' == 'B001-02-01' || '${item.inspSecondCd}' == 'B001-02-16' || '${item.inspSecondCd}' == 'B001-01-02' || '${item.inspSecondCd}' == 'B001-02-02'){
+			fnPcrPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
 		}
-	</c:forEach>
+	'</c:forEach>';
 
 })
 
-function fnPcrPdf(idx,inspNo){
-	console.log(inspNo);
+function fnPcrPdf(idx,inspNo,sec,thr,res){
 	$.ajax({
 		url : 'getPcrList',
 		data : {inspNo : inspNo},
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			var th1 = '';
-			var th2 = '';
+			if(data.length>0){
+				var html = '';
+				html += '<div class="card-body">';
+				html += '	<div class="row">';
+				html += '		<div class="table-responsive">';
+				html += '			<table class="table table-bordered text-nowrap">';
+				html += '				<thead>';
+				html += '					<tr>';
+				html += '						<td style="background-color:#F2F2F2;width:*;">검사방법</td>';
+				html += '						<td style="background-color:#F2F2F2;width:*;">시료</td>';
+				html += '						<td style="background-color:#F2F2F2;width:*;">검사항목</td>';
+				html += '						<td style="background-color:#F2F2F2;width:*;">결과</td>';
+				html += '					</tr>';
+				html += '				</thead>';
+				html += '				<tbody>';
 
-			if(title == 'PCR') {
-				th1 = 'POSITIVE';
-				th2 = 'NEGATIVE';
-			}else {
-				th1 = '암컷';
-				th2 = '수컷';
+				for(var i=0; i<data.length; i++){
+					var item = data[i];
+
+					html += '<tr>';
+					html += '	<td>'+sec+'</td>';
+					html += '	<td>'+item.smplName+'</td>';
+					html += '	<td>'+thr+'</td>';
+					html += '	<td>'+item.result+'</td>';
+					html += '</tr>';
+				}
+
+				var addTr = 0;
+				if(data.length < 15){
+					addTr = 15-data.length;
+				}
+				for(var i=0; i<addTr; i++){
+					html +=	'						<tr style="height:33.39px;">';
+					html +=	'							<td class="txtl"></td>';
+					html +=	'							<td class="txtl"></td>';
+					html +=	'							<td class="txtl"></td>';
+					html +=	'							<td class="txtc"></td>';
+					html +=	'						</tr>';
+				}
+
+				html += '				</tbody>';
+				html += '			</table>';
+
+				html += '			<div style="height:100px;"></div>';
+				html += '			<table class="table table-bordered text-nowrap">';
+				html += '				<thead>';
+				html += '					<tr style="height:500px;">';
+				html += '						<td style="width:20%;">검사메모</td>';
+				html += '						<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
+				html += '					</tr>';
+				html += '				</thead>';
+				html += '			</table>';
+				html += '		</div>';
+				html += '	</div>';
+				html += '</div>';
+
+				var shtml = makePdf(idx,html);
+				$("#printDiv").append(idx,shtml);
+
 			}
-
-			var html = '';
-			html += '<div class="card-body">';
-			html += '	<div class="row">';
-			html += '		<div class="table-responsive">';
-			html += '			<table class="table table-bordered text-nowrap">';
-			html += '				<thead>';
-			html += '					<tr>';
-			html += '						<td style="background-color:#F2F2F2;width:10%;">No.</td>';
-			html += '						<td style="background-color:#F2F2F2;width:*;">시료명</td>';
-			html += '						<td style="background-color:#F2F2F2;width:10%;">'+th1+'</td>';
-			html += '						<td style="background-color:#F2F2F2;width:10%;">'+th2+'</td>';
-			html += '						<td style="background-color:#F2F2F2;width:25%;">결과</td>';
-			html += '						<td style="background-color:#F2F2F2;width:25%;">메모</td>';
-			html += '					</tr>';
-			html += '				</thead>';
-			html += '				<tbody id="pcrPdf'+idx+'">';
-			html += '				</tbody>';
-			html += '			</table>';
-			html += '		</div>';
-			html += '	</div>';
-			html += '</div>';
-			$("#printDiv").append(idx,html);
-
-			var subHtml = '';
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				var no = i+1;
-
-				subHtml += '<tr>';
-				subHtml += '	<td>'+no+'</td>';
-				subHtml += '	<td>'+item.smplName+'</td>';
-				subHtml += '	<td>'+item.positive+'</td>';
-				subHtml += '	<td>'+item.negative+'</td>';
-				subHtml += '	<td>'+item.result+'</td>';
-				subHtml += '	<td>'+item.memo+'</td>';
-				subHtml += '</tr>';
-			}
-			$("#pcrPdf"+idx).html(subHtml);
-
 		}
 	});
+
 
 }
 </script>
