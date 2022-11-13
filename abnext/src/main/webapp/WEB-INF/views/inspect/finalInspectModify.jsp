@@ -1430,7 +1430,7 @@ $("#pdf").click(function(){
 		month += setMonth;
 	}
 
-	html +=	'		<div class="card-body table-responsive pdfStyle" style="font-size:15px"><span style="text-align:center;font-size:25px;">반려조류 검사결과서</span>';
+	html +=	'		<div class="card-body table-responsive pdfStyle" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">반려조류 검사결과서</span><br/><br/>';
 	html +=	'			<table class="table table-bordered text-nowrap">';
 	html +=	'				<tbody>';
 	html +=	'					<tr>';
@@ -1482,6 +1482,7 @@ $("#pdf").click(function(){
 	html +=	'					<c:forEach var="item" items="${inspList }" varStatus="status">';
 	html +=	'						<tr>';
 	html +=	'							<td style="width:70%;background-color:#F2F2F2" class="txtl">${item.inspThirdNm }</td>';
+	//html +=	'							<c:set var="inspRes" value="${fn:replace(fn:replace(item.inspResult, LF, \''), CR, \'')}" />';
 	html +=	'							<c:set var="inspRes" value="${fn:replace(fn:replace(item.inspResult, LF, \''), CR, \'')}" />';
 	html +=	'							<td style="width:30%;background-color:#F2F2F2" class="txtc">${inspRes}</td>';
 	html +=	'						</tr>';
@@ -1516,10 +1517,12 @@ $("#pdf").click(function(){
 	html +=	'			</table>';
 
 	html +=	'			<div style="height:50px;"></div>';
-	html += '			<span>(주)아비넥스트 대표 모인필</span>';
+	html += '			<div style="width:100%;text-align:right;padding-right:10%;">';
+	html += '				<span style="font-weight:bold;font-size:20px;">(주)아비넥스트 대표 모인필</span>';
+	html += '			</div>';
 
-	html +=	'			<div style="height:50px;"></div>';
-	html += '			<span>검사신청 및 문의<br/>avinext@avinext.co.kr T. 043-292-9998 F. 043-292-9980<br/>충청북도 청주시 상당구 남일면 쌍암동길 30-7</span>';
+	html +=	'			<div style="height:70px;"></div>';
+	html += '			<span style="font-weight:bold;">검사신청 및 문의<br/>avinext@avinext.co.kr T. 043-292-9998 F. 043-292-9980<br/>http://avinextlab.com/<br/>충청북도 청주시 상당구 남일면 쌍암동길 30-7</span>';
 
 
 	html +=	'		</div>';
@@ -1542,11 +1545,11 @@ $("#pdf").click(function(){
 	var shtml = makePdf(1,html);
 	$("#printDiv").append(shtml);
 
-	'<c:forEach var="item" items="${inspList }" varStatus="status">';
+	//'<c:forEach var="item" items="${inspList }" varStatus="status">';
 		if('${item.inspSecondCd}' == 'B001-01-01' || '${item.inspSecondCd}' == 'B001-02-01' || '${item.inspSecondCd}' == 'B001-02-16' || '${item.inspSecondCd}' == 'B001-01-02' || '${item.inspSecondCd}' == 'B001-02-02'){
 			fnPcrPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
 		}
-	'</c:forEach>';
+	//'</c:forEach>';
 
 })
 
