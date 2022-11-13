@@ -186,6 +186,38 @@ function afterPrint(){
 window.onbeforeprint = beforePrint;
 window.onafterprint = afterPrint;
 
+function makePdf(pageNum, bodyObj){
+	var html = '';
+	html +='<section class="content pdfSection"'+pageNum+' style="font-size:13px;">';
+	html +='	<div class="container-fluid">';
+	html +='		<div class="row">';
+	html +='			<div class="col-12">';
+	html +='				<div class="card">';
+	html +='					<div class="row mb-2" style="border-bottom:2px solid #000000;">';
+	html +='						<div class="col-sm-6">';
+	html +='							<h1><b><img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:50%;"></b></h1>';
+	html +='						</div>';
+	html +='						<div class="col-sm-6">';
+	html +='							<ol class="breadcrumb float-sm-right">';
+	html +='								<li class="breadcrumb-item">TEL 043-292-9998</li>';
+	html +='								<li class="breadcrumb-item active" onclick="fn_print(\'printDiv\');">가검물통계</li>';
+	html +='							</ol>';
+	html +='						</div>';
+	html +='					</div>';
+	html +='					<div class="row pdfDiv" style="min-height:1350px;">';
+	html += bodyObj;
+	html +='					</div>			';
+	html +='					<div style="font-size:13px;font-weight:bold;color:#000000;width:100%;border-top:1px solid #ddd;text-align:center;margin:5px;padding-top:5px;">';
+	html +='						<strong>Copyright &copy; 2017-2022 <a href="https://adminlte.io">(주)아비넥스트</a>.</strong> All rights reserved.';
+	html +='						<br/>';
+	html +='						<string style="color:#FF0000">* 본 문서는 검사확인 및 치료 이외의 다른 목적으로 활용 할 수 없습니다.</string>';
+	html +='					</div>';
+	html +='				</div>';
+	html +='			</div>';
+	html +='		</div>';
+	html +='	</div>	';
+	html +='</section>';
+}
 
 /************************************************************/
 /* 엑셀다운 jqGrid
