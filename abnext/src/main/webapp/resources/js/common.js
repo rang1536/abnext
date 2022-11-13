@@ -188,7 +188,7 @@ window.onafterprint = afterPrint;
 
 function makePdf(pageNum, bodyObj){
 	var html = '';
-	html +='<section class="content pdfSection"'+pageNum+' style="font-size:13px;">';
+	html +='<section class="content pdfSection'+pageNum+'" style="font-size:13px;">';
 	html +='	<div class="container-fluid">';
 	html +='		<div class="row">';
 	html +='			<div class="col-12">';
@@ -217,6 +217,8 @@ function makePdf(pageNum, bodyObj){
 	html +='		</div>';
 	html +='	</div>	';
 	html +='</section>';
+
+	return html;
 }
 
 /************************************************************/

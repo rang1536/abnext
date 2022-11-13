@@ -278,7 +278,12 @@
 				<div class="row">
 					<div class="col-12" style="text-align:center">
 						<button type="button" id="list" style="width:161.2px;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-list"></i> 목록</button>
+						<c:if test="">
+							<button type="button" id="list" style="width:161.2px;" class="btn btn-sm btn-success btn-flat"><i class="fas fa-file"></i> 진단결과서</button>
+						</c:if>
 					</div>
+				</div>
+				<div class="row" style="height:15px">
 				</div>
 
 			</div>
