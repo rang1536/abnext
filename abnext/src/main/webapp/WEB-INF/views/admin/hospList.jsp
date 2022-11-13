@@ -109,7 +109,7 @@
 								</form>
 
 								<div class="card-footer">
-									<button type="button" id="delHospBtn" class="btn btn-sm btn-danger" onclick="fn_delHospital();">삭제</button>
+									<!-- <button type="button" id="delHospBtn" class="btn btn-sm btn-danger" onclick="fn_delHospital();">삭제</button> -->
 									<button type="button" id="addHospBtn" class="btn btn-sm btn-success btn-flat" style="float:right;">기관병원등록</button>
 								</div>
 							</div> <!-- /.card -->
@@ -232,32 +232,6 @@
 		}
 	})
 
-
-	/*
-	* 병원삭제
-	*/
-	function fn_delHospital(){
-		var arr = new Array();
-
-		$('input:checkbox[name="hospNo"]').each(function(){
-			if($(this).is(':checked')){
-				arr.push($(this).val());
-			}
-		})
-
-		$.ajax({
-			url : 'delHospCtrl',
-			dataType : 'json',
-			type : 'post',
-			data : {'hospList':arr},
-			success : function(data){
-				if(data.result == 'succ'){
-					alert('삭제되었습니다');
-					window.location.reload(true);
-				}
-			}
-		})
-	}
 
 	//기관정보수정
 	function fn_modifyHosp(hospNo){

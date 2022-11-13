@@ -210,4 +210,9 @@ public class InspectDao {
 	public List<TbBloodChem> getCbcList(TbBloodChem bean){
 		return sql.selectList("inspection.getCbcList", bean);
 	}
+
+	//cencelRcept
+	public int cencelRcept(String pdlNo) {
+		return sql.update("inspection.cencelRcept", pdlNo);
+	}
 }

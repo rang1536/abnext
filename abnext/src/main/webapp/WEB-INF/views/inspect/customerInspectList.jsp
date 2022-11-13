@@ -212,7 +212,7 @@
 						"itemTemplate" :
 							function(value, item) {
 								var flag = false;
-								console.log(item);
+								//console.log(item);
 								if(value == '01') {
 									return '<p style="color:red;font-weight:bold;">'+$.gfn_setComma(item.price)+"(미납) </p>";
 								}else if(value == '02') {
@@ -223,6 +223,20 @@
 							}
 					}
 					fields.push(row);
+
+					if(i == (colList.length-1)){
+						row = {
+								"type"	: 'button',
+								"title" : '',
+								"width" : '100',
+								"align" : 'center',
+								"itemTemplate" : function(value, item){
+									return '<input type="button" id="delLine" value="접수취소" class="btn btn-sm btn-danger"/>';
+								}
+						}
+						fields.push(row);
+					}
+
 				}
 
 				$("#"+gridId).jsGrid({
@@ -234,9 +248,18 @@
 					fields: fields,
 					rowClick: function(args){
 						var $target = $(args.event.target);
-						$("[name=pdlNo]").val($target.parent().find("td:eq(0)").text());
-						$("#viewFrm").attr("action","customerViewInspect");
-						$("#viewFrm").submit();
+
+						if($target.attr('type') == 'button'){
+							var pdlNo = $target.parent().parent().find("td:eq(0)").text();
+							var procStatNm = $target.parent().parent().find("td:eq(2)").text();
+
+							fn_delInspect(pdlNo, procStatNm);
+						}else{
+							$("[name=pdlNo]").val($target.parent().find("td:eq(0)").text());
+							$("#viewFrm").attr("action","customerViewInspect");
+							$("#viewFrm").submit();
+						}
+
 					}
 				});
 			}
@@ -253,6 +276,27 @@
 			exclude_links : true,
 			exclude_inputs : true        
 		});    
+	}
+
+
+	function fn_delInspect(pdlNo, procStatNm){
+		if(procStatNm == '검사중' && procStatNm == '검사완료'){
+			alert('검사중이거나 완료된 건은 취소할 수 없습니다');
+			return;
+		}else if(procStatNm == '접수취소'){
+			alert('이미 접수 취소된 건입니다');
+			return;
+		}else{
+			$.ajax({
+				url : 'cencelRcept',
+				dataType : 'json',
+				type : 'post',
+				data : {'pdlNo' : pdlNo},
+				success:function(data){
+
+				}
+			})
+		}
 	}
 </script>
 </body>

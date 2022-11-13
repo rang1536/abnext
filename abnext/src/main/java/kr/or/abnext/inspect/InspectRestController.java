@@ -669,4 +669,19 @@ public class InspectRestController {
 
 		return map;
 	}
+
+	//접수취소
+	@RequestMapping(value = "cencelRcept")
+	public Map<String, Object> cencelRcept(@RequestParam(value="pdlNo") String pdlNo) {
+		int result = inspectServ.cencelRcept(pdlNo);
+		Map<String, Object> map = new HashMap<String,Object>();
+		if(result == 0) {
+			map.put("result", "succ");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
+
+
 }

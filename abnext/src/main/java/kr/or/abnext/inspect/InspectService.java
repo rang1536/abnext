@@ -291,4 +291,8 @@ public class InspectService {
 	public String getAnimCode(TbAnimal bean) {
 		return inspectDao.getAnimCode(bean);
 	}
+
+	public int cencelRcept(String pdlNo) {
+		return inspectDao.cencelRcept(pdlNo);
+	}
 }

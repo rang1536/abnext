@@ -1181,7 +1181,8 @@ function fnAnti(inspNo,k){
 }
 
 $(document).on('click', '#modBtn', function(){
-
+	alert('검사결과서를 준비중입니다. 관리자인 경우 최종진단 메뉴에서 결과서를 확인하실수 있습니다.');
+	return;
 })
 
 

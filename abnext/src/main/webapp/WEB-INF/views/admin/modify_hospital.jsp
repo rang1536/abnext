@@ -339,7 +339,8 @@
 		              <!-- /.card-body -->
 
 		              <div class="card-footer">
-					  	<button type="button" onclick="fn_modifyHospital();" class="btn btn-sm btn-primary btn-flat" style="float:right;">정보변경</button>
+						<button type="button" id="delHospBtn" class="btn btn-sm btn-danger" onclick="fn_delHospital();">삭제</button>
+						<button type="button" onclick="fn_modifyHospital();" class="btn btn-sm btn-primary btn-flat" style="float:right;">정보변경</button>
 					  </div>
 		            </div>
 		            <!-- /.card -->
@@ -480,6 +481,36 @@
 	}
 
 
+
+
+	/*
+	* 병원삭제
+	*/
+	function fn_delHospital(){
+		var arr = new Array();
+		toastr.info('삭제중입니다');
+		/*
+		$('input:checkbox[name="hospNo"]').each(function(){
+			if($(this).is(':checked')){
+				arr.push($(this).val());
+			}
+		})
+		*/
+
+		arr.push($('#hospNo').val());
+		$.ajax({
+			url : 'delHospCtrl',
+			dataType : 'json',
+			type : 'post',
+			data : {'hospList':arr},
+			success : function(data){
+				if(data.result == 'succ'){
+					alert('삭제되었습니다');
+					location.href = 'hospList';
+				}
+			}
+		})
+	}
 
 </script>
 </html>

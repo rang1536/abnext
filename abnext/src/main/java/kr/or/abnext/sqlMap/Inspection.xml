@@ -157,6 +157,7 @@
 		     , ANIM_SEX, RQST_DT, PROC_STAT
 			 , CASE WHEN PROC_STAT = 'A001-05' THEN '검사완료'
 			        WHEN PROC_STAT = 'A001-02' THEN '접수완료'
+			        WHEN PROC_STAT = 'A001-09' THEN '접수취소'
 			        ELSE '검사중'
 			   END AS PROC_STAT_NM
 		     , RQST_MEMO, PAY_GB, PRICE, PAY_STAT
@@ -617,4 +618,12 @@
 		   AND ANIM_NM = #{animNm}
 		   AND RQST_DT = DATE_FORMAT(NOW(),'%Y.%m.%d')
 	</select>
+
+	<update id="cencelRcept" parameterType="String">
+		UPDATE TB_RCEPT
+		   SET PROC_STAT = 'A001-09'
+		   	   , PROC_STAT_NM = '접수취소'
+		   	   , UPT_DT = NOW()
+		 WEHRE PDL_NO = #{pdlNo}#
+	</update>
 </mapper>
