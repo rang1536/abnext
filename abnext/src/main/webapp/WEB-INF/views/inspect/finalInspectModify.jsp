@@ -33,7 +33,7 @@
 	<link rel="stylesheet" href="resources/plugins/summernote/summernote-bs4.min.css">
 	<style>
 		.txtc {text-align:center;}
-
+		.txtl {text-align:left;}
 		td {text-align:center}
 	</style>
 
@@ -281,13 +281,21 @@
 				<div class="row">
 					<div class="col-12" style="text-align:center">
 						<button type="button" id="list" style="width:161.2px;" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-list"></i> 목록</button>
+						<button type="button" id="pdf" style="width:161.2px;" class="btn btn-sm btn-success btn-flat"><i class="fas fa-file"></i> 진단결과서</button>
 					</div>
 				</div>
-
+				<div class="row" style="height:15px">
+				</div>
 			</div>
 			<!-- /.container-fluid -->
 		</section>
 		<!-- /.content -->
+
+		<div id="printDiv">
+
+		</div>
+
+
 	</div>
 
 
@@ -1388,6 +1396,212 @@ function callBackFn(data,col){
 $(document).on('click','#list',function(){
 	location.href='finalInspectList';
 })
+
+$("#pdf").click(function(){
+	var html = '';
+	var animSex = '${rceptInfo.animSex }';
+	var animSexNm = '';
+	if(animSex == 'M'){
+		animSexNm = '수컷';
+	}else if(animSex == 'F'){
+		animSexNm = '암컷';
+	}else {
+		animSexNm = '모름';
+	}
+
+	var curDt = new Date();
+	var birthArr = '${rceptInfo.animBirth}'.split(".");
+	var setYear = curDt.getFullYear()-birthArr[0];
+	var setMonth = curDt.getMonth()+1-birthArr[1];
+	var setDate = curDt.getDate()-birthArr[2];
+	var month = setYear*12;
+	if(setDate >= 0){
+		month += setMonth+1;
+	}else {
+		month += setMonth;
+	}
+
+	html +=	'		<div class="card-body table-responsive pdfStyle" style="font-size:15px"><span style="text-align:center;font-size:25px;">반려조류 검사결과서</span>';
+	html +=	'			<table class="table table-bordered text-nowrap">';
+	html +=	'				<tbody>';
+	html +=	'					<tr>';
+	html +=	'						<td style="width:20%;background-color:#929292" class="txtc"></td>';
+	html +=	'						<td style="width:30%;background-color:#929292"" class="txtc">${rceptInfo.animNm}</td>';
+	html +=	'						<td style="width:20%;background-color:#929292" class="txtc">${rceptInfo.pdlNo }</td>';
+	html +=	'						<td style="width:30%;background-color:#929292"" class="txtc"></td>';
+	html +=	'					</tr>';
+	html +=	'					<tr>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">보호자</td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.animButler }</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">신청자(기관)</td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.hospNm }</td>';
+	html +=	'					</tr>';
+	html +=	'					<tr>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">종</td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc"></td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">담당수의사</td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.docNm }</td>';
+	html +=	'					</tr>';
+	html +=	'					<tr>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">품종</td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.animFirstNm } ${rceptInfo.animSecondNm } ${rceptInfo.animThirdNm }</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">시료수령일</td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.rqstDt}</td>';
+	html +=	'					</tr>';
+	html +=	'					<tr>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">성별</td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">'+animSexNm+'</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">검사일</td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.finishDt }</td>';
+	html +=	'					</tr>';
+	html +=	'					<tr>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">나이</td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">'+month+'M</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc"></td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc"></td>';
+	html +=	'					</tr>';
+	html +=	'				</tbody>';
+	html +=	'			</table>';
+	html +=	'			<div style="height:10px;"></div>';
+	html +=	'			<table class="table table-bordered text-nowrap">';
+	html +=	'				<tbody>';
+	html +=	'					<tr>';
+	html +=	'						<td style="width:70%;background-color:#929292" class="txtl">검사항목</td>';
+	html +=	'						<td style="width:30%;background-color:#929292"" class="txtc">결과</td>';
+	html +=	'					</tr>';
+
+	html +=	'					<c:forEach var="item" items="${inspList }" varStatus="status">';
+	html +=	'						<tr>';
+	html +=	'							<td style="width:70%;background-color:#F2F2F2" class="txtl">${item.inspThirdNm }</td>';
+	html +=	'							<td style="width:30%;background-color:#F2F2F2" class="txtc">${item.inspResult }</td>';
+	html +=	'						</tr>';
+	html +=	'						<c:set var="len" value="${status.index}"/>';
+	html +=	'					</c:forEach>';
+
+	var inspLen = parseInt('${len}');
+	var addTr = 0;
+	if(inspLen < 12){
+		addTr = 12-inspLen;
+	}
+	for(var i=0; i<addTr; i++){
+		html +=	'						<tr>';
+		html +=	'							<td style="width:70%;height:36.39px;background-color:#F2F2F2" class="txtl"></td>';
+		html +=	'							<td style="width:30%;height:36.39px;background-color:#F2F2F2" class="txtc"></td>';
+		html +=	'						</tr>';
+	}
+
+	html +=	'				</tbody>';
+	html +=	'			</table>';
+
+	html +=	'			<div style="height:10px;"></div>';
+	html +=	'			<table class="table table-bordered text-nowrap">';
+	html +=	'				<tbody>';
+	html +=	'					<tr>';
+	html +=	'						<td style="background-color:#929292" class="txtl">종합소견</td>';
+	html +=	'					</tr>';
+	html +=	'					<tr>';
+	html +=	'						<td style="width:70%;background-color:#F2F2F2;:" class="txtl"><div style="min-height:8em;">${rceptInfo.finalMemo }</div></td>';
+	html +=	'					</tr>';
+	html +=	'				</tbody>';
+	html +=	'			</table>';
+
+	html +=	'			<div style="height:50px;"></div>';
+	html += '			<span>(주)아비넥스트 대표 모인필</span>';
+
+	html +=	'			<div style="height:50px;"></div>';
+	html += '			<span>검사신청 및 문의<br/>avinext@avinext.co.kr T. 043-292-9998 F. 043-292-9980<br/>충청북도 청주시 상당구 남일면 쌍암동길 30-7</span>';
+
+
+	html +=	'		</div>';
+/*
+	var inspSecCd = $(this).find("[id^=inspSecondCd]").val();
+	if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-16'){
+		fnPcr($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
+	}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
+		fnAnti($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
+	}else if(inspSecCd == 'B001-03-18'){
+		fnSerum($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
+	}else if(inspSecCd == 'B001-04-23'){
+		fnBloodChem($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
+	}else if(inspSecCd == 'B001-04-24'){
+		fnCbc($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
+	}else {
+		drawImg($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
+	}
+ */
+	var shtml = makePdf(1,html);
+	$("#printDiv").append(shtml);
+
+	<c:forEach var="item" items="${inspList }" varStatus="status">
+		if('${item.inspSecondCd}' == 'B001-01-01' || '${item.inspSecondCd}' == 'B001-01-02' || '${item.inspSecondCd}' == 'B001-02-01' || '${item.inspSecondCd}' == 'B001-01-02' || '${item.inspSecondCd}' == 'B001-02-16'){
+			fnPcrPdf('${status.index+2 }','${item.inspNo}');
+		}
+	</c:forEach>
+
+})
+
+function fnPcrPdf(idx,inspNo){
+	console.log(inspNo);
+	$.ajax({
+		url : 'getPcrList',
+		data : {inspNo : inspNo},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var th1 = '';
+			var th2 = '';
+
+			if(title == 'PCR') {
+				th1 = 'POSITIVE';
+				th2 = 'NEGATIVE';
+			}else {
+				th1 = '암컷';
+				th2 = '수컷';
+			}
+
+			var html = '';
+			html += '<div class="card-body">';
+			html += '	<div class="row">';
+			html += '		<div class="table-responsive">';
+			html += '			<table class="table table-bordered text-nowrap">';
+			html += '				<thead>';
+			html += '					<tr>';
+			html += '						<td style="background-color:#F2F2F2;width:10%;">No.</td>';
+			html += '						<td style="background-color:#F2F2F2;width:*;">시료명</td>';
+			html += '						<td style="background-color:#F2F2F2;width:10%;">'+th1+'</td>';
+			html += '						<td style="background-color:#F2F2F2;width:10%;">'+th2+'</td>';
+			html += '						<td style="background-color:#F2F2F2;width:25%;">결과</td>';
+			html += '						<td style="background-color:#F2F2F2;width:25%;">메모</td>';
+			html += '					</tr>';
+			html += '				</thead>';
+			html += '				<tbody id="pcrPdf'+idx+'">';
+			html += '				</tbody>';
+			html += '			</table>';
+			html += '		</div>';
+			html += '	</div>';
+			html += '</div>';
+			$("#printDiv").append(idx,html);
+
+			var subHtml = '';
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var no = i+1;
+
+				subHtml += '<tr>';
+				subHtml += '	<td>'+no+'</td>';
+				subHtml += '	<td>'+item.smplName+'</td>';
+				subHtml += '	<td>'+item.positive+'</td>';
+				subHtml += '	<td>'+item.negative+'</td>';
+				subHtml += '	<td>'+item.result+'</td>';
+				subHtml += '	<td>'+item.memo+'</td>';
+				subHtml += '</tr>';
+			}
+			$("#pcrPdf"+idx).html(subHtml);
+
+		}
+	});
+
+}
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>

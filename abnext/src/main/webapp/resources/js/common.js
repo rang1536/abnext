@@ -217,6 +217,8 @@ function makePdf(pageNum, bodyObj){
 	html +='		</div>';
 	html +='	</div>	';
 	html +='</section>';
+
+	return html;
 }
 
 /************************************************************/
