@@ -140,6 +140,7 @@
 		     , CONVERT(FINAL_MEMO USING UTF8) AS FINAL_MEMO
 		     , (SELECT CODE_NM FROM TB_CODE WHERE CODE_ID = (SELECT INSP_SECOND_CD FROM TB_INSPECTION B WHERE A.RQST_NO = B.RQST_NO LIMIT 1)) AS INSP_TYPE
 		     , PDL_NO
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = 'C001') AS JONG
 		  FROM TB_RCEPT A
 		 WHERE PROC_STAT IN
 		<foreach item="arr" collection="array" open="(" separator="," close=")">
@@ -238,6 +239,7 @@
 		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = A.ANIM_THIRD_CD) AS ANIM_THIRD_NM
 		     , CASE WHEN ANIM_SEX = 'M' THEN '수컷' WHEN ANIM_SEX = 'F' THEN '암컷' ELSE '모름' END ANIM_SEX_NM
 		     , PDL_NO , INSPECTION
+		     , (SELECT CODE_NM FROM TB_CODE B WHERE B.CODE_ID = 'C001') AS JONG
 		  FROM TB_RCEPT A
 		 WHERE 1=1
 		<if test="rqstNo != null and rqstNo != ''">
@@ -303,11 +305,11 @@
 		</if>
 		<if test="result != null and result != ''">
 		     , RESULT = #{result}
-		     , RESULT_WRITER = #{uptId}
-		     , FINISH_DT = DATE_FORMAT(NOW(),'%Y.%m.%d')
 		</if>
 		<if test="finalMemo != null and finalMemo != ''">
 		     , FINAL_MEMO = #{finalMemo}
+		     , FINISH_DT = DATE_FORMAT(NOW(),'%Y.%m.%d')
+   		     , RESULT_WRITER = #{uptId}
 		</if>
 		<if test="diagUpCd != null and diagUpCd != ''">
 		     , DIAG_UP_CD = #{diagUpCd}

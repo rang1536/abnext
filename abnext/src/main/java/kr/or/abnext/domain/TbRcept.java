@@ -84,6 +84,8 @@ public class TbRcept {
 	//검사비변경사유
 	private String priceComment;
 
+	//REPORT용
+	private String jong;
 
 	public String getPriceComment() {
 		return priceComment;
@@ -573,6 +575,14 @@ public class TbRcept {
 		this.inspNo = inspNo;
 	}
 
+	public String getJong() {
+		return jong;
+	}
+
+	public void setJong(String jong) {
+		this.jong = jong;
+	}
+
 	@Override
 	public String toString() {
 		return "TbRcept [rqstNo=" + rqstNo + ", pdlNo=" + pdlNo + ", hospNo=" + hospNo + ", hospNm=" + hospNm
@@ -592,7 +602,7 @@ public class TbRcept {
 				+ ", uptDt=" + uptDt + ", uptId=" + uptId + ", inspType=" + inspType + ", searchStrtDt=" + searchStrtDt
 				+ ", searchFnshDt=" + searchFnshDt + ", searchStr=" + searchStr + ", payedPrice=" + payedPrice
 				+ ", limitCnt=" + limitCnt + ", sumCnt=" + sumCnt + ", inspNo=" + inspNo + ", fileList=" + fileList
-				+ ", priceComment=" + priceComment + "]";
+				+ ", priceComment=" + priceComment + ", jong=" + jong + "]";
 	}
 
 
