@@ -1102,7 +1102,7 @@ function fnSerum(inspNo,k,title){
 				type : 'post',
 				data : {inspNo : inspNo},
 				success:function(data){
-					setChartData(data);
+					setChartData(data,title);
 				}
 			})
 
@@ -1126,18 +1126,24 @@ function fnSerum(inspNo,k,title){
 }
 
 
-function setChartData(data){
+function setChartData(data,title){
 	var areaChartData = '';
 	// x축값 구하기
 	var xArr = new Array();
 	var maxData = 0;
-	for(var i=0; i<data.length; i++){
+
+	if(title == 'ELISA') maxData = 22;
+	else maxData = 13;
+
+	/*
+	for(var i=0; i<22; i++){
 		if(maxData < data[i].serData){
 			maxData = data[i].serData;
 		}
 	}
 
 	if(maxData < 10) maxData = 10;
+ */
 
 	for(var i=0; i<=maxData; i++){
 		xArr.push(i);
@@ -1407,6 +1413,9 @@ $(document).on('click','#list',function(){
 })
 
 $("#pdf").click(function(){
+
+	$("#printDiv").empty();
+
 	var html = '';
 	var animSex = '${rceptInfo.animSex }';
 	var animSexNm = '';
@@ -1447,7 +1456,7 @@ $("#pdf").click(function(){
 	html +=	'					</tr>';
 	html +=	'					<tr>';
 	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">종</td>';
-	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc"></td>';
+	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.jong }</td>';
 	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">담당수의사</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.docNm }</td>';
 	html +=	'					</tr>';
@@ -1482,7 +1491,6 @@ $("#pdf").click(function(){
 	html +=	'					<c:forEach var="item" items="${inspList }" varStatus="status">';
 	html +=	'						<tr>';
 	html +=	'							<td style="width:70%;background-color:#F2F2F2" class="txtl">${item.inspThirdNm }</td>';
-	//html +=	'							<c:set var="inspRes" value="${fn:replace(fn:replace(item.inspResult, LF, \''), CR, \'')}" />';
 	html +=	'							<c:set var="inspRes" value="${fn:replace(fn:replace(item.inspResult, LF, \''), CR, \'')}" />';
 	html +=	'							<td style="width:30%;background-color:#F2F2F2" class="txtc">${inspRes}</td>';
 	html +=	'						</tr>';
@@ -1545,13 +1553,17 @@ $("#pdf").click(function(){
 	var shtml = makePdf(1,html);
 	$("#printDiv").append(shtml);
 
-	//'<c:forEach var="item" items="${inspList }" varStatus="status">';
+	'<c:forEach var="item" items="${inspList }" varStatus="status">';
 		if('${item.inspSecondCd}' == 'B001-01-01' || '${item.inspSecondCd}' == 'B001-02-01' || '${item.inspSecondCd}' == 'B001-02-16' || '${item.inspSecondCd}' == 'B001-01-02' || '${item.inspSecondCd}' == 'B001-02-02'){
 			fnPcrPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
+		}else if('${item.inspSecondCd}' == 'B001-01-14' || '${item.inspSecondCd}' == 'B001-02-14'){
+			fnAntiPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
+		}else if('${item.inspSecondCd}' == 'B001-03-18'){
+			fnSerumPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
 		}
-	//'</c:forEach>';
+	'</c:forEach>';
 
-})
+});
 
 function fnPcrPdf(idx,inspNo,sec,thr,res){
 	$.ajax({
@@ -1624,6 +1636,194 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 	});
 
 
+}
+
+function fnAntiPdf(idx,inspNo,sec,thr,res){
+	$.ajax({
+		url : 'getAntiList',
+		data : {inspNo : inspNo},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var html = '';
+			html += '			<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">항생제감수성 검사</span><br/><br/>';
+			html += '				<div class="table-responsive">';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<thead>';
+			html += '							<tr>';
+			html += '								<td rowspan="2">번호</td>';
+			html += '								<td rowspan="2">항생제</td>';
+			html += '								<td rowspan="2">용량</td>';
+			html += '								<td rowspan="2">약자</td>';
+			html += '								<td rowspan="2">기준직경(mm)</td>';
+			html += '								<td colspan="3">결과<br/>직경<br/>(mm)</td>';
+			html += '								<td rowspan="2">판독</td>';
+			html += '								<td rowspan="2">비고</td>';
+			html += '							</tr>';
+			html += '							<tr>';
+			html += '								<td>R<br/>≤</td>';
+			html += '								<td>I</td>';
+			html += '								<td>S<br/>≥</td>';
+			html += '							</tr>';
+			html += '						</thead>';
+			html += '						<tbody id="antibiotic">';
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				html += '<tr>';
+				html += '<td>'+item.antiNo+'</td>';
+				html += '<td>'+item.antiName+'</td>';
+				html += '<td>'+item.capacity+'</td>';
+				html += '<td>'+item.nickName+'</td>';
+				html += '<td>'+item.mini+'</td>';
+				html += '<td>'+item.scope+'</td>';
+				html += '<td>'+item.maxi+'</td>';
+				html += '<td>'+item.res1+'</td>';
+				html += '<td>'+item.res2+'</td>';
+				html += '<td>'+item.antiMemo+'</td>';
+				html += '</tr>';
+			}
+			html += '						</tbody>';
+			html += '					</table>';
+
+			html += '			<div style="height:100px;"></div>';
+			html += '			<table class="table table-bordered text-nowrap">';
+			html += '				<thead>';
+			html += '					<tr style="height:500px;">';
+			html += '						<td style="width:20%;">검사메모</td>';
+			html += '						<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
+			html += '					</tr>';
+			html += '				</thead>';
+			html += '			</table>';
+
+			html += '				</div>';
+			html += '			</div>';
+
+			var shtml = makePdf(idx,html);
+			$("#printDiv").append(idx,shtml);
+		}
+	});
+
+
+}
+
+function fnSerumPdf(idx,inspNo,sec,thr,res){
+	$.ajax({
+		url : 'getSerumList',
+		data : {inspNo : inspNo},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var html = '';
+			html += '		<div class="card-body"  style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">'+sec+'</span><br/><br/>';
+			html += '			<div class="chart">';
+			html += '				<canvas id="barChartPdf" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>';
+			html += '			</div>';
+
+			html += '			<div style="height:100px;"></div>';
+			html += '			<table class="table table-bordered text-nowrap">';
+			html += '				<thead>';
+			html += '					<tr style="height:500px;">';
+			html += '						<td style="width:20%;">검사메모</td>';
+			html += '						<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
+			html += '					</tr>';
+			html += '				</thead>';
+			html += '			</table>';
+			html += '		</div>';
+
+			var shtml = makePdf(idx,html);
+			$("#printDiv").append(idx,shtml);
+
+			$.ajax({
+				url : 'getSerumChart',
+				dataType : 'json',
+				type : 'post',
+				data : {inspNo : inspNo},
+				success:function(data){
+					setChartDataPdf(data);
+				}
+			})
+
+		}
+	});
+}
+
+function setChartDataPdf(data,title){
+	var areaChartData = '';
+	// x축값 구하기
+	var xArr = new Array();
+	var maxData = 0;
+
+	if(title == 'ELISA') maxData = 22;
+	else maxData = 13;
+
+	/*
+	for(var i=0; i<22; i++){
+		if(maxData < data[i].serData){
+			maxData = data[i].serData;
+		}
+	}
+
+	if(maxData < 10) maxData = 10;
+ */
+
+	for(var i=0; i<=maxData; i++){
+		xArr.push(i);
+	}
+
+	// y축값 구하기
+	var yArr = new Array();
+
+	for(var i=0; i<=maxData; i++){
+		var flag = false;
+		for(var j=0; j<data.length; j++){
+			if(i == data[j].serData){
+				yArr.push(Number(data[j].cnt));
+				flag = true;
+			}
+		}
+		if(!flag){
+			yArr.push(0);
+		}
+
+	}
+
+	var dataSet = '';
+	var dataSets = new Array();
+	dataSet = {
+			label               : '혈청개수',
+			backgroundColor     : 'rgba(60,141,188,0.9)',
+			borderColor         : '#3b8bba',
+			pointRadius          : false,
+			pointColor          : 'rgba(60,141,188,1)',
+			pointStrokeColor    : 'fff',
+			pointHighlightFill  : '#fff',
+			pointHighlightStroke: 'rgba(60,141,188,1)',
+			data                : yArr
+		}
+	dataSets.push(dataSet);
+
+	var areaChartData = {
+		labels  :	xArr,
+		datasets: dataSets
+	}
+
+    var barChartCanvas = $('#barChartPdf').get(0).getContext('2d');
+    var barChartData = $.extend(true, {}, areaChartData);
+    var temp0 = areaChartData.datasets[0];
+    barChartData.datasets[0] = temp0;
+
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+
+    new Chart(barChartCanvas, {
+      type: 'bar',
+      data: barChartData,
+      options: barChartOptions
+    })
 }
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>

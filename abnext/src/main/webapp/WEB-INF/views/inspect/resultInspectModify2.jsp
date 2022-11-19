@@ -1284,14 +1284,14 @@ $("#inspList").find("tr").click(function(){
 
 		$("[name=inspNo]").val($(this).find("[id^=inspNo]").val());
 		$("#inspSickCd").val($(this).find("[id^=inspThirdCd]").val());
-
+		var title = $(this).find("td:eq(3)").text();
 		var inspSecCd = $(this).find("[id^=inspSecondCd]").val();
 		if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-16'){
 			fnPcr();
 		}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
 			fnAnti();
 		}else if(inspSecCd == 'B001-03-18'){
-			fnSerum();
+			fnSerum(title);
 		}else if(inspSecCd == 'B001-04-23'){
 			fnBloodChem();
 		}else if(inspSecCd == 'B001-04-24'){
@@ -1631,11 +1631,18 @@ $("#serumSave").click(function(){
 
 })
 
-function setChartData(data){
+function setChartData(data,title){
 	var areaChartData = '';
 	// x축값 구하기
 	var xArr = new Array();
 	var maxData = 0;
+
+	console.log(title);
+
+	if(title == 'ELISA') maxData = 22;
+	else maxData = 13;
+
+	/*
 	for(var i=0; i<data.length; i++){
 		if(maxData < data[i].serData){
 			maxData = data[i].serData;
@@ -1643,7 +1650,7 @@ function setChartData(data){
 	}
 
 	if(maxData < 10) maxData = 10;
-
+ */
 	for(var i=0; i<=maxData; i++){
 		xArr.push(i);
 	}
@@ -1704,7 +1711,7 @@ function setChartData(data){
     })
 }
 
-function fnSerum(){
+function fnSerum(title){
 	$(".iptPop").hide();
 	$(".inputType3").show();
 
@@ -1744,7 +1751,7 @@ function fnSerum(){
 			if(chartObj != null){
 				chartObj.destroy();
 			}
-			setChartData(data);
+			setChartData(data,title);
 		}
 	})
 }
