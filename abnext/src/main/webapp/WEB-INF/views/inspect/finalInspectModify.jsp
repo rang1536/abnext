@@ -639,10 +639,56 @@ function fnCbc(inspNo,k,title){
 			html += '				<div class="table-responsive">';
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<colgroup>';
-			html += '							<col style="width:50%"/>';
-			html += '							<col style="width:50%"/>';
+			html += '							<col style="width:20%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:*"/>';
 			html += '						</colgroup>';
+			html += '						<thead>';
+			html += '							<tr>';
+			html += '								<td rowspan="2">항목명</td>';
+			html += '								<td colspan="2">결과</td>';
+			html += '								<td colspan="2">참조값</td>';
+			html += '								<td>비고</td>';
+			html += '							</tr>';
+			html += '							<tr>';
+			html += '								<td>값</td>';
+			html += '								<td>단위</td>';
+			html += '								<td>최저</td>';
+			html += '								<td>최대</td>';
+			html += '								<td></td>';
+			html += '							</tr>';
+			html += '						</thead>';
 			html += '						<tbody id="cbc">';
+
+			for(var i=0; i<data.length; i++){
+
+				var item = data[i].itemName;
+				switch(item) {
+					case 'WBC' : td2 = '10³/㎕'; td3 = '3'; td4 = '11'; break;
+					case 'RBC' : td2 = '10^6/㎕'; td3 = '2.4'; td4 = '4.2'; break;
+					case 'Hct' : td2 = '%'; td3 = '39'; td4 = '49'; break;
+					case 'Hets' : td2 = '%'; td3 = '50'; td4 = '80'; break;
+					case 'Eos' : td2 = '%'; td3 = '0'; td4 = '2'; break;
+					case 'Baso' : td2 = '%'; td3 = '0'; td4 = '1'; break;
+					case 'Monos' : td2 = '%'; td3 = '0'; td4 = '3'; break;
+					case 'Lymphos' : td2 = '%'; td3 = '20'; td4 = '45'; break;
+					default : td2 = '-'; td3 = '-'; td4 = '-'; break;
+				}
+
+				html += '<tr>';
+				html += '	<td>'+data[i].itemName+'</td>';
+				html += '	<td>'+data[i].val+'</td>';
+				html += '	<td>'+td2+'</td>';
+				html += '	<td>'+td3+'</td>';
+				html += '	<td>'+td4+'</td>';
+				html += '	<td>'+$.gfn_nvl(data[i].rmk)+'</td>';
+
+				html += '</tr>';
+			}
+
 			html += '						</tbody>';
 			html += '					</table>';
 			html += '				</div>';
@@ -652,16 +698,6 @@ function fnCbc(inspNo,k,title){
 			html += '</div>';
 			html += '</div>';
 			$(".result").append(html);
-
-			var subHtml = '';
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				subHtml += '<tr>';
-				subHtml += '<td>'+item.itemName+'</td>';
-				subHtml += '<td>'+item.val+'</td>';
-				subHtml += '</tr>';
-			}
-			$("#cbc").html(subHtml);
 
 			$.ajax({
 				url : 'getInspResult',
@@ -750,11 +786,61 @@ function fnBloodChem(inspNo,k,title){
 			html += '			<div class="card-body">';
 			html += '				<div class="table-responsive">';
 			html += '					<table class="table table-bordered text-nowrap">';
+
 			html += '						<colgroup>';
-			html += '							<col style="width:50%"/>';
-			html += '							<col style="width:50%"/>';
+			html += '							<col style="width:20%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:*"/>';
 			html += '						</colgroup>';
+			html += '						<thead>';
+			html += '							<tr>';
+			html += '								<td rowspan="2">항목명</td>';
+			html += '								<td colspan="2">결과</td>';
+			html += '								<td colspan="2">참조값</td>';
+			html += '								<td>비고</td>';
+			html += '							</tr>';
+			html += '							<tr>';
+			html += '								<td>값</td>';
+			html += '								<td>단위</td>';
+			html += '								<td>최저</td>';
+			html += '								<td>최대</td>';
+			html += '								<td></td>';
+			html += '							</tr>';
+			html += '						</thead>';
 			html += '						<tbody id="bloodChem">';
+
+			for(var i=0; i<data.length; i++){
+				var item = data[i].itemName;
+				console.log(data[i]);
+				switch(item) {
+					case 'TP' : td2 = 'g/dL'; td3 = '5.4'; td4 = '8.2'; break;
+					case 'Alb' : td2 = 'g/dL'; td3 = '2.2'; td4 = '4.4'; break;
+					case 'Glob' : td2 = 'g/dL'; td3 = '1.5'; td4 = '5.7'; break;
+					case 'A/G ratio' : td2 = ''; td3 = ''; td4 = ''; break;
+					case 'GLU' : td2 = 'mg/dL'; td3 = '70'; td4 = '150'; break;
+					case 'AST' : td2 = ''; td3 = ''; td4 = ''; break;
+					case 'CK' : td2 = ''; td3 = ''; td4 = ''; break;
+					case 'CA' : td2 = 'mg/dL'; td3 = '8.0'; td4 = '11.8'; break;
+					case 'PHOS' : td2 = 'mg/dL'; td3 = '3.4'; td4 = '8.5'; break;
+					case 'Na' : td2 = 'mmol/L'; td3 = '142'; td4 = '164'; break;
+					case 'K' : td2 = 'mmol/L'; td3 = '3.7'; td4 = '5.8'; break;
+					case 'Na/K ratio' : td2 = ''; td3 = ''; td4 = ''; break;
+					default : td2 = ''; td3 = ''; td4 = ''; break;
+				}
+
+				html += '<tr>';
+				html += '	<td>'+data[i].itemName+'</td>';
+				html += '	<td>'+data[i].val+'</td>';
+				html += '	<td>'+td2+'</td>';
+				html += '	<td>'+td3+'</td>';
+				html += '	<td>'+td4+'</td>';
+				html += '	<td>'+data[i].rmk+'</td>';
+				html += '</tr>';
+			}
+
 			html += '						</tbody>';
 			html += '					</table>';
 			html += '				</div>';
@@ -765,15 +851,6 @@ function fnBloodChem(inspNo,k,title){
 			html += '</div>';
 			$(".result").append(html);
 
-			var subHtml = '';
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				subHtml += '<tr>';
-				subHtml += '<td>'+item.itemName+'</td>';
-				subHtml += '<td>'+item.val+'</td>';
-				subHtml += '</tr>';
-			}
-			$("#bloodChem").html(subHtml);
 
 			$.ajax({
 				url : 'getInspResult',
@@ -1480,7 +1557,7 @@ $("#pdf").click(function(){
 	html +=	'					</tr>';
 	html +=	'				</tbody>';
 	html +=	'			</table>';
-	html +=	'			<div style="height:10px;"></div>';
+	html +=	'			<div style="height:50px;"></div>';
 	html +=	'			<table class="table table-bordered text-nowrap">';
 	html +=	'				<tbody>';
 	html +=	'					<tr>';
@@ -1512,7 +1589,7 @@ $("#pdf").click(function(){
 	html +=	'				</tbody>';
 	html +=	'			</table>';
 
-	html +=	'			<div style="height:10px;"></div>';
+	html +=	'			<div style="height:50px;"></div>';
 	html +=	'			<table class="table table-bordered text-nowrap">';
 	html +=	'				<tbody>';
 	html +=	'					<tr>';
@@ -1534,22 +1611,7 @@ $("#pdf").click(function(){
 
 
 	html +=	'		</div>';
-/*
-	var inspSecCd = $(this).find("[id^=inspSecondCd]").val();
-	if(inspSecCd == 'B001-01-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-01' || inspSecCd == 'B001-01-02' || inspSecCd == 'B001-02-16'){
-		fnPcr($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
-	}else if(inspSecCd == 'B001-01-14' || inspSecCd == 'B001-02-14'){
-		fnAnti($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
-	}else if(inspSecCd == 'B001-03-18'){
-		fnSerum($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
-	}else if(inspSecCd == 'B001-04-23'){
-		fnBloodChem($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
-	}else if(inspSecCd == 'B001-04-24'){
-		fnCbc($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
-	}else {
-		drawImg($(this).find("[id^=inspNo]").val(),k,$(this).find("td:eq(2)").text());
-	}
- */
+
 	var shtml = makePdf(1,html);
 	$("#printDiv").append(shtml);
 
@@ -1560,6 +1622,12 @@ $("#pdf").click(function(){
 			fnAntiPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
 		}else if('${item.inspSecondCd}' == 'B001-03-18'){
 			fnSerumPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
+		}else if('${item.inspSecondCd}' == 'B001-04-23'){
+			fnBloodChemPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
+		}else if('${item.inspSecondCd}' == 'B001-04-24'){
+			fnCbcPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
+		}else {
+			drawImgPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
 		}
 	'</c:forEach>';
 
@@ -1716,7 +1784,7 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 			var html = '';
 			html += '		<div class="card-body"  style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">'+sec+'</span><br/><br/>';
 			html += '			<div class="chart">';
-			html += '				<canvas id="barChartPdf" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>';
+			html += '				<canvas id="barChartPdf'+idx+'" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>';
 			html += '			</div>';
 
 			html += '			<div style="height:100px;"></div>';
@@ -1739,7 +1807,7 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 				type : 'post',
 				data : {inspNo : inspNo},
 				success:function(data){
-					setChartDataPdf(data);
+					setChartDataPdf(data,sec,idx);
 				}
 			})
 
@@ -1747,7 +1815,7 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 	});
 }
 
-function setChartDataPdf(data,title){
+function setChartDataPdf(data,title,idx){
 	var areaChartData = '';
 	// x축값 구하기
 	var xArr = new Array();
@@ -1755,16 +1823,6 @@ function setChartDataPdf(data,title){
 
 	if(title == 'ELISA') maxData = 22;
 	else maxData = 13;
-
-	/*
-	for(var i=0; i<22; i++){
-		if(maxData < data[i].serData){
-			maxData = data[i].serData;
-		}
-	}
-
-	if(maxData < 10) maxData = 10;
- */
 
 	for(var i=0; i<=maxData; i++){
 		xArr.push(i);
@@ -1807,7 +1865,7 @@ function setChartDataPdf(data,title){
 		datasets: dataSets
 	}
 
-    var barChartCanvas = $('#barChartPdf').get(0).getContext('2d');
+    var barChartCanvas = $('#barChartPdf'+idx).get(0).getContext('2d');
     var barChartData = $.extend(true, {}, areaChartData);
     var temp0 = areaChartData.datasets[0];
     barChartData.datasets[0] = temp0;
@@ -1825,6 +1883,229 @@ function setChartDataPdf(data,title){
       options: barChartOptions
     })
 }
+
+function fnCbcPdf(idx,inspNo,sec,thr,res){
+	$.ajax({
+		url : 'getCbcList',
+		data : {inspNo : inspNo},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var html = "";
+			html += '			<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">혈구검사</span><br/><br/>';
+			html += '				<div class="table-responsive">';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<colgroup>';
+			html += '							<col style="width:20%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:*"/>';
+			html += '						</colgroup>';
+			html += '						<thead>';
+			html += '							<tr>';
+			html += '								<td rowspan="2">항목명</td>';
+			html += '								<td colspan="2">결과</td>';
+			html += '								<td colspan="2">참조값</td>';
+			html += '								<td>비고</td>';
+			html += '							</tr>';
+			html += '							<tr>';
+			html += '								<td>값</td>';
+			html += '								<td>단위</td>';
+			html += '								<td>최저</td>';
+			html += '								<td>최대</td>';
+			html += '								<td></td>';
+			html += '							</tr>';
+			html += '						</thead>';
+			html += '						<tbody id="cbc">';
+
+			for(var i=0; i<data.length; i++){
+
+				var item = data[i].itemName;
+				switch(item) {
+					case 'WBC' : td2 = '10³/㎕'; td3 = '3'; td4 = '11'; break;
+					case 'RBC' : td2 = '10^6/㎕'; td3 = '2.4'; td4 = '4.2'; break;
+					case 'Hct' : td2 = '%'; td3 = '39'; td4 = '49'; break;
+					case 'Hets' : td2 = '%'; td3 = '50'; td4 = '80'; break;
+					case 'Eos' : td2 = '%'; td3 = '0'; td4 = '2'; break;
+					case 'Baso' : td2 = '%'; td3 = '0'; td4 = '1'; break;
+					case 'Monos' : td2 = '%'; td3 = '0'; td4 = '3'; break;
+					case 'Lymphos' : td2 = '%'; td3 = '20'; td4 = '45'; break;
+					default : td2 = '-'; td3 = '-'; td4 = '-'; break;
+				}
+
+				html += '<tr>';
+				html += '	<td>'+data[i].itemName+'</td>';
+				html += '	<td>'+data[i].val+'</td>';
+				html += '	<td>'+td2+'</td>';
+				html += '	<td>'+td3+'</td>';
+				html += '	<td>'+td4+'</td>';
+				html += '	<td>'+$.gfn_nvl(data[i].rmk)+'</td>';
+
+				html += '</tr>';
+			}
+
+			html += '						</tbody>';
+			html += '					</table>';
+
+			html += '					</table>';
+			html += '					<div style="height:100px;"></div>';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<thead>';
+			html += '							<tr style="height:500px;">';
+			html += '								<td style="width:20%;">검사메모</td>';
+			html += '								<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
+			html += '							</tr>';
+			html += '						</thead>';
+			html += '					</table>';
+			html += '				</div>';
+			html += '			</div>';
+
+			var shtml = makePdf(idx,html);
+			$("#printDiv").append(idx,shtml);
+
+
+		}
+	});
+}
+
+function fnBloodChemPdf(idx,inspNo,sec,thr,res){
+	$.ajax({
+		url : 'getBcList',
+		data : {inspNo : inspNo},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var html = "";
+			html += '			<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">혈액화학검사</span><br/><br/>';
+			html += '				<div class="table-responsive">';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<colgroup>';
+			html += '							<col style="width:20%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:15%"/>';
+			html += '							<col style="width:*"/>';
+			html += '						</colgroup>';
+			html += '						<thead>';
+			html += '							<tr>';
+			html += '								<td rowspan="2">항목명</td>';
+			html += '								<td colspan="2">결과</td>';
+			html += '								<td colspan="2">참조값</td>';
+			html += '								<td>비고</td>';
+			html += '							</tr>';
+			html += '							<tr>';
+			html += '								<td>값</td>';
+			html += '								<td>단위</td>';
+			html += '								<td>최저</td>';
+			html += '								<td>최대</td>';
+			html += '								<td></td>';
+			html += '							</tr>';
+			html += '						</thead>';
+			html += '						<tbody id="bloodChem">';
+
+			for(var i=0; i<data.length; i++){
+				var item = data[i].itemName;
+				switch(item) {
+					case 'TP' : td2 = 'g/dL'; td3 = '5.4'; td4 = '8.2'; break;
+					case 'Alb' : td2 = 'g/dL'; td3 = '2.2'; td4 = '4.4'; break;
+					case 'Glob' : td2 = 'g/dL'; td3 = '1.5'; td4 = '5.7'; break;
+					case 'A/G ratio' : td2 = ''; td3 = ''; td4 = ''; break;
+					case 'GLU' : td2 = 'mg/dL'; td3 = '70'; td4 = '150'; break;
+					case 'AST' : td2 = ''; td3 = ''; td4 = ''; break;
+					case 'CK' : td2 = ''; td3 = ''; td4 = ''; break;
+					case 'CA' : td2 = 'mg/dL'; td3 = '8.0'; td4 = '11.8'; break;
+					case 'PHOS' : td2 = 'mg/dL'; td3 = '3.4'; td4 = '8.5'; break;
+					case 'Na' : td2 = 'mmol/L'; td3 = '142'; td4 = '164'; break;
+					case 'K' : td2 = 'mmol/L'; td3 = '3.7'; td4 = '5.8'; break;
+					case 'Na/K ratio' : td2 = ''; td3 = ''; td4 = ''; break;
+					default : td2 = ''; td3 = ''; td4 = ''; break;
+				}
+
+				html += '<tr>';
+				html += '	<td>'+data[i].itemName+'</td>';
+				html += '	<td>'+data[i].val+'</td>';
+				html += '	<td>'+td2+'</td>';
+				html += '	<td>'+td3+'</td>';
+				html += '	<td>'+td4+'</td>';
+				html += '	<td>'+data[i].rmk+'</td>';
+				html += '</tr>';
+			}
+
+			html += '					</table>';
+			html += '					<div style="height:100px;"></div>';
+			html += '					<table class="table table-bordered text-nowrap">';
+			html += '						<thead>';
+			html += '							<tr style="height:500px;">';
+			html += '								<td style="width:20%;">검사메모</td>';
+			html += '								<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
+			html += '							</tr>';
+			html += '						</thead>';
+			html += '					</table>';
+			html += '				</div>';
+			html += '			</div>';
+
+			var shtml = makePdf(idx,html);
+			$("#printDiv").append(idx,shtml);
+		}
+
+	});
+}
+
+function drawImgPdf(idx,inspNo,sec,thr,res){
+	$.ajax({
+		url : 'getFileList',
+		data : {inspNo : inspNo, fileGb : 'F001-05'},
+		dataType : 'json',
+		type : 'post',
+		success : function(data){
+			var htmlData = '';
+			var inputType1 = '';
+
+			inputType1 += '			<div class="card-body">';
+			inputType1 += '				<div>';
+			inputType1 += '					<div class="filter-container row previewList'+idx+'"></div>';
+			inputType1 += '				</div>';
+
+			inputType1 += '				<div style="height:100px;"></div>';
+			inputType1 += '				<table class="table table-bordered text-nowrap">';
+			inputType1 += '					<thead>';
+			inputType1 += '						<tr style="height:500px;">';
+			inputType1 += '							<td style="width:20%;">검사메모</td>';
+			inputType1 += '							<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
+			inputType1 += '						</tr>';
+			inputType1 += '					</thead>';
+			inputType1 += '				</table>';
+			inputType1 += '			</div>';
+
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var checked = '';
+				if(item.closeYn == 'Y'){
+					continue;
+				}
+				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
+				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+				htmlData += '	</a>';
+				htmlData += '</div>';
+				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-12">'+item.title+'</div>';
+				htmlData += '	</div>';
+				htmlData += '	<div class="row">';
+				htmlData += '		<div class="col-12">'+item.content+'</div>';
+				htmlData += '	</div>';
+				htmlData += '</div>';
+
+			}
+
+		}
+	});
+}
+
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>

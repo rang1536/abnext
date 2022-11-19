@@ -581,20 +581,23 @@
 		SELECT A.*
 		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
 		  FROM TB_BLOOD_CHEM A
-		 WHERE INSP_NO = #{inspNo}
-		 ORDER BY INS_DT
+		     , TB_CODE B
+		 WHERE A.ITEM_NAME = B.CODE_NM
+		   AND A.INSP_NO = #{inspNo}
+		 ORDER BY B.SORT_IDX
 	</select>
 
 	<insert id="insertCbc" parameterType="kr.or.abnext.domain.TbBloodChem">
 		INSERT
 		  INTO TB_CBC (
 		       INSP_NO , ITEM_NAME , VAL
-		     , INS_DT  , INS_ID )
+		     , RMK     , INS_DT    , INS_ID )
 		VALUES (
 		       #{inspNo} , #{itemName} , #{val}
-		     , NOW()     , #{insId} )
+		     , #{rmk}    , NOW()       , #{insId} )
 		    ON DUPLICATE KEY
 		UPDATE VAL = #{val}
+		     , RMK = #{rmk}
 		     , UPT_DT = NOW()
 		     , UPT_ID = #{insId}
 	</insert>

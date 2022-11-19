@@ -954,9 +954,28 @@
 								<div class="table-responsive">
 									<table class="table table-bordered text-nowrap">
 										<colgroup>
-											<col style="width:50%"/>
-											<col style="width:50%"/>
+											<col style="width:20%"/>
+											<col style="width:15%"/>
+											<col style="width:15%"/>
+											<col style="width:15%"/>
+											<col style="width:15%"/>
+											<col style="width:*"/>
 										</colgroup>
+										<thead>
+											<tr>
+												<td rowspan="2">항목명</td>
+												<td colspan="2">결과</td>
+												<td colspan="2">참조값</td>
+												<td>비고</td>
+											</tr>
+											<tr>
+												<td>값</td>
+												<td>단위</td>
+												<td>최저</td>
+												<td>최대</td>
+												<td></td>
+											</tr>
+										</thead>
 										<tbody id="cbc"></tbody>
 									</table>
 								</div>
@@ -1669,6 +1688,7 @@ function makeTd(target){
 			}
 		}
 	}else {
+
 		if(splitStr[0] == 'bcvl'){
 			var idx = Number(splitStr[1])-1;
 			var r = Number($("#bloodChem").find("tr:eq("+idx+")").find("td:eq(3)").text().trim());
@@ -1678,6 +1698,21 @@ function makeTd(target){
 					$("#bigo"+Number(splitStr[1])).text("▼");
 				}else if(val > s){
 					$("#bigo"+Number(splitStr[1])).text("▲");
+				}else {
+					$("#bigo"+Number(splitStr[1])).text("");
+				}
+			}
+		}else if(splitStr[0] == 'cbcvl'){
+			var idx = Number(splitStr[1])-1;
+			var r = Number($("#cbc").find("tr:eq("+idx+")").find("td:eq(3)").text().trim());
+			var s = Number($("#cbc").find("tr:eq("+idx+")").find("td:eq(4)").text().trim());
+			if(r > 0 && s > 0 && val > 0){
+				if(val < r){
+					$("#bigo2"+Number(splitStr[1])).text("▼");
+				}else if(val > s){
+					$("#bigo2"+Number(splitStr[1])).text("▲");
+				}else {
+					$("#bigo2"+Number(splitStr[1])).text("");
 				}
 			}
 		}
@@ -2315,11 +2350,12 @@ function callBackBloodChem(data){
 	$("#cbc").find("tr").each(function(idx){
 		var itemName = $(this).find("td:eq(0)").text();
 		var val = $(this).find("td:eq(1)").text();
-
+		var rmk = $(this).find("td:eq(5)").text();
 		if(val != ''){
 			var cbc = {
 				itemName : itemName,
 				val : val,
+				rmk : rmk,
 				insId : JSON.parse(sessionStorage.getItem("userInfo")).userId
 			}
 			bcList.push(cbc);
@@ -2364,6 +2400,7 @@ function fnCbc(){
 				$("#cbc").find("tr").each(function(){
 					if($(this).find("td:eq(0)").text() == item.itemName){
 						$(this).find("td:eq(1)").text(item.val);
+						$(this).find("td:eq(5)").text(item.rmk);
 					}
 				})
 			}
@@ -2376,9 +2413,28 @@ function callBackCbc(data){
 	var html = '';
 	$("#cbc").empty();
 	for(var i=0; i<data.length; i++){
+
+		var item = data[i].codeNm;
+		switch(item) {
+			case 'WBC' : td2 = '10³/㎕'; td3 = '3'; td4 = '11'; break;
+			case 'RBC' : td2 = '10^6/㎕'; td3 = '2.4'; td4 = '4.2'; break;
+			case 'Hct' : td2 = '%'; td3 = '39'; td4 = '49'; break;
+			case 'Hets' : td2 = '%'; td3 = '50'; td4 = '80'; break;
+			case 'Eos' : td2 = '%'; td3 = '0'; td4 = '2'; break;
+			case 'Baso' : td2 = '%'; td3 = '0'; td4 = '1'; break;
+			case 'Monos' : td2 = '%'; td3 = '0'; td4 = '3'; break;
+			case 'Lymphos' : td2 = '%'; td3 = '20'; td4 = '45'; break;
+			default : td2 = '-'; td3 = '-'; td4 = '-'; break;
+		}
+
 		html += '<tr>';
 		html += '	<td id="cbcnm_'+(i+1)+'">'+data[i].codeNm+'</td>';
 		html += '	<td style="height:34px; padding: 1px 3px 1px 3px;" id="cbcvl_'+(i+1)+'"></td>';
+		html += '	<td>'+td2+'</td>';
+		html += '	<td>'+td3+'</td>';
+		html += '	<td>'+td4+'</td>';
+		html += '	<td id="bigo2'+(i+1)+'"></td>';
+
 		html += '</tr>';
 	}
 	$("#cbc").html(html);
