@@ -95,12 +95,12 @@
 										</select>
 									</div>
 								</div>
-								<div class="col-sm-3">
+								<!-- <div class="col-sm-3">
 									<div class="form-group">
 										<label>신청기관</label>
 										<input type="text" class="form-control" placeholder="신청기관" id="searchStr">
 									</div>
-								</div>
+								</div>  -->
 								<div class="col-sm-1">
 									<div class="form-group">
 										<label>&nbsp;</label>
@@ -193,7 +193,7 @@
 								</thead>
 								<tbody id="inspList">
 								</tbody>
-								<tfoot>
+								<tfoot style="display:none;">
 									<tr>
 										<td colspan="4" class="txtc">
 											<button type="button" id="sett" style="width:121.2px" class="btn btn-sm btn-primary btn-flat"><i class="fas fa-money-check-alt"></i> 입금확인</button>
@@ -325,7 +325,7 @@
 				searchStrtDt : $('#strtDt').val(),
 				searchFnshDt : $('#fnshDt').val(),
 				payGb : $("#payGb").val(),
-				searchStr : $('#searchStr').val(),
+				//searchStr : $('#searchStr').val(),
 				hospNo : hospNo
 		}
 

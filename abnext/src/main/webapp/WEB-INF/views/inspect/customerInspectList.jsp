@@ -61,7 +61,7 @@
 							</div>
 							<!-- /.card-header -->
 							<div class="card-body">
-								<div style="display:none">
+								<div>
 									<div class="form-group clearfix" style="float:right">
 										<div class="icheck-primary d-inline">
 											<input type="checkbox" id="chkAll" class="chkbox" checked>
@@ -69,7 +69,7 @@
 										</div>
 										<div class="icheck-primary d-inline" style="margin-left:15px">
 											<input type="checkbox" id="chk1" class="chkbox">
-											<label for="chk1">검사중</label>
+											<label for="chk1">검사진행중</label>
 										</div>
 										<div class="icheck-primary d-inline" style="margin-left:15px">
 											<input type="checkbox" id="chk2" class="chkbox">
@@ -193,11 +193,11 @@
 			type : 'post',
 			data : data,
 			success:function(data){
-				var colList = ['pdlNo','rqstDt','procStatNm','animNm','animButler','docNm','gubun','payStat'];
-				var typeList = ['text','text','text','text','text','text','text','text'];
+				var colList = ['pdlNo','rqstDt','procStatNm','animNm','animButler','docNm','payStat'];
+				var typeList = ['text','text','text','text','text','text','text'];
 				var widthList = ['120','100','100','150','180','150','120','120'];
-				var titleList = ['의뢰번호','신청일','상태','동물이름','보호자','담당수의사','검사구분','비용'];
-				var alignList = ['center','center','center','center','center','center','center','right'];
+				var titleList = ['의뢰번호','신청일','상태','동물이름','보호자','담당수의사','비용'];
+				var alignList = ['center','center','center','center','center','center','right'];
 				var gridId = 'jsGrid1';
 				var fields = new Array();
 				var row = '';
@@ -231,7 +231,11 @@
 								"width" : '100',
 								"align" : 'center',
 								"itemTemplate" : function(value, item){
-									return '<input type="button" id="delLine" value="접수취소" class="btn btn-sm btn-danger"/>';
+									if(item.procStatNm == '접수완료'){
+										return '<input type="button" id="delLine" value="접수취소" class="btn btn-sm btn-danger"/>';
+									}else{
+										return '';
+									}
 								}
 						}
 						fields.push(row);
