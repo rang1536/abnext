@@ -422,7 +422,7 @@
 							</div>
 						</div>
 
-						<div class="row" style="display:none">
+						<div class="row">
 							<div class="col-md-10">
 								<div class="row">
 									<div class="col-sm-5">
@@ -459,7 +459,7 @@
 						</div>
 					</div>
 					<!-- /.card-header -->
-					<div class="card-body table-responsive" style="display:none">
+					<div class="card-body table-responsive">
 						<form>
 							<div class="row">
 								<table id="example2" class="table table-bordered text-nowrap">
