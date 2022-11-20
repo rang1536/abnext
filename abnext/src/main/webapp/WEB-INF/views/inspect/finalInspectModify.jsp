@@ -299,8 +299,7 @@ pageContext.setAttribute("LF", "\n");
 			<!-- /.container-fluid -->
 		</section>
 		<!-- /.content -->
-
-		<div id="printDiv">
+		<div id="printDiv" style="width:950px;">
 
 		</div>
 

@@ -215,12 +215,12 @@ window.onafterprint = afterPrint;
 
 function makePdf(pageNum, bodyObj){
 	var html = '';
-	html +='<section class="content pdfSection'+pageNum+'" style="font-size:13px;">';
+	html +='<section class="content pdfSection'+pageNum+'" style="font-size:13px;width:100%;">';
 	html +='	<div class="container-fluid">';
 	html +='		<div class="row">';
 	html +='			<div class="col-12">';
 	html +='				<div class="card">';
-	html +='					<div class="row mb-2" style="border-bottom:2px solid #000000;padding:10px;">';
+	html +='					<div class="row mb-2" style="border-bottom:2px solid #000000;padding:10px;width:98%;margin-left:10px;">';
 	html +='						<div class="col-sm-6">';
 	html +='							<h1><b><img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:50%;"></b></h1>';
 	html +='						</div>';
