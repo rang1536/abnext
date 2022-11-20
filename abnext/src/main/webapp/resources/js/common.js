@@ -183,7 +183,7 @@ function fn_print(tagId){
 
 	setTimeout(function(){
 		window.print();
-	}, 500);
+	}, 1000);
 
 
 
