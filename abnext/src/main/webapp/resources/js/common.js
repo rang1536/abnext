@@ -171,6 +171,24 @@ var printTagId;
 
 function fn_print(tagId){
 	printTagId = tagId;
+
+	$.each(chartIdArr, function(i, chartTagId){
+		var canvas = document.getElementById(chartTagId);
+		//console.log(canvas.toDataURL());
+	})
+
+
+	$('#chartImgTag').prop('src', canvas.toDataURL());
+	$('.chart').css('display', 'none');
+
+	setTimeout(function(){
+		fn_print('printTest');
+		$('.chart').css('display', '');
+		$('.chartImg').css('display', 'none');
+		getData();
+	}, 500);
+
+
 	window.print();
 }
 

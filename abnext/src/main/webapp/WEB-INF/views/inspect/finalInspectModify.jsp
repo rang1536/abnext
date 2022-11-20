@@ -1800,6 +1800,7 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 
 }
 
+var chartIdArr =new Array();
 function fnSerumPdf(idx,inspNo,sec,thr,res){
 	$.ajax({
 		url : 'getSerumList',
@@ -1813,7 +1814,9 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 			html += '			<div class="chart">';
 			html += '				<canvas id="barChartPdf'+idx+'" style="min-height: 500px; height: 500px; max-height: 500px; max-width: 100%;"></canvas>';
 			html += '			</div>';
-
+			html += '			<div class="chartImg">';
+			html += '				<img id="chartImgTag'+idx+'"/>';
+			html += '			</div>';
 			html += '			<div style="height:350px;"></div>';
 			html += '			<table class="table table-bordered text-nowrap">';
 			html += '				<thead>';
@@ -1835,6 +1838,7 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 				data : {inspNo : inspNo},
 				success:function(data){
 					setChartDataPdf(data,sec,idx);
+					chartIdArr.push("barChartPdf"+idx);
 				}
 			})
 
@@ -2110,67 +2114,263 @@ function fnBloodChemPdf(idx,inspNo,sec,thr,res){
 }
 
 function drawImgPdf(idx,inspNo,sec,thr,res){
+	var closeYn = 'N';
 	$.ajax({
 		url : 'getFileList',
-		data : {inspNo : inspNo, fileGb : 'F001-05'},
+		data : {inspNo : inspNo, fileGb : 'F001-05', closeYn : closeYn},
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
 			var htmlData = '';
 			var inputType1 = '';
 
-			inputType1 += '			<div class="card-body">';
-			inputType1 += '				<div>';
-			inputType1 += '					<div class="filter-container row previewList'+idx+'">';
+			inputType1 += '<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">'+sec+'</span><br/><br/>';
+			inputType1 += '		<div>';
+			inputType1 += '			<div class="filter-container row previewList'+idx+'">';
 			//이미지
+			inputType1 += '				<table class="table table-bordered text-nowrap">';
+
+			var rowSize = 0;
+			var lastIndex = 0;
+
+			console.log(data);
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				var checked = '';
-				if(item.closeYn == 'Y'){ //비공개
-					continue;
+
+				if(rowSize <= 3){
+					if(lastIndex == i && lastIndex < (data.length-2)){
+						console.log('1 : '+lastIndex);
+						inputType1 += '	<tr>';
+						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+1].title+'</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+2].title+'</td>';
+						inputType1 += '	</tr>';
+						inputType1 += '	<tr>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+item.fileNewNm+'"/>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+data[i+1].fileNewNm+'"/>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+data[i+2].fileNewNm+'"/>';
+						inputType1 += '		</td>';
+						inputType1 += '	</tr>';
+						inputType1 += '	<tr>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+item.content+'</textarea>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+data[i+1].content+'</textarea>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+data[i+2].content+'</textarea>';
+						inputType1 += '		</td>';
+						inputType1 += '	</tr>';
+
+						lastIndex = i+3;
+						rowSize++;
+					}else if(lastIndex == i && lastIndex == (data.length-2)){
+						console.log('2 : '+lastIndex);
+						inputType1 += '	<tr>';
+						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+1].title+'</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;"></td>';
+						inputType1 += '	</tr>';
+						inputType1 += '	<tr>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+item.fileNewNm+'"/>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+data[i+1].fileNewNm+'"/>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '		</td>';
+						inputType1 += '	</tr>';
+						inputType1 += '	<tr>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+item.content+'</textarea>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+data[i+1].content+'</textarea>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '		</td>';
+						inputType1 += '	</tr>';
+						rowSize++;
+					}else if(lastIndex == i && lastIndex == (data.length-1) && lastIndex % 3 > 0){
+						console.log('3 : '+lastIndex);
+						inputType1 += '	<tr>';
+						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;"></td>';
+						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;"></td>';
+						inputType1 += '	</tr>';
+						inputType1 += '	<tr>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+item.fileNewNm+'"/>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '		</td>';
+						inputType1 += '	</tr>';
+						inputType1 += '	<tr>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+item.content+'</textarea>';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '		</td>';
+						inputType1 += '		<td style="width:33%;text-align:center;">';
+						inputType1 += '		</td>';
+						inputType1 += '	</tr>';
+						rowSize++;
+					}
 				}
-				inputType1 += '				<table class="table table-bordered text-nowrap">';
-				inputType1 += '';
-				inputType1 += '';
-				inputType1 += '';
-				inputType1 += '';
-				inputType1 += '';
-				inputType1 += '';
-				inputType1 += '				</table>';
-
-
-				inputType1 += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
-				inputType1 += '	<a id="imgLoad'+item.fileNo+'">';
-				inputType1 += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
-				inputType1 += '	</a>';
-				inputType1 += '</div>';
-				inputType1 += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
-				inputType1 += '	<div class="row">';
-				inputType1 += '		<div class="col-12">'+item.title+'</div>';
-				inputType1 += '	</div>';
-				inputType1 += '	<div class="row">';
-				inputType1 += '		<div class="col-12">'+item.content+'</div>';
-				inputType1 += '	</div>';
-				inputType1 += '</div>';
 			}
 
-			inputType1 += 					'</div>';
-			inputType1 += '				</div>';
 
-			inputType1 += '				<div style="height:50px;"></div>';
-			inputType1 += '				<table class="table table-bordered text-nowrap">';
-			inputType1 += '					<thead>';
-			inputType1 += '						<tr style="height:250px;">';
-			inputType1 += '							<td style="width:20%;">검사메모</td>';
-			inputType1 += '							<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
-			inputType1 += '						</tr>';
-			inputType1 += '					</thead>';
-			inputType1 += '				</table>';
-			inputType1 += '			</div>';
+				inputType1 += '</table>';
+				inputType1 += 					'</div>';
+				inputType1 += '				</div>';
 
+			if(data.length > 3 && data.length <= 6){
+				inputType1 += '				<div style="height:150px;"></div>';
+				inputType1 += '				<table class="table table-bordered text-nowrap">';
+				inputType1 += '					<thead>';
+				inputType1 += '						<tr style="height:250px;">';
+				inputType1 += '							<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
+				inputType1 += '							<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
+				inputType1 += '						</tr>';
+				inputType1 += '					</thead>';
+				inputType1 += '				</table>';
+				inputType1 += '			</div>';
+			}else if(data.length <= 3){
+				inputType1 += '				<div style="height:450px;"></div>';
+				inputType1 += '				<table class="table table-bordered text-nowrap">';
+				inputType1 += '					<thead>';
+				inputType1 += '						<tr style="height:250px;">';
+				inputType1 += '							<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
+				inputType1 += '							<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
+				inputType1 += '						</tr>';
+				inputType1 += '					</thead>';
+				inputType1 += '				</table>';
+				inputType1 += '			</div>';
+			}
 
 			var shtml = makePdf(idx,inputType1);
 			$("#printDiv").append(idx,shtml);
+
+
+			if(data.length > 0 && data.length > 9){ //2페이지 세팅
+				inputType1 = '';
+				inputType1 += '<div class="card-body">';
+				inputType1 += '		<div>';
+				inputType1 += '			<div class="filter-container row previewList'+idx+'">';
+				//이미지
+				inputType1 += '				<table class="table table-bordered text-nowrap">';
+
+				var rowSize = 0;
+
+				for(var i=9; i<data.length; i++){
+					var item = data[i];
+					var checked = '';
+
+					if(rowSize <= 3){
+						if(lastIndex == i && lastIndex < (data.length-2)){
+							console.log('1 : '+lastIndex);
+							inputType1 += '	<tr>';
+							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+1].title+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+2].title+'</td>';
+							inputType1 += '	</tr>';
+							inputType1 += '	<tr>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+item.fileNewNm+'"/>';
+							inputType1 += '		</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+data[i+1].fileNewNm+'"/>';
+							inputType1 += '		</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+data[i+2].fileNewNm+'"/>';
+							inputType1 += '		</td>';
+							inputType1 += '	</tr>';
+							inputType1 += '	<tr>';
+							inputType1 += '		<td style="width:33%;text-align:center;">'+item.content+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">'+data[i+1].content+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">'+data[i+2].content+'</td>';
+							inputType1 += '	</tr>';
+
+							lastIndex = i+3;
+							rowSize++;
+						}else if(lastIndex == i && lastIndex == (data.length-2)){
+							console.log('2 : '+lastIndex);
+							inputType1 += '	<tr>';
+							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+1].title+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;"></td>';
+							inputType1 += '	</tr>';
+							inputType1 += '	<tr>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+item.fileNewNm+'"/>';
+							inputType1 += '		</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+data[i+1].fileNewNm+'"/>';
+							inputType1 += '		</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '		</td>';
+							inputType1 += '	</tr>';
+							inputType1 += '	<tr>';
+							inputType1 += '		<td style="width:33%;text-align:center;">'+item.content+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">'+data[i+1].content+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;"></td>';
+							inputType1 += '	</tr>';
+							rowSize++;
+						}else if(lastIndex == i && lastIndex == (data.length-1)){
+							console.log('3 : '+lastIndex);
+							inputType1 += '	<tr>';
+							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;"></td>';
+							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;"></td>';
+							inputType1 += '	</tr>';
+							inputType1 += '	<tr>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<img class="img-fluid mb-2" style="width:100%;height:250px" src="'+imgDomain+item.fileNewNm+'"/>';
+							inputType1 += '		</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '		</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '		</td>';
+							inputType1 += '	</tr>';
+							inputType1 += '	<tr>';
+							inputType1 += '		<td style="width:33%;text-align:center;">'+item.content+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;"></td>';
+							inputType1 += '		<td style="width:33%;text-align:center;"></td>';
+							inputType1 += '	</tr>';
+							rowSize++;
+						}
+					}
+				}
+
+				inputType1 += '</table>';
+				inputType1 += 					'</div>';
+				inputType1 += '				</div>';
+
+				inputType1 += '				<div style="height:50px;"></div>';
+				inputType1 += '				<table class="table table-bordered text-nowrap">';
+				inputType1 += '					<thead>';
+				inputType1 += '						<tr style="height:250px;">';
+				inputType1 += '							<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
+				inputType1 += '							<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
+				inputType1 += '						</tr>';
+				inputType1 += '					</thead>';
+				inputType1 += '				</table>';
+				inputType1 += '			</div>';
+
+				shtml = makePdf((idx+1),inputType1);
+				$("#printDiv").append((idx+1),shtml);
+
+			}
 		}
 	});
 }

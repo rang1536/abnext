@@ -450,6 +450,9 @@
 		<if test="fileGb != null and fileGb != ''">
 		   AND FILE_GB = #{fileGb}
 		</if>
+		<if test="closeYn != null and closeYn != ''">
+		   AND (CLOSE_YN is null OR CLOSE_YN = #{closeYn})
+		</if>
 	</select>
 
 	<select id="getInspResult" parameterType="kr.or.abnext.domain.TbInspection" resultType="kr.or.abnext.domain.TbInspection">

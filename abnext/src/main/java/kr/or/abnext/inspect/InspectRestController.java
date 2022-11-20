@@ -468,6 +468,7 @@ public class InspectRestController {
 
 	@RequestMapping(value = "getFileList")
 	public List<TbFile> getFileList(TbFile file) {
+		System.out.println(">>>>>>>>>>>> FILE : "+file);
 		return inspectServ.getFileList(file);
 	}
 
