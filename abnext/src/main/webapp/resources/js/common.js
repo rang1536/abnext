@@ -172,24 +172,21 @@ var printTagId;
 function fn_print(tagId){
 	printTagId = tagId;
 
-	$.each(chartIdArr, function(i, chartTagId){
-		var canvas = document.getElementById(chartTagId);
-		//console.log(canvas.toDataURL());
+	$.each(chartIdArr, function(i, chartTagIdx){
+		var canvas = document.getElementById("barChartPdf"+chartTagIdx);
+		console.log(canvas.toDataURL());
+
+		$('#chartImgTag'+chartTagIdx).prop('src', canvas.toDataURL());
 	})
 
-
-	$('#chartImgTag').prop('src', canvas.toDataURL());
 	$('.chart').css('display', 'none');
 
 	setTimeout(function(){
-		fn_print('printTest');
-		$('.chart').css('display', '');
-		$('.chartImg').css('display', 'none');
-		getData();
+		window.print();
 	}, 500);
 
 
-	window.print();
+
 }
 
 function beforePrint(){
@@ -199,7 +196,7 @@ function beforePrint(){
 
 function afterPrint(){
 	document.body.innerHTML = initBobyHtml;
-	console.log('창닫힘')
+	location.reload(true);
 }
 
 /*

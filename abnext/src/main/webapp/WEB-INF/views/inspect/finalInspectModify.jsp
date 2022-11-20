@@ -1838,7 +1838,7 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 				data : {inspNo : inspNo},
 				success:function(data){
 					setChartDataPdf(data,sec,idx);
-					chartIdArr.push("barChartPdf"+idx);
+					chartIdArr.push(idx);
 				}
 			})
 
