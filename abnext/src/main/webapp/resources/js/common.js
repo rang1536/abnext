@@ -181,8 +181,21 @@ function beforePrint(){
 
 function afterPrint(){
 	document.body.innerHTML = initBobyHtml;
+	console.log('창닫힘')
 }
 
+/*
+if(window.matchMedia){
+	var mQuery = window.matchMedia('print');
+	mQuery.addListener(function(mql){
+		if(mql.matches){
+			beforePrint();
+		}else{
+			afterPrint();
+		}
+	})
+}
+*/
 window.onbeforeprint = beforePrint;
 window.onafterprint = afterPrint;
 

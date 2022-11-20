@@ -1520,40 +1520,40 @@ $("#pdf").click(function(){
 	html +=	'			<table class="table table-bordered text-nowrap">';
 	html +=	'				<tbody>';
 	html +=	'					<tr>';
-	html +=	'						<td style="width:20%;background-color:#929292" class="txtc"></td>';
-	html +=	'						<td style="width:30%;background-color:#929292"" class="txtc">${rceptInfo.animNm}</td>';
-	html +=	'						<td style="width:20%;background-color:#929292" class="txtc">${rceptInfo.pdlNo }</td>';
-	html +=	'						<td style="width:30%;background-color:#929292"" class="txtc"></td>';
+	html +=	'						<td style="width:20%;background-color:#929292;font-weight:bold;" class="txtc" colspan="2">${rceptInfo.animNm}</td>';
+	//html +=	'						<td style="width:30%;background-color:#929292"" class="txtc"></td>';
+	html +=	'						<td style="width:20%;background-color:#929292;font-weight:bold;" class="txtc" colspan="2">${rceptInfo.pdlNo }</td>';
+	//html +=	'						<td style="width:30%;background-color:#929292"" class="txtc"></td>';
 	html +=	'					</tr>';
 	html +=	'					<tr>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">보호자</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;" class="txtc">보호자</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.animButler }</td>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">신청자(기관)</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;" class="txtc">신청자(기관)</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.hospNm }</td>';
 	html +=	'					</tr>';
 	html +=	'					<tr>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">종</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;" class="txtc">종</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.jong }</td>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">담당수의사</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;" class="txtc">담당수의사</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.docNm }</td>';
 	html +=	'					</tr>';
 	html +=	'					<tr>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">품종</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;" class="txtc">품종</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.animFirstNm } ${rceptInfo.animSecondNm } ${rceptInfo.animThirdNm }</td>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">시료수령일</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;" class="txtc">시료수령일</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.rqstDt}</td>';
 	html +=	'					</tr>';
 	html +=	'					<tr>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">성별</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;" class="txtc">성별</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">'+animSexNm+'</td>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">검사일</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;" class="txtc">검사일</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">${rceptInfo.finishDt }</td>';
 	html +=	'					</tr>';
 	html +=	'					<tr>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc">나이</td>';
+	html +=	'						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;" class="txtc">나이</td>';
 	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc">'+month+'M</td>';
-	html +=	'						<td style="width:20%;background-color:#F2F2F2" class="txtc"></td>';
-	html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc"></td>';
+	html +=	'						<td style="background-color:#F2F2F2" class="txtc" colspan="2"></td>';
+	//html +=	'						<td style="width:30%;background-color:#F2F2F2" class="txtc"></td>';
 	html +=	'					</tr>';
 	html +=	'				</tbody>';
 	html +=	'			</table>';
@@ -1561,13 +1561,19 @@ $("#pdf").click(function(){
 	html +=	'			<table class="table table-bordered text-nowrap">';
 	html +=	'				<tbody>';
 	html +=	'					<tr>';
-	html +=	'						<td style="width:70%;background-color:#929292" class="txtl">검사항목</td>';
-	html +=	'						<td style="width:30%;background-color:#929292"" class="txtc">결과</td>';
+	html +=	'						<td style="width:70%;background-color:#929292;font-weight:bold;" class="txtc">검사항목</td>';
+	html +=	'						<td style="width:30%;background-color:#929292;font-weight:bold;" class="txtc">결과</td>';
 	html +=	'					</tr>';
 
 	html +=	'					<c:forEach var="item" items="${inspList }" varStatus="status">';
 	html +=	'						<tr>';
-	html +=	'							<td style="width:70%;background-color:#F2F2F2" class="txtl">${item.inspThirdNm }</td>';
+	html +=	'							<td style="width:70%;background-color:#F2F2F2" class="txtl">';
+	if('${item.inspSecondCd }' == 'B001-04-23' || '${item.inspSecondCd }' == 'B001-04-24'){
+		html += '							${item.inspSecondNm }';
+	}else{
+		html += '							${item.inspThirdNm }';
+	}
+	html += '							</td>';
 	html +=	'							<c:set var="inspRes" value="${fn:replace(fn:replace(item.inspResult, LF, \''), CR, \'')}" />';
 	html +=	'							<td style="width:30%;background-color:#F2F2F2" class="txtc">${inspRes}</td>';
 	html +=	'						</tr>';
@@ -1593,7 +1599,7 @@ $("#pdf").click(function(){
 	html +=	'			<table class="table table-bordered text-nowrap">';
 	html +=	'				<tbody>';
 	html +=	'					<tr>';
-	html +=	'						<td style="background-color:#929292" class="txtl">종합소견</td>';
+	html +=	'						<td style="background-color:#929292;font-weight:bold;font-size:17px;" class="txtc">종합소견</td>';
 	html +=	'					</tr>';
 	html +=	'					<tr>';
 	html +=	'						<td style="width:70%;background-color:#F2F2F2;:" class="txtl"><div style="min-height:8em;">${rceptInfo.finalMemo }</div></td>';
@@ -1642,16 +1648,16 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 		success : function(data){
 			if(data.length>0){
 				var html = '';
-				html += '<div class="card-body">';
+				html += '<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">PCR</span><br/><br/>';
 				html += '	<div class="row">';
 				html += '		<div class="table-responsive">';
 				html += '			<table class="table table-bordered text-nowrap">';
 				html += '				<thead>';
 				html += '					<tr>';
-				html += '						<td style="background-color:#F2F2F2;width:*;">검사방법</td>';
-				html += '						<td style="background-color:#F2F2F2;width:*;">시료</td>';
-				html += '						<td style="background-color:#F2F2F2;width:*;">검사항목</td>';
-				html += '						<td style="background-color:#F2F2F2;width:*;">결과</td>';
+				html += '						<td style="background-color:#F2F2F2;width:*;font-weight:bold;">검사방법</td>';
+				html += '						<td style="background-color:#F2F2F2;width:*;font-weight:bold;">시료</td>';
+				html += '						<td style="background-color:#F2F2F2;width:*;font-weight:bold;">검사항목</td>';
+				html += '						<td style="background-color:#F2F2F2;width:*;font-weight:bold;">결과</td>';
 				html += '					</tr>';
 				html += '				</thead>';
 				html += '				<tbody>';
@@ -1668,8 +1674,8 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 				}
 
 				var addTr = 0;
-				if(data.length < 15){
-					addTr = 15-data.length;
+				if(data.length < 25){
+					addTr = 25-data.length;
 				}
 				for(var i=0; i<addTr; i++){
 					html +=	'						<tr style="height:33.39px;">';
@@ -1683,11 +1689,11 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 				html += '				</tbody>';
 				html += '			</table>';
 
-				html += '			<div style="height:100px;"></div>';
+				html += '			<div style="height:60px;"></div>';
 				html += '			<table class="table table-bordered text-nowrap">';
 				html += '				<thead>';
-				html += '					<tr style="height:500px;">';
-				html += '						<td style="width:20%;">검사메모</td>';
+				html += '					<tr style="height:250px;">';
+				html += '						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 				html += '						<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 				html += '					</tr>';
 				html += '				</thead>';
@@ -1719,19 +1725,19 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<thead>';
 			html += '							<tr>';
-			html += '								<td rowspan="2">번호</td>';
-			html += '								<td rowspan="2">항생제</td>';
-			html += '								<td rowspan="2">용량</td>';
-			html += '								<td rowspan="2">약자</td>';
-			html += '								<td rowspan="2">기준직경(mm)</td>';
-			html += '								<td colspan="3">결과<br/>직경<br/>(mm)</td>';
-			html += '								<td rowspan="2">판독</td>';
-			html += '								<td rowspan="2">비고</td>';
+			html += '								<td rowspan="2" style="background-color:#F2F2F2;font-weight:bold;">번호</td>';
+			html += '								<td rowspan="2" style="background-color:#F2F2F2;font-weight:bold;">항생제</td>';
+			html += '								<td rowspan="2" style="background-color:#F2F2F2;font-weight:bold;">용량</td>';
+			html += '								<td rowspan="2" style="background-color:#F2F2F2;font-weight:bold;">약자</td>';
+			html += '								<td rowspan="2" style="background-color:#F2F2F2;font-weight:bold;">기준직경(mm)</td>';
+			html += '								<td colspan="3" style="background-color:#F2F2F2;font-weight:bold;">결과<br/>직경<br/>(mm)</td>';
+			html += '								<td rowspan="2" style="background-color:#F2F2F2;font-weight:bold;">판독</td>';
+			html += '								<td rowspan="2" style="background-color:#F2F2F2;font-weight:bold;">비고</td>';
 			html += '							</tr>';
 			html += '							<tr>';
-			html += '								<td>R<br/>≤</td>';
-			html += '								<td>I</td>';
-			html += '								<td>S<br/>≥</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">R<br/>≤</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">I</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">S<br/>≥</td>';
 			html += '							</tr>';
 			html += '						</thead>';
 			html += '						<tbody id="antibiotic">';
@@ -1750,14 +1756,34 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 				html += '<td>'+item.antiMemo+'</td>';
 				html += '</tr>';
 			}
+
+			var addTr = 0;
+			if(data.length < 22){
+				addTr = 22-data.length;
+			}
+			for(var i=0; i<addTr; i++){
+				html +=	'						<tr style="height:33.39px;">';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'						</tr>';
+			}
+
 			html += '						</tbody>';
 			html += '					</table>';
 
-			html += '			<div style="height:100px;"></div>';
+			html += '			<div style="height:60px;"></div>';
 			html += '			<table class="table table-bordered text-nowrap">';
 			html += '				<thead>';
-			html += '					<tr style="height:500px;">';
-			html += '						<td style="width:20%;">검사메모</td>';
+			html += '					<tr style="height:250px;">';
+			html += '						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 			html += '						<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 			html += '					</tr>';
 			html += '				</thead>';
@@ -1783,15 +1809,16 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 		success : function(data){
 			var html = '';
 			html += '		<div class="card-body"  style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">'+sec+'</span><br/><br/>';
+			html += '			<br/><br/>';
 			html += '			<div class="chart">';
-			html += '				<canvas id="barChartPdf'+idx+'" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>';
+			html += '				<canvas id="barChartPdf'+idx+'" style="min-height: 500px; height: 500px; max-height: 500px; max-width: 100%;"></canvas>';
 			html += '			</div>';
 
-			html += '			<div style="height:100px;"></div>';
+			html += '			<div style="height:350px;"></div>';
 			html += '			<table class="table table-bordered text-nowrap">';
 			html += '				<thead>';
-			html += '					<tr style="height:500px;">';
-			html += '						<td style="width:20%;">검사메모</td>';
+			html += '					<tr style="height:250px;">';
+			html += '						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 			html += '						<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 			html += '					</tr>';
 			html += '				</thead>';
@@ -1905,17 +1932,16 @@ function fnCbcPdf(idx,inspNo,sec,thr,res){
 			html += '						</colgroup>';
 			html += '						<thead>';
 			html += '							<tr>';
-			html += '								<td rowspan="2">항목명</td>';
-			html += '								<td colspan="2">결과</td>';
-			html += '								<td colspan="2">참조값</td>';
-			html += '								<td>비고</td>';
+			html += '								<td rowspan="2" style="background-color:#F2F2F2;font-weight:bold;">항목명</td>';
+			html += '								<td colspan="2" style="background-color:#F2F2F2;font-weight:bold;">결과</td>';
+			html += '								<td colspan="2" style="background-color:#F2F2F2;font-weight:bold;">참조값</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;" rowspan="2">비고</td>';
 			html += '							</tr>';
 			html += '							<tr>';
-			html += '								<td>값</td>';
-			html += '								<td>단위</td>';
-			html += '								<td>최저</td>';
-			html += '								<td>최대</td>';
-			html += '								<td></td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">값</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">단위</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">최저</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">최대</td>';
 			html += '							</tr>';
 			html += '						</thead>';
 			html += '						<tbody id="cbc">';
@@ -1946,15 +1972,30 @@ function fnCbcPdf(idx,inspNo,sec,thr,res){
 				html += '</tr>';
 			}
 
+			var addTr = 0;
+			if(data.length < 22){
+				addTr = 22-data.length;
+			}
+			for(var i=0; i<addTr; i++){
+				html +=	'						<tr style="height:33.39px;">';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'						</tr>';
+			}
+
 			html += '						</tbody>';
 			html += '					</table>';
 
 			html += '					</table>';
-			html += '					<div style="height:100px;"></div>';
+			html += '					<div style="height:60px;"></div>';
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<thead>';
-			html += '							<tr style="height:500px;">';
-			html += '								<td style="width:20%;">검사메모</td>';
+			html += '							<tr style="height:250px;">';
+			html += '								<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 			html += '								<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 			html += '							</tr>';
 			html += '						</thead>';
@@ -1991,17 +2032,16 @@ function fnBloodChemPdf(idx,inspNo,sec,thr,res){
 			html += '						</colgroup>';
 			html += '						<thead>';
 			html += '							<tr>';
-			html += '								<td rowspan="2">항목명</td>';
-			html += '								<td colspan="2">결과</td>';
-			html += '								<td colspan="2">참조값</td>';
-			html += '								<td>비고</td>';
+			html += '								<td rowspan="2" style="background-color:#F2F2F2;font-weight:bold;">항목명</td>';
+			html += '								<td colspan="2" style="background-color:#F2F2F2;font-weight:bold;">결과</td>';
+			html += '								<td colspan="2" style="background-color:#F2F2F2;font-weight:bold;">참조값</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;" rowspan="2">비고</td>';
 			html += '							</tr>';
 			html += '							<tr>';
-			html += '								<td>값</td>';
-			html += '								<td>단위</td>';
-			html += '								<td>최저</td>';
-			html += '								<td>최대</td>';
-			html += '								<td></td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">값</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">단위</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">최저</td>';
+			html += '								<td style="background-color:#F2F2F2;font-weight:bold;">최대</td>';
 			html += '							</tr>';
 			html += '						</thead>';
 			html += '						<tbody id="bloodChem">';
@@ -2034,12 +2074,27 @@ function fnBloodChemPdf(idx,inspNo,sec,thr,res){
 				html += '</tr>';
 			}
 
+			var addTr = 0;
+			if(data.length < 22){
+				addTr = 22-data.length;
+			}
+			for(var i=0; i<addTr; i++){
+				html +=	'						<tr style="height:33.39px;">';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'							<td class="txtl"></td>';
+				html +=	'						</tr>';
+			}
+
 			html += '					</table>';
-			html += '					<div style="height:100px;"></div>';
+			html += '					<div style="height:60px;"></div>';
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<thead>';
-			html += '							<tr style="height:500px;">';
-			html += '								<td style="width:20%;">검사메모</td>';
+			html += '							<tr style="height:250px;">';
+			html += '								<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 			html += '								<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 			html += '							</tr>';
 			html += '						</thead>';
@@ -2066,13 +2121,46 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 
 			inputType1 += '			<div class="card-body">';
 			inputType1 += '				<div>';
-			inputType1 += '					<div class="filter-container row previewList'+idx+'"></div>';
+			inputType1 += '					<div class="filter-container row previewList'+idx+'">';
+			//이미지
+			for(var i=0; i<data.length; i++){
+				var item = data[i];
+				var checked = '';
+				if(item.closeYn == 'Y'){ //비공개
+					continue;
+				}
+				inputType1 += '				<table class="table table-bordered text-nowrap">';
+				inputType1 += '';
+				inputType1 += '';
+				inputType1 += '';
+				inputType1 += '';
+				inputType1 += '';
+				inputType1 += '';
+				inputType1 += '				</table>';
+
+
+				inputType1 += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
+				inputType1 += '	<a id="imgLoad'+item.fileNo+'">';
+				inputType1 += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+				inputType1 += '	</a>';
+				inputType1 += '</div>';
+				inputType1 += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
+				inputType1 += '	<div class="row">';
+				inputType1 += '		<div class="col-12">'+item.title+'</div>';
+				inputType1 += '	</div>';
+				inputType1 += '	<div class="row">';
+				inputType1 += '		<div class="col-12">'+item.content+'</div>';
+				inputType1 += '	</div>';
+				inputType1 += '</div>';
+			}
+
+			inputType1 += 					'</div>';
 			inputType1 += '				</div>';
 
-			inputType1 += '				<div style="height:100px;"></div>';
+			inputType1 += '				<div style="height:50px;"></div>';
 			inputType1 += '				<table class="table table-bordered text-nowrap">';
 			inputType1 += '					<thead>';
-			inputType1 += '						<tr style="height:500px;">';
+			inputType1 += '						<tr style="height:250px;">';
 			inputType1 += '							<td style="width:20%;">검사메모</td>';
 			inputType1 += '							<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 			inputType1 += '						</tr>';
@@ -2080,28 +2168,9 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 			inputType1 += '				</table>';
 			inputType1 += '			</div>';
 
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				var checked = '';
-				if(item.closeYn == 'Y'){
-					continue;
-				}
-				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
-				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
-				htmlData += '	</a>';
-				htmlData += '</div>';
-				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
-				htmlData += '	<div class="row">';
-				htmlData += '		<div class="col-12">'+item.title+'</div>';
-				htmlData += '	</div>';
-				htmlData += '	<div class="row">';
-				htmlData += '		<div class="col-12">'+item.content+'</div>';
-				htmlData += '	</div>';
-				htmlData += '</div>';
 
-			}
-
+			var shtml = makePdf(idx,inputType1);
+			$("#printDiv").append(idx,shtml);
 		}
 	});
 }

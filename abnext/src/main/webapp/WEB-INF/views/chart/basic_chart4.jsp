@@ -52,11 +52,11 @@
 		</section>
 
 		<!-- Main content -->
-		 <section class="content" style="font-size:13px;">
+		 <section class="content" style="font-size:13px;" >
  			<div class="container-fluid">
-				<div class="card">
+				<div class="card" >
 					<div class="card-header card-info" style="background-color:#D4F4FA;color:#000000;">
-						<h3 class="card-title"><b>지역별 진단명별 Chart</b></h3>
+						<h3 class="card-title" onclick="testPrint();"><b>지역별 진단명별 Chart</b></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -68,9 +68,12 @@
 						</div>
 					</div>
 
-					<div class="card-body">
+					<div class="card-body" id="printTest">
 						<div class="chart">
 							<canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+						</div>
+						<div class="chartImg">
+							<img id="chartImgTag"/>
 						</div>
 					</div>
 					<!-- /.card-body -->
@@ -391,7 +394,24 @@
 	    })
 	}
 
+	function testPrint(){
+		//stackedBarChart
+		//chartImgTag
+		var canvas = document.getElementById('stackedBarChart');
+		//console.log(canvas.toDataURL());
 
+		$('#chartImgTag').prop('src', canvas.toDataURL());
+		$('.chart').css('display', 'none');
+
+		setTimeout(function(){
+			fn_print('printTest');
+			$('.chart').css('display', '');
+			$('.chartImg').css('display', 'none');
+			getData();
+		}, 500);
+
+
+	}
 
 </script>
 </html>
