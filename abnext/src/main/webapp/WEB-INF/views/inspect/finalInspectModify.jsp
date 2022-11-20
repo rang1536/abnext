@@ -814,7 +814,6 @@ function fnBloodChem(inspNo,k,title){
 
 			for(var i=0; i<data.length; i++){
 				var item = data[i].itemName;
-				console.log(data[i]);
 				switch(item) {
 					case 'TP' : td2 = 'g/dL'; td3 = '5.4'; td4 = '8.2'; break;
 					case 'Alb' : td2 = 'g/dL'; td3 = '2.2'; td4 = '4.4'; break;
@@ -1636,7 +1635,6 @@ $("#pdf").click(function(){
 			drawImgPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
 		}
 	'</c:forEach>';
-
 });
 
 function fnPcrPdf(idx,inspNo,sec,thr,res){
@@ -1703,7 +1701,7 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 				html += '</div>';
 
 				var shtml = makePdf(idx,html);
-				$("#printDiv").append(idx,shtml);
+				$("#printDiv").append(shtml);
 
 			}
 		}
@@ -1758,8 +1756,8 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 			}
 
 			var addTr = 0;
-			if(data.length < 22){
-				addTr = 22-data.length;
+			if(data.length < 20){
+				addTr = 20-data.length;
 			}
 			for(var i=0; i<addTr; i++){
 				html +=	'						<tr style="height:33.39px;">';
@@ -1793,7 +1791,7 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 			html += '			</div>';
 
 			var shtml = makePdf(idx,html);
-			$("#printDiv").append(idx,shtml);
+			$("#printDiv").append(shtml);
 		}
 	});
 
@@ -1829,7 +1827,7 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 			html += '		</div>';
 
 			var shtml = makePdf(idx,html);
-			$("#printDiv").append(idx,shtml);
+			$("#printDiv").append(shtml);
 
 			$.ajax({
 				url : 'getSerumChart',
@@ -2008,7 +2006,7 @@ function fnCbcPdf(idx,inspNo,sec,thr,res){
 			html += '			</div>';
 
 			var shtml = makePdf(idx,html);
-			$("#printDiv").append(idx,shtml);
+			$("#printDiv").append(shtml);
 
 
 		}
@@ -2107,7 +2105,7 @@ function fnBloodChemPdf(idx,inspNo,sec,thr,res){
 			html += '			</div>';
 
 			var shtml = makePdf(idx,html);
-			$("#printDiv").append(idx,shtml);
+			$("#printDiv").append(shtml);
 		}
 
 	});
@@ -2133,14 +2131,12 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 			var rowSize = 0;
 			var lastIndex = 0;
 
-			console.log(data);
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				var checked = '';
 
 				if(rowSize <= 3){
 					if(lastIndex == i && lastIndex < (data.length-2)){
-						console.log('1 : '+lastIndex);
 						inputType1 += '	<tr>';
 						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
 						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+1].title+'</td>';
@@ -2172,7 +2168,6 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 						lastIndex = i+3;
 						rowSize++;
 					}else if(lastIndex == i && lastIndex == (data.length-2)){
-						console.log('2 : '+lastIndex);
 						inputType1 += '	<tr>';
 						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
 						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+1].title+'</td>';
@@ -2200,7 +2195,6 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 						inputType1 += '	</tr>';
 						rowSize++;
 					}else if(lastIndex == i && lastIndex == (data.length-1) && lastIndex % 3 > 0){
-						console.log('3 : '+lastIndex);
 						inputType1 += '	<tr>';
 						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
 						inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;"></td>';
@@ -2256,10 +2250,12 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				inputType1 += '					</thead>';
 				inputType1 += '				</table>';
 				inputType1 += '			</div>';
+			}else {
+				inputType1 += '				<div style="height:30px;"></div>';
 			}
 
 			var shtml = makePdf(idx,inputType1);
-			$("#printDiv").append(idx,shtml);
+			$("#printDiv").append('',shtml);
 
 
 			if(data.length > 0 && data.length > 9){ //2페이지 세팅
@@ -2278,7 +2274,6 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 
 					if(rowSize <= 3){
 						if(lastIndex == i && lastIndex < (data.length-2)){
-							console.log('1 : '+lastIndex);
 							inputType1 += '	<tr>';
 							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
 							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+1].title+'</td>';
@@ -2296,15 +2291,23 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 							inputType1 += '		</td>';
 							inputType1 += '	</tr>';
 							inputType1 += '	<tr>';
-							inputType1 += '		<td style="width:33%;text-align:center;">'+item.content+'</td>';
-							inputType1 += '		<td style="width:33%;text-align:center;">'+data[i+1].content+'</td>';
-							inputType1 += '		<td style="width:33%;text-align:center;">'+data[i+2].content+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+data[i].content+'</textarea>';
+							inputType1 += '		</td>';
+
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+data[i+1].content+'</textarea>';
+							inputType1 += '		</td>';
+
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+data[i+2].content+'</textarea>';
+							inputType1 += '		</td>';
+
 							inputType1 += '	</tr>';
 
 							lastIndex = i+3;
 							rowSize++;
 						}else if(lastIndex == i && lastIndex == (data.length-2)){
-							console.log('2 : '+lastIndex);
 							inputType1 += '	<tr>';
 							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
 							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+data[i+1].title+'</td>';
@@ -2321,13 +2324,16 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 							inputType1 += '		</td>';
 							inputType1 += '	</tr>';
 							inputType1 += '	<tr>';
-							inputType1 += '		<td style="width:33%;text-align:center;">'+item.content+'</td>';
-							inputType1 += '		<td style="width:33%;text-align:center;">'+data[i+1].content+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+data[i].content+'</textarea>';
+							inputType1 += '		</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+data[i+1].content+'</textarea>';
+							inputType1 += '		</td>';
 							inputType1 += '		<td style="width:33%;text-align:center;"></td>';
 							inputType1 += '	</tr>';
 							rowSize++;
 						}else if(lastIndex == i && lastIndex == (data.length-1)){
-							console.log('3 : '+lastIndex);
 							inputType1 += '	<tr>';
 							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;">'+item.title+'</td>';
 							inputType1 += '		<td style="width:33%;text-align:center;background-color:#F2F2F2;"></td>';
@@ -2343,7 +2349,9 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 							inputType1 += '		</td>';
 							inputType1 += '	</tr>';
 							inputType1 += '	<tr>';
-							inputType1 += '		<td style="width:33%;text-align:center;">'+item.content+'</td>';
+							inputType1 += '		<td style="width:33%;text-align:center;">';
+							inputType1 += '			<textarea style="width:100%;border:0px;resize:none;" rows="2" readonly>'+data[i].content+'</textarea>';
+							inputType1 += '		</td>';
 							inputType1 += '		<td style="width:33%;text-align:center;"></td>';
 							inputType1 += '		<td style="width:33%;text-align:center;"></td>';
 							inputType1 += '	</tr>';
@@ -2368,7 +2376,7 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				inputType1 += '			</div>';
 
 				shtml = makePdf((idx+1),inputType1);
-				$("#printDiv").append((idx+1),shtml);
+				$("#printDiv").append('',shtml);
 
 			}
 		}

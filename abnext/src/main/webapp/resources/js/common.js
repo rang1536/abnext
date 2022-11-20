@@ -174,7 +174,6 @@ function fn_print(tagId){
 
 	$.each(chartIdArr, function(i, chartTagIdx){
 		var canvas = document.getElementById("barChartPdf"+chartTagIdx);
-		console.log(canvas.toDataURL());
 
 		$('#chartImgTag'+chartTagIdx).prop('src', canvas.toDataURL());
 	})
