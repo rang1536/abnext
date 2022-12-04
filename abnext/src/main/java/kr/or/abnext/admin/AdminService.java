@@ -144,6 +144,16 @@ public class AdminService {
 	}
 
 	/**
+	 * @function : getUserDamdangListServ
+	 * @Description : 담당자조회
+	 * @param :
+	 * @return : List<TbUser>
+	 **/
+	public List<TbUser> getUserDamdangListServ(TbUser tbUser){
+		return adminDao.getUserList(tbUser);
+	}
+
+	/**
 	 * @function : getHospListServ
 	 * @Description : 기관병원조회
 	 * @param :

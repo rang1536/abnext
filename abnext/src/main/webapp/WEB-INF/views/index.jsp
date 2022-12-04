@@ -40,108 +40,12 @@
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
-		<section class="content-header" style="width:auto;height:688px;background-image:url('resources/files/backimg1.jpg')">
+		<!-- <section class="content-header" style="width:auto;height:688px;background-image:url('resources/files/backimg1.jpg')"> -->
+		<section class="content-header" style="width:auto;min-height:150px;backgroun-color:#000000;">
 			<div class="container-fluid">
-				<h1><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:25%;"></b></h1>
+				<!-- <h1><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:25%;"></b></h1> -->
+				<img src="resources/files/backimg4.jpg" style="width:100%;"/>
 
-				<!--<div style="background-color:#fff;opacity:60%;min-height:300px;">윤재호윤재호</div>-->
-
-				<!--
-				<div style="min-height:400px;"></div>
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="form-group">
-							<div class="input-group" style="text-align:center;">
-								<div style="width:40%;"></div>
-								<div class="btn-group">
-	           						<button type="button" class="searchBtn btn-lg btn-primary" style="max-width:200px;min-width:82px;"><i class="fa fa-search"></i> 로그인</button>
-	           						&nbsp;&nbsp;
-	           						<button type="button" class="excelBtn btn-lg btn-success" style="max-width:200px;min-width:82px;"><i class="fa fa-copy"></i> 회원가입</button>
-          						</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-				 -->
-
-				<!-- <div class="row">
-					<div class="col-md-8" >
-
-					</div>
-
-					<div class="col-md-4" style="opacity:0.8;color:#212121;font-weight:bold;">
-						<div class="card">
-		                  <div class="card-header">
-		                    <h3 class="card-title"><b>Avinext Members</b></h3>
-
-		                    <div class="card-tools">
-		                      <span class="badge badge-danger">8 New Members</span>
-		                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
-		                        <i class="fas fa-minus"></i>
-		                      </button>
-		                      <button type="button" class="btn btn-tool" data-card-widget="remove">
-		                        <i class="fas fa-times"></i>
-		                      </button>
-		                    </div>
-		                  </div>
-		                  /.card-header
-
-		                  <div class="card-body p-0">
-		                    <ul class="users-list clearfix">
-		                      <li>
-		                        <img src="resources/dist/img/user1-128x128.jpg" alt="User Image">
-		                        <a class="users-list-name" href="#">송현기</a>
-		                        <span class="users-list-date">Today</span>
-		                      </li>
-		                      <li>
-		                        <img src="resources/dist/img/user8-128x128.jpg" alt="User Image">
-		                        <a class="users-list-name" href="#">윤재호</a>
-		                        <span class="users-list-date">Yesterday</span>
-		                      </li>
-		                      <li>
-		                        <img src="resources/dist/img/user7-128x128.jpg" alt="User Image">
-		                        <a class="users-list-name" href="#">황선자</a>
-		                        <span class="users-list-date">12 Jan</span>
-		                      </li>
-		                      <li>
-		                        <img src="resources/dist/img/user6-128x128.jpg" alt="User Image">
-		                        <a class="users-list-name" href="#">홍길동</a>
-		                        <span class="users-list-date">12 Jan</span>
-		                      </li>
-		                      <li>
-		                        <img src="resources/dist/img/user2-160x160.jpg" alt="User Image">
-		                        <a class="users-list-name" href="#">수의사1</a>
-		                        <span class="users-list-date">13 Jan</span>
-		                      </li>
-		                      <li>
-		                        <img src="resources/dist/img/user5-128x128.jpg" alt="User Image">
-		                        <a class="users-list-name" href="#">수의사2</a>
-		                        <span class="users-list-date">14 Jan</span>
-		                      </li>
-		                      <li>
-		                        <img src="resources/dist/img/user4-128x128.jpg" alt="User Image">
-		                        <a class="users-list-name" href="#">수의사3</a>
-		                        <span class="users-list-date">15 Jan</span>
-		                      </li>
-		                      <li>
-		                        <img src="resources/dist/img/user3-128x128.jpg" alt="User Image">
-		                        <a class="users-list-name" href="#">수의사4</a>
-		                        <span class="users-list-date">15 Jan</span>
-		                      </li>
-		                    </ul>
-		                    /.users-list
-		                  </div>
-		                  /.card-body
-		                  <div class="card-footer text-center" style="background-color:#002266;color:#FFFFFF;">
-		                      <b>Avinext에 방문에 주셔서 감사합니다</b>
-		                  </div>
-		                  /.card-footer
-		                </div>
-		                /.card
-
-					</div>
-				</div> -->
 
 
 			</div><!-- /.container-fluid -->
@@ -222,8 +126,10 @@
     </div>
   	<strong>
   		<a href="#">대표</a>&nbsp;&nbsp;모인필&nbsp;&nbsp;|
-  		&nbsp;&nbsp;<a href="#">주소 </a>&nbsp;&nbsp; 충북 청주시 상당구 남일면 쌍암동길 30-7&nbsp;&nbsp;|
-  		&nbsp;&nbsp;<a href="#">TEL.</a> 042-292-9998
+  		&nbsp;&nbsp;<a href="#">주소 </a>&nbsp;&nbsp; 충북 청주시 상당구 남일면 쌍암동길 30-7<br/>
+  		&nbsp;&nbsp;<a href="#">TEL</a>&nbsp;&nbsp; 043-292-9998&nbsp;&nbsp;|
+  		&nbsp;&nbsp;<a href="#">FAX</a>&nbsp;&nbsp; 043-292-9980&nbsp;&nbsp;|
+  		&nbsp;&nbsp;<a href="#">E-mail</a>&nbsp;&nbsp; avinext@avinext.co.kr
   	</strong>
   </footer>
 

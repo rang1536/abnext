@@ -2137,6 +2137,7 @@ function fnPcr(){
 				htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
 				htmlData += '				<div class="icheck-primary d-inline">';
 				htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+' disabled>';
+				//htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+' >';
 				htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
 				htmlData += '				</div>';
 				htmlData += '				<a class="delete" onclick="deleteServerFile('+item.fileNo+');"><i class="far fa-minus-square"></i></a>';

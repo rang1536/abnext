@@ -429,7 +429,9 @@
 										<option <c:if test="${user.userLev eq '1' }">selected</c:if> value="1">일반회원</option>
 				                        <option <c:if test="${user.userLev eq '2' }">selected</c:if> value="2">연구원</option>
 				                        <option <c:if test="${user.userLev eq '3' }">selected</c:if> value="3">접수자</option>
-				                        <option <c:if test="${user.userLev eq '4' }">selected</c:if> value="4">책임자</option>
+				                        <option <c:if test="${user.userLev eq '5' }">selected</c:if> value="5">정산담당</option>
+				                        <option <c:if test="${user.userLev eq '6' }">selected</c:if> value="6">업무책임자</option>
+				                        <option <c:if test="${user.userLev eq '4' }">selected</c:if> value="4">관리자</option>
 				                    </select>
 								</div>
 							</div>

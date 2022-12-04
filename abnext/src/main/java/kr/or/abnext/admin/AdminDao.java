@@ -170,6 +170,18 @@ public class AdminDao {
 	}
 
 
+	//getUserDamdangList
+	/**
+	 * @function : getUserDamdangList
+	 * @Description : 담당자조회
+	 * @param :
+	 * @return:List<TbUser>
+	 **/
+	public List<TbUser> getUserDamdangList(TbUser tbUser) {
+		return sql.selectList("admin.getUserDamdangList", tbUser);
+	}
+
+
 	/**
 	 * @function : getHospList
 	 * @Description : 기관병원조회

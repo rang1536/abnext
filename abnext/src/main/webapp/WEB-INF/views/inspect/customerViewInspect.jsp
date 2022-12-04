@@ -256,7 +256,7 @@
 		</section>
 		<!-- /.content -->
 
-		<div id="printDiv">
+		<div id="printDiv" style="display:none;">
 
 		</div>
 	</div>
@@ -1219,7 +1219,7 @@ $("#pdf").click(function(){
 		month += setMonth;
 	}
 
-	html +=	'		<div class="card-body table-responsive pdfStyle" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">반려조류 검사결과서</span><br/><br/>';
+	html +=	'		<div class="card-body table-responsive pdfStyle" style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">반려조류 검사결과서</span><br/><br/>';
 	html +=	'			<table class="table table-bordered text-nowrap">';
 	html +=	'				<tbody>';
 	html +=	'					<tr>';
@@ -1285,8 +1285,8 @@ $("#pdf").click(function(){
 
 	var inspLen = parseInt('${len}');
 	var addTr = 0;
-	if(inspLen < 12){
-		addTr = 12-inspLen;
+	if(inspLen < 9){
+		addTr = 9-inspLen;
 	}
 	for(var i=0; i<addTr; i++){
 		html +=	'						<tr>';
@@ -1315,14 +1315,17 @@ $("#pdf").click(function(){
 	html += '				<span style="font-weight:bold;font-size:20px;">(주)아비넥스트 대표 모인필</span>';
 	html += '			</div>';
 
-	html +=	'			<div style="height:70px;"></div>';
+	html +=	'			<div style="height:50px;"></div>';
 	html += '			<span style="font-weight:bold;">검사신청 및 문의<br/>avinext@avinext.co.kr T. 043-292-9998 F. 043-292-9980<br/>http://avinextlab.com/<br/>충청북도 청주시 상당구 남일면 쌍암동길 30-7</span>';
 
 
 	html +=	'		</div>';
 
-	var shtml = makePdf(1,html);
+	var shtml = makePdf(1,html, 'N');
 	$("#printDiv").append(shtml);
+
+	//var shtml2 = makePdfView(1,html);
+	//$("#viewDiv").append(shtml2);
 
 	'<c:forEach var="item" items="${inspList }" varStatus="status">';
 		if('${item.inspSecondCd}' == 'B001-01-01' || '${item.inspSecondCd}' == 'B001-02-01' || '${item.inspSecondCd}' == 'B001-02-16' || '${item.inspSecondCd}' == 'B001-01-02' || '${item.inspSecondCd}' == 'B001-02-02'){
@@ -1339,6 +1342,11 @@ $("#pdf").click(function(){
 			drawImgPdf('${status.index+2 }','${item.inspNo}','${item.inspSecondNm}','${item.inspThirdNm}');
 		}
 	'</c:forEach>';
+
+	setTimeout(function(){
+		$('#printDiv').css('display','');
+	}, 300)
+
 });
 
 function fnPcrPdf(idx,inspNo,sec,thr,res){
@@ -1350,7 +1358,7 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 		success : function(data){
 			if(data.length>0){
 				var html = '';
-				html += '<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">PCR</span><br/><br/>';
+				html += '<div class="card-body" style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">PCR</span><br/><br/>';
 				html += '	<div class="row">';
 				html += '		<div class="table-responsive">';
 				html += '			<table class="table table-bordered text-nowrap">';
@@ -1376,8 +1384,8 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 				}
 
 				var addTr = 0;
-				if(data.length < 25){
-					addTr = 25-data.length;
+				if(data.length < 17){
+					addTr = 17-data.length;
 				}
 				for(var i=0; i<addTr; i++){
 					html +=	'						<tr style="height:33.39px;">';
@@ -1394,7 +1402,7 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 				html += '			<div style="height:60px;"></div>';
 				html += '			<table class="table table-bordered text-nowrap">';
 				html += '				<thead>';
-				html += '					<tr style="height:250px;">';
+				html += '					<tr style="height:100px;">';
 				html += '						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 				html += '						<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 				html += '					</tr>';
@@ -1422,7 +1430,7 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 		type : 'post',
 		success : function(data){
 			var html = '';
-			html += '			<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">항생제감수성 검사</span><br/><br/>';
+			html += '			<div class="card-body" style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">항생제감수성 검사</span><br/><br/>';
 			html += '				<div class="table-responsive">';
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<thead>';
@@ -1460,8 +1468,8 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 			}
 
 			var addTr = 0;
-			if(data.length < 20){
-				addTr = 20-data.length;
+			if(data.length < 15){
+				addTr = 15-data.length;
 			}
 			for(var i=0; i<addTr; i++){
 				html +=	'						<tr style="height:33.39px;">';
@@ -1484,7 +1492,7 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 			html += '			<div style="height:60px;"></div>';
 			html += '			<table class="table table-bordered text-nowrap">';
 			html += '				<thead>';
-			html += '					<tr style="height:250px;">';
+			html += '					<tr style="height:100px;">';
 			html += '						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 			html += '						<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 			html += '					</tr>';
@@ -1511,10 +1519,10 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 		type : 'post',
 		success : function(data){
 			var html = '';
-			html += '		<div class="card-body"  style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">'+sec+'</span><br/><br/>';
+			html += '		<div class="card-body"  style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">'+sec+'</span><br/><br/>';
 			html += '			<br/><br/>';
 			html += '			<div class="chart">';
-			html += '				<canvas id="barChartPdf'+idx+'" style="min-height: 500px; height: 500px; max-height: 500px; max-width: 100%;"></canvas>';
+			html += '				<canvas id="barChartPdf'+idx+'" style="min-height: 350px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>';
 			html += '			</div>';
 			html += '			<div class="chartImg">';
 			html += '				<img id="chartImgTag'+idx+'"/>';
@@ -1522,7 +1530,7 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 			html += '			<div style="height:350px;"></div>';
 			html += '			<table class="table table-bordered text-nowrap">';
 			html += '				<thead>';
-			html += '					<tr style="height:250px;">';
+			html += '					<tr style="height:100px;">';
 			html += '						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 			html += '						<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 			html += '					</tr>';
@@ -1625,7 +1633,7 @@ function fnCbcPdf(idx,inspNo,sec,thr,res){
 		type : 'post',
 		success : function(data){
 			var html = "";
-			html += '			<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">혈구검사</span><br/><br/>';
+			html += '			<div class="card-body" style="width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">혈구검사</span><br/><br/>';
 			html += '				<div class="table-responsive">';
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<colgroup>';
@@ -1679,8 +1687,8 @@ function fnCbcPdf(idx,inspNo,sec,thr,res){
 			}
 
 			var addTr = 0;
-			if(data.length < 22){
-				addTr = 22-data.length;
+			if(data.length < 17){
+				addTr = 17-data.length;
 			}
 			for(var i=0; i<addTr; i++){
 				html +=	'						<tr style="height:33.39px;">';
@@ -1700,7 +1708,7 @@ function fnCbcPdf(idx,inspNo,sec,thr,res){
 			html += '					<div style="height:60px;"></div>';
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<thead>';
-			html += '							<tr style="height:250px;">';
+			html += '							<tr style="height:100px;">';
 			html += '								<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 			html += '								<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 			html += '							</tr>';
@@ -1725,7 +1733,7 @@ function fnBloodChemPdf(idx,inspNo,sec,thr,res){
 		type : 'post',
 		success : function(data){
 			var html = "";
-			html += '			<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">혈액화학검사</span><br/><br/>';
+			html += '			<div class="card-body" style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">혈액화학검사</span><br/><br/>';
 			html += '				<div class="table-responsive">';
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<colgroup>';
@@ -1781,8 +1789,8 @@ function fnBloodChemPdf(idx,inspNo,sec,thr,res){
 			}
 
 			var addTr = 0;
-			if(data.length < 22){
-				addTr = 22-data.length;
+			if(data.length < 17){
+				addTr = 17-data.length;
 			}
 			for(var i=0; i<addTr; i++){
 				html +=	'						<tr style="height:33.39px;">';
@@ -1799,7 +1807,7 @@ function fnBloodChemPdf(idx,inspNo,sec,thr,res){
 			html += '					<div style="height:60px;"></div>';
 			html += '					<table class="table table-bordered text-nowrap">';
 			html += '						<thead>';
-			html += '							<tr style="height:250px;">';
+			html += '							<tr style="height:100px;">';
 			html += '								<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 			html += '								<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 			html += '							</tr>';
@@ -1826,7 +1834,7 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 			var htmlData = '';
 			var inputType1 = '';
 
-			inputType1 += '<div class="card-body" style="font-size:15px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">'+sec+'</span><br/><br/>';
+			inputType1 += '<div class="card-body" style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">'+sec+'</span><br/><br/>';
 			inputType1 += '		<div>';
 			inputType1 += '			<div class="filter-container row previewList'+idx+'">';
 			//이미지
@@ -1936,7 +1944,7 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				inputType1 += '				<div style="height:150px;"></div>';
 				inputType1 += '				<table class="table table-bordered text-nowrap">';
 				inputType1 += '					<thead>';
-				inputType1 += '						<tr style="height:250px;">';
+				inputType1 += '						<tr style="height:100px;">';
 				inputType1 += '							<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 				inputType1 += '							<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 				inputType1 += '						</tr>';
@@ -1947,7 +1955,7 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				inputType1 += '				<div style="height:450px;"></div>';
 				inputType1 += '				<table class="table table-bordered text-nowrap">';
 				inputType1 += '					<thead>';
-				inputType1 += '						<tr style="height:250px;">';
+				inputType1 += '						<tr style="height:100px;">';
 				inputType1 += '							<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 				inputType1 += '							<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 				inputType1 += '						</tr>';
@@ -1955,12 +1963,12 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				inputType1 += '				</table>';
 				inputType1 += '			</div>';
 			}else {
-				inputType1 += '				<div style="height:30px;"></div>';
+				inputType1 += '				<div style="height:10px;"></div>';
 			}
 
 			var shtml = makePdf(idx,inputType1);
-			$("#printDiv").append('',shtml);
-
+			//$("#printDiv").append('',shtml);
+			$("#printDiv").append(shtml);
 
 			if(data.length > 0 && data.length > 9){ //2페이지 세팅
 				inputType1 = '';
@@ -2071,7 +2079,7 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				inputType1 += '				<div style="height:50px;"></div>';
 				inputType1 += '				<table class="table table-bordered text-nowrap">';
 				inputType1 += '					<thead>';
-				inputType1 += '						<tr style="height:250px;">';
+				inputType1 += '						<tr style="height:100px;">';
 				inputType1 += '							<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
 				inputType1 += '							<td style="width:*;">'+$.gfn_nvl(data[0].inspResult)+'</td>';
 				inputType1 += '						</tr>';
@@ -2080,7 +2088,7 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				inputType1 += '			</div>';
 
 				shtml = makePdf((idx+1),inputType1);
-				$("#printDiv").append('',shtml);
+				$("#printDiv").append(shtml);
 
 			}
 		}

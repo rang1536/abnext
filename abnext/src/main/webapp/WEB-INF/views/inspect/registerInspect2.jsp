@@ -405,7 +405,7 @@
 											<label for="chk22">APV</label>
 										</div>
 										<div class="icheck-primary d-inline">
-											<input type="checkbox" id="chk23" class="chkw" value="B001-02-02-0003">
+											<input type="checkbox" id="chk23" class="chkw" value="B001-02-01-0003">
 											<label for="chk23">PDD</label>
 										</div>
 										<div class="icheck-primary d-inline">

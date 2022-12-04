@@ -17,8 +17,10 @@
     </div>
   	<strong>
   		|<a href="#">대표</a>&nbsp;&nbsp;모인필&nbsp;&nbsp;|
-  		&nbsp;&nbsp;<a href="#">주소 </a>&nbsp;&nbsp; 충북 청주시 상당구 남일면 쌍암동길 30-7&nbsp;&nbsp;|
-  		&nbsp;&nbsp;<a href="#">TEL</a>&nbsp;&nbsp; 042-292-9998
+  		&nbsp;&nbsp;<a href="#">주소 </a>&nbsp;&nbsp; 충북 청주시 상당구 남일면 쌍암동길 30-7<br/>
+  		&nbsp;&nbsp;<a href="#">TEL</a>&nbsp;&nbsp; 043-292-9998&nbsp;&nbsp;|
+  		&nbsp;&nbsp;<a href="#">FAX</a>&nbsp;&nbsp; 043-292-9980&nbsp;&nbsp;|
+  		&nbsp;&nbsp;<a href="#">E-mail</a>&nbsp;&nbsp; avinext@avinext.co.kr
   	</strong>
   </footer>
 

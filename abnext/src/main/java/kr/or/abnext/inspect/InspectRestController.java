@@ -96,7 +96,9 @@ public class InspectRestController {
 				//user.setUserWorkGb(tbRcept.getInspList().get(i).get("inspFirstCd").toString());
 				user.setUserWorkGb(tbRcept.getInspList().get(i).get("inspThirdCd").toString());
 				user.setAdminYn("Y");
-				List<TbUser> workerList = adminServ.getUserListServ(user);
+
+				// 2022.12.04. 윤재호 입력시 담당자 담당자 테이블에서 가져오도록 수정함.
+				List<TbUser> workerList = adminServ.getUserDamdangListServ(user);
 
 				if(workerList.size() > 0) {
 					ti.setWorkerNo(workerList.get(0).getUserId());

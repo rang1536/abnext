@@ -172,6 +172,8 @@ var printTagId;
 function fn_print(tagId){
 	printTagId = tagId;
 
+	$('#printDiv').css('display', '');
+
 	$.each(chartIdArr, function(i, chartTagIdx){
 		var canvas = document.getElementById("barChartPdf"+chartTagIdx);
 
@@ -195,7 +197,7 @@ function beforePrint(){
 
 function afterPrint(){
 	document.body.innerHTML = initBobyHtml;
-	location.reload(true);
+	//location.reload(true);
 }
 
 /*
@@ -213,9 +215,52 @@ if(window.matchMedia){
 window.onbeforeprint = beforePrint;
 window.onafterprint = afterPrint;
 
-function makePdf(pageNum, bodyObj){
+function makePdf(pageNum, bodyObj, footYn){
+	if(footYn == null || footYn == ''){
+		footYn = 'Y';
+	}
+
 	var html = '';
-	html +='<section class="content pdfSection'+pageNum+'" style="font-size:13px;width:100%;">';
+	html +='<section class="content pdfSection'+pageNum+' paperView" style="font-size:12px;">';
+	html +='	<div class="container-fluid">';
+	html +='		<div class="row">';
+	html +='			<div class="col-12">';
+	html +='				<div class="card paperContentView">';
+	html +='					<div class="row mb-2" style="border-bottom:2px solid #000000;padding:10px;width:98%;margin-left:10px;">';
+	html +='						<div class="col-sm-6">';
+	html +='							<h1><b><img src="resources/files/avilogo.png" alt="Avinext Logo" style="width:50%;"></b></h1>';
+	html +='						</div>';
+	html +='						<div class="col-sm-6">';
+	html +='							<ol class="breadcrumb float-sm-right">';
+	html +='								<li class="breadcrumb-item">TEL 043-292-9998</li>';
+	html +='								<li class="breadcrumb-item active" onclick="fn_print(\'printDiv\');">출력하기</li>';
+	html +='							</ol>';
+	html +='						</div>';
+	html +='					</div>';
+	html +='					<div class="row pdfDiv" style="min-height:1110px;max-height:1150px;">';
+	html += bodyObj;
+	html +='					</div>			';
+
+	if(footYn != 'N'){
+		html +='					<div style="font-size:12px;font-weight:bold;color:#000000;width:100%;border-top:1px solid #ddd;text-align:center;margin:5px;padding-top:5px;">';
+		html +='						<strong>Copyright &copy; 2017-2022 <a href="https://adminlte.io">(주)아비넥스트</a>.</strong> All rights reserved.';
+		html +='						<br/>';
+		html +='						<string style="color:#FF0000">* 본 문서는 검사확인 및 치료 이외의 다른 목적으로 활용 할 수 없습니다.</string>';
+		html +='					</div>';
+	}
+
+	html +='				</div>';
+	html +='			</div>';
+	html +='		</div>';
+	html +='	</div>	';
+	html +='</section>';
+
+	return html;
+}
+
+function makePdfView(pageNum, bodyObj){
+	var html = '';
+	html +='<section class="content pdfSection'+pageNum+'" style="font-size:12px;">';
 	html +='	<div class="container-fluid">';
 	html +='		<div class="row">';
 	html +='			<div class="col-12">';
@@ -231,14 +276,16 @@ function makePdf(pageNum, bodyObj){
 	html +='							</ol>';
 	html +='						</div>';
 	html +='					</div>';
-	html +='					<div class="row pdfDiv" style="min-height:1310px;max-height:1350px;">';
+	html +='					<div class="row pdfDiv" style="min-height:1150px;max-height:1150px;">';
 	html += bodyObj;
 	html +='					</div>			';
-	html +='					<div style="font-size:13px;font-weight:bold;color:#000000;width:100%;border-top:1px solid #ddd;text-align:center;margin:5px;padding-top:5px;">';
+
+	html +='					<div style="font-size:12px;font-weight:bold;color:#000000;width:100%;border-top:1px solid #ddd;text-align:center;margin:5px;padding-top:5px;">';
 	html +='						<strong>Copyright &copy; 2017-2022 <a href="https://adminlte.io">(주)아비넥스트</a>.</strong> All rights reserved.';
 	html +='						<br/>';
 	html +='						<string style="color:#FF0000">* 본 문서는 검사확인 및 치료 이외의 다른 목적으로 활용 할 수 없습니다.</string>';
 	html +='					</div>';
+
 	html +='				</div>';
 	html +='			</div>';
 	html +='		</div>';

@@ -226,11 +226,16 @@
 			var levOne 	= 'N';
 			var levTwo 	= 'N';
 			var levThree= 'N';
-			var levFour = 'Y'
+			var levFour = 'Y';
+			var levFive = 'N';
+			var levSix = 'N';
+
 			if(menuLev == '1') levOne 	= 'Y';
 			if(menuLev == '2') levTwo 	= 'Y';
 			if(menuLev == '3') levThree = 'Y';
 			if(menuLev == '4') levFour 	= 'Y';
+			if(menuLev == '5') levFive 	= 'Y';
+			if(menuLev == '6') levSix 	= 'Y';
 
 			$.ajax({
 				url :'getMenuList',
@@ -240,6 +245,8 @@
 						, 'levTwo' : levTwo
 						, 'levThree' : levThree
 						, 'levFour' : levFour
+						, 'levFive' : levFive
+						, 'levSix' : levSix
 				},
 				success:function(data){
 

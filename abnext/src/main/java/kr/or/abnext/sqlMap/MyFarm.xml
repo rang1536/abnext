@@ -15,6 +15,30 @@
 		 GROUP BY SUBSTR(RQST_DT,1,7)
 	</select>
 
+	<!-- 2022.12.04. 윤재호. 마이페이지 신청현황이 안나온다고 하여 쿼리 수정
+	원쿼리
+	SELECT A.CODE_NM INSP_SECOND_NM
+	     , IFNULL(SUM(B.REQ_CNT),0) REQ_CNT
+	     , IFNULL(SUM(B.PROC_CNT),0) PROC_CNT
+	     , IFNULL(SUM(B.FIN_CNT),0) FIN_CNT
+	  FROM TB_CODE A
+	  LEFT OUTER JOIN (
+	          SELECT A.INSP_SECOND_CD
+		           , COUNT(CASE WHEN PROC_STAT = 'A001-01' THEN 1 END) AS REQ_CNT
+	               , COUNT(CASE WHEN PROC_STAT = 'A001-02' THEN 1 WHEN PROC_STAT = 'A001-03' THEN 1 WHEN PROC_STAT = 'A001-04' THEN 1 END) AS PROC_CNT
+	               , COUNT(CASE WHEN PROC_STAT = 'A001-05' THEN 1 END) AS FIN_CNT
+	            FROM TB_INSPECTION A
+	            JOIN TB_RCEPT B
+	              ON A.RQST_NO = B.RQST_NO
+	           WHERE SUBSTR(B.RQST_DT,1,7) =  #{searchStr}
+	           GROUP BY INSP_SECOND_CD
+	       ) B
+    ON A.CODE_ID = B.INSP_SECOND_CD
+	 WHERE SUBSTR(A.CODE_ID,1,4) = 'B001'
+	   AND A.CODE_LEVEL = '3'
+	 GROUP BY CODE_NM
+	 ORDER BY CODE_NM
+	 -->
 	<select id="selectMonthlyDataAdm" parameterType="kr.or.abnext.domain.MyFarm" resultType="kr.or.abnext.domain.MyFarm">
 		SELECT A.CODE_NM INSP_SECOND_NM
 		     , IFNULL(SUM(B.REQ_CNT),0) REQ_CNT

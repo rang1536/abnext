@@ -193,6 +193,36 @@ public class InspectController {
 		return "inspect/finalInspectList";
 	}
 
+	@RequestMapping(value = "inspPrint")
+	public String inspPrint(Locale locale, Model model, TbRcept searchRcept) {
+		logger.info("finalInspectModify Method is start {}.", locale);
+
+		// 접수정보
+		TbRcept rcept = insServ.getRcept(searchRcept);
+
+		// 시료정보
+		TbSample tbSample = new TbSample();
+		tbSample.setRqstNo("" + rcept.getRqstNo());
+		List<TbSample> smplList = insServ.selectSampleList(tbSample);
+
+		// 검사정보
+		TbInspection tbInspection = new TbInspection();
+		tbInspection.setRqstNo("" + rcept.getRqstNo());
+		List<TbInspection> inspList = insServ.selectInspList(tbInspection);
+
+		// 시료상태
+		TbCode code = new TbCode();
+		code.setUppCodeId("S001");
+		List<TbCode> codeList = admServ.selectCodeList(code);
+
+		model.addAttribute("rceptInfo", rcept);
+		model.addAttribute("codeList", codeList);
+		model.addAttribute("smplList", smplList);
+		model.addAttribute("inspList", inspList);
+
+		return "inspect/inspPrint";
+	}
+
 	@RequestMapping(value = "finalInspectModify")
 	public String finalInspectModify(Locale locale, Model model, TbRcept searchRcept) {
 		logger.info("finalInspectModify Method is start {}.", locale);

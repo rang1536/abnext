@@ -212,6 +212,18 @@
 		 ORDER BY USER_NO
 	</select>
 
+	<!-- 담당자 조회 -->
+	<select id="getUserDamdangList" parameterType="kr.or.abnext.domain.TbUser" resultType="kr.or.abnext.domain.TbUser">
+		SELECT USER_ID, USER_NM
+		  FROM TB_USER A
+		 WHERE USER_NO IN (
+		 			SELECT USER_NO
+		 			  FROM TB_USER_DAMDANG B
+		 			 WHERE CODE_ID = #{userWorkGb}
+		 			   AND DAMDANG_YN = 'Y'
+		 	   )
+	</select>
+
 	<!-- 기관(병원)조회 -->
 	<select id="getHospList" resultType="kr.or.abnext.domain.TbHospital">
 		SELECT A.*
@@ -735,6 +747,8 @@
 			   , CASE WHEN LEV_TWO = 'Y' THEN true ELSE false END AS LEV_TWO_CHK
 			   , CASE WHEN LEV_THREE = 'Y' THEN true ELSE false END AS LEV_THREE_CHK
 			   , CASE WHEN LEV_FOUR = 'Y' THEN true ELSE false END AS LEV_FOUR_CHK
+			   , CASE WHEN LEV_FIVE = 'Y' THEN true ELSE false END AS LEV_FIVE_CHK
+			   , CASE WHEN LEV_SIX = 'Y' THEN true ELSE false END AS LEV_SIX_CHK
 		  FROM TB_MENU A
 		 WHERE 1=1
 		 <if test='levOne != null and levOne.equals("Y")'>
@@ -749,6 +763,12 @@
 		 <if test='levFour != null and levFour.equals("Y")'>
 		 	AND LEV_FOUR = #{levFour}
 		 </if>
+		 <if test='levFive != null and levFive.equals("Y")'>
+		 	AND LEV_FIVE = #{levFive}
+		 </if>
+		 <if test='levSix != null and levSix.equals("Y")'>
+		 	AND LEV_SIX = #{levSix}
+		 </if>
 		 ORDER BY MENU_ORDER, MENU_NO
 
 	</select>
@@ -760,6 +780,8 @@
 		   	   , LEV_TWO = IFNULL(#{levTwo}, LEV_TWO)
 		   	   , LEV_THREE = IFNULL(#{levThree}, LEV_THREE)
 		   	   , LEV_FOUR = IFNULL(#{levFour}, LEV_FOUR)
+		   	   , LEV_FIVE = IFNULL(#{levFive}, LEV_FIVE)
+		   	   , LEV_SIX = IFNULL(#{levSix}, LEV_SIX)
 		 WHERE MENU_NO = #{menuNo}
 	</update>
 

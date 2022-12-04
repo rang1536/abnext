@@ -244,6 +244,62 @@
 		                	})
 		                });
           		}},
+          		{ name: "levFiveChk", 	type: "checkbox", width: 120,title:"권한(정산담당)", 	align: "center"
+	            	, itemTemplate: function(value, item) {
+			              	return $("<input>").attr("type", "checkbox")
+		            		.attr("checked", value || item.Checked)
+		                .on("change", function() {
+		                	item.Checked = $(this).is(":checked");
+
+		                	var levFive = $(this).is(":checked")?'Y':'N';
+		                	var menuNo = $(this).parent().parent().find('td').html();
+		                	var menuNm = $(this).parent().parent().find('td:eq(1)').html();
+
+		                	$.ajax({
+		                		url : 'modifyMenu',
+		                		dataType : 'json',
+		                		type :'post',
+		                		data : {'menuNo':menuNo, 'levFive':levFive},
+		                		success:function(data){
+									if(data.result == 'succ'){
+										if(levFive == 'Y'){
+											toastr.success(menuNm+' 메뉴를 정산담당이 이용가능하도록 수정하였습니다.');
+										}else{
+											toastr.danger(menuNm+' 메뉴를 정산담당이 사용할 수 없도록 수정하였습니다.');
+										}
+									}
+		                		}
+		                	})
+		                });
+          		}},
+          		{ name: "levSixChk", 	type: "checkbox", width: 120,title:"권한(업무책임자)", 	align: "center"
+	            	, itemTemplate: function(value, item) {
+			              	return $("<input>").attr("type", "checkbox")
+		            		.attr("checked", value || item.Checked)
+		                .on("change", function() {
+		                	item.Checked = $(this).is(":checked");
+
+		                	var levSix = $(this).is(":checked")?'Y':'N';
+		                	var menuNo = $(this).parent().parent().find('td').html();
+		                	var menuNm = $(this).parent().parent().find('td:eq(1)').html();
+
+		                	$.ajax({
+		                		url : 'modifyMenu',
+		                		dataType : 'json',
+		                		type :'post',
+		                		data : {'menuNo':menuNo, 'levSix':levSix},
+		                		success:function(data){
+									if(data.result == 'succ'){
+										if(levSix == 'Y'){
+											toastr.success(menuNm+' 메뉴를 업무책임자가 이용가능하도록 수정하였습니다.');
+										}else{
+											toastr.danger(menuNm+' 메뉴를 업무책임자가 사용할 수 없도록 수정하였습니다.');
+										}
+									}
+		                		}
+		                	})
+		                });
+          		}},
           		{ name: "levFourChk", 	type: "checkbox", width: 120,title:"권한(관리자)", 	align: "center"
 	            	, itemTemplate: function(value, item) {
 			              	return $("<input>").attr("type", "checkbox")
@@ -272,7 +328,6 @@
 		                	})
 		                });
           		}}
-
 	        ]
 	    });
 	}

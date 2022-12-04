@@ -23,13 +23,41 @@ public class TbMenu {
 	public String levTwo;
 	public String levThree;
 	public String levFour;
+	public String levFive;
+	public String levSix;
 
 	public boolean levOneChk;
 	public boolean levTwoChk;
 	public boolean levThreeChk;
 	public boolean levFourChk;
+	public boolean levFiveChk;
+	public boolean levSixChk;
 
 
+	public String getLevFive() {
+		return levFive;
+	}
+	public void setLevFive(String levFive) {
+		this.levFive = levFive;
+	}
+	public String getLevSix() {
+		return levSix;
+	}
+	public void setLevSix(String levSix) {
+		this.levSix = levSix;
+	}
+	public boolean isLevFiveChk() {
+		return levFiveChk;
+	}
+	public void setLevFiveChk(boolean levFiveChk) {
+		this.levFiveChk = levFiveChk;
+	}
+	public boolean isLevSixChk() {
+		return levSixChk;
+	}
+	public void setLevSixChk(boolean levSixChk) {
+		this.levSixChk = levSixChk;
+	}
 	public boolean isLevOneChk() {
 		return levOneChk;
 	}
@@ -137,8 +165,9 @@ public class TbMenu {
 		return "TbMenu [menuNo=" + menuNo + ", menuNm=" + menuNm + ", uppMenuNo=" + uppMenuNo + ", menuOrder="
 				+ menuOrder + ", menuLev=" + menuLev + ", menuDtlMemo=" + menuDtlMemo + ", menuUrl=" + menuUrl
 				+ ", menuLevChk=" + menuLevChk + ", uppMenuNm=" + uppMenuNm + ", levOne=" + levOne + ", levTwo="
-				+ levTwo + ", levThree=" + levThree + ", levFour=" + levFour + ", levOneChk=" + levOneChk
-				+ ", levTwoChk=" + levTwoChk + ", levThreeChk=" + levThreeChk + ", levFourChk=" + levFourChk + "]";
+				+ levTwo + ", levThree=" + levThree + ", levFour=" + levFour + ", levFive=" + levFive + ", levSix="
+				+ levSix + ", levOneChk=" + levOneChk + ", levTwoChk=" + levTwoChk + ", levThreeChk=" + levThreeChk
+				+ ", levFourChk=" + levFourChk + ", levFiveChk=" + levFiveChk + ", levSixChk=" + levSixChk + "]";
 	}
 
 }
