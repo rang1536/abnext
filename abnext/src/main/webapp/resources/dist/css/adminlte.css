@@ -6269,6 +6269,10 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 .hide{
 	display: none;
 }
+
+.txtc {text-align:center;}
+.txtl {text-align:left;}
+
 .toast-header {
   display: -webkit-flex;
   display: -ms-flexbox;
