@@ -533,6 +533,7 @@ function drawImg(inspNo,k,title){
 				if(item.closeYn == 'Y'){
 					checked = 'checked';
 				}
+				if(item.fileNo == 0) continue;
 				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
 				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
@@ -681,6 +682,7 @@ function fnCbc(inspNo,k,title){
 			for(var i=0; i<data.length; i++){
 
 				var item = data[i].itemName;
+				if(item == null) continue;
 				switch(item) {
 					case 'WBC' : td2 = '10³/㎕'; td3 = '3'; td4 = '11'; break;
 					case 'RBC' : td2 = '10^6/㎕'; td3 = '2.4'; td4 = '4.2'; break;
@@ -829,6 +831,7 @@ function fnBloodChem(inspNo,k,title){
 
 			for(var i=0; i<data.length; i++){
 				var item = data[i].itemName;
+				if(item == null) continue;
 				switch(item) {
 					case 'TP' : td2 = 'g/dL'; td3 = '5.4'; td4 = '8.2'; break;
 					case 'Alb' : td2 = 'g/dL'; td3 = '2.2'; td4 = '4.4'; break;
@@ -1003,6 +1006,7 @@ function fnPcr(inspNo,k,title){
 				var item = data[i];
 				var no = i+1;
 
+				if(item.smplName == null) continue;
 				subHtml += '<tr>';
 				subHtml += '	<td>'+no+'</td>';
 				subHtml += '	<td>'+item.smplName+'</td>';
@@ -1027,6 +1031,7 @@ function fnPcr(inspNo,k,title){
 						if(item.closeYn == 'Y'){
 							checked = 'checked';
 						}
+						if(item.fileNo == 0) continue;
 						htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
 						htmlData += '	<a id="imgLoad'+item.fileNo+'">';
 						htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
@@ -1187,9 +1192,11 @@ function fnSerum(inspNo,k,title){
 			html += '</div>';
 			$(".result").append(html);
 
+
 			var subHtml = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
+				if(item.serName == null) continue;
 				subHtml += '<tr>';
 				subHtml += '<td>'+item.serName+'</td>';
 				subHtml += '<td>'+item.serData+'</td>';
@@ -1416,6 +1423,7 @@ function fnAnti(inspNo,k,title){
 			var subHtml = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
+				if(item.antiName == null) continue;
 				subHtml += '<tr>';
 				subHtml += '<td>'+item.antiNo+'</td>';
 				subHtml += '<td>'+item.antiName+'</td>';

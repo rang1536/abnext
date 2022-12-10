@@ -530,6 +530,7 @@ function drawImg(inspNo,k,title){
 				if(item.closeYn == 'Y'){
 					checked = 'checked';
 				}
+				if(item.fileNo == 0) continue;
 				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
 				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
@@ -661,6 +662,7 @@ function fnCbc(inspNo,k,title){
 			var subHtml = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
+				if(item.itemName == null) continue;
 				subHtml += '<tr>';
 				subHtml += '<td>'+item.itemName+'</td>';
 				subHtml += '<td>'+item.val+'</td>';
@@ -792,7 +794,7 @@ function fnBloodChem(inspNo,k,title){
 			var subHtml = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
-				console.log(item);
+				if(item.itemName == null) continue;
 				subHtml += '<tr>';
 				switch(item.itemName) {
 					case 'TP' : td2 = 'g/dL'; td3 = '5.4'; td4 = '8.2'; break;
@@ -942,6 +944,7 @@ function fnPcr(inspNo,k,title){
 			var subHtml = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
+				if(item.smplName == null) continue;
 				var no = i+1;
 				subHtml += '<tr>';
 				subHtml += '	<td>'+no+'</td>';
@@ -963,6 +966,7 @@ function fnPcr(inspNo,k,title){
 
 					for(var i=0; i<data.length; i++){
 						var item = data[i];
+						if(item.fileNo == 0) continue;
 						htmlData += '<div id="previewImg'+item.fileNo+'">';
 						htmlData += '	<a id="imgLoad'+item.fileNo+'">';
 						htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
@@ -1090,6 +1094,7 @@ function fnSerum(inspNo,k,title){
 			var subHtml = '';
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
+				if(item.serName == null) continue;
 				subHtml += '<tr>';
 				subHtml += '<td>'+item.serName+'</td>';
 				subHtml += '<td>'+item.serData+'</td>';
@@ -1261,6 +1266,7 @@ function fnAnti(inspNo,k,title){
 			html += '			</div>';
 			html += '			<div style="height:10px;"></div>';
 			html += '		</div>';
+			/*
 			html += '		<div class="card card-warning card-outline">';
 			html += '			<div class="card-header">';
 			html += '				<h3 class="card-title"><b>사진</b></h3>';
@@ -1269,6 +1275,7 @@ function fnAnti(inspNo,k,title){
 			html += '				<div class="filter-container row previewList'+k+'"></div>';
 			html += '			</div>';
 			html += '		</div>';
+			 */
 			html += '	</div>';
 			html += '	<div class="col-md-6">';
 			html += '		<div class="card card-danger card-outline">';
@@ -1320,6 +1327,7 @@ function fnAnti(inspNo,k,title){
 			for(var i=0; i<data.length; i++){
 				var item = data[i];
 				var no = item.antiNo;
+				if(item.antiName == null) continue;
 				switch(i) {
 					case 0 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case1html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
 					case 1 : subHtml += '<tr><td>'+item.antiNo+'</td>'+case2html+'<td>'+item.res1+'</td><td>'+item.res2+'</td><td>'+item.antiMemo+'</td></tr>';break;
