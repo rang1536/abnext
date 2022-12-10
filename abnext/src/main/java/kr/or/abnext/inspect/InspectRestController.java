@@ -351,6 +351,22 @@ public class InspectRestController {
 		return map;
 	}
 
+	//파일 업데이트
+	@RequestMapping(value = "inspFileUpdate", method = RequestMethod.POST)
+	public Map<String, Object> inspFileUpload(
+			@RequestParam("fileNoList") List<String> fileNos,
+			@RequestParam("titleList") List<String> titles,
+			@RequestParam("contentList") List<String> contents,
+			@RequestParam("closeYnList") List<String> closeYns) {
+
+		Map<String, Object> map = new HashMap<String,Object>();
+		if(fileNos.size() > 0) {
+			map = inspectServ.inspFileUpdateServ(fileNos, titles, contents, closeYns);
+		}
+
+		return map;
+	}
+
 	//결과사진업로드
 	@RequestMapping(value = "inspFileUpload2", method = RequestMethod.POST)
 	public Map<String, Object> inspFileUpload2(TbRcept tbRcept, String inspNo

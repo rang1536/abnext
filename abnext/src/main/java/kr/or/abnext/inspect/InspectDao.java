@@ -215,4 +215,9 @@ public class InspectDao {
 	public int cencelRcept(String pdlNo) {
 		return sql.update("inspection.cencelRcept", pdlNo);
 	}
+
+	public int updateFile(TbFile bean) {
+		return sql.update("inspection.updateFile", bean);
+	}
+
 }

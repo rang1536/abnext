@@ -444,14 +444,16 @@
 
 	<select id="getFileList" parameterType="kr.or.abnext.domain.TbFile" resultType="kr.or.abnext.domain.TbFile">
 		SELECT A.*
-		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
-		  FROM TB_FILE A
-		 WHERE INSP_NO = #{inspNo}
+		     , B.INSP_RESULT
+		  FROM TB_INSPECTION B
+		  LEFT OUTER JOIN TB_FILE A
+		    ON B.INSP_NO = A.INSP_NO
+		 WHERE B.INSP_NO = #{inspNo}
 		<if test="fileGb != null and fileGb != ''">
-		   AND FILE_GB = #{fileGb}
+		   AND A.FILE_GB = #{fileGb}
 		</if>
 		<if test="closeYn != null and closeYn != ''">
-		   AND (CLOSE_YN is null OR CLOSE_YN = #{closeYn})
+		   AND (A.CLOSE_YN is null OR A.CLOSE_YN = #{closeYn})
 		</if>
 	</select>
 
@@ -494,9 +496,11 @@
 
 	<select id="getAntiList" parameterType="kr.or.abnext.domain.TbAntibiotic" resultType="kr.or.abnext.domain.TbAntibiotic">
 		SELECT A.*
-		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
-		  FROM TB_ANTIBIOTIC A
-		 WHERE INSP_NO = #{inspNo}
+		     , B.INSP_RESULT
+		  FROM TB_INSPECTION B
+		  LEFT OUTER JOIN TB_ANTIBIOTIC A
+		    ON B.INSP_NO = A.INSP_NO
+		 WHERE B.INSP_NO = #{inspNo}
 		 ORDER BY CAST(ANTI_NO AS UNSIGNED)
 	</select>
 
@@ -516,10 +520,12 @@
 
 	<select id="getSerumList" parameterType="kr.or.abnext.domain.TbSerum" resultType="kr.or.abnext.domain.TbSerum">
 		SELECT A.*
-		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
-		  FROM TB_SERUM A
-		 WHERE INSP_NO = #{inspNo}
-		 ORDER BY SER_NAME
+		     , B.INSP_RESULT
+		  FROM TB_INSPECTION B
+		  LEFT OUTER JOIN TB_SERUM A
+		    ON B.INSP_NO = A.INSP_NO
+		 WHERE B.INSP_NO = #{inspNo}
+		 ORDER BY A.SER_NAME
 	</select>
 
 	<select id="getSerumChart" parameterType="kr.or.abnext.domain.TbSerum" resultType="kr.or.abnext.domain.TbSerum">
@@ -559,10 +565,12 @@
 
 	<select id="getPcrList" parameterType="kr.or.abnext.domain.TbPcr" resultType="kr.or.abnext.domain.TbPcr">
 		SELECT A.*
-		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
-		  FROM TB_PCR A
-		 WHERE INSP_NO = #{inspNo}
-		 ORDER BY SMPL_NAME
+		     , B.INSP_RESULT
+		  FROM TB_INSPECTION B
+		  LEFT OUTER JOIN TB_PCR A
+		    ON B.INSP_NO = A.INSP_NO
+		 WHERE B.INSP_NO = #{inspNo}
+		 ORDER BY A.SMPL_NAME
 	</select>
 
 	<insert id="insertBloodChem" parameterType="kr.or.abnext.domain.TbBloodChem">
@@ -582,12 +590,14 @@
 
 	<select id="getBcList" parameterType="kr.or.abnext.domain.TbBloodChem" resultType="kr.or.abnext.domain.TbBloodChem">
 		SELECT A.*
-		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
-		  FROM TB_BLOOD_CHEM A
-		     , TB_CODE B
-		 WHERE A.ITEM_NAME = B.CODE_NM
-		   AND A.INSP_NO = #{inspNo}
-		 ORDER BY B.SORT_IDX
+		     , B.INSP_RESULT
+		  FROM TB_INSPECTION B
+		  LEFT OUTER JOIN TB_BLOOD_CHEM A
+		    ON B.INSP_NO = A.INSP_NO
+		  LEFT OUTER JOIN TB_CODE C
+		    ON A.ITEM_NAME = C.CODE_NM
+		 WHERE B.INSP_NO = #{inspNo}
+		 ORDER BY C.SORT_IDX
 	</select>
 
 	<insert id="insertCbc" parameterType="kr.or.abnext.domain.TbBloodChem">
@@ -607,9 +617,11 @@
 
 	<select id="getCbcList" parameterType="kr.or.abnext.domain.TbBloodChem" resultType="kr.or.abnext.domain.TbBloodChem">
 		SELECT A.*
-		     , (SELECT INSP_RESULT FROM TB_INSPECTION WHERE INSP_NO = A.INSP_NO) INSP_RESULT
-		  FROM TB_CBC A
-		 WHERE INSP_NO = #{inspNo}
+		     , B.INSP_RESULT
+		  FROM TB_INSPECTION B
+		  LEFT OUTER JOIN TB_CBC A
+		    ON B.INSP_NO = A.INSP_NO
+		 WHERE B.INSP_NO = #{inspNo}
 		 ORDER BY INS_DT
 	</select>
 
@@ -632,6 +644,14 @@
 		   SET PROC_STAT = 'A001-09'
 		   	   , PROC_STAT_NM = '접수취소'
 		   	   , UPT_DT = NOW()
-		 WEHRE PDL_NO = #{pdlNo}#
+		 WEHRE PDL_NO = #{pdlNo}
+	</update>
+
+	<update id="updateFile" parameterType="kr.or.abnext.domain.TbFile">
+		UPDATE TB_FILE
+		   SET TITLE = #{title}
+		   	 , CONTENT = #{content}
+		   	 , CLOSE_YN =  #{closeYn}
+		 WHERE FILE_NO = #{fileNo}
 	</update>
 </mapper>

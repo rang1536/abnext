@@ -337,6 +337,11 @@
 										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
 									</tbody>
 								</table>
+
+								<div style="text-align:center">
+									<button type="button" onclick="saveMemo(1)" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i> 단위결과저장</button>
+								</div>
+
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -384,6 +389,10 @@
 										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
 									</tbody>
 								</table>
+
+								<div style="text-align:center">
+									<button type="button" onclick="saveMemo(2)" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i> 단위결과저장</button>
+								</div>
 							</div>
 							<div style="height:10px;"></div>
 						</div>
@@ -600,6 +609,10 @@
 										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
 									</tbody>
 								</table>
+
+								<div style="text-align:center">
+									<button type="button" onclick="saveMemo(3)" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i> 단위결과저장</button>
+								</div>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -682,6 +695,10 @@
 										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
 									</tbody>
 								</table>
+
+								<div style="text-align:center">
+									<button type="button" onclick="saveMemo(4)" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i> 단위결과저장</button>
+								</div>
 							</div>
 							<!-- /.card-body -->
 							<div class="card card-primary card-outline">
@@ -881,6 +898,10 @@
 										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
 									</tbody>
 								</table>
+
+								<div style="text-align:center">
+									<button type="button" onclick="saveMemo(5)" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i> 단위결과저장</button>
+								</div>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -943,6 +964,10 @@
 										<tr><td><textarea class="form-control" rows="3" id="inspResult" name="inspResult"></textarea></td></tr>
 									</tbody>
 								</table>
+
+								<div style="text-align:center">
+									<button type="button" onclick="saveMemo(6)" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i> 단위결과저장</button>
+								</div>
 							</div>
 							<!-- /.card-body -->
 						</div>
@@ -1779,23 +1804,23 @@ function fnAnti(){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			if(data.length == 0){
-				$("[name=inspResult]").val("");
-			}else {
+			if(data[0] != null) {
 				$("[name=inspResult]").val(data[0].inspResult);
-			}
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				var no = item.antiNo;
-				$("#antiName_"+no).text(item.antiName);
-				$("#cap_"+no).text(item.capacity);
-				$("#nick_"+no).text(item.nickName);
-				$("#r_"+no).text(item.mini);
-				$("#i_"+no).text(item.scope);
-				$("#s_"+no).text(item.maxi);
-				$("#res1_"+no).text(item.res1);
-				$("#res2_"+no).text(item.res2);
-				$("#resMemo_"+no).text(item.antiMemo);
+				for(var i=0; i<data.length; i++){
+					var item = data[i];
+					var no = item.antiNo;
+					$("#antiName_"+no).text(item.antiName);
+					$("#cap_"+no).text(item.capacity);
+					$("#nick_"+no).text(item.nickName);
+					$("#r_"+no).text(item.mini);
+					$("#i_"+no).text(item.scope);
+					$("#s_"+no).text(item.maxi);
+					$("#res1_"+no).text(item.res1);
+					$("#res2_"+no).text(item.res2);
+					$("#resMemo_"+no).text(item.antiMemo);
+				}
+			}else {
+				$("[name=inspResult]").val("");
 			}
 		}
 	});
@@ -1957,15 +1982,12 @@ function fnSerum(title){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			if(data != ''){
-				if(data.length == 0){
-					$("[name=inspResult]").val("");
-				}else {
-					$("[name=inspResult]").val(data[0].inspResult);
-				}
+			if(data[0] != null){
+				$("[name=inspResult]").val(data[0].inspResult);
 				for(var i=0; i<data.length; i++){
 					var item = data[i];
 					var no = i+1;
+					if(item.serName == null) continue;
 					$("#nm_"+no).text(item.serName);
 					$("#dt_"+no).text(item.serData);
 				}
@@ -2081,26 +2103,27 @@ function fnPcr(){
 		type : 'post',
 		success : function(data){
 			$("#pcr").empty();
-			if(data.length == 0){
-				$("[name=inspResult]").val("");
-			}else {
+			if(data[0] != null){
 				$("[name=inspResult]").val(data[0].inspResult);
-			}
+				var html = '';
+				for(var i=0; i<data.length; i++){
+					var item = data[i];
+					if(item.smplName == null) continue;
+					var no = i+1;
+					html += '<tr>';
+					html += '	<td id="smplName_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+$.gfn_nvl(item.smplName)+'</td>';
+					html += '	<td id="positive_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+$.gfn_nvl(item.positive)+'</td>';
+					html += '	<td id="negative_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+$.gfn_nvl(item.negative)+'</td>';
+					html += '	<td id="result_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+$.gfn_nvl(item.result)+'</td>';
+					html += '	<td id="memo_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+$.gfn_nvl(item.memo)+'</td>';
+					html += '</tr>';
+				}
 
-			var html = '';
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				var no = i+1;
-				html += '<tr>';
-				html += '	<td id="smplName_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.smplName+'</td>';
-				html += '	<td id="positive_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.positive+'</td>';
-				html += '	<td id="negative_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.negative+'</td>';
-				html += '	<td id="result_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.result+'</td>';
-				html += '	<td id="memo_'+no+'" style="height:39px;" onclick="makeBox(this.id)">'+item.memo+'</td>';
-				html += '</tr>';
-			}
+				$("#pcr").html(html);
 
-			$("#pcr").html(html);
+			}else {
+				$("[name=inspResult]").val("");
+			}
 		}
 	});
 
@@ -2122,6 +2145,7 @@ function fnPcr(){
 				if(item.closeYn == 'Y'){
 					checked = 'checked';
 				}
+				if(item.fileNo == 0) continue;
 				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
 				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
@@ -2195,6 +2219,7 @@ function fnElse(){
 				if(item.closeYn == 'Y'){
 					checked = 'checked';
 				}
+				if(item.fileNo == 0) continue;
 				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
 				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
@@ -2244,19 +2269,19 @@ function fnBloodChem(){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			if(data.length == 0){
-				$("[name=inspResult]").val("");
-			}else {
+			if(data[0] != null){
 				$("[name=inspResult]").val(data[0].inspResult);
-			}
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				$("#bloodChem").find("tr").each(function(){
-					if($(this).find("td:eq(0)").text() == item.itemName){
-						$(this).find("td:eq(1)").text(item.val);
-						$(this).find("td:eq(5)").text(item.rmk);
-					}
-				})
+				for(var i=0; i<data.length; i++){
+					var item = data[i];
+					$("#bloodChem").find("tr").each(function(){
+						if($(this).find("td:eq(0)").text() == item.itemName){
+							$(this).find("td:eq(1)").text(item.val);
+							$(this).find("td:eq(5)").text(item.rmk);
+						}
+					})
+				}
+			}else {
+				$("[name=inspResult]").val("");
 			}
 		}
 	});
@@ -2391,19 +2416,19 @@ function fnCbc(){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
-			if(data.length == 0){
-				$("[name=inspResult]").val("");
-			}else {
+			if(data[0] != null){
 				$("[name=inspResult]").val(data[0].inspResult);
-			}
-			for(var i=0; i<data.length; i++){
-				var item = data[i];
-				$("#cbc").find("tr").each(function(){
-					if($(this).find("td:eq(0)").text() == item.itemName){
-						$(this).find("td:eq(1)").text(item.val);
-						$(this).find("td:eq(5)").text(item.rmk);
-					}
-				})
+				for(var i=0; i<data.length; i++){
+					var item = data[i];
+					$("#cbc").find("tr").each(function(){
+						if($(this).find("td:eq(0)").text() == item.itemName){
+							$(this).find("td:eq(1)").text(item.val);
+							$(this).find("td:eq(5)").text(item.rmk);
+						}
+					})
+				}
+			}else {
+				$("[name=inspResult]").val("");
 			}
 		}
 	});
@@ -2467,9 +2492,9 @@ $(document).on('click','#save',function(){
 	});
 
 	/**************************************************************************************************/
-	/* 1 부검 외 기타                                                                                                                                                                                                 */
-	/* 2 항생제                                                                                                                                                                                                         */
-	/* 3 혈청                                                                                                                                                                                                            */
+	/* 1 부검 외 기타                                                                                                                                                     */
+	/* 2 항생제                                                                                                                                                            */
+	/* 3 혈청                                                                                                                                                              */
 	/* 4 PCR                                                                                          */
 	/* 5 BC                                                                                           */
 	/* 6 CBC                                                                                          */
@@ -2511,6 +2536,7 @@ function makeBox(target){
 	$('#'+target).html(html);
 	$("#target").focus();
 }
+
 </script>
 <jsp:include page="../popup/pop_fileView.jsp"></jsp:include>
 </body>

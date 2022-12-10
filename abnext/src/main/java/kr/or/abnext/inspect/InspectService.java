@@ -232,6 +232,34 @@ public class InspectService {
 		return map;
 	}
 
+	//inspFileUpdateServ
+	public Map<String, Object> inspFileUpdateServ(
+			List<String> fileNos,
+			List<String> titles,
+			List<String> contents,
+			List<String> closeYns){
+
+		int result = 0;
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		for(int i=0; i<fileNos.size(); i++) {
+			TbFile file = new TbFile();
+			file.setFileNo(Integer.parseInt(fileNos.get(i)));
+			file.setTitle(titles.get(i));
+			file.setContent(contents.get(i));
+			file.setCloseYn(closeYns.get(i));
+			result += updateFile(file);
+		}
+
+		if(fileNos.size() == result) {
+			map.put("result", "succ");
+		}else {
+			map.put("result", "fail");
+		}
+
+		return map;
+	}
+
 	public TbInspection getInspResult(TbInspection bean){
 		return inspectDao.getInspResult(bean);
 	}
@@ -294,5 +322,9 @@ public class InspectService {
 
 	public int cencelRcept(String pdlNo) {
 		return inspectDao.cencelRcept(pdlNo);
+	}
+
+	public int updateFile(TbFile bean) {
+		return inspectDao.updateFile(bean);
 	}
 }

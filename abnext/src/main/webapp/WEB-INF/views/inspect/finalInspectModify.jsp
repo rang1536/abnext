@@ -516,6 +516,9 @@ function drawImg(inspNo,k,title){
 			inputType1 += '				<div>';
 			inputType1 += '					<div class="filter-container row previewList'+k+'"></div>';
 			inputType1 += '				</div>';
+			inputType1 += '				<div style="text-align:center">';
+			inputType1 += '					<button type="button" onclick="fileSave('+k+')" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i>단위결과저장</button>';
+			inputType1 += '				</div>';
 			inputType1 += '			</div>';
 			inputType1 += '		</div>';
 			inputType1 += '	</div>';
@@ -535,22 +538,29 @@ function drawImg(inspNo,k,title){
 				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
 				htmlData += '	</a>';
 				htmlData += '</div>';
-				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
+				htmlData += '<div class="col-sm-9 inputDiv" id="preview'+item.fileNo+'">';
 				htmlData += '	<div class="row">';
-				htmlData += '		<div class="col-8">'+item.title+'</div>';
-				htmlData += '		<div class="col-4">';
+				htmlData += '		<div class="col-8">';
+				htmlData += '			<input type="text" class="form-control" id="title'+item.fileNo+'" placeholder="장기" value="'+item.title+'">';
+				htmlData += '		</div>';
+				htmlData += '		<div class="col-4" style="padding-top:-9px">';
 				htmlData += '			<label for="chk1"></label>';
 				htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
 				htmlData += '				<div class="icheck-primary d-inline">';
-				htmlData += '					<input type="checkbox" disabled id="chk'+item.fileNo+'" '+checked+'>';
+				htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+'>';
 				htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
 				htmlData += '				</div>';
+				htmlData += '				<input type="hidden" id="file'+item.fileNo+'" value="'+item.fileNewNm+'">';
+				htmlData += '				<input type="hidden" id="fileNo'+item.fileNo+'" value="'+item.fileNo+'">';
 				htmlData += '			</div>';
 				htmlData += '		</div>';
 				htmlData += '	</div>';
 				htmlData += '	<div class="row">';
-				htmlData += '		<div class="col-12">'+item.content+'</div>';
+				htmlData += '		<div class="col-12">';
+				htmlData += '			<textarea class="form-control" rows="3" id="content'+item.fileNo+'" placeholder="메모">'+item.content+'</textarea>';
+				htmlData += '		</div>';
 				htmlData += '	</div>';
+				htmlData += '	<form id="fileForm" method="post"></form>';
 				htmlData += '</div>';
 
 			}
@@ -977,7 +987,10 @@ function fnPcr(inspNo,k,title){
 			html += '				<h3 class="card-title"><b>사진</b></h3>';
 			html += '			</div>';
 			html += '			<div class="card-body">';
-			html += '				<div class="filter-container row previewList'+k+'"></div>';
+			html += '				<div class="filter-container row previewList'+k+' fileDiv"></div>';
+			html += '				<div style="text-align:center">';
+			html += '					<button type="button" onclick="fileSave('+k+')" style="width:161.2px;" class="btn btn-sm btn-info btn-flat"><i class="fas fa-pencil-alt"></i>단위결과저장</button>';
+			html += '				</div>';
 			html += '			</div>';
 			html += '		</div>';
 			html += '	</div>';
@@ -1014,27 +1027,34 @@ function fnPcr(inspNo,k,title){
 						if(item.closeYn == 'Y'){
 							checked = 'checked';
 						}
-						htmlData += '<div class="filtr-item col-sm-4" id="previewImg'+item.fileNo+'">';
+						htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
 						htmlData += '	<a id="imgLoad'+item.fileNo+'">';
 						htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
 						htmlData += '	</a>';
 						htmlData += '</div>';
-						htmlData += '<div class="col-sm-8" id="preview'+item.fileNo+'">';
+						htmlData += '<div class="col-sm-9 inputDiv" id="preview'+item.fileNo+'">';
 						htmlData += '	<div class="row">';
-						htmlData += '		<div class="col-8">'+item.title+'</div>';
-						htmlData += '		<div class="col-4">';
+						htmlData += '		<div class="col-8">';
+						htmlData += '			<input type="text" class="form-control" id="title'+item.fileNo+'" placeholder="장기" value="'+item.title+'">';
+						htmlData += '		</div>';
+						htmlData += '		<div class="col-4" style="padding-top:-9px">';
 						htmlData += '			<label for="chk1"></label>';
 						htmlData += '			<div class="form-group clearfix" style="margin-left:9px;margin-top:-10px;">';
 						htmlData += '				<div class="icheck-primary d-inline">';
-						htmlData += '					<input type="checkbox" disabled id="chk'+item.fileNo+'" '+checked+'>';
+						htmlData += '					<input type="checkbox" id="chk'+item.fileNo+'" '+checked+'>';
 						htmlData += '					<label for="chk'+item.fileNo+'">비공개</label>';
 						htmlData += '				</div>';
+						htmlData += '				<input type="hidden" id="file'+item.fileNo+'" value="'+item.fileNewNm+'">';
+						htmlData += '				<input type="hidden" id="fileNo'+item.fileNo+'" value="'+item.fileNo+'">';
 						htmlData += '			</div>';
 						htmlData += '		</div>';
 						htmlData += '	</div>';
 						htmlData += '	<div class="row">';
-						htmlData += '		<div class="col-12">'+item.content+'</div>';
+						htmlData += '		<div class="col-12">';
+						htmlData += '			<textarea class="form-control" rows="3" id="content'+item.fileNo+'" placeholder="메모">'+item.content+'</textarea>';
+						htmlData += '		</div>';
 						htmlData += '	</div>';
+						htmlData += '	<form id="fileForm" method="post"></form>';
 						htmlData += '</div>';
 
 					}
@@ -2399,6 +2419,32 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				shtml = makePdf((idx+1),inputType1);
 				$("#printDiv").append(shtml);
 
+			}
+		}
+	});
+}
+
+function fileSave(idx){
+	var formData = new FormData($('#fileForm')[0]);
+	$(".previewList"+idx).find(".inputDiv").each(function(){
+		var chkYn = $(this).find("input[type=checkbox]").is(":checked") ? 'Y' : 'N';
+		formData.append('fileNoList', $(this).find("[id^=fileNo]").val());
+		formData.append('titleList', $(this).find("[id^=title]").val());
+		formData.append('contentList', $(this).find("[id^=content]").val());
+		formData.append('closeYnList', chkYn);
+	});
+
+	$.ajax({
+		url : 'inspFileUpdate',
+		data : formData,
+		dataType : 'json',
+		type : 'post',
+		processData : false,
+		contentType : false,
+		success : function(data){
+			if(data.result == 'succ'){
+				toastr.info('저장하였습니다');
+				location.reload();
 			}
 		}
 	});
