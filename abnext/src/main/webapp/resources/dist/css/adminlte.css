@@ -6266,6 +6266,9 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   display: none;
 }
 
+.hide{
+	display: none;
+}
 .toast-header {
   display: -webkit-flex;
   display: -ms-flexbox;

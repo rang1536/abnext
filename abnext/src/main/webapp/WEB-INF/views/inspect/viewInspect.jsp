@@ -1393,6 +1393,7 @@ $(document).on('click','#list',function(){
 
 
 
+
 $("#pdf").click(function(){
 
 	$("#printDiv").empty();
@@ -1486,8 +1487,8 @@ $("#pdf").click(function(){
 
 	var inspLen = parseInt('${len}');
 	var addTr = 0;
-	if(inspLen < 9){
-		addTr = 9-inspLen;
+	if(inspLen < 6){
+		addTr = 6-inspLen;
 	}
 	for(var i=0; i<addTr; i++){
 		html +=	'						<tr>';
@@ -1544,9 +1545,11 @@ $("#pdf").click(function(){
 		}
 	'</c:forEach>';
 
+
 	setTimeout(function(){
 		$('#printDiv').css('display','');
 	}, 300)
+
 
 });
 
@@ -1557,6 +1560,10 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
+			if(data[0].smplName == null || data[0].smplName == 'null'){
+				return;
+			}
+
 			if(data.length>0){
 				var html = '';
 				html += '<div class="card-body" style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">PCR</span><br/><br/>';
@@ -1601,7 +1608,7 @@ function fnPcrPdf(idx,inspNo,sec,thr,res){
 				html += '			</table>';
 
 				html += '			<div style="height:60px;"></div>';
-				html += '			<table class="table table-bordered text-nowrap">';
+				html += '			<table class="table table-bordered text-nowrap hide">';
 				html += '				<thead>';
 				html += '					<tr style="height:100px;">';
 				html += '						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
@@ -1630,6 +1637,10 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
+			if(data[0].antiName == null || data[0].antiName == 'null'){
+				return;
+			}
+
 			var html = '';
 			html += '			<div class="card-body" style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">항생제감수성 검사</span><br/><br/>';
 			html += '				<div class="table-responsive">';
@@ -1691,7 +1702,7 @@ function fnAntiPdf(idx,inspNo,sec,thr,res){
 			html += '					</table>';
 
 			html += '			<div style="height:60px;"></div>';
-			html += '			<table class="table table-bordered text-nowrap">';
+			html += '			<table class="table table-bordered text-nowrap hide">';
 			html += '				<thead>';
 			html += '					<tr style="height:100px;">';
 			html += '						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
@@ -1719,6 +1730,10 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
+			if(data[0].serName == null || data[0].serName == 'null'){
+				return;
+			}
+
 			var html = '';
 			html += '		<div class="card-body"  style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">'+sec+'</span><br/><br/>';
 			html += '			<br/><br/>';
@@ -1729,7 +1744,7 @@ function fnSerumPdf(idx,inspNo,sec,thr,res){
 			html += '				<img id="chartImgTag'+idx+'"/>';
 			html += '			</div>';
 			html += '			<div style="height:350px;"></div>';
-			html += '			<table class="table table-bordered text-nowrap">';
+			html += '			<table class="table table-bordered text-nowrap hide">';
 			html += '				<thead>';
 			html += '					<tr style="height:100px;">';
 			html += '						<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
@@ -1833,6 +1848,10 @@ function fnCbcPdf(idx,inspNo,sec,thr,res){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
+			if(data[0].itemName == null || data[0].itemName == 'null'){
+				return;
+			}
+
 			var html = "";
 			html += '			<div class="card-body" style="width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">혈구검사</span><br/><br/>';
 			html += '				<div class="table-responsive">';
@@ -1907,7 +1926,7 @@ function fnCbcPdf(idx,inspNo,sec,thr,res){
 
 			html += '					</table>';
 			html += '					<div style="height:60px;"></div>';
-			html += '					<table class="table table-bordered text-nowrap">';
+			html += '					<table class="table table-bordered text-nowrap hide">';
 			html += '						<thead>';
 			html += '							<tr style="height:100px;">';
 			html += '								<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
@@ -1933,6 +1952,10 @@ function fnBloodChemPdf(idx,inspNo,sec,thr,res){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
+			if(data[0].itemName == null || data[0].itemName == 'null'){
+				return;
+			}
+
 			var html = "";
 			html += '			<div class="card-body" style="font-size:12px;width:100%;text-align:center;"><span style="font-size:30px;font-weight:bold;">혈액화학검사</span><br/><br/>';
 			html += '				<div class="table-responsive">';
@@ -2006,7 +2029,7 @@ function fnBloodChemPdf(idx,inspNo,sec,thr,res){
 
 			html += '					</table>';
 			html += '					<div style="height:60px;"></div>';
-			html += '					<table class="table table-bordered text-nowrap">';
+			html += '					<table class="table table-bordered text-nowrap hide">';
 			html += '						<thead>';
 			html += '							<tr style="height:100px;">';
 			html += '								<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
@@ -2032,6 +2055,10 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 		dataType : 'json',
 		type : 'post',
 		success : function(data){
+			if(data[0].fileNewNm == null || data[0].fileNewNm == 'null'){
+				return;
+			}
+
 			var htmlData = '';
 			var inputType1 = '';
 
@@ -2143,7 +2170,7 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 
 			if(data.length > 3 && data.length <= 6){
 				inputType1 += '				<div style="height:150px;"></div>';
-				inputType1 += '				<table class="table table-bordered text-nowrap">';
+				inputType1 += '				<table class="table table-bordered text-nowrap hide">';
 				inputType1 += '					<thead>';
 				inputType1 += '						<tr style="height:100px;">';
 				inputType1 += '							<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
@@ -2154,7 +2181,7 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				inputType1 += '			</div>';
 			}else if(data.length <= 3){
 				inputType1 += '				<div style="height:450px;"></div>';
-				inputType1 += '				<table class="table table-bordered text-nowrap">';
+				inputType1 += '				<table class="table table-bordered text-nowrap hide">';
 				inputType1 += '					<thead>';
 				inputType1 += '						<tr style="height:100px;">';
 				inputType1 += '							<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
@@ -2278,7 +2305,7 @@ function drawImgPdf(idx,inspNo,sec,thr,res){
 				inputType1 += '				</div>';
 
 				inputType1 += '				<div style="height:50px;"></div>';
-				inputType1 += '				<table class="table table-bordered text-nowrap">';
+				inputType1 += '				<table class="table table-bordered text-nowrap hide">';
 				inputType1 += '					<thead>';
 				inputType1 += '						<tr style="height:100px;">';
 				inputType1 += '							<td style="width:20%;background-color:#F2F2F2;font-weight:bold;">검사메모</td>';
