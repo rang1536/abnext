@@ -25,4 +25,8 @@ public class MyFarmService {
 		return myFarmDao.selectMonthlyDataWorker(bean);
 	}
 
+	public List<MyFarm> getRceptList(MyFarm bean){
+		return myFarmDao.getRceptList(bean);
+	}
+
 }

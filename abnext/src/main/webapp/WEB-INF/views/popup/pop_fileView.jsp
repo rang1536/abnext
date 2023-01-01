@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="modal fade" id="imgView"> <!-- 여기 아이디값 변경해서 복사 사용하면 됨 -->
-	 <div class="modal-dialog">
+	 <div class="modal-dialog modal-xl">
 		 <div class="modal-content">
 			 <div class="modal-body">
 				 <div class="row">
@@ -10,7 +10,7 @@
 							<div class="card-body">
 								<div class="col-12">
 									<!-- <img class="product-image"> -->
-									<img class="image">
+									<img class="image" style="width:100%;">
 								</div>
 							</div>
 						</div>

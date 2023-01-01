@@ -24,4 +24,8 @@ public class MyFarmDao {
 	public List<MyFarm> selectMonthlyDataWorker(MyFarm bean) {
 		return sql.selectList("myFarm.selectMonthlyDataWorker", bean);
 	}
+
+	public List<MyFarm> getRceptList(MyFarm bean) {
+		return sql.selectList("myFarm.getRceptList", bean);
+	}
 }

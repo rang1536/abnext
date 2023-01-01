@@ -103,6 +103,8 @@
 		<!-- Control sidebar content goes here -->
 	</aside>
 	<!-- /.control-sidebar -->
+
+	<c:import url="../popup/pop_rceptList.jsp"></c:import>
 </div>
 <!-- ./wrapper -->
 
@@ -175,8 +177,8 @@
 						"type"	: typeList[i],
 						"width" : widthList[i],
 						"title"	: titleList[i],
-						"itemTemplate" : setComma,
-						"align"	: alignList[i]
+						"align"	: alignList[i],
+						"itemTemplate" : setComma
 					}
 					fields.push(row);
 				}
@@ -188,7 +190,10 @@
 			        paging: true,
 					data: data,
 					pageSize : 30,
-			        fields: fields
+			        fields: fields,
+			        rowClick : function(args){
+			        	getRceptListPop(args.item.inspSecondNm, '전체');
+			        }
 			    });
 			}
 		})
@@ -202,6 +207,64 @@
 			return value;
 		}
 	}
+
+	function getRceptListPop(inspSecondNm, procStatNm){
+		var param = {
+			userNo : JSON.parse(sessionStorage.getItem("userInfo")).userNo,
+			userLev : JSON.parse(sessionStorage.getItem("userInfo")).userLev,
+			searchStr : $('#searchYear').val().substring(0,7).replace("-","."),
+			inspSecondNm : inspSecondNm,
+			procStatNm : procStatNm == null ? '전체' : procStatNm
+		};
+
+		console.log(JSON.parse(sessionStorage.getItem("userInfo")).userLev)
+
+		$.ajax({
+			url : 'getRceptList',
+			dataType : 'json',
+			type : 'post',
+			data : param,
+			success:function(data){
+				//console.log(data);
+				$('#inspSecondNm').val(inspSecondNm);
+				$('#userNo').val(param.userNo);
+
+				var html = '';
+				if(data.length > 0){
+					$.each(data, function(i, list){
+						html += '<tr>';
+						html += '	<td>'+list.pdlNo+'</td>';
+						html += '	<td>'+list.rqstDt+'</td>';
+						html += '	<td>'+list.userNm+'</td>';
+						html += '	<td>'+list.procStatNm+'</td>';
+						html += '	<td>'+list.animNm+'</td>';
+						html += '	<td>'+list.docNm+'</td>';
+						html += '	<td>'+list.inspSecondNm+'</td>';
+						html += '</tr>';
+					})
+				}else{
+					html += '<tr>';
+					html += '	<td colspan="7">신청(진행)중인 목록이 없습니다.</td>';
+					html += '</tr>';
+				}
+
+				$('#rceptListTbody').empty();
+				$('#rceptListTbody').html(html);
+			}
+		})
+
+		$('#popRceptList').modal();
+
+	}
+
+	$(document).on('change', '#searchStatCd', function(){
+		var inspSecondNm = $('#inspSecondNm').val();
+		var procStatNm = $(this).val();
+
+		getRceptListPop(inspSecondNm, procStatNm);
+	})
+
+
 </script>
 </body>
 </html>

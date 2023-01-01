@@ -151,7 +151,7 @@
 			success:function(data){
 				var colList = ['pdlNo','rqstDt','procStatNm','animNm','animNo','hospNm','docNm','inspType'];
 				var typeList = ['text','text','text','text','text','text','text','text'];
-				var widthList = ['120','100','100','150','180','150','120','120'];
+				var widthList = ['120','100','100','150','180','150','120','250'];
 				var titleList = ['의뢰번호','신청일','상태','동물이름','동물번호','신청자(기관)','담당수의사','검사구분'];
 				var alignList = ['center','center','center','center','center','center','center','center'];
 				var gridId = 'jsGrid1';

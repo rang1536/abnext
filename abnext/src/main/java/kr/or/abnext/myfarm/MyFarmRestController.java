@@ -55,4 +55,9 @@ public class MyFarmRestController {
 
 	}
 
+
+	@RequestMapping(value = "getRceptList", method = RequestMethod.POST)
+	public List<MyFarm> getRceptList(MyFarm bean) {
+		return myFarmServ.getRceptList(bean);
+	}
 }

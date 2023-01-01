@@ -87,4 +87,39 @@
 		 GROUP BY CODE_NM
 		 ORDER BY CODE_NM
 	</select>
+
+
+	<select id="getRceptList"  parameterType="kr.or.abnext.domain.MyFarm" resultType="kr.or.abnext.domain.MyFarm">
+		SELECT A.CODE_NM INSP_SECOND_NM
+		       , B.*
+		  FROM TB_CODE A
+		  LEFT OUTER JOIN (
+		          SELECT A.INSP_SECOND_CD
+			           	 , CASE WHEN PROC_STAT = 'A001-01' THEN '신청'
+			                    WHEN PROC_STAT IN ('A001-02', 'A001-03', 'A001-04') THEN '검사중'
+				           ELSE '완료'
+				           END AS PROC_STAT_NM
+			             , B.PDL_NO
+			             , B.RQST_DT
+			             , B.DOC_NM
+		               	 , B.ANIM_NM
+		               	 , B.USER_NM
+		            FROM TB_INSPECTION A
+		            inner JOIN TB_RCEPT B
+		              ON A.RQST_NO = B.RQST_NO
+		           WHERE SUBSTR(B.RQST_DT,1,7) =  #{searchStr}
+		       ) B
+		    ON A.CODE_ID = B.INSP_SECOND_CD
+		 WHERE SUBSTR(A.CODE_ID,1,4) = 'B001'
+		   AND A.CODE_LEVEL = '3'
+		   AND B.PDL_NO IS NOT NULL
+		   <if test="userLev != 4">
+		   	 AND CODE_NM IN (SELECT DISTINCT(CODE_NM) FROM TB_USER_DAMDANG K WHERE USER_NO = #{userNo})
+		   </if>
+		   AND CODE_NM = #{inspSecondNm}
+		   <if test="procStatNm != '전체'">
+		     AND B.PROC_STAT_NM = #{procStatNm}
+		   </if>
+
+	</select>
 </mapper>

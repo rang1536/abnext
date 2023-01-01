@@ -1840,7 +1840,7 @@ function fnAnti(){
 				var item = data[i];
 				htmlData += '<div id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'" onclick="setBigImg(\''+imgDomain+item.fileNewNm+'\')"/>';
 				htmlData += '	</a>';
 				htmlData += '</div>';
 			}
@@ -2148,7 +2148,7 @@ function fnPcr(){
 				if(item.fileNo == 0) continue;
 				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'" onclick="setBigImg(\''+imgDomain+item.fileNewNm+'\')"/>';
 				htmlData += '	</a>';
 				htmlData += '</div>';
 				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
@@ -2222,7 +2222,7 @@ function fnElse(){
 				if(item.fileNo == 0) continue;
 				htmlData += '<div class="filtr-item col-sm-3" id="previewImg'+item.fileNo+'">';
 				htmlData += '	<a id="imgLoad'+item.fileNo+'">';
-				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'"/>';
+				htmlData += '		<img class="img-fluid mb-2" style="width:140px;height:140px" src="'+imgDomain+item.fileNewNm+'" onclick="setBigImg(\''+imgDomain+item.fileNewNm+'\')"/>';
 				htmlData += '	</a>';
 				htmlData += '</div>';
 				htmlData += '<div class="col-sm-9" id="preview'+item.fileNo+'">';
@@ -2535,6 +2535,11 @@ function makeBox(target){
 	$('#'+target).empty();
 	$('#'+target).html(html);
 	$("#target").focus();
+}
+
+function setBigImg(src){
+	$('.image').attr('src', src);
+	$('#imgView').modal();
 }
 
 </script>

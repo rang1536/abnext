@@ -30,6 +30,44 @@ public class MyFarm {
 	private String userNo;
 	private String userLev;
 
+	private String pdlNo;
+	private String docNm;
+	private String animNm;
+	private String userNm;
+
+
+	public String getPdlNo() {
+		return pdlNo;
+	}
+
+	public void setPdlNo(String pdlNo) {
+		this.pdlNo = pdlNo;
+	}
+
+	public String getDocNm() {
+		return docNm;
+	}
+
+	public void setDocNm(String docNm) {
+		this.docNm = docNm;
+	}
+
+	public String getAnimNm() {
+		return animNm;
+	}
+
+	public void setAnimNm(String animNm) {
+		this.animNm = animNm;
+	}
+
+	public String getUserNm() {
+		return userNm;
+	}
+
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
+
 	public String getReqCnt() {
 		return reqCnt;
 	}
@@ -147,7 +185,8 @@ public class MyFarm {
 		return "MyFarm [reqCnt=" + reqCnt + ", recCnt=" + recCnt + ", procCnt=" + procCnt + ", finCnt=" + finCnt
 				+ ", rqstDt=" + rqstDt + ", rqstNo=" + rqstNo + ", price=" + price + ", payStat=" + payStat + ", insId="
 				+ insId + ", searchStr=" + searchStr + ", inspSecondNm=" + inspSecondNm + ", procStatNm=" + procStatNm
-				+ ", userNo=" + userNo + ", userLev=" + userLev + "]";
+				+ ", userNo=" + userNo + ", userLev=" + userLev + ", pdlNo=" + pdlNo + ", docNm=" + docNm + ", animNm="
+				+ animNm + ", userNm=" + userNm + "]";
 	}
 
 

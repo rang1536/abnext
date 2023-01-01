@@ -135,7 +135,17 @@
 						"width" : widthList[i],
 						"title"	: titleList[i],
 						"align"	: alignList[i],
-
+						"itemTemplate" :
+							function(value, item) {
+								var procStatNm = item.procStatNm;
+								if(procStatNm == '접수완료' || procStatNm == '진단설정') {
+									return '<p style="color:blue;font-weight:bold;">'+value+' </p>';
+								}else if(procStatNm == '결과입력') {
+									return '<p style="color:red;font-weight:bold;">'+value+' </p>';
+								}else {
+									return '<p style="font-weight:bold;">'+value+' </p>';
+								}
+							}
 					}
 					fields.push(row);
 				}
